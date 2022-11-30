@@ -1,0 +1,1 @@
+export const enemyTypes = ["Wolf", "Orc", "Spirit"];
