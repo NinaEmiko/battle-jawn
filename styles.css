@@ -15,6 +15,18 @@ body {
     background-color: #333;
 }
 
+.logBoxDisplayElement {
+    height: 120px;
+    border: 3px solid #ccc;
+    display: flex;
+    flex-direction: column-reverse;
+    box-shadow: 0 0 10px 2px;
+}
+
+.userDisplay {
+    font-size: 25px;
+}
+
 .container {
     width: 800px;
     max-width: 80%;
