@@ -15,7 +15,32 @@ body {
     background-color: #333;
 }
 
+progress {
+    background-color:hsl(200, 100%, 50%);
+    border: 0;
+    border-radius: 20px;
+    margin: 5px;
+    width: 50%;
+}
+progress::-webkit-progress-bar {
+    border: 0;
+    border-radius: 20px;
+ }
+ progress::-webkit-progress-value {
+    border: 0;
+    border-radius: 20px;
+ }
+ progress::-moz-progress-bar {
+    border: 0;
+    border-radius: 20px;
+ }
+
+
+
+
+
 .logBoxDisplayElement {
+    margin-top: 10px;
     height: 120px;
     border: 3px solid #ccc;
     display: flex;
