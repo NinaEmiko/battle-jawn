@@ -4,6 +4,7 @@ import { playerRun } from '../player/playerRun.js';
 import { playerSteal } from '../player/playerSteal.js';
 import { enemyAttack } from '../enemy/enemyAttack.js';
 import { userInterface } from '../user/UI.js'
+import { logBoxDisplay } from '../logBox/logBoxDisplay.js';
 
 export const playerMove = (input) => {
 
@@ -19,4 +20,5 @@ export const playerMove = (input) => {
 
     enemyAttack();
     userInterface();
+    logBoxDisplay();
 }

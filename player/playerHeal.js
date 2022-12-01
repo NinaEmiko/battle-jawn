@@ -1,4 +1,5 @@
 import { user } from '../user/user.js';
+import { logBox } from '../logBox/logBox.js';
 
 export const playerHeal = () => {
 
@@ -10,8 +11,8 @@ export const playerHeal = () => {
             user.health = user.maxHealth;
             user.potions--;
         }
-        alert(`You consumed a potion. You feel better.`)
+        logBox.push(`You consumed a potion. You feel better.`);
     } else {
-        alert(`You are out of potions.`)
+        logBox.push(`You are out of potions.`);
     }
 }
