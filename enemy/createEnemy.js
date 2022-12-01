@@ -15,4 +15,4 @@ if (newEnemy === "Wolf") {
     strength = 20;
 }
 
-export const createEnemy = new Enemy(newEnemy, health, strength);
+export const createEnemy = new Enemy(newEnemy, health, health, strength);
