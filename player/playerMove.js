@@ -18,7 +18,7 @@ export const playerMove = (input) => {
         playerSteal();
     }
 
-    setTimeout(enemyAttack, 250);
-    setTimeout(userInterface, 250);
-    setTimeout(logBoxDisplay, 250);
+    enemyAttack();
+    userInterface();
+    logBoxDisplay();
 }
