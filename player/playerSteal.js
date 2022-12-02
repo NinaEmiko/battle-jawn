@@ -7,17 +7,24 @@ import { createEnemy } from '../enemy/createEnemy.js';
 
 export const playerSteal = () => {
     let successRate = Math.floor(Math.random() * 100);
-    if (successRate > 80 && createEnemy.potions > 0){
-        user.potions++;
-        createEnemy.potions--;
-        logBox.push(`You stole a potion!`);
-        userInterface();
-        logBoxDisplay();
-        enemyAttack();
+    if (createEnemy.potions > 0) {
+        if (successRate > 80){
+            user.potions++;
+            createEnemy.potions--;
+            logBox.push(`You stole a potion!`);
+            userInterface();
+            logBoxDisplay();
+            enemyAttack();
+        } else {
+            logBox.push(`You didn't find anything.`);
+            userInterface();
+            logBoxDisplay();
+            enemyAttack();
+        }
     } else {
-        logBox.push(`You didn't find anything.`);
-        userInterface();
-        logBoxDisplay();
-        enemyAttack();
+        logBox.push(`Enemy is out of potions!`);
+            userInterface();
+            logBoxDisplay();
+            enemyAttack();
     }
 };

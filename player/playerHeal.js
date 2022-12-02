@@ -19,9 +19,8 @@ export const playerHeal = () => {
         logBoxDisplay();
         enemyAttack();
     } else {
-        logBox.push(`You are out of potions.`);
+        logBox.push(`You are out of potions!`);
         userInterface();
         logBoxDisplay();
-        enemyAttack();
     }
 }
