@@ -2,7 +2,7 @@ import { logBox } from '../UI/logBox/logBox.js';
 import { user } from '../user/user.js';
 import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
 import { userInterface } from '../UI/UI.js';
-import { enemyAttack } from '../enemy/enemyAttack.js';
+import { enemyMoves } from '../enemy/enemyMoves.js';
 import { createEnemy } from '../enemy/createEnemy.js';
 
 export const playerSteal = () => {
@@ -14,17 +14,17 @@ export const playerSteal = () => {
             logBox.push(`You stole a potion!`);
             userInterface();
             logBoxDisplay();
-            enemyAttack();
+            enemyMoves();
         } else {
             logBox.push(`You didn't find anything.`);
             userInterface();
             logBoxDisplay();
-            enemyAttack();
+            enemyMoves();
         }
     } else {
         logBox.push(`Enemy is out of potions!`);
             userInterface();
             logBoxDisplay();
-            enemyAttack();
+            enemyMoves();
     }
 };

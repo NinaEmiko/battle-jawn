@@ -2,7 +2,7 @@ import { user } from '../user/user.js';
 import { logBox } from '../UI/logBox/logBox.js';
 import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
 import { userInterface } from '../UI/UI.js';
-import { enemyAttack } from '../enemy/enemyAttack.js';
+import { enemyMoves } from '../enemy/enemyMoves.js';
 
 export const playerHeal = () => {
 
@@ -17,7 +17,7 @@ export const playerHeal = () => {
         logBox.push(`You consumed a potion. You feel better.`);
         userInterface();
         logBoxDisplay();
-        enemyAttack();
+        enemyMoves();
     } else {
         logBox.push(`You are out of potions!`);
         userInterface();

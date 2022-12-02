@@ -1,7 +1,7 @@
 import { logBox } from "../UI/logBox/logBox.js";
 import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
 import { userInterface } from '../UI/UI.js';
-import { enemyAttack } from "../enemy/enemyAttack.js";
+import { enemyMoves } from "../enemy/enemyMoves.js";
 
 export const playerRun = () => {
     let runRate = Math.floor(Math.random() * 100);
@@ -13,6 +13,6 @@ export const playerRun = () => {
         logBox.push(`You tried to run. It didn't work.`);
         userInterface();
         logBoxDisplay();
-        enemyAttack();
+        enemyMoves();
     }
 }
