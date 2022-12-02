@@ -1,1 +1,1 @@
-export const enemyTypes = ["Wolf", "Orc", "Spirit"];
+export const enemyTypes = ["Wolf", "Orc", "Spirit", "Thief"];

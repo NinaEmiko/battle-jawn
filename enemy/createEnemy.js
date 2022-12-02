@@ -10,9 +10,12 @@ if (newEnemy === "Wolf") {
 } else if (newEnemy === "Orc") {
     health = 100;
     strength = 15;
-} else {
+} else if (newEnemy === 'Spirit') {
     health = 150;
     strength = 20;
+} else {
+    health = 90;
+    strength = 17;
 }
 
 export const createEnemy = new Enemy(newEnemy, health, health, strength);
