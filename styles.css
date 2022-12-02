@@ -21,7 +21,7 @@ progress {
     border: 0;
     border-radius: 20px;
     margin: 5px;
-    width: 50%;
+    width: 100%;
 }
 progress::-webkit-progress-bar {
     border: 0;
@@ -36,7 +36,10 @@ progress::-webkit-progress-bar {
     border-radius: 20px;
  }
 
-
+.potionPicture {
+    height: 5%;
+    width: 5%;
+}
 
 .text3 {
     text-align: center;
@@ -44,17 +47,24 @@ progress::-webkit-progress-bar {
 }
 
 .logBoxDisplayElement {
-    margin-top: 10px;
-    height: 120px;
-    width: 50%;
+    height: 240px;
+    width: 45%;
     border: 3px solid #ccc;
     display: flex;
     flex-direction: column-reverse;
     box-shadow: 0 0 10px 2px;
     overflow: auto;
+    float: left;
 }
 
-.userDisplay {
+
+
+.userDisplayPlayer {
+    font-size: 25px;
+
+}
+
+.userDisplayEnemy {
     font-size: 25px;
 }
 
@@ -72,6 +82,8 @@ progress::-webkit-progress-bar {
     grid-template-columns: repeat(2, auto);
     gap: 10px;
     margin-top: 30px;
+    width: 50%;
+    float: right;
 }
 
 .btn {
