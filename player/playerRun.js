@@ -13,6 +13,6 @@ export const playerRun = () => {
         logBox.push(`You tried to run. It didn't work.`);
         userInterface();
         logBoxDisplay();
-        setTimeout(enemyAttack, 1000);
+        enemyAttack();
     }
 }

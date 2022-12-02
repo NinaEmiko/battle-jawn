@@ -9,12 +9,13 @@ export const enemyAttack = () => {
         let damage = Math.floor(Math.random() * createEnemy.strength);
         user.health = user.health - damage;
         logBox.push(`${createEnemy.name} has attacked! ${createEnemy.name} did ${damage} damage.`);
-        userInterface();
-        logBoxDisplay();
+        setTimeout(userInterface, 1000);
+        setTimeout(logBoxDisplay, 1000);
     } else {
         logBox.push(`You have vanquished the ${createEnemy.name}!`);
         userInterface();
+        logBoxDisplay();
         setTimeout(function() {window.location.reload();
-        }, 4000);
+        }, 3000);
     }
 }

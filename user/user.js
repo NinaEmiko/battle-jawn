@@ -1,6 +1,5 @@
 import { Player } from '../player/player.js'
 
-let maxHealth;
 let health;
 let strength;
 let healthRandomizer = Math.floor(Math.random() * 3)

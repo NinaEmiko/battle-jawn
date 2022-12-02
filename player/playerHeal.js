@@ -17,11 +17,11 @@ export const playerHeal = () => {
         logBox.push(`You consumed a potion. You feel better.`);
         userInterface();
         logBoxDisplay();
-        setTimeout(enemyAttack, 1000);
+        enemyAttack();
     } else {
         logBox.push(`You are out of potions.`);
         userInterface();
         logBoxDisplay();
-        setTimeout(enemyAttack, 1000);
+        enemyAttack();
     }
 }

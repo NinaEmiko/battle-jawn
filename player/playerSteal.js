@@ -11,11 +11,11 @@ export const playerSteal = () => {
         logBox.push(`You stole a potion!`);
         userInterface();
         logBoxDisplay();
-        setTimeout(enemyAttack, 1000);
+        enemyAttack();
     } else {
         logBox.push(`You didn't find anything.`);
         userInterface();
         logBoxDisplay();
-        setTimeout(enemyAttack, 1000);
+        enemyAttack();
     }
 };

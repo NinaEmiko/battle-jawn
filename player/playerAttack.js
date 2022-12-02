@@ -11,5 +11,5 @@ export const playerAttack = () => {
     logBox.push(`You attacked the enemy. You did ${damage} damage.`);
     userInterface();
     logBoxDisplay();
-    setTimeout(enemyAttack, 1000);
+    enemyAttack();
 };
