@@ -9,6 +9,7 @@ export const enemyAttack = () => {
         logBox.push(`${createEnemy.name} has attacked! ${createEnemy.name} did ${damage} damage.`);
     } else {
         logBox.push(`You have vanquished the ${createEnemy.name}!`);
-        window.location.reload();
+        setTimeout(function() {window.location.reload();
+        }, 4000);
     }
 }
