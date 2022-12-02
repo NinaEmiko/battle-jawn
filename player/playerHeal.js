@@ -3,29 +3,22 @@ import { logBox } from '../UI/logBox/logBox.js';
 import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
 import { userInterface } from '../UI/UI.js';
 import { enemyMoves } from '../enemy/enemyMoves.js';
+import { castHeal } from '../player/playerHeal/castHeal.js';
+import { usePotion } from '../player/playerHeal/usePotion.js';
+
 
 export const playerHeal = () => {
 
     if (user.role === "Healer") {
-        if (user.maxHealth - user.health > 30){
-            user.health = user.health + 30;
-        } else {
-            user.health = user.maxHealth;
-        }
+        castHeal();
         logBox.push(`You cast Heal. You feel better.`);
         userInterface();
         logBoxDisplay();
         enemyMoves();
     } else {
         if (user.potions > 0) {
-            if (user.maxHealth - user.health > 30){
-                user.health = user.health + 30;
-                user.potions--;
-            } else {
-                user.health = user.maxHealth;
-                user.potions--;
-            }
-            logBox.push(`You consumed a potion. You feel better.`);
+            usePotion();
+            logBox.push(`You used a potion! You feel better!`);
             userInterface();
             logBoxDisplay();
             enemyMoves();

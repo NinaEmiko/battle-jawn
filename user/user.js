@@ -1,26 +1,20 @@
-import { Player } from '../player/player.js';
+import { Tank } from '../player/role/tank.js';
+import { Healer } from '../player/role/healer.js';
+import { DPS } from '../player/role/dps.js';
 
-let role;
-let health;
-let strength;
-let potions;
-let healthRandomizer = Math.floor(Math.random() * 3)
+const newUser = function() {
 
-if (healthRandomizer === 1) {
-    role = "Tank"
-    health = 110;
-    strength = 15;
-    potions = 3;
-} else if (healthRandomizer === 2) {
-    role = "Healer"
-    health = 100;
-    strength = 17;
-    potions = 0;
-} else {
-    role = "DPS"
-    health = 90;
-    strength = 20;
-    potions = 2;
+    let createUser;
+    let healthRandomizer = Math.floor(Math.random() * 3);
+
+    if (healthRandomizer === 1) {
+        createUser = new Tank("Nina", "Tank", 110, 110, 15, 3);
+    } else if (healthRandomizer === 2) {
+        createUser = new Healer("Nina", "Healer", 100, 100, 17, 0);
+    } else {
+        createUser = new DPS("Nina", "DPS", 90, 90, 20, 2);
+    }
+    return createUser;
 }
 
-export const user = new Player("Nina", role, health, health, strength, potions);
+export const user = newUser();
