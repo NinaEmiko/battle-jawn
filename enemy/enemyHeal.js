@@ -5,8 +5,15 @@ import { userInterface } from "../UI/UI.js";
 
 
 export function enemyHeal() {
-    createEnemy.health = createEnemy.health + 30;
-    createEnemy.potions--;
+
+    if (createEnemy.maxHealth - createEnemy.health > 30){
+        createEnemy.health = createEnemy.health + 30;
+        createEnemy.potions--;
+    } else {
+        createEnemy.health = createEnemy.maxHealth;
+        createEnemy.potions--;
+    }
+    
     logBox.push(`${createEnemy.name} used a potion!`);
     setTimeout(userInterface, 1000);
     setTimeout(logBoxDisplay, 1000);
