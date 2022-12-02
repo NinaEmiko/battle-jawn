@@ -16,7 +16,7 @@ export const enemySteal = () => {
         } else {
             logBox.push(`${createEnemy.name} attempted to steal! Attempt was unsuccessful!`);
             setTimeout(userInterface, 1000);
-        setTimeout(logBoxDisplay, 1000);
+            setTimeout(logBoxDisplay, 1000);
         }
     } else {
         logBox.push(`${createEnemy.name} attempted to steal! Too bad you're a broke bitch.`);

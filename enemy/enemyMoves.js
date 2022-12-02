@@ -9,13 +9,13 @@ export function enemyMoves() {
 
     if (enemyMove > 20) {
         enemyAttack();
-    } else if (enemyMove < 20 && newEnemy === "Thief") {
+    } else if (enemyMove < 20 && createEnemy.name === "Thief") {
         if (createEnemy.potions < 1) {
             enemyAttack();
         } else {
             enemySteal();
         }
-    } else {
+    } else if (enemyMove < 20 && createEnemy.name !== Thief) {
         if (createEnemy.potions < 1) {
             enemyAttack();
         } else {
