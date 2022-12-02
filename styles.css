@@ -43,11 +43,11 @@ progress::-webkit-progress-bar {
 
 .text3 {
     text-align: center;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .logBoxDisplayElement {
-    height: 240px;
+    height: 250px;
     width: 45%;
     border: 3px solid #ccc;
     display: flex;
@@ -61,11 +61,13 @@ progress::-webkit-progress-bar {
 
 .userDisplayPlayer {
     font-size: 25px;
+    color: green;
 
 }
 
 .userDisplayEnemy {
     font-size: 25px;
+    color: red;
 }
 
 .container {
@@ -82,7 +84,7 @@ progress::-webkit-progress-bar {
     grid-template-columns: repeat(2, auto);
     gap: 10px;
     margin-top: 30px;
-    width: 50%;
+    width: 53.5%;
     float: right;
 }
 
