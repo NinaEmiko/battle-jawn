@@ -4,24 +4,26 @@ import { playerRun } from '../player/playerRun.js';
 import { playerSteal } from '../player/playerSteal.js';
 import { isAlive } from '../user/isAlive.js';
 import { disableButtons } from '../UI/disableButtons.js';
+import { user } from '../user/user.js';
+import { deathDisableButtons } from '../UI/deathDisableButtons.js';
 
 export const playerMove = (input) => {
 
-    if (input === 'attack') {
-        isAlive();
-        playerAttack();
-        disableButtons();
-    } else if (input === 'heal') {
-        isAlive();
-        playerHeal();
-        disableButtons();
-    } else if (input === 'run') {
-        isAlive();
-        playerRun();
-        disableButtons();
-    } else if (input === 'steal') {
-        isAlive();
-        playerSteal();
-        disableButtons();
+    if (user.health > 0) {
+        if (input === 'attack') {
+            playerAttack();
+            disableButtons();
+        } else if (input === 'heal') {
+            playerHeal();
+            disableButtons();
+        } else if (input === 'run') {
+            playerRun();
+            disableButtons();
+        } else if (input === 'steal') {
+            playerSteal();
+            disableButtons();
+        }
+    } else {
+        deathDisableButtons();
     }
 }
