@@ -1,4 +1,4 @@
-import { enemyAttack } from '../enemy/enemyAttack.js'
+import { enemyAttack } from '../enemy/enemyAttack/enemyAttack.js'
 import { enemySteal } from '../enemy/enemySteal.js';
 import { createEnemy } from '../enemy/createEnemy.js';
 import { enemyHeal } from '../enemy/enemyHeal.js';

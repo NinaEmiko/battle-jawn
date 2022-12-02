@@ -1,9 +1,9 @@
-import { createEnemy } from '../enemy/createEnemy.js';
-import { logBox } from '../UI/logBox/logBox.js';
-import { userInterface } from '../UI/UI.js';
-import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
-import { isAlive } from '../user/isAlive.js';
-import { enemyStrike } from './enemyAttack/enemyStrike.js';
+import { createEnemy } from '../../enemy/createEnemy.js';
+import { logBox } from '../../UI/logBox/logBox.js';
+import { userInterface } from '../../UI/UI.js';
+import { logBoxDisplay } from '../../UI/logBox/logBoxDisplay.js';
+import { isAlive } from '../../user/isAlive.js';
+import { enemyStrike } from '../../enemy/enemyAttack/enemyStrike.js';
 
 export const enemyAttack = () => {
     if (createEnemy.health > 0) {

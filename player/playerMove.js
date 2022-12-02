@@ -1,4 +1,4 @@
-import { playerAttack } from '../player/playerAttack.js';
+import { playerAttack } from './playerAttack/playerAttack.js';
 import { playerHeal } from '../player/playerHeal/playerHeal.js';
 import { playerRun } from '../player/playerRun.js';
 import { playerSteal } from '../player/playerSteal.js';
