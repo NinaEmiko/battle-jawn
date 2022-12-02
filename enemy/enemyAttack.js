@@ -3,6 +3,7 @@ import { user } from '../user/user.js';
 import { logBox } from '../logBox/logBox.js';
 import { userInterface } from '../user/UI.js';
 import { logBoxDisplay } from '../logBox/logBoxDisplay.js';
+import { isAlive } from '../user/isAlive.js';
 
 export const enemyAttack = () => {
     if (createEnemy.health > 0) {
@@ -11,6 +12,7 @@ export const enemyAttack = () => {
         logBox.push(`${createEnemy.name} has attacked! ${createEnemy.name} did ${damage} damage.`);
         setTimeout(userInterface, 1000);
         setTimeout(logBoxDisplay, 1000);
+        isAlive();
     } else {
         logBox.push(`You have vanquished the ${createEnemy.name}!`);
         userInterface();

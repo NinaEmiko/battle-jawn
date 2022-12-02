@@ -5,7 +5,8 @@ export const isAlive = () => {
     if (user.health > 0) {
         return true;
     } else {
-        confirm('You have been slain!');
-        window.location.reload();
+        logBox.push(`You have been slain!`);
+        userInterface();
+        logBoxDisplay();
     }
 }
