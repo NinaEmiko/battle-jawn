@@ -6,21 +6,33 @@ import { enemyMoves } from '../enemy/enemyMoves.js';
 
 export const playerHeal = () => {
 
-    if (user.potions > 0) {
+    if (user.role === "Healer") {
         if (user.maxHealth - user.health > 30){
             user.health = user.health + 30;
-            user.potions--;
         } else {
             user.health = user.maxHealth;
-            user.potions--;
         }
-        logBox.push(`You consumed a potion. You feel better.`);
+        logBox.push(`You cast Heal. You feel better.`);
         userInterface();
         logBoxDisplay();
         enemyMoves();
     } else {
-        logBox.push(`You are out of potions!`);
-        userInterface();
-        logBoxDisplay();
+        if (user.potions > 0) {
+            if (user.maxHealth - user.health > 30){
+                user.health = user.health + 30;
+                user.potions--;
+            } else {
+                user.health = user.maxHealth;
+                user.potions--;
+            }
+            logBox.push(`You consumed a potion. You feel better.`);
+            userInterface();
+            logBoxDisplay();
+            enemyMoves();
+        } else {
+            logBox.push(`You are out of potions!`);
+            userInterface();
+            logBoxDisplay();
+        }
     }
 }

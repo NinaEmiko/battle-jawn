@@ -12,7 +12,7 @@ export function userInterface() {
     textElement.innerHTML=
     `Enemy: ${createEnemy.name}`
     enemyHealthBarElement.value = createEnemy.health / createEnemy.maxHealth * 100;
-    textElement2.innerHTML=`Hero: ${user.name} ||  Potions: ${user.potions}`
+    textElement2.innerHTML=`Hero: ${user.role} ||  Potions: ${user.potions}`
     playerHealthBarElement.value = user.health / user.maxHealth * 100;
     textElement3.innerHTML=`What do you wish to do?`
 }
