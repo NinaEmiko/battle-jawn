@@ -7,7 +7,7 @@ const newUser = function() {
     let healthRandomizer = Math.floor(Math.random() * 3);
 
     if (healthRandomizer === 1) {
-        createUser = new Tank("Nina", "Tank", 110, 110, 15, 3);
+        createUser = new Tank("Nina", "Tank", 120, 120, 15, 3);
     } else if (healthRandomizer === 2) {
         createUser = new Healer("Nina", "Healer", 100, 100, 17, 0);
     } else {

@@ -7,9 +7,9 @@ export function enemyMoves() {
     let enemyMove = Math.floor(Math.random() * 100);
 
     if (createEnemy.name === "Thief") {
-        if (enemyMove > 20) {
+        if (enemyMove > 15) {
             enemyAttack();
-        } else if (enemyMove < 20) {
+        } else if (enemyMove < 15) {
             if (createEnemy.potions < 1) {
                 enemyAttack();
             } else {
@@ -17,7 +17,7 @@ export function enemyMoves() {
             }
         }
     } else {
-        if (enemyMove > 20) {
+        if (enemyMove > 15) {
             enemyAttack();
         } else if (createEnemy.potions < 1) {
             enemyAttack();
