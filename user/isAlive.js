@@ -1,5 +1,6 @@
-import { logBox } from '../logBox/logBox.js';
+import { logBox } from '../UI/logBox/logBox.js';
 import { user } from '../user/user.js';
+import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
 
 export const isAlive = () => {
     if (user.health > 0) {

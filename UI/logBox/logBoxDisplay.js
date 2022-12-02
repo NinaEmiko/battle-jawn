@@ -1,4 +1,4 @@
-import { logBox } from "./logBox.js";
+import { logBox } from "../logBox/logBox.js";
 
 const logBoxDisplayElement = document.getElementById('logBoxDisplayElement');
 

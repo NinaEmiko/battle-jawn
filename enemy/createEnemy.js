@@ -1,5 +1,5 @@
 import { Enemy } from '../enemy/enemy.js';
-import { newEnemy } from '../enemy/Newenemy.js';
+import { newEnemy } from '../enemy/NewEnemy.js';
 
 let health;
 let potions;

@@ -1,8 +1,8 @@
 import { createEnemy } from '../enemy/createEnemy.js';
 import { user } from '../user/user.js';
-import { logBox } from '../logBox/logBox.js';
-import { userInterface } from '../user/UI.js';
-import { logBoxDisplay } from '../logBox/logBoxDisplay.js';
+import { logBox } from '../UI/logBox/logBox.js';
+import { userInterface } from '../UI/UI.js';
+import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
 import { isAlive } from '../user/isAlive.js';
 
 export const enemyAttack = () => {
