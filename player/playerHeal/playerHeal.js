@@ -1,10 +1,10 @@
-import { user } from '../user/user.js';
-import { logBox } from '../UI/logBox/logBox.js';
-import { logBoxDisplay } from '../UI/logBox/logBoxDisplay.js';
-import { userInterface } from '../UI/UI.js';
-import { enemyMoves } from '../enemy/enemyMoves.js';
-import { castHeal } from '../player/playerHeal/castHeal.js';
-import { usePotion } from '../player/playerHeal/usePotion.js';
+import { user } from '../../user/user.js';
+import { logBox } from '../../UI/logBox/logBox.js';
+import { logBoxDisplay } from '../../UI/logBox/logBoxDisplay.js';
+import { userInterface } from '../../UI/UI.js';
+import { enemyMoves } from '../../enemy/enemyMoves.js';
+import { castHeal } from '../playerHeal/castHeal.js';
+import { usePotion } from '../playerHeal/usePotion.js';
 
 
 export const playerHeal = () => {

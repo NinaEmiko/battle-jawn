@@ -3,7 +3,6 @@ import { Healer } from '../player/role/healer.js';
 import { DPS } from '../player/role/dps.js';
 
 const newUser = function() {
-
     let createUser;
     let healthRandomizer = Math.floor(Math.random() * 3);
 
