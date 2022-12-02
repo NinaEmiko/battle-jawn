@@ -9,19 +9,26 @@
 </head>
 <body>
     <div class="container">
-        <div class='userDisplay' id="text">Text</div>
-        <progress class='healthBar' id="enemyHealthBar" value="100" max="100"></progress>
-        <br><div class='userDisplay' id="text2">Text</div></br>
-        <progress class='healthBar' id="playerHealthBar" value="100" max="100"></progress>
+        <div class='userDisplayEnemy' id="text">Text</div>
+        <div class="jawn">
+            <progress class='healthBarEnemy' id="enemyHealthBar" value="100" max="100"></progress>
+        </div>
+        <div class='userDisplayPlayer' id="text2">Text</div>
+        <div class="jawn">
+            <progress class='healthBarPlayer' id="playerHealthBar" value="100" max="100"></progress>
+        </div>
+
         <br><div class='logBoxDisplayElement' id="logBoxDisplayElement">Text</div></br>
+        
         <br><div class='text3' id="text3">Text</div></br>
+
         <div id="option-buttons" class="btn-grid">
         <button class="btn" id="attack">Attack</button>
         <button class="btn" id="heal">Heal</button>
         <button class="btn" id="steal">Steal</button>
         <button class="btn" id="run">Run</button>
         </div>
-        <script type='module' src='runGame.js'></script>
     </div>
+    <script type='module' src='runGame.js'></script>
 </body>
 </html>
