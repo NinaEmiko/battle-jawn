@@ -2,6 +2,7 @@ import { isAlive } from '../user/isAlive.js';
 import { userInterface } from './user/UI.js';
 import { userInput } from '../user/userInput.js';
 import { logBoxDisplay } from './logBox/logBoxDisplay.js';
+import { createEnemy } from '../enemy/createEnemy.js';
 
 function runGame() {
     if (isAlive() === true) {
