@@ -6,25 +6,25 @@ let run = document.getElementById("run");
 function disableAttackButton() {
     attack.disabled = true;
     setTimeout(()=>{
-      attack.disabled = false}, 3000)
+      attack.disabled = false}, 1000)
   }
 
 function disableHealButton() {
     heal.disabled = true;
     setTimeout(()=>{
-        heal.disabled = false}, 3000)
+        heal.disabled = false}, 1000)
 }
 
 function disableStealButton() {
     steal.disabled = true;
     setTimeout(()=>{
-      steal.disabled = false}, 3000)
+      steal.disabled = false}, 1000)
   }
 
 function disableRunButton() {
     run.disabled = true;
     setTimeout(()=>{
-        run.disabled = false}, 3000)
+        run.disabled = false}, 1000)
 }
 
 export function disableButtons() {
