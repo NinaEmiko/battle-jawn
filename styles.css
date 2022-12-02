@@ -99,3 +99,8 @@ progress::-webkit-progress-bar {
 .btn:hover {
     border-color: black;
 }
+
+.btn:active {
+    box-shadow: 0 5px rgb(43, 43, 36);
+    transform: translateY(2px);
+  }
