@@ -7,7 +7,12 @@ import { createEnemy } from '../enemy/createEnemy.js';
 
 export const playerSteal = () => {
     let successRate = Math.floor(Math.random() * 100);
-    if (createEnemy.potions > 0) {
+    if (user.potions === user.maxPotions) {
+        logBox.push(`You cannot carry anymore potions!`);
+            userInterface();
+            logBoxDisplay();
+            enemyMoves();
+    } else if (createEnemy.potions > 0) {
         if (successRate > 80){
             user.potions++;
             createEnemy.potions--;
