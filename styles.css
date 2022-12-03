@@ -48,16 +48,20 @@ progress::-webkit-progress-bar {
  .userDisplayPlayer {
     font-size: 25px;
     color: green;
+    float: left;
 }
 
 .userDisplayEnemy {
     font-size: 25px;
     color: red;
+    float: left;
 }
 
-.potionPicture {
+.potions {
+    display: none;
     height: 5%;
     width: 5%;
+    float: right;
 }
 
 .logBoxDisplayElement {

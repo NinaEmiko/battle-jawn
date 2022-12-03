@@ -2,7 +2,6 @@ import { playerAttack } from './playerAttack/playerAttack.js';
 import { playerHeal } from '../player/playerHeal/playerHeal.js';
 import { playerRun } from '../player/playerRun.js';
 import { playerSteal } from '../player/playerSteal.js';
-import { isAlive } from '../user/isAlive.js';
 import { disableButtons } from '../UI/disableButtons.js';
 import { user } from '../user/user.js';
 import { deathDisableButtons } from '../UI/deathDisableButtons.js';

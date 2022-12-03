@@ -1,5 +1,6 @@
 import { createEnemy } from '../enemy/createEnemy.js';
-import { user } from '../user/user.js';        
+import { user } from '../user/user.js';
+import { displayPotion } from '../UI/displayPotions.js';
 
 const textElement = document.getElementById('text');
 const textElement2 = document.getElementById('text2');
@@ -8,7 +9,8 @@ const textElement3 = document.getElementById('text3');
 const playerHealthBarElement = document.getElementById('playerHealthBar');
 const enemyHealthBarElement = document.getElementById('enemyHealthBar');
         
-export function userInterface() {   
+export function userInterface() {
+    displayPotion();
     textElement.innerHTML=
     `Enemy: ${createEnemy.name}`
     enemyHealthBarElement.value = createEnemy.health / createEnemy.maxHealth * 100;
