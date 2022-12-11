@@ -1,5 +1,5 @@
 export class Player {
-    constructor(name, role, health, maxHealth, strength, potions, maxPotions) {
+    constructor(name, role, health, maxHealth, strength, potions, maxPotions, statusAilments) {
         this.name = name;
         this.role = role;
         this.health = health;
@@ -7,5 +7,6 @@ export class Player {
         this.strength = strength;
         this.potions = potions;
         this.maxPotions = maxPotions;
+        this.statusAilments = statusAilments;
     }
 }

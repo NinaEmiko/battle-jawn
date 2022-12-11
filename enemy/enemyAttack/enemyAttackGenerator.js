@@ -7,6 +7,8 @@ import { enemyStab } from "../../enemy/enemyAttack/enemyStab.js";
 import { enemyStrike } from "../../enemy/enemyAttack/enemyStrike.js";
 import { enemyBite } from "../../enemy/enemyAttack/enemyBite.js"
 import{ enemyMaim } from "../../enemy/enemyAttack/enemyMaim.js"
+import { enemySoulEater } from "./enemySoulEater.js";
+import { user } from "../../user/user.js";
 
 export function enemyAttackGenerator() {
     let generator = Math.floor(Math.random() * 100);
@@ -18,6 +20,10 @@ export function enemyAttackGenerator() {
     } else if (createEnemy.name === "Thief") {
         generator > 25 ? enemyStab() : enemySteal();
     } else {
-        generator > 25 ? enemyShadowBlast() : enemyParalyze();
+        if (user.statusAilments.paralyze === false) {
+            generator > 25 ? enemyShadowBlast() : enemyParalyze();
+        } else { 
+            generator > 33 ? enemyShadowBlast() : enemySoulEater();
+        }
     }
 }

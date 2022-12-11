@@ -5,22 +5,28 @@ import { playerSteal } from '../player/playerSteal.js';
 import { disableButtons } from '../UI/disableButtons.js';
 import { user } from '../user/user.js';
 import { deathDisableButtons } from '../UI/deathDisableButtons.js';
+import { paralyzed } from './statusAilmentCheck.js';
 
 export const playerMove = (input) => {
 
     if (user.health > 0) {
-        if (input === 'attack') {
-            playerAttack();
+        if (user.statusAilments.paralyze === true) {
+            paralyzed();
             disableButtons();
-        } else if (input === 'heal') {
-            playerHeal();
-            disableButtons();
-        } else if (input === 'run') {
-            playerRun();
-            disableButtons();
-        } else if (input === 'steal') {
-            playerSteal();
-            disableButtons();
+        } else {
+            if (input === 'attack') {
+                playerAttack();
+                disableButtons();
+            } else if (input === 'heal') {
+                playerHeal();
+                disableButtons();
+            } else if (input === 'run') {
+                playerRun();
+                disableButtons();
+            } else if (input === 'steal') {
+                playerSteal();
+                disableButtons();
+            }
         }
     } else {
         deathDisableButtons();
