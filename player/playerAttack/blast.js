@@ -1,6 +1,9 @@
 import { logBox } from "../../UI/logBox/logBox.js";
 import { user } from "../../user/user.js";
 import { createEnemy } from "../../enemy/createEnemy.js";
+import { userInterface } from "../../UI/UI.js";
+import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
+import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function blast() {
     let damage = (Math.floor(Math.random() * user.strength) + user.strength / 2);
@@ -19,8 +22,14 @@ export function blast() {
 
         createEnemy.health = createEnemy.health - damage;
         logBox.push(`You used Blast! You did ${damage} damage.`);
+        userInterface();
+        logBoxDisplay();
+        enemyMoves();
     } else {
         logBox.push(`You missed the enemy!`);
+        userInterface();
+        logBoxDisplay();
+        enemyMoves();
     }
     //Next attack on enemy will += 5
     //During real time combat, will have a 3.5 second cool down

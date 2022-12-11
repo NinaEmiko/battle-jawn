@@ -1,35 +1,35 @@
-let attack = document.getElementById("attack");
-let heal = document.getElementById("heal");
-let steal = document.getElementById("steal");
-let run = document.getElementById("run");
+let button1 = document.getElementById("button1");
+let button2 = document.getElementById("button2");
+let button3 = document.getElementById("button3");
+let button4 = document.getElementById("button4");
 
-function disableAttackButton() {
-    attack.disabled = true;
+function disableButton1() {
+    button1.disabled = true;
     setTimeout(()=>{
-      attack.disabled = false}, 1000)
+      button1.disabled = false}, 1000)
   }
 
-function disableHealButton() {
-    heal.disabled = true;
+function disableButton2() {
+    button2.disabled = true;
     setTimeout(()=>{
-        heal.disabled = false}, 1000)
+        button2.disabled = false}, 1000)
 }
 
-function disableStealButton() {
-    steal.disabled = true;
+function disableButton3() {
+    button3.disabled = true;
     setTimeout(()=>{
-      steal.disabled = false}, 1000)
+      button3.disabled = false}, 1000)
   }
 
-function disableRunButton() {
-    run.disabled = true;
+function disableButton4() {
+    button4.disabled = true;
     setTimeout(()=>{
-        run.disabled = false}, 1000)
+        button4.disabled = false}, 1000)
 }
 
 export function disableButtons() {
-    disableAttackButton();
-    disableHealButton();
-    disableStealButton();
-    disableRunButton();
+    disableButton1();
+    disableButton2();
+    disableButton3();
+    disableButton4();
 }

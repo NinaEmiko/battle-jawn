@@ -1,6 +1,9 @@
 import { logBox } from "../../UI/logBox/logBox.js";
 import { user } from "../../user/user.js";
 import { createEnemy } from "../../enemy/createEnemy.js";
+import { userInterface } from "../../UI/UI.js";
+import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
+import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function impale() {
     let damage = user.strength * 1.2;
@@ -14,5 +17,8 @@ export function impale() {
 
     createEnemy.health = createEnemy.health - damage;
     logBox.push(`You used Impale! You did ${damage} damage.`);
+    userInterface();
+    logBoxDisplay();
+    enemyMoves();
     //During real time combat, will have a 3 second cool down
 }

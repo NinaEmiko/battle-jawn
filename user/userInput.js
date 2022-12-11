@@ -1,15 +1,15 @@
-import { playerMove } from '../player/playerMove.js';
+import { playerMove } from '../player/playerMove/playerMove.js';
 
-let attack = document.querySelector.bind(document);
-let heal = document.querySelector.bind(document);
-let steal = document.querySelector.bind(document);
-let run = document.querySelector.bind(document);
+let button1 = document.querySelector.bind(document);
+let button2 = document.querySelector.bind(document);
+let button3 = document.querySelector.bind(document);
+let button4 = document.querySelector.bind(document);
 
 export function userInput() {
 
-attack('#attack').addEventListener('click', e => {playerMove("attack")});
-heal('#heal').addEventListener('click', e => {playerMove("heal")});
-steal('#steal').addEventListener('click', e => {playerMove("steal")});
-run('#run').addEventListener('click', e => {playerMove("run")});
+button1('#button1').addEventListener('click', e => {playerMove("button1")});
+button2('#button2').addEventListener('click', e => {playerMove("button2")});
+button3('#button3').addEventListener('click', e => {playerMove("button3")});
+button4('#button4').addEventListener('click', e => {playerMove("button4")});
 
 }

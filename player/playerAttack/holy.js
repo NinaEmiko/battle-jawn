@@ -1,6 +1,9 @@
 import { logBox } from "../../UI/logBox/logBox.js";
 import { user } from "../../user/user.js";
 import { createEnemy } from "../../enemy/createEnemy.js";
+import { userInterface } from "../../UI/UI.js";
+import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
+import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function holy() {
     let damage = (Math.floor(Math.random() * user.strength) + user.strength / 2);
@@ -23,8 +26,14 @@ export function holy() {
             createEnemy.health = createEnemy.health - damage;
         }
         logBox.push(`You used Holy! You did ${damage} damage.`);
+        userInterface();
+        logBoxDisplay();
+        enemyMoves();
     } else {
         logBox.push(`You missed the enemy!`);
+        userInterface();
+        logBoxDisplay();
+        enemyMoves();
     }
     //Next enemy attack will -= 5
     //During real time combat, will have a 3 second cool down
