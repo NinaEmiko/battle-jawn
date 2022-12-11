@@ -12,7 +12,6 @@ const enemyHealthBarElement = document.getElementById('enemyHealthBar');
         
 export function userInterface() {
     displayPotion();
-    buttonDisplay();
     textElement.innerHTML=
     `Enemy: ${createEnemy.name}`
     enemyHealthBarElement.value = createEnemy.health / createEnemy.maxHealth * 100;
