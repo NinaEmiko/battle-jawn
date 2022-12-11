@@ -2,6 +2,7 @@ import { disableButtons } from "../../UI/disableButtons.js";
 import { playerHeal } from "../playerHeal/playerHeal.js";
 import { playerRun } from "../playerRun.js";
 import { wand } from "../playerAttack/wand.js";
+import { holy } from "../playerAttack/holy.js"
 
 export function healerMove(input) {
     if (input === 'button1') {

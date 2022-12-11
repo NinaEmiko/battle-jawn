@@ -6,7 +6,7 @@ import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
 import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function wand() {
-    let damage = user.strength * .75;
+    let damage = Math.floor(user.strength * .75);
 
     let missed = false;
     if (damage === 0) {missed = true};
