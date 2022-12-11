@@ -5,6 +5,8 @@
 import { createEnemy } from '../../enemy/createEnemy.js';
 import { user } from  '../../user/user.js';
 import { logBox } from '../../UI/logBox/logBox.js';
+import { userInterface } from '../../UI/UI.js';
+import { logBoxDisplay } from '../../UI/logBox/logBoxDisplay.js';
 
 export function enemySoulEater() {
     let damage = 20;
@@ -15,7 +17,9 @@ export function enemySoulEater() {
     if (missed === false) {
         user.health = user.health - damage;
         createEnemy.health = createEnemy.health + damage;
-        logBox.push(`${createEnemy.name} used SOUL EATER! ${createEnemy.name} did ${damage} damage.`); 
+        setTimeout(userInterface, 1000);
+        setTimeout(logBoxDisplay, 1000);
+        logBox.push(`${createEnemy.name} used SOUL EATER! SOUL EATER did ${damage} damage and replenished ${damage} of ${createEnemy.name}'s health!`); 
     } else {
         logBox.push(`${createEnemy.name}'s SOUL EATER missed you!`);
     }

@@ -5,7 +5,7 @@ import { createEnemy } from '../../enemy/createEnemy.js';
 import { user } from  '../../user/user.js';
 import { logBox } from '../../UI/logBox/logBox.js';
 
-export function enemyStrike() {
+export function enemyMaim() {
     let damage = createEnemy.strength * 1.5;
 
     let missed = false;

@@ -3,11 +3,11 @@ import { logBox } from '../../UI/logBox/logBox.js';
 import { userInterface } from '../../UI/UI.js';
 import { logBoxDisplay } from '../../UI/logBox/logBoxDisplay.js';
 import { isAlive } from '../../user/isAlive.js';
-import { enemyStrike } from '../../enemy/enemyAttack/enemyStrike.js';
+import { enemyAttackGenerator } from '../../enemy/enemyAttack/enemyAttackGenerator.js';
 
 export const enemyAttack = () => {
     if (createEnemy.health > 0) {
-        enemyStrike();
+        enemyAttackGenerator();
         setTimeout(userInterface, 1000);
         setTimeout(logBoxDisplay, 1000);
         isAlive();
