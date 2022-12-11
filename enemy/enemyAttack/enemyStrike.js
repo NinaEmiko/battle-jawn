@@ -22,8 +22,8 @@ export function enemyStrike() {
             }
 
         user.health = user.health - damage;
-        logBox.push(`${createEnemy.name} has attacked! ${createEnemy.name} did ${damage} damage.`); 
+        logBox.push(`${createEnemy.name} used STRIKE! ${createEnemy.name} did ${damage} damage.`); 
     } else {
-        logBox.push(`${createEnemy.name}'s strike missed you!`);
+        logBox.push(`${createEnemy.name}'s STRIKE missed you!`);
     }
 }
