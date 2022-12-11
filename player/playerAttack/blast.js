@@ -6,7 +6,7 @@ import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
 import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function blast() {
-    let damage = (Math.floor(Math.random() * user.strength) + user.strength / 2);
+    let damage = (Math.floor(Math.random() * user.strength) + user.strength / 4);
 
     let missed = false;
     if (damage === 0) {missed = true};
