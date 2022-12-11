@@ -9,4 +9,5 @@ export function usePotion() {
         user.health = user.maxHealth;
         user.potions--;
     }
+    //During real time combat, will have a 10 second cool down
 }

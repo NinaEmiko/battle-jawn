@@ -7,7 +7,7 @@ import { logBox } from '../UI/logBox/logBox.js';
 export const enemySteal = () => {
     let successRate = Math.floor(Math.random() * 100);
     if (user.potions > 0) {
-        if (successRate > 80){
+        if (successRate > 90){
             createEnemy.potions++;
             user.potions--;
             logBox.push(`${createEnemy.name} stole a potion!`);

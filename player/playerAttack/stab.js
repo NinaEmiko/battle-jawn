@@ -2,7 +2,7 @@ import { logBox } from "../../UI/logBox/logBox.js";
 import { user } from "../../user/user.js";
 import { createEnemy } from "../../enemy/createEnemy.js";
 
-export function strike() {
+export function stab() {
     let damage = Math.floor(Math.random() * user.strength);
 
     let missed = false;
@@ -20,10 +20,10 @@ export function strike() {
                 logBox.push("Critical Hit!");
             }
 
-        createEnemy.health = createEnemy.health - damage;
+        createEnemy.health = createEnemy.health - damage * 1.1;
         logBox.push(`You attacked the enemy. You did ${damage} damage.`);
     } else {
         logBox.push(`You missed the enemy!`);
     }
-    //During real time attack, will have a 1.5 second cool down
+    //During real time combat, will have a 1 second cool down
 }

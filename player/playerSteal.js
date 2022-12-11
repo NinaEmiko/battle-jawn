@@ -32,4 +32,5 @@ export const playerSteal = () => {
             logBoxDisplay();
             enemyMoves();
     }
+    //During real time combat, will have a 15 second cool down
 };

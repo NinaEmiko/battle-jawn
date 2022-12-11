@@ -6,4 +6,5 @@ export function castHeal() {
     } else {
         user.health = user.maxHealth;
     }
+    //During real time combat, will have a 3.5 second cool down
 }
