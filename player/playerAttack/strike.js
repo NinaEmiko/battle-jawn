@@ -7,6 +7,7 @@ import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function strike() {
     let damage = Math.floor(Math.random() * user.strength);
+    let staggerChance = Math.floor(Math.random() * 10);
 
     let missed = false;
     if (damage === 0) {missed = true};
@@ -27,7 +28,13 @@ export function strike() {
         logBox.push(`You used STRIKE. You did ${damage} damage.`);
         userInterface();
         logBoxDisplay();
-        enemyMoves();
+        if (staggerChance < 9) {
+            enemyMoves();
+        } else {
+            logBox.push(`You have staggered the enemy!`);
+            userInterface();
+            logBoxDisplay();
+        }
     } else {
         logBox.push(`You missed the enemy!`);
         userInterface();

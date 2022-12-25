@@ -6,7 +6,7 @@ import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
 import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function holy() {
-    let damage = Math.floor((Math.random() * user.strength) + user.strength / 2);
+    let damage = Math.floor((Math.random() * user.strength) + user.strength / 3);
 
     let missed = false;
     if (damage === 0) {missed = true};
@@ -21,7 +21,7 @@ export function holy() {
             }
         
         if (createEnemy.name === "Spirit") {
-            createEnemy.health = Math.floor(createEnemy.health - damage * 1.5);
+            createEnemy.health = Math.floor(createEnemy.health - damage * 2);
         } else {
             createEnemy.health = createEnemy.health - damage;
         }

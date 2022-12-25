@@ -21,7 +21,8 @@ export function blast() {
             }
 
         createEnemy.health = createEnemy.health - damage;
-        logBox.push(`You used Blast! You did ${damage} damage.`);
+        user.health = user.health - 10;
+        logBox.push(`You used Blast! You did ${damage} damage. Blast did 10 damage to you.`);
         userInterface();
         logBoxDisplay();
         enemyMoves();
