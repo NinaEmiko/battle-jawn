@@ -6,9 +6,12 @@ import { enemyMoves } from "../enemy/enemyMoves.js";
 export const playerRun = () => {
     let runRate = Math.floor(Math.random() * 100);
 
-    if (runRate > 75) {
+    if (runRate > 50) {
         logBox.push(`You successfully ran away!`);
-        window.location.reload();
+        userInterface();
+        logBoxDisplay();
+        setTimeout(function() {window.location.href = "../../playerSelection/playerSelection.html";;
+        }, 2000);
     } else {
         logBox.push(`You tried to run. It didn't work.`);
         userInterface();

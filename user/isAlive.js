@@ -12,5 +12,7 @@ export const isAlive = () => {
         logBox.push(`You have been slain!`);
         userInterface();
         logBoxDisplay();
+        setTimeout(function() {window.location.href = "../../playerSelection/playerSelection.html";;
+        }, 3000);
     }
 }
