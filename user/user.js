@@ -6,16 +6,17 @@ import { statusAilments } from '../player/statusAilments.js';
 
 const newUser = function() {
     let createUser;
-    let healthRandomizer = Math.floor(Math.random() * 4);
 
-    if (healthRandomizer === 1) {
+    if (localStorage.getItem('User Role') === 'Tank') {
         createUser = new Tank("Nina", "Tank", 120, 120, 15, 3, 3, statusAilments);
-    } else if (healthRandomizer === 2) {
+    } else if (localStorage.getItem('User Role') === 'Healer') {
         createUser = new Healer("Nina", "Healer", 100, 100, 17, 0, 0, statusAilments);
-    } else if (healthRandomizer === 3) {
+    } else if (localStorage.getItem('User Role') === 'Caster') {
         createUser = new Caster("Nina", "Caster", 90, 90, 20, 2, 3, statusAilments);
-    } else {
+    } else if (localStorage.getItem('User Role') === 'DPS'){
         createUser = new DPS("Nina", "DPS", 90, 90, 20, 2, 3, statusAilments);
+    } else {
+        createUser = new Healer("Nina", "Healer", 100, 100, 17, 0, 0, statusAilments);
     }
     return createUser;
 }

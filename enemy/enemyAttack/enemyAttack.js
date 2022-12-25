@@ -17,7 +17,7 @@ export const enemyAttack = () => {
         logBox.push(`You have vanquished the ${createEnemy.name}!`);
         userInterface();
         logBoxDisplay();
-        setTimeout(function() {window.location.reload();
+        setTimeout(function() {window.location.href = "../../playerSelection/playerSelection.html";;
         }, 3000);
     }
 }

@@ -1,0 +1,110 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: fantasy;
+    color: #dfd000;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #333;
+}
+
+.container {
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px;
+}
+
+progress {
+    background-color:hsl(60, 100%, 50%);
+    border: 0;
+    border-radius: 20px;
+    margin: 5px;
+    width: 100%;
+}
+progress::-webkit-progress-bar {
+    border: 0;
+    border-radius: 20px;
+ }
+ progress::-webkit-progress-value {
+    border: 0;
+    border-radius: 20px;
+ }
+ progress::-moz-progress-bar {
+    border: 0;
+    border-radius: 20px;
+ }
+
+ .userDisplayPlayer {
+    font-size: 25px;
+    color: green;
+    float: left;
+}
+
+.userDisplayEnemy {
+    font-size: 25px;
+    color: red;
+    float: left;
+}
+
+.potions {
+    display: none;
+    height: 5%;
+    width: 5%;
+    float: right;
+}
+
+.logBoxDisplayElement {
+    height: 250px;
+    width: 45%;
+    border: 3px solid #ccc;
+    display: flex;
+    flex-direction: column-reverse;
+    box-shadow: 0 0 10px 2px;
+    overflow: auto;
+    float: left;
+}
+
+.text3 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 30px;
+    width: 53.5%;
+    float: right;
+}
+
+.btn {
+    background-color: hsl(200, 100%, 50%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: rgb(255, 255, 8);
+    outline: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.btn:active {
+    box-shadow: 0 5px rgb(43, 43, 36);
+    transform: translateY(2px);
+  }

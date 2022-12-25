@@ -14,16 +14,16 @@ export function enemyAttackGenerator() {
     let generator = Math.floor(Math.random() * 100);
 
     if (createEnemy.name === "Wolf") {
-        generator > 25 ? enemyBite() : enemyMaim();
+        generator > 20 ? enemyBite() : enemyMaim();
     } else if (createEnemy.name === "Orc") {
         generator > 25 ? enemyStrike() : enemyImpale();
     } else if (createEnemy.name === "Thief") {
-        generator > 25 ? enemyStab() : enemySteal();
+        generator > 5 ? enemyStab() : enemySteal();
     } else {
         if (user.statusAilments.paralyze === false) {
-            generator > 25 ? enemyShadowBlast() : enemyParalyze();
+            generator > 15 ? enemyShadowBlast() : enemyParalyze();
         } else { 
-            generator > 33 ? enemyShadowBlast() : enemySoulEater();
+            generator > 50 ? enemyShadowBlast() : enemySoulEater();
         }
     }
 }
