@@ -16,7 +16,7 @@ const newUser = function() {
     } else if (localStorage.getItem('User Role') === 'DPS'){
         createUser = new DPS("Nina", "DPS", 90, 90, 20, 2, 3, statusAilments);
     } else {
-        createUser = new Healer("Nina", "Healer", 100, 100, 17, 0, 0, statusAilments);
+        window.location.href = "playerSelection/playerSelection.html";
     }
     return createUser;
 }

@@ -6,6 +6,7 @@ import { buttonDisplay } from '../UI/buttonDisplay.js';
 
 function runGame() {
     if (isAlive() === true) {
+        localStorage.clear();
         buttonDisplay();
         userInterface();
         userInput();
