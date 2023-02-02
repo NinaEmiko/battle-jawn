@@ -33,14 +33,17 @@ progress {
     width: 100%;
 }
 progress::-webkit-progress-bar {
+    accent-color: hsl(200, 100%, 50%);
     border: 0;
     border-radius: 20px;
  }
  progress::-webkit-progress-value {
+    background-color: hsl(200, 100%, 50%);
     border: 0;
     border-radius: 20px;
  }
  progress::-moz-progress-bar {
+    background-color: hsl(200, 100%, 50%);
     border: 0;
     border-radius: 20px;
  }
