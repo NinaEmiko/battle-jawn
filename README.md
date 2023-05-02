@@ -43,3 +43,5 @@ Positioned beside the player's moves is a Dialogue Box that tracks the moves tha
 ## After Battle
 
 After the battle the user will be returned to the Class Selection screen.
+
+![](https://github.com/NinaEmiko/battle-jawn/blob/main/battle-jawn-user-experience.gif)
