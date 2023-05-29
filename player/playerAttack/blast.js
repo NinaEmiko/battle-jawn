@@ -22,7 +22,7 @@ export function blast() {
 
         createEnemy.health = createEnemy.health - damage;
         user.health = user.health - 10;
-        user.mana = user.mana - 30;
+        // user.mana = user.mana - 30;
         logBox.push(`You used Blast! You did ${damage} damage. Blast did 10 damage to you.`);
         userInterface();
         logBoxDisplay();

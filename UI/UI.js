@@ -9,7 +9,7 @@ const textElement3 = document.getElementById('text3');
 //const optionsButtonsElement = document.getElementById('option-buttons');  
 const playerHealthBarElement = document.getElementById('playerHealthBar');
 const enemyHealthBarElement = document.getElementById('enemyHealthBar');
-const playerManaBarElement = document.getElementById('playerManaBar');
+// const playerManaBarElement = document.getElementById('playerManaBar');
         
 export function userInterface() {
     displayPotion();
