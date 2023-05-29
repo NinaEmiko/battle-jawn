@@ -10,9 +10,9 @@ const newUser = function() {
     if (localStorage.getItem('User Role') === 'Tank') {
         createUser = new Tank("Nina", "Tank", 120, 120, 15, 3, 3, statusAilments);
     } else if (localStorage.getItem('User Role') === 'Healer') {
-        createUser = new Healer("Nina", "Healer", 100, 100, 17, 0, 0, statusAilments);
+        createUser = new Healer("Nina", "Healer", 100, 100, 150, 150, 17, 0, 0, statusAilments);
     } else if (localStorage.getItem('User Role') === 'Caster') {
-        createUser = new Caster("Nina", "Caster", 90, 90, 20, 2, 3, statusAilments);
+        createUser = new Caster("Nina", "Caster", 90, 90, 150, 150, 20, 2, 3, statusAilments);
     } else if (localStorage.getItem('User Role') === 'DPS'){
         createUser = new DPS("Nina", "DPS", 90, 90, 20, 2, 3, statusAilments);
     } else {

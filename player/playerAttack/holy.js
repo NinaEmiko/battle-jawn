@@ -6,6 +6,7 @@ import { logBoxDisplay } from "../../UI/logBox/logBoxDisplay.js";
 import { enemyMoves } from "../../enemy/enemyMoves.js";
 
 export function holy() {
+    user.mana = user.mana - 30;
     let damage = Math.floor((Math.random() * user.strength) + user.strength / 3);
 
     let missed = false;

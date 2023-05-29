@@ -5,6 +5,7 @@
 }
 
 body {
+    /* Centering Content */
     padding: 0;
     margin: 0;
     display: flex;
@@ -13,47 +14,78 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
+    /* Background Color */
     background-color: #333;
 }
 
+/* Display Box */
 .container {
     width: 800px;
-    max-width: 80%;
-    background-color: white;
+    /* max-width: 80%; */
+    /* Moves Content away from edges of Display Box */
     padding: 10px;
+    /* Rounds edges of Display Box */
     border-radius: 5px;
+    /* Shadow Effect */
     box-shadow: 0 0 10px 2px;
 }
 
-progress {
+.healthBar, .manaBar {
+    /* Color of Health/Mana Bar behind full health */
     background-color:hsl(60, 100%, 50%);
-    border: 0;
+
+    /* border: 0; */
+    /* Rounds edges of Health/Mana Bar */
     border-radius: 20px;
+    /* Creates more space between Health/Mana Bar and surrounding elements */
     margin: 5px;
+    /* Makes Health/Mana Bar the width of the Display Box */
     width: 100%;
 }
-progress::-webkit-progress-bar {
+
+/* Styling for Health Bar for different browsers */
+.healthBar::-webkit-progress-bar {
+    accent-color: maroon;
+    border: 0;
+    border-radius: 20px;
+ }
+.healthBar::-webkit-progress-value {
+    background-color: maroon;
+    border: 0;
+    border-radius: 20px;
+ }
+ .healthBar::-moz-progress-bar {
+    background-color: maroon;
+    border: 0;
+    border-radius: 20px;
+ }
+
+/* Styling for Mana Bar for different browsers */
+
+.manaBar::-webkit-progress-bar {
     accent-color: hsl(200, 100%, 50%);
     border: 0;
     border-radius: 20px;
  }
- progress::-webkit-progress-value {
+.manaBar::-webkit-progress-value {
     background-color: hsl(200, 100%, 50%);
     border: 0;
     border-radius: 20px;
  }
- progress::-moz-progress-bar {
+ .manaBar::-moz-progress-bar {
     background-color: hsl(200, 100%, 50%);
     border: 0;
     border-radius: 20px;
  }
 
+ 
+/* Hero Name Display */
  .userDisplayPlayer {
     font-size: 25px;
     color: green;
     float: left;
 }
-
+/* Enemy Name Display */
 .userDisplayEnemy {
     font-size: 25px;
     color: red;
@@ -67,31 +99,46 @@ progress::-webkit-progress-bar {
     float: right;
 }
 
+/* Log Box Display */
 .logBoxDisplayElement {
     height: 250px;
     width: 45%;
     border: 3px solid #ccc;
+    /* Places text at the bottom of the Log Box Display */
     display: flex;
     flex-direction: column-reverse;
+    /* Shadow Effects */
     box-shadow: 0 0 10px 2px;
+    /* Makes it so text does not go out of bounds of Log Box Display */
     overflow: auto;
+    /* Positions log Box Display to the left of the Button Display */
     float: left;
+    /* Background Color */
+    background-color: #333;
 }
 
+/* User Promt Text */
 .text3 {
     text-align: center;
     font-size: 30px;
 }
 
+
 .btn-grid {
+/* Keeps Buttons in grid format */
     display: grid;
+    /* Keeps grid in columns of 2 */
     grid-template-columns: repeat(2, auto);
+    /* Adds spacing between buttons */
     gap: 10px;
     margin-top: 30px;
+    /* Keeps buttons at full width of space beside Log Box Display */
     width: 53.5%;
+    /* Keeps buttons to the right of the Log Box Display */
     float: right;
 }
 
+    /* Button Styling */
 .btn {
     background-color: hsl(200, 100%, 50%);
     border: 1px solid hsl(200, 100%, 30%);

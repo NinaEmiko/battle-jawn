@@ -1,0 +1,70 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: fantasy;
+    color: #dfd000;
+}
+
+body {
+    /* Centering Content */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    /* Background Color */
+    background-color: #333;
+}
+
+/* Display Box */
+.container {
+    width: 800px;
+    /* max-width: 80%; */
+    /* Moves Content away from edges of Display Box */
+    padding: 10px;
+    /* Rounds edges of Display Box */
+    border-radius: 5px;
+    /* Shadow Effect */
+    box-shadow: 0 0 10px 2px;
+}
+
+/* User Promt Text */
+.text3 {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 30px;
+}
+
+
+.btn-grid {
+/* Keeps Buttons in grid format */
+    display: grid;
+    /* Keeps grid in columns of 2 */
+    grid-template-columns: repeat(2, auto);
+    /* Adds spacing between buttons */
+    gap: 10px;
+    margin-top: 30px;
+}
+
+    /* Button Styling */
+.btn {
+    background-color: hsl(200, 100%, 50%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: rgb(255, 255, 8);
+    outline: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.btn:active {
+    box-shadow: 0 5px rgb(43, 43, 36);
+    transform: translateY(2px);
+  }

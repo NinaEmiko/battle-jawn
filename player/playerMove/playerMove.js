@@ -27,9 +27,9 @@ export const playerMove = (input) => {
             } else if (user.role === 'DPS') {
                 dpsMove(input);
                 disableButtons();
-            }
-        }
+            };
+        };
     } else {
         deathDisableButtons();
-    }
-}
+    };
+};
