@@ -1,7 +1,7 @@
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: fantasy;
-    color: #dfd000;
+    color: hsl(181, 84%, 44%);
 }
 
 body {
@@ -55,11 +55,11 @@ body {
 
     /* Button Styling */
 .btn {
-    background-color: hsl(200, 100%, 50%);
+    background-color: hsl(181, 84%, 44%);
     border: 1px solid hsl(200, 100%, 30%);
     border-radius: 5px;
     padding: 5px 10px;
-    color: rgb(255, 255, 8);
+    color: rgb(119, 8, 255);
     outline: none;
     font-size: 20px;
     font-weight: bold;

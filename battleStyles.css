@@ -1,7 +1,7 @@
 *, *::before, *::after {
     box-sizing: border-box;
     font-family: fantasy;
-    color: #dfd000;
+    color: hsl(181, 84%, 44%);
 }
 
 body {
@@ -50,17 +50,17 @@ body {
 
 /* Styling for Health Bar for different browsers */
 .healthBar::-webkit-progress-bar {
-    accent-color: maroon;
+    accent-color: rgb(161, 2, 2);
     border: 0;
     border-radius: 20px;
  }
 .healthBar::-webkit-progress-value {
-    background-color: maroon;
+    background-color: rgb(161, 2, 2);
     border: 0;
     border-radius: 20px;
  }
  .healthBar::-moz-progress-bar {
-    background-color: maroon;
+    background-color: rgb(161, 2, 2);
     border: 0;
     border-radius: 20px;
  }
@@ -87,13 +87,13 @@ body {
 /* Hero Name Display */
  .userDisplayPlayer {
     font-size: 25px;
-    color: green;
+    color:  hsl(181, 84%, 44%);
     float: left;
 }
 /* Enemy Name Display */
 .userDisplayEnemy {
     font-size: 25px;
-    color: red;
+    color: yellow;
     float: left;
 }
 
@@ -145,11 +145,11 @@ body {
 
     /* Button Styling */
 .btn {
-    background-color: hsl(200, 100%, 50%);
+    background-color: hsl(181, 84%, 44%);
     border: 1px solid hsl(200, 100%, 30%);
     border-radius: 5px;
     padding: 5px 10px;
-    color: rgb(255, 255, 8);
+    color: rgb(119, 8, 255);
     outline: none;
     font-size: 20px;
     font-weight: bold;
