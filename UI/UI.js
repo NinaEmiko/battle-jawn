@@ -18,8 +18,8 @@ export function userInterface() {
     enemyHealthBarElement.value = createEnemy.health / createEnemy.maxHealth * 100;
     textElement2.innerHTML=`Hero: ${user.role}`;
     playerHealthBarElement.value = user.health / user.maxHealth * 100;
-    if (user.role === "Healer" || user.role === "Caster") {
-        playerManaBarElement.value = user.mana / user.maxMana * 100;
-    }
+    // if (user.role === "Healer" || user.role === "Caster") {
+    //     playerManaBarElement.value = user.mana / user.maxMana * 100;
+    // }
     textElement3.innerHTML=`What do you wish to do?`;
 }
