@@ -13,7 +13,7 @@ public class Impale implements CriticalHit, Missable {
     }
 
     public attack() {
-        setDamage(player.strength * 2);
+        setDamage(player.strength * 1.2);
 
         if (miss()) {
             setDamage(0);

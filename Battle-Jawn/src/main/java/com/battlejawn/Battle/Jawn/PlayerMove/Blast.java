@@ -13,7 +13,7 @@ public class Blast implements CriticalHit, Missable {
     }
 
     public attack() {
-        setDamage(player.strength * 2);
+        setDamage(Math.floor(Math.random() * user.strength) + user.strength / 4);
 
         if (miss()) {
             setDamage(0);

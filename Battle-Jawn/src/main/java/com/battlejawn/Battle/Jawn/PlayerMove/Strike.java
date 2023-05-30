@@ -1,6 +1,6 @@
 package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
 
-public class Strike implements CriticalHit, Missable {
+public class Strike implements CriticalHit, Missable, Stagger {
 
     private int damage;
 
@@ -13,7 +13,7 @@ public class Strike implements CriticalHit, Missable {
     }
 
     public attack() {
-        setDamage(player.strength * 2);
+        setDamage(Math.floor(Math.random() * user.strength));
 
         if (miss()) {
             setDamage(0);
@@ -32,6 +32,14 @@ public class Strike implements CriticalHit, Missable {
 
     public boolean miss() {
         int chance = Math.floor(Math.random() * 100);
+        if (chance > 95) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean stagger() {
+        int chance = Math.floor(Math.random() * 10);
         if (chance > 95) {
             return true;
         }

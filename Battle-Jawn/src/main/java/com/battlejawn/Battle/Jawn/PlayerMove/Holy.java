@@ -13,7 +13,9 @@ public class Holy implements CriticalHit, Missable {
     }
 
     public attack() {
-        setDamage(player.strength * 2);
+        setDamage((Math.random() * user.strength) + user.strength / 3);
+
+        //If enemy is spirit, do double damage
 
         if (miss()) {
             setDamage(0);

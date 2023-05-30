@@ -1,6 +1,6 @@
 package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
 
-public class Wand implements CriticalHit, Missable {
+public class Wand implements Missable {
 
     private int damage;
 
@@ -13,21 +13,13 @@ public class Wand implements CriticalHit, Missable {
     }
 
     public attack() {
-        setDamage(player.strength * 2);
+        setDamage(Math.floor(user.strength * .75));
 
         if (miss()) {
             setDamage(0);
         } else if (criticalHit()){
             setDamage(damage *= 1.5);
         }
-    }
-
-    public boolean criticalHit() {
-        int chance = Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
     }
 
     public boolean miss() {

@@ -3,6 +3,7 @@ package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
 public class Stab implements CriticalHit, Missable {
 
     private int damage;
+    private int stabCount;
 
     public int getDamage() {
         return damage;
@@ -12,14 +13,23 @@ public class Stab implements CriticalHit, Missable {
         this.damage = damage;
     }
 
+    public int getStabCount() {
+        return stabCount;
+    }
+
+    public void setStabCount(int stabCount) {
+        this.stabCount = stabCount;
+    }
+
     public attack() {
-        setDamage(player.strength * 2);
+        setDamage(Math.floor(Math.random() * user.strength));
 
         if (miss()) {
             setDamage(0);
         } else if (criticalHit()){
             setDamage(damage *= 1.5);
         }
+        setStabCount(stabCount++);
     }
 
     public boolean criticalHit() {
