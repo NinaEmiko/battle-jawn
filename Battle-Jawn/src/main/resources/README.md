@@ -2,7 +2,7 @@
 
 This project started off as me trying to wrap my head around classes and how they can be utilized within a software program, and it spun out from there.
 
-It is a turn-based, text-based battle game. 
+It is a turn-based, text-based battle game.
 
 ## Choose A Class
 
@@ -13,7 +13,7 @@ The first screen that the user is presented with gives them four classes to choo
 - DPS
 - Caster
 
-Each class has their own weaknesses and strengths. 
+Each class has their own weaknesses and strengths.
 
 ## Gameplay
 
@@ -26,7 +26,7 @@ After selecting which class the user would like to play as, the user is thrown i
 - Rogue
 - Wolf
 
-Each enemy has their own weaknesses and strengths. 
+Each enemy has their own weaknesses and strengths.
 
 ### Player Moves
 
