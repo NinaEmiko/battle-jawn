@@ -4,24 +4,13 @@ import java.lang.annotation.Inherited;
 
 import javax.annotation.processing.Generated;
 
-@Entity
-@Tables(name = "players")
 public class Player {
-    @Id
-    @GeneratedValue(Strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "health")
     private int health;
-    @Column(name = "max_health")
     private int maxHealth;
-    @Column(name = "strength")
     private int strength;
-    @Column(name = "potions")
     private int potions;
-    @Column(name = "maxPotions")
     private int maxPotions;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status_ailments")
     private StatusAilments statusAilments;
 
     public Long getId() {
