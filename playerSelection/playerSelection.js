@@ -1,9 +1,4 @@
 import { disableButtons } from "../UI/disableButtons.js";
-import { Tank } from '../player/role/tank.js';
-import { Healer } from '../player/role/healer.js';
-import { DPS } from '../player/role/dps.js';
-import { Caster } from '../player/role/caster.js';
-import { statusAilments } from '../player/statusAilments.js';
 
 export function playerSelection(input) {
     let createUser;
