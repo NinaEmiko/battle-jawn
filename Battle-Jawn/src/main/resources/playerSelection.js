@@ -1,4 +1,4 @@
-import { disableButtons } from "../UI/disableButtons.js";
+import { disableButtons } from "UI/disableButtons.js";
 
 export function playerSelection(input) {
     let createUser;

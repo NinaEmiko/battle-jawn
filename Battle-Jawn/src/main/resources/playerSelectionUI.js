@@ -1,5 +1,5 @@
-import { PlayerSelectionUserInput } from "./playerSelectionUserInput.js";
-import { tipGenerator } from "./tipGenerator.js";
+import { PlayerSelectionUserInput } from "playerSelectionUserInput.js";
+import { tipGenerator } from "tipGenerator.js";
 
 let currentTip = tipGenerator();
 

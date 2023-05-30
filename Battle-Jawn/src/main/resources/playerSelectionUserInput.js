@@ -1,4 +1,4 @@
-import { playerSelection } from '../playerSelection/playerSelection.js';
+import { playerSelection } from 'playerSelection.js';
 
 let button1 = document.querySelector.bind(document);
 let button2 = document.querySelector.bind(document);
