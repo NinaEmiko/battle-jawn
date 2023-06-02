@@ -1,6 +1,20 @@
-package main.java.com.battlejawn.Battle.Jawn.Service;
+package com.battlejawn.Battle.Jawn.Service;
 
-import main.java.com.battlejawn.Battle.Jawn.DTO.TankDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.battlejawn.Battle.Jawn.DTO.CasterDTO;
+import com.battlejawn.Battle.Jawn.DTO.DPSDTO;
+import com.battlejawn.Battle.Jawn.DTO.HealerDTO;
+import com.battlejawn.Battle.Jawn.DTO.InputDTO;
+import com.battlejawn.Battle.Jawn.DTO.TankDTO;
+import com.battlejawn.Battle.Jawn.Player.Caster;
+import com.battlejawn.Battle.Jawn.Player.DPS;
+import com.battlejawn.Battle.Jawn.Player.Healer;
+import com.battlejawn.Battle.Jawn.Player.Tank;
+import com.battlejawn.Battle.Jawn.Repository.TankRepository;
+
+import com.battlejawn.Battle.Jawn.Repository.HealerRepository;
 
 @Service
 public class PlayerService {

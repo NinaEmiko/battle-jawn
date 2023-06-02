@@ -1,6 +1,8 @@
 package main.java.com.battlejawn.Battle.Jawn.Repository;
 
+import org.springframework.stereotype.Repository;
+
 @Repository
-public interface DPSRepoitory extends JpaRepository<DPS, Long> {
+public interface DPSRepository extends JpaRepository<DPS, Long> {
 
 }
