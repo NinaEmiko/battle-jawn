@@ -1,9 +1,5 @@
 package com.battlejawn.Battle.Jawn.Player;
 
-import java.lang.annotation.Inherited;
-
-import javax.annotation.processing.Generated;
-
 import com.battlejawn.Battle.Jawn.StatusAilments.StatusAilments;
 
 public class Player {
