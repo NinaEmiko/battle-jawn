@@ -1,8 +1,8 @@
-package main.java.com.battlejawn.Battle.Jawn.EnemyMove;
+package com.battlejawn.Battle.Jawn.EnemyMove;
 
 public class Steal {
 
-    private boolean success;
+    // private boolean success;
 
     // If user is DPS, enemy attacks instead of stealing
     //
