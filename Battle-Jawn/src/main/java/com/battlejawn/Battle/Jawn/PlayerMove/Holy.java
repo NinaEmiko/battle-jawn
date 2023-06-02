@@ -1,4 +1,7 @@
-package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
+package com.battlejawn.Battle.Jawn.PlayerMove;
+
+import com.battlejawn.Battle.Jawn.Interfaces.CriticalHit;
+import com.battlejawn.Battle.Jawn.Interfaces.Missable;
 
 public class Holy implements CriticalHit, Missable {
 
@@ -12,8 +15,8 @@ public class Holy implements CriticalHit, Missable {
         this.damage = damage;
     }
 
-    public attack() {
-        setDamage((Math.random() * user.strength) + user.strength / 3);
+    public void attack() {
+        setDamage((int) (Math.random()/* * user.strength) + user.strength / 3*/));
 
         //If enemy is spirit, do double damage
 
@@ -25,7 +28,7 @@ public class Holy implements CriticalHit, Missable {
     }
 
     public boolean criticalHit() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 90) {
             return true;
         }
@@ -33,7 +36,7 @@ public class Holy implements CriticalHit, Missable {
     }
 
     public boolean miss() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 95) {
             return true;
         }
