@@ -1,7 +1,7 @@
-package main.java.com.battlejawn.Battle.Jawn.EnemyMove;
+package com.battlejawn.Battle.Jawn.EnemyMove;
 
-import main.java.com.battlejawn.Battle.Jawn.PlayerMove.CriticalHit;
-import main.java.com.battlejawn.Battle.Jawn.PlayerMove.Missable;
+import com.battlejawn.Battle.Jawn.Interfaces.CriticalHit;
+import com.battlejawn.Battle.Jawn.Interfaces.Missable;
 
 public class Bite implements CriticalHit, Missable {
     private int damage;
@@ -14,8 +14,8 @@ public class Bite implements CriticalHit, Missable {
         this.damage = damage;
     }
 
-    public attack() {
-        setDamage(Math.floor(Math.random() * enemy.strength));
+    public void attack() {
+        setDamage((int) Math.floor(Math.random() /* * enemy.strength */));
 
         if (miss()) {
             setDamage(0);
@@ -25,7 +25,7 @@ public class Bite implements CriticalHit, Missable {
     }
 
     public boolean criticalHit() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 90) {
             return true;
         }
@@ -33,7 +33,7 @@ public class Bite implements CriticalHit, Missable {
     }
 
     public boolean miss() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 95) {
             return true;
         }
