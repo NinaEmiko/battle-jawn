@@ -1,11 +1,22 @@
-package main.java.com.battlejawn.Battle.Jawn.Player;
+package com.battlejawn.Battle.Jawn.Player;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import com.battlejawn.Battle.Jawn.StatusAilments.StatusAilments;
 
 @Entity
-@Tables(name = "casters")
+@Table(name = "casters")
 public class Caster extends Player {
 
     @Id
-    @GeneratedValue(Strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "health")
