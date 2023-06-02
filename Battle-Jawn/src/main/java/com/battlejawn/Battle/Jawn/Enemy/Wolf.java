@@ -1,4 +1,4 @@
-package main.java.com.battlejawn.Battle.Jawn.Enemy;
+package com.battlejawn.Battle.Jawn.Enemy;
 
 public class Wolf extends Enemy {
 
