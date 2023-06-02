@@ -1,4 +1,6 @@
-package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
+package com.battlejawn.Battle.Jawn.PlayerMove;
+
+import com.battlejawn.Battle.Jawn.Interfaces.Missable;
 
 public class Wand implements Missable {
 
@@ -12,18 +14,16 @@ public class Wand implements Missable {
         this.damage = damage;
     }
 
-    public attack() {
-        setDamage(Math.floor(user.strength * .75));
+    public void attack() {
+        setDamage((int) Math.floor(/*user.strength * .75*/10));
 
         if (miss()) {
             setDamage(0);
-        } else if (criticalHit()){
-            setDamage(damage *= 1.5);
         }
     }
 
     public boolean miss() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 95) {
             return true;
         }
