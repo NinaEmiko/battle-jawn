@@ -1,4 +1,6 @@
-package main.java.com.battlejawn.Battle.Jawn.DTO;
+package com.battlejawn.Battle.Jawn.DTO;
+
+import com.battlejawn.Battle.Jawn.StatusAilments.StatusAilments;
 
 public class CasterDTO {
     private int health;
