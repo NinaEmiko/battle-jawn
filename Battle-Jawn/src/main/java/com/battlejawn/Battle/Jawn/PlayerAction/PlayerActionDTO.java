@@ -1,4 +1,6 @@
-package main.java.com.battlejawn.Battle.Jawn.PlayerAction;
+package com.battlejawn.Battle.Jawn.PlayerAction;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class PlayerActionDTO {
