@@ -1,5 +1,7 @@
 package main.java.com.battlejawn.Battle.Jawn.Service;
 
+import org.springframework.stereotype.Service;
+
 import main.java.com.battlejawn.Battle.Jawn.DTO.TankDTO;
 
 @Service

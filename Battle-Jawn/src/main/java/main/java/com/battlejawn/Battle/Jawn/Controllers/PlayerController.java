@@ -1,5 +1,10 @@
 package main.java.com.battlejawn.Battle.Jawn.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.battlejawn.Battle.Jawn.Service.PlayerService;
+
 @RestController
 public class PlayerController {
     private final PlayerService playerService;

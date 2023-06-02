@@ -1,7 +1,10 @@
 package main.java.com.battlejawn.Battle.Jawn.Player;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 @Entity
-@Tables(name = "casters")
+@Table(name = "casters")
 public class Caster extends Player {
 
     @Id
