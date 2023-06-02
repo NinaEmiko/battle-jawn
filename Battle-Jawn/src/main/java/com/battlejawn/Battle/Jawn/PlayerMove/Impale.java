@@ -1,4 +1,7 @@
-package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
+package com.battlejawn.Battle.Jawn.PlayerMove;
+
+import com.battlejawn.Battle.Jawn.Interfaces.CriticalHit;
+import com.battlejawn.Battle.Jawn.Interfaces.Missable;
 
 public class Impale implements CriticalHit, Missable {
 
@@ -12,8 +15,8 @@ public class Impale implements CriticalHit, Missable {
         this.damage = damage;
     }
 
-    public attack() {
-        setDamage(player.strength * 1.2);
+    public void attack() {
+        setDamage( /* player.strength * 1.2*/ 10);
 
         if (miss()) {
             setDamage(0);
@@ -23,7 +26,7 @@ public class Impale implements CriticalHit, Missable {
     }
 
     public boolean criticalHit() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 90) {
             return true;
         }
@@ -31,7 +34,7 @@ public class Impale implements CriticalHit, Missable {
     }
 
     public boolean miss() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 95) {
             return true;
         }
