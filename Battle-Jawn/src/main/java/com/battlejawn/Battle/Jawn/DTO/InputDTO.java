@@ -1,4 +1,4 @@
-package main.java.com.battlejawn.Battle.Jawn.DTO;
+package com.battlejawn.Battle.Jawn.DTO;
 
 public class InputDTO {
     private int playerId;
