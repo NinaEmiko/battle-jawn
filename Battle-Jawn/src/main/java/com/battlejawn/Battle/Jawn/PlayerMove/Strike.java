@@ -1,4 +1,8 @@
-package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
+package com.battlejawn.Battle.Jawn.PlayerMove;
+
+import com.battlejawn.Battle.Jawn.Interfaces.CriticalHit;
+import com.battlejawn.Battle.Jawn.Interfaces.Missable;
+import com.battlejawn.Battle.Jawn.Interfaces.Stagger;
 
 public class Strike implements CriticalHit, Missable, Stagger {
 
@@ -12,8 +16,8 @@ public class Strike implements CriticalHit, Missable, Stagger {
         this.damage = damage;
     }
 
-    public attack() {
-        setDamage(Math.floor(Math.random() * user.strength));
+    public void attack() {
+        setDamage((int) Math.floor(Math.random() /* * user.strength */));
 
         if (miss()) {
             setDamage(0);
@@ -23,7 +27,7 @@ public class Strike implements CriticalHit, Missable, Stagger {
     }
 
     public boolean criticalHit() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 90) {
             return true;
         }
@@ -31,7 +35,7 @@ public class Strike implements CriticalHit, Missable, Stagger {
     }
 
     public boolean miss() {
-        int chance = Math.floor(Math.random() * 100);
+        int chance = (int) Math.floor(Math.random() * 100);
         if (chance > 95) {
             return true;
         }
@@ -39,7 +43,7 @@ public class Strike implements CriticalHit, Missable, Stagger {
     }
 
     public boolean stagger() {
-        int chance = Math.floor(Math.random() * 10);
+        int chance = (int) Math.floor(Math.random() * 10);
         if (chance > 95) {
             return true;
         }
