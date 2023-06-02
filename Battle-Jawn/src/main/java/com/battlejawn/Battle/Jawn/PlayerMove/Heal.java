@@ -1,4 +1,4 @@
-package main.java.com.battlejawn.Battle.Jawn.PlayerMove;
+package com.battlejawn.Battle.Jawn.PlayerMove;
 
 public class Heal {
 
