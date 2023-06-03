@@ -2,6 +2,8 @@
 
 This project started off as me trying to wrap my head around classes and how they can be utilized within a software program, and it spun out from there.
 
+Currently migrating base code from vanilla JS to Spring Boot, to better familiarize myself with Java/Spring.
+
 It is a turn-based, text-based battle game. 
 
 ## Choose A Class
@@ -46,3 +48,10 @@ Positioned beside the player's moves is a Log Box that tracks the moves that bot
 After the battle the user will be returned to the Class Selection screen.
 
 ![](https://github.com/NinaEmiko/battle-jawn/blob/main/battle-jawn-user-experience.gif)
+
+### Future Features
+
+- Real-Time Combat
+- Specs
+- Survival Mode
+- Battle Animations
