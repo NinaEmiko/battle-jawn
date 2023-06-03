@@ -1,20 +1,21 @@
 package com.battlejawn.Config;
 
-
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.Resource;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class PropertyConfig {
 
     @Value("${spring.datasource.password}")
-    private Resource passwordFile;
+    private String password;
 
+    @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        configurer.setLocalOverride(true);
+        configurer.setLocation(new ClassPathResource("/Users/NK/Documents/Dev/config.properties"));
         return configurer;
     }
 }
