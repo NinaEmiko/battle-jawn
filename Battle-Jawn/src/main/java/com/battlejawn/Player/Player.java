@@ -2,22 +2,22 @@ package com.battlejawn.Player;
 
 import com.battlejawn.StatusAilments.StatusAilments;
 
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "entity_type")
 public class Player {
-    private Long id;
+
     private int health;
     private int maxHealth;
     private int strength;
     private int potions;
     private int maxPotions;
     private StatusAilments statusAilments;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getHealth() {
         return health;
