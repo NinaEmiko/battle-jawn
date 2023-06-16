@@ -2,7 +2,7 @@ import React from 'react'
 
 const PlayerHealthBar = () => {
   return (
-    <progress></progress>
+    <progress className='healthBar' id="playerHealthBar" value="100" max="100"></progress>
   )
 }
 
