@@ -1,6 +1,5 @@
 import React from "react";
 import "../styling/Button.css";
-import "../styling/Button.css";
 
 const Button = () => {
   return (

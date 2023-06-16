@@ -1,5 +1,6 @@
 /* User Prompt Text */
-.user-prompt-wrapper {
-    margin-top: 30px;
+
+.userPrompt {
+    color: yellow;
     font-size: 30px;
 }
