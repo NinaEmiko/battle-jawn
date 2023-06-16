@@ -19,6 +19,8 @@ const Container = () => {
       <PlayerHealthBar />
       <div className="bottom-content-wrapper">
         <LogBoxDisplay />
+        </div>
+        <div>
         <div className="user-prompt-wrapper">
         <UserPromptText />
         <Button />

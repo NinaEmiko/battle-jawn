@@ -14,8 +14,11 @@
 
   .bottom-content-wrapper {
     display: flex; /* Use flexbox */
+    flex-direction: column; /* Use column layout */
+    align-items: center;
+    margin-left: 5px;
   }
 
-  .user-prompt-wrapper{
+  .user-prompt-wrapper {
     text-align: center;
-  }
+}
