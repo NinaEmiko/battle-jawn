@@ -1,10 +1,3 @@
-import React from "react";
-import EnemyName from "./EnemyName";
-import EnemyHealthBar from "./EnemyHealthBar";
-import PlayerName from "./PlayerName";
-import PotionDisplay from "./PotionDisplay";
-import PlayerHealthBar from "./PlayerHealthBar";
-import LogBoxDisplay from "./LogBoxDisplay";
 import UserPromptText from "./UserPromptText";
 import Button from "./Button";
 import "../styling/Container.css";
@@ -14,14 +7,19 @@ function PlayerSelectionContainer() {
   return (
     <div className="container">
       <PlayerTips />
-        <div>
+      <div>
         <div className="user-prompt-wrapper">
-        <UserPromptText text="Choose a role!"></UserPromptText>
-        <Button />
+          <UserPromptText text="Choose a role!"></UserPromptText>
+          <Button
+            buttonOneText="Tank"
+            buttonTwoText="Healer"
+            buttonThreeText="Caster"
+            buttonFourText="DPS"
+          />
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default PlayerSelectionContainer;

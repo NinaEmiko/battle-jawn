@@ -4,7 +4,7 @@ import BattleContainer from "./components/BattleContainer";
 import PlayerSelectionContainer from "./components/PlayerSelectionContainer";
 
 function App() {
-  return <BattleContainer />;
+  return <PlayerSelectionContainer />;
 }
 
 document.body.style.backgroundImage = `url("${BackgroundImage}")`;

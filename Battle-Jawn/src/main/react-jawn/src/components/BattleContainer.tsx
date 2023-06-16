@@ -19,15 +19,20 @@ function BattleContainer() {
       <PlayerHealthBar />
       <div className="bottom-content-wrapper">
         <LogBoxDisplay />
-        </div>
-        <div>
+      </div>
+      <div>
         <div className="user-prompt-wrapper">
-        <UserPromptText text={"What would you like to do?"} />
-        <Button />
+          <UserPromptText text={"What would you like to do?"} />
+          <Button
+            buttonOneText="Attack"
+            buttonTwoText="Heal"
+            buttonThreeText="Strong Attack"
+            buttonFourText="Run"
+          />
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default BattleContainer;
