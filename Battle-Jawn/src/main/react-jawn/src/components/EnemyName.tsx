@@ -2,7 +2,7 @@ import React from 'react'
 
 const EnemyName = () => {
   return (
-    <div>Text</div>
+    <div className="name" id="enemyName">Text</div>
   )
 }
 
