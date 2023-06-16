@@ -1,13 +1,11 @@
-import React from 'react'
-import BackgroundImage from "../../resources/images/BattleJawnBackground.png"
-import Container from './components/Container';
+import React from "react";
+import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
+import BattleContainer from "./components/BattleContainer";
 
 function BattleScreen() {
-    return (
-        <Container />
-    );
-  }
-  
-  document.body.style.backgroundImage = `url("${BackgroundImage}")`;
+  return <BattleContainer />;
+}
 
-export default BattleScreen
+document.body.style.backgroundImage = `url("${BackgroundImage}")`;
+
+export default BattleScreen;

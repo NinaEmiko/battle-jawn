@@ -1,11 +1,9 @@
 import "./App.css";
-import BackgroundImage from "../../resources/images/BattleJawnBackground.png"
-import Container from "./components/Container";
+import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
+import Container from "./components/BattleContainer";
 
 function App() {
-  return (
-      <Container />
-  );
+  return <Container />;
 }
 
 document.body.style.backgroundImage = `url("${BackgroundImage}")`;

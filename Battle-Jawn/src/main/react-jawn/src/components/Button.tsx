@@ -1,7 +1,7 @@
 import React from "react";
 import "../styling/Button.css";
 
-const Button = () => {
+function Button() {
   return (
     <>
       <div className="btn-grid" id="option-buttons">

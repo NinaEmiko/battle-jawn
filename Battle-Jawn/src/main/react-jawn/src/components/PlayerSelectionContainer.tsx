@@ -8,15 +8,12 @@ import LogBoxDisplay from "./LogBoxDisplay";
 import UserPromptText from "./UserPromptText";
 import Button from "./Button";
 import "../styling/Container.css";
+import PlayerTips from "./PlayerTips";
 
-const Container = () => {
+function PlayerSelectionContainer() {
   return (
     <div className="container">
-      <EnemyName />
-      <EnemyHealthBar />
-      <PlayerName />
-      <PotionDisplay />
-      <PlayerHealthBar />
+      <PlayerTips />
       <div className="bottom-content-wrapper">
         <LogBoxDisplay />
         </div>
@@ -30,4 +27,4 @@ const Container = () => {
   );
 };
 
-export default Container;
+export default PlayerSelectionContainer;
