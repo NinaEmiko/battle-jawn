@@ -11,7 +11,7 @@
     /* Makes it so text does not go out of bounds of Log Box Display */
     overflow: auto;
     /* Positions log Box Display to the left of the Button Display */
-    float: left;
+    /* float: left; */
     /* Background Color */
     background-color: #333;
 }

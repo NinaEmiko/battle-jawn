@@ -7,7 +7,7 @@ import PlayerHealthBar from "./PlayerHealthBar";
 import LogBoxDisplay from "./LogBoxDisplay";
 import UserPromptText from "./UserPromptText";
 import Button from "./Button";
-import '../styling/Container.css';
+import "../styling/Container.css";
 
 const Container = () => {
   return (
@@ -17,9 +17,13 @@ const Container = () => {
       <PlayerName />
       <PotionDisplay />
       <PlayerHealthBar />
-      <LogBoxDisplay />
-      <UserPromptText />
-      <Button />
+      <div className="bottom-content-wrapper">
+        <LogBoxDisplay />
+        <div className="user-prompt-wrapper">
+        <UserPromptText />
+        <Button />
+        </div>
+      </div>
     </div>
   );
 };

@@ -11,3 +11,11 @@
     /* Shadow Effect */
     box-shadow: 0 0 10px 2px;
   }
+
+  .bottom-content-wrapper {
+    display: flex; /* Use flexbox */
+  }
+
+  .user-prompt-wrapper{
+    text-align: center;
+  }
