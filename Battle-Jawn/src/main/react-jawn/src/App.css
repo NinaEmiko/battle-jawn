@@ -4,8 +4,9 @@
   color: hsl(181, 84%, 44%);
 }
 
+
 body {
-  background-image: url(/img/BattleJawn\ Background.png);
+  background-image: "url('../../resources/images/BattleJawnBackground.png')";
   background-repeat: no-repeat;
   background-size: cover;
   /* Centering Content */

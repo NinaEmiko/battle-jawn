@@ -1,24 +1,11 @@
 import "./App.css";
-import Button from "./components/Button";
-import EnemyHealthBar from "./components/EnemyHealthBar";
-import EnemyName from "./components/EnemyName";
-import LogBoxDisplay from "./components/LogBoxDisplay";
-import PlayerHealthBar from "./components/PlayerHealthBar";
-import PlayerName from "./components/PlayerName";
-import PotionDisplay from "./components/PotionDisplay";
-import UserPromptText from "./components/UserPromptText";
+import BackgroundImage from "../../resources/images/BattleJawnBackground.png"
+import Container from "./components/Container";
 
 function App() {
   return (
-    <div className="container">
-      <EnemyName />
-      <EnemyHealthBar />
-      <PlayerName />
-      <PotionDisplay />
-      <PlayerHealthBar />
-      <LogBoxDisplay />
-      <UserPromptText />
-      <Button />
+    <div style={{backgroundImage: `url("${BackgroundImage}")`}}>
+      <Container />
     </div>
   );
 }
