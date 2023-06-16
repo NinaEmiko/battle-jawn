@@ -1,12 +1,14 @@
-import './App.css'
-import Button from './components/Button';
+import "./App.css";
+import Button from "./components/Button";
+import PlayerHealthBar from "./components/PlayerHealthBar";
 
 function App() {
   return (
     <>
-      <Button></Button>
+      <PlayerHealthBar />
+      <Button />
     </>
   );
 }
 
-export default App
+export default App;
