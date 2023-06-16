@@ -1,9 +1,10 @@
 import "./App.css";
 import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
-import Container from "./components/BattleContainer";
+import BattleContainer from "./components/BattleContainer";
+import PlayerSelectionContainer from "./components/PlayerSelectionContainer";
 
 function App() {
-  return <Container />;
+  return <BattleContainer />;
 }
 
 document.body.style.backgroundImage = `url("${BackgroundImage}")`;

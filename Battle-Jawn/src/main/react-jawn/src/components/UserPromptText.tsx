@@ -1,8 +1,12 @@
 import React from "react";
 import "../styling/UserPromptText.css";
 
-const UserPromptText = () => {
-  return <div className="userPrompt">What do you wish to do?</div>;
+interface UserPromptTextProp {
+  text: string;
+}
+
+const UserPromptText: React.FC<UserPromptTextProp> = ({ text }) => {
+  return <div className="userPrompt">{text}</div>;
 };
 
 export default UserPromptText;

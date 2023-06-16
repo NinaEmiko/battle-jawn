@@ -14,12 +14,9 @@ function PlayerSelectionContainer() {
   return (
     <div className="container">
       <PlayerTips />
-      <div className="bottom-content-wrapper">
-        <LogBoxDisplay />
-        </div>
         <div>
         <div className="user-prompt-wrapper">
-        <UserPromptText />
+        <UserPromptText text="Choose a role!"></UserPromptText>
         <Button />
         </div>
       </div>

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import "../styling/Button.css";
 
 function Button() {
+  // const log = (e: KeyboardEvent): void => {
+  //   alert(e.key);
+  // };
+
   return (
     <>
       <div className="btn-grid" id="option-buttons">
@@ -17,9 +21,10 @@ function Button() {
         <button className="btn" id="button4">
           Button 4
         </button>
+        {/* <input type="text" onKeyUp={log} defaultValue="Hey!" /> */}
       </div>
     </>
   );
-};
+}
 
 export default Button;

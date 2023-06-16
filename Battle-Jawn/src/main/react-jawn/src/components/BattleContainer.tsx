@@ -22,7 +22,7 @@ function BattleContainer() {
         </div>
         <div>
         <div className="user-prompt-wrapper">
-        <UserPromptText />
+        <UserPromptText text={"What would you like to do?"} />
         <Button />
         </div>
       </div>
