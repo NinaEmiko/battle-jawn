@@ -1,4 +1,5 @@
 import React from 'react'
+import "../styling/EnemyName.css";
 
 const EnemyName = () => {
   return (

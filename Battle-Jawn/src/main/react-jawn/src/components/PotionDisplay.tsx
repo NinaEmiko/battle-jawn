@@ -1,5 +1,6 @@
 import React from "react";
 import healthPotion from "../../../resources/images/HealthPotion.png";
+import "../styling/PotionDisplay.css";
 
 const PotionDisplay = () => {
   return (
