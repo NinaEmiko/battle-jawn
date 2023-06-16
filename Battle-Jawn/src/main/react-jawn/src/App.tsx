@@ -10,7 +10,7 @@ import UserPromptText from "./components/UserPromptText";
 
 function App() {
   return (
-    <>
+    <div className="container">
       <EnemyName />
       <EnemyHealthBar />
       <PlayerName />
@@ -19,7 +19,7 @@ function App() {
       <LogBoxDisplay />
       <UserPromptText />
       <Button />
-    </>
+    </div>
   );
 }
 

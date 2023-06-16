@@ -1,0 +1,29 @@
+.healthBar, .manaBar {
+    /* Color of Health/Mana Bar behind full health */
+    background-color:hsl(60, 100%, 50%);
+
+    /* border: 0; */
+    /* Rounds edges of Health/Mana Bar */
+    border-radius: 20px;
+    /* Creates more space between Health/Mana Bar and surrounding elements */
+    margin: 5px;
+    /* Makes Health/Mana Bar the width of the Display Box */
+    width: 100%;
+}
+
+/* Styling for Health Bar for different browsers */
+.healthBar::-webkit-progress-bar {
+    accent-color: rgb(161, 2, 2);
+    border: 0;
+    border-radius: 20px;
+ }
+.healthBar::-webkit-progress-value {
+    background-color: rgb(161, 2, 2);
+    border: 0;
+    border-radius: 20px;
+ }
+ .healthBar::-moz-progress-bar {
+    background-color: rgb(161, 2, 2);
+    border: 0;
+    border-radius: 20px;
+ }
