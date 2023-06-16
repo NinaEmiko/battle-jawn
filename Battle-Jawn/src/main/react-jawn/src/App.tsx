@@ -6,6 +6,7 @@ import LogBoxDisplay from "./components/LogBoxDisplay";
 import PlayerHealthBar from "./components/PlayerHealthBar";
 import PlayerName from "./components/PlayerName";
 import PotionDisplay from "./components/PotionDisplay";
+import UserPromptText from "./components/UserPromptText";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <PotionDisplay />
       <PlayerHealthBar />
       <LogBoxDisplay />
+      <UserPromptText />
       <Button />
     </>
   );

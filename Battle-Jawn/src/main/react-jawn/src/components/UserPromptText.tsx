@@ -2,7 +2,7 @@ import React from 'react'
 
 const UserPromptText = () => {
   return (
-    <div className="userPrompt">Text</div>
+    <div className="userPrompt">What do you wish to do?</div>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 const LogBoxDisplay = () => {
   return (
-    <div className="logBox">Text</div>
+    <div className="logBox">You encountered an enemy!</div>
   )
 }
 
