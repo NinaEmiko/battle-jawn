@@ -7,7 +7,7 @@ import PlayerHealthBar from "./PlayerHealthBar";
 import LogBoxDisplay from "./LogBoxDisplay";
 import UserPromptText from "./UserPromptText";
 import Button from "./Button";
-import BackgroundImage from "./BackgroundImage";
+import '../styling/Container.css';
 
 const Container = () => {
   return (

@@ -1,0 +1,13 @@
+/* Display Box */
+.container {
+    background-color: #333;
+    opacity: 90%;
+    width: 800px;
+    /* max-width: 80%; */
+    /* Moves Content away from edges of Display Box */
+    padding: 10px;
+    /* Rounds edges of Display Box */
+    border-radius: 5px;
+    /* Shadow Effect */
+    box-shadow: 0 0 10px 2px;
+  }

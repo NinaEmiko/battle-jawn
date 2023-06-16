@@ -4,10 +4,10 @@ import Container from "./components/Container";
 
 function App() {
   return (
-    <div style={{backgroundImage: `url("${BackgroundImage}")`}}>
       <Container />
-    </div>
   );
 }
+
+document.body.style.backgroundImage = `url("${BackgroundImage}")`;
 
 export default App;
