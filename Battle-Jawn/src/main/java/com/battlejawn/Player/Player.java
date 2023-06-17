@@ -1,11 +1,11 @@
 package com.battlejawn.Player;
 
-import com.battlejawn.StatusAilments.StatusAilments;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import com.battlejawn.StatusAilments.StatusAilments;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

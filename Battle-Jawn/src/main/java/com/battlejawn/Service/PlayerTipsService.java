@@ -3,12 +3,12 @@ package com.battlejawn.Service;
 import java.util.List;
 import java.util.Random;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.battlejawn.PlayerTips;
 import com.battlejawn.Repository.PlayerTipsRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
