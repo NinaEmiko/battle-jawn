@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.battlejawn.StatusAilments.StatusAilments;
+// import com.battlejawn.StatusAilments.StatusAilments;
 
 @Entity
 public class Player {
@@ -19,7 +19,7 @@ public class Player {
     private int potions;
     private int maxPotions;
     private Role role;
-    private StatusAilments statusAilments;
+    // private StatusAilments statusAilments;
 
     public Long getId() {
         return id;
@@ -77,13 +77,13 @@ public class Player {
         this.role = role;
     }
 
-    public StatusAilments getStatusAilments() {
-        return statusAilments;
-    }
+    // public StatusAilments getStatusAilments() {
+    //     return statusAilments;
+    // }
 
-    public void setStatusAilments(StatusAilments statusAilments) {
-        this.statusAilments = statusAilments;
-    }
+    // public void setStatusAilments(StatusAilments statusAilments) {
+    //     this.statusAilments = statusAilments;
+    // }
 
     public Player(int health, int maxHealth, int strength, int potions, int maxPotions, Role role) {
         this.health = health;
