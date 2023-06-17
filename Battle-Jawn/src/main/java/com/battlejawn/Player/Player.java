@@ -1,23 +1,33 @@
 package com.battlejawn.Player;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import com.battlejawn.StatusAilments.StatusAilments;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "entity_type")
 public class Player {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int health;
     private int maxHealth;
     private int strength;
     private int potions;
     private int maxPotions;
+    private Role role;
     private StatusAilments statusAilments;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public int getHealth() {
         return health;
@@ -59,6 +69,14 @@ public class Player {
         this.maxPotions = maxPotions;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public StatusAilments getStatusAilments() {
         return statusAilments;
     }
@@ -67,13 +85,12 @@ public class Player {
         this.statusAilments = statusAilments;
     }
 
-    public Player(int health, int maxHealth, int strength, int potions, int maxPotions,
-            StatusAilments statusAilments) {
+    public Player(int health, int maxHealth, int strength, int potions, int maxPotions, Role role) {
         this.health = health;
         this.maxHealth = maxHealth;
         this.strength = strength;
         this.potions = potions;
         this.maxPotions = maxPotions;
-        this.statusAilments = statusAilments;
+        this.role = role;
     }
 }
