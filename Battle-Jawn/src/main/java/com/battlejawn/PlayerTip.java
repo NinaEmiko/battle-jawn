@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class PlayerTips {
+public class PlayerTip {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class PlayerTips {
 
     private String body;
 
-    public PlayerTips(Long id, String body) {
+    public PlayerTip(Long id, String body) {
         this.id = id;
         this.body = body;
     }
