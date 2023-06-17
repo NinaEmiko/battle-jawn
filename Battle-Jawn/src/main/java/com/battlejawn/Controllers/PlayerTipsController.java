@@ -1,28 +1,23 @@
 package com.battlejawn.Controllers;
 
-import java.util.List;
-import java.util.Random;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.battlejawn.PlayerTips;
-import com.battlejawn.Repository.PlayerTipsRepository;
+import com.battlejawn.Service.PlayerTipsService;
 
 @RestController
 public class PlayerTipsController {
 
-    private final PlayerTipsRepository playerTipsRepository;
+    private final PlayerTipsService playerTipsService;
 
-    public PlayerTipsController(PlayerTipsRepository playerTipsRepository) {
-        this.playerTipsRepository = playerTipsRepository;
+    public PlayerTipsController(PlayerTipsService playerTipsService) {
+        this.playerTipsService = playerTipsService;
     }
 
     @GetMapping("/player-tips/random")
     public PlayerTips getRandomPlayerTip() {
-        List<PlayerTips> playerTips = playerTipsRepository.findAll();
-        int randomIndex = new Random().nextInt(playerTips.size());
-        return playerTips.get(randomIndex);
+        return playerTipsService.getRandomPlayerTip();
     }
     
 }
