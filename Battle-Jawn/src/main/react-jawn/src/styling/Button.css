@@ -21,6 +21,8 @@
         color: rgb(119, 8, 255);
         outline: none;
         font-size: 20px;
+        width: 200px;
+        height: 50px;
     }
     
     .btn:hover {

@@ -17,18 +17,18 @@ function BattleContainer() {
       <PlayerName />
       <PotionDisplay />
       <PlayerHealthBar />
-      <div className="bottom-content-wrapper">
+      <div className="logbox-and-user-input">
         <LogBoxDisplay />
-      </div>
-      <div>
-        <div className="user-prompt-wrapper">
-          <UserPromptText text={"What would you like to do?"} />
-          <Button
-            buttonOneText="Attack"
-            buttonTwoText="Heal"
-            buttonThreeText="Strong Attack"
-            buttonFourText="Run"
-          />
+        <div>
+          <div className="user-prompt-wrapper">
+            <UserPromptText text={"What would you like to do?"} />
+            <Button
+              buttonOneText="Attack"
+              buttonTwoText="Heal"
+              buttonThreeText="Strong Attack"
+              buttonFourText="Run"
+            />
+          </div>
         </div>
       </div>
     </div>

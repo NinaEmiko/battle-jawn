@@ -12,14 +12,16 @@
     box-shadow: 0 0 10px 2px;
   }
 
-  .bottom-content-wrapper {
-    display: flex; /* Use flexbox */
-    flex-direction: column; /* Use column layout */
+  .logbox-and-user-input {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-left: 5px;
   }
 
   .user-prompt-wrapper {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin-top: 30px;
 }
