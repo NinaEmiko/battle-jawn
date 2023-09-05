@@ -1,18 +1,18 @@
 import React from "react";
-import EnemyName from "./EnemyName";
-import EnemyHealthBar from "./EnemyHealthBar";
-import PlayerName from "./PlayerName";
-import PotionDisplay from "./PotionDisplay";
-import PlayerHealthBar from "./PlayerHealthBar";
-import LogBoxDisplay from "./LogBoxDisplay";
-import UserPromptText from "./UserPromptText";
-import Button from "./Button";
+import EnemyName from "../components/EnemyName";
+import EnemyHealthBar from "../components/EnemyHealthBar";
+import PlayerName from "../components/PlayerName";
+import PotionDisplay from "../components/PotionDisplay";
+import PlayerHealthBar from "../components/PlayerHealthBar";
+import LogBoxDisplay from "../components/LogBoxDisplay";
+import UserPromptText from "../components/UserPromptText";
+import Button from "../components/Button";
 import "../styling/Container.css";
 
 function BattleContainer() {
   return (
     <div className="container">
-      <EnemyName />
+      <EnemyName/>
       <EnemyHealthBar />
       <PlayerName />
       <PotionDisplay />

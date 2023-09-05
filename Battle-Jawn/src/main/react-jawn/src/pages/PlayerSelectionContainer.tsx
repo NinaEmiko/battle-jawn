@@ -1,9 +1,10 @@
-import UserPromptText from "./UserPromptText";
-import Button from "./Button";
+import UserPromptText from "../components/UserPromptText";
+import Button from "../components/Button";
 import "../styling/Container.css";
-import PlayerTips from "./PlayerTips";
+import PlayerTips from "../components/PlayerTips";
 
 function PlayerSelectionContainer() {
+
   return (
     <div className="container">
       <PlayerTips />

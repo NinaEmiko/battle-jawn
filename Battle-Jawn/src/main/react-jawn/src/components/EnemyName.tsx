@@ -1,9 +1,10 @@
 import React from 'react'
 import "../styling/EnemyName.css";
 
-const EnemyName = () => {
+function EnemyName(){
+
   return (
-    <div className="name" id="enemyName">Enemy Name</div>
+    <div className="name" id="enemyName">Ha</div>
   )
 }
 

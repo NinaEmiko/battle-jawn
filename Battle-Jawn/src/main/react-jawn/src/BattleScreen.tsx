@@ -1,6 +1,6 @@
 import React from "react";
 import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
-import BattleContainer from "./components/BattleContainer";
+import BattleContainer from "./pages/BattleContainer";
 
 function BattleScreen() {
   return <BattleContainer />;
