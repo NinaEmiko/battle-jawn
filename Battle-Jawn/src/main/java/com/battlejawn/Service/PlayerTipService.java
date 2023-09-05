@@ -3,7 +3,7 @@ package com.battlejawn.Service;
 import java.util.List;
 import java.util.Random;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +34,10 @@ public class PlayerTipService {
 
     public List<PlayerTip> getAllPlayerTips() {
         return playerTipRepository.findAll();
+        // List<PlayerTip> tips = new ArrayList<PlayerTip>();
+        // PlayerTip playerTip = new PlayerTip((long) 1, "This is here");
+        // tips.add(playerTip);
+        // return tips;
     }
 
     public void deletePlayerTip(Long id) {
