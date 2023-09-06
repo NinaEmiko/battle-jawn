@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import EnemyName from "../components/EnemyName";
 import EnemyHealthBar from "../components/EnemyHealthBar";
-import PlayerName from "../components/PlayerName";
 import PotionDisplay from "../components/PotionDisplay";
 import PlayerHealthBar from "../components/PlayerHealthBar";
 import LogBoxDisplay from "../components/LogBoxDisplay";
@@ -10,11 +9,13 @@ import Button from "../components/Button";
 import "../styling/Container.css";
 
 function BattleContainer() {
+  const role = window.localStorage.getItem("Role");
+
   return (
     <div className="container">
       <EnemyName/>
       <EnemyHealthBar />
-      <PlayerName />
+      <div>{role}</div>
       <PotionDisplay />
       <PlayerHealthBar />
       <div className="logbox-and-user-input">

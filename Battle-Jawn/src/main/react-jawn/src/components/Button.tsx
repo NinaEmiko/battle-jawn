@@ -36,13 +36,13 @@ const Button: React.FC<ButtonProp> = ({
         <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button1">
           {buttonOneText}
         </button>
-        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button2">
+        <button onClick={(e) => handleClick(buttonTwoText)} className="btn" id="button2">
           {buttonTwoText}
         </button>
-        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button3">
+        <button onClick={(e) => handleClick(buttonThreeText)} className="btn" id="button3">
           {buttonThreeText}
         </button>
-        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button4">
+        <button onClick={(e) => handleClick(buttonFourText)} className="btn" id="button4">
           {buttonFourText}
         </button>
       </div>
