@@ -1,4 +1,4 @@
-import React, { KeyboardEvent } from "react";
+import React, { KeyboardEvent, useState } from "react";
 import "../styling/Button.css";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,11 @@ const Button: React.FC<ButtonProp> = ({
   
 }) => {
   const navigate = useNavigate();
-  const handleClick = () => {
+  const [role, setRole] = useState("");
+
+  function handleClick(role: string) {
+    setRole(role);
+    window.localStorage.setItem("Role", role);
     navigate("/battle-screen");
   }
   
@@ -29,16 +33,16 @@ const Button: React.FC<ButtonProp> = ({
   return (
     <>
       <div className="btn-grid" id="option-buttons">
-        <button onClick={handleClick} className="btn" id="button1">
+        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button1">
           {buttonOneText}
         </button>
-        <button onClick={handleClick} className="btn" id="button2">
+        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button2">
           {buttonTwoText}
         </button>
-        <button onClick={handleClick} className="btn" id="button3">
+        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button3">
           {buttonThreeText}
         </button>
-        <button onClick={handleClick} className="btn" id="button4">
+        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button4">
           {buttonFourText}
         </button>
       </div>
