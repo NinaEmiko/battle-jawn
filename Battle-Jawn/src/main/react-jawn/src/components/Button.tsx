@@ -1,5 +1,8 @@
-import React, { KeyboardEvent } from "react";
+import React, { KeyboardEvent, useState } from "react";
 import "../styling/Button.css";
+import { useNavigate } from "react-router-dom";
+
+
 
 interface ButtonProp {
   buttonOneText: string;
@@ -8,32 +11,40 @@ interface ButtonProp {
   buttonFourText: string;
 }
 
+
+
 const Button: React.FC<ButtonProp> = ({
   buttonOneText,
   buttonTwoText,
   buttonThreeText,
   buttonFourText,
+  
 }) => {
-  // const log = (e: KeyboardEvent): void => {
-  //   alert(e.key);
-  // };
+  const navigate = useNavigate();
+  const [role, setRole] = useState("");
+
+  function handleClick(role: string) {
+    setRole(role);
+    window.localStorage.setItem("Role", role);
+    navigate("/battle-screen");
+  }
+  
 
   return (
     <>
       <div className="btn-grid" id="option-buttons">
-        <button className="btn" id="button1">
+        <button onClick={(e) => handleClick(buttonOneText)} className="btn" id="button1">
           {buttonOneText}
         </button>
-        <button className="btn" id="button2">
+        <button onClick={(e) => handleClick(buttonTwoText)} className="btn" id="button2">
           {buttonTwoText}
         </button>
-        <button className="btn" id="button3">
+        <button onClick={(e) => handleClick(buttonThreeText)} className="btn" id="button3">
           {buttonThreeText}
         </button>
-        <button className="btn" id="button4">
+        <button onClick={(e) => handleClick(buttonFourText)} className="btn" id="button4">
           {buttonFourText}
         </button>
-        {/* <input type="text" onKeyUp={log} defaultValue="Hey!" /> */}
       </div>
     </>
   );

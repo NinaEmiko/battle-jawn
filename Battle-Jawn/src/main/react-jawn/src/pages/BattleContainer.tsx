@@ -1,20 +1,21 @@
-import React from "react";
-import EnemyName from "./EnemyName";
-import EnemyHealthBar from "./EnemyHealthBar";
-import PlayerName from "./PlayerName";
-import PotionDisplay from "./PotionDisplay";
-import PlayerHealthBar from "./PlayerHealthBar";
-import LogBoxDisplay from "./LogBoxDisplay";
-import UserPromptText from "./UserPromptText";
-import Button from "./Button";
+import React, { useEffect } from "react";
+import EnemyName from "../components/EnemyName";
+import EnemyHealthBar from "../components/EnemyHealthBar";
+import PotionDisplay from "../components/PotionDisplay";
+import PlayerHealthBar from "../components/PlayerHealthBar";
+import LogBoxDisplay from "../components/LogBoxDisplay";
+import UserPromptText from "../components/UserPromptText";
+import Button from "../components/Button";
 import "../styling/Container.css";
 
 function BattleContainer() {
+  const role = window.localStorage.getItem("Role");
+
   return (
     <div className="container">
-      <EnemyName />
+      <EnemyName/>
       <EnemyHealthBar />
-      <PlayerName />
+      <div>{role}</div>
       <PotionDisplay />
       <PlayerHealthBar />
       <div className="logbox-and-user-input">

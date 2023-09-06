@@ -21,11 +21,6 @@ public class PlayerTipController {
         this.playerTipService = playerTipService;
     }
 
-    @GetMapping("/random")
-    public PlayerTip getRandomPlayerTip() {
-        return playerTipService.getRandomPlayerTip();
-    }
-
     @GetMapping("/all")
     public List<PlayerTip> getAllPlayerTip() {
         return playerTipService.getAllPlayerTips();

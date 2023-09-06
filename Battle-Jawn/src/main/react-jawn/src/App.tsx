@@ -1,10 +1,18 @@
 import "./App.css";
 import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
-import BattleContainer from "./components/BattleContainer";
-import PlayerSelectionContainer from "./components/PlayerSelectionContainer";
+import BattleContainer from "./pages/BattleContainer";
+import PlayerSelectionContainer from "./pages/PlayerSelectionContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  return <PlayerSelectionContainer />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PlayerSelectionContainer />} />
+        <Route path="battle-screen" element={<BattleContainer />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 document.body.style.backgroundImage = `url("${BackgroundImage}")`;
