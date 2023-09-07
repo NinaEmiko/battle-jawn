@@ -23,12 +23,43 @@ function BattleContainer() {
         <div>
           <div className="user-prompt-wrapper">
             <UserPromptText text={"What would you like to do?"} />
-            <Button
-              buttonOneText="Attack"
-              buttonTwoText="Heal"
-              buttonThreeText="Strong Attack"
-              buttonFourText="Run"
-            />
+
+            {role == "Tank" &&
+              <Button
+                buttonOneText="Strike"
+                buttonTwoText="Potion"
+                buttonThreeText="Impale"
+                buttonFourText="Run"
+              />
+            }
+
+            {role == "Healer" &&
+              <Button
+                buttonOneText="Wand"
+                buttonTwoText="Heal"
+                buttonThreeText="Holy"
+                buttonFourText="Run"
+              />
+            }   
+
+            {role == "Caster" &&
+              <Button
+                buttonOneText="Wand"
+                buttonTwoText="Potion"
+                buttonThreeText="Blast"
+                buttonFourText="Run"
+              />
+            }   
+            {role == "DPS" &&
+              <Button
+                buttonOneText="Stab"
+                buttonTwoText="Potion"
+                buttonThreeText="Steal"
+                buttonFourText="Run"
+              />
+            }   
+
+            
           </div>
         </div>
       </div>
