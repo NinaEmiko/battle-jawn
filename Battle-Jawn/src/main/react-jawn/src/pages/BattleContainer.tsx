@@ -15,7 +15,7 @@ function BattleContainer() {
     <div className="container">
       <EnemyName/>
       <EnemyHealthBar />
-      <div>{role}</div>
+      <div className="name" id="playerName">{role}</div>
       <PotionDisplay />
       <PlayerHealthBar />
       <div className="logbox-and-user-input">
