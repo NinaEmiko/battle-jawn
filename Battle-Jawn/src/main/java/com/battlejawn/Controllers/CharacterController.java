@@ -3,7 +3,7 @@ package com.battlejawn.Controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PlayerController {
+public class CharacterController {
     // private final PlayerService playerService;
 
     // @Autowired

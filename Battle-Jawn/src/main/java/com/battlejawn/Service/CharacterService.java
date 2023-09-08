@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 // import com.battlejawn.Battle.Jawn.Repository.HealerRepository;
 
 @Service
-public class PlayerService {
+public class CharacterService {
     // private final TankRepository tankRepository;
     // private final HealerRepository healerRepository;
 

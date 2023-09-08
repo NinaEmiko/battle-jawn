@@ -1,4 +1,4 @@
-package com.battlejawn.Player;
+package com.battlejawn.Entities;
 
 public enum Role {
     TANK,
