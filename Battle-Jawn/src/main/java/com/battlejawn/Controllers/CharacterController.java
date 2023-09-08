@@ -1,15 +1,45 @@
 package com.battlejawn.Controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.battlejawn.Entities.Character;
+
+import com.battlejawn.Service.CharacterService;
 
 @RestController
 public class CharacterController {
-    // private final PlayerService playerService;
 
-    // @Autowired
-    // public PlayerController(PlayerService playerService) {
-    //     this.playerService = playerService;
-    // }
+    private CharacterService characterService;
+
+    @Autowired
+    public CharacterController(CharacterService characterService) {
+        this.characterService = characterService;
+    }
+
+    @GetMapping("/characters")
+    public List<Character> getAllCharacters() {
+        return characterService.getAllCharacters();
+    }
+
+    @GetMapping("/id")
+    public Character findCharacterById(Long id) {
+        return characterService.getCharacterById(id);
+    }
+
+    @PostMapping
+    public void addCharacter(Character character) {
+        characterService.saveCharacter(character);
+    }
+
+    @DeleteMapping
+    public void deleteCharacterById(Long id) {
+        characterService.deleteCharacterById(id);
+    }
 
     // @PostMapping("../PlayerAction/PlayerAction")
     // public void playerAction(@RequestBody InputDTO input) {
@@ -23,36 +53,6 @@ public class CharacterController {
     //         return ResponseEntitiy.ok("Tank created successfully");
     //     } catch (Eception e) {
     //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Tank");
-    //     }
-    // }
-
-    // @PostMapping("../Player/Healer")
-    // public ResponseEntity<String> createHealer(@RequestBody HealerDTO healerDTO) {
-    //     try {
-    //         playerService.createHealer(healerDTO);
-    //         return ResponseEntitiy.ok("Healer created successfully");
-    //     } catch (Eception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Healer");
-    //     }
-    // }
-
-    // @PostMapping("../Player/Caster")
-    // public ResponseEntity<String> createCaster(@RequestBody CasterDTO casterDTO) {
-    //     try {
-    //         playerService.createCaster(casterDTO);
-    //         return ResponseEntitiy.ok("Caster created successfully");
-    //     } catch (Eception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Caster");
-    //     }
-    // }
-
-    // @PostMapping("../Player/DPS")
-    // public ResponseEntity<String> createDPS(@RequestBody DPSDTO dpsDTO) {
-    //     try {
-    //         playerService.createDPS(dpsDTO);
-    //         return ResponseEntitiy.ok("DPS created successfully");
-    //     } catch (Eception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create DPS");
     //     }
     // }
 }

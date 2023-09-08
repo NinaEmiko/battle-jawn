@@ -3,10 +3,12 @@ package com.battlejawn.Entities;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Account {
@@ -14,10 +16,15 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String username;
+    @Transient
     private String password;
+    @Column
     private ArrayList<Character> characters;
+    @Column
     private int maxCharacters;
+    @Column
     private Date creationDate;
 
     public Account(Long id, String username, String password, ArrayList<Character> characters, int maxCharacters, Date creationDate) {
