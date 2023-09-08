@@ -24,8 +24,8 @@ public class CharacterService {
         return characterRepository.getById(id);
     }
 
-    public void saveCharacter(Character character){
-        characterRepository.save(character);
+    public Character saveCharacter(Character character){
+        return characterRepository.save(character);
     }
 
     public void deleteCharacterById(Long id) {
