@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 // import com.battlejawn.StatusAilments.StatusAilments;
 
 @Entity
+@Table(name = "character")
 public class Character {
 
     @Id
@@ -30,6 +34,9 @@ public class Character {
     private int maxPotions;
     @Column
     private Role role;
+    @ManyToOne
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private Account account;
     @Column
     private Date creationDate;
     @Column
@@ -41,6 +48,14 @@ public class Character {
     @Column
     private int totalBattles;
     // private StatusAilments statusAilments;
+
+    public Character() {
+        this.creationDate = new Date();
+        this.wins = 0;
+        this.losses = 0;
+        this.timesRanAway = 0;
+        this.totalBattles = 0;
+    }
 
     public Long getId() {
         return id;
@@ -154,7 +169,7 @@ public class Character {
     //     this.statusAilments = statusAilments;
     // }
 
-    public Character(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Date creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
+    public Character(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Account account, Date creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
@@ -162,10 +177,19 @@ public class Character {
         this.potions = potions;
         this.maxPotions = maxPotions;
         this.role = role;
+        this.account = account;
         this.creationDate = creationDate;
         this.wins = wins;
         this.losses = losses;
         this.timesRanAway = timesRanAway;
         this.totalBattles = totalBattles;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

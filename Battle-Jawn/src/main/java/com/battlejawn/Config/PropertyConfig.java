@@ -15,7 +15,7 @@
 //     @Bean
 //     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 //         PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-//         configurer.setLocation(new FileSystemResource("/Users/NK/Documents/Dev/config.properties"));
+//         configurer.setLocation(new FileSystemResource("/Users/nina/Documents/dev/config.properties"));
 //         return configurer;
 //     }
 // }

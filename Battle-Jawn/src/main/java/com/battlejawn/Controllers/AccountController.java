@@ -18,7 +18,7 @@ import com.battlejawn.Entities.Account;
 import com.battlejawn.Service.AccountService;
 
 @RestController
-@RequestMapping("account")
+@RequestMapping("/api/account")
 public class AccountController {
 
     private AccountService accountService;

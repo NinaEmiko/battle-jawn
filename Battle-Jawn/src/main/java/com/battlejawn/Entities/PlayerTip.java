@@ -1,11 +1,13 @@
-package com.battlejawn;
+package com.battlejawn.Entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "player_tip")
 public class PlayerTip {
 
     @Id
@@ -13,6 +15,10 @@ public class PlayerTip {
     private Long id;
 
     private String body;
+
+    public PlayerTip() {
+        
+    }
 
     public PlayerTip(Long id, String body) {
         this.id = id;

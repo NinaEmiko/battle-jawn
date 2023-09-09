@@ -17,7 +17,7 @@ import com.battlejawn.Entities.Character;
 import com.battlejawn.Service.CharacterService;
 
 @RestController
-@RequestMapping("/characters")
+@RequestMapping("api/characters")
 public class CharacterController {
 
     private CharacterService characterService;

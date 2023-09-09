@@ -2,15 +2,20 @@ package com.battlejawn.Entities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
+@Table(name = "account")
 public class Account {
 
     @Id
@@ -20,19 +25,20 @@ public class Account {
     private String username;
     @Transient
     private String password;
-    @Column
-    private ArrayList<Character> characters;
-    @Column
-    private int maxCharacters;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    private List<Character> characters = new ArrayList<>();
     @Column
     private Date creationDate;
 
-    public Account(Long id, String username, String password, ArrayList<Character> characters, int maxCharacters, Date creationDate) {
+    public Account() {
+    
+    }
+
+    public Account(Long id, String username, String password, ArrayList<Character> characters, Date creationDate) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.characters = characters;
-        this.maxCharacters = maxCharacters;
         this.creationDate = creationDate;
     }
 
@@ -54,17 +60,11 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-    public ArrayList<Character> getCharacters() {
+    public List<Character> getCharacters() {
         return characters;
     }
     public void setCharacters(ArrayList<Character> characters) {
         this.characters = characters;
-    }
-    public int getMaxCharacters() {
-        return maxCharacters;
-    }
-    public void setMaxCharacters(int maxCharacters) {
-        this.maxCharacters = maxCharacters;
     }
     public Date getCreationDate() {
         return creationDate;
