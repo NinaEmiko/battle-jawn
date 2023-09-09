@@ -27,7 +27,7 @@ class AccountComponent extends Component {
   }
 
   loadAccounts = () => {
-    axios.get('/api/account')
+    axios.get('/api/account/accounts')
       .then((response) => {
         this.setState({ accounts: response.data });
       })
