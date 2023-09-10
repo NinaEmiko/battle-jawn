@@ -1,6 +1,10 @@
 package com.battlejawn.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Entities.Account;
@@ -24,8 +28,17 @@ public class AccountService {
         return accountRepository.getById(id);
     }
 
-    public Account saveAccount(Account account){
-        return accountRepository.save(account);
+    @Transactional
+    public Account saveAccount(String username){
+        try {
+            Account account = new Account();
+            account.setUsername(username);
+            account.setCreationDate(LocalDateTime.now());
+            accountRepository.save(account);
+            return account;
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to save the account: " + e.getMessage());
+        }
     }
 
     public void deleteAccountById(Long id) {

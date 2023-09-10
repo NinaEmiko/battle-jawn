@@ -1,5 +1,6 @@
 package com.battlejawn.Entities;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class Hero {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
     @Column
-    private Date creationDate;
+    private LocalDateTime creationDate;
     @Column
     private int wins;
     @Column
@@ -50,7 +51,7 @@ public class Hero {
     // private StatusAilments statusAilments;
 
     public Hero() {
-        this.creationDate = new Date();
+        this.creationDate = LocalDateTime.now();
         this.wins = 0;
         this.losses = 0;
         this.timesRanAway = 0;
@@ -61,11 +62,11 @@ public class Hero {
         return id;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -169,7 +170,7 @@ public class Hero {
     //     this.statusAilments = statusAilments;
     // }
 
-    public Hero(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Account account, Date creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
+    public Hero(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Account account, LocalDateTime creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;

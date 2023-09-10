@@ -45,8 +45,8 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addAccount(@RequestBody Account newAccount) {
-        Account account = accountService.saveAccount(newAccount);
+    public ResponseEntity<Void> addAccount(@RequestBody String username) {
+        Account account = accountService.saveAccount(username);
         if (account != null) {
             URI location = URI.create("/account/" + account.getId());
             return ResponseEntity.created(location).build();

@@ -1,9 +1,9 @@
 package com.battlejawn.Entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,13 +27,13 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Hero> heroes = new ArrayList<>();
     @Column
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     public Account() {
     
     }
 
-    public Account(Long id, String username, String password, ArrayList<Hero> heroes, Date creationDate) {
+    public Account(Long id, String username, String password, ArrayList<Hero> heroes, LocalDateTime creationDate) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -65,10 +65,10 @@ public class Account {
     public void setHeroes(ArrayList<Hero> heroes) {
         this.heroes = heroes;
     }
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
     

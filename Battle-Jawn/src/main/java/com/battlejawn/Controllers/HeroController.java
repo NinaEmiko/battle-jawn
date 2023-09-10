@@ -64,19 +64,4 @@ public class HeroController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    // @PostMapping("../PlayerAction/PlayerAction")
-    // public void playerAction(@RequestBody InputDTO input) {
-    //     playerService.move(input);
-    // }
-
-    // @PostMapping("../Player/Tank")
-    // public ResponseEntity<String> createTank(@RequestBody TankDTO tankDTO) {
-    //     try {
-    //         playerService.createTank(tankDTO);
-    //         return ResponseEntitiy.ok("Tank created successfully");
-    //     } catch (Eception e) {
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create Tank");
-    //     }
-    // }
 }
