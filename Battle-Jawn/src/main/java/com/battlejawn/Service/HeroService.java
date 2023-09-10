@@ -29,7 +29,6 @@ public class HeroService {
 
     public Hero saveHero(String name, String role, Long accountId){
         Hero hero = new Hero();
-        heroRepository.save(hero);
         hero.setName(name);
         hero.setLosses(0);
         hero.setAccount(accountService.getAccountById(accountId));
@@ -71,7 +70,7 @@ public class HeroService {
                 hero.setMaxHealth(90);
                 break;
         }
-        return hero;
+        return heroRepository.save(hero);
     }
 
     public void deleteHeroById(Long id) {

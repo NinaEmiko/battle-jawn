@@ -17,8 +17,7 @@ const PlayerTips = () => {
 
   return (
     <div>
-      <h3>Random Tip:</h3>
-      <p>{randomTip}</p>
+      <h3>{randomTip}</h3>
     </div>
   );
 };

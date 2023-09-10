@@ -47,7 +47,8 @@ function PlayerSelectionContainer() {
             <button onClick={() => handleRoleChange("Caster")} className="btn" id="button3">Caster</button>
             <button onClick={() => handleRoleChange("DPS")} className="btn" id="button4">DPS</button>
           </div>
-          <button onClick={createHero} className="btn" id="button5">Create Hero</button>
+          <button onClick={() => { handleHeroNameChange; createHero; }} className="btn" id="button5">Create Hero</button>
+
         </div>
       </div>
     </div>
