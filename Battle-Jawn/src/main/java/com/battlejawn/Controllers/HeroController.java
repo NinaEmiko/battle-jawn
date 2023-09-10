@@ -17,7 +17,7 @@ import com.battlejawn.Entities.Hero;
 import com.battlejawn.Service.HeroService;
 
 @RestController
-@RequestMapping("api/heroes")
+@RequestMapping("/api/hero")
 public class HeroController {
 
     private HeroService heroService;
@@ -27,7 +27,7 @@ public class HeroController {
         this.heroService = heroService;
     }
 
-    @GetMapping("/heros")
+    @GetMapping("/hero")
     public ResponseEntity<List<Hero>> getAllHeroes() {
         List<Hero> heros = heroService.getAllHeroes();
         return new ResponseEntity<>(heros, HttpStatus.OK);
@@ -45,10 +45,11 @@ public class HeroController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addHero(@RequestBody Hero newHero) {
-        Hero hero = heroService.saveHero(newHero);
+    public ResponseEntity<Void> addHero(@RequestBody String name, String role, Long accountId) {
+        Hero hero = heroService.saveHero(name, role, accountId);
+
         if (hero != null) {
-            URI location = URI.create("/heroes/" + hero.getId());
+            URI location = URI.create("/hero/" + hero.getId());
             return ResponseEntity.created(location).build();
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

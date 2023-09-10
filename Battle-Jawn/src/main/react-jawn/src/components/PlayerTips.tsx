@@ -1,23 +1,26 @@
-import React from 'react'
-
-let defaultTips = [
-  'Tank starts with 3 potions!',
-            'Tank can withstand the most damage before dying!',
-            "DPS has a special 'BackStab' move that is unlocked after 3 consecutive 'Stabs' are landed on the enemy!",
-            'Healer does not require potions to heal themselves!',
-            'Spirit enemy is weak to the move Holy!',
-            'Be careful! Some powerful moves can also hurt you!',
-            'If you stagger the enemy, you have a chance to attack again before they do!'
-]
-
-const handleGenerateRandomTip = () => {
-  return defaultTips[Math.floor(Math.random() * (defaultTips.length - 1))];
-}
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const PlayerTips = () => {
-  return (
-    <div>{handleGenerateRandomTip()}</div>
-  )
-}
+  const [randomTip, setRandomTip] = useState('');
 
-export default PlayerTips
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/player-tip/random')
+      .then((response) => {
+        const randomTipBody = response.data;
+        setRandomTip(randomTipBody);
+      })
+      .catch((error) => {
+        console.error('Error fetching random player tip:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <h3>Random Tip:</h3>
+      <p>{randomTip}</p>
+    </div>
+  );
+};
+
+export default PlayerTips;

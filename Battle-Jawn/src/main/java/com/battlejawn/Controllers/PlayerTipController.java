@@ -11,7 +11,7 @@ import com.battlejawn.Entities.PlayerTip;
 import com.battlejawn.Service.PlayerTipService;
 
 @RestController
-@RequestMapping("player-tip")
+@RequestMapping("/api/player-tip")
 public class PlayerTipController {
 
     private final PlayerTipService playerTipService;
@@ -24,6 +24,11 @@ public class PlayerTipController {
     @GetMapping("/all")
     public List<PlayerTip> getAllPlayerTip() {
         return playerTipService.getAllPlayerTips();
+    }
+
+    @GetMapping("/random")
+    public String getRandomTip() {
+        return playerTipService.getRandomPlayerTip();
     }
 
 }
