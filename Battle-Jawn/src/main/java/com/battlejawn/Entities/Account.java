@@ -3,7 +3,6 @@ package com.battlejawn.Entities;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +24,8 @@ public class Account {
     private String username;
     @Transient
     private String password;
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<Character> characters = new ArrayList<>();
+    @OneToMany(mappedBy = "account")
+    private List<Hero> heroes = new ArrayList<>();
     @Column
     private Date creationDate;
 
@@ -34,11 +33,11 @@ public class Account {
     
     }
 
-    public Account(Long id, String username, String password, ArrayList<Character> characters, Date creationDate) {
+    public Account(Long id, String username, String password, ArrayList<Hero> heroes, Date creationDate) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.characters = characters;
+        this.heroes = heroes;
         this.creationDate = creationDate;
     }
 
@@ -60,11 +59,11 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-    public List<Character> getCharacters() {
-        return characters;
+    public List<Hero> getHeroes() {
+        return heroes;
     }
-    public void setCharacters(ArrayList<Character> characters) {
-        this.characters = characters;
+    public void setHeroes(ArrayList<Hero> heroes) {
+        this.heroes = heroes;
     }
     public Date getCreationDate() {
         return creationDate;

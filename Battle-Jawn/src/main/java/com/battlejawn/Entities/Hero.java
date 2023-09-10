@@ -14,8 +14,8 @@ import javax.persistence.Table;
 // import com.battlejawn.StatusAilments.StatusAilments;
 
 @Entity
-@Table(name = "character")
-public class Character {
+@Table(name = "hero")
+public class Hero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +49,7 @@ public class Character {
     private int totalBattles;
     // private StatusAilments statusAilments;
 
-    public Character() {
+    public Hero() {
         this.creationDate = new Date();
         this.wins = 0;
         this.losses = 0;
@@ -169,7 +169,7 @@ public class Character {
     //     this.statusAilments = statusAilments;
     // }
 
-    public Character(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Account account, Date creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
+    public Hero(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Account account, Date creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;

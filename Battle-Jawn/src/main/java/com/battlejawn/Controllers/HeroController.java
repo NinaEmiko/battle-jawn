@@ -13,42 +13,42 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.battlejawn.Entities.Character;
-import com.battlejawn.Service.CharacterService;
+import com.battlejawn.Entities.Hero;
+import com.battlejawn.Service.HeroService;
 
 @RestController
-@RequestMapping("api/characters")
-public class CharacterController {
+@RequestMapping("api/heroes")
+public class HeroController {
 
-    private CharacterService characterService;
+    private HeroService heroService;
 
     @Autowired
-    public CharacterController(CharacterService characterService) {
-        this.characterService = characterService;
+    public HeroController(HeroService heroService) {
+        this.heroService = heroService;
     }
 
-    @GetMapping("/characters")
-    public ResponseEntity<List<Character>> getAllCharacters() {
-        List<Character> characters = characterService.getAllCharacters();
-        return new ResponseEntity<>(characters, HttpStatus.OK);
+    @GetMapping("/heros")
+    public ResponseEntity<List<Hero>> getAllHeroes() {
+        List<Hero> heros = heroService.getAllHeroes();
+        return new ResponseEntity<>(heros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Character> getCharacterById(@PathVariable Long id) {
-        Character character = characterService.getCharacterById(id);
+    public ResponseEntity<Hero> getHeroById(@PathVariable Long id) {
+        Hero hero = heroService.getHeroById(id);
         
-        if (character != null) {
-            return new ResponseEntity<>(character, HttpStatus.OK);
+        if (hero != null) {
+            return new ResponseEntity<>(hero, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping
-    public ResponseEntity<Void> addCharacter(@RequestBody Character newCharacter) {
-        Character character = characterService.saveCharacter(newCharacter);
-        if (character != null) {
-            URI location = URI.create("/characters/" + character.getId());
+    public ResponseEntity<Void> addHero(@RequestBody Hero newHero) {
+        Hero hero = heroService.saveHero(newHero);
+        if (hero != null) {
+            URI location = URI.create("/heroes/" + hero.getId());
             return ResponseEntity.created(location).build();
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -56,9 +56,9 @@ public class CharacterController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteCharacterById(@PathVariable Long userId) {
-        characterService.deleteCharacterById(userId);
-        if (characterService.getCharacterById(userId) != null) {
+    public ResponseEntity<Void> deleteHeroById(@PathVariable Long userId) {
+        heroService.deleteHeroById(userId);
+        if (heroService.getHeroById(userId) != null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
