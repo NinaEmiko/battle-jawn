@@ -1,8 +1,6 @@
 package com.battlejawn.Entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-// import com.battlejawn.StatusAilments.StatusAilments;
 
 @Entity
 @Table(name = "hero")
@@ -48,7 +44,6 @@ public class Hero {
     private int timesRanAway;
     @Column
     private int totalBattles;
-    // private StatusAilments statusAilments;
 
     public Hero() {
         this.creationDate = LocalDateTime.now();
@@ -162,13 +157,13 @@ public class Hero {
         this.role = role;
     }
 
-    // public StatusAilments getStatusAilments() {
-    //     return statusAilments;
-    // }
+    public Account getAccount() {
+        return account;
+    }
 
-    // public void setStatusAilments(StatusAilments statusAilments) {
-    //     this.statusAilments = statusAilments;
-    // }
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public Hero(String name, int health, int maxHealth, int strength, int potions, int maxPotions, Role role, Account account, LocalDateTime creationDate, int wins, int losses, int timesRanAway, int totalBattles) {
         this.name = name;
@@ -184,13 +179,5 @@ public class Hero {
         this.losses = losses;
         this.timesRanAway = timesRanAway;
         this.totalBattles = totalBattles;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 }

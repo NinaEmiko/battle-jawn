@@ -27,7 +27,7 @@ public class HeroController {
         this.heroService = heroService;
     }
 
-    @GetMapping("/hero")
+    @GetMapping("/all")
     public ResponseEntity<List<Hero>> getAllHeroes() {
         List<Hero> heros = heroService.getAllHeroes();
         return new ResponseEntity<>(heros, HttpStatus.OK);
@@ -56,10 +56,10 @@ public class HeroController {
         }
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteHeroById(@PathVariable Long userId) {
-        heroService.deleteHeroById(userId);
-        if (heroService.getHeroById(userId) != null) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteHeroById(@PathVariable Long id) {
+        heroService.deleteHeroById(id);
+        if (heroService.getHeroById(id) != null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

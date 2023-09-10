@@ -24,7 +24,7 @@ public class Account {
     @Transient
     private String password;
     @OneToMany(mappedBy = "account")
-    private List<Hero> heroes = new ArrayList<>();
+    private List<Hero> heroList = new ArrayList<>();
     @Column
     private LocalDateTime creationDate;
 
@@ -32,11 +32,11 @@ public class Account {
     
     }
 
-    public Account(Long id, String username, String password, ArrayList<Hero> heroes, LocalDateTime creationDate) {
+    public Account(Long id, String username, String password, ArrayList<Hero> heroList, LocalDateTime creationDate) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.heroes = heroes;
+        this.heroList = heroList;
         this.creationDate = creationDate;
     }
 
@@ -58,11 +58,11 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-    public List<Hero> getHeroes() {
-        return heroes;
+    public List<Hero> getHeroList() {
+        return heroList;
     }
-    public void setHeroes(ArrayList<Hero> heroes) {
-        this.heroes = heroes;
+    public void setHeroList(ArrayList<Hero> heroList) {
+        this.heroList = heroList;
     }
     public LocalDateTime getCreationDate() {
         return creationDate;

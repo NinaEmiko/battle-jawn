@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import EnemyName from "../components/EnemyName";
 import EnemyHealthBar from "../components/EnemyHealthBar";
 import PotionDisplay from "../components/PotionDisplay";

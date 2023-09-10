@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="account" element={<Account />} />
+        <Route path="account-creation" element={<Account />} />
         <Route path="hero-creation" element={<PlayerSelectionContainer />} />
         <Route path="battle-screen" element={<BattleContainer />} />
       </Routes>
