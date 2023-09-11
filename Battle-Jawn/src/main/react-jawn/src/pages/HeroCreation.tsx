@@ -4,7 +4,7 @@ import PlayerTips from "../components/PlayerTips";
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
 
-function PlayerSelectionContainer() {
+function HeroCreation() {
 
   const [heroName, setHeroName] = useState("");
   const [role, setRole] = useState("");
@@ -55,4 +55,4 @@ function PlayerSelectionContainer() {
   );
 }
 
-export default PlayerSelectionContainer;
+export default HeroCreation;

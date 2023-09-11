@@ -1,8 +1,6 @@
-import React, { KeyboardEvent, useState } from "react";
+import React, { useState } from "react";
 import "../styling/Button.css";
 import { useNavigate } from "react-router-dom";
-
-
 
 interface ButtonProp {
   buttonOneText: string;
@@ -10,8 +8,6 @@ interface ButtonProp {
   buttonThreeText: string;
   buttonFourText: string;
 }
-
-
 
 const Button: React.FC<ButtonProp> = ({
   buttonOneText,
@@ -29,7 +25,6 @@ const Button: React.FC<ButtonProp> = ({
     navigate("/battle-screen");
   }
   
-
   return (
     <>
       <div className="btn-grid" id="option-buttons">
