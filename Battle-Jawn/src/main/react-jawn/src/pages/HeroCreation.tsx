@@ -31,16 +31,20 @@ function HeroCreation() {
 
   return (
     <div className="container">
-      <PlayerTips />
       <div>
         <div className="user-prompt-wrapper">
           <UserPromptText text="Create A Hero"></UserPromptText>
-          <UserPromptText text="Hero Name: "></UserPromptText>
+
+        <div className="hero-name-container">
+          <h3 className="hero-name">Hero Name:</h3>
           <input className="input" type="text"
             placeholder="Enter Hero Name"
             value={heroName}
-            onChange={handleHeroNameChange}></input>
-          <UserPromptText text="Choose a Class: "></UserPromptText>
+            onChange={handleHeroNameChange}>
+          </input>
+        </div>
+
+          <h2>Choose a Class: </h2>
           <div className="btn-grid" id="option-buttons">
             <button onClick={() => handleRoleChange("Tank")} className="btn" id="button1">Tank</button>
             <button onClick={() => handleRoleChange("Healer")} className="btn" id="button2">Healer</button>
@@ -48,6 +52,7 @@ function HeroCreation() {
             <button onClick={() => handleRoleChange("DPS")} className="btn" id="button4">DPS</button>
           </div>
           <button onClick={() => { handleHeroNameChange; createHero; }} className="btn" id="button5">Create Hero</button>
+          <PlayerTips />
 
         </div>
       </div>
