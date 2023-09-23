@@ -31,9 +31,8 @@ function HeroCreation() {
 
   return (
     <div className="container">
-      <div>
-        <div className="user-prompt-wrapper">
-          <UserPromptText text="Create A Hero"></UserPromptText>
+      <div className="user-prompt-wrapper">
+        <UserPromptText text="Create A Hero"></UserPromptText>
 
         <div className="hero-name-container">
           <h3 className="hero-name">Hero Name:</h3>
@@ -44,17 +43,16 @@ function HeroCreation() {
           </input>
         </div>
 
-          <h2>Choose a Class: </h2>
-          <div className="btn-grid" id="option-buttons">
-            <button onClick={() => handleRoleChange("Tank")} className="btn" id="button1">Tank</button>
-            <button onClick={() => handleRoleChange("Healer")} className="btn" id="button2">Healer</button>
-            <button onClick={() => handleRoleChange("Caster")} className="btn" id="button3">Caster</button>
-            <button onClick={() => handleRoleChange("DPS")} className="btn" id="button4">DPS</button>
-          </div>
-          <button onClick={() => { handleHeroNameChange; createHero; }} className="btn" id="button5">Create Hero</button>
-          <PlayerTips />
-
+        <h2>Choose a Class: </h2>
+        <div className="btn-grid" id="option-buttons">
+          <button onClick={() => handleRoleChange("Tank")} className="btn" id="button1">Tank</button>
+          <button onClick={() => handleRoleChange("Healer")} className="btn" id="button2">Healer</button>
+          <button onClick={() => handleRoleChange("Caster")} className="btn" id="button3">Caster</button>
+          <button onClick={() => handleRoleChange("DPS")} className="btn" id="button4">DPS</button>
         </div>
+        <button onClick={() => { handleHeroNameChange; createHero; }} className="btn" id="button5">Create Hero</button>
+        <PlayerTips />
+
       </div>
     </div>
   );
