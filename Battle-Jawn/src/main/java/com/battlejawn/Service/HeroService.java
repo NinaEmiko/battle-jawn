@@ -15,8 +15,9 @@ public class HeroService {
     private AccountService accountService;
 
     @Autowired
-    public HeroService(HeroRepository heroRepository) {
+    public HeroService(HeroRepository heroRepository, AccountService accountService) {
         this.heroRepository = heroRepository;
+        this.accountService = accountService;
     }
 
     public List<Hero> getAllHeroes() {
@@ -27,11 +28,13 @@ public class HeroService {
         return heroRepository.getById(id);
     }
 
-    public Hero saveHero(String name, String role, Long accountId){
+    public Hero saveHero(String name, String role){
+        Long jawn = (long) 4;
+
         Hero hero = new Hero();
         hero.setName(name);
         hero.setLosses(0);
-        hero.setAccount(accountService.getAccountById(accountId));
+        hero.setAccount(accountService.getAccountById(jawn));
         hero.setWins(0);
         hero.setTotalBattles(0);
         hero.setTimesRanAway(0);

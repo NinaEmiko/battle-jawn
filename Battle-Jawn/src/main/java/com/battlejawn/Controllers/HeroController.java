@@ -45,8 +45,8 @@ public class HeroController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addHero(@RequestBody String name, String role, Long accountId) {
-        Hero hero = heroService.saveHero(name, role, accountId);
+    public ResponseEntity<Void> addHero(@RequestBody String name, String role) {
+        Hero hero = heroService.saveHero(name, role);
 
         if (hero != null) {
             URI location = URI.create("/hero/" + hero.getId());

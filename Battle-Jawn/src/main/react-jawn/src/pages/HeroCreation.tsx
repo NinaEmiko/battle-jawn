@@ -6,12 +6,12 @@ import axios from "axios";
 
 function HeroCreation() {
 
-  const [heroName, setHeroName] = useState("");
-  const [role, setRole] = useState("");
-  const [accountId, setAccountId] = useState(1);
-
+  const [heroName, setHeroName] = useState('');
+  const [role, setRole] = useState('');
+  
   const createHero = () => {
-    axios.post('http://localhost:8080/api/hero', { name: heroName, role: role, accountId: accountId, })
+    console.log(heroName, role);
+    axios.post('http://localhost:8080/api/hero', { name:heroName, role:role})
       .then((response) => {
         console.log('Hero created successfully:', response.data);
       })
@@ -36,7 +36,7 @@ function HeroCreation() {
 
         <div className="hero-name-container">
           <h3 className="hero-name">Hero Name:</h3>
-          <input className="input" type="text"
+          <input className="input" id="test" type="text"
             placeholder="Enter Hero Name"
             value={heroName}
             onChange={handleHeroNameChange}>
@@ -50,7 +50,7 @@ function HeroCreation() {
           <button onClick={() => handleRoleChange("Caster")} className="btn" id="button3">Caster</button>
           <button onClick={() => handleRoleChange("DPS")} className="btn" id="button4">DPS</button>
         </div>
-        <button onClick={() => { handleHeroNameChange; createHero; }} className="btn" id="button5">Create Hero</button>
+        <button onClick={ createHero } className="btn" id="button5">Create Hero</button>
         <PlayerTips />
 
       </div>
