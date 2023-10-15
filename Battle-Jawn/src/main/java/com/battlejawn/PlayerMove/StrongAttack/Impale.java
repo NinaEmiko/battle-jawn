@@ -1,9 +1,9 @@
-package com.battlejawn.PlayerMove;
+package com.battlejawn.PlayerMove.StrongAttack;
 
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 
-public class Impale implements CriticalHit, Missable {
+public class Impale extends PlayerStrongAttack implements CriticalHit, Missable {
 
     private int damage;
 

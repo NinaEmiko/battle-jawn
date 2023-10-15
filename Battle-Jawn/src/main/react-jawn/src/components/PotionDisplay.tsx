@@ -1,13 +1,32 @@
-import React from "react";
-import healthPotion from "../../../resources/images/HealthPotion.png";
+import healthPotion from "../../../resources/images/healthPotion.png";
 import "../styling/PotionDisplay.css";
 
 const PotionDisplay = () => {
+  const role = window.localStorage.getItem("Role");
   return (
     <>
-      <img className="potions" id="potion1" src={healthPotion}></img>
-      <img className="potions" id="potion2" src={healthPotion}></img>
-      <img className="potions" id="potion3" src={healthPotion}></img>
+      {role=="Tank" &&
+        <div>
+          <img src={healthPotion} className="potions" id="potion1"/>
+          <img src={healthPotion} className="potions" id="potion2"/>
+          <img src={healthPotion} className="potions" id="potion3"/>
+        </div>
+      }
+
+      {role=="DPS" &&
+        <div>
+          <img src={healthPotion} className="potions" id="potion1"/>
+          <img src={healthPotion} className="potions" id="potion2"/>
+        </div>
+      }
+
+      {role=="Caster" &&
+        <div>
+          <img src={healthPotion} className="potions" id="potion1"/>
+          <img src={healthPotion} className="potions" id="potion2"/>
+          <img src={healthPotion} className="potions" id="potion3"/>
+        </div>
+      }
     </>
   );
 };

@@ -1,5 +1,5 @@
 package com.battlejawn.PlayerMove;
 
-public class Potion {
-
+public class Run {
+    
 }

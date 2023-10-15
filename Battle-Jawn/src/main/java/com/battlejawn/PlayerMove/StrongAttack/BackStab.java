@@ -1,9 +1,9 @@
-package com.battlejawn.PlayerMove;
+package com.battlejawn.PlayerMove.StrongAttack;
 
 import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
 
-public class BackStab implements CriticalHit, Attack {
+public class BackStab extends PlayerStrongAttack implements CriticalHit, Attack {
 
     private int damage;
 

@@ -1,18 +1,8 @@
-package com.battlejawn.PlayerMove;
+package com.battlejawn.PlayerMove.Attack;
 
 import com.battlejawn.Interfaces.Missable;
 
-public class Wand implements Missable {
-
-    private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
+public class Wand extends PlayerAttack implements Missable {
 
     public void attack() {
         setDamage((int) Math.floor(/*user.strength * .75*/10));

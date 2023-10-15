@@ -1,4 +1,3 @@
-import React from 'react'
 import "../styling/PlayerHealthBar.css";
 
 const PlayerHealthBar = () => {

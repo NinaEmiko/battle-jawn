@@ -1,9 +1,9 @@
-package com.battlejawn.PlayerMove;
+package com.battlejawn.PlayerMove.StrongAttack;
 
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 
-public class Holy implements CriticalHit, Missable {
+public class Holy extends PlayerStrongAttack implements CriticalHit, Missable {
 
     private int damage;
 

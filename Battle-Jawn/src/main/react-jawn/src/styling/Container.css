@@ -3,48 +3,45 @@
     background-color: #333;
     opacity: 90%;
     width: 800px;
-    /* max-width: 80%; */
-    /* Moves Content away from edges of Display Box */
-    padding: 10px;
     /* Rounds edges of Display Box */
     border-radius: 5px;
     /* Shadow Effect */
     box-shadow: 0 0 10px 2px;
+    padding-top: 0.0125em;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 16px;
   }
+
+.battle-container {
+  background-color: #333;
+  opacity: 90%;
+  width: 800px;
+  /* Rounds edges of Display Box */
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 16px;
+}
 
 .hero-name-container {
     display: flex;
     align-items: center;
   }
 
-  .input {
-    margin-left: 1em; 
-    width: 20em;
-  }
-
-  .logbox-and-user-input {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .user-prompt-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 30px;
+.logbox-and-user-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#button5 {
-  margin-top: 1em;
-  background-color: rgb(119, 8, 255);
-  border: 1px solid hsl(0, 0%, 0%);
-  border-radius: 5px;
-  padding: 5px 10px;
-  color: hsl(181, 84%, 44%);
-  outline: none;
-  font-size: 20px;
-  width: 200px;
-  height: 50px;
+.user-prompt-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
 }

@@ -1,22 +1,13 @@
-package com.battlejawn.PlayerMove;
+package com.battlejawn.PlayerMove.Attack;
 
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
+import com.battlejawn.Interfaces.Stagger;
 
-public class Blast implements CriticalHit, Missable {
-
-    private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
+public class Strike extends PlayerAttack implements CriticalHit, Missable, Stagger {
 
     public void attack() {
-        setDamage((int) Math.floor(Math.random() /* * user.strength) + user.strength / 4*/));
+        setDamage((int) Math.floor(Math.random() /* * user.strength */));
 
         if (miss()) {
             setDamage(0);
@@ -35,6 +26,14 @@ public class Blast implements CriticalHit, Missable {
 
     public boolean miss() {
         int chance = (int) Math.floor(Math.random() * 100);
+        if (chance > 95) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean stagger() {
+        int chance = (int) Math.floor(Math.random() * 10);
         if (chance > 95) {
             return true;
         }
