@@ -1,12 +1,11 @@
-package com.battlejawn.PlayerMove;
+package com.battlejawn.PlayerMove.StrongAttack;
 
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 
-public class Stab implements CriticalHit, Missable {
+public class Blast extends PlayerStrongAttack implements CriticalHit, Missable {
 
     private int damage;
-    private int stabCount;
 
     public int getDamage() {
         return damage;
@@ -16,23 +15,14 @@ public class Stab implements CriticalHit, Missable {
         this.damage = damage;
     }
 
-    public int getStabCount() {
-        return stabCount;
-    }
-
-    public void setStabCount(int stabCount) {
-        this.stabCount = stabCount;
-    }
-
     public void attack() {
-        setDamage((int) Math.floor(Math.random() /* * user.strength */));
+        setDamage((int) Math.floor(Math.random() /* * user.strength) + user.strength / 4*/));
 
         if (miss()) {
             setDamage(0);
         } else if (criticalHit()){
             setDamage(damage *= 1.5);
         }
-        setStabCount(stabCount++);
     }
 
     public boolean criticalHit() {

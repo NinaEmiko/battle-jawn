@@ -11,7 +11,7 @@ function BattleContainer() {
   const role = window.localStorage.getItem("Role");
 
   return (
-    <div className="container">
+    <div className="battle-container">
       <EnemyName/>
       <EnemyHealthBar />
       <div className="name" id="playerName">{role}</div>

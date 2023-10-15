@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import "../styling/PlayerTips.css";
 import axios from 'axios';
 
 const PlayerTips = () => {
@@ -17,7 +18,7 @@ const PlayerTips = () => {
 
   return (
     <div>
-      <h3>{randomTip}</h3>
+      <p className="player-tips-container">{randomTip}</p>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 .healthBar, .manaBar {
     /* Color of Health/Mana Bar behind full health */
     background-color:hsl(60, 100%, 50%);
-
     /* border: 0; */
     /* Rounds edges of Health/Mana Bar */
     border-radius: 20px;

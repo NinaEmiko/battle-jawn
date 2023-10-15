@@ -1,20 +1,41 @@
+import { SetStateAction, useEffect, useState } from "react";
 import Button from "../components/Button";
 import PlayerTips from "../components/PlayerTips";
 import UserPromptText from "../components/UserPromptText";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function PlayerSelection() {
+
+  const [role, setRole] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(role);
+    if (role !== '') {
+    axios.post('http://localhost:8080/api/toon', { role })
+      .then((response) => {
+        console.log('Toon created successfully:', response.data);
+        navigate("/battle-screen");
+      })
+      .catch((error) => {
+        console.error('Error creating toon:', error);
+      });
+    }
+  })
+
         return (
             <div className="container">
               <PlayerTips />
               <div>
                 <div className="user-prompt-wrapper">
                   <UserPromptText text="Choose a Class: "></UserPromptText>
-                  <Button
-                    buttonOneText="Tank"
-                    buttonTwoText="Healer"
-                    buttonThreeText="Caster"
-                    buttonFourText="DPS"
-                  />
+                  <div className="btn-grid" id="option-buttons">
+                    <button onClick={() => setRole("Tank")} className="btn" id="button1">Tank</button>
+                    <button onClick={() => setRole("Healer")} className="btn" id="button2">Healer</button>
+                    <button onClick={() => setRole("DPS")} className="btn" id="button3">DPS</button>
+                    <button onClick={() => setRole("Caster")} className="btn" id="button4">Caster</button>
+                  </div>
                 </div>
               </div>
             </div>
