@@ -2,6 +2,8 @@ package com.battlejawn.Controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Entities.Roles.Toon;
 import com.battlejawn.Service.ToonService;
 
@@ -19,6 +23,8 @@ import com.battlejawn.Service.ToonService;
 public class ToonController {
 
     private ToonService toonService;
+    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private JsonParser jsonParser;
 
     @Autowired
     public ToonController(ToonService toonService){
@@ -33,7 +39,10 @@ public class ToonController {
 
     @PostMapping
     public ResponseEntity<Void> addToon(@RequestBody String role) {
-        Toon toon = toonService.saveToon(role);
+        jsonParser = new JsonParser();
+        String parsedRole = jsonParser.extractJson(role);
+        Toon toon = toonService.saveToon(parsedRole);
+        logger.info("Role format: " + parsedRole);
         if (toon != null) {
             URI location = URI.create("/toon/" + toon.getId());
             return ResponseEntity.created(location).build();
