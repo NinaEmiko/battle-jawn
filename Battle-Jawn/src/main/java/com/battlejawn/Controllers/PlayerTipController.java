@@ -2,7 +2,6 @@ package com.battlejawn.Controllers;
 
 import java.util.List;
 import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +29,7 @@ public class PlayerTipController {
     @GetMapping("/random")
     public String getRandomTip() {
         String randomTip = playerTipService.getRandomPlayerTip();
-        logger.info(randomTip);
+        logger.info("Current tip: " + randomTip);
         return randomTip;
     }
 

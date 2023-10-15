@@ -13,6 +13,8 @@ function PlayerSelection() {
     if (role !== '') {
     axios.post('http://localhost:8080/api/toon', { role })
       .then((response) => {
+        const id = response.data.id;
+        localStorage.setItem('toonId', id);
         console.log('Toon created successfully:', response.data);
         navigate("/battle-screen");
       })
@@ -21,7 +23,7 @@ function PlayerSelection() {
       });
     }
   })
-  
+
   return (
       <div className="container">
         <PlayerTips />
