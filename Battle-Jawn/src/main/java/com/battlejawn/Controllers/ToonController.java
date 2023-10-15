@@ -37,6 +37,14 @@ public class ToonController {
         return new ResponseEntity<>(toons, HttpStatus.OK);
     }
 
+    @GetMapping("/new")
+    public ResponseEntity<String> getNewestToon() {
+        List<Toon> toonList = toonService.getAllToons();
+        Toon toon = toonService.getToonById((long) toonList.size());
+        logger.info("Role: " + toon.getRole());
+        return new ResponseEntity<String>(toon.getRole(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Void> addToon(@RequestBody String role) {
         jsonParser = new JsonParser();

@@ -6,9 +6,21 @@ import LogBoxDisplay from "../components/LogBoxDisplay";
 import UserPromptText from "../components/UserPromptText";
 import Button from "../components/Button";
 import "../styling/Container.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function BattleContainer() {
-  const role = window.localStorage.getItem("Role");
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/toon/new')
+      .then((response) => {
+        setRole(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching toon data:', error);
+      });
+  }, []);
 
   return (
     <div className="battle-container">
