@@ -1,12 +1,10 @@
-import { SetStateAction, useEffect, useState } from "react";
-import Button from "../components/Button";
+import { useEffect, useState } from "react";
 import PlayerTips from "../components/PlayerTips";
 import UserPromptText from "../components/UserPromptText";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function PlayerSelection() {
-
   const [role, setRole] = useState('');
   const navigate = useNavigate();
 
@@ -23,23 +21,23 @@ function PlayerSelection() {
       });
     }
   })
-
-        return (
-            <div className="container">
-              <PlayerTips />
-              <div>
-                <div className="user-prompt-wrapper">
-                  <UserPromptText text="Choose a Class: "></UserPromptText>
-                  <div className="btn-grid" id="option-buttons">
-                    <button onClick={() => setRole("Tank")} className="btn" id="button1">Tank</button>
-                    <button onClick={() => setRole("Healer")} className="btn" id="button2">Healer</button>
-                    <button onClick={() => setRole("DPS")} className="btn" id="button3">DPS</button>
-                    <button onClick={() => setRole("Caster")} className="btn" id="button4">Caster</button>
-                  </div>
-                </div>
-              </div>
+  
+  return (
+      <div className="container">
+        <PlayerTips />
+        <div>
+          <div className="user-prompt-wrapper">
+            <UserPromptText text="Choose a Class: "></UserPromptText>
+            <div className="btn-grid" id="option-buttons">
+              <button onClick={() => setRole("Tank")} className="btn" id="button1">Tank</button>
+              <button onClick={() => setRole("Healer")} className="btn" id="button2">Healer</button>
+              <button onClick={() => setRole("DPS")} className="btn" id="button3">DPS</button>
+              <button onClick={() => setRole("Caster")} className="btn" id="button4">Caster</button>
             </div>
-          );
+          </div>
+        </div>
+      </div>
+    );
 }
 
 export default PlayerSelection;

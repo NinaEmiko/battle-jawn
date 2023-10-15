@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import PlayerName from "../components/PlayerName";
 
 function BattleContainer() {
   const [role, setRole] = useState('');
@@ -26,7 +27,7 @@ function BattleContainer() {
     <div className="battle-container">
       <EnemyName/>
       <EnemyHealthBar />
-      <div className="name" id="playerName">{role}</div>
+      <PlayerName role={role} />
       <PotionDisplay />
       <PlayerHealthBar />
       <div className="logbox-and-user-input">

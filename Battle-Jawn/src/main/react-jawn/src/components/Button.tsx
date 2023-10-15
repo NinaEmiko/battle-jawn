@@ -12,11 +12,8 @@ const Button: React.FC<ButtonProp> = ({
   buttonTwoText,
   buttonThreeText,
   buttonFourText,
-  
 }) => {
-
   function handleClickBattle(move: string) {
-
   }
   
   return (
