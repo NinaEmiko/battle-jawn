@@ -1,5 +1,8 @@
 package com.battlejawn.Enemy;
 
+import lombok.Data;
+
+@Data
 public class Enemy {
 
     private String name;
@@ -7,46 +10,6 @@ public class Enemy {
     private int maxHealth;
     private int potions;
     private int strength;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public int getMaxHealth() {
-        return maxHealth;
-    }
-
-    public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
-    }
-
-    public int getPotions() {
-        return potions;
-    }
-
-    public void setPotions(int potions) {
-        this.potions = potions;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
 
     public Enemy(String name, int health, int maxHealth, int potions, int strength) {
         this.name = name;

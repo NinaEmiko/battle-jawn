@@ -3,8 +3,12 @@ package com.battlejawn.PlayerMove.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 import com.battlejawn.Interfaces.Stagger;
+import lombok.Data;
 
-public class Strike extends PlayerAttack implements CriticalHit, Missable, Stagger {
+@Data
+public class Strike implements CriticalHit, Missable, Stagger {
+
+    private int damage;
 
     public void attack() {
         setDamage((int) Math.floor(Math.random() /* * user.strength */));

@@ -2,17 +2,11 @@ package com.battlejawn.EnemyMove;
 
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
+import lombok.Data;
 
+@Data
 public class Maim implements CriticalHit, Missable {
     private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
 
     public void attack() {
             setDamage(/* enemy.strength * 1.5 */ 10);
