@@ -53,7 +53,9 @@ public class ToonController {
         logger.info("Role format: " + parsedRole);
         if (toon != null) {
             URI location = URI.create("/toon/" + toon.getId());
+            logger.info("Location: " + location);
             userResponse = new UserResponse(location, toon.getId());
+            logger.info("addToon api POST call Response: " + userResponse);
             return ResponseEntity.created(location).body(userResponse);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
