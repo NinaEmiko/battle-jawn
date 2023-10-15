@@ -4,7 +4,7 @@ import PotionDisplay from "../components/PotionDisplay";
 import PlayerHealthBar from "../components/PlayerHealthBar";
 import LogBoxDisplay from "../components/LogBoxDisplay";
 import UserPromptText from "../components/UserPromptText";
-import Button from "../components/Button";
+import PlayerMoves from "../components/PlayerMoves";
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -37,25 +37,23 @@ function BattleContainer() {
             <UserPromptText text={"What would you like to do?"} />
 
             {role == "Tank" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Strike"
                 buttonTwoText="Potion"
                 buttonThreeText="Impale"
                 buttonFourText="Run"
               />
             }
-
             {role == "Healer" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Wand"
                 buttonTwoText="Heal"
                 buttonThreeText="Holy"
                 buttonFourText="Run"
               />
-            }   
-
+            } 
             {role == "Caster" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Wand"
                 buttonTwoText="Potion"
                 buttonThreeText="Blast"
@@ -63,15 +61,13 @@ function BattleContainer() {
               />
             }   
             {role == "DPS" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Stab"
                 buttonTwoText="Potion"
                 buttonThreeText="Steal"
                 buttonFourText="Run"
               />
             }   
-
-            
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ interface ButtonProp {
   buttonFourText: string;
 }
 
-const Button: React.FC<ButtonProp> = ({
+const PlayerMoves: React.FC<ButtonProp> = ({
   buttonOneText,
   buttonTwoText,
   buttonThreeText,
@@ -36,4 +36,4 @@ const Button: React.FC<ButtonProp> = ({
   );
 };
 
-export default Button;
+export default PlayerMoves;
