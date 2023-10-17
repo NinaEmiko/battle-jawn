@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,7 @@ public class ToonService {
                                 toon.setRole("Healer");
                                 break;
             }
+            toon.setCreatedAt(LocalDateTime.now());
             toonRepository.save(toon);
             return toon;
         } catch(Exception e) {
