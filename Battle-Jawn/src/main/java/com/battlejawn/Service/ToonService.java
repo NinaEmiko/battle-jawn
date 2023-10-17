@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import com.battlejawn.Entities.Roles.Toon;
+
+import com.battlejawn.Entities.Toon;
 import com.battlejawn.Repository.ToonRepository;
 
 @Service

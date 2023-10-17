@@ -1,14 +1,10 @@
 # Battle-Jawn
 
-This project started off as me trying to wrap my head around classes and how they can be utilized within a software program, and it spun out from there.
-
 Currently migrating base code from vanilla JS to Spring Boot, to better familiarize myself with Java/Spring.
 
-It is a turn-based, text-based battle game. 
+Turn-based fighting game.
 
 ## Choose A Class
-
-The first screen that the user is presented with gives them four classes to choose from:
 
 - Healer
 - Tank
@@ -17,11 +13,7 @@ The first screen that the user is presented with gives them four classes to choo
 
 Each class has their own weaknesses and strengths. 
 
-## Gameplay
-
 ### Enemies
-
-After selecting which class the user would like to play as, the user is thrown into a battle with a random enemy:
 
 - Spirit
 - Orc
@@ -31,8 +23,6 @@ After selecting which class the user would like to play as, the user is thrown i
 Each enemy has their own weaknesses and strengths. 
 
 ### Player Moves
-
-Players have the option to select from four possible moves(Not including hidden special moves):
 
 - Normal Attack
 - Heal/Consume Potion
@@ -48,10 +38,3 @@ Positioned beside the player's moves is a Log Box that tracks the moves that bot
 After the battle the user will be returned to the Class Selection screen.
 
 ![](https://github.com/NinaEmiko/battle-jawn/blob/main/battle-jawn-user-experience.gif)
-
-### Future Features
-
-- Real-Time Combat
-- Specs
-- Survival Mode
-- Battle Animations

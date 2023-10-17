@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Config.UserResponse;
-import com.battlejawn.Entities.Roles.Toon;
+import com.battlejawn.Entities.Toon;
 import com.battlejawn.Service.ToonService;
 
 @RestController
