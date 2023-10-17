@@ -2,18 +2,12 @@ package com.battlejawn.PlayerMove.StrongAttack;
 
 import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
+import lombok.Data;
 
-public class BackStab extends PlayerStrongAttack implements CriticalHit, Attack {
+@Data
+public class BackStab implements CriticalHit, Attack {
 
     private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
 
     public void attack() {
         setDamage(/*player.strength * 2*/ 10);

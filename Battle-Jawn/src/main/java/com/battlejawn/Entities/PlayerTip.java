@@ -19,4 +19,13 @@ public class PlayerTip {
     @Column
     private String body;
 
+    public PlayerTip(Long id, String body) {
+        this.id = id;
+        this.body = body;
+    }
+
+    public PlayerTip() {
+
+    }
+
 }

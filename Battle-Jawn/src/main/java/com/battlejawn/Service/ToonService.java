@@ -1,9 +1,8 @@
 package com.battlejawn.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-
 import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
 import com.battlejawn.Entities.Roles.Toon;
 import com.battlejawn.Repository.ToonRepository;
@@ -29,7 +28,6 @@ public class ToonService {
     public Toon saveToon(String role) {
         try {
             Toon toon = new Toon();
-            toon.setRole(role);
 
             switch (role) {
                 case "Tank": 
@@ -37,26 +35,31 @@ public class ToonService {
                                 toon.setMaxHealth(120);
                                 toon.setPotions(3);
                                 toon.setMaxPotions(3);
-                                break;
-                case "Healer": 
-                                toon.setHealth(100);
-                                toon.setMaxHealth(100);
-                                toon.setPotions(0);
-                                toon.setMaxPotions(0);
+                                toon.setRole("Tank");
                                 break;
                 case "DPS": 
                                 toon.setHealth(90);
                                 toon.setMaxHealth(90);
                                 toon.setPotions(2);
                                 toon.setMaxPotions(3);
+                                toon.setRole("DPS");
                                 break;
                 case "Caster": 
                                 toon.setHealth(90);
                                 toon.setMaxHealth(90);
                                 toon.setPotions(3);
                                 toon.setMaxPotions(3);
+                                toon.setRole("Caster");
+                                break;
+                case "Healer": 
+                                toon.setHealth(100);
+                                toon.setMaxHealth(100);
+                                toon.setPotions(0);
+                                toon.setMaxPotions(0);
+                                toon.setRole("Healer");
                                 break;
             }
+            toon.setCreatedAt(LocalDateTime.now());
             toonRepository.save(toon);
             return toon;
         } catch(Exception e) {

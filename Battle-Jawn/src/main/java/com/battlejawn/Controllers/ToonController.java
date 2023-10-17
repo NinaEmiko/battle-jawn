@@ -2,6 +2,7 @@ package com.battlejawn.Controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.battlejawn.Config.JsonParser;
+import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Roles.Toon;
 import com.battlejawn.Service.ToonService;
 
@@ -19,6 +22,9 @@ import com.battlejawn.Service.ToonService;
 public class ToonController {
 
     private ToonService toonService;
+    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private JsonParser jsonParser;
+    UserResponse userResponse;
 
     @Autowired
     public ToonController(ToonService toonService){
@@ -31,12 +37,26 @@ public class ToonController {
         return new ResponseEntity<>(toons, HttpStatus.OK);
     }
 
+    @GetMapping("/new")
+    public ResponseEntity<String> getNewestToon() {
+        List<Toon> toonList = toonService.getAllToons();
+        Toon toon = toonService.getToonById((long) toonList.size());
+        logger.info("Role: " + toon.getRole());
+        return new ResponseEntity<String>(toon.getRole(), HttpStatus.OK);
+    }
+
     @PostMapping
-    public ResponseEntity<Void> addToon(@RequestBody String role) {
-        Toon toon = toonService.saveToon(role);
+    public ResponseEntity<UserResponse> addToon(@RequestBody String role) {
+        jsonParser = new JsonParser();
+        String parsedRole = jsonParser.extractJson(role);
+        Toon toon = toonService.saveToon(parsedRole);
+        logger.info("Role format: " + parsedRole);
         if (toon != null) {
             URI location = URI.create("/toon/" + toon.getId());
-            return ResponseEntity.created(location).build();
+            logger.info("Location: " + location);
+            userResponse = new UserResponse(location, toon.getId());
+            logger.info("addToon api POST call Response: " + userResponse);
+            return ResponseEntity.created(location).body(userResponse);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

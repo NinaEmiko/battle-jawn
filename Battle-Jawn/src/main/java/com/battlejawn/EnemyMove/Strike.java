@@ -2,17 +2,11 @@ package com.battlejawn.EnemyMove;
 
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
+import lombok.Data;
 
+@Data
 public class Strike implements CriticalHit, Missable {
     private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
 
     public void attack() {
         setDamage( (int) Math.floor(Math.random() /* * createEnemy.strength */));

@@ -1,17 +1,11 @@
 package com.battlejawn.EnemyMove;
 
 import com.battlejawn.Interfaces.CriticalHit;
+import lombok.Data;
 
+@Data   
 public class Impale implements CriticalHit {
     private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
 
     public void attack() {
         setDamage(/* enemy.strength * 1.2 */ 10);

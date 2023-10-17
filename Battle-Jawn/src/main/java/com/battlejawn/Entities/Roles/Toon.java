@@ -1,5 +1,7 @@
 package com.battlejawn.Entities.Roles;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,5 +29,7 @@ public class Toon {
     private int maxPotions;
     @Column
     private String role;
+    @Column
+    private LocalDateTime createdAt;
     
 }

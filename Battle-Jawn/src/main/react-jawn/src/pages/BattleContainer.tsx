@@ -4,17 +4,30 @@ import PotionDisplay from "../components/PotionDisplay";
 import PlayerHealthBar from "../components/PlayerHealthBar";
 import LogBoxDisplay from "../components/LogBoxDisplay";
 import UserPromptText from "../components/UserPromptText";
-import Button from "../components/Button";
+import PlayerMoves from "../components/PlayerMoves";
 import "../styling/Container.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import PlayerName from "../components/PlayerName";
 
 function BattleContainer() {
-  const role = window.localStorage.getItem("Role");
+  const [role, setRole] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/toon/new')
+      .then((response) => {
+        setRole(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching toon data:', error);
+      });
+  }, []);
 
   return (
     <div className="battle-container">
       <EnemyName/>
       <EnemyHealthBar />
-      <div className="name" id="playerName">{role}</div>
+      <PlayerName role={role} />
       <PotionDisplay />
       <PlayerHealthBar />
       <div className="logbox-and-user-input">
@@ -24,25 +37,23 @@ function BattleContainer() {
             <UserPromptText text={"What would you like to do?"} />
 
             {role == "Tank" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Strike"
                 buttonTwoText="Potion"
                 buttonThreeText="Impale"
                 buttonFourText="Run"
               />
             }
-
             {role == "Healer" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Wand"
                 buttonTwoText="Heal"
                 buttonThreeText="Holy"
                 buttonFourText="Run"
               />
-            }   
-
+            } 
             {role == "Caster" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Wand"
                 buttonTwoText="Potion"
                 buttonThreeText="Blast"
@@ -50,15 +61,13 @@ function BattleContainer() {
               />
             }   
             {role == "DPS" &&
-              <Button
+              <PlayerMoves
                 buttonOneText="Stab"
                 buttonTwoText="Potion"
                 buttonThreeText="Steal"
                 buttonFourText="Run"
               />
             }   
-
-            
           </div>
         </div>
       </div>
