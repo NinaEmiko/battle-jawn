@@ -1,4 +1,6 @@
-package com.battlejawn.Enemy;
+package com.battlejawn.Entities.Enemy;
+
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -10,12 +12,14 @@ public class Enemy {
     private int maxHealth;
     private int potions;
     private int strength;
+    private LocalDateTime createdAt;
 
-    public Enemy(String name, int health, int maxHealth, int potions, int strength) {
+    public Enemy(String name, int health, int maxHealth, int potions, int strength, LocalDateTime createdAt) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
         this.potions = potions;
         this.strength = strength;
+        this.createdAt = createdAt;
     }
 }

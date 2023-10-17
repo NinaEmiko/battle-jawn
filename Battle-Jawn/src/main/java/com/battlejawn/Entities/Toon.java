@@ -1,4 +1,4 @@
-package com.battlejawn.Entities.Roles;
+package com.battlejawn.Entities;
 
 import java.time.LocalDateTime;
 
