@@ -1,7 +1,5 @@
 # Battle-Jawn
 
-Currently migrating base code from vanilla JS to Spring Boot, to better familiarize myself with Java/Spring.
-
 Turn-based fighting game.
 
 ## Choose A Class

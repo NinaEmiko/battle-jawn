@@ -10,10 +10,20 @@ public class JsonParser {
         objectMapper = new ObjectMapper();
     }
 
-    public String extractJson(String JsonString) {
+    public String extractRole(String JsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(JsonString);
             return jsonNode.get("role").asText();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String extractId(String JsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(JsonString);
+            return jsonNode.get("id").asText();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

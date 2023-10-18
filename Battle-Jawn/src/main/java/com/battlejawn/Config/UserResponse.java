@@ -12,5 +12,4 @@ public class UserResponse {
         this.location = location;
         this.id = id;
     }
-    
 }
