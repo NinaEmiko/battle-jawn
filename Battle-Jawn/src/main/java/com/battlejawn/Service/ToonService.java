@@ -1,11 +1,15 @@
 package com.battlejawn.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.persistence.DiscriminatorValue;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import com.battlejawn.Entities.Toon;
+import com.battlejawn.Entities.Hero.Caster;
+import com.battlejawn.Entities.Hero.DPS;
+import com.battlejawn.Entities.Hero.Healer;
+import com.battlejawn.Entities.Hero.Tank;
+import com.battlejawn.Entities.Hero.Toon;
 import com.battlejawn.Repository.ToonRepository;
 
 @Service
@@ -15,6 +19,18 @@ public class ToonService {
 
     public ToonService(ToonRepository toonRepository) {
         this.toonRepository = toonRepository;
+    }
+
+    public String getToonType(Long id) {
+        Toon toon = toonRepository.findById(id).orElse(null);
+
+        if (toon != null) {
+            DiscriminatorValue discriminatorValue = toon.getClass().getAnnotation(DiscriminatorValue.class);
+            if (discriminatorValue != null) {
+                return discriminatorValue.value();
+            } return null;
+        }
+        return null;
     }
     
     public Toon getToonById(Long id){
@@ -28,39 +44,20 @@ public class ToonService {
     @Transactional
     public Toon saveToon(String role) {
         try {
-            Toon toon = new Toon();
+            Toon toon = new Healer();
 
             switch (role) {
                 case "Tank": 
-                                toon.setHealth(120);
-                                toon.setMaxHealth(120);
-                                toon.setPotions(3);
-                                toon.setMaxPotions(3);
-                                toon.setRole("Tank");
+                                toon = new Tank();
                                 break;
                 case "DPS": 
-                                toon.setHealth(90);
-                                toon.setMaxHealth(90);
-                                toon.setPotions(2);
-                                toon.setMaxPotions(3);
-                                toon.setRole("DPS");
+                                toon = new DPS();
                                 break;
                 case "Caster": 
-                                toon.setHealth(90);
-                                toon.setMaxHealth(90);
-                                toon.setPotions(3);
-                                toon.setMaxPotions(3);
-                                toon.setRole("Caster");
-                                break;
-                case "Healer": 
-                                toon.setHealth(100);
-                                toon.setMaxHealth(100);
-                                toon.setPotions(0);
-                                toon.setMaxPotions(0);
-                                toon.setRole("Healer");
+                                toon = new Caster();
                                 break;
             }
-            toon.setCreatedAt(LocalDateTime.now());
+
             toonRepository.save(toon);
             return toon;
         } catch(Exception e) {

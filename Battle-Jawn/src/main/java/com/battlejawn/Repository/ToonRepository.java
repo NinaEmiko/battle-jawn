@@ -2,7 +2,7 @@ package com.battlejawn.Repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.battlejawn.Entities.Toon;
+import com.battlejawn.Entities.Hero.Toon;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

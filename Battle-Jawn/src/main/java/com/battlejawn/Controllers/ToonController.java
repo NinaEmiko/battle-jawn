@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Config.UserResponse;
-import com.battlejawn.Entities.Toon;
+import com.battlejawn.Entities.Hero.Toon;
 import com.battlejawn.Service.ToonService;
 
 @RestController
@@ -33,7 +33,7 @@ public class ToonController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Toon>> getAllToons() {
-        List<Toon> toons = toonService.getAllToons();
+        List<com.battlejawn.Entities.Hero.Toon> toons = toonService.getAllToons();
         return new ResponseEntity<>(toons, HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class ToonController {
     @PostMapping
     public ResponseEntity<UserResponse> addToon(@RequestBody String role) {
         jsonParser = new JsonParser();
-        String parsedRole = jsonParser.extractJson(role);
+        String parsedRole = jsonParser.extractRole(role);
         Toon toon = toonService.saveToon(parsedRole);
         logger.info("Role format: " + parsedRole);
         if (toon != null) {
