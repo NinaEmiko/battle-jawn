@@ -18,6 +18,7 @@ function BattleContainer() {
     axios.get('http://localhost:8080/api/toon/' + id)
       .then((response) => {
         setRole(response.data.role);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error fetching toon data:', error);

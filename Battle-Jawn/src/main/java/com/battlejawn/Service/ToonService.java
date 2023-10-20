@@ -28,6 +28,7 @@ public class ToonService {
     }
 
     public String getToonType(Long id) {
+        logger.info("Inside getToonType Service method");
         Toon toon = toonRepository.findById(id).orElse(null);
 
         if (toon != null) {
@@ -51,6 +52,7 @@ public class ToonService {
     }
 
     public List<Toon> getAllToons() {
+        logger.info("Inside getAllToons Service method");
         return toonRepository.findAll();
     }
 

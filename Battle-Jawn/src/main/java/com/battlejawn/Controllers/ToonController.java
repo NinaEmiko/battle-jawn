@@ -34,20 +34,14 @@ public class ToonController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Toon>> getAllToons() {
+        logger.info("Inside getAllToons");
         List<com.battlejawn.Entities.Hero.Toon> toons = toonService.getAllToons();
         return new ResponseEntity<>(toons, HttpStatus.OK);
     }
 
-    @GetMapping("/new")
-    public ResponseEntity<String> getNewestToon() {
-        List<Toon> toonList = toonService.getAllToons();
-        Toon toon = toonService.getToonById((long) toonList.size());
-        logger.info("Role: " + toon.getRole());
-        return new ResponseEntity<String>(toon.getRole(), HttpStatus.OK);
-    }
-
     @PostMapping
-    public ResponseEntity<UserResponse> addToon(@RequestBody String role) {
+    public ResponseEntity<UserResponse> createNewToon(@RequestBody String role) {
+        logger.info("Inside createNewToon");
         jsonParser = new JsonParser();
         String parsedRole = jsonParser.extractRole(role);
         Toon toon = toonService.saveToon(parsedRole);
@@ -79,6 +73,7 @@ public class ToonController {
 
     @GetMapping("/health")
     public ResponseEntity<Integer> getHealthById(@PathVariable Long id) {
+        logger.info("Inside getHealthById");
         Toon toon = toonService.getToonById(id);
         logger.info("Toon health: " + toon.getHealth());
         return new ResponseEntity<>(toon.getHealth(), HttpStatus.OK);
