@@ -12,11 +12,12 @@ import PlayerName from "../components/PlayerName";
 
 function BattleContainer() {
   const [role, setRole] = useState('');
+  const [id, setId] = useState(localStorage.getItem('toonId'));
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/toon/new')
+    axios.get('http://localhost:8080/api/toon/' + id)
       .then((response) => {
-        setRole(response.data);
+        setRole(response.data.role);
       })
       .catch((error) => {
         console.error('Error fetching toon data:', error);

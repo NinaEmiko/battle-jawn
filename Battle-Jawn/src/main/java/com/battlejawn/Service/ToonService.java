@@ -1,10 +1,15 @@
 package com.battlejawn.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import com.battlejawn.Controllers.ToonController;
 import com.battlejawn.Entities.Hero.Caster;
 import com.battlejawn.Entities.Hero.DPS;
 import com.battlejawn.Entities.Hero.Healer;
@@ -16,6 +21,7 @@ import com.battlejawn.Repository.ToonRepository;
 public class ToonService {
 
     private ToonRepository toonRepository;
+    private Logger logger = Logger.getLogger(ToonController.class.getName());
 
     public ToonService(ToonRepository toonRepository) {
         this.toonRepository = toonRepository;
@@ -34,7 +40,14 @@ public class ToonService {
     }
     
     public Toon getToonById(Long id){
-        return toonRepository.getById(id);
+        logger.info("Inside Toon Service ID: " + id);
+        Optional<Toon> toon = toonRepository.findById(id);
+        if (toon.isPresent()) {
+            logger.info("Inside Toon isPresent");
+            return toon.get();
+        } else {
+            throw new EntityNotFoundException("User with ID " + id + " not found");
+        }
     }
 
     public List<Toon> getAllToons() {

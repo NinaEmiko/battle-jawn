@@ -17,6 +17,7 @@ import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Hero.Toon;
 import com.battlejawn.Service.ToonService;
 
+// @CrossOrigin(origins="http://localhost:5173/")
 @RestController
 @RequestMapping("/api/toon")
 public class ToonController {
@@ -63,7 +64,10 @@ public class ToonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Toon> getToonById(@PathVariable Long id) {
+    public ResponseEntity<Toon> getToonById(@PathVariable("id") Long id) {
+        // jsonParser = new JsonParser();
+        // Long parsedId = jsonParser.extractId(id);
+        logger.info("Inside Toon Controller ID: " + id);
         Toon toon = toonService.getToonById(id);
 
         if (toon != null) {
@@ -71,6 +75,13 @@ public class ToonController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Integer> getHealthById(@PathVariable Long id) {
+        Toon toon = toonService.getToonById(id);
+        logger.info("Toon health: " + toon.getHealth());
+        return new ResponseEntity<>(toon.getHealth(), HttpStatus.OK);
     }
     
 }

@@ -20,10 +20,14 @@ public class JsonParser {
         }
     }
 
-    public String extractId(String JsonString) {
+    public Long extractId(String JsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(JsonString);
-            return jsonNode.get("id").asText();
+            String stringId = jsonNode.get("id").asText();
+            Long longId = Long.parseLong(stringId);
+            return longId;
+            // return (jsonNode.get("id").asText());
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
