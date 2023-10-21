@@ -23,13 +23,13 @@ public class PlayerTipController {
 
     @GetMapping("/all")
     public List<PlayerTip> getAllPlayerTip() {
-        logger.info("Inside getAllPlayerTip");
+        logger.info("Inside getAllPlayerTip Controller method");
         return playerTipService.getAllPlayerTips();
     }
 
     @GetMapping("/random")
     public String getRandomTip() {
-        logger.info("Inside getRandomTip");
+        logger.info("Inside getRandomTip Controller");
         String randomTip = playerTipService.getRandomPlayerTip();
         logger.info("Current tip: " + randomTip);
         return randomTip;

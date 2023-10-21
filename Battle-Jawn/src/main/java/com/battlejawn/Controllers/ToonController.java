@@ -1,7 +1,6 @@
 package com.battlejawn.Controllers;
 
 import java.net.URI;
-import java.util.List;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,6 @@ import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Hero.Toon;
 import com.battlejawn.Service.ToonService;
 
-// @CrossOrigin(origins="http://localhost:5173/")
 @RestController
 @RequestMapping("/api/toon")
 public class ToonController {
@@ -25,18 +23,11 @@ public class ToonController {
     private ToonService toonService;
     private Logger logger = Logger.getLogger(ToonController.class.getName());
     private JsonParser jsonParser;
-    UserResponse userResponse;
+    private UserResponse userResponse;
 
     @Autowired
     public ToonController(ToonService toonService){
         this.toonService = toonService;
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Toon>> getAllToons() {
-        logger.info("Inside getAllToons");
-        List<com.battlejawn.Entities.Hero.Toon> toons = toonService.getAllToons();
-        return new ResponseEntity<>(toons, HttpStatus.OK);
     }
 
     @PostMapping
@@ -59,8 +50,6 @@ public class ToonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Toon> getToonById(@PathVariable("id") Long id) {
-        // jsonParser = new JsonParser();
-        // Long parsedId = jsonParser.extractId(id);
         logger.info("Inside Toon Controller ID: " + id);
         Toon toon = toonService.getToonById(id);
 

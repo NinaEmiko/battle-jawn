@@ -9,7 +9,6 @@ function PlayerSelection() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(role);
     if (role !== '') {
     axios.post('http://localhost:8080/api/toon', { role })
       .then((response) => {

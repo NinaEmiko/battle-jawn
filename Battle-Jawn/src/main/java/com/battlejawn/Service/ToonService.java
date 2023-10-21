@@ -1,10 +1,7 @@
 package com.battlejawn.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
-
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -26,19 +23,6 @@ public class ToonService {
     public ToonService(ToonRepository toonRepository) {
         this.toonRepository = toonRepository;
     }
-
-    public String getToonType(Long id) {
-        logger.info("Inside getToonType Service method");
-        Toon toon = toonRepository.findById(id).orElse(null);
-
-        if (toon != null) {
-            DiscriminatorValue discriminatorValue = toon.getClass().getAnnotation(DiscriminatorValue.class);
-            if (discriminatorValue != null) {
-                return discriminatorValue.value();
-            } return null;
-        }
-        return null;
-    }
     
     public Toon getToonById(Long id){
         logger.info("Inside Toon Service ID: " + id);
@@ -49,11 +33,6 @@ public class ToonService {
         } else {
             throw new EntityNotFoundException("User with ID " + id + " not found");
         }
-    }
-
-    public List<Toon> getAllToons() {
-        logger.info("Inside getAllToons Service method");
-        return toonRepository.findAll();
     }
 
     @Transactional

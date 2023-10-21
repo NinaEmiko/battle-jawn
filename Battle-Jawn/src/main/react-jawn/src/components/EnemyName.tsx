@@ -1,14 +1,18 @@
 import "../styling/EnemyName.css";
 
-function EnemyName(){
-  const enemyList = ["Wolf", "Orc", "Spirit", "Thief"];
-
-  const handleGenerateRandomEnemy = () => {
-    return enemyList[Math.floor(Math.random() * (enemyList.length - 1))];
-  }
+    interface EnemyNameProp {
+        name: string;
+      }
+      
+      const EnemyName: React.FC<EnemyNameProp> = ({
+        name
+      }) => {
+        function handleClickBattle(move: string) {
+        }
+        
 
   return (
-    <div className="name" id="enemyName">{handleGenerateRandomEnemy()}</div>
+    <div className="name" id="enemyName">{name}</div>
   )
 }
 

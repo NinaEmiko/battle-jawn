@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("SPIRIT")
 public class Spirit extends Enemy {
 
-    public Spirit(Long id, String name, int health, int maxHealth, int potions, int strength, LocalDateTime createdAt) {
+    public Spirit() {
         super("Spirit", 150, 150, 1, 20, LocalDateTime.now());
     }
 

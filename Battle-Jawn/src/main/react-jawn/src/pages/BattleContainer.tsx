@@ -13,21 +13,35 @@ import PlayerName from "../components/PlayerName";
 function BattleContainer() {
   const [role, setRole] = useState('');
   const [id, setId] = useState(localStorage.getItem('toonId'));
+  const [enemyId, setEnemyId] = useState(0);
+  const [enemyName, setEnemyName] = useState('');
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/toon/' + id)
       .then((response) => {
         setRole(response.data.role);
-        console.log(response.data);
+        console.log("Inside getById. Response data: " + response.data);
       })
       .catch((error) => {
         console.error('Error fetching toon data:', error);
       });
   }, []);
 
+  useEffect(() => {
+    axios.post('http://localhost:8080/api/enemy')
+      .then((response) => {
+        setEnemyId(response.data.id);
+        setEnemyName(response.data.name);
+        console.log("Inside setEnemyData. Response data: " + response.data.id + ", " + response.data.name);
+      })
+      .catch((error) => {
+        console.error('Error fetching enemy data:', error);
+      });
+  }, []);
+
   return (
     <div className="battle-container">
-      <EnemyName/>
+      <EnemyName name={enemyName}/>
       <EnemyHealthBar />
       <PlayerName role={role} />
       <PotionDisplay />

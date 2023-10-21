@@ -9,6 +9,7 @@ import "../styling/PlayerName.css";
       }) => {
         function handleClickBattle(move: string) {
         }
+        
 
   return (
     <div className="name" id="playerName">{role}</div>
