@@ -1,24 +1,26 @@
 package com.battlejawn.PlayerMove.Attack;
 
+import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 import lombok.Data;
 
 @Data
-public class Stab implements CriticalHit, Missable {
+public class Stab implements CriticalHit, Missable, Attack {
 
     private int stabCount;
-    private int damage;
 
-    public void attack() {
-        setDamage((int) Math.floor(Math.random() /* * user.strength */));
+    public int attack() {
 
         if (miss()) {
-            setDamage(0);
+            return 0;
         } else if (criticalHit()){
-            setDamage(damage *= 1.5);
+            setStabCount(stabCount++);
+            return (int) Math.floor(Math.random() /* * user.strength */ * 1.5);
+        } else {
+            setStabCount(stabCount++);
+            return (int) Math.floor(Math.random() /* * user.strength */);
         }
-        setStabCount(stabCount++);
     }
 
     public boolean criticalHit() {

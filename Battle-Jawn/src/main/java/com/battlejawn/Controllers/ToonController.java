@@ -60,12 +60,16 @@ public class ToonController {
         }
     }
 
-    @GetMapping("/health")
-    public ResponseEntity<Integer> getHealthById(@PathVariable Long id) {
+    @GetMapping("/health/{id}")
+    public ResponseEntity<Integer> getHealthById(@PathVariable("id") Long id) {
         logger.info("Inside getHealthById");
-        Toon toon = toonService.getToonById(id);
-        logger.info("Toon health: " + toon.getHealth());
-        return new ResponseEntity<>(toon.getHealth(), HttpStatus.OK);
+        Integer currentHealth = toonService.getToonHealthById(id);
+        logger.info("Toon health: " + currentHealth);
+        if (currentHealth != null) {
+            return new ResponseEntity<>(currentHealth, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     
 }

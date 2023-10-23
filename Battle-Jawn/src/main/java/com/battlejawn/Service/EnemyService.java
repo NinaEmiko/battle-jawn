@@ -1,11 +1,11 @@
 package com.battlejawn.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.ToonController;
@@ -14,11 +14,6 @@ import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Enemy.Spirit;
 import com.battlejawn.Entities.Enemy.Thief;
 import com.battlejawn.Entities.Enemy.Wolf;
-import com.battlejawn.Entities.Hero.Caster;
-import com.battlejawn.Entities.Hero.DPS;
-import com.battlejawn.Entities.Hero.Healer;
-import com.battlejawn.Entities.Hero.Tank;
-import com.battlejawn.Entities.Hero.Toon;
 import com.battlejawn.Repository.EnemyRepository;
 
 @Service
@@ -35,6 +30,18 @@ public class EnemyService {
     public List<Enemy> getAllEnemies() {
         logger.info("Inside getAllEnemies Service method");
         return enemyRepository.findAll();
+    }
+
+    public Integer getEnemyHealthById(Long id){
+        logger.info("Inside getToonHealthById Service. ID: " + id);
+        Optional<Enemy> enemy = enemyRepository.findById(id);
+        int currentHealth = enemy.get().getHealth();
+        if (enemy.isPresent()) {
+            logger.info("Inside Enemy isPresent");
+            return currentHealth;
+        } else {
+            throw new EntityNotFoundException("Enemy with ID " + id + " not found");
+        }
     }
 
     @Transactional

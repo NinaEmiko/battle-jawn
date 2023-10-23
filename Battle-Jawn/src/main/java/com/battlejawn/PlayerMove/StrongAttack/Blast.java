@@ -1,21 +1,21 @@
 package com.battlejawn.PlayerMove.StrongAttack;
 
+import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 import lombok.Data;
 
 @Data
-public class Blast implements CriticalHit, Missable {
+public class Blast implements CriticalHit, Missable, Attack {
 
-    private int damage;
-
-    public void attack() {
-        setDamage((int) Math.floor(Math.random() /* * user.strength) + user.strength / 4*/));
+    public int attack() {
 
         if (miss()) {
-            setDamage(0);
+            return 0;
         } else if (criticalHit()){
-            setDamage(damage *= 1.5);
+            return (int) (Math.floor(Math.random() /* * user.strength) + user.strength / 4*/) * 1.5);
+        } else {
+            return (int) Math.floor(Math.random() /* * user.strength) + user.strength / 4*/);
         }
     }
 

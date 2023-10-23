@@ -1,22 +1,22 @@
 package com.battlejawn.PlayerMove.Attack;
 
+import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 import com.battlejawn.Interfaces.Stagger;
 import lombok.Data;
 
 @Data
-public class Strike implements CriticalHit, Missable, Stagger {
+public class Strike implements CriticalHit, Missable, Stagger, Attack {
 
-    private int damage;
-
-    public void attack() {
-        setDamage((int) Math.floor(Math.random() /* * user.strength */));
+    public int attack() {
 
         if (miss()) {
-            setDamage(0);
+            return 0;
         } else if (criticalHit()){
-            setDamage(damage *= 1.5);
+            return (int) Math.floor(Math.random() /* * user.strength */ * 1.5);
+        } else {
+            return (int) Math.floor(Math.random() /* * user.strength */);
         }
     }
 

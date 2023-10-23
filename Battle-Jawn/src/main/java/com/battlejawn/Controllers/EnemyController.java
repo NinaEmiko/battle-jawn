@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Service.EnemyService;
 
@@ -31,6 +30,18 @@ public class EnemyController {
     public List<Enemy> getAllEnemies() {
         logger.info("Inside getAllEnemies Controller method");
         return enemyService.getAllEnemies();
+    }
+
+    @GetMapping("/health/{id}")
+    public ResponseEntity<Integer> getHealthById(@PathVariable("id") Long id) {
+        logger.info("Inside getHealthById Enemy Controller method");
+        Integer currentHealth = enemyService.getEnemyHealthById(id);
+        logger.info("Enemy health: " + currentHealth);
+        if (currentHealth != null) {
+            return new ResponseEntity<>(currentHealth, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping

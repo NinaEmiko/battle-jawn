@@ -7,13 +7,12 @@ import lombok.Data;
 @Data
 public class BackStab implements CriticalHit, Attack {
 
-    private int damage;
-
-    public void attack() {
-        setDamage(/*player.strength * 2*/ 10);
+    public int attack() {
 
         if (criticalHit()){
-            setDamage(damage *= 1.5);
+            return (int) Math.floor((/*player.strength * 2*/ 10) * 1.5);
+        } else {
+            return (int) (/*player.strength * 2*/ 10);
         }
     }
 

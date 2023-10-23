@@ -13,13 +13,15 @@ import PlayerName from "../components/PlayerName";
 function BattleContainer() {
   const [role, setRole] = useState('');
   const [id, setId] = useState(localStorage.getItem('toonId'));
-  const [enemyId, setEnemyId] = useState(0);
   const [enemyName, setEnemyName] = useState('');
+  const [maxHealth, setMaxHealth] = useState(0);
+  const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/toon/' + id)
       .then((response) => {
         setRole(response.data.role);
+        setMaxHealth(response.data.maxHealth);
         console.log("Inside getById. Response data: " + response.data);
       })
       .catch((error) => {
@@ -30,22 +32,24 @@ function BattleContainer() {
   useEffect(() => {
     axios.post('http://localhost:8080/api/enemy')
       .then((response) => {
-        setEnemyId(response.data.id);
         setEnemyName(response.data.name);
-        console.log("Inside setEnemyData. Response data: " + response.data.id + ", " + response.data.name);
+        setEnemyMaxHealth(response.data.maxHealth);
+        console.log("Inside setEnemyData. Response data: " + response.data.id + ", " + response.data.name + ", " + response.data.maxHealth);
       })
       .catch((error) => {
         console.error('Error fetching enemy data:', error);
       });
   }, []);
 
+  console.log("Enemy Max Health inside BattleContainer: " + enemyMaxHealth)
+
   return (
     <div className="battle-container">
       <EnemyName name={enemyName}/>
-      <EnemyHealthBar />
+      <EnemyHealthBar props={enemyMaxHealth}/>
       <PlayerName role={role} />
       <PotionDisplay />
-      <PlayerHealthBar />
+      <PlayerHealthBar  maxHealth={maxHealth}/>
       <div className="logbox-and-user-input">
         <LogBoxDisplay />
         <div>

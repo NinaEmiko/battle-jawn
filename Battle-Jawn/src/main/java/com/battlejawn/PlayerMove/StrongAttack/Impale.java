@@ -1,21 +1,21 @@
 package com.battlejawn.PlayerMove.StrongAttack;
 
+import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.CriticalHit;
 import com.battlejawn.Interfaces.Missable;
 import lombok.Data;
 
 @Data
-public class Impale implements CriticalHit, Missable {
+public class Impale implements CriticalHit, Missable, Attack {
 
-    private int damage;
-
-    public void attack() {
-        setDamage( /* player.strength * 1.2*/ 10);
+    public int attack() {
 
         if (miss()) {
-            setDamage(0);
+            return 0;
         } else if (criticalHit()){
-            setDamage(damage *= 1.5);
+            return (int) (( /* player.strength * 1.2*/ 10) * 1.5);
+        } else {
+            return ( /* player.strength * 1.2*/ 10);
         }
     }
 

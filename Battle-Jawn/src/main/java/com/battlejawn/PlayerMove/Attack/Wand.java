@@ -1,18 +1,19 @@
 package com.battlejawn.PlayerMove.Attack;
 
+import com.battlejawn.Interfaces.Attack;
 import com.battlejawn.Interfaces.Missable;
 
 import lombok.Data;
 
 @Data
-public class Wand implements Missable {
+public class Wand implements Missable, Attack {
     private int damage;
 
-    public void attack() {
-        setDamage((int) Math.floor(/*user.strength * .75*/10));
-
+    public int attack() {
         if (miss()) {
-            setDamage(0);
+            return 0;
+        } else {
+            return ((int) Math.floor(/*user.strength * .75*/10));
         }
     }
 

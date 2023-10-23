@@ -35,6 +35,18 @@ public class ToonService {
         }
     }
 
+    public Integer getToonHealthById(Long id){
+        logger.info("Inside getToonHealthById Service. ID: " + id);
+        Optional<Toon> toon = toonRepository.findById(id);
+        int currentHealth = toon.get().getHealth();
+        if (toon.isPresent()) {
+            logger.info("Inside Toon isPresent");
+            return currentHealth;
+        } else {
+            throw new EntityNotFoundException("Toon with ID " + id + " not found");
+        }
+    }
+
     @Transactional
     public Toon saveToon(String role) {
         try {

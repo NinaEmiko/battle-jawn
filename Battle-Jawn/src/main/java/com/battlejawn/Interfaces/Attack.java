@@ -1,5 +1,5 @@
 package com.battlejawn.Interfaces;
 
 public interface Attack {
-    public void attack();
+    public int attack();
 }
