@@ -1,21 +1,24 @@
 package com.battlejawn.Config;
 
+import com.battlejawn.Controllers.PlayerTipController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JsonParser {
-    private ObjectMapper objectMapper;
+import java.util.logging.Logger;
 
+public class JsonParser {
+    private final ObjectMapper objectMapper;
     public JsonParser() {
         objectMapper = new ObjectMapper();
     }
+    private final Logger logger = Logger.getLogger(PlayerTipController.class.getName());
 
     public String extractRole(String JsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(JsonString);
             return jsonNode.get("role").asText();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info("Exception: " + e);
             return null;
         }
     }

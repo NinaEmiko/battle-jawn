@@ -3,6 +3,7 @@ package com.battlejawn.Service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -23,7 +24,7 @@ public class ToonServiceTest {
     ToonRepository toonRepository;
 
     @Test
-    void testGetToonById() {
+    void testGetToonByIdReturnsCorrectToon() {
 
         Long id = 1L;
         Tank tank = new Tank();
@@ -31,8 +32,19 @@ public class ToonServiceTest {
 
         Mockito.when(toonRepository.findById(id)).thenReturn(Optional.of(tank));
 
-        Toon result = toonService.getToonById(id);
+        Toon actual = toonService.getToonById(id);
 
-        assertEquals(result.getId(), id);
+        assertEquals(actual.getId(), id);
     }
+
+    // @Test
+    // void testGetToonHealthByIdReturnsCorrectHealth() {
+    //     Long id = 1L;
+    //     int health = 50;
+    //     Tank tank = new Tank();
+    //     tank.setId(id);
+    //     tank.setHealth(health);
+
+    //     Mockito.when(toonRepository.findById(id)).thenReturn(tank);
+    // }
 }

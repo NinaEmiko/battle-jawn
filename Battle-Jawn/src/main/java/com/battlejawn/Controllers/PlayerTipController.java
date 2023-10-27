@@ -14,7 +14,7 @@ import com.battlejawn.Service.PlayerTipService;
 public class PlayerTipController {
 
     private final PlayerTipService playerTipService;
-    private Logger logger = Logger.getLogger(PlayerTipController.class.getName());
+    private final Logger logger = Logger.getLogger(PlayerTipController.class.getName());
 
     @Autowired
     public PlayerTipController(PlayerTipService playerTipService) {

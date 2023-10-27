@@ -3,10 +3,8 @@ package com.battlejawn.Service;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.battlejawn.Controllers.ToonController;
 import com.battlejawn.Entities.PlayerTip;
 import com.battlejawn.Repository.PlayerTipRepository;
@@ -15,7 +13,7 @@ import com.battlejawn.Repository.PlayerTipRepository;
 public class PlayerTipService {
 
     private final PlayerTipRepository playerTipRepository;
-    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private final Logger logger = Logger.getLogger(ToonController.class.getName());
 
     @Autowired
     public PlayerTipService(PlayerTipRepository playerTipRepository) {

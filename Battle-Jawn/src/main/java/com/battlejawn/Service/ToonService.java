@@ -17,8 +17,8 @@ import com.battlejawn.Repository.ToonRepository;
 @Service
 public class ToonService {
 
-    private ToonRepository toonRepository;
-    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private final ToonRepository toonRepository;
+    private final Logger logger = Logger.getLogger(ToonController.class.getName());
 
     public ToonService(ToonRepository toonRepository) {
         this.toonRepository = toonRepository;
@@ -38,10 +38,9 @@ public class ToonService {
     public Integer getToonHealthById(Long id){
         logger.info("Inside getToonHealthById Service. ID: " + id);
         Optional<Toon> toon = toonRepository.findById(id);
-        int currentHealth = toon.get().getHealth();
         if (toon.isPresent()) {
             logger.info("Inside Toon isPresent");
-            return currentHealth;
+            return toon.get().getHealth();
         } else {
             throw new EntityNotFoundException("Toon with ID " + id + " not found");
         }
@@ -53,13 +52,13 @@ public class ToonService {
             Toon toon = new Healer();
 
             switch (role) {
-                case "Tank": 
+                case "Tank":
                                 toon = new Tank();
                                 break;
-                case "DPS": 
+                case "DPS":
                                 toon = new DPS();
                                 break;
-                case "Caster": 
+                case "Caster":
                                 toon = new Caster();
                                 break;
             }

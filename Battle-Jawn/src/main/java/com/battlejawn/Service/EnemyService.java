@@ -19,8 +19,8 @@ import com.battlejawn.Repository.EnemyRepository;
 @Service
 public class EnemyService {
 
-    private EnemyRepository enemyRepository;
-    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private final EnemyRepository enemyRepository;
+    private final Logger logger = Logger.getLogger(ToonController.class.getName());
 
     @Autowired
     public EnemyService(EnemyRepository enemyRepository) {

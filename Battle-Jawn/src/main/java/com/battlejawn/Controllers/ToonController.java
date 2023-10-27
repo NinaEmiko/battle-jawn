@@ -20,8 +20,8 @@ import com.battlejawn.Service.ToonService;
 @RequestMapping("/api/toon")
 public class ToonController {
 
-    private ToonService toonService;
-    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private final ToonService toonService;
+    private final Logger logger = Logger.getLogger(ToonController.class.getName());
     private JsonParser jsonParser;
     private UserResponse userResponse;
 

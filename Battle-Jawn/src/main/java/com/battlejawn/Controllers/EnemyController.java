@@ -19,7 +19,7 @@ import com.battlejawn.Service.EnemyService;
 public class EnemyController {
 
     private final EnemyService enemyService;
-    private Logger logger = Logger.getLogger(ToonController.class.getName());
+    private final Logger logger = Logger.getLogger(EnemyController.class.getName());
 
     @Autowired
     public EnemyController(EnemyService enemyService) {
