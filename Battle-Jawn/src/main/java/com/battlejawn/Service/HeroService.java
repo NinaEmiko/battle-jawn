@@ -4,6 +4,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.Hero.Caster;
@@ -18,7 +20,7 @@ public class HeroService {
 
     private final HeroRepository heroRepository;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-
+    @Autowired
     public HeroService(HeroRepository heroRepository) {
         this.heroRepository = heroRepository;
     }
@@ -48,19 +50,12 @@ public class HeroService {
     @Transactional
     public Hero saveHero(String role) {
         try {
-            Hero hero = new Healer();
-
-            switch (role) {
-                case "Tank":
-                    hero = new Tank();
-                    break;
-                case "DPS":
-                    hero = new DPS();
-                    break;
-                case "Caster":
-                    hero = new Caster();
-                    break;
-            }
+            Hero hero = switch (role) {
+                case "Tank" -> new Tank();
+                case "DPS" -> new DPS();
+                case "Caster" -> new Caster();
+                default -> new Healer();
+            };
 
             heroRepository.save(hero);
             return hero;

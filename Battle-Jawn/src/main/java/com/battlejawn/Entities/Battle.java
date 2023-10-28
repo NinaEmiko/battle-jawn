@@ -12,11 +12,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "battle_history")
-public class BattleHistory {
+@Table(name = "battle")
+public class Battle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
+    private Long enemyId;
+    @Column
+    private Long heroId;
     @Column
     private ArrayList<String> messages;
     

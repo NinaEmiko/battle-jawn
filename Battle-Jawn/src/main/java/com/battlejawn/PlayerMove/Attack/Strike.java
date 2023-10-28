@@ -1,9 +1,9 @@
 package com.battlejawn.PlayerMove.Attack;
 
-import com.battlejawn.Interfaces.Attack;
-import com.battlejawn.Interfaces.CriticalHit;
-import com.battlejawn.Interfaces.Missable;
-import com.battlejawn.Interfaces.Stagger;
+import com.battlejawn.AttackInterfaces.Attack;
+import com.battlejawn.AttackInterfaces.CriticalHit;
+import com.battlejawn.AttackInterfaces.Missable;
+import com.battlejawn.AttackInterfaces.Stagger;
 import lombok.Data;
 
 @Data

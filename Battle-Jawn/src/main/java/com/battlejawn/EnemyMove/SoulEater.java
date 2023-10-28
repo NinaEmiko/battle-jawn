@@ -1,7 +1,7 @@
 package com.battlejawn.EnemyMove;
 
-import com.battlejawn.Interfaces.CriticalHit;
-import com.battlejawn.Interfaces.Missable;
+import com.battlejawn.AttackInterfaces.CriticalHit;
+import com.battlejawn.AttackInterfaces.Missable;
 import lombok.Data;
 
 @Data

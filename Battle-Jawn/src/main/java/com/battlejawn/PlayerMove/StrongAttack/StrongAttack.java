@@ -1,8 +1,8 @@
 package com.battlejawn.PlayerMove.StrongAttack;
 
-import com.battlejawn.Entities.BattleHistory;
+import com.battlejawn.Entities.Battle;
 import com.battlejawn.Entities.Enemy.Enemy;
-import com.battlejawn.Repository.BattleHistoryRepository;
+import com.battlejawn.Repository.BattleRepository;
 import com.battlejawn.Repository.EnemyRepository;
 import com.battlejawn.Repository.HeroRepository;
 
@@ -10,8 +10,8 @@ public class StrongAttack {
     
     private String role;
     private int damage;
-    private BattleHistory battleHistory;
-    private BattleHistoryRepository battleHistoryRepository;
+    private Battle battle;
+    private BattleRepository battleRepository;
     private Enemy enemy;
     private int enemyCurrentHealth;
     private String newMessage;
@@ -21,34 +21,34 @@ public class StrongAttack {
     public void useAttack(Long playerId, Long enemyId, Long battleId) {
         role = heroRepository.findById(playerId).get().getRole();
         enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
-        battleHistory = battleHistoryRepository.findById(battleId).get();
+        battle = battleRepository.findById(battleId).get();
 
         switch (role) {
             case "Caster":  Blast blast = new Blast();
                             damage = blast.attack();
                             newMessage = newMessageGenerator("Blast", damage);
-                            battleHistory.getMessages().add(newMessage);
+                            battle.getMessages().add(newMessage);
                             break;
             case "Healer":  Holy holy = new Holy();
                             damage = holy.attack();
                             newMessage = newMessageGenerator("Holy", damage);
-                            battleHistory.getMessages().add(newMessage);
+                            battle.getMessages().add(newMessage);
                             break;
             case "Tank":    Impale impale = new Impale();
                             damage = impale.attack();
                             newMessage = newMessageGenerator("Impale", damage);
-                            battleHistory.getMessages().add(newMessage);
+                            battle.getMessages().add(newMessage);
                             break;
             case "DPS":     BackStab backStab = new BackStab();
                             damage = backStab.attack();
                             newMessage = newMessageGenerator("Backstab", damage);
-                            battleHistory.getMessages().add(newMessage);
+                            battle.getMessages().add(newMessage);
                             break;
         }
 
         enemy.setHealth(enemyCurrentHealth - damage);
 
-        battleHistoryRepository.save(battleHistory);
+        battleRepository.save(battle);
         enemyRepository.save(enemy);
     }
 

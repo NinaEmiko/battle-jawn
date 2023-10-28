@@ -12,13 +12,15 @@ import PlayerName from "../components/PlayerName";
 
 function BattleContainer() {
   const [role, setRole] = useState('');
-  const [id, setId] = useState(localStorage.getItem('heroId'));
+  const [heroId, setHeroId] = useState(localStorage.getItem('heroId'));
   const [enemyName, setEnemyName] = useState('');
   const [maxHealth, setMaxHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
+  const [messages, setMessages] = useState('');
+  const [battleId, setBattleId] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/hero/' + id)
+    axios.get('http://localhost:8080/api/hero/' + heroId)
       .then((response) => {
         setRole(response.data.role);
         setMaxHealth(response.data.maxHealth);
@@ -40,6 +42,18 @@ function BattleContainer() {
         console.error('Error fetching enemy data:', error);
       });
   }, []);
+
+//Send json object with enemyId and heroId
+//     useEffect(() => {
+//       axios.post('http://localhost:8080/api/battle')
+//         .then((response) => {
+//           setMessages(response.data.messages);
+//           setBattleId(response.data.battleId);
+//         })
+//         .catch((error) => {
+//           console.error('Error fetching battle data:', error);
+//         });
+//     }, []);
 
   console.log("Enemy Max Health inside BattleContainer: " + enemyMaxHealth)
 

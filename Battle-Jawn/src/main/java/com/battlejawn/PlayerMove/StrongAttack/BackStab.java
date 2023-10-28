@@ -1,7 +1,7 @@
 package com.battlejawn.PlayerMove.StrongAttack;
 
-import com.battlejawn.Interfaces.Attack;
-import com.battlejawn.Interfaces.CriticalHit;
+import com.battlejawn.AttackInterfaces.Attack;
+import com.battlejawn.AttackInterfaces.CriticalHit;
 import lombok.Data;
 
 @Data

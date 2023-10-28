@@ -1,7 +1,7 @@
 package com.battlejawn.PlayerMove.Attack;
 
-import com.battlejawn.Interfaces.Attack;
-import com.battlejawn.Interfaces.Missable;
+import com.battlejawn.AttackInterfaces.Attack;
+import com.battlejawn.AttackInterfaces.Missable;
 
 import lombok.Data;
 
