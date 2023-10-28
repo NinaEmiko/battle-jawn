@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class HeroPurge {
 
      private final HeroRepository heroRepository;
-     private Logger logger = Logger.getLogger(HeroPurge.class.getName());
+     private final Logger logger = Logger.getLogger(HeroPurge.class.getName());
 
      public HeroPurge(HeroRepository heroRepository) {
          this.heroRepository = heroRepository;

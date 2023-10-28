@@ -1,4 +1,4 @@
-package com.battlejawn.PlayerMove.Heal;
+package com.battlejawn.HeroMove.Heal;
 
 public class Heal {
 

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class EnemyPurge {
 
     private final EnemyRepository enemyRepository;
-    private Logger logger = Logger.getLogger(HeroPurge.class.getName());
+    private final Logger logger = Logger.getLogger(HeroPurge.class.getName());
 
     public EnemyPurge(EnemyRepository enemyRepository) {
         this.enemyRepository = enemyRepository;

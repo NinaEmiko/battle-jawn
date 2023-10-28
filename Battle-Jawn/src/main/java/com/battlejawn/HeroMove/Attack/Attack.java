@@ -1,4 +1,4 @@
-package com.battlejawn.PlayerMove.Attack;
+package com.battlejawn.HeroMove.Attack;
 
 import com.battlejawn.Entities.Battle;
 import com.battlejawn.Entities.Enemy.Enemy;
@@ -7,30 +7,21 @@ import com.battlejawn.Repository.EnemyRepository;
 import com.battlejawn.Repository.HeroRepository;
 
 public class Attack {
-    
-    private String role;
+
     private int damage;
-    private Battle battle;
     private BattleRepository battleRepository;
     private Enemy enemy;
-    private int enemyCurrentHealth;
-    private String newMessage;
     private EnemyRepository enemyRepository;
     private HeroRepository heroRepository;
-    private Wand wand;
 
     public void useAttack(Long playerId, Long enemyId, Long battleId) {
-        role = heroRepository.findById(playerId).get().getRole();
-        enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
-        battle = battleRepository.findById(battleId).get();
-        wand = new Wand();
+        String role = heroRepository.findById(playerId).get().getRole();
+        int enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
+        Battle battle = battleRepository.findById(battleId).get();
+        String newMessage;
 
         switch (role) {
-            case "Caster":  damage = wand.attack();
-                            newMessage = newMessageGenerator("Wand", damage);
-                            battle.getMessages().add(newMessage);
-                            break;
-            case "Healer":  
+            case "Caster", "Healer":  Wand wand = new Wand();
                             damage = wand.attack();
                             newMessage = newMessageGenerator("Wand", damage);
                             battle.getMessages().add(newMessage);

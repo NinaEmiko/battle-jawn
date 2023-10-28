@@ -1,37 +1,37 @@
-package com.battlejawn.PlayerMove.StrongAttack;
+package com.battlejawn.HeroMove.Attack;
 
 import com.battlejawn.AttackInterfaces.Attack;
 import com.battlejawn.AttackInterfaces.CriticalHit;
 import com.battlejawn.AttackInterfaces.Missable;
+import com.battlejawn.AttackInterfaces.Stagger;
 import lombok.Data;
 
 @Data
-public class Impale implements CriticalHit, Missable, Attack {
+public class Strike implements CriticalHit, Missable, Stagger, Attack {
 
     public int attack() {
 
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) (( /* player.strength * 1.2*/ 10) * 1.5);
+            return (int) Math.floor(Math.random() /* * user.strength */ * 1.5);
         } else {
-            return ( /* player.strength * 1.2*/ 10);
+            return (int) Math.floor(Math.random() /* * user.strength */);
         }
     }
 
     public boolean criticalHit() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
+        return chance > 90;
     }
 
     public boolean miss() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 95) {
-            return true;
-        }
-        return false;
+        return chance > 95;
+    }
+
+    public boolean stagger() {
+        int chance = (int) Math.floor(Math.random() * 10);
+        return chance > 95;
     }
 }

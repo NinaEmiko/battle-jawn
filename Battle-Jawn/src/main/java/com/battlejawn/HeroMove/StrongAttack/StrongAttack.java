@@ -1,4 +1,4 @@
-package com.battlejawn.PlayerMove.StrongAttack;
+package com.battlejawn.HeroMove.StrongAttack;
 
 import com.battlejawn.Entities.Battle;
 import com.battlejawn.Entities.Enemy.Enemy;
@@ -7,21 +7,18 @@ import com.battlejawn.Repository.EnemyRepository;
 import com.battlejawn.Repository.HeroRepository;
 
 public class StrongAttack {
-    
-    private String role;
+
     private int damage;
-    private Battle battle;
     private BattleRepository battleRepository;
     private Enemy enemy;
-    private int enemyCurrentHealth;
-    private String newMessage;
     private EnemyRepository enemyRepository;
     private HeroRepository heroRepository;
 
     public void useAttack(Long playerId, Long enemyId, Long battleId) {
-        role = heroRepository.findById(playerId).get().getRole();
-        enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
-        battle = battleRepository.findById(battleId).get();
+        String role = heroRepository.findById(playerId).get().getRole();
+        int enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
+        Battle battle = battleRepository.findById(battleId).get();
+        String newMessage;
 
         switch (role) {
             case "Caster":  Blast blast = new Blast();

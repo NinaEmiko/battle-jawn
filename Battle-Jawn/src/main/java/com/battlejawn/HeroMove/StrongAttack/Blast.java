@@ -1,4 +1,4 @@
-package com.battlejawn.PlayerMove.StrongAttack;
+package com.battlejawn.HeroMove.StrongAttack;
 
 import com.battlejawn.AttackInterfaces.Attack;
 import com.battlejawn.AttackInterfaces.CriticalHit;
@@ -21,17 +21,11 @@ public class Blast implements CriticalHit, Missable, Attack {
 
     public boolean criticalHit() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
+        return chance > 90;
     }
 
     public boolean miss() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 95) {
-            return true;
-        }
-        return false;
+        return chance > 95;
     }
 }

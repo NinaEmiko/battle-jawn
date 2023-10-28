@@ -1,4 +1,4 @@
-package com.battlejawn.PlayerMove.Attack;
+package com.battlejawn.HeroMove.Attack;
 
 import com.battlejawn.AttackInterfaces.Attack;
 import com.battlejawn.AttackInterfaces.Missable;
@@ -19,9 +19,6 @@ public class Wand implements Missable, Attack {
 
     public boolean miss() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 95) {
-            return true;
-        }
-        return false;
+        return chance > 95;
     }
 }

@@ -1,4 +1,4 @@
-package com.battlejawn.PlayerMove.StrongAttack;
+package com.battlejawn.HeroMove.StrongAttack;
 
 import com.battlejawn.AttackInterfaces.Attack;
 import com.battlejawn.AttackInterfaces.CriticalHit;
@@ -18,9 +18,6 @@ public class BackStab implements CriticalHit, Attack {
 
     public boolean criticalHit() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
+        return chance > 90;
     }
 }

@@ -1,10 +1,10 @@
 package com.battlejawn.Service;
 
 import com.battlejawn.Entities.Battle;
-import com.battlejawn.PlayerMove.Run;
-import com.battlejawn.PlayerMove.Attack.Attack;
-import com.battlejawn.PlayerMove.Heal.Heal;
-import com.battlejawn.PlayerMove.StrongAttack.StrongAttack;
+import com.battlejawn.HeroMove.Run;
+import com.battlejawn.HeroMove.Attack.Attack;
+import com.battlejawn.HeroMove.Heal.Heal;
+import com.battlejawn.HeroMove.StrongAttack.StrongAttack;
 import com.battlejawn.Repository.BattleRepository;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
