@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+
+import com.battlejawn.Entities.Hero.Hero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
@@ -33,8 +35,14 @@ public class EnemyService {
     }
 
     public Enemy getEnemyById(Long id) {
-        logger.info("Inside getEnemyById Service method");
-        return enemyRepository.getById(id);
+        logger.info("Inside Enemy Service ID: " + id);
+        Optional<Enemy> enemy = enemyRepository.findById(id);
+        if (enemy.isPresent()) {
+            logger.info("Inside Enemy isPresent");
+            return enemy.get();
+        } else {
+            throw new EntityNotFoundException("Enemy with ID " + id + " not found");
+        }
     }
 
     public Integer getEnemyHealthById(Long id){

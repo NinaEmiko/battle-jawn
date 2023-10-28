@@ -13,8 +13,11 @@ import PlayerName from "../components/PlayerName";
 function BattleContainer() {
   const [role, setRole] = useState('');
   const [heroId, setHeroId] = useState(localStorage.getItem('heroId'));
+  const [enemyId, setEnemyId] = useState(localStorage.getItem('enemyId'));
   const [enemyName, setEnemyName] = useState('');
+  const [health, setHealth] = useState(0);
   const [maxHealth, setMaxHealth] = useState(0);
+  const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [messages, setMessages] = useState('');
   const [battleId, setBattleId] = useState(0);
@@ -24,36 +27,24 @@ function BattleContainer() {
       .then((response) => {
         setRole(response.data.role);
         setMaxHealth(response.data.maxHealth);
-        console.log("Inside getById. Response data: " + response.data);
+        console.log("Inside Hero getById. Response data: " + response.data);
       })
       .catch((error) => {
         console.error('Error fetching hero data:', error);
       });
-  }, []);
 
-  useEffect(() => {
-    axios.post('http://localhost:8080/api/enemy')
+    axios.get('http://localhost:8080/api/enemy/' + enemyId)
       .then((response) => {
         setEnemyName(response.data.name);
+        setEnemyHealth(response.data.health);
         setEnemyMaxHealth(response.data.maxHealth);
-        console.log("Inside setEnemyData. Response data: " + response.data.id + ", " + response.data.name + ", " + response.data.maxHealth);
+        console.log("Inside Enemy getById. response.data.name: " + response.data);
       })
       .catch((error) => {
         console.error('Error fetching enemy data:', error);
       });
-  }, []);
 
-//Send json object with enemyId and heroId
-//     useEffect(() => {
-//       axios.post('http://localhost:8080/api/battle')
-//         .then((response) => {
-//           setMessages(response.data.messages);
-//           setBattleId(response.data.battleId);
-//         })
-//         .catch((error) => {
-//           console.error('Error fetching battle data:', error);
-//         });
-//     }, []);
+  }, []);
 
   console.log("Enemy Max Health inside BattleContainer: " + enemyMaxHealth)
 

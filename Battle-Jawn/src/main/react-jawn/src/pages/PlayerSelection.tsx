@@ -6,6 +6,7 @@ import axios from "axios";
 
 function PlayerSelection() {
   const [role, setRole] = useState('');
+  const [newEnemyCreated, setNewEnemyCreated] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,11 +15,23 @@ function PlayerSelection() {
       .then((response) => {
         const id = response.data.id;
         localStorage.setItem('heroId', id);
-        console.log('Hero created successfully:', response.data);
+        console.log('Hero created successfully: ', response.data);
         navigate("/battle-screen");
       })
       .catch((error) => {
         console.error('Error creating hero:', error);
+      });
+    }
+    if(newEnemyCreated == false) {
+    axios.post('http://localhost:8080/api/enemy')
+      .then((response) => {
+        const enemyId = response.data.id;
+        localStorage.setItem('enemyId', enemyId);
+        console.log("Enemy created successfully: " + response.data.id);
+        setNewEnemyCreated(true);
+      })
+      .catch((error) => {
+        console.error('Error fetching enemy data:', error);
       });
     }
   })
