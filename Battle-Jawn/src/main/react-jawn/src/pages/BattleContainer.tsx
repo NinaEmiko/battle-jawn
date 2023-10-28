@@ -38,21 +38,21 @@ function BattleContainer() {
         setEnemyName(response.data.name);
         setEnemyHealth(response.data.health);
         setEnemyMaxHealth(response.data.maxHealth);
-        console.log("Inside Enemy getById. response.data.name: " + response.data);
+        console.log("Inside Enemy getById. response.data.name: " + response.data.name);
       })
       .catch((error) => {
         console.error('Error fetching enemy data:', error);
       });
 
   }, []);
-
-  console.log("Enemy Max Health inside BattleContainer: " + enemyMaxHealth)
+  
+    console.log("enemyName in BattleContainer: " + enemyName);
 
   return (
     <div className="battle-container">
       <EnemyName name={enemyName}/>
       <EnemyHealthBar props={enemyMaxHealth}/>
-      <PlayerName role={role} />
+      <PlayerName name={role} />
       <PotionDisplay />
       <PlayerHealthBar  maxHealth={maxHealth}/>
       <div className="logbox-and-user-input">

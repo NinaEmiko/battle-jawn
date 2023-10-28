@@ -1,19 +1,10 @@
 import "../styling/EnemyName.css";
 
-    interface EnemyNameProp {
-        name: string;
-      }
-      
-      const EnemyName: React.FC<EnemyNameProp> = ({
-        name
-      }) => {
-        function handleClickBattle(move: string) {
-        }
-        
+const EnemyName = (props: any) => {
 
   return (
-    <div className="name" id="enemyName">{name}</div>
-  )
-}
+    <div className="name" id="enemyName">{props.name}</div>
+  );
+};
 
-export default EnemyName
+export default EnemyName;
