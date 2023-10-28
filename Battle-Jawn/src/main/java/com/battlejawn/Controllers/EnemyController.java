@@ -3,6 +3,8 @@ package com.battlejawn.Controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.logging.Logger;
+
+import com.battlejawn.Entities.Hero.Hero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,18 @@ public class EnemyController {
     public List<Enemy> getAllEnemies() {
         logger.info("Inside getAllEnemies Controller method");
         return enemyService.getAllEnemies();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Enemy> getEnemyById(@PathVariable("id") Long id) {
+        logger.info("Inside Enemy Controller ID: " + id);
+        Enemy enemy = enemyService.getEnemyById(id);
+
+        if (enemy != null) {
+            return new ResponseEntity<>(enemy, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/health/{id}")

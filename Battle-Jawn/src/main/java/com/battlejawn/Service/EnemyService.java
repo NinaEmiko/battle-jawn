@@ -32,6 +32,11 @@ public class EnemyService {
         return enemyRepository.findAll();
     }
 
+    public Enemy getEnemyById(Long id) {
+        logger.info("Inside getEnemyById Service method");
+        return enemyRepository.getById(id);
+    }
+
     public Integer getEnemyHealthById(Long id){
         logger.info("Inside getEnemyHealthById Service. ID: " + id);
         Optional<Enemy> enemy = enemyRepository.findById(id);
