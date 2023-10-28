@@ -4,7 +4,7 @@ import com.battlejawn.Entities.BattleHistory;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleHistoryRepository;
 import com.battlejawn.Repository.EnemyRepository;
-import com.battlejawn.Repository.ToonRepository;
+import com.battlejawn.Repository.HeroRepository;
 
 public class StrongAttack {
     
@@ -16,10 +16,10 @@ public class StrongAttack {
     private int enemyCurrentHealth;
     private String newMessage;
     private EnemyRepository enemyRepository;
-    private ToonRepository toonRepository;
+    private HeroRepository heroRepository;
 
     public void useAttack(Long playerId, Long enemyId, Long battleId) {
-        role = toonRepository.findById(playerId).get().getRole();
+        role = heroRepository.findById(playerId).get().getRole();
         enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
         battleHistory = battleHistoryRepository.findById(battleId).get();
 

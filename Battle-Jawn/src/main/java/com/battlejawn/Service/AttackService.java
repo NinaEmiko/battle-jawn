@@ -14,12 +14,12 @@ public class AttackService {
     private Heal heal;
     private Run run;
 
-    public void useAttack(int button, Long toonId, Long enemyId, Long battleId) {
+    public void useAttack(int button, Long heroId, Long enemyId, Long battleId) {
         switch (button) {
-            case 1: attack.useAttack(toonId, enemyId, battleId);
+            case 1: attack.useAttack(heroId, enemyId, battleId);
             case 2: heal.useHeal();
-            case 3: strongAttack.useAttack(toonId, enemyId, battleId);
-            case 4: run.useRun(toonId);;
+            case 3: strongAttack.useAttack(heroId, enemyId, battleId);
+            case 4: run.useRun(heroId);;
         }
     }
     

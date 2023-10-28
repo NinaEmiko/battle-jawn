@@ -10,15 +10,15 @@ function PlayerSelection() {
 
   useEffect(() => {
     if (role !== '') {
-    axios.post('http://localhost:8080/api/toon', { role })
+    axios.post('http://localhost:8080/api/hero', { role })
       .then((response) => {
         const id = response.data.id;
-        localStorage.setItem('toonId', id);
-        console.log('Toon created successfully:', response.data);
+        localStorage.setItem('heroId', id);
+        console.log('Hero created successfully:', response.data);
         navigate("/battle-screen");
       })
       .catch((error) => {
-        console.error('Error creating toon:', error);
+        console.error('Error creating hero:', error);
       });
     }
   })

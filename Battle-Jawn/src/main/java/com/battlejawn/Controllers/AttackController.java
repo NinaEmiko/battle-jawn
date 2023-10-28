@@ -24,9 +24,9 @@
      }
 
      @PostMapping
-     public ResponseEntity<Enemy> playerAttack(@RequestBody Long toonId) {
+     public ResponseEntity<Enemy> playerAttack(@RequestBody Long heroId) {
          logger.info("Inside playerAttack");
-//         attackService.perform(0, toonId, null, null);
+//         attackService.perform(0, heroId, null, null);
         
 
          // if (null != null) {

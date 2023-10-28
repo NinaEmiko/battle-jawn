@@ -11,40 +11,40 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.battlejawn.Entities.Hero.Tank;
-import com.battlejawn.Entities.Hero.Toon;
-import com.battlejawn.Repository.ToonRepository;
+import com.battlejawn.Entities.Hero.Hero;
+import com.battlejawn.Repository.HeroRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class ToonServiceTest {
+public class HeroServiceTest {
 
     @InjectMocks
-    ToonService toonService;
+    HeroService heroService;
 
     @Mock
-    ToonRepository toonRepository;
+    HeroRepository heroRepository;
 
     @Test
-    void testGetToonByIdReturnsCorrectToon() {
+    void testGetHeroByIdReturnsCorrectHero() {
 
         Long id = 1L;
         Tank tank = new Tank();
         tank.setId(id);
 
-        Mockito.when(toonRepository.findById(id)).thenReturn(Optional.of(tank));
+        Mockito.when(heroRepository.findById(id)).thenReturn(Optional.of(tank));
 
-        Toon actual = toonService.getToonById(id);
+        Hero actual = heroService.getHeroById(id);
 
         assertEquals(actual.getId(), id);
     }
 
     // @Test
-    // void testGetToonHealthByIdReturnsCorrectHealth() {
+    // void testGetHeroHealthByIdReturnsCorrectHealth() {
     //     Long id = 1L;
     //     int health = 50;
     //     Tank tank = new Tank();
     //     tank.setId(id);
     //     tank.setHealth(health);
 
-    //     Mockito.when(toonRepository.findById(id)).thenReturn(tank);
+    //     Mockito.when(heroRepository.findById(id)).thenReturn(tank);
     // }
 }

@@ -12,20 +12,20 @@ import PlayerName from "../components/PlayerName";
 
 function BattleContainer() {
   const [role, setRole] = useState('');
-  const [id, setId] = useState(localStorage.getItem('toonId'));
+  const [id, setId] = useState(localStorage.getItem('heroId'));
   const [enemyName, setEnemyName] = useState('');
   const [maxHealth, setMaxHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/toon/' + id)
+    axios.get('http://localhost:8080/api/hero/' + id)
       .then((response) => {
         setRole(response.data.role);
         setMaxHealth(response.data.maxHealth);
         console.log("Inside getById. Response data: " + response.data);
       })
       .catch((error) => {
-        console.error('Error fetching toon data:', error);
+        console.error('Error fetching hero data:', error);
       });
   }, []);
 

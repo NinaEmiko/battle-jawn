@@ -8,7 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.battlejawn.Controllers.ToonController;
+import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Enemy.Spirit;
@@ -20,7 +20,7 @@ import com.battlejawn.Repository.EnemyRepository;
 public class EnemyService {
 
     private final EnemyRepository enemyRepository;
-    private final Logger logger = Logger.getLogger(ToonController.class.getName());
+    private final Logger logger = Logger.getLogger(HeroController.class.getName());
 
     @Autowired
     public EnemyService(EnemyRepository enemyRepository) {
@@ -33,7 +33,7 @@ public class EnemyService {
     }
 
     public Integer getEnemyHealthById(Long id){
-        logger.info("Inside getToonHealthById Service. ID: " + id);
+        logger.info("Inside getEnemyHealthById Service. ID: " + id);
         Optional<Enemy> enemy = enemyRepository.findById(id);
         int currentHealth = enemy.get().getHealth();
         if (enemy.isPresent()) {
@@ -75,5 +75,5 @@ public class EnemyService {
             throw new RuntimeException("Failed to save enemy: " + e.getMessage());
         }
     }
-    
+
 }

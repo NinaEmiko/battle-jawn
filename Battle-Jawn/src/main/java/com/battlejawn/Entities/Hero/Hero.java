@@ -14,10 +14,10 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="toon")
+@Table(name="hero")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "toon_type")
-public abstract class Toon {
+@DiscriminatorColumn(name = "hero_type")
+public abstract class Hero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,11 +35,11 @@ public abstract class Toon {
     @Column
     private LocalDateTime createdAt;
 
-    public Toon() {
+    public Hero() {
 
     }
 
-    public Toon(int health, int maxHealth, int potions, int maxPotions, String role, LocalDateTime createdAt) {
+    public Hero(int health, int maxHealth, int potions, int maxPotions, String role, LocalDateTime createdAt) {
         this.health = health;
         this.maxHealth = maxHealth;
         this.potions = potions;
