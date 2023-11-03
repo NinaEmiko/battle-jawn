@@ -12,7 +12,6 @@ function PlayerSelection({roleChosen}) {
       if (role !== '') {
           axios.post('http://localhost:8080/api/hero', { role })
                 .then((response) => {
-                  const id = response.data.id;
                   roleChosen(response.data.id);
                   console.log('Hero created successfully: ', response.data);
                 })
@@ -54,10 +53,6 @@ function PlayerSelection({roleChosen}) {
     setChosenRole("You have chosen to be a Caster")
     }
 
-  const handleClickCheckRole = () => {
-        console.log(role);
-    }
-
   return (
       <div className="container">
         <PlayerTips />
@@ -72,9 +67,8 @@ function PlayerSelection({roleChosen}) {
               <button onClick={handleClickButtonTwo} className="btn" id="button2">Healer</button>
               <button onClick={handleClickButtonThree} className="btn" id="button3">DPS</button>
               <button onClick={handleClickButtonFour} className="btn" id="button4">Caster</button>
-              <button onClick={handleClickBegin} className="btn" id="button5">Begin</button>
-              <button onClick={handleClickCheckRole} className="btn" id="button6">Check Class</button>
             </div>
+            <button onClick={handleClickBegin} className="btn" id="button5">Begin</button>
           </div>
         </div>
       </div>
