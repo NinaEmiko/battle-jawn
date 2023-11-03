@@ -3,7 +3,7 @@ import "../styling/PlayerName.css";
 const PlayerName = (props: any) => {
 
   return (
-    <div className="name" id="playerName">{props.name}</div>
+    <div className="name" id="playerName">{props.props}</div>
   );
 };
 
