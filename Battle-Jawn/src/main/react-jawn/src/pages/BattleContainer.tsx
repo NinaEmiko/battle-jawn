@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PlayerName from "../components/PlayerName";
 
-function BattleContainer() {
-  const [heroId, setHeroId] = useState(localStorage.getItem('heroId'));
+function BattleContainer(props) {
+  const heroId = props.id;
   const [role, setRole] = useState('');
   const [health, setHealth] = useState(0);
   const [maxHealth, setMaxHealth] = useState(0);
@@ -24,6 +24,7 @@ function BattleContainer() {
 
   useEffect(() => {
     getHero();
+    console.log(heroId);
     getEnemy();
 
   }, []);

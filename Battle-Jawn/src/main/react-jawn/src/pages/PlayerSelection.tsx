@@ -6,7 +6,6 @@ import axios from "axios";
 
 function PlayerSelection({roleChosen}) {
   const [role, setRole] = useState('');
-  const [heroId, setHeroId] = useState(0);
   const [chosenRole, setChosenRole] = useState('');
 
   const handleClickBegin = () => {
@@ -14,8 +13,7 @@ function PlayerSelection({roleChosen}) {
           axios.post('http://localhost:8080/api/hero', { role })
                 .then((response) => {
                   const id = response.data.id;
-                  localStorage.setItem('heroId', id);
-                  setHeroId(response.data.id);
+                  roleChosen(response.data.id);
                   console.log('Hero created successfully: ', response.data);
                 })
                 .catch((error) => {
@@ -31,7 +29,6 @@ function PlayerSelection({roleChosen}) {
                 .catch((error) => {
                   console.error('Error fetching enemy data:', error);
                 });
-            roleChosen(heroId);
       } else {
         setChosenRole('You have not yet chosen a class!')
       }
