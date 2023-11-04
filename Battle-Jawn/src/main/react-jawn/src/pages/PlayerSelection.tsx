@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PlayerTips from "../components/PlayerTips";
 import UserPromptText from "../components/UserPromptText";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function PlayerSelection({roleChosen}) {
+function PlayerSelection({roleChosen}:{roleChosen: any}) {
   const [role, setRole] = useState('');
   const [chosenRole, setChosenRole] = useState('');
 

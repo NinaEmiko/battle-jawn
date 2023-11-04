@@ -13,9 +13,10 @@ const PlayerMoves: React.FC<ButtonProp> = ({
   buttonThreeText,
   buttonFourText,
 }) => {
+  
   function handleClickBattle(move: string) {
   }
-  
+
   return (
     <>
       <div className="btn-grid" id="option-buttons">

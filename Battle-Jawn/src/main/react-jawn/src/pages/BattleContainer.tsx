@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PlayerName from "../components/PlayerName";
 
-function BattleContainer(props) {
-  const heroId = props.id;
+function BattleContainer({props}:{props:any}) {
+  const heroId = props;
   const [role, setRole] = useState('');
   const [health, setHealth] = useState(0);
   const [maxHealth, setMaxHealth] = useState(0);
@@ -24,17 +24,15 @@ function BattleContainer(props) {
 
   useEffect(() => {
     getHero();
-    console.log(heroId);
     getEnemy();
     getBattle();
-    console.log(battleId);
-
   }, []);
 
   const getHero = () => {
       axios.get('http://localhost:8080/api/hero/' + heroId)
             .then((response) => {
               setRole(response.data.role);
+              setHealth(response.data.health);
               setMaxHealth(response.data.maxHealth);
               console.log("Inside Hero getById. Response data: " + response.data);
             })
@@ -42,11 +40,11 @@ function BattleContainer(props) {
               console.error('Error fetching hero data:', error);
         });
   }
-  
 
   const getEnemy = () => {
       axios.get('http://localhost:8080/api/enemy/' + enemyId)
         .then((response) => {
+          setEnemyId(response.data.id);
           setEnemyName(response.data.name);
           setEnemyHealth(response.data.health);
           setEnemyMaxHealth(response.data.maxHealth);
@@ -55,7 +53,6 @@ function BattleContainer(props) {
         .catch((error) => {
           console.error('Error fetching enemy data:', error);
         });
-
     }
 
   const getBattle = () => {

@@ -1,8 +1,6 @@
 import "./App.css";
 import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
-import BattleContainer from "./pages/BattleContainer";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import PlayerSelection from "./pages/PlayerSelection";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 
 function App() {
@@ -11,8 +9,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="player-selection" element={<PlayerSelection />} />
-        <Route path="battle-screen" element={<BattleContainer />} />
       </Routes>
     </BrowserRouter>
   )

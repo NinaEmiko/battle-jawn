@@ -3,19 +3,16 @@ import BattleContainer from "./BattleContainer";
 import PlayerSelection from "./PlayerSelection";
 
 function HomePage() {
-    const [roleChosen, setRoleChosen] = useState(false);
     const [heroId, setHeroId] = useState(0);
 
-    const handlePlayerSelection = (id) => {
-        setRoleChosen(true);
+    const handlePlayerSelection = (id: any) => {
         setHeroId(id);
-
     }
 
     return (
         <div>
-            {roleChosen ? (
-                <BattleContainer id={heroId} />
+            {heroId ? (
+                <BattleContainer props={heroId} />
             ):
                 <PlayerSelection roleChosen={handlePlayerSelection} />
             }
