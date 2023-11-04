@@ -3,13 +3,11 @@
  import com.battlejawn.Config.JsonParser;
  import com.battlejawn.Config.UserResponse;
  import com.battlejawn.Entities.Battle;
- import com.battlejawn.Entities.Enemy.Enemy;
  import com.battlejawn.Service.BattleService;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.http.HttpStatus;
  import org.springframework.http.ResponseEntity;
  import org.springframework.web.bind.annotation.*;
-
  import java.net.URI;
  import java.util.logging.Logger;
 
@@ -17,7 +15,7 @@
  @RequestMapping("/api/battle")
  public class BattleController {
 
-     private BattleService battleService;
+     private final BattleService battleService;
      private UserResponse userResponse;
      private JsonParser jsonParser;
      private final Logger logger = Logger.getLogger(BattleController.class.getName());
@@ -28,18 +26,28 @@
      }
 
      @PostMapping
-     //Receive json object with heroId and enemyId
-     public ResponseEntity<UserResponse> startNewBattle(@RequestBody Long json) {
-         logger.info("Inside startNewBattle");
-         Battle battle = battleService.startNewBattle(json);
+     public ResponseEntity<Battle> startNewBattle() {
+         logger.info("Inside startNewBattle Controller method");
+         Battle battle = battleService.startNewBattle();
          if (battle != null) {
              URI location = URI.create("/battle/" + battle.getId());
              logger.info("Location: " + location);
-             userResponse = new UserResponse(location, battle.getId());
              logger.info("addHero api POST call Response: " + userResponse);
-             return ResponseEntity.created(location).body(userResponse);
+             return ResponseEntity.created(location).body(battle);
          } else {
              return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
+     }
+
+     @GetMapping("/{id}")
+     public ResponseEntity<Battle> getBattleById(@PathVariable("id") Long id) {
+         logger.info("Inside Battle Controller ID: " + id);
+         Battle battle = battleService.getBattleById(id);
+
+         if (battle != null) {
+             return new ResponseEntity<>(battle, HttpStatus.OK);
+         } else {
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
          }
      }
 
@@ -63,6 +71,8 @@
          } catch (Exception e) {
              return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
          }
+
+
      }
 
  }

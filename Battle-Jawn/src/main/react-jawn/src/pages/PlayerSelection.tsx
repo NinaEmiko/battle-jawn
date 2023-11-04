@@ -28,6 +28,16 @@ function PlayerSelection({roleChosen}) {
                 .catch((error) => {
                   console.error('Error fetching enemy data:', error);
                 });
+
+          axios.post('http://localhost:8080/api/battle')
+                .then((response) => {
+                  const battleId = response.data.id;
+                  localStorage.setItem('battleId', battleId);
+                  console.log("Battle created successfully: " + response.data.id);
+                })
+                .catch((error) => {
+                  console.error('Error fetching battle data:', error);
+                });
       } else {
         setChosenRole('You have not yet chosen a class!')
       }

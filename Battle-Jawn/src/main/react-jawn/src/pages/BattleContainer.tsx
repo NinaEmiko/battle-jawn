@@ -20,12 +20,14 @@ function BattleContainer(props) {
   const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [messages, setMessages] = useState('');
-  const [battleId, setBattleId] = useState(0);
+  const [battleId, setBattleId] = useState(localStorage.getItem('battleId'));
 
   useEffect(() => {
     getHero();
     console.log(heroId);
     getEnemy();
+    getBattle();
+    console.log(battleId);
 
   }, []);
 
@@ -40,6 +42,7 @@ function BattleContainer(props) {
               console.error('Error fetching hero data:', error);
         });
   }
+  
 
   const getEnemy = () => {
       axios.get('http://localhost:8080/api/enemy/' + enemyId)
@@ -52,7 +55,18 @@ function BattleContainer(props) {
         .catch((error) => {
           console.error('Error fetching enemy data:', error);
         });
+
     }
+
+  const getBattle = () => {
+      axios.get('http://localhost:8080/api/battle/' + battleId)
+        .then((response) => {
+          console.log("Inside Battle getById. response.data.id: " + response.data.id);
+        })
+        .catch((error) => {
+          console.error('Error fetching battle data:', error);
+        });
+      }
 
   return (
     <div className="battle-container">

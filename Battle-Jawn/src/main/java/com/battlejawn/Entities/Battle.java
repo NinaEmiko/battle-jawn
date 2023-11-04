@@ -22,6 +22,10 @@ public class Battle {
     @Column
     private Long heroId;
     @Column
-    private ArrayList<String> messages;
+    private ArrayList<String> messages = new ArrayList<>();
+
+    public void addToMessages(String message) {
+        messages.add(message);
+    }
     
 }
