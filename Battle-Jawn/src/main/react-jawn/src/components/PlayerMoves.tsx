@@ -1,4 +1,6 @@
+import axios from "axios";
 import "../styling/Button.css";
+import { useState } from "react";
 
 interface ButtonProp {
   buttonOneText: string;
@@ -13,8 +15,32 @@ const PlayerMoves: React.FC<ButtonProp> = ({
   buttonThreeText,
   buttonFourText,
 }) => {
+  const config = { headers: {
+    'Content-Type': 'application/json'
+  }}
+
+  const data = {
+    moveName: String,
+    heroId: Number,
+    enemyId: Number,
+    battleId: Number
+  }
+  const url = 'http://localhost:8080/api/battle';
+  const [enemyId, setEnemyId] = useState(localStorage.getItem('enemyId'));
+  const [battleId, setBattleId] = useState(localStorage.getItem('battleId'));
+  const [heroId, setHeroId] = useState(1);
   
   function handleClickBattle(move: string) {
+
+    // axios.put(url, data)
+    // .then((response) => {
+    // console.log(move + " successful: " + response.data);
+    // })
+    // .catch((error) => {
+    // console.error('Error occured while trying to use: ' + move + " ", error);
+    // });
+    console.log("Player used " + move);
+
   }
 
   return (

@@ -26,12 +26,12 @@ public class BattleService {
         this.battleRepository = battleRepository;
     }
 
-    public Battle useAttack(int button, Long heroId, Long enemyId, Long battleId) {
+    public Battle useAttack(String button, Long heroId, Long enemyId, Long battleId) {
         switch (button) {
-            case 1: attack.useAttack(heroId, enemyId, battleId);
-            case 2: heal.useHeal();
-            case 3: strongAttack.useAttack(heroId, enemyId, battleId);
-            case 4: run.useRun(heroId);;
+            case "Wand": attack.useAttack(heroId, enemyId, battleId);
+            case "Heal": heal.useHeal();
+            case "Blast": strongAttack.useAttack(heroId, enemyId, battleId);
+            case "Run": run.useRun(heroId);;
         }
         return battleRepository.getById(battleId);
     }

@@ -22,10 +22,10 @@ public class JsonParser {
             return null;
         }
     }
-    public Integer extractButton(String jsonString) {
+    public String extractButton(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-            return jsonNode.get("btn").asInt();
+            return jsonNode.get("btn").asText();
         } catch (Exception e) {
             logger.info("Exception: " + e);
             return null;

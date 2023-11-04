@@ -11,7 +11,6 @@ import axios from "axios";
 import PlayerName from "../components/PlayerName";
 
 function BattleContainer({props}:{props:any}) {
-  const heroId = props;
   const [role, setRole] = useState('');
   const [health, setHealth] = useState(0);
   const [maxHealth, setMaxHealth] = useState(0);
@@ -29,7 +28,7 @@ function BattleContainer({props}:{props:any}) {
   }, []);
 
   const getHero = () => {
-      axios.get('http://localhost:8080/api/hero/' + heroId)
+      axios.get('http://localhost:8080/api/hero/' + props)
             .then((response) => {
               setRole(response.data.role);
               setHealth(response.data.health);

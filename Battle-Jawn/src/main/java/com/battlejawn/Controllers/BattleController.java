@@ -52,13 +52,13 @@
      }
 
      @PutMapping
-     public ResponseEntity<UserResponse> useAttack(@RequestBody String json){
+     public ResponseEntity<UserResponse> useAttack(@RequestBody String move){
          jsonParser = new JsonParser();
 
-         int btn = jsonParser.extractButton(json);
-         Long heroId = jsonParser.extractHeroId(json);
-         Long enemyId = jsonParser.extractEnemyId(json);
-         Long battleId = jsonParser.extractBattleId(json);
+         String btn = jsonParser.extractButton(move);
+         Long heroId = jsonParser.extractHeroId(move);
+         Long enemyId = jsonParser.extractEnemyId(move);
+         Long battleId = jsonParser.extractBattleId(move);
 
          logger.info("Inside useAttack");
          Battle battle = battleService.useAttack(btn, heroId, enemyId, battleId);

@@ -4,38 +4,19 @@ import UserPromptText from "../components/UserPromptText";
 import axios from "axios";
 
 function PlayerSelection({roleChosen}:{roleChosen: any}) {
+  const url = 'http://localhost:8080/api/hero';
   const [role, setRole] = useState('');
   const [chosenRole, setChosenRole] = useState('');
 
   const handleClickBegin = () => {
       if (role !== '') {
-          axios.post('http://localhost:8080/api/hero', { role })
+          axios.post(url, { role })
                 .then((response) => {
                   roleChosen(response.data.id);
                   console.log('Hero created successfully: ', response.data);
                 })
                 .catch((error) => {
                   console.error('Error creating hero:', error);
-                });
-
-          axios.post('http://localhost:8080/api/enemy')
-                .then((response) => {
-                  const enemyId = response.data.id;
-                  localStorage.setItem('enemyId', enemyId);
-                  console.log("Enemy created successfully: " + response.data.id);
-                })
-                .catch((error) => {
-                  console.error('Error fetching enemy data:', error);
-                });
-
-          axios.post('http://localhost:8080/api/battle')
-                .then((response) => {
-                  const battleId = response.data.id;
-                  localStorage.setItem('battleId', battleId);
-                  console.log("Battle created successfully: " + response.data.id);
-                })
-                .catch((error) => {
-                  console.error('Error fetching battle data:', error);
                 });
       } else {
         setChosenRole('You have not yet chosen a class!')
