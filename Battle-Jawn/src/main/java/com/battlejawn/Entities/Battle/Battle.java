@@ -1,4 +1,4 @@
-package com.battlejawn.Entities;
+package com.battlejawn.Entities.Battle;
 
 import java.util.ArrayList;
 
@@ -21,11 +21,5 @@ public class Battle {
     private Long enemyId;
     @Column
     private Long heroId;
-    @Column
-    private ArrayList<String> messages = new ArrayList<>();
 
-    public void addToMessages(String message) {
-        messages.add(message);
-    }
-    
 }

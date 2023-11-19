@@ -2,7 +2,8 @@
 
  import com.battlejawn.Config.JsonParser;
  import com.battlejawn.Config.UserResponse;
- import com.battlejawn.Entities.Battle;
+ import com.battlejawn.Entities.Battle.Battle;
+ import com.battlejawn.Entities.Battle.BattleHistory;
  import com.battlejawn.Service.BattleService;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.http.HttpStatus;
@@ -25,32 +26,6 @@
          this.battleService = battleService;
      }
 
-     @PostMapping
-     public ResponseEntity<Battle> startNewBattle() {
-         logger.info("Inside startNewBattle Controller method");
-         Battle battle = battleService.startNewBattle();
-         if (battle != null) {
-             URI location = URI.create("/battle/" + battle.getId());
-             logger.info("Location: " + location);
-             logger.info("addHero api POST call Response: " + userResponse);
-             return ResponseEntity.created(location).body(battle);
-         } else {
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }
-     }
-
-     @GetMapping("/{id}")
-     public ResponseEntity<Battle> getBattleById(@PathVariable("id") Long id) {
-         logger.info("Inside Battle Controller ID: " + id);
-         Battle battle = battleService.getBattleById(id);
-
-         if (battle != null) {
-             return new ResponseEntity<>(battle, HttpStatus.OK);
-         } else {
-             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-         }
-     }
-
      @PutMapping
      public ResponseEntity<UserResponse> useAttack(@RequestBody String move){
          jsonParser = new JsonParser();
@@ -58,12 +33,12 @@
          String btn = jsonParser.extractButton(move);
          Long heroId = jsonParser.extractHeroId(move);
          Long enemyId = jsonParser.extractEnemyId(move);
-         Long battleId = jsonParser.extractBattleId(move);
+         Long battleHistoryId = jsonParser.extractBattleHistoryId(move);
 
          logger.info("Inside useAttack");
-         Battle battle = battleService.useAttack(btn, heroId, enemyId, battleId);
+         Battle battle = battleService.useAttack(btn, heroId, enemyId, battleHistoryId);
          try {
-             URI location = URI.create("/battle/" + battle.getId());
+             URI location = URI.create("/battleHistory/" + battle.getId());
              logger.info("Location: " + location);
              userResponse = new UserResponse(location, battle.getId());
              logger.info("useAttack api PUT call Response: " + userResponse);

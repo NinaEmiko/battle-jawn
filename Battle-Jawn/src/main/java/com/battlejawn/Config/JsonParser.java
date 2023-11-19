@@ -52,10 +52,10 @@ public class JsonParser {
         return null;
     }
 
-    public Long extractBattleId(String jsonString) {
+    public Long extractBattleHistoryId(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-            return jsonNode.get("battleId").asLong();
+            return jsonNode.get("battleHistoryId").asLong();
         } catch (Exception e) {
             logger.info("Exception: " + e);
         }

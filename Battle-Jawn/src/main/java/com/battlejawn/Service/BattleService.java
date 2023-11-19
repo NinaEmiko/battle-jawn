@@ -1,6 +1,6 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Entities.Battle;
+import com.battlejawn.Entities.Battle.Battle;
 import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Attack.Attack;
 import com.battlejawn.HeroMove.Heal.Heal;
@@ -35,30 +35,4 @@ public class BattleService {
         }
         return battleRepository.getById(battleId);
     }
-
-    @Transactional
-    public Battle startNewBattle() {
-        logger.info("Inside startNewBattle Service method");
-        try {
-            Battle battle = new Battle();
-            String openingMessage = "(BattleService Class) You encountered an enemy!";
-            battle.addToMessages(openingMessage);
-            battleRepository.save(battle);
-            return battle;
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to start new battle: " + e.getMessage());
-        }
-    }
-
-    public Battle getBattleById(Long id) {
-        logger.info("Inside Battle Service ID: " + id);
-        Optional<Battle> battle = battleRepository.findById(id);
-        if (battle.isPresent()) {
-            logger.info("Inside Battle isPresent");
-            return battle.get();
-        } else {
-            throw new EntityNotFoundException("Battle with ID " + id + " not found");
-        }
-    }
-
 }

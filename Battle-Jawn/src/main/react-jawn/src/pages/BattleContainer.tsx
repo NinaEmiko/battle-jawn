@@ -19,12 +19,13 @@ function BattleContainer({props}:{props:any}) {
   const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [messages, setMessages] = useState('');
-  const [battleId, setBattleId] = useState(localStorage.getItem('battleId'));
+  const [battleHistoryId, setBattleHistoryId] = useState(localStorage.getItem('battleHistoryId'));
+  const [battleHistory, setBattleHistory] = useState([]);
 
   useEffect(() => {
     getHero();
     getEnemy();
-    getBattle();
+    getBattleHistory();
   }, []);
 
   const getHero = () => {
@@ -43,7 +44,6 @@ function BattleContainer({props}:{props:any}) {
   const getEnemy = () => {
       axios.get('http://localhost:8080/api/enemy/' + enemyId)
         .then((response) => {
-          setEnemyId(response.data.id);
           setEnemyName(response.data.name);
           setEnemyHealth(response.data.health);
           setEnemyMaxHealth(response.data.maxHealth);
@@ -54,15 +54,16 @@ function BattleContainer({props}:{props:any}) {
         });
     }
 
-  const getBattle = () => {
-      axios.get('http://localhost:8080/api/battle/' + battleId)
+  const getBattleHistory = () => {
+    axios.get('http://localhost:8080/api/battle-history/' + battleHistoryId)
         .then((response) => {
-          console.log("Inside Battle getById. response.data.id: " + response.data.id);
-        })
-        .catch((error) => {
-          console.error('Error fetching battle data:', error);
-        });
-      }
+                  setBattleHistory(response.data.messages);
+                  console.log("Inside BattleHistory getById. response.data.messages: " + response.data.messages);
+                })
+                .catch((error) => {
+                  console.error('Error fetching battle history data:', error);
+                });
+    }
 
   return (
     <div className="battle-container">
@@ -72,7 +73,7 @@ function BattleContainer({props}:{props:any}) {
       <PotionDisplay />
       <PlayerHealthBar  props={maxHealth}/>
       <div className="logbox-and-user-input">
-        <LogBoxDisplay />
+        <LogBoxDisplay props={battleHistory} />
         <div>
           <div className="user-prompt-wrapper">
             <UserPromptText text={"What would you like to do?"} />
