@@ -2,7 +2,7 @@
 
  import com.battlejawn.Config.JsonParser;
  import com.battlejawn.Config.UserResponse;
- import com.battlejawn.Entities.Battle;
+ import com.battlejawn.Entities.Battle.Battle;
  import com.battlejawn.Service.BattleService;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.http.HttpStatus;
@@ -23,32 +23,6 @@
      @Autowired
      public BattleController(BattleService battleService) {
          this.battleService = battleService;
-     }
-
-     @PostMapping
-     public ResponseEntity<Battle> startNewBattle() {
-         logger.info("Inside startNewBattle Controller method");
-         Battle battle = battleService.startNewBattle();
-         if (battle != null) {
-             URI location = URI.create("/battle/" + battle.getId());
-             logger.info("Location: " + location);
-             logger.info("addHero api POST call Response: " + userResponse);
-             return ResponseEntity.created(location).body(battle);
-         } else {
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }
-     }
-
-     @GetMapping("/{id}")
-     public ResponseEntity<Battle> getBattleById(@PathVariable("id") Long id) {
-         logger.info("Inside Battle Controller ID: " + id);
-         Battle battle = battleService.getBattleById(id);
-
-         if (battle != null) {
-             return new ResponseEntity<>(battle, HttpStatus.OK);
-         } else {
-             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-         }
      }
 
      @PutMapping

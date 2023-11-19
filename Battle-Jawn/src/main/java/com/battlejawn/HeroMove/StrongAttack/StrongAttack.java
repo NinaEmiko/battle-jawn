@@ -1,6 +1,6 @@
 package com.battlejawn.HeroMove.StrongAttack;
 
-import com.battlejawn.Entities.Battle;
+import com.battlejawn.Entities.Battle.Battle;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleRepository;
 import com.battlejawn.Repository.EnemyRepository;

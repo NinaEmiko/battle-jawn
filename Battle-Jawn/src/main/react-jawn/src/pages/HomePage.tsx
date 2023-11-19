@@ -32,6 +32,16 @@ function HomePage() {
                 console.error('Error fetching battle data:', error);
                 });
 
+        axios.post('http://localhost:8080/api/battle-history')
+                        .then((response) => {
+                        const battleHistoryId = response.data.battleHistoryId;
+                        localStorage.setItem('battleHistoryId', battleHistoryId);
+                        console.log("BattleHistory created successfully: " + response.data.battleHistoryId);
+                        })
+                        .catch((error) => {
+                        console.error('Error fetching battleHistory data:', error);
+                        });
+
     }
 
     return (
