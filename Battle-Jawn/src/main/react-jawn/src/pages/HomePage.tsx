@@ -3,14 +3,16 @@ import BattleContainer from "./BattleContainer";
 import PlayerSelection from "./PlayerSelection";
 import axios from "axios";
 
-
 function HomePage() {
     const [beginBattle, setBeginBattle] = useState(false);
     const [heroId, setHeroId] = useState(0);
 
+    const requestData = {
+        heroId: heroId,
+    }
+
     const handlePlayerSelection = (heroId: number) => {
         setHeroId(heroId);
-        setBeginBattle(true);
 
         axios.post('http://localhost:8080/api/enemy')
             .then((response) => {
@@ -32,6 +34,7 @@ function HomePage() {
             console.error('Error fetching battleHistory data:', error);
             });
 
+        setBeginBattle(true);
     }
 
     return (

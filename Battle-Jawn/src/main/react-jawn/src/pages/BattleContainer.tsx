@@ -65,6 +65,7 @@ function BattleContainer({props}:{props:any}) {
                 });
     }
 
+
   return (
     <div className="battle-container">
       <EnemyName props={enemyName}/>

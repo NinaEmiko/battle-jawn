@@ -23,22 +23,23 @@ const PlayerMoves: React.FC<ButtonProp> = ({
     moveName: String,
     heroId: Number,
     enemyId: Number,
-    battleId: Number
+    battleHistoryId: Number
   }
-  const url = 'http://localhost:8080/api/battle';
+  const url = 'http://localhost:8080/api/battle-history';
   const [enemyId, setEnemyId] = useState(localStorage.getItem('enemyId'));
-  const [battleId, setBattleId] = useState(localStorage.getItem('battleId'));
+  const [battleHistoryId, setBattleHistoryId] = useState(localStorage.getItem('battleHistoryId'));
   const [heroId, setHeroId] = useState(1);
   
   function handleClickBattle(move: string) {
 
-    // axios.put(url, data)
-    // .then((response) => {
-    // console.log(move + " successful: " + response.data);
-    // })
-    // .catch((error) => {
-    // console.error('Error occured while trying to use: ' + move + " ", error);
-    // });
+    axios.put(url, data)
+    .then((response) => {
+    console.log(move + " successful: " + response.data);
+    })
+    .catch((error) => {
+    console.error('Error occurred while trying to use: ' + move + " ", error);
+    });
+
     console.log("Player used " + move);
 
   }

@@ -1,10 +1,7 @@
 package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.JsonParser;
-import com.battlejawn.Config.UserResponse;
-import com.battlejawn.Entities.Battle.Battle;
 import com.battlejawn.Entities.Battle.BattleHistory;
-import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Service.BattleHistoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,5 +48,4 @@ public class BattleHistoryController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

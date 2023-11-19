@@ -1,6 +1,5 @@
 package com.battlejawn.HeroMove.Attack;
 
-import com.battlejawn.Entities.Battle.Battle;
 import com.battlejawn.Entities.Battle.BattleHistory;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleHistoryRepository;

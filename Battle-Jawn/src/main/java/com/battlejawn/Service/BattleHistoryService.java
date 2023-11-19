@@ -1,6 +1,5 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Entities.Battle.Battle;
 import com.battlejawn.Entities.Battle.BattleHistory;
 import com.battlejawn.Repository.BattleHistoryRepository;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
 @Service
 public class BattleHistoryService {
     private final BattleHistoryRepository battleHistoryRepository;
-    private final Logger logger = Logger.getLogger(BattleService.class.getName());
+    private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
 
     public BattleHistoryService(BattleHistoryRepository battleHistoryRepository) {
         this.battleHistoryRepository = battleHistoryRepository;
