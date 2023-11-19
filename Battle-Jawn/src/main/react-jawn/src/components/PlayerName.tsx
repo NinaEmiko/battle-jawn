@@ -1,18 +1,9 @@
 import "../styling/PlayerName.css";
 
-    interface PlayerNameProp {
-        role: string;
-      }
-      
-      const PlayerName: React.FC<PlayerNameProp> = ({
-        role
-      }) => {
-        function handleClickBattle(move: string) {
-        }
-
+const PlayerName = (props: any) => {
   return (
-    <div className="name" id="playerName">{role}</div>
-  )
-}
+    <div className="name" id="playerName">{props.props}</div>
+  );
+};
 
-export default PlayerName
+export default PlayerName;

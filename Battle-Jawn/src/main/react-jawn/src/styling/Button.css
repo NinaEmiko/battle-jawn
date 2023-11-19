@@ -13,7 +13,7 @@
     border: 1px solid hsl(200, 100%, 30%);
     border-radius: 5px;
     padding: 5px 10px;
-    color: rgb(119, 8, 255);
+    color: black;
     outline: none;
     font-size: 20px;
     width: 200px;
@@ -27,4 +27,10 @@
 .btn:active {
     box-shadow: 0 5px rgb(43, 43, 36);
     transform: translateY(2px);
+}
+
+#button5 {
+    margin-top: 10px;
+    background-color: yellow;
+    color: black;
 }

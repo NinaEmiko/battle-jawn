@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity 
 @DiscriminatorValue("HEALER")
-public class Healer extends Toon {
+public class Healer extends Hero {
 
     public Healer() {
         super(100, 100, 0, 0, "Healer", LocalDateTime.now());

@@ -14,7 +14,7 @@ import com.battlejawn.Service.PlayerTipService;
 public class PlayerTipController {
 
     private final PlayerTipService playerTipService;
-    private Logger logger = Logger.getLogger(PlayerTipController.class.getName());
+    private final Logger logger = Logger.getLogger(PlayerTipController.class.getName());
 
     @Autowired
     public PlayerTipController(PlayerTipService playerTipService) {
@@ -23,11 +23,13 @@ public class PlayerTipController {
 
     @GetMapping("/all")
     public List<PlayerTip> getAllPlayerTip() {
+        logger.info("Inside getAllPlayerTip Controller method");
         return playerTipService.getAllPlayerTips();
     }
 
     @GetMapping("/random")
     public String getRandomTip() {
+        logger.info("Inside getRandomTip Controller");
         String randomTip = playerTipService.getRandomPlayerTip();
         logger.info("Current tip: " + randomTip);
         return randomTip;

@@ -1,15 +1,9 @@
 import "../styling/EnemyName.css";
 
-function EnemyName(){
-  const enemyList = ["Wolf", "Orc", "Spirit", "Thief"];
-
-  const handleGenerateRandomEnemy = () => {
-    return enemyList[Math.floor(Math.random() * (enemyList.length - 1))];
-  }
-
+const EnemyName = (props: any) => {
   return (
-    <div className="name" id="enemyName">{handleGenerateRandomEnemy()}</div>
-  )
-}
+    <div className="name" id="enemyName">{props.props}</div>
+  );
+};
 
-export default EnemyName
+export default EnemyName;

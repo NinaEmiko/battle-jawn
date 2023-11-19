@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity 
 @DiscriminatorValue("DPS")
-public class DPS extends Toon {
+public class DPS extends Hero {
     
     public DPS() {
         super(90, 90, 2, 3, "DPS", LocalDateTime.now());

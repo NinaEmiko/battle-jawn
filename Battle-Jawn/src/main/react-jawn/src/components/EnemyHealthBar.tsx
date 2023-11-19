@@ -1,8 +1,8 @@
 import "../styling/EnemyHealthBar.css";
 
-const EnemyHealthBar = () => {
+const EnemyHealthBar = (props: any) => {
   return (
-    <progress className="healthBar" id="enemyHealthBar" value="100" max="100" />
+    <progress className="healthBar" id="enemyHealthBar" value={props.health} max={props.enemyMaxHealth} />
   );
 };
 

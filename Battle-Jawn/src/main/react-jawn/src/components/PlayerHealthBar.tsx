@@ -1,8 +1,8 @@
 import "../styling/PlayerHealthBar.css";
 
-const PlayerHealthBar = () => {
+const PlayerHealthBar = (props: any) => {
   return (
-    <progress className='healthBar' id="playerHealthBar" value="100" max="100"></progress>
+    <progress className='healthBar' id="playerHealthBar" value={props.health} max={props.maxHealth}></progress>
   )
 }
 
