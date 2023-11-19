@@ -61,7 +61,7 @@ public class EnemyController {
 
     @PostMapping
     public ResponseEntity<Enemy> createNewEnemy() {
-        logger.info("Inside createNewEnemy");
+        logger.info("Inside createNewEnemy controller method");
         Enemy enemy = enemyService.createNewEnemy();
         if (enemy != null) {
             URI location = URI.create("/enemy/" + enemy.getId());

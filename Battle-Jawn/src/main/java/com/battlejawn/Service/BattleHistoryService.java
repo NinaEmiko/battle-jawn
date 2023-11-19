@@ -36,6 +36,7 @@ public class BattleHistoryService {
             String openingMessage = "(BattleHistoryService Class) You encountered an enemy!";
             battleHistory.addNewMessage(openingMessage);
             battleHistoryRepository.save(battleHistory);
+            logger.info("Newly Created Battle History: " + battleHistory.getMessages());
             return battleHistory;
         } catch(Exception e) {
             throw new RuntimeException("Failed to create new battle history: " + e.getMessage());
