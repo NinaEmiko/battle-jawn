@@ -33,7 +33,7 @@ public class BattleHistoryService {
         logger.info("Inside createNewBattleHistory Service method");
         try {
             BattleHistory battleHistory = new BattleHistory();
-            String openingMessage = "(BattleHistoryService Class) You encountered an enemy!";
+            String openingMessage = "You encountered an enemy!";
             battleHistory.addNewMessage(openingMessage);
             battleHistoryRepository.save(battleHistory);
             logger.info("Newly Created Battle History: " + battleHistory.getMessages());
