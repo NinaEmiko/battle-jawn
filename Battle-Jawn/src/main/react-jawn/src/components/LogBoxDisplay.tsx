@@ -1,8 +1,10 @@
 import "../styling/LogBoxDisplay.css";
 
-const LogBoxDisplay = () => {
+const LogBoxDisplay = (props: any) => {
+
+
   return (
-    <div className="logBox" id="logBox">You encountered an enemy!</div>
+    <div className="logBox" id="logBox">{props.props}</div>
   )
 }
 

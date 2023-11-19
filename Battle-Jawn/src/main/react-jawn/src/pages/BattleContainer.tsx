@@ -84,7 +84,7 @@ function BattleContainer({props}:{props:any}) {
       <PotionDisplay />
       <PlayerHealthBar  props={maxHealth}/>
       <div className="logbox-and-user-input">
-        <LogBoxDisplay />
+        <LogBoxDisplay props={battleHistoryId} />
         <div>
           <div className="user-prompt-wrapper">
             <UserPromptText text={"What would you like to do?"} />
