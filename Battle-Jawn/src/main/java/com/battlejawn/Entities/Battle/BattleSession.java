@@ -1,8 +1,7 @@
 package com.battlejawn.Entities.Battle;
-
-import javax.persistence.*;
-
 import lombok.Data;
+import javax.persistence.*;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -12,10 +11,14 @@ public class BattleSession {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private Long enemyId;
+    private ArrayList<String> battleHistory = new ArrayList<>();
     @Column
     private Long heroId;
-    @OneToOne
-    @JoinColumn(name = "battle_history_id")
-    private BattleHistory battleHistory;
+    @Column
+    private Long enemyId;
+
+    public void addNewMessage(String message) {
+        battleHistory.add(message);
+    }
+
 }

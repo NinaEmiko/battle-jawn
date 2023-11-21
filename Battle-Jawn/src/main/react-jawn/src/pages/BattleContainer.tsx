@@ -19,7 +19,7 @@ function BattleContainer({props}:{props:any}) {
   const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [messages, setMessages] = useState('');
-  const [battleHistoryId, setBattleHistoryId] = useState(localStorage.getItem('battleHistoryId'));
+  const [battleSessionId, setBattleSessionId] = useState(localStorage.getItem('battleSessionId'));
   const [battleHistory, setBattleHistory] = useState([]);
 
   useEffect(() => {
@@ -55,10 +55,10 @@ function BattleContainer({props}:{props:any}) {
     }
 
   const getBattleHistory = () => {
-    axios.get('http://localhost:8080/api/battle-history/' + battleHistoryId)
+    axios.get('http://localhost:8080/api/battle-session/' + battleSessionId)
         .then((response) => {
-                  setBattleHistory(response.data.messages);
-                  console.log("Inside BattleHistory getById. response.data.messages: " + response.data.messages);
+                  setBattleHistory(response.data.battleHistory);
+                  console.log("Inside BattleHistory getById. response.data.battleHistory: " + response.data.battleHistory);
                 })
                 .catch((error) => {
                   console.error('Error fetching battle history data:', error);
