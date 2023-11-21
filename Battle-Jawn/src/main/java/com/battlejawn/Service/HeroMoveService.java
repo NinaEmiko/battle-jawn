@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.Controllers.HeroMoveController;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
@@ -8,6 +9,8 @@ import com.battlejawn.HeroMove.Heal.Heal;
 import com.battlejawn.HeroMove.StrongAttack.StrongAttack;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+
 @Service
 public class HeroMoveService {
     private final BattleSessionService battleSessionService;
@@ -15,6 +18,7 @@ public class HeroMoveService {
     private final EnemyService enemyService;
     private Attack attack;
     private StrongAttack strongAttack;
+    private final Logger logger = Logger.getLogger(HeroMoveService.class.getName());
 
     public HeroMoveService(BattleSessionService battleSessionService, HeroService heroService, EnemyService enemyService) {
         this.battleSessionService = battleSessionService;
@@ -23,6 +27,7 @@ public class HeroMoveService {
     }
 
     public void heroMove(String move, Long battleSessionId) {
+        logger.info("Inside heroMove Service method. Move: " + move + ". Battle Session ID: " + battleSessionId);
         attack = new Attack();
         strongAttack = new StrongAttack();
 

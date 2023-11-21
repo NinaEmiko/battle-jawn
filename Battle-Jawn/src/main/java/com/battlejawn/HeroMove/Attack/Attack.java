@@ -6,14 +6,19 @@ import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Repository.BattleSessionRepository;
 import com.battlejawn.Repository.EnemyRepository;
 import com.battlejawn.Repository.HeroRepository;
+import com.battlejawn.Service.HeroMoveService;
+
+import java.util.logging.Logger;
 
 public class Attack {
 
     private int damage;
     private String role;
     private String newMessage;
+    private final Logger logger = Logger.getLogger(Attack.class.getName());
 
     public void useAttack(Hero hero, Enemy enemy, BattleSession battleSession) {
+        logger.info("Inside useAttack method. Hero: " + hero + ". Enemy: " + enemy + ". Battle Session: " + battleSession + ".");
         role = hero.getRole();
         int enemyCurrentHealth = enemy.getHealth();
 
