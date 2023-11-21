@@ -2,6 +2,7 @@ package com.battlejawn.HeroMove.Attack;
 
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
+import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Repository.BattleSessionRepository;
 import com.battlejawn.Repository.EnemyRepository;
 import com.battlejawn.Repository.HeroRepository;
@@ -9,39 +10,32 @@ import com.battlejawn.Repository.HeroRepository;
 public class Attack {
 
     private int damage;
-    private BattleSessionRepository battleSessionRepository;
-    private Enemy enemy;
-    private EnemyRepository enemyRepository;
-    private HeroRepository heroRepository;
+    private String role;
+    private String newMessage;
 
-    public void useAttack(Long playerId, Long enemyId, Long battleId) {
-        String role = heroRepository.findById(playerId).get().getRole();
-        int enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
-        BattleSession battleSession = battleSessionRepository.findById(battleId).get();
-        String newMessage;
+    public void useAttack(Hero hero, Enemy enemy, BattleSession battleSession) {
+        role = hero.getRole();
+        int enemyCurrentHealth = enemy.getHealth();
 
         switch (role) {
             case "Caster", "Healer":  Wand wand = new Wand();
                             damage = wand.attack();
                             newMessage = newMessageGenerator("Wand", damage);
-                            battleSession.getBattleHistory().add(newMessage);
+                            battleSession.addNewMessage(newMessage);
                             break;
             case "Tank":    Strike strike = new Strike();
                             damage = strike.attack();
                             newMessage = newMessageGenerator("Strike", damage);
-                            battleSession.getBattleHistory().add(newMessage);
+                            battleSession.addNewMessage(newMessage);
                             break;
             case "DPS":     Stab stab = new Stab();
                             damage = stab.attack();
                             newMessage = newMessageGenerator("Stab", damage);
-                            battleSession.getBattleHistory().add(newMessage);
+                            battleSession.addNewMessage(newMessage);
                             break;
         }
 
         enemy.setHealth(enemyCurrentHealth - damage);
-
-        battleSessionRepository.save(battleSession);
-        enemyRepository.save(enemy);
     }
 
     public String newMessageGenerator(String name, int damage) {

@@ -2,23 +2,19 @@ package com.battlejawn.HeroMove.StrongAttack;
 
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
+import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Repository.BattleSessionRepository;
 import com.battlejawn.Repository.EnemyRepository;
 import com.battlejawn.Repository.HeroRepository;
 
 public class StrongAttack {
-
     private int damage;
-    private BattleSessionRepository battleSessionRepository;
-    private Enemy enemy;
-    private EnemyRepository enemyRepository;
-    private HeroRepository heroRepository;
+    private String role;
+    private String newMessage;
 
-    public void useAttack(Long playerId, Long enemyId, Long battleHistoryId) {
-        String role = heroRepository.findById(playerId).get().getRole();
-        int enemyCurrentHealth = enemyRepository.findById(enemyId).get().getHealth();
-        BattleSession battleSession = battleSessionRepository.findById(battleHistoryId).get();
-        String newMessage;
+    public void useAttack(Hero hero, Enemy enemy, BattleSession battleSession) {
+        role = hero.getRole();
+        int enemyCurrentHealth = enemy.getHealth();
 
         switch (role) {
             case "Caster":  Blast blast = new Blast();
@@ -44,9 +40,6 @@ public class StrongAttack {
         }
 
         enemy.setHealth(enemyCurrentHealth - damage);
-
-        battleSessionRepository.save(battleSession);
-        enemyRepository.save(enemy);
     }
 
     public String newMessageGenerator(String name, int damage) {

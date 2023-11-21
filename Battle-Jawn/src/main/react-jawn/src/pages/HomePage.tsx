@@ -9,9 +9,10 @@ function HomePage() {
 
     const handlePlayerSelection = (id: number) => {
         setHeroId(id);
+
         axios.post('http://localhost:8080/api/battle-session', {
             heroId: id
-        })
+            })
             .then((response) => {
 
             localStorage.setItem('battleSessionId', response.data.id);
