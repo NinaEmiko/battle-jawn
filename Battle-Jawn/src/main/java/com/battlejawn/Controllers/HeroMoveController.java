@@ -26,11 +26,11 @@ public class HeroMoveController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public void heroMove(@RequestBody String move, String battleSessionId) {
-        logger.info("Inside heroMove Controller method. Move: " + move + " Battle Session ID: " + battleSessionId);
+    public void heroMove(@RequestBody String data) {
+        logger.info("Inside heroMove Controller method. Data: " + data);
         jsonParser = new JsonParser();
-        String parsedMove = jsonParser.extractMove(move);
-        Long parsedBattleId = jsonParser.extractBattleSessionId(battleSessionId);
+        String parsedMove = jsonParser.extractMove(data);
+        Long parsedBattleId = jsonParser.extractBattleSessionId(data);
         heroMoveService.heroMove(parsedMove, parsedBattleId);
 
     }

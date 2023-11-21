@@ -55,7 +55,7 @@ public class JsonParser {
     public Long extractBattleSessionId(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-            return jsonNode.get("battleHistoryId").asLong();
+            return jsonNode.get("battleSessionId").asLong();
         } catch (Exception e) {
             logger.info("Exception: " + e);
         }

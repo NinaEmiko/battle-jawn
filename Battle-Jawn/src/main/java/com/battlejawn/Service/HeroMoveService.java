@@ -15,7 +15,6 @@ public class HeroMoveService {
     private final EnemyService enemyService;
     private Attack attack;
     private StrongAttack strongAttack;
-    private Heal heal;
 
     public HeroMoveService(BattleSessionService battleSessionService, HeroService heroService, EnemyService enemyService) {
         this.battleSessionService = battleSessionService;
@@ -26,7 +25,6 @@ public class HeroMoveService {
     public void heroMove(String move, Long battleSessionId) {
         attack = new Attack();
         strongAttack = new StrongAttack();
-        heal = new Heal();
 
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
