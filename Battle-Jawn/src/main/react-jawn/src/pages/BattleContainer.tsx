@@ -22,48 +22,44 @@ function BattleContainer({props}:{props:any}) {
   const [battleSessionId, setBattleSessionId] = useState(localStorage.getItem('battleSessionId'));
   const [battleHistory, setBattleHistory] = useState([]);
 
-  useEffect(() => {
-    getHero();
-    getEnemy();
-    getBattleHistory();
-  }, []);
-
-  const getHero = () => {
-      axios.get('http://localhost:8080/api/hero/' + props)
-            .then((response) => {
-              setRole(response.data.role);
-              setHealth(response.data.health);
-              setMaxHealth(response.data.maxHealth);
-              console.log("Inside Hero getById. Response data: " + response.data);
-            })
-            .catch((error) => {
-              console.error('Error fetching hero data:', error);
-        });
-  }
-
-  const getEnemy = () => {
-      axios.get('http://localhost:8080/api/enemy/' + enemyId)
-        .then((response) => {
-          setEnemyName(response.data.name);
-          setEnemyHealth(response.data.health);
-          setEnemyMaxHealth(response.data.maxHealth);
-          console.log("Inside Enemy getById. response.data.name: " + response.data.name);
-        })
-        .catch((error) => {
-          console.error('Error fetching enemy data:', error);
-        });
-    }
-
-  const getBattleHistory = () => {
-    axios.get('http://localhost:8080/api/battle-session/' + battleSessionId)
-        .then((response) => {
-                  setBattleHistory(response.data.battleHistory);
-                  console.log("Inside BattleHistory getById. response.data.battleHistory: " + response.data.battleHistory);
-                })
-                .catch((error) => {
-                  console.error('Error fetching battle history data:', error);
-                });
-    }
+    useEffect(() => {
+        const fetchHero = async () => {
+            try {
+                const response = await
+                axios.get('http://localhost:8080/api/hero/' + props)
+                setRole(response.data.role);
+                setHealth(response.data.health);
+                setMaxHealth(response.data.maxHealth);
+                } catch (error) {
+                console.error('Error fetching data: ', error)
+                }
+            }
+        const fetchEnemy = async () => {
+            try {
+                const response = await
+                axios.get('http://localhost:8080/api/enemy/' + enemyId)
+                setEnemyName(response.data.name);
+                setEnemyHealth(response.data.health);
+                setEnemyMaxHealth(response.data.maxHealth);
+                console.log("Inside Enemy getById. response.data.name: " + response.data.name);
+                } catch (error) {
+                console.error('Error fetching data: ', error)
+                }
+            }
+        const fetchBattleHistory = async () => {
+            try {
+                const response = await
+                axios.get('http://localhost:8080/api/battle-session/' + battleSessionId)
+                setBattleHistory(response.data.battleHistory);
+                console.log("Inside BattleHistory getById. response.data.battleHistory: " + response.data.battleHistory);
+                } catch (error) {
+                console.error('Error fetching data: ', error)
+                }
+            }
+        fetchHero();
+        fetchEnemy();
+        fetchBattleHistory();
+    }, [props, enemyId, battleSessionId])
 
 
   return (
