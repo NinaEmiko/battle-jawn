@@ -13,34 +13,33 @@ import java.util.logging.Logger;
 public class Attack {
 
     private int damage;
-    private String role;
     private String newMessage;
     private final Logger logger = Logger.getLogger(Attack.class.getName());
 
-    public void useAttack(Hero hero, Enemy enemy, BattleSession battleSession) {
-        logger.info("Inside useAttack method. Hero: " + hero + ". Enemy: " + enemy + ". Battle Session: " + battleSession + ".");
-        role = hero.getRole();
-        int enemyCurrentHealth = enemy.getHealth();
+    public void useAttack(Hero hero, Enemy enemy, BattleSession battleSession, String move) {
+        logger.info("Inside useAttack method. Hero: " + hero + ". Enemy: " + enemy + ". Battle Session: " + battleSession + ". Move: " + move + ".");
 
-        switch (role) {
-            case "Caster", "Healer":  Wand wand = new Wand();
+        switch (move) {
+            case "Wand":    Wand wand = new Wand();
                             damage = wand.attack();
+                            enemy.takeDamage(damage);
                             newMessage = newMessageGenerator("Wand", damage);
                             battleSession.addNewMessage(newMessage);
                             break;
-            case "Tank":    Strike strike = new Strike();
+            case "Strike":  Strike strike = new Strike();
                             damage = strike.attack();
+                            enemy.takeDamage(damage);
                             newMessage = newMessageGenerator("Strike", damage);
                             battleSession.addNewMessage(newMessage);
                             break;
-            case "DPS":     Stab stab = new Stab();
+            case "Stab":    Stab stab = new Stab();
                             damage = stab.attack();
+                            enemy.takeDamage(damage);
+                            logger.info("Inside useAttack method. Enemy health: " + enemy.getHealth() + ". Damage: " + damage);
                             newMessage = newMessageGenerator("Stab", damage);
                             battleSession.addNewMessage(newMessage);
                             break;
         }
-
-        enemy.setHealth(enemyCurrentHealth - damage);
     }
 
     public String newMessageGenerator(String name, int damage) {

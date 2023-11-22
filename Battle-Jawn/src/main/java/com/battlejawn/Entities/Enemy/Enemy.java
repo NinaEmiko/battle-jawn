@@ -47,5 +47,13 @@ public abstract class Enemy {
     public Enemy() {
     }
 
+    public void takeDamage(int damage) {
+
+        if (damage < health) {
+            health = health - damage;
+        } else {
+            health = 0;
+        }
+    }
     
 }

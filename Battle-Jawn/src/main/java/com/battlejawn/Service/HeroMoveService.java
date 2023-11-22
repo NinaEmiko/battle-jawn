@@ -36,9 +36,9 @@ public class HeroMoveService {
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
 
         switch (move) {
-            case "Attack":  attack.useAttack(hero, enemy, battleSession);
+            case "Strike", "Stab", "Wand":  attack.useAttack(hero, enemy, battleSession, move);
                 break;
-            case "StrongAttack":  strongAttack.useAttack(hero, enemy, battleSession);
+            case "Impale", "Holy", "Blast":  strongAttack.useAttack(hero, enemy, battleSession, move);
                 break;
         }
     }
