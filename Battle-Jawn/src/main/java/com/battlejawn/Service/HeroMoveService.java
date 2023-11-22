@@ -7,6 +7,7 @@ import com.battlejawn.HeroMove.Attack.Stab;
 import com.battlejawn.HeroMove.Attack.Strike;
 import com.battlejawn.HeroMove.Attack.Wand;
 import com.battlejawn.HeroMove.Heal.Heal;
+import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.HeroMove.StrongAttack.*;
 import org.springframework.stereotype.Service;
 
@@ -64,9 +65,6 @@ public class HeroMoveService {
                     updatedEnemyHealth = enemy.getHealth() - damage;
                 }
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-//                newMessage = newMessageGenerator("Strike", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
                 break;
             case "Stab":    Stab stab = new Stab();
                 damage = stab.attack();
@@ -76,22 +74,15 @@ public class HeroMoveService {
                     updatedEnemyHealth = enemy.getHealth() - damage;
                 }
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-//                newMessage = newMessageGenerator("Stab", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
                 break;
             case "Blast":       Blast blast = new Blast();
                 damage = blast.attack();
-                //Change to EnemyRepository method that updates enemy health in database
                 if (damage > enemy.getHealth()) {
                     updatedEnemyHealth = 0;
                 } else {
                     updatedEnemyHealth = enemy.getHealth() - damage;
                 }
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-//                newMessage = newMessageGenerator("Blast", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
                 break;
             case "Holy":        Holy holy = new Holy();
                 damage = holy.attack();
@@ -101,9 +92,6 @@ public class HeroMoveService {
                     updatedEnemyHealth = enemy.getHealth() - damage;
                 }
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-//                newMessage = newMessageGenerator("Holy", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
                 break;
             case "Impale":      Impale impale = new Impale();
                 damage = impale.attack();
@@ -113,9 +101,6 @@ public class HeroMoveService {
                     updatedEnemyHealth = enemy.getHealth() - damage;
                 }
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-//                newMessage = newMessageGenerator("Impale", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
                 break;
             case "Backstab":    BackStab backStab = new BackStab();
                 damage = backStab.attack();
@@ -125,9 +110,6 @@ public class HeroMoveService {
                     updatedEnemyHealth = enemy.getHealth() - damage;
                 }
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-//                newMessage = newMessageGenerator("Backstab", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
                 break;
             case "Heal":    Heal heal = new Heal();
                 healAmount = heal.useHeal();
@@ -137,9 +119,22 @@ public class HeroMoveService {
                     updatedHeroHealth = hero.getHealth() + healAmount;
                 }
                 heroService.updateHealthById(updatedHeroHealth, hero.getId());
-//                newMessage = newMessageGenerator("Backstab", damage);
-//                battleHistory.add(newMessage);
-//                battleSessionService.addMessageToBattleHistory(battleHistory, battleSessionId);
+                break;
+            case "Potion":
+                if (hero.getPotions() > 0) {
+                    Potion potion = new Potion();
+                    int updatedPotionCount = hero.getPotions() - 1;
+                    healAmount = potion.usePotion();
+                    if (healAmount > hero.getMaxHealth()) {
+                        updatedHeroHealth = hero.getMaxHealth();
+                    } else {
+                        updatedHeroHealth = hero.getHealth() + healAmount;
+                    }
+                    heroService.updatePotionCountById(updatedPotionCount, hero.getId());
+                    heroService.updateHealthById(updatedHeroHealth, hero.getId());
+                } else {
+                    //Update battleHistory
+                }
                 break;
 
         }
