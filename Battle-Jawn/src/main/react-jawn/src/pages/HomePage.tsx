@@ -3,35 +3,31 @@ import BattleContainer from "./BattleContainer";
 import PlayerSelection from "./PlayerSelection";
 import axios from "axios";
 
-
 function HomePage() {
     const [beginBattle, setBeginBattle] = useState(false);
     const [heroId, setHeroId] = useState(0);
 
-    const handlePlayerSelection = (heroId: number) => {
-        setHeroId(heroId);
-        setBeginBattle(true);
+    const handlePlayerSelection = (id: number) => {
+        setHeroId(id);
 
-        axios.post('http://localhost:8080/api/enemy')
+        axios.post('http://localhost:8080/api/battle-session', {
+            heroId: id
+            })
             .then((response) => {
-            const enemyId = response.data.id;
+
+            localStorage.setItem('battleSessionId', response.data.id);
+            console.log("BattleSession created successfully: " + response.data.id);
+
+            const enemyId = response.data.enemyId;
             localStorage.setItem('enemyId', enemyId);
-            console.log("Enemy created successfully: " + response.data.id);
+            console.log("Enemy created successfully: " + response.data.enemyId);
+
             })
             .catch((error) => {
-            console.error('Error fetching enemy data:', error);
+            console.error('Error fetching battleSession data:', error);
             });
 
-        axios.post('http://localhost:8080/api/battle-history')
-            .then((response) => {
-            const battleHistoryId = response.data.id;
-            localStorage.setItem('battleHistoryId', battleHistoryId);
-            console.log("BattleHistory created successfully: " + response.data.id);
-            })
-            .catch((error) => {
-            console.error('Error fetching battleHistory data:', error);
-            });
-
+        setBeginBattle(true);
     }
 
     return (

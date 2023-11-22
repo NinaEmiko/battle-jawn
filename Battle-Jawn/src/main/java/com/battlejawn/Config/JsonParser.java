@@ -22,10 +22,10 @@ public class JsonParser {
             return null;
         }
     }
-    public String extractButton(String jsonString) {
+    public String extractMove(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-            return jsonNode.get("btn").asText();
+            return jsonNode.get("move").asText();
         } catch (Exception e) {
             logger.info("Exception: " + e);
             return null;
@@ -52,10 +52,10 @@ public class JsonParser {
         return null;
     }
 
-    public Long extractBattleHistoryId(String jsonString) {
+    public Long extractBattleSessionId(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
-            return jsonNode.get("battleHistoryId").asLong();
+            return jsonNode.get("battleSessionId").asLong();
         } catch (Exception e) {
             logger.info("Exception: " + e);
         }

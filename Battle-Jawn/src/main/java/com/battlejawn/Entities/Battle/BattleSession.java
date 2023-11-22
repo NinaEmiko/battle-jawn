@@ -5,16 +5,20 @@ import java.util.ArrayList;
 
 @Data
 @Entity
-@Table(name = "battle_history")
-public class BattleHistory {
+@Table(name = "battle_session")
+public class BattleSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private ArrayList<String> messages = new ArrayList<>();
+    private ArrayList<String> battleHistory = new ArrayList<>();
+    @Column
+    private Long heroId;
+    @Column
+    private Long enemyId;
 
     public void addNewMessage(String message) {
-        messages.add(message);
+        battleHistory.add(message);
     }
 
 }

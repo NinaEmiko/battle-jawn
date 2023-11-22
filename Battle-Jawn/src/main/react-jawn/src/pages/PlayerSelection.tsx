@@ -4,13 +4,12 @@ import UserPromptText from "../components/UserPromptText";
 import axios from "axios";
 
 function PlayerSelection({roleChosen}:{roleChosen: any}) {
-  const url = 'http://localhost:8080/api/hero';
   const [role, setRole] = useState('');
   const [chosenRole, setChosenRole] = useState('');
 
   const handleClickBegin = () => {
       if (role !== '') {
-          axios.post(url, { role })
+          axios.post('http://localhost:8080/api/hero', { role })
                 .then((response) => {
                   roleChosen(response.data.id);
                   console.log('Hero created successfully: ', response.data);

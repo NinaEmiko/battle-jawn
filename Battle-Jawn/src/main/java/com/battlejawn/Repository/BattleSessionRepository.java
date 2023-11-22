@@ -1,10 +1,9 @@
 package com.battlejawn.Repository;
 
+import com.battlejawn.Entities.Battle.BattleSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.battlejawn.Entities.Battle.Battle;
 
 @Repository
-public interface BattleRepository extends JpaRepository<Battle, Long> {
-    
+public interface BattleSessionRepository extends JpaRepository<BattleSession, Long> {
 }
