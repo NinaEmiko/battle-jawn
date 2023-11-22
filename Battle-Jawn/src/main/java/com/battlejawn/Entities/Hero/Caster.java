@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Caster extends Hero {
     
     public Caster() {
-        super(90, 90, 3, 3, "Caster", LocalDateTime.now());
+        super(90, 90, 3, 3, "Caster", 0, 0, 0, LocalDateTime.now());
     }
 
 }

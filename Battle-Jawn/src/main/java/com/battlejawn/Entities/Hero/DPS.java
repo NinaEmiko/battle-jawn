@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class DPS extends Hero {
     
     public DPS() {
-        super(90, 90, 2, 3, "DPS", LocalDateTime.now());
+        super(90, 90, 2, 3, "DPS", 0, 0, 0, LocalDateTime.now());
     }
 
 }
