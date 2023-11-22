@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 @Service
@@ -30,6 +32,13 @@ public class BattleSessionService {
             throw new EntityNotFoundException("BattleSession with ID " + id + " not found");
         }
     }
+
+    @Transactional
+    public void addMessageToBattleHistory(ArrayList<String> message, Long battleSessionId) {
+        logger.info("Inside addMessageToBattleHistory Service. New Message: " + message);
+        battleSessionRepository.addMessageToBattleHistory(message, battleSessionId);
+    }
+
     @Transactional
     public BattleSession createNewBattleSession(Long heroId) {
         logger.info("Inside createNewBattleSession Service method");
@@ -41,9 +50,6 @@ public class BattleSessionService {
             String openingMessage = "You encountered an enemy!";
             battleSession.addNewMessage(openingMessage);
             battleSessionRepository.save(battleSession);
-            logger.info("Newly Created Battle History: " + battleSession.getBattleHistory());
-            logger.info("Newly Created Enemy Id: " + battleSession.getEnemyId());
-            logger.info("Battle History Hero Id: " + battleSession.getHeroId());
             return battleSession;
         } catch(Exception e) {
             throw new RuntimeException("Failed to create new battle session: " + e.getMessage());

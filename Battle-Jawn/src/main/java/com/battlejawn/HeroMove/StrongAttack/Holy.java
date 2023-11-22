@@ -15,9 +15,9 @@ public class Holy implements CriticalHit, Missable, Attack {
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) ((Math.random()/* * user.strength) + user.strength / 3*/) * 1.5);
+            return (int) ((Math.floor(Math.random() * 20) + 1) /* * user.strength */ * 1.5);
         } else {
-            return (int) (Math.random()/* * user.strength) + user.strength / 3*/);
+            return (int) (Math.floor(Math.random() * 20) + 1);
         }
     }
 

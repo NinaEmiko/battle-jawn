@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,6 +15,6 @@ public interface BattleSessionRepository extends JpaRepository<BattleSession, Lo
 
     @Modifying
     @Query("UPDATE BattleSession e SET e.battleHistory = :newList WHERE e.id = :idValue")
-    void addMessageToBattleHistory(@Param("newList") List<String> newList, @Param("idValue") Long id);
+    void addMessageToBattleHistory(@Param("newList") ArrayList<String> newList, @Param("idValue") Long id);
 
 }

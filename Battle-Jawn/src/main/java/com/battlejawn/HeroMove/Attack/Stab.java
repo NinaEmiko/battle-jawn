@@ -14,19 +14,15 @@ public class Stab implements CriticalHit, Missable, Attack {
     private final Logger logger = Logger.getLogger(Stab.class.getName());
 
     public int attack() {
-        logger.info("Inside Stab attack method.");
 
         if (miss()) {
-            logger.info("Stab missed.");
             return 0;
         } else if (criticalHit()){
-            logger.info("Stab critical hit.");
             setStabCount(stabCount++);
-            return (int) ((Math.floor(Math.random() * 15) + 1) /* * user.strength */ * 1.5);
+            return (int) ((Math.floor(Math.random() * 17) + 1) /* * user.strength */ * 1.5);
         } else {
-            logger.info("Stab hit.");
             setStabCount(stabCount++);
-            return (int) (Math.floor(Math.random() * 15) + 1 /* * user.strength */);
+            return (int) (Math.floor(Math.random() * 17) + 1 /* * user.strength */);
         }
     }
 

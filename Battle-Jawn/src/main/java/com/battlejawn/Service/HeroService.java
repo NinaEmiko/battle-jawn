@@ -47,6 +47,11 @@ public class HeroService {
         }
     }
 
+    public void updateHealthById(int updatedEnemyHealth, Long enemyId) {
+        logger.info("Inside updateHealthById Service. ID: " + enemyId);
+        heroRepository.updateHealthById(updatedEnemyHealth, enemyId);
+    }
+
     @Transactional
     public Hero saveHero(String role) {
         try {

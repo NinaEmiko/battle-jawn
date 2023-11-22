@@ -13,9 +13,9 @@ public class Impale implements CriticalHit, Missable, Attack {
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) (( /* player.strength * 1.2*/ 10) * 1.5);
+            return (int) ((Math.floor(Math.random() * 18) + 1) /* * user.strength */ * 1.5);
         } else {
-            return ( /* player.strength * 1.2*/ 10);
+            return (int) (Math.floor(Math.random() * 18) + 1);
         }
     }
 
