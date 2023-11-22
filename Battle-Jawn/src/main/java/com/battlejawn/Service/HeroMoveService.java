@@ -136,7 +136,14 @@ public class HeroMoveService {
                     //Update battleHistory
                 }
                 break;
-
+            case "Steal":
+                if (enemy.getPotions() > 0 && hero.getPotions() < hero.getMaxPotions()) {
+                    int updatedPotionCount = hero.getPotions() + 1;
+                    heroService.updatePotionCountById(updatedPotionCount, hero.getId());
+                } else {
+                    //Update battleHistory
+                }
+                break;
         }
     }
 
