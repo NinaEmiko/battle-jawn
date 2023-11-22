@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Tank extends Hero {
 
     public Tank() {
-        super(120, 120, 3, 3, "Tank", LocalDateTime.now());
+        super(120, 120, 3, 3, "Tank", 0, 0, 0, LocalDateTime.now());
     }
     
 }
