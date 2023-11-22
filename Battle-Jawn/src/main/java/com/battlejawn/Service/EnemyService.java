@@ -57,6 +57,11 @@ public class EnemyService {
         }
     }
 
+    public void updateHealthById(int updatedEnemyHealth, Long enemyId) {
+        logger.info("Inside updateHealthById Service. ID: " + enemyId);
+        enemyRepository.updateHealthById(updatedEnemyHealth, enemyId);
+    }
+
     @Transactional
     public Enemy createNewEnemy() {
         try {
