@@ -16,6 +16,7 @@ public class StrongAttack {
         switch (move) {
             case "Blast":       Blast blast = new Blast();
                                 damage = blast.attack();
+                                //Change to EnemyRepository method that updates enemy health in database
                                 enemy.takeDamage(damage);
                                 newMessage = newMessageGenerator("Blast", damage);
                                 battleSession.getBattleHistory().add(newMessage);

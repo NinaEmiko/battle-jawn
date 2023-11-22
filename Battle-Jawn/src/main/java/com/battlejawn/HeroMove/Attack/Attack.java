@@ -22,6 +22,7 @@ public class Attack {
         switch (move) {
             case "Wand":    Wand wand = new Wand();
                             damage = wand.attack();
+                            //Change to EnemyRepository method that updates enemy health in database
                             enemy.takeDamage(damage);
                             newMessage = newMessageGenerator("Wand", damage);
                             battleSession.addNewMessage(newMessage);
