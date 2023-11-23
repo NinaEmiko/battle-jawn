@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.Config.HeroMoveDTO;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
@@ -22,6 +23,7 @@ public class HeroMoveService {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final Logger logger = Logger.getLogger(HeroMoveService.class.getName());
+    private HeroMoveDTO heroMoveDTO;
 
     public HeroMoveService(BattleSessionService battleSessionService, HeroService heroService, EnemyService enemyService) {
         this.battleSessionService = battleSessionService;
@@ -30,7 +32,7 @@ public class HeroMoveService {
     }
 
     @Transactional
-    public void heroMove(String move, Long battleSessionId) {
+    public HeroMoveDTO heroMove(String move, Long battleSessionId) {
         logger.info("Inside heroMove service method. Move: " + move + ". Battle Session ID: " + battleSessionId);
 
         int damage;
@@ -55,7 +57,9 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Wand", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
+                logger.info("Hero Move DTO: " + heroMoveDTO);
+                return heroMoveDTO;
             case "Strike":  Strike strike = new Strike();
                 damage = strike.attack();
                 if (damage > enemy.getHealth()) {
@@ -66,7 +70,7 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Strike", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
             case "Stab":    Stab stab = new Stab();
                 damage = stab.attack();
                 if (damage > enemy.getHealth()) {
@@ -77,7 +81,7 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Stab", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
             case "Blast":       Blast blast = new Blast();
                 damage = blast.attack();
                 if (damage > enemy.getHealth()) {
@@ -88,7 +92,7 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Blast", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
             case "Holy":        Holy holy = new Holy();
                 damage = holy.attack();
                 if (damage > enemy.getHealth()) {
@@ -99,7 +103,7 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Holy", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
             case "Impale":      Impale impale = new Impale();
                 damage = impale.attack();
                 if (damage > enemy.getHealth()) {
@@ -110,7 +114,7 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Impale", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
             case "Backstab":    BackStab backStab = new BackStab();
                 damage = backStab.attack();
                 if (damage > enemy.getHealth()) {
@@ -121,7 +125,7 @@ public class HeroMoveService {
                 enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
                 newMessage = newMessageGenerator("Backstab", damage);
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
             case "Heal":    Heal heal = new Heal();
                 healAmount = heal.useHeal();
                 if (healAmount > hero.getMaxHealth()) {
@@ -132,7 +136,7 @@ public class HeroMoveService {
                 heroService.updateHealthById(updatedHeroHealth, hero.getId());
                 newMessage = "You healed yourself for " + healAmount;
                 battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
-                break;
+                return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory);
             case "Potion":
                 if (hero.getPotions() > 0) {
                     Potion potion = new Potion();
@@ -147,6 +151,7 @@ public class HeroMoveService {
                     heroService.updateHealthById(updatedHeroHealth, hero.getId());
                     newMessage = "You feel better now";
                     battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
+                    return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory);
                 } else {
                     //Update battleHistory
                 }
@@ -157,11 +162,13 @@ public class HeroMoveService {
                     heroService.updatePotionCountById(updatedPotionCount, hero.getId());
                     newMessage = "You stole a potion!";
                     battleSessionService.addMessageToBattleHistory(newMessage, battleSessionId);
+                    return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory);
                 } else {
                     //Update battleHistory
                 }
                 break;
         }
+        return null;
     }
 
     public String newMessageGenerator(String name, int damage) {
@@ -170,6 +177,15 @@ public class HeroMoveService {
         } else {
             return name + " missed!";
         }
+    }
+
+    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, ArrayList<String> battleHistory) {
+        HeroMoveDTO heroMoveDTO = new HeroMoveDTO();
+        heroMoveDTO.setEnemyHealth(enemyHealth);
+        heroMoveDTO.setHeroHealth(heroHealth);
+        heroMoveDTO.setPotionCount(potionCount);
+        heroMoveDTO.setBattleHistory(battleHistory);
+        return heroMoveDTO;
     }
 
 }

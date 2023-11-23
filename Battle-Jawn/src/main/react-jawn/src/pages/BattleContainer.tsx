@@ -60,7 +60,8 @@ function BattleContainer({props}:{props:any}) {
           battleSessionId: props.battleSessionId
             })
         .then((response) => {
-        console.log(move + " successful!");
+          console.log(response.data);
+        setEnemyHealth(response.data.enemyHealth)
         })
         .catch((error) => {
         console.error('Error occurred while trying to use: ' + move + " ", error);

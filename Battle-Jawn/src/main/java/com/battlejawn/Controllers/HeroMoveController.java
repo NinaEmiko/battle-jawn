@@ -1,5 +1,6 @@
 package com.battlejawn.Controllers;
 
+import com.battlejawn.Config.HeroMoveDTO;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Battle.BattleSession;
@@ -25,13 +26,18 @@ public class HeroMoveController {
     }
 
     @PostMapping
-    @ResponseStatus(value = HttpStatus.OK)
-    public void heroMove(@RequestBody String data) {
+    public ResponseEntity<HeroMoveDTO> heroMove(@RequestBody String data) {
         logger.info("Inside heroMove controller method. Data: " + data + ".");
         jsonParser = new JsonParser();
         String parsedMove = jsonParser.extractMove(data);
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);
-        heroMoveService.heroMove(parsedMove, parsedBattleId);
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove(parsedMove, parsedBattleId);
 
+        if (heroMoveDTO != null) {
+            URI location = URI.create("/hero-move-dto/");
+            return ResponseEntity.created(location).body(heroMoveDTO);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
