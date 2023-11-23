@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 public class Stab implements CriticalHit, Missable, Attack {
 
     private int stabCount;
-    private final Logger logger = Logger.getLogger(Stab.class.getName());
 
     public int attack() {
 

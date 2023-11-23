@@ -27,7 +27,7 @@ public class HeroMoveController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.OK)
     public void heroMove(@RequestBody String data) {
-        logger.info("Inside heroMove Controller method. Data: " + data);
+        logger.info("Inside heroMove controller method. Data: " + data + ".");
         jsonParser = new JsonParser();
         String parsedMove = jsonParser.extractMove(data);
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);

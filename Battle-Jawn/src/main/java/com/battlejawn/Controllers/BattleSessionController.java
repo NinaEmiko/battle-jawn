@@ -26,7 +26,7 @@ public class BattleSessionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BattleSession> getBattleSessionById(@PathVariable("id") Long id) {
-        logger.info("Inside Battle Controller ID: " + id);
+        logger.info("Inside getBattleSessionById controller method. Battle Session ID: " + id + ".");
         BattleSession battleSession = battleSessionService.getBattleSessionById(id);
 
         if (battleSession != null) {
@@ -39,15 +39,12 @@ public class BattleSessionController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<BattleSession> createNewBattleSession(@RequestBody String heroId) {
-        logger.info("Inside createNewBattleSession Controller method" + heroId);
+        logger.info("Inside createNewBattleSession controller method. Hero ID: " + heroId + ".");
         jsonParser = new JsonParser();
         Long parsedHeroId = jsonParser.extractHeroId(heroId);
-        logger.info("Parsed Hero ID: " + parsedHeroId);
         BattleSession battleSession = battleSessionService.createNewBattleSession(parsedHeroId);
         if (battleSession != null) {
             URI location = URI.create("/battleSession/" + battleSession.getId());
-            logger.info("Location: " + location);
-            logger.info("Battle Session data: " + battleSession);
             return ResponseEntity.created(location).body(battleSession);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

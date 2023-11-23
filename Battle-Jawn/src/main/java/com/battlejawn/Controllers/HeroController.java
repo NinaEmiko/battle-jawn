@@ -33,16 +33,13 @@ public class HeroController {
 
     @PostMapping
     public ResponseEntity<UserResponse> createNewHero(@RequestBody String role) {
-        logger.info("Inside createNewHero");
+        logger.info("Inside createNewHero controller method. Role: " + role + ".");
         jsonParser = new JsonParser();
         String parsedRole = jsonParser.extractRole(role);
         Hero hero = heroService.saveHero(parsedRole);
-        logger.info("Role format: " + parsedRole);
         if (hero != null) {
             URI location = URI.create("/hero/" + hero.getId());
-            logger.info("Location: " + location);
             userResponse = new UserResponse(location, hero.getId());
-            logger.info("addHero api POST call Response: " + userResponse);
             return ResponseEntity.created(location).body(userResponse);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -51,7 +48,7 @@ public class HeroController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Hero> getHeroById(@PathVariable("id") Long id) {
-        logger.info("Inside Hero Controller ID: " + id);
+        logger.info("Inside getHeroById controller method. Hero ID: " + id + ".");
         Hero hero = heroService.getHeroById(id);
 
         if (hero != null) {
@@ -63,9 +60,8 @@ public class HeroController {
 
     @GetMapping("/health/{id}")
     public ResponseEntity<Integer> getHealthById(@PathVariable("id") Long id) {
-        logger.info("Inside getHealthById");
+        logger.info("Inside getHealthById controller method. Hero ID: " + id + ".");
         Integer currentHealth = heroService.getHeroHealthById(id);
-        logger.info("Hero health: " + currentHealth);
         if (currentHealth != null) {
             return new ResponseEntity<>(currentHealth, HttpStatus.OK);
         } else {

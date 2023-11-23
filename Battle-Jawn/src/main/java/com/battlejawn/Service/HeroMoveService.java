@@ -31,7 +31,7 @@ public class HeroMoveService {
 
     @Transactional
     public void heroMove(String move, Long battleSessionId) {
-        logger.info("Inside heroMove Service method. Move: " + move + ". Battle Session ID: " + battleSessionId);
+        logger.info("Inside heroMove service method. Move: " + move + ". Battle Session ID: " + battleSessionId);
 
         int damage;
         int healAmount;

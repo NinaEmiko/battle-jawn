@@ -37,7 +37,7 @@ public class EnemyController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Enemy> getEnemyById(@PathVariable("id") Long id) {
-        logger.info("Inside Enemy Controller ID: " + id);
+        logger.info("Inside getEnemyById controller method. Enemy ID: " + id + ".");
         Enemy enemy = enemyService.getEnemyById(id);
 
         if (enemy != null) {
@@ -49,9 +49,8 @@ public class EnemyController {
 
     @GetMapping("/health/{id}")
     public ResponseEntity<Integer> getHealthById(@PathVariable("id") Long id) {
-        logger.info("Inside getHealthById Enemy Controller method");
+        logger.info("Inside getHealthById controller method. Enemy ID: " + id + ".");
         Integer currentHealth = enemyService.getEnemyHealthById(id);
-        logger.info("Enemy health: " + currentHealth);
         if (currentHealth != null) {
             return new ResponseEntity<>(currentHealth, HttpStatus.OK);
         } else {
@@ -65,10 +64,7 @@ public class EnemyController {
         Enemy enemy = enemyService.createNewEnemy();
         if (enemy != null) {
             URI location = URI.create("/enemy/" + enemy.getId());
-            logger.info("Location: " + location);
-            logger.info("Enemy data: " + enemy);
             return ResponseEntity.created(location).body(enemy);
-            // return new ResponseEntity<>(enemy, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

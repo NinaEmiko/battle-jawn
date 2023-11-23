@@ -23,10 +23,9 @@ public class BattleSessionService {
     }
 
     public BattleSession getBattleSessionById(Long id) {
-        logger.info("Inside Battle Session Service ID: " + id);
+        logger.info("Inside getBattleSessionById service method. Battle Session ID: " + id + ".");
         Optional<BattleSession> battleSession = battleSessionRepository.findById(id);
         if (battleSession.isPresent()) {
-            logger.info("Inside BattleSession isPresent");
             return battleSession.get();
         } else {
             throw new EntityNotFoundException("BattleSession with ID " + id + " not found");
@@ -35,7 +34,7 @@ public class BattleSessionService {
 
     @Transactional
     public void addMessageToBattleHistory(String message, Long battleSessionId) {
-        logger.info("Inside addMessageToBattleHistory Service. New Message: " + message);
+        logger.info("Inside addMessageToBattleHistory service method. New Message: " + message + ".");
         Optional<BattleSession> optionalBattleSession = battleSessionRepository.findById(battleSessionId);
         if (optionalBattleSession.isPresent()) {
             BattleSession battleSession = optionalBattleSession.get();
@@ -50,7 +49,7 @@ public class BattleSessionService {
 
     @Transactional
     public BattleSession createNewBattleSession(Long heroId) {
-        logger.info("Inside createNewBattleSession Service method");
+        logger.info("Inside createNewBattleSession service method. Hero ID: " + heroId + ".");
         try {
             BattleSession battleSession = new BattleSession();
             Enemy enemy = enemyService.createNewEnemy();

@@ -21,7 +21,7 @@ public class PlayerTipService {
     }
 
     public String getRandomPlayerTip() {
-        logger.info("Inside getRandomPlayerTip Service method");
+        logger.info("Inside getRandomPlayerTip service method.");
         List<PlayerTip> playerTip = playerTipRepository.findAll();
         int randomIndex = new Random().nextInt(playerTip.size());
         PlayerTip randomPlayerTip = playerTip.get(randomIndex);
@@ -29,17 +29,17 @@ public class PlayerTipService {
     }
 
     public PlayerTip savePlayerTip(PlayerTip tip) {
-        logger.info("Inside savePlayerTip Service method");
+        logger.info("Inside savePlayerTip service method. Tip: " + tip + ".");
         return playerTipRepository.save(tip);
     }
 
     public List<PlayerTip> getAllPlayerTips() {
-        logger.info("Inside getAllPlayerTip Service method");
+        logger.info("Inside getAllPlayerTip service method.");
         return playerTipRepository.findAll();
     }
 
     public void deletePlayerTip(Long id) {
-        logger.info("Inside deletePlayerTip Service method");
+        logger.info("Inside deletePlayerTip service method. Player tip ID: " + id + ".");
         playerTipRepository.deleteById(id);
     }
 }

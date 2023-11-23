@@ -26,34 +26,32 @@ public class HeroService {
     }
 
     public Hero getHeroById(Long id){
-        logger.info("Inside Hero Service ID: " + id);
+        logger.info("Inside getHeroById service method. Hero ID: " + id + ".");
         Optional<Hero> hero = heroRepository.findById(id);
         if (hero.isPresent()) {
-            logger.info("Inside Hero isPresent");
             return hero.get();
         } else {
-            throw new EntityNotFoundException("Hero with ID " + id + " not found");
+            throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
 
     public Integer getHeroHealthById(Long id){
-        logger.info("Inside getHeroHealthById Service. ID: " + id);
+        logger.info("Inside getHeroHealthById service method. Hero ID: " + id);
         Optional<Hero> hero = heroRepository.findById(id);
         if (hero.isPresent()) {
-            logger.info("Inside Hero isPresent");
             return hero.get().getHealth();
         } else {
-            throw new EntityNotFoundException("Hero with ID " + id + " not found");
+            throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
 
-    public void updateHealthById(int updatedEnemyHealth, Long heroId) {
-        logger.info("Inside updateHealthById Service. ID: " + heroId);
-        heroRepository.updateHealthById(updatedEnemyHealth, heroId);
+    public void updateHealthById(int updatedHeroHealth, Long heroId) {
+        logger.info("Inside updateHealthById service method. Hero ID: " + heroId + ". Updated Hero Health: " + updatedHeroHealth + ".");
+        heroRepository.updateHealthById(updatedHeroHealth, heroId);
     }
 
     public void updatePotionCountById(int updatedPotionCount, Long heroId) {
-        logger.info("Inside updatePotionCountById Service. ID: " + heroId);
+        logger.info("Inside updatePotionCountById service method. Hero ID: " + heroId + ". Updated potion count: " + updatedPotionCount + ".");
         heroRepository.updatePotionCountById(updatedPotionCount, heroId);
     }
 
@@ -70,7 +68,7 @@ public class HeroService {
             heroRepository.save(hero);
             return hero;
         } catch(Exception e) {
-            throw new RuntimeException("Failed to save hero: " + e.getMessage());
+            throw new RuntimeException("Failed to save hero: " + e.getMessage() + ".");
         }
     }
 }
