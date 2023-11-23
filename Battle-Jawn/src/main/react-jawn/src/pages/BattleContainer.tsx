@@ -11,6 +11,7 @@ function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
     const [health, setHealth] = useState(0);
     const [maxHealth, setMaxHealth] = useState(0);
+    const [potionCount, setPotionCount] = useState(0);
     const [enemyName, setEnemyName] = useState('');
     const [enemyHealth, setEnemyHealth] = useState(0);
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
@@ -60,8 +61,10 @@ function BattleContainer({props}:{props:any}) {
           battleSessionId: props.battleSessionId
             })
         .then((response) => {
-          console.log(response.data);
-        setEnemyHealth(response.data.enemyHealth)
+          setHealth(response.data.heroHealth);
+          setPotionCount(response.data.potionCount);
+          setEnemyHealth(response.data.enemyHealth);
+          setBattleHistory(response.data.battleHistory);
         })
         .catch((error) => {
         console.error('Error occurred while trying to use: ' + move + " ", error);
@@ -77,7 +80,13 @@ function BattleContainer({props}:{props:any}) {
           <PotionDisplay />
           <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
           <div className="logbox-and-user-input">
-            <div className="logBox" id="logBox">{battleHistory}
+            <div className="logBox" id="logBox">
+              {battleHistory.slice().reverse().map((item, index) => (
+            <div key={index}>
+          {item}
+          <br />
+        </div>
+      ))}
           </div>
           <div>
               <div className="user-prompt-wrapper">
