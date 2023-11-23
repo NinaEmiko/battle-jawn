@@ -8,7 +8,6 @@ const PlayerTips = () => {
   useEffect(() => {
     axios.get('http://localhost:8080/api/player-tip/random')
       .then((response) => {
-        console.log("Inside getRandomPlayerTip GET request. Response data: " + response.data);
         const randomTipBody = response.data;
         setRandomTip(randomTipBody);
       })

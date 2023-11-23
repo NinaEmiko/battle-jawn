@@ -29,12 +29,11 @@ const PlayerMoves: React.FC<ButtonProp> = ({
       battleSessionId: battleSessionId
         })
     .then((response) => {
-    console.log(move + " successful: " + response.data);
+    console.log(move + " successful!");
     })
     .catch((error) => {
     console.error('Error occurred while trying to use: ' + move + " ", error);
     });
-    console.log("Player used " + move);
 
   }
 

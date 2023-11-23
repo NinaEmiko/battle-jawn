@@ -31,7 +31,7 @@ function BattleContainer({props}:{props:any}) {
                 setHealth(response.data.health);
                 setMaxHealth(response.data.maxHealth);
                 } catch (error) {
-                console.error('Error fetching data: ', error)
+                console.error('Error fetching Hero data: ', error)
                 }
             }
         const fetchEnemy = async () => {
@@ -41,9 +41,8 @@ function BattleContainer({props}:{props:any}) {
                 setEnemyName(response.data.name);
                 setEnemyHealth(response.data.health);
                 setEnemyMaxHealth(response.data.maxHealth);
-                console.log("Inside Enemy getById. response.data.name: " + response.data.name);
                 } catch (error) {
-                console.error('Error fetching data: ', error)
+                console.error('Error fetching Enemy data: ', error)
                 }
             }
         const fetchBattleHistory = async () => {
@@ -51,9 +50,8 @@ function BattleContainer({props}:{props:any}) {
                 const response = await
                 axios.get('http://localhost:8080/api/battle-session/' + battleSessionId)
                 setBattleHistory(response.data.battleHistory);
-                console.log("Inside BattleHistory getById. response.data.battleHistory: " + response.data.battleHistory);
                 } catch (error) {
-                console.error('Error fetching data: ', error)
+                console.error('Error fetching Battle History data: ', error)
                 }
             }
         fetchHero();
