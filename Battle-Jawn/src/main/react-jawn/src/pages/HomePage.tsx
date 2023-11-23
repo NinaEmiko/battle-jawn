@@ -5,20 +5,24 @@ import axios from "axios";
 
 function HomePage() {
     const [beginBattle, setBeginBattle] = useState(false);
-    const [heroId, setHeroId] = useState(0);
+
+    const [ids, setIds] = useState({
+        heroId: 0,
+        enemyId: 0,
+        battleSessionId: 0,
+    })
 
     const handlePlayerSelection = (id: number) => {
-        setHeroId(id);
+
+        setIds((prevData) => ({...prevData, heroId: id}));
 
         axios.post('http://localhost:8080/api/battle-session', {
             heroId: id
             })
             .then((response) => {
 
-            localStorage.setItem('battleSessionId', response.data.id);
-
-            const enemyId = response.data.enemyId;
-            localStorage.setItem('enemyId', enemyId);
+            setIds((prevData) => ({...prevData, battleSessionId: response.data.id}));
+            setIds((prevData) => ({...prevData, enemyId: response.data.enemyId}));
 
             })
             .catch((error) => {
@@ -31,7 +35,7 @@ function HomePage() {
     return (
         <div>
             {beginBattle ? (
-                <BattleContainer  props={heroId} />
+                <BattleContainer  props={ids} />
             ):
                 <PlayerSelection roleChosen={handlePlayerSelection} />
             }

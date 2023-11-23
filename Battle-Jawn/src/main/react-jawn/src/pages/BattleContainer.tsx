@@ -10,19 +10,16 @@ function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
     const [health, setHealth] = useState(0);
     const [maxHealth, setMaxHealth] = useState(0);
-    const [enemyId, setEnemyId] = useState(localStorage.getItem('enemyId'));
     const [enemyName, setEnemyName] = useState('');
     const [enemyHealth, setEnemyHealth] = useState(0);
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
-    const [messages, setMessages] = useState('');
-    const [battleSessionId, setBattleSessionId] = useState(localStorage.getItem('battleSessionId'));
     const [battleHistory, setBattleHistory] = useState([]);
 
     useEffect(() => {
         const fetchHero = async () => {
             try {
                 const response = await
-                axios.get('http://localhost:8080/api/hero/' + props)
+                axios.get('http://localhost:8080/api/hero/' + props.heroId)
                 setRole(response.data.role);
                 setHealth(response.data.health);
                 setMaxHealth(response.data.maxHealth);
@@ -33,7 +30,7 @@ function BattleContainer({props}:{props:any}) {
         const fetchEnemy = async () => {
             try {
                 const response = await
-                axios.get('http://localhost:8080/api/enemy/' + enemyId)
+                axios.get('http://localhost:8080/api/enemy/' + props.enemyId)
                 setEnemyName(response.data.name);
                 setEnemyHealth(response.data.health);
                 setEnemyMaxHealth(response.data.maxHealth);
@@ -44,7 +41,7 @@ function BattleContainer({props}:{props:any}) {
         const fetchBattleHistory = async () => {
             try {
                 const response = await
-                axios.get('http://localhost:8080/api/battle-session/' + battleSessionId)
+                axios.get('http://localhost:8080/api/battle-session/' + props.battleSessionId)
                 setBattleHistory(response.data.battleHistory);
                 } catch (error) {
                 console.error('Error fetching Battle History data: ', error)
@@ -53,7 +50,7 @@ function BattleContainer({props}:{props:any}) {
         fetchHero();
         fetchEnemy();
         fetchBattleHistory();
-    }, [props, enemyId, battleSessionId])
+    }, [props])
 
 
     return (
