@@ -34,9 +34,18 @@ public class BattleSessionService {
     }
 
     @Transactional
-    public void addMessageToBattleHistory(ArrayList<String> message, Long battleSessionId) {
+    public void addMessageToBattleHistory(String message, Long battleSessionId) {
         logger.info("Inside addMessageToBattleHistory Service. New Message: " + message);
-        battleSessionRepository.addMessageToBattleHistory(message, battleSessionId);
+        Optional<BattleSession> optionalBattleSession = battleSessionRepository.findById(battleSessionId);
+        if (optionalBattleSession.isPresent()) {
+            BattleSession battleSession = optionalBattleSession.get();
+
+            ArrayList<String> updatedList = new ArrayList<>(battleSession.getBattleHistory());
+            updatedList.add(message);
+
+            battleSession.setBattleHistory(updatedList);
+            battleSessionRepository.save(battleSession);
+        }
     }
 
     @Transactional

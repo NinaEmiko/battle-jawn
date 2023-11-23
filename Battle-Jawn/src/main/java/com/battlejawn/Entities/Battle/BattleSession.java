@@ -10,6 +10,7 @@ public class BattleSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @CollectionTable
     @Column
     private ArrayList<String> battleHistory = new ArrayList<>();
     @Column
