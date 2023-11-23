@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import "../styling/PlayerTips.css";
+import "../styling/BattleContainer.css";
 import axios from 'axios';
 
 const PlayerTips = () => {

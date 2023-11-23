@@ -1,0 +1,55 @@
+img {
+    /* display: none; */
+    height: 5%;
+    width: 5%;
+    float: right;
+}
+
+.name {
+    font-size: 25px;
+    color:  hsl(181, 84%, 44%);
+    float: left;
+}
+
+.name {
+    justify-content: flex-end;
+    font-size: 25px;
+    color: yellow;
+    float: left;
+    padding-right: 5px;
+}
+
+.logBox {
+    height: 250px;
+    width: 45%;
+    border: 3px solid #ccc;
+    display: flex;
+    flex-direction: column-reverse;
+    box-shadow: 0 0 10px 2px;
+    overflow: auto;
+    background-color: #333;
+    color: yellow;
+    margin-top: 30px;
+}
+
+.healthBar, .manaBar {
+    background-color:hsl(60, 100%, 50%);
+    border-radius: 20px;
+    margin: 5px;
+    width: 100%;
+}
+.healthBar::-webkit-progress-bar {
+    accent-color: rgb(161, 2, 2);
+    border: 0;
+    border-radius: 20px;
+ }
+.healthBar::-webkit-progress-value {
+    background-color: rgb(161, 2, 2);
+    border: 0;
+    border-radius: 20px;
+ }
+ .healthBar::-moz-progress-bar {
+    background-color: rgb(161, 2, 2);
+    border: 0;
+    border-radius: 20px;
+ }

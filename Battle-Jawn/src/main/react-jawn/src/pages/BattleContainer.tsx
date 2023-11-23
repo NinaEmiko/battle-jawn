@@ -9,13 +9,8 @@ import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PlayerName from "../components/PlayerName";
-import "../styling/PlayerHealthBar.css";
 import healthPotion from "../../../resources/images/healthPotion.png";
-import "../styling/PotionDisplay.css";
-import "../styling/EnemyHealthBar.css";
-import "../styling/EnemyName.css";
-import "../styling/PlayerName.css";
-import "../styling/LogBoxDisplay.css";
+import "../styling/BattleContainer.css";
 import "../styling/UserPromptText.css";
 
 function BattleContainer({props}:{props:any}) {

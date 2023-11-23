@@ -1,5 +1,5 @@
 import healthPotion from "../../../resources/images/healthPotion.png";
-import "../styling/PotionDisplay.css";
+import "../styling/BattleContainer.css";
 
 const PotionDisplay = () => {
   const role = window.localStorage.getItem("Role");
