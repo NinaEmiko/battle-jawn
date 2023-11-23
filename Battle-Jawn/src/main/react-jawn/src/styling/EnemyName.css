@@ -1,8 +1,0 @@
-/* Enemy Name Display */
-.name {
-    justify-content: flex-end;
-    font-size: 25px;
-    color: yellow;
-    float: left;
-    padding-right: 5px;
-}
