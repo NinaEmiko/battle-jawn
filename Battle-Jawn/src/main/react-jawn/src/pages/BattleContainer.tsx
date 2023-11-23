@@ -1,14 +1,8 @@
-import EnemyName from "../components/EnemyName";
-import EnemyHealthBar from "../components/EnemyHealthBar";
 import PotionDisplay from "../components/PotionDisplay";
-import PlayerHealthBar from "../components/PlayerHealthBar";
-import LogBoxDisplay from "../components/LogBoxDisplay";
-import UserPromptText from "../components/UserPromptText";
 import PlayerMoves from "../components/PlayerMoves";
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PlayerName from "../components/PlayerName";
 import healthPotion from "../../../resources/images/healthPotion.png";
 import "../styling/BattleContainer.css";
 import "../styling/UserPromptText.css";
