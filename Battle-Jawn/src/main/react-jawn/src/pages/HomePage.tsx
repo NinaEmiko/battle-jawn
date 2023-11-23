@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BattleContainer from "./BattleContainer";
 import PlayerSelection from "./PlayerSelection";
 import axios from "axios";
 
 function HomePage() {
     const [beginBattle, setBeginBattle] = useState(false);
+    const [roleHasBeenChosen, setRoleHasBeenChosen] = useState(false);
 
     const [ids, setIds] = useState({
         heroId: 0,
@@ -12,24 +13,32 @@ function HomePage() {
         battleSessionId: 0,
     })
 
+    useEffect(() => {
+        if (roleHasBeenChosen && !beginBattle) {
+          const createNewBattleSession = async () => {
+            try {
+              const response = await axios.post('http://localhost:8080/api/battle-session', {
+                heroId: ids.heroId
+              });
+      
+              setIds((prevData) => ({
+                ...prevData,
+                battleSessionId: response.data.id,
+                enemyId: response.data.enemyId
+              }));
+      
+              setBeginBattle(true);
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          };
+          createNewBattleSession();
+        }
+      }, [roleHasBeenChosen, beginBattle]);
+
     const handlePlayerSelection = (id: number) => {
-
         setIds((prevData) => ({...prevData, heroId: id}));
-
-        axios.post('http://localhost:8080/api/battle-session', {
-            heroId: id
-            })
-            .then((response) => {
-
-            setIds((prevData) => ({...prevData, battleSessionId: response.data.id}));
-            setIds((prevData) => ({...prevData, enemyId: response.data.enemyId}));
-
-            })
-            .catch((error) => {
-            console.error('Error fetching Battle Session data:', error);
-            });
-
-        setBeginBattle(true);
+        setRoleHasBeenChosen(true);
     }
 
     return (

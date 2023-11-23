@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "../styling/BattleContainer.css";
 import "../styling/UserPromptText.css";
+import "../styling/Button.css";
 
 function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
@@ -52,6 +53,20 @@ function BattleContainer({props}:{props:any}) {
         fetchBattleHistory();
     }, [props])
 
+    function handleClickBattle(move: string) {
+
+        axios.post('http://localhost:8080/api/hero-move', {
+          move: move,
+          battleSessionId: props.battleSessionId
+            })
+        .then((response) => {
+        console.log(move + " successful!");
+        })
+        .catch((error) => {
+        console.error('Error occurred while trying to use: ' + move + " ", error);
+        });
+    }
+
 
     return (
         <div className="battle-container">
@@ -68,36 +83,68 @@ function BattleContainer({props}:{props:any}) {
                 <div className="userPrompt">{"What would you like to do?"}</div>
 
                 {role == "Tank" &&
-                  <PlayerMoves
-                    buttonOneText="Strike"
-                    buttonTwoText="Potion"
-                    buttonThreeText="Impale"
-                    buttonFourText="Run"
-                  />
+                  <div className="btn-grid" id="option-buttons">
+                      <button onClick={(e) => handleClickBattle('Strike')} className="btn" id="button1">
+                        Strike
+                      </button>
+                      <button onClick={(e) => handleClickBattle('Potion')} className="btn" id="button2">
+                        Potion
+                      </button>
+                      <button onClick={(e) => handleClickBattle('Impale')} className="btn" id="button3">
+                        Impale
+                      </button>
+                      <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                        Run
+                      </button>
+                    </div>
                 }
                 {role == "Healer" &&
-                  <PlayerMoves
-                    buttonOneText="Wand"
-                    buttonTwoText="Heal"
-                    buttonThreeText="Holy"
-                    buttonFourText="Run"
-                  />
+                  <div className="btn-grid" id="option-buttons">
+                      <button onClick={(e) => handleClickBattle('Wand')} className="btn" id="button1">
+                        Wand
+                      </button>
+                      <button onClick={(e) => handleClickBattle('Heal')} className="btn" id="button2">
+                        Heal
+                      </button>
+                      <button onClick={(e) => handleClickBattle('Holy')} className="btn" id="button3">
+                        Holy
+                      </button>
+                      <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                        Run
+                      </button>
+                    </div>
                 }
                 {role == "Caster" &&
-                  <PlayerMoves
-                    buttonOneText="Wand"
-                    buttonTwoText="Potion"
-                    buttonThreeText="Blast"
-                    buttonFourText="Run"
-                  />
+                    <div className="btn-grid" id="option-buttons">
+                        <button onClick={(e) => handleClickBattle('Wand')} className="btn" id="button1">
+                          Wand
+                        </button>
+                        <button onClick={(e) => handleClickBattle('Potion')} className="btn" id="button2">
+                          Potion
+                        </button>
+                        <button onClick={(e) => handleClickBattle('Blast')} className="btn" id="button3">
+                          Blast
+                        </button>
+                        <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                          Run
+                        </button>
+                      </div>
                 }
                 {role == "DPS" &&
-                  <PlayerMoves
-                    buttonOneText="Stab"
-                    buttonTwoText="Potion"
-                    buttonThreeText="Steal"
-                    buttonFourText="Run"
-                  />
+                    <div className="btn-grid" id="option-buttons">
+                        <button onClick={(e) => handleClickBattle('Stab')} className="btn" id="button1">
+                          Stab
+                        </button>
+                        <button onClick={(e) => handleClickBattle('Potion')} className="btn" id="button2">
+                          Potion
+                        </button>
+                        <button onClick={(e) => handleClickBattle('Steal')} className="btn" id="button3">
+                          Steal
+                        </button>
+                        <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                          Run
+                        </button>
+                      </div>
                 }
               </div>
             </div>
