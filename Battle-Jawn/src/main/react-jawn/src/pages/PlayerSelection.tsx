@@ -47,7 +47,7 @@ function PlayerSelection({roleChosen}:{roleChosen: any}) {
         <PlayerTips />
         <div>
           <div className="user-prompt-wrapper">
-            <UserPromptText text="Choose a Class: "></UserPromptText>
+            <div className="userPrompt">{"Choose a class: "}</div>
             {chosenRole && (
             <p>{chosenRole}</p>
             )}

@@ -9,6 +9,14 @@ import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PlayerName from "../components/PlayerName";
+import "../styling/PlayerHealthBar.css";
+import healthPotion from "../../../resources/images/healthPotion.png";
+import "../styling/PotionDisplay.css";
+import "../styling/EnemyHealthBar.css";
+import "../styling/EnemyName.css";
+import "../styling/PlayerName.css";
+import "../styling/LogBoxDisplay.css";
+import "../styling/UserPromptText.css";
 
 function BattleContainer({props}:{props:any}) {
   const [role, setRole] = useState('');
@@ -62,16 +70,17 @@ function BattleContainer({props}:{props:any}) {
 
   return (
     <div className="battle-container">
-      <EnemyName props={enemyName}/>
-      <EnemyHealthBar props={{enemyHealth, enemyMaxHealth}}/>
-      <PlayerName props={role} />
+      <div className="name" id="enemyName">{enemyName}</div>
+      <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
+      <div className="name" id="playerName">{role}</div>
       <PotionDisplay />
-      <PlayerHealthBar  props={maxHealth}/>
+      <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
       <div className="logbox-and-user-input">
-        <LogBoxDisplay props={battleHistory} />
-        <div>
+        <div className="logBox" id="logBox">{battleHistory}
+      </div>
+      <div>
           <div className="user-prompt-wrapper">
-            <UserPromptText text={"What would you like to do?"} />
+            <div className="userPrompt">{"What would you like to do?"}</div>
 
             {role == "Tank" &&
               <PlayerMoves

@@ -21,6 +21,7 @@ const PlayerMoves: React.FC<ButtonProp> = ({
 
   const url = 'http://localhost:8080/api/hero-move';
   const [battleSessionId, setBattleSessionId] = useState(localStorage.getItem('battleSessionId'));
+  const [moveMade, setMoveMade] = useState(1);
   
   function handleClickBattle(move: string) {
 
@@ -35,6 +36,7 @@ const PlayerMoves: React.FC<ButtonProp> = ({
     console.error('Error occurred while trying to use: ' + move + " ", error);
     });
 
+    setMoveMade(moveMade + 1);
   }
 
   return (
