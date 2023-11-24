@@ -16,7 +16,6 @@ function BattleContainer({props}:{props:any}) {
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
     const [battleHistory, setBattleHistory] = useState([]);
     const [gameOver, setGameOver] = useState(false);
-    const [heroTurn, setHeroTurn] = useState(true);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     useEffect(() => {
@@ -53,10 +52,6 @@ function BattleContainer({props}:{props:any}) {
                 console.error('Error fetching Battle History data: ', error)
                 }
             }
-        if (!heroTurn) {
-          handleEnemyMove();
-          setHeroTurn(true);
-        }
             
         fetchHero();
         fetchEnemy();
@@ -101,9 +96,7 @@ function BattleContainer({props}:{props:any}) {
         .catch((error) => {
         console.error('Error occurred while trying to use: ' + move + " ", error);
         });
-        setHeroTurn(false);
     }
-    console.log("Hero turn: " +heroTurn); 
 
     return (
         <div className="battle-container">
