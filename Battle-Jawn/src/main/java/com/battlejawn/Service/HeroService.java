@@ -55,6 +55,11 @@ public class HeroService {
         heroRepository.updatePotionCountById(updatedPotionCount, heroId);
     }
 
+    public void updateRunCountById(Long heroId, int updatedRunCount) {
+        logger.info("Inside updateRunCountById service method. Hero ID: " + heroId + ". Updated run count: " + updatedRunCount + ".");
+        heroRepository.updateRunCountByHeroId(updatedRunCount, heroId);
+    }
+
     @Transactional
     public Hero saveHero(String role) {
         try {

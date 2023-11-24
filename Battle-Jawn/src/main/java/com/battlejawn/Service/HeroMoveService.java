@@ -10,6 +10,7 @@ import com.battlejawn.HeroMove.Attack.Strike;
 import com.battlejawn.HeroMove.Attack.Wand;
 import com.battlejawn.HeroMove.Heal.Heal;
 import com.battlejawn.HeroMove.Heal.Potion;
+import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.StrongAttack.*;
 import org.springframework.stereotype.Service;
 
@@ -40,63 +41,61 @@ public class HeroMoveService {
 
         int damage;
         int healAmount;
-        String newMessage;
-        int updatedHeroHealth;
-        HeroMoveDTO heroMoveDTO;
 
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
 
         switch (move) {
-            case "Wand":    Wand wand = new Wand();
+            case "Wand":
+                Wand wand = new Wand();
                 damage = wand.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Strike":  Strike strike = new Strike();
+            case "Strike":
+                Strike strike = new Strike();
                 damage = strike.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Stab":    Stab stab = new Stab();
+            case "Stab":
+                Stab stab = new Stab();
                 damage = stab.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Blast":       Blast blast = new Blast();
+            case "Blast":
+                Blast blast = new Blast();
                 damage = blast.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Holy":        Holy holy = new Holy();
+            case "Holy":
+                Holy holy = new Holy();
                 damage = holy.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Impale":      Impale impale = new Impale();
+            case "Impale":
+                Impale impale = new Impale();
                 damage = impale.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Backstab":    BackStab backStab = new BackStab();
+            case "Backstab":
+                BackStab backStab = new BackStab();
                 damage = backStab.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Heal":    Heal heal = new Heal();
+            case "Heal":
+                Heal heal = new Heal();
                 healAmount = heal.useHeal();
                 heroMoveDTO = processHeroHeal(healAmount, enemy, battleSessionId, hero);
                 return heroMoveDTO;
             case "Potion":
-                if (hero.getPotions() > 0) {
-                    heroMoveDTO = processPotion(enemy, battleSessionId, hero);
-                    return heroMoveDTO;
-                } else {
-                    //Update battleHistory
-                }
-                break;
+                heroMoveDTO = processPotion(enemy, battleSessionId, hero);
+                return heroMoveDTO;
             case "Steal":
-                if (enemy.getPotions() > 0 && hero.getPotions() < hero.getMaxPotions()) {
-                    heroMoveDTO = processSteal(enemy, battleSessionId, hero);
-                    return heroMoveDTO;
-                } else {
-                    //Update battleHistory
-                }
-                break;
+                heroMoveDTO = processSteal(enemy, battleSessionId, hero);
+                return heroMoveDTO;
+            case "Run":
+                heroMoveDTO = processRun(enemy, battleSessionId, hero);
+                return heroMoveDTO;
         }
         return null;
     }
@@ -115,9 +114,9 @@ public class HeroMoveService {
         } else {
             newMessage = move + " missed!";
         }
-        BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-        return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
+        return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, false);
     }
 
     public HeroMoveDTO processHeroHeal(int healAmount, Enemy enemy, Long battleSessionId, Hero hero) {
@@ -129,46 +128,84 @@ public class HeroMoveService {
         }
         heroService.updateHealthById(updatedHeroHealth, hero.getId());
         String newMessage = "You healed yourself for " + healAmount;
-        BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-        return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory);
+        return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
     }
 
     public HeroMoveDTO processPotion(Enemy enemy, Long battleSessionId, Hero hero) {
-        Potion potion = new Potion();
-        int updatedHeroHealth;
-        int updatedPotionCount = hero.getPotions() - 1;
-        int healAmount = potion.usePotion();
-        if (healAmount > hero.getMaxHealth()) {
-            updatedHeroHealth = hero.getMaxHealth();
+
+        if (hero.getPotions() > 0) {
+            Potion potion = new Potion();
+            int updatedHeroHealth;
+            int updatedPotionCount = hero.getPotions() - 1;
+            int healAmount = potion.usePotion();
+            if (healAmount > hero.getMaxHealth()) {
+                updatedHeroHealth = hero.getMaxHealth();
+            } else {
+                updatedHeroHealth = hero.getHealth() + healAmount;
+            }
+            heroService.updatePotionCountById(updatedPotionCount, hero.getId());
+            heroService.updateHealthById(updatedHeroHealth, hero.getId());
+            String newMessage = "You feel better now";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
         } else {
-            updatedHeroHealth = hero.getHealth() + healAmount;
+            String newMessage = "You are out of potions!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
         }
-        heroService.updatePotionCountById(updatedPotionCount, hero.getId());
-        heroService.updateHealthById(updatedHeroHealth, hero.getId());
-        String newMessage = "You feel better now";
-        BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory);
     }
 
     public HeroMoveDTO processSteal(Enemy enemy, Long battleSessionId, Hero hero) {
-        int updatedPotionCount = hero.getPotions() + 1;
-        heroService.updatePotionCountById(updatedPotionCount, hero.getId());
-        String newMessage = "You stole a potion!";
-        BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory);
+        if (enemy.getPotions() > 0 && hero.getPotions() < hero.getMaxPotions()) {
+            int updatedPotionCount = hero.getPotions() + 1;
+            heroService.updatePotionCountById(updatedPotionCount, hero.getId());
+            String newMessage = "You stole a potion!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
+        } else {
+            String newMessage = "Enemy is out of potions!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
+        }
     }
 
-    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, List<String> battleHistory) {
+    public HeroMoveDTO processRun(Enemy enemy, Long battleSessionId, Hero hero) {
+        Run run = new Run();
+        boolean ranAway = run.useRun();
+        if (ranAway) {
+            hero.setRunCount(hero.getRunCount() + 1);
+            heroService.updateRunCountById(hero.getId(), hero.getRunCount());
+            String newMessage = "You successfully ran away!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, true);
+        } else {
+            String newMessage = "You could not get away!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
+        }
+    }
+
+    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, List<String> battleHistory, boolean ranAway) {
         HeroMoveDTO heroMoveDTO = new HeroMoveDTO();
         heroMoveDTO.setEnemyHealth(enemyHealth);
         heroMoveDTO.setHeroHealth(heroHealth);
         heroMoveDTO.setPotionCount(potionCount);
         heroMoveDTO.setBattleHistory(battleHistory);
+        heroMoveDTO.setRanAway(ranAway);
         return heroMoveDTO;
     }
 

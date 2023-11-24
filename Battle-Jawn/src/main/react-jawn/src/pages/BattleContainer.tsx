@@ -16,6 +16,7 @@ function BattleContainer({props}:{props:any}) {
     const [enemyHealth, setEnemyHealth] = useState(0);
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
     const [battleHistory, setBattleHistory] = useState([]);
+    const [ranAway, setRanAway] = useState(false);
 
     useEffect(() => {
         const fetchHero = async () => {
@@ -66,6 +67,7 @@ function BattleContainer({props}:{props:any}) {
           setPotionCount(response.data.potionCount);
           setEnemyHealth(response.data.enemyHealth);
           setBattleHistory(response.data.battleHistory);
+          setRanAway(response.data.ranAway);
         })
         .catch((error) => {
         console.error('Error occurred while trying to use: ' + move + " ", error);

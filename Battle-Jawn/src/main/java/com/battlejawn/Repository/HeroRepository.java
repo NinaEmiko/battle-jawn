@@ -20,5 +20,9 @@ public interface HeroRepository extends JpaRepository<Hero, Long> {
     @Modifying
     @Query("UPDATE Hero e SET e.potions = :newValue WHERE e.id = :idValue")
     void updatePotionCountById(@Param("newValue") int newValue, @Param("idValue") Long id);
+
+    @Modifying
+    @Query("UPDATE Hero e SET e.runCount = :newValue WHERE e.id = :idValue")
+    void updateRunCountByHeroId(@Param("newValue") int newValue, @Param("idValue") Long id);
     
 }
