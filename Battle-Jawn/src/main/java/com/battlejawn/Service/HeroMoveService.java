@@ -103,28 +103,33 @@ public class HeroMoveService {
 
     public HeroMoveDTO processHeroMove(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move) {
         int updatedEnemyHealth;
+        String newMessage;
         if (damage > enemy.getHealth()) {
             updatedEnemyHealth = 0;
-        } else {
-            updatedEnemyHealth = enemy.getHealth() - damage;
-        }
-        enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-        String newMessage;
-        if (damage > 0) {
-            newMessage = move + " did " + damage + " damage.";
-        } else {
-            newMessage = move + " missed!";
-        }
-        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        if (enemy.getHealth() == 0) {
+            newMessage = getDamageMessage(move, damage);
+            enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
             String enemyDefeatedMessage = "You have defeated the enemy!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, enemyDefeatedMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, true);
+        } else {
+            updatedEnemyHealth = enemy.getHealth() - damage;
+            newMessage = getDamageMessage(move, damage);
+            enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, false);
         }
-        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-        return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, false);
+}
+
+public String getDamageMessage(String move, int damage) {
+    if (damage > 0) {
+        return move + " did " + damage + " damage.";
+    } else {
+        return move + " missed!";
     }
+}
 
     public HeroMoveDTO processHeroHeal(int healAmount, Enemy enemy, Long battleSessionId, Hero hero) {
         int updatedHeroHealth;
