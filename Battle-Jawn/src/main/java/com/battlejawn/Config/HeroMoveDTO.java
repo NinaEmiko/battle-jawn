@@ -3,11 +3,12 @@ package com.battlejawn.Config;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class HeroMoveDTO {
     private int enemyHealth;
     private int heroHealth;
-    private ArrayList<String> battleHistory;
+    private List<String> battleHistory;
     private int potionCount;
 }

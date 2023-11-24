@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BattleHistoryMessageService {
@@ -28,7 +29,7 @@ public class BattleHistoryMessageService {
 
     }
 
-    public ArrayList<String> getBattleHistoryMessagesById(Long id) {
-        return null;
+    public List<String> getBattleHistoryMessagesByBattleSessionId(Long id) {
+        return battleHistoryMessageRepository.findMessagesByBattleSessionId(id);
     }
 }

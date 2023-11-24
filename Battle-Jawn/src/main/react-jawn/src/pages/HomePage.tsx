@@ -11,6 +11,7 @@ function HomePage() {
         heroId: 0,
         enemyId: 0,
         battleSessionId: 0,
+        battleHistoryMessageId: 0,
     })
 
     useEffect(() => {
@@ -24,7 +25,8 @@ function HomePage() {
               setIds((prevData) => ({
                 ...prevData,
                 battleSessionId: response.data.id,
-                enemyId: response.data.enemyId
+                enemyId: response.data.enemyId,
+                battleHistoryMessageId: response.data.battleHistoryMessageId
               }));
       
               setBeginBattle(true);

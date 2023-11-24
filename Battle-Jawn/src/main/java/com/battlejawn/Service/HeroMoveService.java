@@ -116,7 +116,7 @@ public class HeroMoveService {
             newMessage = move + " missed!";
         }
         BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        ArrayList<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesById(battleHistoryMessage.getId());
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory);
     }
 
@@ -130,7 +130,7 @@ public class HeroMoveService {
         heroService.updateHealthById(updatedHeroHealth, hero.getId());
         String newMessage = "You healed yourself for " + healAmount;
         BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        ArrayList<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesById(battleHistoryMessage.getId());
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory);
     }
 
@@ -148,7 +148,7 @@ public class HeroMoveService {
         heroService.updateHealthById(updatedHeroHealth, hero.getId());
         String newMessage = "You feel better now";
         BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        ArrayList<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesById(battleHistoryMessage.getId());
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory);
     }
@@ -158,12 +158,12 @@ public class HeroMoveService {
         heroService.updatePotionCountById(updatedPotionCount, hero.getId());
         String newMessage = "You stole a potion!";
         BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        ArrayList<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesById(battleHistoryMessage.getId());
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory);
     }
 
-    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, ArrayList<String> battleHistory) {
+    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, List<String> battleHistory) {
         HeroMoveDTO heroMoveDTO = new HeroMoveDTO();
         heroMoveDTO.setEnemyHealth(enemyHealth);
         heroMoveDTO.setHeroHealth(heroHealth);

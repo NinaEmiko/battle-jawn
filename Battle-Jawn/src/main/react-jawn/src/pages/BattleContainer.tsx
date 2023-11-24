@@ -43,8 +43,8 @@ function BattleContainer({props}:{props:any}) {
         const fetchBattleHistory = async () => {
             try {
                 const response = await
-                axios.get('http://localhost:8080/api/battle-session/' + props.battleSessionId)
-                setBattleHistory(response.data.battleHistory);
+                axios.get('http://localhost:8080/api/battle-history-message/' + props.battleSessionId)
+                setBattleHistory(response.data);
                 } catch (error) {
                 console.error('Error fetching Battle History data: ', error)
                 }

@@ -13,8 +13,4 @@ import java.util.List;
 @Repository
 public interface BattleSessionRepository extends JpaRepository<BattleSession, Long> {
 
-//    @Modifying
-//    @Query("UPDATE BattleSession e SET e.battleHistory = :newList WHERE e.id = :idValue")
-//    void addMessageToBattleHistory(@Param("newList") ArrayList<String> newList, @Param("idValue") Long id);
-
 }
