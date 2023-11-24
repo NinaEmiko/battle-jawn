@@ -44,22 +44,22 @@ public class HeroService {
             throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
-
+    @Transactional
     public void updateHealthById(int updatedHeroHealth, Long heroId) {
         logger.info("Inside updateHealthById service method. Hero ID: " + heroId + ". Updated Hero Health: " + updatedHeroHealth + ".");
         heroRepository.updateHealthById(updatedHeroHealth, heroId);
     }
-
+    @Transactional
     public void updatePotionCountById(int updatedPotionCount, Long heroId) {
         logger.info("Inside updatePotionCountById service method. Hero ID: " + heroId + ". Updated potion count: " + updatedPotionCount + ".");
         heroRepository.updatePotionCountById(updatedPotionCount, heroId);
     }
-
+    @Transactional
     public void updateRunCountById(Long heroId, int updatedRunCount) {
         logger.info("Inside updateRunCountById service method. Hero ID: " + heroId + ". Updated run count: " + updatedRunCount + ".");
         heroRepository.updateRunCountByHeroId(updatedRunCount, heroId);
     }
-
+    @Transactional
     public void updateWinCountById(Long heroId, int updatedWinCount) {
         logger.info("Inside updateWinCountById service method. Hero ID: " + heroId + ". Updated win count: " + updatedWinCount + ".");
         heroRepository.updateWinCountById(updatedWinCount, heroId);

@@ -33,7 +33,7 @@ public class EnemyMoveService {
         String newMessage;
         if (damage > hero.getHealth()) {
             updatedHeroHealth = 0;
-            newMessage = getDamageMessage("Strike", damage);
+            newMessage = getDamageMessage("Enemy Strike", damage);
             heroService.updateHealthById(updatedHeroHealth, hero.getId());
             String heroDefeatedMessage = "You have been defeated by the enemy!";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
@@ -42,7 +42,7 @@ public class EnemyMoveService {
             return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, true);
         } else {
             updatedHeroHealth = hero.getHealth() - damage;
-            newMessage = getDamageMessage("Strike", damage);
+            newMessage = getDamageMessage("Enemy Strike", damage);
             heroService.updateHealthById(updatedHeroHealth, hero.getId());
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
