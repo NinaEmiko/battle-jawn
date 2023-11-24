@@ -111,7 +111,7 @@ public class HeroMoveService {
         enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
         String newMessage;
         if (damage > 0) {
-            newMessage = move + " did " + damage + " damage!";
+            newMessage = move + " did " + damage + " damage.";
         } else {
             newMessage = move + " missed!";
         }
@@ -128,7 +128,7 @@ public class HeroMoveService {
             updatedHeroHealth = hero.getHealth() + healAmount;
         }
         heroService.updateHealthById(updatedHeroHealth, hero.getId());
-        String newMessage = "You healed yourself for " + healAmount;
+        String newMessage = "You healed yourself for " + healAmount + ".";
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
@@ -148,13 +148,13 @@ public class HeroMoveService {
             }
             heroService.updatePotionCountById(updatedPotionCount, hero.getId());
             heroService.updateHealthById(updatedHeroHealth, hero.getId());
-            String newMessage = "You feel better now";
+            String newMessage = "You feel better now.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
         } else if (hero.getPotions() > 0 && hero.getHealth() == hero.getMaxHealth()) {
-            String newMessage = "You are at full health";
+            String newMessage = "You are at full health.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);

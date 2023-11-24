@@ -14,7 +14,7 @@ public class Bite implements CriticalHit, Missable {
         if (miss()) {
             setDamage(0);
         } else if (criticalHit()){
-            setDamage(damage *= 1.5);
+            setDamage(damage *= (int) 1.5);
         }
     }
 
