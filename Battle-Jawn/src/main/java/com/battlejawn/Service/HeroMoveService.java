@@ -116,6 +116,12 @@ public class HeroMoveService {
             newMessage = move + " missed!";
         }
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        if (enemy.getHealth() == 0) {
+            String enemyDefeatedMessage = "You have defeated the enemy!";
+            battleHistoryMessageService.createNewMessage(battleSessionId, enemyDefeatedMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, true);
+        }
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, false);
     }
@@ -200,8 +206,8 @@ public class HeroMoveService {
 
     public HeroMoveDTO processRun(Enemy enemy, Long battleSessionId, Hero hero) {
         Run run = new Run();
-        boolean ranAway = run.useRun();
-        if (ranAway) {
+        boolean gameOver = run.useRun();
+        if (gameOver) {
             hero.setRunCount(hero.getRunCount() + 1);
             heroService.updateRunCountById(hero.getId(), hero.getRunCount());
             String newMessage = "You successfully ran away!";
@@ -218,13 +224,13 @@ public class HeroMoveService {
         }
     }
 
-    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, List<String> battleHistory, boolean ranAway) {
+    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, int potionCount, List<String> battleHistory, boolean gameOver) {
         HeroMoveDTO heroMoveDTO = new HeroMoveDTO();
         heroMoveDTO.setEnemyHealth(enemyHealth);
         heroMoveDTO.setHeroHealth(heroHealth);
         heroMoveDTO.setPotionCount(potionCount);
         heroMoveDTO.setBattleHistory(battleHistory);
-        heroMoveDTO.setRanAway(ranAway);
+        heroMoveDTO.setGameOver(gameOver);
         return heroMoveDTO;
     }
 

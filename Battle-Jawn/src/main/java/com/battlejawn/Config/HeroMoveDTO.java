@@ -11,5 +11,5 @@ public class HeroMoveDTO {
     private int heroHealth;
     private List<String> battleHistory;
     private int potionCount;
-    private boolean ranAway;
+    private boolean gameOver;
 }
