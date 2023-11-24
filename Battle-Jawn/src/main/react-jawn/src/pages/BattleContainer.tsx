@@ -1,4 +1,3 @@
-import PotionDisplay from "../components/PotionDisplay";
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -107,64 +106,64 @@ function BattleContainer({props}:{props:any}) {
 
                 {role == "Tank" &&
                   <div className="btn-grid" id="option-buttons">
-                      <button onClick={(e) => handleClickBattle('Strike')} className="btn" id="button1">
+                      <button onClick={(e) => handleClickBattle('Strike')} disabled={gameOver} className="btn" id="button1">
                         Strike
                       </button>
-                      <button onClick={(e) => handleClickBattle('Potion')} className="btn" id="button2">
+                      <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver} className="btn" id="button2">
                         Potion
                       </button>
-                      <button onClick={(e) => handleClickBattle('Impale')} className="btn" id="button3">
+                      <button onClick={(e) => handleClickBattle('Impale')} disabled={gameOver} className="btn" id="button3">
                         Impale
                       </button>
-                      <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                      <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
                         Run
                       </button>
                     </div>
                 }
                 {role == "Healer" &&
                   <div className="btn-grid" id="option-buttons">
-                      <button onClick={(e) => handleClickBattle('Wand')} className="btn" id="button1">
+                      <button onClick={(e) => handleClickBattle('Wand')} disabled={gameOver} className="btn" id="button1">
                         Wand
                       </button>
-                      <button onClick={(e) => handleClickBattle('Heal')} className="btn" id="button2">
+                      <button onClick={(e) => handleClickBattle('Heal')} disabled={gameOver} className="btn" id="button2">
                         Heal
                       </button>
-                      <button onClick={(e) => handleClickBattle('Holy')} className="btn" id="button3">
+                      <button onClick={(e) => handleClickBattle('Holy')} disabled={gameOver} className="btn" id="button3">
                         Holy
                       </button>
-                      <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                      <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
                         Run
                       </button>
                     </div>
                 }
                 {role == "Caster" &&
                     <div className="btn-grid" id="option-buttons">
-                        <button onClick={(e) => handleClickBattle('Wand')} className="btn" id="button1">
+                        <button onClick={(e) => handleClickBattle('Wand')} disabled={gameOver} className="btn" id="button1">
                           Wand
                         </button>
-                        <button onClick={(e) => handleClickBattle('Potion')} className="btn" id="button2">
+                        <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver} className="btn" id="button2">
                           Potion
                         </button>
-                        <button onClick={(e) => handleClickBattle('Blast')} className="btn" id="button3">
+                        <button onClick={(e) => handleClickBattle('Blast')} disabled={gameOver} className="btn" id="button3">
                           Blast
                         </button>
-                        <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                        <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
                           Run
                         </button>
                       </div>
                 }
                 {role == "DPS" &&
                     <div className="btn-grid" id="option-buttons">
-                        <button onClick={(e) => handleClickBattle('Stab')} className="btn" id="button1">
+                        <button onClick={(e) => handleClickBattle('Stab')} disabled={gameOver} className="btn" id="button1">
                           Stab
                         </button>
-                        <button onClick={(e) => handleClickBattle('Potion')} className="btn" id="button2">
+                        <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver} className="btn" id="button2">
                           Potion
                         </button>
-                        <button onClick={(e) => handleClickBattle('Steal')} className="btn" id="button3">
+                        <button onClick={(e) => handleClickBattle('Steal')} disabled={gameOver} className="btn" id="button3">
                           Steal
                         </button>
-                        <button onClick={(e) => handleClickBattle('Run')} className="btn" id="button4">
+                        <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
                           Run
                         </button>
                       </div>
