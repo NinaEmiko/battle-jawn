@@ -54,6 +54,11 @@ public class EnemyService {
         }
     }
 
+    public void updatePotionCountById(int updatedPotionCount, Long enemyId) {
+        logger.info("Inside updatePotionCountById service method. Enemy ID: " + enemyId + ". Updated potion count: " + updatedPotionCount + ".");
+        enemyRepository.updatePotionCountById(updatedPotionCount, enemyId);
+    }
+
     public void updateHealthById(int updatedEnemyHealth, Long enemyId) {
         logger.info("Inside updateHealthById service method. Enemy ID: " + enemyId + ". Updated Enemy Health: " + updatedEnemyHealth + ".");
         enemyRepository.updateHealthById(updatedEnemyHealth, enemyId);
