@@ -109,6 +109,7 @@ public class HeroMoveService {
             newMessage = getDamageMessage(move, damage);
             enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
             String enemyDefeatedMessage = "You have defeated the enemy!";
+            heroService.updateWinCountById(hero.getId(), hero.getWinCount() + 1);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, enemyDefeatedMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);

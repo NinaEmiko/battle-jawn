@@ -60,6 +60,11 @@ public class HeroService {
         heroRepository.updateRunCountByHeroId(updatedRunCount, heroId);
     }
 
+    public void updateWinCountById(Long heroId, int updatedWinCount) {
+        logger.info("Inside updateWinCountById service method. Hero ID: " + heroId + ". Updated win count: " + updatedWinCount + ".");
+        heroRepository.updateWinCountById(updatedWinCount, heroId);
+    }
+
     @Transactional
     public Hero saveHero(String role) {
         try {
