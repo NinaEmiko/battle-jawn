@@ -3,6 +3,7 @@ package com.battlejawn.Controllers;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Service.BattleSessionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class BattleSessionController {
     private JsonParser jsonParser;
     private final Logger logger = Logger.getLogger(BattleSessionController.class.getName());
 
-
+    @Autowired
     public BattleSessionController(BattleSessionService battleSessionService) {
         this.battleSessionService = battleSessionService;
     }
