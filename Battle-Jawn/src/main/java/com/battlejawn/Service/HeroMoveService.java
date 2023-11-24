@@ -136,7 +136,7 @@ public class HeroMoveService {
 
     public HeroMoveDTO processPotion(Enemy enemy, Long battleSessionId, Hero hero) {
 
-        if (hero.getPotions() > 0) {
+        if (hero.getPotions() > 0 && hero.getHealth() != hero.getMaxHealth()) {
             Potion potion = new Potion();
             int updatedHeroHealth;
             int updatedPotionCount = hero.getPotions() - 1;
@@ -153,6 +153,12 @@ public class HeroMoveService {
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
+        } else if (hero.getPotions() > 0 && hero.getHealth() == hero.getMaxHealth()) {
+            String newMessage = "You are at full health";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
         } else {
             String newMessage = "You are out of potions!";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
