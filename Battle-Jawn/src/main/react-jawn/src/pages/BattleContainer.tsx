@@ -1,11 +1,11 @@
 import PotionDisplay from "../components/PotionDisplay";
-import PlayerMoves from "../components/PlayerMoves";
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../styling/BattleContainer.css";
 import "../styling/UserPromptText.css";
 import "../styling/Button.css";
+import healthPotion from "../assets/healthPotion.png";
 
 function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
@@ -25,6 +25,7 @@ function BattleContainer({props}:{props:any}) {
                 setRole(response.data.role);
                 setHealth(response.data.health);
                 setMaxHealth(response.data.maxHealth);
+                setPotionCount(response.data.potions)
                 } catch (error) {
                 console.error('Error fetching Hero data: ', error)
                 }
@@ -77,7 +78,17 @@ function BattleContainer({props}:{props:any}) {
           <div className="name" id="enemyName">{enemyName}</div>
           <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
           <div className="name" id="playerName">{role}</div>
-          <PotionDisplay />
+            <div className="potionDisplay">
+              <a href="#" onClick={(e) => handleClickBattle('Potion')}>
+              {Array.from({ length: potionCount }).map((_, index) => (
+                <img className="potion"
+                key={index}
+                src={healthPotion}
+                alt={`Potion ${index + 1}`}
+              />
+            ))}
+        </a>
+      </div>
           <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
           <div className="logbox-and-user-input">
             <div className="logBox" id="logBox">
