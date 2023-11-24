@@ -16,8 +16,11 @@ function BattleContainer({props}:{props:any}) {
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
     const [battleHistory, setBattleHistory] = useState([]);
     const [gameOver, setGameOver] = useState(false);
+    const [heroTurn, setHeroTurn] = useState(true);
 
     useEffect(() => {
+      let timeoutId: number | undefined;
+
         const fetchHero = async () => {
             try {
                 const response = await
@@ -50,10 +53,30 @@ function BattleContainer({props}:{props:any}) {
                 console.error('Error fetching Battle History data: ', error)
                 }
             }
+            if (!heroTurn) {
+              timeoutId = setTimeout(() => {
+                axios.post('http://localhost:8080/api/enemy-move')
+                  .then(response => {
+                    setHealth(response.data.heroHealth);
+                    setGameOver(response.data.gameOver);
+                    setPotionCount(response.data.potion);
+                    setEnemyHealth(response.data.enemyHealth);
+                    setBattleHistory(response.data.battleHistory);
+                  })
+                  .catch(error => {
+                    console.error('Error fetching enemy move data:', error);
+                  })
+                  .finally(() => {
+                    setHeroTurn(true);
+                  });
+              }, 3000);
+            }
+            
         fetchHero();
         fetchEnemy();
         fetchBattleHistory();
-    }, [props])
+        return () => clearTimeout(timeoutId);
+    }, [props, heroTurn])
 
     function handleClickBattle(move: string) {
 
@@ -71,6 +94,7 @@ function BattleContainer({props}:{props:any}) {
         .catch((error) => {
         console.error('Error occurred while trying to use: ' + move + " ", error);
         });
+        setHeroTurn(false);
     }
 
 
@@ -106,64 +130,64 @@ function BattleContainer({props}:{props:any}) {
 
                 {role == "Tank" &&
                   <div className="btn-grid" id="option-buttons">
-                      <button onClick={(e) => handleClickBattle('Strike')} disabled={gameOver} className="btn" id="button1">
+                      <button onClick={(e) => handleClickBattle('Strike')} disabled={gameOver || !heroTurn} className="btn" id="button1">
                         Strike
                       </button>
-                      <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver} className="btn" id="button2">
+                      <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver || !heroTurn} className="btn" id="button2">
                         Potion
                       </button>
-                      <button onClick={(e) => handleClickBattle('Impale')} disabled={gameOver} className="btn" id="button3">
+                      <button onClick={(e) => handleClickBattle('Impale')} disabled={gameOver || !heroTurn} className="btn" id="button3">
                         Impale
                       </button>
-                      <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
+                      <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver || !heroTurn} className="btn" id="button4">
                         Run
                       </button>
                     </div>
                 }
                 {role == "Healer" &&
                   <div className="btn-grid" id="option-buttons">
-                      <button onClick={(e) => handleClickBattle('Wand')} disabled={gameOver} className="btn" id="button1">
+                      <button onClick={(e) => handleClickBattle('Wand')} disabled={gameOver || !heroTurn} className="btn" id="button1">
                         Wand
                       </button>
-                      <button onClick={(e) => handleClickBattle('Heal')} disabled={gameOver} className="btn" id="button2">
+                      <button onClick={(e) => handleClickBattle('Heal')} disabled={gameOver || !heroTurn} className="btn" id="button2">
                         Heal
                       </button>
-                      <button onClick={(e) => handleClickBattle('Holy')} disabled={gameOver} className="btn" id="button3">
+                      <button onClick={(e) => handleClickBattle('Holy')} disabled={gameOver || !heroTurn} className="btn" id="button3">
                         Holy
                       </button>
-                      <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
+                      <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver || !heroTurn} className="btn" id="button4">
                         Run
                       </button>
                     </div>
                 }
                 {role == "Caster" &&
                     <div className="btn-grid" id="option-buttons">
-                        <button onClick={(e) => handleClickBattle('Wand')} disabled={gameOver} className="btn" id="button1">
+                        <button onClick={(e) => handleClickBattle('Wand')} disabled={gameOver || !heroTurn} className="btn" id="button1">
                           Wand
                         </button>
-                        <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver} className="btn" id="button2">
+                        <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver || !heroTurn} className="btn" id="button2">
                           Potion
                         </button>
-                        <button onClick={(e) => handleClickBattle('Blast')} disabled={gameOver} className="btn" id="button3">
+                        <button onClick={(e) => handleClickBattle('Blast')} disabled={gameOver || !heroTurn} className="btn" id="button3">
                           Blast
                         </button>
-                        <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
+                        <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver || !heroTurn} className="btn" id="button4">
                           Run
                         </button>
                       </div>
                 }
                 {role == "DPS" &&
                     <div className="btn-grid" id="option-buttons">
-                        <button onClick={(e) => handleClickBattle('Stab')} disabled={gameOver} className="btn" id="button1">
+                        <button onClick={(e) => handleClickBattle('Stab')} disabled={gameOver || !heroTurn} className="btn" id="button1">
                           Stab
                         </button>
-                        <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver} className="btn" id="button2">
+                        <button onClick={(e) => handleClickBattle('Potion')} disabled={gameOver || !heroTurn} className="btn" id="button2">
                           Potion
                         </button>
-                        <button onClick={(e) => handleClickBattle('Steal')} disabled={gameOver} className="btn" id="button3">
+                        <button onClick={(e) => handleClickBattle('Steal')} disabled={gameOver || !heroTurn} className="btn" id="button3">
                           Steal
                         </button>
-                        <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver} className="btn" id="button4">
+                        <button onClick={(e) => handleClickBattle('Run')} disabled={gameOver || !heroTurn} className="btn" id="button4">
                           Run
                         </button>
                       </div>

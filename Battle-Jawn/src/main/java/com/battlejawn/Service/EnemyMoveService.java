@@ -24,11 +24,11 @@ public class EnemyMoveService {
         this.battleHistoryMessageService = battleHistoryMessageService;
     }
 
-    public HeroMoveDTO useEnemyMove(Long heroId, Long battleSessionId){
+    public HeroMoveDTO enemyMove(Long battleSessionId){
         Enemy enemy = enemyService.getEnemyById(battleSessionService.getBattleSessionById(battleSessionId).getEnemyId());
         Strike strike = new Strike();
         int damage = strike.attack();
-        Hero hero = heroService.getHeroById(heroId);
+        Hero hero = heroService.getHeroById(battleSessionService.getBattleSessionById(battleSessionId).getHeroId());
         int updatedHeroHealth;
         String newMessage;
         if (damage > hero.getHealth()) {
