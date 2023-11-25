@@ -30,6 +30,7 @@ public class EnemyMoveController {
         jsonParser = new JsonParser();
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);
         HeroMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(parsedBattleId);
+        logger.info("Enemy Move DTO: " + enemyMoveDTO);
 
         if (enemyMoveDTO != null) {
             URI location = URI.create("/enemy-move-dto/");
