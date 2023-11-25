@@ -10,18 +10,20 @@ import java.util.logging.Logger;
 @Data
 public class Stab implements CriticalHit, Missable, Attack {
 
+    private int damage;
     private int stabCount;
 
     public int attack() {
-
         if (miss()) {
             return 0;
         } else if (criticalHit()){
             setStabCount(stabCount++);
-            return (int) ((Math.floor(Math.random() * 17) + 1) /* * user.strength */ * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 7) + 10) /* * user.strength */ * 1.5);
+            return damage;
         } else {
             setStabCount(stabCount++);
-            return (int) (Math.floor(Math.random() * 17) + 1 /* * user.strength */);
+            damage = (int) (Math.floor(Math.random() * 7) + 10 /* * user.strength */);
+            return damage;
         }
     }
 

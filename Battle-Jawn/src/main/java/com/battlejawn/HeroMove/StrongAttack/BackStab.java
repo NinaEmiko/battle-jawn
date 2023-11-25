@@ -6,13 +6,16 @@ import lombok.Data;
 
 @Data
 public class BackStab implements CriticalHit, Attack {
+    private int damage;
 
     public int attack() {
 
         if (criticalHit()){
-            return (int) Math.floor((/*player.strength * 2*/ 10) * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 15) + 10 /* * user.strength */) * 1.5);
+            return damage;
         } else {
-            return (int) (/*player.strength * 2*/ 10);
+            damage = (int) (Math.floor(Math.random() * 15) + 10 /* * user.strength */);
+            return damage;
         }
     }
 

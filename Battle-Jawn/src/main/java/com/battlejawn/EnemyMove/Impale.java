@@ -5,12 +5,15 @@ import lombok.Data;
 
 @Data   
 public class Impale implements CriticalHit {
+    private int damage;
     public int attack() {
 
         if (criticalHit()){
-            return (int) ((Math.floor(Math.random() * 17) + 1 ) /* * user.strength */ * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 17) + 10 /* * user.strength */) * 1.5);
+            return damage;
         } else {
-            return (int) (Math.floor(Math.random() * 17) + 1  /* * user.strength */);
+            damage = (int) (Math.floor(Math.random() * 17) + 10 /* * user.strength */);
+            return damage;
         }
     }
 

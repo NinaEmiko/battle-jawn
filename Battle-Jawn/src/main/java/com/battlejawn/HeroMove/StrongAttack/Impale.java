@@ -7,15 +7,18 @@ import lombok.Data;
 
 @Data
 public class Impale implements CriticalHit, Missable, Attack {
+    private int damage;
 
     public int attack() {
 
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) ((Math.floor(Math.random() * 18) + 1) /* * user.strength */ * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 18) + 10 /* * user.strength */) * 1.5);
+            return damage;
         } else {
-            return (int) (Math.floor(Math.random() * 18) + 1);
+            damage = (int) (Math.floor(Math.random() * 18) + 10 /* * user.strength */);
+            return damage;
         }
     }
 

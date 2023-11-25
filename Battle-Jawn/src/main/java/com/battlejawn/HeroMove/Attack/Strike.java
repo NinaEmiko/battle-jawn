@@ -8,15 +8,18 @@ import lombok.Data;
 
 @Data
 public class Strike implements CriticalHit, Missable, Stagger, Attack {
+    private int damage;
 
     public int attack() {
 
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) ((Math.floor(Math.random() * 17) + 1 ) /* * user.strength */ * 1.5);
+            damage = (int) (Math.floor(Math.random() * 6) + 10 /* * user.strength */);
+            return damage;
         } else {
-            return (int) (Math.floor(Math.random() * 17) + 1  /* * user.strength */);
+            damage = (int) (Math.floor(Math.random() * 6) + 10 /* * user.strength */);
+            return damage;
         }
     }
 

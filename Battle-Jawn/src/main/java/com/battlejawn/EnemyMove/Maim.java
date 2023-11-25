@@ -6,14 +6,16 @@ import lombok.Data;
 
 @Data
 public class Maim implements CriticalHit, Missable {
+    private int damage;
     public int attack() {
 
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) ((Math.floor(Math.random() * 17) + 1 ) /* * user.strength */ * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 12) + 10 /* * user.strength */) * 1.5);
+            return damage;
         } else {
-            return (int) (Math.floor(Math.random() * 17) + 1  /* * user.strength */);
+            return (int) (Math.floor(Math.random() * 12) + 1  /* * user.strength */);
         }
     }
 

@@ -8,6 +8,7 @@ import com.battlejawn.HeroMove.Heal.Potion;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class EnemyMoveService {
@@ -16,6 +17,8 @@ public class EnemyMoveService {
     private final EnemyService enemyService;
     private final BattleSessionService battleSessionService;
     private HeroMoveDTO heroMoveDTO;
+    private final Logger logger = Logger.getLogger(EnemyMoveService.class.getName());
+
 
     public EnemyMoveService(BattleSessionService battleSessionService, EnemyService enemyService, HeroService heroService, BattleHistoryMessageService battleHistoryMessageService) {
         this.battleSessionService = battleSessionService;
@@ -61,13 +64,13 @@ public class EnemyMoveService {
                 }
                 break;
             case "Thief":
-                if (enemy.getHealth() < 40 && moveIndex < 3 && enemy.getPotions() > 0) {
+                if (enemy.getHealth() < 30 && moveIndex < 3 && enemy.getPotions() > 0) {
                     HeroMoveDTO enemyMoveDTO = processPotion(enemy, battleSessionId, hero);
                     return enemyMoveDTO;
-                } else if (moveIndex > 8 && enemy.getPotions() > 0 && enemy.getHealth() != enemy.getMaxHealth()) {
+                } else if (moveIndex > 9 && enemy.getPotions() > 0 && enemy.getHealth() != enemy.getMaxHealth()) {
                     HeroMoveDTO enemyMoveDTO = processPotion(enemy, battleSessionId, hero);
                     return enemyMoveDTO;
-                } else if (moveIndex == 1) {
+                } else if (moveIndex > 1) {
                     Stab stab = new Stab();
                     damage = stab.attack();
                     HeroMoveDTO enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Stab");

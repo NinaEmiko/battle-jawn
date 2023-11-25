@@ -13,7 +13,8 @@ public class Wand implements Missable, Attack {
         if (miss()) {
             return 0;
         } else {
-            return (int) (Math.floor(Math.random() * 15) + 1);
+            damage = (int) (Math.floor(Math.random() * 5) + 10 /* * user.strength */);
+            return damage;
         }
     }
 

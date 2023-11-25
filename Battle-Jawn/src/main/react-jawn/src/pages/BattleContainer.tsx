@@ -20,11 +20,6 @@ function BattleContainer({props}:{props:any}) {
 
     useEffect(() => {
 
-      if (gameOver) {
-        window.location.reload();
-      }
-
-
       if(buttonDisabled) {
         handleEnemyMove();
       }

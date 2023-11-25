@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class Holy implements CriticalHit, Missable, Attack {
+    private int damage;
 
     public int attack() {
 
@@ -15,9 +16,11 @@ public class Holy implements CriticalHit, Missable, Attack {
         if (miss()) {
             return 0;
         } else if (criticalHit()){
-            return (int) ((Math.floor(Math.random() * 20) + 1) /* * user.strength */ * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 14) + 10 /* * user.strength */) * 1.5);
+            return damage;
         } else {
-            return (int) (Math.floor(Math.random() * 20) + 1);
+            damage = (int) (Math.floor(Math.random() * 14) + 10 /* * user.strength */);
+            return damage;
         }
     }
 
