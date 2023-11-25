@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Wolf extends Enemy {
 
     public Wolf() {
-        super("Wolf", 50, 50, 1, 10, LocalDateTime.now());
+        super("Wolf", 50, 50, 0, 0, 10, LocalDateTime.now());
     }
 
 }

@@ -6,32 +6,24 @@ import lombok.Data;
 
 @Data
 public class SoulEater implements CriticalHit, Missable {
-    private int damage;
-
-    public void attack() {
-        setDamage(20);
+    public int attack() {
 
         if (miss()) {
-            setDamage(0);
+            return 0;
         } else if (criticalHit()){
-            setDamage(damage *= 1.5);
+            return (int) ((Math.floor(Math.random() * 15) + 1 ) /* * user.strength */ * 1.5);
+        } else {
+            return (int) (Math.floor(Math.random() * 15) + 1  /* * user.strength */);
         }
     }
 
     public boolean criticalHit() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
+        return chance > 90;
     }
 
     public boolean miss() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 95) {
-            return true;
-        }
-        return false;
+        return chance > 95;
     }
-
 }

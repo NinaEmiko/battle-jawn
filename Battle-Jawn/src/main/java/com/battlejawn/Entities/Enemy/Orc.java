@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public class Orc extends Enemy {
 
     public Orc() {
-        super("Orc", 100, 100, 2, 15, LocalDateTime.now());
+        super("Orc", 100, 100, 2, 3, 15, LocalDateTime.now());
     }
 
 }

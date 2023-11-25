@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Spirit extends Enemy {
 
     public Spirit() {
-        super("Spirit", 150, 150, 1, 20, LocalDateTime.now());
+        super("Spirit", 150, 150, 0, 0, 20, LocalDateTime.now());
     }
 
 }
