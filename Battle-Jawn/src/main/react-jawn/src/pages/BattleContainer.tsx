@@ -111,6 +111,7 @@ function BattleContainer({props}:{props:any}) {
     if (battleHistory.includes('You have defeated the enemy!')||
     battleHistory.includes('You have been defeated by the enemy!')||
     battleHistory.includes('You successfully ran away!')) {
+      setButtonDisabled(true);
       setTimeout(() => {
         window.location.reload();
       }, 1500);
