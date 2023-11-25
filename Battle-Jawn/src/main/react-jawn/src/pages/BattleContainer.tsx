@@ -21,15 +21,11 @@ function BattleContainer({props}:{props:any}) {
     const [enemyName, setEnemyName] = useState('');
     const [enemyHealth, setEnemyHealth] = useState(1);
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
-    const [battleHistory, setBattleHistory] = useState([]);
+    const [battleHistory, setBattleHistory] = useState<string[]>([]);
     const [gameOver, setGameOver] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     useEffect(() => {
-
-      if(buttonDisabled) {
-        handleEnemyMove();
-      }
 
         const fetchHero = async () => {
             try {
@@ -91,7 +87,7 @@ function BattleContainer({props}:{props:any}) {
     }
 
     function handleClickBattle(move: string) {
-
+      
       setButtonDisabled(true);
 
         axios.post('http://localhost:8080/api/hero-move', {
@@ -108,8 +104,17 @@ function BattleContainer({props}:{props:any}) {
         .catch((error) => {
         console.error('Error occurred while trying to use: ' + move + " ", error);
         });
-        handleEnemyMove();
+      handleEnemyMove();
+      
     }
+
+    if (battleHistory.includes('You have defeated the enemy!')||
+    battleHistory.includes('You have been defeated by the enemy!')||
+    battleHistory.includes('You successfully ran away!')) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+  }
 
     return (
         <div className="battle-container">
