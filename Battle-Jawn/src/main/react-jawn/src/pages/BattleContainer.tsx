@@ -5,6 +5,10 @@ import "../styling/BattleContainer.css";
 import "../styling/UserPromptText.css";
 import "../styling/Button.css";
 import healthPotion from "../assets/healthPotion.png";
+import wizard from "../assets/wizard.png";
+import ninja from "../assets/ninja.png";
+import athena from "../assets/athena.png";
+import antibiotics from "../assets/antibiotics.png";
 
 function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
@@ -108,7 +112,22 @@ function BattleContainer({props}:{props:any}) {
         <div className="battle-container">
           <div className="name" id="enemyName">{enemyName}</div>
           <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
-          <div className="name" id="playerName">{role}</div>
+          <div className="name" id="playerName">
+            {role == "Tank" && 
+            <img className="role-icon" src={athena}></img>
+            }
+            {role == "Healer" && 
+            <img className="role-icon" src={antibiotics}></img>
+            }
+            {role == "Caster" && 
+            <img className="role-icon" src={wizard}></img>
+            }
+            {role == "DPS" && 
+            <img className="role-icon" src={ninja}></img>
+            }
+            
+            
+            {role}</div>
             <div className="potionDisplay">
               <a href="#" onClick={(e) => handleClickBattle('Potion')}>
               {Array.from({ length: potionCount }).map((_, index) => (

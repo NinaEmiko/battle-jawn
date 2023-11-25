@@ -1,7 +1,10 @@
 import { useState } from "react";
 import PlayerTips from "../components/PlayerTips";
-import UserPromptText from "../components/UserPromptText";
 import axios from "axios";
+import wizard from "../assets/wizard.png";
+import ninja from "../assets/ninja.png";
+import athena from "../assets/athena.png";
+import antibiotics from "../assets/antibiotics.png";
 
 function PlayerSelection({roleChosen}:{roleChosen: any}) {
   const [role, setRole] = useState('');
@@ -52,10 +55,10 @@ function PlayerSelection({roleChosen}:{roleChosen: any}) {
             <p>{chosenRole}</p>
             )}
             <div className="btn-grid" id="option-buttons">
-              <button onClick={handleClickButtonOne} className="btn" id="button1">Tank</button>
-              <button onClick={handleClickButtonTwo} className="btn" id="button2">Healer</button>
-              <button onClick={handleClickButtonThree} className="btn" id="button3">DPS</button>
-              <button onClick={handleClickButtonFour} className="btn" id="button4">Caster</button>
+              <button onClick={handleClickButtonOne} className="btn" id="button1"><img className="role-icon" src={athena}></img>Tank</button>
+              <button onClick={handleClickButtonTwo} className="btn" id="button2"><img className="role-icon" src={antibiotics}></img>Healer</button>
+              <button onClick={handleClickButtonThree} className="btn" id="button3"><img className="role-icon" src={ninja}></img>DPS</button>
+              <button onClick={handleClickButtonFour} className="btn" id="button4"><img className="role-icon" src={wizard}></img>Caster</button>
             </div>
             <button onClick={handleClickBegin} className="btn" id="button5">Begin</button>
           </div>

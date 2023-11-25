@@ -5,6 +5,13 @@
     width: 45px;
 }
 
+.role-icon {
+    /* display: none; */
+    float: left;
+    display: flex;
+    width: 45px;
+}
+
 .name {
     font-size: 25px;
     color:  hsl(181, 84%, 44%);
