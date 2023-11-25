@@ -193,7 +193,7 @@ public String getDamageMessage(String move, int damage) {
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-                return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
+                return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), updatedPotionCount, battleHistory, false);
             } else {
                 String newMessage = "You didn't find anything.";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);

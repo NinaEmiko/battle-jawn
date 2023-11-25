@@ -8,21 +8,17 @@ import healthPotion from "../assets/healthPotion.png";
 
 function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
-    const [health, setHealth] = useState(0);
+    const [health, setHealth] = useState(1);
     const [maxHealth, setMaxHealth] = useState(0);
     const [potionCount, setPotionCount] = useState(0);
     const [enemyName, setEnemyName] = useState('');
-    const [enemyHealth, setEnemyHealth] = useState(0);
+    const [enemyHealth, setEnemyHealth] = useState(1);
     const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
     const [battleHistory, setBattleHistory] = useState([]);
     const [gameOver, setGameOver] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     useEffect(() => {
-
-      if (gameOver){
-        window.location.reload();
-      }
 
       if(buttonDisabled) {
         handleEnemyMove();
@@ -67,6 +63,7 @@ function BattleContainer({props}:{props:any}) {
     }, [props])
 
     function handleEnemyMove() {
+
       let timeoutId: number | undefined;
       timeoutId = setTimeout(() => {
         axios.post('http://localhost:8080/api/enemy-move', {
@@ -87,6 +84,7 @@ function BattleContainer({props}:{props:any}) {
     }
 
     function handleClickBattle(move: string) {
+
       setButtonDisabled(true);
 
         axios.post('http://localhost:8080/api/hero-move', {
