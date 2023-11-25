@@ -9,6 +9,9 @@ import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
 import athena from "../assets/athena.png";
 import antibiotics from "../assets/antibiotics.png";
+import wolf from "../assets/wolf.png";
+import orc from "../assets/orc.png";
+import ghost from "../assets/ghost.png";
 
 function BattleContainer({props}:{props:any}) {
     const [role, setRole] = useState('');
@@ -110,7 +113,22 @@ function BattleContainer({props}:{props:any}) {
 
     return (
         <div className="battle-container">
-          <div className="name" id="enemyName">{enemyName}</div>
+          <div className="name" id="enemyName">
+          {enemyName == "Wolf" && 
+            <img className="role-icon" src={wolf}></img>
+            }
+            {enemyName == "Orc" && 
+            <img className="role-icon" src={orc}></img>
+            }
+            {enemyName == "Spirit" && 
+            <img className="role-icon" src={ghost}></img>
+            }
+            {enemyName == "Thief" && 
+            <img className="role-icon" src={ninja}></img>
+            }
+            
+            
+            {enemyName}</div>
           <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
           <div className="name" id="playerName">
             {role == "Tank" && 
