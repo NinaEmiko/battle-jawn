@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;

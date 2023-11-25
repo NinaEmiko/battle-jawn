@@ -42,16 +42,6 @@ public class JsonParser {
         return null;
     }
 
-    public Long extractEnemyId(String jsonString) {
-        try {
-            JsonNode jsonNode = objectMapper.readTree(jsonString);
-            return jsonNode.get("enemyId").asLong();
-        } catch (Exception e) {
-            logger.info("Exception: " + e);
-        }
-        return null;
-    }
-
     public Long extractBattleSessionId(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);

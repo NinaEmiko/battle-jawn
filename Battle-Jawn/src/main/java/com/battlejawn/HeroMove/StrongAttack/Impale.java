@@ -12,14 +12,13 @@ public class Impale implements CriticalHit, Missable, Attack {
     public int attack() {
 
         if (miss()) {
-            return 0;
+            damage = 0;
         } else if (criticalHit()){
             damage = (int) ((Math.floor(Math.random() * 18) + 10 /* * user.strength */) * 1.5);
-            return damage;
         } else {
             damage = (int) (Math.floor(Math.random() * 18) + 10 /* * user.strength */);
-            return damage;
         }
+        return damage;
     }
 
     public boolean criticalHit() {

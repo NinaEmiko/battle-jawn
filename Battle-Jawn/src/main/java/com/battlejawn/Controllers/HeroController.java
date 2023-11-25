@@ -23,8 +23,6 @@ public class HeroController {
 
     private final HeroService heroService;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-    private JsonParser jsonParser;
-    private UserResponse userResponse;
 
     @Autowired
     public HeroController(HeroService heroService){
@@ -34,6 +32,8 @@ public class HeroController {
     @PostMapping
     public ResponseEntity<UserResponse> createNewHero(@RequestBody String role) {
         logger.info("Inside createNewHero controller method. Role: " + role + ".");
+        UserResponse userResponse;
+        JsonParser jsonParser;
         jsonParser = new JsonParser();
         String parsedRole = jsonParser.extractRole(role);
         Hero hero = heroService.saveHero(parsedRole);

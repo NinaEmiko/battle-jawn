@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class StatusAilments {
 
-    private boolean paralyze = false;
-    private boolean bubble = false;
-    private boolean vulnerable = false;
-    private boolean slow = false;
+    private boolean paralyze;
+    private boolean bubble;
+    private boolean vulnerable;
+    private boolean slow;
 
     public StatusAilments(boolean paralyze, boolean bubble, boolean vulnerable, boolean slow) {
         this.paralyze = paralyze;

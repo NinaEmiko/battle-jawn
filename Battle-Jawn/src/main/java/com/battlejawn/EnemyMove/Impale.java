@@ -10,11 +10,10 @@ public class Impale implements CriticalHit {
 
         if (criticalHit()){
             damage = (int) ((Math.floor(Math.random() * 17) + 10 /* * user.strength */) * 1.5);
-            return damage;
         } else {
             damage = (int) (Math.floor(Math.random() * 17) + 10 /* * user.strength */);
-            return damage;
         }
+        return damage;
     }
 
     public boolean criticalHit() {

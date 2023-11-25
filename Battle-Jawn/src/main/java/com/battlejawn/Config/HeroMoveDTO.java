@@ -1,8 +1,6 @@
 package com.battlejawn.Config;
 
 import lombok.Data;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
