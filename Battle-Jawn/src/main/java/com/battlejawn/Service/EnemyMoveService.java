@@ -136,7 +136,6 @@ public class EnemyMoveService {
             String newMessage = "Enemy used a potion.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             return heroMoveDTO = getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, false);
     }
 
@@ -152,20 +151,17 @@ public class EnemyMoveService {
                 String newMessage = "Enemy stole a potion!";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-                battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), updatedHeroPotionCount, battleHistory, false);
             } else {
                 String newMessage = "Enemy tried to steal. They didn't find anything.";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-                battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
             }
         } else {
             String newMessage = "Enemy tried to steal, but you are out of potions!";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getPotions(), battleHistory, false);
         }
     }
