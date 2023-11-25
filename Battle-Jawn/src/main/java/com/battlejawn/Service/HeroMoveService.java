@@ -164,7 +164,7 @@ public String getDamageMessage(String move, int damage) {
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
+            return heroMoveDTO = getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, updatedPotionCount, battleHistory, false);
         } else if (hero.getPotions() > 0 && hero.getHealth() == hero.getMaxHealth()) {
             String newMessage = "You are at full health.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);

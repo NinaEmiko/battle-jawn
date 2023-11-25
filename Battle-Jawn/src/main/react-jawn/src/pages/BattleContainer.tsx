@@ -20,6 +20,10 @@ function BattleContainer({props}:{props:any}) {
 
     useEffect(() => {
 
+      if (gameOver){
+        window.location.reload();
+      }
+
       if(buttonDisabled) {
         handleEnemyMove();
       }
@@ -70,9 +74,9 @@ function BattleContainer({props}:{props:any}) {
             })
           .then(response => {
             setHealth(response.data.heroHealth);
-            // setGameOver(response.data.gameOver);
-            // setPotionCount(response.data.potionCount);
-            // setEnemyHealth(response.data.enemyHealth);
+            setGameOver(response.data.gameOver);
+            setPotionCount(response.data.potionCount);
+            setEnemyHealth(response.data.enemyHealth);
             setBattleHistory(response.data.battleHistory);
             setButtonDisabled(false);
           })
