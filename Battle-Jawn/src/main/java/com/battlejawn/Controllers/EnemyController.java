@@ -18,10 +18,9 @@ import com.battlejawn.Service.EnemyService;
 @RequestMapping("/api/enemy")
 public class EnemyController {
 
+    @Autowired
     private final EnemyService enemyService;
     private final Logger logger = Logger.getLogger(EnemyController.class.getName());
-
-    @Autowired
     public EnemyController(EnemyService enemyService) {
         this.enemyService = enemyService;
     }

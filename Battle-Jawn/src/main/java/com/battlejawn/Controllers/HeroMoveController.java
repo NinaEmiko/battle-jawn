@@ -3,6 +3,7 @@ package com.battlejawn.Controllers;
 import com.battlejawn.Config.HeroMoveDTO;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Service.HeroMoveService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/api/hero-move")
 public class HeroMoveController {
-
+    @Autowired
     private final HeroMoveService heroMoveService;
     private final Logger logger = Logger.getLogger(HeroMoveController.class.getName());
 

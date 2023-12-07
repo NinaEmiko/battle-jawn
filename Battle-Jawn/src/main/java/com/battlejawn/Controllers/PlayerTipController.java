@@ -12,11 +12,10 @@ import com.battlejawn.Service.PlayerTipService;
 @RestController
 @RequestMapping("/api/player-tip")
 public class PlayerTipController {
-
+    @Autowired
     private final PlayerTipService playerTipService;
     private final Logger logger = Logger.getLogger(PlayerTipController.class.getName());
 
-    @Autowired
     public PlayerTipController(PlayerTipService playerTipService) {
         this.playerTipService = playerTipService;
     }

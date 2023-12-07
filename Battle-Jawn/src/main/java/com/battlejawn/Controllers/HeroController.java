@@ -20,11 +20,10 @@ import com.battlejawn.Entities.Hero.Hero;
 @RestController
 @RequestMapping("/api/hero")
 public class HeroController {
-
+    @Autowired
     private final HeroService heroService;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
 
-    @Autowired
     public HeroController(HeroService heroService){
         this.heroService = heroService;
     }
