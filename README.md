@@ -1,3 +1,3 @@
 # Battle-Jawn
 
-![](https://github.com/NinaEmiko/battle-jawn/blob/main/battle-jawn-user-experience.gif)
+![](https://github.com/NinaEmiko/battle-jawn/blob/develop/battle-jawn-user-experience.gif)
