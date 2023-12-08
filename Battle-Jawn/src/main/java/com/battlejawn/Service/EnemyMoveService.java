@@ -1,6 +1,6 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Config.HeroMoveDTO;
+import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.EnemyMove.*;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;

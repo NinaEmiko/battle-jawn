@@ -1,6 +1,6 @@
 package com.battlejawn.Controllers;
 
-import com.battlejawn.Config.HeroMoveDTO;
+import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Service.EnemyMoveService;
 import org.springframework.beans.factory.annotation.Autowired;

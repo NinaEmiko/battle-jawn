@@ -1,8 +1,7 @@
 package com.battlejawn.Entities.Enemy;
 
 import java.time.LocalDateTime;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import jakarta.persistence.*;
 
 @Entity 
 @DiscriminatorValue("ORC")

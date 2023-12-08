@@ -5,8 +5,9 @@ import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleSessionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.logging.Logger;
 @Service

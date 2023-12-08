@@ -21,3 +21,22 @@ body {
   /* Background Color */
   background-color: #333;
 }
+
+.app-title {
+    font-size: 1.5em;
+}
+
+.app-header {
+    background-color: #222;
+    padding: 20px;
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0; /* optional, adjust as needed */
+    z-index: 1000; /* optional, adjust as needed */
+    color: white;
+    text-align: center;
+}
+
+

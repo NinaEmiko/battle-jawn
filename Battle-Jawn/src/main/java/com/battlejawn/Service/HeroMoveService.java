@@ -1,6 +1,6 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Config.HeroMoveDTO;
+import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
@@ -13,7 +13,8 @@ import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
 import com.battlejawn.HeroMove.StrongAttack.*;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.logging.Logger;
 

@@ -45,8 +45,6 @@ function HomePage() {
 
     return (
         <div>
-            <Header pageTitle="Battle Jawn"/>
-
             {beginBattle ? (
                 <BattleContainer  props={ids} />
             ):
