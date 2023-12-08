@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PlayerTips from "../components/PlayerTips";
+import PlayerTips from "./PlayerTips";
 import axios from "axios";
 import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";

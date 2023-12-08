@@ -36,6 +36,8 @@
 
 .navbar {
   background-color: #00788c;
+  box-shadow: 0 0 10px 2px;
+  padding-bottom: 0px;
 }
 
 .tab-register {
@@ -48,7 +50,6 @@
 
 .title-jawn {
   text-align: center;
-  padding-top: 20px;
 }
 
 .basic-text {

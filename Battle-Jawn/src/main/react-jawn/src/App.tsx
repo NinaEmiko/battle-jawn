@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
-import HomePage from "./pages/HomePage";
+import HomePage from "./components/HomePage";
 import { request, setAuthHeader } from "./helpers/axios_helper";
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <CustomNavBar pageTitle="Battle Jawn" onLogout={logout}/>
+        <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={loggedIn}/>
         <div className="background-jawn">
         <Routes>
             <Route
