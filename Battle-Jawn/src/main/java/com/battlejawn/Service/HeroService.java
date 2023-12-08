@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
@@ -43,6 +44,17 @@ public class HeroService {
             throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
+
+    public List<Hero> getHeroListByAccountId(Long id) {
+        logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);
+        List<Hero> heroList = heroRepository.findByUserAccountId(id);
+        if (heroList != null) {
+            return heroList;
+        } else {
+            throw new EntityNotFoundException("Hero List with User Account ID " + id + " not found.");
+        }
+    }
+
     @Transactional
     public void updateHealthById(int updatedHeroHealth, Long heroId) {
         logger.info("Inside updateHealthById service method. Hero ID: " + heroId + ". Updated Hero Health: " + updatedHeroHealth + ".");

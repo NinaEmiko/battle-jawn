@@ -46,7 +46,7 @@ function PlayerSelection({roleChosen}:{roleChosen: any}) {
     }
 
   return (
-      <div className="container">
+      <div className="container-jawn">
         <PlayerTips />
         <div>
           <div className="user-prompt-wrapper">

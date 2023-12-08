@@ -1,6 +1,8 @@
 package com.battlejawn.Entities.Hero;
 
 import java.time.LocalDateTime;
+
+import com.battlejawn.Entities.UserAccount;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -30,6 +32,9 @@ public abstract class Hero {
     private int winCount;
     @Column
     private int lossCount;
+    @ManyToOne
+    @JoinColumn(name = "user_account_id", nullable = false)
+    private UserAccount userAccount;
     @Column
     private LocalDateTime createdAt;
 

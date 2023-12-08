@@ -7,16 +7,16 @@ import Header from "./components/Header";
 function App() {
   return (
     <BrowserRouter>
-    <div>
-    <Header pageTitle="Battle Jawn"/>
-      <Routes>
-        <Route path="/" element={<AppContent />} />
-      </Routes>
+      <div>
+        <Header pageTitle="Battle Jawn"/>
+        <div className="background-jawn">
+          <Routes>
+            <Route path="/" element={<AppContent />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   )
 }
-
-document.body.style.backgroundImage = `url("${BackgroundImage}")`;
 
 export default App;

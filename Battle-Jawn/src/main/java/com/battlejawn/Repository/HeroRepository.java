@@ -7,8 +7,12 @@ import org.springframework.stereotype.Repository;
 import com.battlejawn.Entities.Hero.Hero;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 @Repository
 public interface HeroRepository extends JpaRepository<Hero, Long> {
+
+    List<Hero> findByUserAccountId(Long userAccountId);
 
     @Modifying
     @Query("UPDATE Hero e SET e.health = :newValue WHERE e.id = :idValue")

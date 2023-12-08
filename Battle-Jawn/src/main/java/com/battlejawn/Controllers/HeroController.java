@@ -1,6 +1,7 @@
 package com.battlejawn.Controllers;
 
 import java.net.URI;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.battlejawn.Service.HeroService;
@@ -63,6 +64,17 @@ public class HeroController {
         Integer currentHealth = heroService.getHeroHealthById(id);
         if (currentHealth != null) {
             return new ResponseEntity<>(currentHealth, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<Hero>> getHeroListByAccountId(@PathVariable("id") Long id) {
+        logger.info("Inside getHeroListByAccountId controller method. User Account ID: " + id + ".");
+        List<Hero> heroList = heroService.getHeroListByAccountId(id);
+        if (heroList != null) {
+            return new ResponseEntity<>(heroList, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

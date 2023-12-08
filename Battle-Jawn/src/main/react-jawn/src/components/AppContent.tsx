@@ -61,11 +61,13 @@ export default class AppContent extends Component<{}, AppContentState> {
   render() {
     return (
       <>
+          <div className="body-background">
         <Buttons login={this.login} logout={this.logout} />
 
         {this.state.componentToShow === 'welcome' && <WelcomeContent />}
         {this.state.componentToShow === 'login' && <LoginForm onLogin={this.onLogin} onRegister={this.onRegister} />}
         {this.state.componentToShow === 'player-selection' && <HomePage />}
+        </div>
       </>
     );
   }
