@@ -47,12 +47,13 @@ export default class LoginForm extends React.Component<
   render() {
     return (
         <div className="container-jawn">
+          <h1 className="title-jawn">Welcome</h1>
       <div className="row justify-content-center">
         <div className="col-4">
           <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
             <li className="nav-item" role="presentation">
               <button
-                className={classNames('nav-link', this.state.active === 'login' ? 'active btn' : '')}
+                className={classNames('nav-link', 'btn', 'custom-button', this.state.active === 'login' ? 'active' : '')}
                 id="tab-login"
                 onClick={() => this.setState({ active: 'login' })}
               >
@@ -61,7 +62,7 @@ export default class LoginForm extends React.Component<
             </li>
             <li className="nav-item" role="presentation">
               <button
-                className={classNames('nav-link', this.state.active === 'register' ? 'active btn' : '')}
+                className={classNames('nav-link', 'btn', 'custom-button', this.state.active === 'register' ? 'active' : '')}
                 id="tab-register"
                 onClick={() => this.setState({ active: 'register' })}
               >
@@ -102,7 +103,7 @@ export default class LoginForm extends React.Component<
                   </label>
                 </div>
 
-                <button type="submit" className="btn" id="button5">
+                <button type="submit" className="reg-btn" id="submit-btn">
                   Sign In
                 </button>
               </form>
@@ -140,7 +141,7 @@ export default class LoginForm extends React.Component<
                   </label>
                 </div>
 
-                <button type="submit" className="btn" id="button5">
+                <button type="submit" className="reg-btn" id="submit-btn">
                   Register
                 </button>
               </form>

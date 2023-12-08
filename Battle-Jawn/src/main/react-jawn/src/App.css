@@ -45,3 +45,48 @@
 .tab-login {
   color: hsl(181, 84%, 44%);
 }
+
+.title-jawn {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.basic-text {
+  text-align: center;
+}
+
+.reg-btn:hover {
+  border-color: black;
+}
+
+.reg-btn:active {
+  box-shadow: 0 5px rgb(43, 43, 36);
+  transform: translateY(2px);
+}
+
+#submit-btn {
+  text-align: center;
+  margin-top: 10px;
+  background-color: yellow;
+  color: black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  outline: none;
+  font-size: 20px;
+  width: 240px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link.custom-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: hsl(181, 84%, 44%);
+}
+
+.nav-link.custom-button.active {
+  background-color: hsl(181, 84%, 44%);
+  color: black;
+}
