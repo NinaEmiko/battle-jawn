@@ -2,6 +2,8 @@
   box-sizing: border-box;
   font-family: fantasy;
   color: hsl(181, 84%, 44%);
+  /* color: #1d1160; */
+  /* color: #00788c; */
 }
 
 
@@ -22,4 +24,24 @@
 
 .bg-body-tertiary {
   opacity: 80%;
+}
+
+.navbar-nav .nav-link {
+  color: white;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.navbar {
+  background-color: #00788c;
+}
+
+.tab-register {
+  color: hsl(181, 84%, 44%);
+}
+
+.tab-login {
+  color: hsl(181, 84%, 44%);
 }

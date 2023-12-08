@@ -45,15 +45,15 @@ public class HeroService {
         }
     }
 
-    public List<Hero> getHeroListByAccountId(Long id) {
-        logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);
-        List<Hero> heroList = heroRepository.findByUserAccountId(id);
-        if (heroList != null) {
-            return heroList;
-        } else {
-            throw new EntityNotFoundException("Hero List with User Account ID " + id + " not found.");
-        }
-    }
+//    public List<Hero> getHeroListByAccountId(Long id) {
+//        logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);
+//        List<Hero> heroList = heroRepository.findByUserAccountId(id);
+//        if (heroList != null) {
+//            return heroList;
+//        } else {
+//            throw new EntityNotFoundException("Hero List with User Account ID " + id + " not found.");
+//        }
+//    }
 
     @Transactional
     public void updateHealthById(int updatedHeroHealth, Long heroId) {

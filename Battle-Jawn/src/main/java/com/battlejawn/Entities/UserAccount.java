@@ -31,7 +31,7 @@ public class UserAccount {
     @Size(max = 100)
     private String password;
 
-    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Size(max = 5)
-    private List<Hero> heroes = new ArrayList<>();
+//    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Size(max = 5)
+//    private List<Hero> heroes = new ArrayList<>();
 }

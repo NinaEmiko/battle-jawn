@@ -32,9 +32,9 @@ public abstract class Hero {
     private int winCount;
     @Column
     private int lossCount;
-    @ManyToOne
-    @JoinColumn(name = "user_account_id", nullable = false)
-    private UserAccount userAccount;
+//    @ManyToOne
+//    @JoinColumn(name = "user_account_id", nullable = false)
+//    private UserAccount userAccount;
     @Column
     private LocalDateTime createdAt;
 

@@ -4,11 +4,7 @@ import "../App.css";
 
 interface LoginFormProps {
   onLogin: (e: FormEvent, login: string, password: string) => void;
-  onRegister: (
-    e: FormEvent,
-    login: string,
-    password: string
-  ) => void;
+  onRegister: (e: FormEvent, login: string, password: string) => void;
 }
 
 interface LoginFormState {
@@ -56,7 +52,7 @@ export default class LoginForm extends React.Component<
           <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
             <li className="nav-item" role="presentation">
               <button
-                className={classNames('nav-link', this.state.active === 'login' ? 'active' : '')}
+                className={classNames('nav-link', this.state.active === 'login' ? 'active btn' : '')}
                 id="tab-login"
                 onClick={() => this.setState({ active: 'login' })}
               >
@@ -65,7 +61,7 @@ export default class LoginForm extends React.Component<
             </li>
             <li className="nav-item" role="presentation">
               <button
-                className={classNames('nav-link', this.state.active === 'register' ? 'active' : '')}
+                className={classNames('nav-link', this.state.active === 'register' ? 'active btn' : '')}
                 id="tab-register"
                 onClick={() => this.setState({ active: 'register' })}
               >
@@ -106,8 +102,8 @@ export default class LoginForm extends React.Component<
                   </label>
                 </div>
 
-                <button type="submit" className="btn">
-                  Sign in
+                <button type="submit" className="btn" id="button5">
+                  Sign In
                 </button>
               </form>
             </div>
@@ -144,8 +140,8 @@ export default class LoginForm extends React.Component<
                   </label>
                 </div>
 
-                <button type="submit" className="btn">
-                  Sign in
+                <button type="submit" className="btn" id="button5">
+                  Register
                 </button>
               </form>
             </div>
