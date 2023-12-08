@@ -34,3 +34,8 @@
     background-color: yellow;
     color: black;
 }
+
+.btn-cntr {
+    display: flex;
+    justify-content: center;
+}

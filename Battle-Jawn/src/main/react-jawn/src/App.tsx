@@ -3,11 +3,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
-import HomePage from "./components/HomePage";
 import { request, setAuthHeader } from "./helpers/axios_helper";
+import MyHeroes from "./components/MyHeroes";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    userName: '',
+    id: 0,
+}) 
 
   const logout = () => {
     setLoggedIn(false);
@@ -22,6 +26,10 @@ function App() {
     })
       .then((response) => {
         setAuthHeader(response.data.token);
+        setCurrentUser(() => ({
+          id: response.data.id,
+          userName: response.data.userName,
+        }));
         setLoggedIn(true);
       })
       .catch((error) => {
@@ -37,6 +45,10 @@ function App() {
     })
       .then((response) => {
         setAuthHeader(response.data.token);
+        setCurrentUser(() => ({
+          id: response.data.id,
+          userName: response.data.userName,
+        }));
         setLoggedIn(true);
       })
       .catch((error) => {
@@ -54,7 +66,7 @@ function App() {
               path="/"
               element={
                 loggedIn ? (
-                  <HomePage />
+                  <MyHeroes props={currentUser} />
                 ) : (
                   <LoginForm onLogin={onLogin} onRegister={onRegister} />
                 )

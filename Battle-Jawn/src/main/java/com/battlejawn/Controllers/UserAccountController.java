@@ -3,14 +3,14 @@ package com.battlejawn.Controllers;
 import com.battlejawn.Config.UserAuthenticationProvider;
 import com.battlejawn.DTO.SignUpDTO;
 import com.battlejawn.DTO.UserAccountDTO;
+import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Service.UserAccountService;
 import com.battlejawn.DTO.CredentialsDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.logging.Logger;
@@ -38,6 +38,18 @@ public class UserAccountController {
         userAccountDTO.setToken(userAuthenticationProvider.createToken(signUpDTO.getLogin()));
         logger.info("Token created: " + userAccountDTO.getToken());
         return ResponseEntity.created(URI.create("/user-account/" + userAccountDTO.getId())).body(userAccountDTO);
+    }
+
+    @GetMapping("/api/user-account/{id}")
+    public ResponseEntity<UserAccountDTO> getUserAccountById(@PathVariable("id") Long id) {
+        logger.info("Inside getUserAccountById controller method. User Account ID: " + id + ".");
+        UserAccountDTO userAccountDTO = userAccountService.getUserAccountById(id);
+
+        if (userAccountDTO != null) {
+            return new ResponseEntity<>(userAccountDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

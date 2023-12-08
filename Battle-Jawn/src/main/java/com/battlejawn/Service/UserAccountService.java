@@ -62,4 +62,10 @@ public class UserAccountService {
         return userAccountMapper.toUserAccountDTO(userAccount);
     }
 
+    public UserAccountDTO getUserAccountById(Long id) {
+        UserAccount userAccount = userAccountRepository.findById(id)
+                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        return userAccountMapper.toUserAccountDTO(userAccount);
+    }
+
 }
