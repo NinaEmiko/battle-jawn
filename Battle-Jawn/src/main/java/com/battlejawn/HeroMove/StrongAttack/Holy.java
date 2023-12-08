@@ -14,14 +14,13 @@ public class Holy implements CriticalHit, Missable, Attack {
         //If enemy is spirit, do double damage
 
         if (miss()) {
-            return 0;
+            damage = 0;
         } else if (criticalHit()){
             damage = (int) ((Math.floor(Math.random() * 14) + 10 /* * user.strength */) * 1.5);
-            return damage;
         } else {
             damage = (int) (Math.floor(Math.random() * 14) + 10 /* * user.strength */);
-            return damage;
         }
+        return damage;
     }
 
     public boolean criticalHit() {

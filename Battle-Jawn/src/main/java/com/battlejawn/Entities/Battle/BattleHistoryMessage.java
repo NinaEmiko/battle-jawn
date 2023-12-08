@@ -1,9 +1,7 @@
 package com.battlejawn.Entities.Battle;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import lombok.Data;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Data

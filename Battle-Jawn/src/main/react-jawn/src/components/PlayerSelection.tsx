@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PlayerTips from "../components/PlayerTips";
+import PlayerTips from "./PlayerTips";
 import axios from "axios";
 import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
@@ -46,7 +46,7 @@ function PlayerSelection({roleChosen}:{roleChosen: any}) {
     }
 
   return (
-      <div className="container">
+      <div className="container-jawn">
         <PlayerTips />
         <div>
           <div className="user-prompt-wrapper">

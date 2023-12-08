@@ -1,14 +1,13 @@
 package com.battlejawn.Service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Entities.Hero.Hero;
@@ -26,25 +25,17 @@ public class HeroServiceTest {
     @Test
     void testGetHeroByIdReturnsCorrectHero() {
 
-        Long id = 1L;
+        long id = 1L;
         Tank tank = new Tank();
         tank.setId(id);
 
-        Mockito.when(heroRepository.findById(id)).thenReturn(Optional.of(tank));
+        when(heroRepository.findById(id)).thenReturn(Optional.of(tank));
 
         Hero actual = heroService.getHeroById(id);
 
         assertEquals(actual.getId(), id);
+
+        verify(heroRepository).findById(id);
     }
 
-    // @Test
-    // void testGetHeroHealthByIdReturnsCorrectHealth() {
-    //     Long id = 1L;
-    //     int health = 50;
-    //     Tank tank = new Tank();
-    //     tank.setId(id);
-    //     tank.setHealth(health);
-
-    //     Mockito.when(heroRepository.findById(id)).thenReturn(tank);
-    // }
 }

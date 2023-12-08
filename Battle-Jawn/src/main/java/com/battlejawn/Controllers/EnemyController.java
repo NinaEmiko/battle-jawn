@@ -3,8 +3,6 @@ package com.battlejawn.Controllers;
 import java.net.URI;
 import java.util.List;
 import java.util.logging.Logger;
-
-import com.battlejawn.Config.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +18,9 @@ import com.battlejawn.Service.EnemyService;
 @RequestMapping("/api/enemy")
 public class EnemyController {
 
-    private final EnemyService enemyService;
-    private JsonParser jsonParser;
-    private final Logger logger = Logger.getLogger(EnemyController.class.getName());
-
     @Autowired
+    private final EnemyService enemyService;
+    private final Logger logger = Logger.getLogger(EnemyController.class.getName());
     public EnemyController(EnemyService enemyService) {
         this.enemyService = enemyService;
     }

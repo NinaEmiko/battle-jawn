@@ -1,15 +1,9 @@
 package com.battlejawn.Entities.Hero;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+
+import com.battlejawn.Entities.UserAccount;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -38,6 +32,9 @@ public abstract class Hero {
     private int winCount;
     @Column
     private int lossCount;
+//    @ManyToOne
+//    @JoinColumn(name = "user_account_id", nullable = false)
+//    private UserAccount userAccount;
     @Column
     private LocalDateTime createdAt;
 

@@ -5,8 +5,6 @@ import com.battlejawn.AttackInterfaces.CriticalHit;
 import com.battlejawn.AttackInterfaces.Missable;
 import lombok.Data;
 
-import java.util.logging.Logger;
-
 @Data
 public class Stab implements CriticalHit, Missable, Attack {
 

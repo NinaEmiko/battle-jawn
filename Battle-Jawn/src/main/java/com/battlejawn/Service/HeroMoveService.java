@@ -1,7 +1,6 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Config.HeroMoveDTO;
-import com.battlejawn.Entities.Battle.BattleHistoryMessage;
+import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
@@ -14,9 +13,8 @@ import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
 import com.battlejawn.HeroMove.StrongAttack.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -78,7 +76,7 @@ public class HeroMoveService {
                 damage = impale.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
-            case "Backstab":
+            case "BackStab":
                 BackStab backStab = new BackStab();
                 damage = backStab.attack();
                 heroMoveDTO = processHeroMove(damage, enemy, battleSessionId, hero, move);

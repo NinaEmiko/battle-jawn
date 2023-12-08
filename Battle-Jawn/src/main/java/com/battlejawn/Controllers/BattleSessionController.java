@@ -16,11 +16,10 @@ import java.util.logging.Logger;
 @RequestMapping("/api/battle-session")
 public class BattleSessionController {
 
+    @Autowired
     private final BattleSessionService battleSessionService;
-    private JsonParser jsonParser;
     private final Logger logger = Logger.getLogger(BattleSessionController.class.getName());
 
-    @Autowired
     public BattleSessionController(BattleSessionService battleSessionService) {
         this.battleSessionService = battleSessionService;
     }
@@ -41,6 +40,7 @@ public class BattleSessionController {
     @ResponseBody
     public ResponseEntity<BattleSession> createNewBattleSession(@RequestBody String heroId) {
         logger.info("Inside createNewBattleSession controller method. Hero ID: " + heroId + ".");
+        JsonParser jsonParser;
         jsonParser = new JsonParser();
         Long parsedHeroId = jsonParser.extractHeroId(heroId);
         BattleSession battleSession = battleSessionService.createNewBattleSession(parsedHeroId);

@@ -1,19 +1,82 @@
 import "./App.css";
-import BackgroundImage from "../../resources/images/BattleJawnBackground.png";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import CustomNavBar from "./components/CustomNavBar";
+import { FormEvent, useState } from "react";
+import LoginForm from "./components/LoginForm";
+import { request, setAuthHeader } from "./helpers/axios_helper";
+import MyHeroes from "./components/MyHeroes";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    userName: '',
+    id: 0,
+}) 
+
+  const logout = () => {
+    setLoggedIn(false);
+    setAuthHeader(null);
+  };
+
+  const onLogin = (e: FormEvent, username: string, password: string) => {
+    e.preventDefault();
+    request('POST', 'http://localhost:8080/login', {
+      login: username,
+      password: password,
+    })
+      .then((response) => {
+        setAuthHeader(response.data.token);
+        setCurrentUser(() => ({
+          id: response.data.id,
+          userName: response.data.userName,
+        }));
+        setLoggedIn(true);
+      })
+      .catch((error) => {
+        setAuthHeader(null);
+      });
+  };
+
+  const onRegister = (event: FormEvent, username: string, password: string) => {
+    event.preventDefault();
+    request('POST', 'http://localhost:8080/register', {
+      login: username,
+      password: password,
+    })
+      .then((response) => {
+        setAuthHeader(response.data.token);
+        setCurrentUser(() => ({
+          id: response.data.id,
+          userName: response.data.userName,
+        }));
+        setLoggedIn(true);
+      })
+      .catch((error) => {
+        setAuthHeader(null);
+      });
+  };
+  
   return (
-    
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
+      <div>
+        <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={loggedIn}/>
+        <div className="background-jawn">
+        <Routes>
+            <Route
+              path="/"
+              element={
+                loggedIn ? (
+                  <MyHeroes props={currentUser} />
+                ) : (
+                  <LoginForm onLogin={onLogin} onRegister={onRegister} />
+                )
+              }
+            />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   )
 }
-
-document.body.style.backgroundImage = `url("${BackgroundImage}")`;
 
 export default App;

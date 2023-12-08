@@ -1,6 +1,7 @@
 package com.battlejawn.Controllers;
 
 import java.net.URI;
+import java.util.List;
 import java.util.logging.Logger;
 
 import com.battlejawn.Service.HeroService;
@@ -20,13 +21,10 @@ import com.battlejawn.Entities.Hero.Hero;
 @RestController
 @RequestMapping("/api/hero")
 public class HeroController {
-
+    @Autowired
     private final HeroService heroService;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-    private JsonParser jsonParser;
-    private UserResponse userResponse;
 
-    @Autowired
     public HeroController(HeroService heroService){
         this.heroService = heroService;
     }
@@ -34,6 +32,8 @@ public class HeroController {
     @PostMapping
     public ResponseEntity<UserResponse> createNewHero(@RequestBody String role) {
         logger.info("Inside createNewHero controller method. Role: " + role + ".");
+        UserResponse userResponse;
+        JsonParser jsonParser;
         jsonParser = new JsonParser();
         String parsedRole = jsonParser.extractRole(role);
         Hero hero = heroService.saveHero(parsedRole);
@@ -68,5 +68,16 @@ public class HeroController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+//    @GetMapping("/list/{id}")
+//    public ResponseEntity<List<Hero>> getHeroListByAccountId(@PathVariable("id") Long id) {
+//        logger.info("Inside getHeroListByAccountId controller method. User Account ID: " + id + ".");
+//        List<Hero> heroList = heroService.getHeroListByAccountId(id);
+//        if (heroList != null) {
+//            return new ResponseEntity<>(heroList, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
     
 }

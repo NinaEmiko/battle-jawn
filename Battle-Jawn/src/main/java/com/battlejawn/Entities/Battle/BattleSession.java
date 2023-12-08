@@ -1,7 +1,7 @@
 package com.battlejawn.Entities.Battle;
+
 import lombok.Data;
-import javax.persistence.*;
-import java.util.ArrayList;
+import jakarta.persistence.*;
 
 @Data
 @Entity

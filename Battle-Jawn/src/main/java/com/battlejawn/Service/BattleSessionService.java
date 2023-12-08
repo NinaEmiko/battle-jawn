@@ -5,12 +5,9 @@ import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleSessionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 @Service
@@ -35,19 +32,6 @@ public class BattleSessionService {
             throw new EntityNotFoundException("BattleSession with ID " + id + " not found");
         }
     }
-
-//    @Transactional
-//    public void addMessageToBattleHistory(String message, Long battleSessionId) {
-//        logger.info("Inside addMessageToBattleHistory service method. New Message: " + message + ".");
-//        Optional<BattleSession> optionalBattleSession = battleSessionRepository.findById(battleSessionId);
-//        if (optionalBattleSession.isPresent()) {
-//            BattleSession battleSession = optionalBattleSession.get();
-//
-//            battleHistoryMessageService.createNewMessage(battleSession.getBattleHistoryMessageId(), message);
-//
-//            ArrayList<String> updatedList = battleHistoryMessageService.getBattleHistoryMessagesById(battleSession.getBattleHistoryMessageId());
-//        }
-//    }
 
     @Transactional
     public BattleSession createNewBattleSession(Long heroId) {
