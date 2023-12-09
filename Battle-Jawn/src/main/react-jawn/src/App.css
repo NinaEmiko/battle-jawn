@@ -22,6 +22,10 @@
   background-color: #333;
 }
 
+.innput-jawn{
+  justify-content: center;
+}
+
 .bg-body-tertiary {
   opacity: 80%;
 }
@@ -50,11 +54,20 @@
 
 .title-jawn {
   padding-top: 15px;
-  text-align: center;
+}
+
+.log-reg {
+  justify-content: center;
+  width: 200px;
 }
 
 .basic-text {
   text-align: center;
+}
+
+.reg-btn {
+  justify-content: center;
+  width: 200px;
 }
 
 .reg-btn:hover {
@@ -75,11 +88,7 @@
   padding: 5px 10px;
   outline: none;
   font-size: 20px;
-  width: 240px;
   height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .nav-link.custom-button {

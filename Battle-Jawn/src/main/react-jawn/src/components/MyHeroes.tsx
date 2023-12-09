@@ -12,7 +12,7 @@ function MyHeroes( {props}:{props:any} ) {
     
     :
     
-    <div className="container-jawn">
+    <div className="container-jawn-login-form">
     <h1 className="title-jawn">{props.userName} Heroes</h1>
     <div className="btn-cntr">
     <button className="btn" id="button5" onClick={() => setChooseHero(true)}>Choose Hero</button>
