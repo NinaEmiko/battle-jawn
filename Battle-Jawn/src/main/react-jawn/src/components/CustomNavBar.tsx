@@ -19,6 +19,11 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
     navigate(path);
   };
 
+  const handleLogout = () => {
+    onLogout();
+    navigate('/');
+  };
+
   useEffect(() => {
     setLoggedIn(isLoggedIn ? true : false);
   }, [isLoggedIn]);
@@ -40,7 +45,7 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
                 Account Settings
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.3" onClick={onLogout}>
+              <NavDropdown.Item onClick={handleLogout}>
                 Log Out
               </NavDropdown.Item>
             </NavDropdown>
