@@ -40,7 +40,7 @@
 }
 
 .healthBar, .manaBar {
-    background-color:hsl(60, 100%, 50%);
+    background-color:#00788c;
     border-radius: 20px;
     margin: 5px;
     width: 100%;

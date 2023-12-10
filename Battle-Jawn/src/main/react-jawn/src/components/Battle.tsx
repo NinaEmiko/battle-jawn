@@ -12,6 +12,7 @@ import antibiotics from "../assets/antibiotics.png";
 import wolf from "../assets/wolf.png";
 import orc from "../assets/orc.png";
 import ghost from "../assets/ghost.png";
+import { useNavigate } from "react-router-dom";
 
 function Battle({props}:{props:any}) {
     const [role, setRole] = useState('');
@@ -24,6 +25,12 @@ function Battle({props}:{props:any}) {
     const [battleHistory, setBattleHistory] = useState<string[]>([]);
     const [gameOver, setGameOver] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleNavigation = (path: string) => {
+      navigate(path);
+    };
 
     useEffect(() => {
 
@@ -113,7 +120,7 @@ function Battle({props}:{props:any}) {
     battleHistory.includes('You successfully ran away!')) {
       setButtonDisabled(true);
       setTimeout(() => {
-        window.location.reload();
+        navigate('/');
       }, 1500);
   }
 

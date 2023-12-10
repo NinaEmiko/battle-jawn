@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Battle from "./Battle";
 import { useNavigate } from "react-router-dom";
 
 function MyHeroes( {props}:{props:any} ) {
@@ -17,7 +16,7 @@ function MyHeroes( {props}:{props:any} ) {
     <div className="container-jawn-login-form">
     <h1 className="title-jawn">{props.userName} Heroes</h1>
     <div className="btn-cntr">
-    <button className="btn" id="button5" onClick={() => handleNavigation('/battle')}>Choose Hero</button>
+    <button className="btn" id="button5" onClick={() => handleNavigation('/battle')}>Create New Hero</button>
     </div>
     </div>
 
