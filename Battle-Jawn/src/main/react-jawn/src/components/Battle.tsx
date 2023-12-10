@@ -118,9 +118,9 @@ function Battle({props}:{props:any}) {
     battleHistory.includes('You have been defeated by the enemy!')||
     battleHistory.includes('You successfully ran away!')) {
       setButtonDisabled(true);
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
+      // setTimeout(() => {
+        handleNavigation('/');
+      // }, 1500);
   }
 
     return (
