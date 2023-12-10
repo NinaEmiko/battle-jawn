@@ -6,6 +6,7 @@
   /* color: #00788c; */
 }
 
+/* Background image styling */
 
 .background-jawn {
   background-image: url('../../resources/images/BattleJawnBackground.png');
@@ -22,19 +23,9 @@
   background-color: #333;
 }
 
-.innput-jawn{
-  justify-content: center;
-}
+/* NavBar styles */
 
-.bg-body-tertiary {
-  opacity: 80%;
-}
-
-.navbar-nav .nav-link {
-  color: white;
-}
-
-.navbar-brand {
+.navbar-nav .nav-link, .navbar-brand  {
   color: white;
 }
 
@@ -42,66 +33,62 @@
   background-color: #00788c;
   box-shadow: 0 0 10px 2px;
   padding-bottom: 0px;
+  opacity: 80%;
 }
 
-.tab-register {
-  color: hsl(181, 84%, 44%);
-}
-
-.tab-login {
-  color: hsl(181, 84%, 44%);
-}
+/* Written conetnt styling */
 
 .title-jawn {
   padding-top: 15px;
-}
-
-.log-reg {
-  justify-content: center;
-  width: 200px;
 }
 
 .basic-text {
   text-align: center;
 }
 
-.reg-btn {
-  justify-content: center;
+/* Idk why, but removing messes up login container styling */
+
+.log-reg {
   width: 200px;
 }
 
-.reg-btn:hover {
-  border-color: black;
-}
-
-.reg-btn:active {
-  box-shadow: 0 5px rgb(43, 43, 36);
-  transform: translateY(2px);
-}
+/* Submit button for login/registration form */
 
 #submit-btn {
   text-align: center;
-  margin-top: 10px;
-  background-color: yellow;
+  background-color: hsl(181, 84%, 44%);
   color: black;
-  border-radius: 5px;
-  padding: 5px 10px;
-  outline: none;
+  border-radius: 10px;
   font-size: 20px;
   height: 50px;
+  width: 200px;
 }
+
+#submit-btn:hover {
+  border-color: black;
+}
+
+#submit-btn:active {
+  box-shadow: 0 5px rgb(43, 43, 36);
+  transform: translateY(2px);}
+
+/* Non-active button between login and register is transparent */
 
 .nav-link.custom-button {
   background-color: transparent;
   border-color: transparent;
   color: hsl(181, 84%, 44%);
+  border-radius: 0;
 }
+
+/* Active button between login and register is blue */
 
 .nav-link.custom-button.active {
   background-color: hsl(181, 84%, 44%);
   color: black;
 }
 
+/* Aligns account settings display items to the left */
 .account-settings-jawn {
   text-align: left;
 }
