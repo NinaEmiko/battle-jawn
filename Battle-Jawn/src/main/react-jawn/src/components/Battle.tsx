@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "../styling/BattleContainer.css";
 import "../styling/UserPromptText.css";
-import "../styling/Button.css";
 import healthPotion from "../assets/healthPotion.png";
 import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
