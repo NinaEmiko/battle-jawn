@@ -1,20 +1,25 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
 import { request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
+import BattleContainer from "./components/BattleContainer";
+import HomePage from "./components/HomePage";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     userName: '',
     id: 0,
+    loggedIn: false,
 }) 
 
   const logout = () => {
-    setLoggedIn(false);
+    setCurrentUser((prev) => ({
+      ...prev,
+      loggedIn: false,
+    }));
     setAuthHeader(null);
   };
 
@@ -29,8 +34,8 @@ function App() {
         setCurrentUser(() => ({
           id: response.data.id,
           userName: response.data.userName,
+          loggedIn: true,
         }));
-        setLoggedIn(true);
       })
       .catch((error) => {
         setAuthHeader(null);
@@ -48,8 +53,8 @@ function App() {
         setCurrentUser(() => ({
           id: response.data.id,
           userName: response.data.userName,
+          loggedIn: true,
         }));
-        setLoggedIn(true);
       })
       .catch((error) => {
         setAuthHeader(null);
@@ -59,19 +64,18 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={loggedIn}/>
+        <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn}/>
         <div className="background-jawn">
         <Routes>
-            <Route
-              path="/"
-              element={
-                loggedIn ? (
-                  <MyHeroes props={currentUser} />
-                ) : (
-                  <LoginForm onLogin={onLogin} onRegister={onRegister} />
-                )
-              }
-            />
+            {currentUser.loggedIn && (
+              <Route key="my-heroes" path="/" element={<MyHeroes props={currentUser} />} />
+            )}
+            {!currentUser.loggedIn && (
+              <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
+            )}
+            {currentUser.loggedIn && (
+              <Route key="battle" path="/battle" element={ <HomePage />} />
+            )}
           </Routes>
         </div>
       </div>

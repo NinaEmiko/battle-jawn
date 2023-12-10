@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import BattleContainer from "./BattleContainer";
+import BattleContainer from "../components/BattleContainer";
 import PlayerSelection from "./PlayerSelection";
 import axios from "axios";
 

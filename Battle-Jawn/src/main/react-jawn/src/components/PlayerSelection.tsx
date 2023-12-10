@@ -5,10 +5,17 @@ import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
 import athena from "../assets/athena.png";
 import antibiotics from "../assets/antibiotics.png";
+import { useNavigate } from "react-router-dom";
 
 function PlayerSelection({roleChosen}:{roleChosen: any}) {
   const [role, setRole] = useState('');
   const [chosenRole, setChosenRole] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
 
   const handleClickBegin = () => {
       if (role !== '') {

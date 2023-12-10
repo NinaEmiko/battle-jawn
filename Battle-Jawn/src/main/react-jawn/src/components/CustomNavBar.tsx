@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate } from "react-router-dom";
 
 interface CustomNavBarProps {
   pageTitle: string;
@@ -13,6 +14,11 @@ interface CustomNavBarProps {
 
 const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLoggedIn }) => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
 
   useEffect(() => {
     setLoggedIn(isLoggedIn ? true : false);
@@ -24,10 +30,10 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
       <Container>
         <Navbar.Brand href="/">{pageTitle}</Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
-          {loggedIn &&
+          {isLoggedIn &&
           <Nav className="ms-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#my-heroes">My Heroes</Nav.Link>
+            <Nav.Link onClick={() => handleNavigation('/')}>My Heroes</Nav.Link>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.2">
                 Account Settings
