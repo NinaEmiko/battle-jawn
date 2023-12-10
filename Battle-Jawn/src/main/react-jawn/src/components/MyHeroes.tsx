@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HomePage from "./HomePage";
+import Battle from "./Battle";
 import { useNavigate } from "react-router-dom";
 
 function MyHeroes( {props}:{props:any} ) {

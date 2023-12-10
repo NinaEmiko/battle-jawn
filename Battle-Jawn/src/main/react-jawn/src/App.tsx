@@ -5,8 +5,8 @@ import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
 import { request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
+import Battle from "./components/Battle";
 import BattleContainer from "./components/BattleContainer";
-import HomePage from "./components/HomePage";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -74,7 +74,7 @@ function App() {
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
             )}
             {currentUser.loggedIn && (
-              <Route key="battle" path="/battle" element={ <HomePage />} />
+              <Route key="battle" path="/battle" element={ <BattleContainer />} />
             )}
           </Routes>
         </div>
