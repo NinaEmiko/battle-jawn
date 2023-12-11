@@ -90,6 +90,17 @@ public class HeroController {
         }
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<Hero>> getHeroListByWinCount() {
+        logger.info("Inside getHeroListByWinCount controller method.");
+        List<Hero> heroList = heroService.getHeroListByWinCount();
+        if (heroList != null) {
+            return new ResponseEntity<>(heroList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/rest/{id}")
     public ResponseEntity<Hero> restHeroById(@PathVariable("id") Long id) {
         logger.info("Inside restHeroById controller method. Hero ID: " + id + ".");

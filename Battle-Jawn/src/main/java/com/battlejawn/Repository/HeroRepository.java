@@ -18,6 +18,8 @@ public interface HeroRepository extends JpaRepository<Hero, Long> {
     int restHeroById(@Param("id") Long id, @Param("newHealth") int health, @Param("newPotions") int potions);
 
     List<Hero> findByUserAccountId(Long userAccountId);
+    @Query("SELECT b FROM Hero b ORDER BY b.winCount DESC Limit 5")
+    List<Hero> findByWinCount();
 
     @Modifying
     @Query("UPDATE Hero e SET e.health = :newValue WHERE e.id = :idValue")

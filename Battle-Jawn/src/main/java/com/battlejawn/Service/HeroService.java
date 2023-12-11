@@ -80,6 +80,16 @@ public class HeroService {
         }
     }
 
+    public List<Hero> getHeroListByWinCount() {
+        logger.info("Inside getHeroListByWinCount service method.");
+        List<Hero> heroList = heroRepository.findByWinCount();
+        if (heroList != null) {
+            return heroList;
+        } else {
+            throw new EntityNotFoundException("Error returning hero list by win count.");
+        }
+    }
+
     @Transactional
     public void updateHealthById(int updatedHeroHealth, Long heroId) {
         logger.info("Inside updateHealthById service method. Hero ID: " + heroId + ". Updated Hero Health: " + updatedHeroHealth + ".");

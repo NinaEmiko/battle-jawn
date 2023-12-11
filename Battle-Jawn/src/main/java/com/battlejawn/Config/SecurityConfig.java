@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/register", "/api/battle-session", "/api/enemy", "/api/enemy-move", "/api/hero", "/api/hero-move", "/api/hero/rest/{id}").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/battle-history-message/{id}", "/api/battle-session/{id}", "/api/enemy/all", "/api/enemy/{id}", "/api/enemy/health/{id}", "/api/hero/{id}", "/api/hero/health/{id}", "/api/player-tip/all", "/api/player-tip/random", "/api/hero/list/{id}", "/api/hero/all").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/battle-history-message/{id}", "/api/battle-session/{id}", "/api/enemy/all", "/api/enemy/{id}", "/api/enemy/health/{id}", "/api/hero/{id}", "/api/hero/health/{id}", "/api/player-tip/all", "/api/player-tip/random", "/api/hero/list/{id}", "/api/hero/all", "/api/hero/list").permitAll()
                         .anyRequest().authenticated())
         ;
         return http.build();

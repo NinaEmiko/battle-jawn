@@ -40,6 +40,7 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
           <Nav className="ms-auto">
             <Nav.Link onClick={() => handleNavigation('/')}>Home</Nav.Link>
             <Nav.Link onClick={() => handleNavigation('/')}>My Heroes</Nav.Link>
+            <Nav.Link onClick={() => handleNavigation('/leader-board')}>Leader Board</Nav.Link>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => handleNavigation('/account-settings')}>
                 Account Settings
