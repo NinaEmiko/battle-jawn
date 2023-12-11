@@ -59,6 +59,16 @@ public class HeroService {
             throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
+    @Transactional
+    public Hero restHeroById(Long id) {
+        logger.info("Inside restHeroById service method. Hero ID: " + id);
+        Optional<Hero> hero = heroRepository.findById(id);
+        if (hero.isPresent()) {
+            Hero actualHero = hero.get();
+            heroRepository.restHeroById(id, actualHero.getMaxHealth(), actualHero.getMaxPotions());
+        }
+        return null;
+    }
 
     public List<Hero> getHeroListByAccountId(Long id) {
         logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);

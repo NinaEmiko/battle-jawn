@@ -6,11 +6,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.battlejawn.Entities.Hero.Hero;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
 public interface HeroRepository extends JpaRepository<Hero, Long> {
+
+    @Modifying
+    @Query("UPDATE Hero e SET e.health = :newHealth, e.potions = :newPotions WHERE e.id = :id")
+    int restHeroById(@Param("id") Long id, @Param("newHealth") int health, @Param("newPotions") int potions);
 
     List<Hero> findByUserAccountId(Long userAccountId);
 

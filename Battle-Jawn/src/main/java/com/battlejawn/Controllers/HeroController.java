@@ -89,5 +89,16 @@ public class HeroController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/rest/{id}")
+    public ResponseEntity<Hero> restHeroById(@PathVariable("id") Long id) {
+        logger.info("Inside restHeroById controller method. Hero ID: " + id + ".");
+        Hero hero = heroService.restHeroById(id);
+        if (hero != null) {
+            return new ResponseEntity<>(hero, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     
 }

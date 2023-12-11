@@ -2,9 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
+import Battle from "./Battle";
 
 function MyHeroes( {props}:{props:any} ) {
-    const [chooseHero, setChooseHero] = useState(false);
+    const [beginBattle, setBeginBattle] = useState(false);
+    const [heroRested, setHeroRested] = useState(true);
+    const [roleHasBeenChosen, setRoleHasBeenChosen] = useState(false);
     const [heroList, setHeroList] = useState([]);
 
     const navigate = useNavigate();
@@ -26,8 +29,65 @@ function MyHeroes( {props}:{props:any} ) {
       fetchHeroes();
   }, [])
 
+  const [ids, setIds] = useState({
+    heroId: 0,
+    enemyId: 0,
+    battleSessionId: 0,
+    battleHistoryMessageId: 0,
+})
+
+useEffect(() => {
+
+
+
+
+    if (roleHasBeenChosen && !beginBattle) {
+      const createNewBattleSession = async () => {
+        try {
+          const response = await axios.post('http://localhost:8080/api/battle-session', {
+            heroId: ids.heroId
+          });
+  
+          setIds((prevData) => ({
+            ...prevData,
+            battleSessionId: response.data.id,
+            enemyId: response.data.enemyId,
+            battleHistoryMessageId: response.data.battleHistoryMessageId
+          }));
+  
+          setBeginBattle(true);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      createNewBattleSession();
+    }
+  }, [roleHasBeenChosen, beginBattle]);
+
+function handlePlayerSelection(id: any): void {
+    console.log("Inside handlePlayerSelection(BattleContainer. Id: " + id);
+    setIds((prevData) => ({...prevData, heroId: id}));
+    setRoleHasBeenChosen(true);
+}
+
+function handleRest(id: any): void {
+    axios.post('http://localhost:8080/api/hero/rest/' + id)
+      .then(response => {
+        setHeroRested(!heroRested);
+        console.log("Hero successfully rested. Response: " + response.data)
+      })
+      .catch(error => {
+        console.error('Error fethcing rest data:', error);
+      })
+    
+  };
+
   return (
     <>
+
+{beginBattle ?  
+      <Battle  props={ids} />
+      :
   
     <div className="container-jawn-hero">
     <h1 className="title-jawn">{props.userName} Heroes</h1>
@@ -69,8 +129,8 @@ function MyHeroes( {props}:{props:any} ) {
       </tbody>
     </table>
     <div className="row justify-content-center">
-          <button className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
-          <button className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Fight</button>
+          <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
+          <button onClick={() => handlePlayerSelection(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Fight</button>
         </div>
       
 
@@ -78,7 +138,7 @@ function MyHeroes( {props}:{props:any} ) {
 ))}
 </div>
     </div>
-
+}
     </>
   );
 };
