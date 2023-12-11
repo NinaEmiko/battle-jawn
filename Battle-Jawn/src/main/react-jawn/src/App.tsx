@@ -16,6 +16,8 @@ function App() {
     loggedIn: false,
 }) 
 
+console.log("User Account Id(App): " + currentUser.id);
+
   const logout = () => {
     setCurrentUser((prev) => ({
       ...prev,
@@ -75,7 +77,7 @@ function App() {
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
             )}
             {currentUser.loggedIn && (
-              <Route key="battle" path="/battle" element={ <BattleContainer />} />
+              <Route key="battle" path="/battle" element={ <BattleContainer props={currentUser} />} />
             )}
             {currentUser.loggedIn && (
               <Route key="account-settings" path="/account-settings" element={ <AccountSettings />} />

@@ -41,7 +41,13 @@ function Battle({props}:{props:any}) {
                 setHealth(response.data.health);
                 setMaxHealth(response.data.maxHealth);
                 setPotionCount(response.data.potions)
+                console.log("Inside Battle. Response: " + response.data);
                 } catch (error) {
+                  console.log("Inside Battle. Id: " + props.heroId);
+                  console.log("Inside Battle. Role: " + role);
+                  console.log("Inside Battle. Health: " + health);
+                  console.log("Inside Battle. maxHealth: " + maxHealth);
+                  console.log("Inside Battle. potionCount: " + potionCount);
                 console.error('Error fetching Hero data: ', error)
                 }
             }

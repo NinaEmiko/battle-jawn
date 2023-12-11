@@ -3,8 +3,10 @@ package com.battlejawn.Entities.Hero;
 import java.time.LocalDateTime;
 
 import com.battlejawn.Entities.UserAccount;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -32,9 +34,11 @@ public abstract class Hero {
     private int winCount;
     @Column
     private int lossCount;
-//    @ManyToOne
-//    @JoinColumn(name = "user_account_id", nullable = false)
-//    private UserAccount userAccount;
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "user_account_id", nullable = false)
+    private UserAccount userAccount;
     @Column
     private LocalDateTime createdAt;
 

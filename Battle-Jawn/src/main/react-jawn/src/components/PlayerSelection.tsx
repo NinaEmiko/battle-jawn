@@ -7,19 +7,20 @@ import athena from "../assets/athena.png";
 import antibiotics from "../assets/antibiotics.png";
 import { useNavigate } from "react-router-dom";
 
-function PlayerSelection({roleChosen}:{roleChosen: any}) {
+interface PlayerSelectionProps {
+  roleChosen: (id: number) => void;
+  userAccountId: number;
+}
+const PlayerSelection: React.FC<PlayerSelectionProps> = ({ roleChosen, userAccountId }) => {
+
+console.log("User Account Id(PlayerSelection): " + userAccountId);
+  const userAccountId2 = userAccountId;
   const [role, setRole] = useState('');
   const [chosenRole, setChosenRole] = useState('');
 
-  const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
-
   const handleClickBegin = () => {
       if (role !== '') {
-          axios.post('http://localhost:8080/api/hero', { role })
+          axios.post('http://localhost:8080/api/hero', { userAccountId: userAccountId2, role: role })
                 .then((response) => {
                   roleChosen(response.data.id);
                   console.log('Hero created successfully: ', response.data);
@@ -33,22 +34,22 @@ function PlayerSelection({roleChosen}:{roleChosen: any}) {
   }
 
   const handleClickButtonOne = () => {
-  setRole("Tank")
+  setRole("Tank");
   setChosenRole("You have chosen to be a Tank")
   }
 
   const handleClickButtonTwo = () => {
-    setRole("Healer")
+    setRole("Healer");
     setChosenRole("You have chosen to be a Healer")
     }
 
   const handleClickButtonThree = () => {
-    setRole("DPS")
+    setRole("DPS");
     setChosenRole("You have chosen to be a DPS")
     }
 
   const handleClickButtonFour = () => {
-    setRole("Caster")
+    setRole("Caster");
     setChosenRole("You have chosen to be a Caster")
     }
 

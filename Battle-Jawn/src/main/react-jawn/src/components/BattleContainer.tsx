@@ -3,7 +3,9 @@ import Battle from "./Battle";
 import PlayerSelection from "./PlayerSelection";
 import axios from "axios";
 
-function BattleContainer() {
+function BattleContainer({props}:{props:any}) {
+
+  console.log("User Account Id(BattleContainer): " + props.id);
     const [beginBattle, setBeginBattle] = useState(false);
     const [roleHasBeenChosen, setRoleHasBeenChosen] = useState(false);
 
@@ -39,6 +41,7 @@ function BattleContainer() {
       }, [roleHasBeenChosen, beginBattle]);
 
     const handlePlayerSelection = (id: number) => {
+        console.log("Inside handlePlayerSelection(BattleContainer. Id: " + id);
         setIds((prevData) => ({...prevData, heroId: id}));
         setRoleHasBeenChosen(true);
     }
@@ -48,7 +51,9 @@ function BattleContainer() {
             {beginBattle ? (
                 <Battle  props={ids} />
             ):
-                <PlayerSelection roleChosen={handlePlayerSelection} />
+                <PlayerSelection
+                roleChosen={handlePlayerSelection} userAccountId={props.id}
+                />
             }
         </div>
 

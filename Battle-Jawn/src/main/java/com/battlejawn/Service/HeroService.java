@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
+
+import com.battlejawn.Entities.UserAccount;
+import com.battlejawn.Repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
@@ -19,10 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class HeroService {
 
     private final HeroRepository heroRepository;
+    private final UserAccountRepository userAccountRepository;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
     @Autowired
-    public HeroService(HeroRepository heroRepository) {
+    public HeroService(HeroRepository heroRepository, UserAccountRepository userAccountRepository) {
         this.heroRepository = heroRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
     public Hero getHeroById(Long id){
@@ -32,6 +37,16 @@ public class HeroService {
             return hero.get();
         } else {
             throw new EntityNotFoundException("Hero with ID " + id + " not found.");
+        }
+    }
+
+    public List<Hero> getAllHeroes(){
+        logger.info("Inside getAllHeroes service method.");
+        List<Hero> heroes = heroRepository.findAll();
+        if (!heroes.isEmpty()) {
+            return heroes;
+        } else {
+            throw new EntityNotFoundException("Error fetching heroes.");
         }
     }
 
@@ -77,7 +92,7 @@ public class HeroService {
     }
 
     @Transactional
-    public Hero saveHero(String role) {
+    public Hero saveHero(String role, Long userAccountId) {
         try {
             Hero hero = switch (role) {
                 case "Tank" -> new Tank();
@@ -85,7 +100,9 @@ public class HeroService {
                 case "Caster" -> new Caster();
                 default -> new Healer();
             };
-
+            Optional<UserAccount> userAccount = userAccountRepository.findById(userAccountId);
+            logger.info("Inside saveHero Service Method. User Account: " + userAccount);
+            userAccount.ifPresent(hero::setUserAccount);
             heroRepository.save(hero);
             return hero;
         } catch(Exception e) {

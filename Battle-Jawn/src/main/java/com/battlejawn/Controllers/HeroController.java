@@ -8,12 +8,7 @@ import com.battlejawn.Service.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Hero.Hero;
@@ -30,16 +25,19 @@ public class HeroController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createNewHero(@RequestBody String role) {
-        logger.info("Inside createNewHero controller method. Role: " + role + ".");
-        UserResponse userResponse;
+    public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
+        logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
         JsonParser jsonParser;
         jsonParser = new JsonParser();
-        String parsedRole = jsonParser.extractRole(role);
-        Hero hero = heroService.saveHero(parsedRole);
+        String parsedRole = jsonParser.extractRole(data);
+        Long parsedUserAccountId = jsonParser.extractUserAccountId(data);
+        logger.info("Inside createNewHero controller method. Parsed User Account Id: " + parsedUserAccountId + ".");
+        Hero hero = heroService.saveHero(parsedRole, parsedUserAccountId);
+        UserResponse userResponse;
         if (hero != null) {
             URI location = URI.create("/hero/" + hero.getId());
             userResponse = new UserResponse(location, hero.getId());
+            logger.info("Inside createNewHero. User response: " + userResponse);
             return ResponseEntity.created(location).body(userResponse);
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -50,9 +48,21 @@ public class HeroController {
     public ResponseEntity<Hero> getHeroById(@PathVariable("id") Long id) {
         logger.info("Inside getHeroById controller method. Hero ID: " + id + ".");
         Hero hero = heroService.getHeroById(id);
+        logger.info("Inside getHeroById controller method. Hero : " + hero + ".");
 
         if (hero != null) {
             return new ResponseEntity<>(hero, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<Hero>> getAllHeroes() {
+        logger.info("Inside getAllHeroes controller method.");
+        List<Hero> heroes = heroService.getAllHeroes();
+
+        if (heroes != null) {
+            return new ResponseEntity<>(heroes, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

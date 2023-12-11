@@ -42,6 +42,16 @@ public class JsonParser {
         return null;
     }
 
+    public Long extractUserAccountId(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("userAccountId").asLong();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return null;
+        }
+    }
+
     public Long extractBattleSessionId(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
