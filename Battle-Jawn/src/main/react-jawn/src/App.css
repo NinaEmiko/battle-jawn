@@ -167,3 +167,22 @@
   max-height: 400px;
   overflow-y: auto;
 }
+
+.row-jawn{
+  padding-left: 30px;
+  text-align: left;
+}
+.data-jawn {
+  padding-left: 190px;
+  text-align: right;
+}
+
+#rest-btn, #delete-btn {
+  background-color: transparent;
+  border-color: gray;
+  color: hsl(181, 84%, 44%);
+  border-radius: 0;
+  width:150px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
