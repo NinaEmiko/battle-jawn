@@ -7,15 +7,7 @@ import Battle from "./Battle";
 function MyHeroes( {props}:{props:any} ) {
     const [heroId, setHeroId] = useState(0);
     const [beginBattle, setBeginBattle] = useState(false);
-    const [roleHasBeenChosen, setRoleHasBeenChosen] = useState(false);
     const [heroList, setHeroList] = useState([]);
-
-    const [ids, setIds] = useState({
-      heroId: 0,
-      enemyId: 0,
-      battleSessionId: 0,
-      battleHistoryMessageId: 0,
-  })  
 
     const navigate = useNavigate();
 
@@ -35,7 +27,7 @@ function MyHeroes( {props}:{props:any} ) {
     
     useEffect(() => {
       fetchHeroes();
-  }, [fetchHeroes])
+    }, [])
 
 function handleRest(id: any): void {
     axios.post('http://localhost:8080/api/hero/rest/' + id)

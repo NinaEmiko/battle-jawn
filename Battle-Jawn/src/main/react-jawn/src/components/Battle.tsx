@@ -36,7 +36,6 @@ function Battle({props}:{props:any}) {
     navigate(path);
   };
 
-  // Creates battle session
   useEffect(() => {
     if (!battleIdSet){
     const createNewBattleSession = async () => {
@@ -60,7 +59,7 @@ function Battle({props}:{props:any}) {
 
   useEffect(() => {
 
-if (battleIdSet) {
+  if (battleIdSet) {
     const fetchHero = async () => {
       try {
         const response = await
@@ -102,7 +101,7 @@ if (battleIdSet) {
     fetchBattleHistory();
     setBeginBattle(true);
   }
-  }, [props, role, health, maxHealth, potionCount, enemyName, enemyHealth, enemyMaxHealth, battleHistory, beginBattle, battleIdSet ])
+  }, [props, role, health, maxHealth, potionCount, enemyName, enemyHealth, enemyMaxHealth, battleHistory, beginBattle, battleIdSet])
 
   function handleEnemyMove() {
     console.log("Inside handleEnemyMove: " + battleSessionId)
@@ -151,9 +150,7 @@ if (battleIdSet) {
   battleHistory.includes('You have been defeated by the enemy!')||
   battleHistory.includes('You successfully ran away!')) {
     setButtonDisabled(true);
-    // setTimeout(() => {
-    handleNavigation('/');
-    // }, 1500);
+    handleNavigation('/account-settings');
   }
 
   return (

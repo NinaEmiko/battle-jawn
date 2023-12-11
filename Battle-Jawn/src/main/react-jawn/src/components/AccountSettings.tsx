@@ -1,4 +1,4 @@
-const AccountSettings = () => {
+const AccountSettings = ({props}:{props:any}) => {
 
   return (
     <div className="container-jawn-login-form">

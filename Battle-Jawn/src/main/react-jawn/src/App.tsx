@@ -8,7 +8,7 @@ import { request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
 import AccountSettings from "./components/AccountSettings";
 import PlayerSelection from "./components/PlayerSelection";
-import Battle from "./components/Battle";
+import LeaderBoard from "./components/LeaderBoard";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -79,7 +79,10 @@ function App() {
               <Route key="player-selection" path="/player-selection" element={ <PlayerSelection props={currentUser} />} />
             )}
             {currentUser.loggedIn && (
-              <Route key="account-settings" path="/account-settings" element={ <AccountSettings />} />
+              <Route key="leader-board" path="/leader-board" element={ <LeaderBoard props={currentUser} />} />
+            )}
+            {currentUser.loggedIn && (
+              <Route key="account-settings" path="/account-settings" element={ <AccountSettings props={currentUser} />} />
             )}
           </Routes>
         </div>

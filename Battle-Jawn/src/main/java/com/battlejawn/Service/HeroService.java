@@ -102,6 +102,12 @@ public class HeroService {
     }
 
     @Transactional
+    public void updateLossCountById(Long heroId, int updatedLossCount) {
+        logger.info("Inside updateLossCountById service method. Hero ID: " + heroId + ". Updated loss count: " + updatedLossCount + ".");
+        heroRepository.updateLossCountById(updatedLossCount, heroId);
+    }
+
+    @Transactional
     public Hero saveHero(String role, Long userAccountId) {
         try {
             Hero hero = switch (role) {
