@@ -47,11 +47,12 @@ function handleRest(id: any): void {
 
   function handleDelete(id: any): void {
     axios.delete('http://localhost:8080/api/hero/delete/' + id)
-    .then(response => {
-      console.log("Hero successfully deleted. Response: " + response.data);
-    }).catch(error => {
-      console.error('Error deleting hero:', error);
-    })
+      .then(response => {
+        console.log("Hero successfully deleted. Response: " + response.data);
+        fetchHeroes();
+      }).catch(error => {
+        console.error('Error deleting hero:', error);
+      })
   }
 
   return (
