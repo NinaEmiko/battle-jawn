@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface HeroRepository extends JpaRepository<Hero, Long> {
 
-//    List<Hero> findByUserAccountId(Long userAccountId);
+    List<Hero> findByUserAccountId(Long userAccountId);
 
     @Modifying
     @Query("UPDATE Hero e SET e.health = :newValue WHERE e.id = :idValue")

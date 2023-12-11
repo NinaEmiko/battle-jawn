@@ -16,28 +16,35 @@ function MyHeroes( {props}:{props:any} ) {
       const fetchHeroes = async () => {
           try {
               const response = await
-              axios.get('http://localhost:8080/api/hero/all')
+              axios.get('http://localhost:8080/api/hero/list/' + props.id)
               setHeroList(response.data);
               } catch (error) {
               console.error('Error fetching Hero data: ', error)
               }
           }
-      // fetchHeroes();
+      fetchHeroes();
   }, [])
 
   return (
     <>
   
-    <div className="container-jawn-login-form">
+    <div className="container-jawn-hero">
     <h1 className="title-jawn">{props.userName} Heroes</h1>
-    {/* {heroList.map((hero) => (
-  <li key={hero.id}>
-    <strong>{hero.role}</strong> by {hero.winCount}
-  </li>
-))} */}
+    {heroList.length < 5 &&
     <div className="btn-cntr">
-    <button className="btn" id="button5" onClick={() => handleNavigation('/battle')}>Create New Hero</button>
+    <button className="btn" id="new-hero-btn" onClick={() => handleNavigation('/battle')}>Create New Hero</button>
     </div>
+    }
+    <div className="">
+    {heroList.map((hero) => (
+  <div className="container-jawn-hero-card" key={hero.id}>
+    <p>Hero: {hero.role}</p>
+    <p>Hero Win Count: {hero.winCount}</p>
+    <p>Hero Loss Count: {hero.lossCount}</p>
+    <p>Hero Run Count: {hero.runCount}</p>
+    </div>
+))}
+</div>
     </div>
 
     </>

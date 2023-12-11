@@ -95,9 +95,16 @@
   color: black;
 }
 
+#new-hero-btn {
+  background-color: hsl(181, 84%, 44%);
+  color: black;
+}
+
 .btn-cntr {
   display: flex;
   justify-content: center;
+  padding-bottom: 15px;
+
 }
 
 /* Submit button for login/registration form */
@@ -134,4 +141,29 @@
 .nav-link.custom-button.active {
   background-color: hsl(181, 84%, 44%);
   color: black;
+}
+
+.container-jawn-hero-card {
+  justify-content: center;
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+}
+
+.container-jawn-hero {
+  background-color: #333;
+  opacity: 90%;
+  /* Rounds edges of Display Box */
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+  padding-top: .50em;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+  width: 400px;
+  text-align: center;
+  max-height: 400px;
+  overflow-y: auto;
 }

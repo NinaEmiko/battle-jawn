@@ -79,15 +79,15 @@ public class HeroController {
         }
     }
 
-//    @GetMapping("/list/{id}")
-//    public ResponseEntity<List<Hero>> getHeroListByAccountId(@PathVariable("id") Long id) {
-//        logger.info("Inside getHeroListByAccountId controller method. User Account ID: " + id + ".");
-//        List<Hero> heroList = heroService.getHeroListByAccountId(id);
-//        if (heroList != null) {
-//            return new ResponseEntity<>(heroList, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @GetMapping("/list/{id}")
+    public ResponseEntity<List<Hero>> getHeroListByAccountId(@PathVariable("id") Long id) {
+        logger.info("Inside getHeroListByAccountId controller method. User Account ID: " + id + ".");
+        List<Hero> heroList = heroService.getHeroListByAccountId(id);
+        if (heroList != null) {
+            return new ResponseEntity<>(heroList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     
 }
