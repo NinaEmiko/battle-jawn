@@ -6,41 +6,37 @@ import Battle from "./Battle";
 
 function MyHeroes( {props}:{props:any} ) {
     const [beginBattle, setBeginBattle] = useState(false);
-    const [heroRested, setHeroRested] = useState(true);
     const [roleHasBeenChosen, setRoleHasBeenChosen] = useState(false);
     const [heroList, setHeroList] = useState([]);
+
+    const [ids, setIds] = useState({
+      heroId: 0,
+      enemyId: 0,
+      battleSessionId: 0,
+      battleHistoryMessageId: 0,
+  })  
 
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
       navigate(path);
     };
+
+    const fetchHeroes = async () => {
+      try {
+          const response = await
+          axios.get('http://localhost:8080/api/hero/list/' + props.id)
+          setHeroList(response.data);
+          } catch (error) {
+          console.error('Error fetching Hero data: ', error)
+          }
+      }
     
     useEffect(() => {
-      const fetchHeroes = async () => {
-          try {
-              const response = await
-              axios.get('http://localhost:8080/api/hero/list/' + props.id)
-              setHeroList(response.data);
-              } catch (error) {
-              console.error('Error fetching Hero data: ', error)
-              }
-          }
       fetchHeroes();
-  }, [])
+  }, [fetchHeroes])
 
-  const [ids, setIds] = useState({
-    heroId: 0,
-    enemyId: 0,
-    battleSessionId: 0,
-    battleHistoryMessageId: 0,
-})
-
-useEffect(() => {
-
-
-
-
+  useEffect(() => {
     if (roleHasBeenChosen && !beginBattle) {
       const createNewBattleSession = async () => {
         try {
@@ -73,13 +69,12 @@ function handlePlayerSelection(id: any): void {
 function handleRest(id: any): void {
     axios.post('http://localhost:8080/api/hero/rest/' + id)
       .then(response => {
-        setHeroRested(!heroRested);
         console.log("Hero successfully rested. Response: " + response.data)
       })
       .catch(error => {
         console.error('Error fethcing rest data:', error);
       })
-    
+      fetchHeroes();
   };
 
   return (
