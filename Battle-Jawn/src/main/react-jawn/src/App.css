@@ -148,6 +148,7 @@
   border-radius: 5px;
   /* Shadow Effect */
   box-shadow: 0 0 10px 2px;
+  margin-bottom: 15px;
 }
 
 .container-jawn-hero {
@@ -164,7 +165,7 @@
   justify-content: center;
   width: 400px;
   text-align: center;
-  max-height: 400px;
+  max-height: 550px;
   overflow-y: auto;
 }
 

@@ -70,7 +70,7 @@ function MyHeroes( {props}:{props:any} ) {
     </table>
     <div className="row justify-content-center">
           <button className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
-          <button className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Delete</button>
+          <button className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Fight</button>
         </div>
       
 
