@@ -150,7 +150,7 @@ function Battle({props}:{props:any}) {
   battleHistory.includes('You have been defeated by the enemy!')||
   battleHistory.includes('You successfully ran away!')) {
     setButtonDisabled(true);
-    handleNavigation('/account-settings');
+    handleNavigation('/leader-board');
   }
 
   return (
