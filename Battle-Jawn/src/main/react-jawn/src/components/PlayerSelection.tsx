@@ -7,23 +7,22 @@ import athena from "../assets/athena.png";
 import antibiotics from "../assets/antibiotics.png";
 import { useNavigate } from "react-router-dom";
 
-interface PlayerSelectionProps {
-  roleChosen: (id: number) => void;
-  userAccountId: number;
-}
-const PlayerSelection: React.FC<PlayerSelectionProps> = ({ roleChosen, userAccountId }) => {
+function PlayerSelection({props}:{props:any}) {
 
-console.log("User Account Id(PlayerSelection): " + userAccountId);
-  const userAccountId2 = userAccountId;
   const [role, setRole] = useState('');
   const [chosenRole, setChosenRole] = useState('');
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
 
   const handleClickBegin = () => {
       if (role !== '') {
-          axios.post('http://localhost:8080/api/hero', { userAccountId: userAccountId2, role: role })
+          axios.post('http://localhost:8080/api/hero', { userAccountId: props.id, role: role })
                 .then((response) => {
-                  roleChosen(response.data.id);
                   console.log('Hero created successfully: ', response.data);
+                  handleNavigation("/");
                 })
                 .catch((error) => {
                   console.error('Error creating hero:', error);
@@ -68,7 +67,7 @@ console.log("User Account Id(PlayerSelection): " + userAccountId);
               <button onClick={handleClickButtonThree} className="btn" id="button3"><img className="role-icon" src={ninja}></img>DPS</button>
               <button onClick={handleClickButtonFour} className="btn" id="button4"><img className="role-icon" src={wizard}></img>Caster</button>
             </div>
-            <button onClick={handleClickBegin} className="btn" id="button5">Begin</button>
+            <button onClick={handleClickBegin} className="btn" id="button5">Create Hero</button>
           </div>
         </div>
       </div>

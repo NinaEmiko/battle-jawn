@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Battle from "./Battle";
 
 function MyHeroes( {props}:{props:any} ) {
+    const [heroId, setHeroId] = useState(0);
     const [beginBattle, setBeginBattle] = useState(false);
     const [roleHasBeenChosen, setRoleHasBeenChosen] = useState(false);
     const [heroList, setHeroList] = useState([]);
@@ -36,59 +37,34 @@ function MyHeroes( {props}:{props:any} ) {
       fetchHeroes();
   }, [fetchHeroes])
 
-  useEffect(() => {
-    if (roleHasBeenChosen && !beginBattle) {
-      const createNewBattleSession = async () => {
-        try {
-          const response = await axios.post('http://localhost:8080/api/battle-session', {
-            heroId: ids.heroId
-          });
-  
-          setIds((prevData) => ({
-            ...prevData,
-            battleSessionId: response.data.id,
-            enemyId: response.data.enemyId,
-            battleHistoryMessageId: response.data.battleHistoryMessageId
-          }));
-  
-          setBeginBattle(true);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-      createNewBattleSession();
-    }
-  }, [roleHasBeenChosen, beginBattle]);
-
-function handlePlayerSelection(id: any): void {
-    console.log("Inside handlePlayerSelection(BattleContainer. Id: " + id);
-    setIds((prevData) => ({...prevData, heroId: id}));
-    setRoleHasBeenChosen(true);
-}
-
 function handleRest(id: any): void {
     axios.post('http://localhost:8080/api/hero/rest/' + id)
       .then(response => {
         console.log("Hero successfully rested. Response: " + response.data)
       })
       .catch(error => {
-        console.error('Error fethcing rest data:', error);
+        console.error('Error fetching rest data:', error);
       })
       fetchHeroes();
   };
+
+  function handleFight(id: any): void {
+    setHeroId(id);
+    setBeginBattle(true);
+  }
 
   return (
     <>
 
 {beginBattle ?  
-      <Battle  props={ids} />
+      <Battle  props={heroId} />
       :
   
     <div className="container-jawn-hero">
     <h1 className="title-jawn">{props.userName} Heroes</h1>
     {heroList.length < 5 &&
     <div className="btn-cntr">
-    <button className="btn" id="new-hero-btn" onClick={() => handleNavigation('/battle')}>Create New Hero</button>
+    <button className="btn" id="new-hero-btn" onClick={() => handleNavigation('/player-selection')}>Create New Hero</button>
     </div>
     }
     <div className="">
@@ -125,7 +101,7 @@ function handleRest(id: any): void {
     </table>
     <div className="row justify-content-center">
           <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
-          <button onClick={() => handlePlayerSelection(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Fight</button>
+          <button onClick={() => handleFight(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
         </div>
       
 

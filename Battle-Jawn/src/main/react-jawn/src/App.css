@@ -178,7 +178,7 @@
   text-align: right;
 }
 
-#rest-btn, #delete-btn {
+#rest-btn, #fight-btn {
   background-color: transparent;
   border-color: gray;
   color: hsl(181, 84%, 44%);

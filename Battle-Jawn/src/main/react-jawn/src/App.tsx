@@ -1,13 +1,14 @@
 import "./App.css";
 import "./styling/Container.css"
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
 import { request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
-import BattleContainer from "./components/BattleContainer";
 import AccountSettings from "./components/AccountSettings";
+import PlayerSelection from "./components/PlayerSelection";
+import Battle from "./components/Battle";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -15,8 +16,6 @@ function App() {
     id: 0,
     loggedIn: false,
 }) 
-
-console.log("User Account Id(App): " + currentUser.id);
 
   const logout = () => {
     setCurrentUser((prev) => ({
@@ -77,7 +76,7 @@ console.log("User Account Id(App): " + currentUser.id);
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
             )}
             {currentUser.loggedIn && (
-              <Route key="battle" path="/battle" element={ <BattleContainer props={currentUser} />} />
+              <Route key="player-selection" path="/player-selection" element={ <PlayerSelection props={currentUser} />} />
             )}
             {currentUser.loggedIn && (
               <Route key="account-settings" path="/account-settings" element={ <AccountSettings />} />
