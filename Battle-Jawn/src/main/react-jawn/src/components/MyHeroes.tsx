@@ -45,6 +45,15 @@ function handleRest(id: any): void {
     setBeginBattle(true);
   }
 
+  function handleDelete(id: any): void {
+    axios.delete('http://localhost:8080/api/hero/delete/' + id)
+    .then(response => {
+      console.log("Hero successfully deleted. Response: " + response.data);
+    }).catch(error => {
+      console.error('Error deleting hero:', error);
+    })
+  }
+
   return (
     <>
 
@@ -94,6 +103,8 @@ function handleRest(id: any): void {
     <div className="row justify-content-center">
           <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
           <button onClick={() => handleFight(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
+          <button onClick={() => handleDelete(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Delete</button>
+
         </div>
       
 

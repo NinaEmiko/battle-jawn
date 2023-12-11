@@ -111,5 +111,16 @@ public class HeroController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteHeroById(@PathVariable("id") Long id) {
+        logger.info("Inside deleteHeroById controller method. Hero ID: " + id + ".");
+        String response = heroService.deleteHeroById(id);
+        if (response != null) {
+            return ResponseEntity.ok(response);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     
 }

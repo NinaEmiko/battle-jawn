@@ -89,6 +89,15 @@ public class HeroService {
             throw new EntityNotFoundException("Error returning hero list by win count.");
         }
     }
+    @Transactional
+    public String deleteHeroById(Long id) {
+        if (heroRepository.existsById(id)) {
+            heroRepository.deleteById(id);
+            return "Hero successfully deleted.";
+        } else {
+            throw new EntityNotFoundException("Hero with ID " + id + " not found");
+        }
+    }
 
     @Transactional
     public void updateHealthById(int updatedHeroHealth, Long heroId) {
