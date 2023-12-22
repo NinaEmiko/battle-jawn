@@ -68,4 +68,16 @@ public class UserAccountService {
         return userAccountMapper.toUserAccountDTO(userAccount);
     }
 
+    @Transactional
+    public String deleteUserAccountById(Long id) {
+        logger.info("Inside deleteUserAccountById service method. User Account ID: " + id);
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(id);
+
+        if (optionalUserAccount.isPresent()) {
+            userAccountRepository.deleteById(id);
+            return "Account with ID " + id + " not found.";
+        } else {
+            return "Account with ID " + id + " not found.";
+        }
+    }
 }

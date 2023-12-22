@@ -4,6 +4,7 @@ import com.battlejawn.Config.UserAuthenticationProvider;
 import com.battlejawn.DTO.SignUpDTO;
 import com.battlejawn.DTO.UserAccountDTO;
 import com.battlejawn.Entities.Hero.Hero;
+import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Service.UserAccountService;
 import com.battlejawn.DTO.CredentialsDTO;
 import jakarta.validation.Valid;
@@ -13,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ import java.util.logging.Logger;
 public class UserAccountController {
 
     private final UserAccountService userAccountService;
+    private final List<UserAccount> userAccounts = new ArrayList<>();
     private final UserAuthenticationProvider userAuthenticationProvider;
     private final Logger logger = Logger.getLogger(UserAccountController.class.getName());
 
@@ -52,4 +57,13 @@ public class UserAccountController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteAccountById(@PathVariable Long id) {
+
+        logger.info("Inside deleteAccountById controller method. User Account Id: " + id);
+        String response = userAccountService.deleteUserAccountById(id);
+
+        return ResponseEntity.ok(response);
+
+    }
 }
