@@ -3,6 +3,8 @@ package com.battlejawn.Entities.Battle;
 import lombok.Data;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name = "battle_session")
@@ -16,5 +18,6 @@ public class BattleSession {
     private Long heroId;
     @Column
     private Long enemyId;
-
+    @Column
+    private LocalDateTime createdAt;
 }

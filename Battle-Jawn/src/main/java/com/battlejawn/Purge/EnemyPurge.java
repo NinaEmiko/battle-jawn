@@ -20,7 +20,7 @@ public class EnemyPurge {
 
     @Scheduled(cron = "0 0 * * * *")
     public void purgeEnemy() {
-        logger.info("Inside scheduledMethod service class. This job runs every hour.");
+        logger.info("Inside purgeEnemy service class. This job runs every hour.");
         List<Enemy> enemyList = enemyRepository.findAll();
         LocalDateTime now;
         LocalDateTime createdAt;
