@@ -4,11 +4,13 @@ import com.battlejawn.Config.AppException;
 import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.DTO.CredentialsDTO;
 import com.battlejawn.DTO.SignUpDTO;
+import com.battlejawn.DTO.UpdatePasswordDTO;
 import com.battlejawn.Mapper.UserAccountMapper;
 import com.battlejawn.DTO.UserAccountDTO;
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,8 +36,13 @@ public class UserAccountService {
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), userAccount.getPassword())) {
+            logger.info("Inside login service method. userAccount.getPassword()" + userAccount.getPassword() + ".");
+
             return userAccountMapper.toUserAccountDTO(userAccount);
+
         }
+        logger.info("Inside login service method. userAccount.getPassword()" + userAccount.getPassword() + ".");
+
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
@@ -79,5 +86,25 @@ public class UserAccountService {
         } else {
             return "Account with ID " + id + " not found.";
         }
+    }
+
+    @Transactional
+    public String updatePasswordByUserAccountId(Long id, UpdatePasswordDTO updatePasswordDTO) {
+        logger.info("Inside updatePasswordByUserAccountId service method. User Account ID: " + id + ". New Password: " + updatePasswordDTO + ".");
+
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(id);
+        if (optionalUserAccount.isPresent()){
+            UserAccount userAccount = optionalUserAccount.get();
+
+            userAccount.setPassword(passwordEncoder.encode(CharBuffer.wrap(updatePasswordDTO.getNewPassword())));
+            logger.info("passwordEncode.encode(CharBuffer.wrap(newPassword: " + passwordEncoder.encode(CharBuffer.wrap(updatePasswordDTO.getNewPassword())) + " .");
+
+
+            userAccountRepository.save(userAccount);
+            return "Password updated successfully for user account ID: " + id + ".";
+        } else {
+            return "User Account with ID: " + id + " not found.";
+        }
+
     }
 }

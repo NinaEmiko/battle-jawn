@@ -2,6 +2,7 @@ package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.UserAuthenticationProvider;
 import com.battlejawn.DTO.SignUpDTO;
+import com.battlejawn.DTO.UpdatePasswordDTO;
 import com.battlejawn.DTO.UserAccountDTO;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.UserAccount;
@@ -59,11 +60,15 @@ public class UserAccountController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAccountById(@PathVariable Long id) {
-
         logger.info("Inside deleteAccountById controller method. User Account Id: " + id);
         String response = userAccountService.deleteUserAccountById(id);
-
         return ResponseEntity.ok(response);
+    }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updatePasswordByUserAccountId(@PathVariable Long id, @RequestBody @Valid UpdatePasswordDTO updatePasswordDTO) {
+        logger.info("Inside updatePasswordByAccountById controller method. User Account Id: " + id + ". New Password: " + updatePasswordDTO + ".");
+        String response = userAccountService.updatePasswordByUserAccountId(id, updatePasswordDTO);
+        return ResponseEntity.ok(response);
     }
 }
