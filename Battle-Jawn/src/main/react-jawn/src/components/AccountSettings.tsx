@@ -31,11 +31,11 @@ const AccountSettings = ({props}:{props:any}) => {
   return (
     <div className="container-jawn-login-form">
         <h1 className="title-jawn">Account Settings</h1>
-            <label className="account-settings-jawn">New Password</label>
+            <label className="account-settings-jawn">New Password:</label>
             <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}></input>
-            <button onClick={handlePasswordChange}>Update Password</button>
+            <button onClick={handlePasswordChange} className="btn">Update Password</button>
               <p>{message}</p>
-            <button onClick={() => onDelete()} className="account-settings-jawn">Delete Account</button>
+            <button onClick={() => onDelete()} className="btn">Delete Account</button>
             {accountIsDeleted && (
               <p>Account successfully deleted</p>
             )}
