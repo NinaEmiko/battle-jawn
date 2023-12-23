@@ -1,9 +1,7 @@
 package com.battlejawn.Purge;
 
 import com.battlejawn.Entities.Battle.BattleSession;
-import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleSessionRepository;
-import com.battlejawn.Repository.EnemyRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.time.Duration;
@@ -34,11 +32,11 @@ public class BattleSessionPurge {
             timeDifference = Duration.between(battleSession.getCreatedAt(), LocalDateTime.now());
             try {
                 if (timeDifference.compareTo(oneDay) > 0) {
-                    logger.info("Inside BattleSessionPurge service class. Purging enemy with ID: " + battleSession.getId() + ".");
+                    logger.info("Inside BattleSessionPurge service class. Purging battleSession with ID: " + battleSession.getId() + ".");
                     battleSessionRepository.deleteById(battleSession.getId());
                 }
             }catch(Exception e) {
-                throw new RuntimeException("BattleSessionPurge failed to delete enemy: " + battleSession.getId() + ". Error: " + e.getMessage() + ".");
+                throw new RuntimeException("BattleSessionPurge failed to delete battleSession: " + battleSession.getId() + ". Error: " + e.getMessage() + ".");
             }
         }
     }
