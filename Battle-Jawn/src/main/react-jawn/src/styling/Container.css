@@ -61,3 +61,20 @@
   width: 400px;
   text-align: center;
 }
+
+.container-jawn-account-settings {
+  background-color: #333;
+  opacity: 90%;
+  /* Rounds edges of Display Box */
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+  padding-top: .50em;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+  width: 500px;
+  text-align: center;
+  display: flex;
+}

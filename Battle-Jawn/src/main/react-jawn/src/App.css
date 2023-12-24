@@ -57,6 +57,10 @@
   width: 200px;
 }
 
+.log-reg-2 {
+  display: flex;
+}
+
 /******* BUTTON STYLINGS *******/
 
 .btn-grid {
@@ -189,11 +193,21 @@
 }
 
 .hero-name-input {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .userPrompt {
   color: yellow;
   font-size: 30px;
-  padding-top: 15px;
+  padding-top: 10px;
+}
+.tab-update-password{
+  width: 50%;
+}
+.tab-delete-account{
+  width: 50%;
+}
+
+ul {
+  list-style-type: none;
 }
