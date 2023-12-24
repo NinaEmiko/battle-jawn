@@ -1,4 +1,4 @@
-//package com.battlejawn.Controller;
+//package com.battlejawn.Controllers;
 //
 //import com.battlejawn.Controllers.HeroController;
 //import com.battlejawn.Service.HeroService;
