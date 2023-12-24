@@ -7,9 +7,12 @@ import jakarta.persistence.*;
 @Entity 
 @DiscriminatorValue("DPS")
 public class DPS extends Hero {
-    
+    private String name;
     public DPS() {
-        super(90, 90, 2, 3, "DPS", 0, 0, 0, LocalDateTime.now());
+
+    }
+    public DPS(String name) {
+        super(name, 90, 90, 2, 3, "DPS", 0, 0, 0, LocalDateTime.now());
     }
 
 }

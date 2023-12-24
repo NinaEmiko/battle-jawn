@@ -9,7 +9,7 @@
 /******* BACKGROUND STYLINGS *******/
 
 .background-jawn {
-  background-image: url('../../resources/images/BattleJawnBackground.png');
+  background-image: url('./assets/BattleJawnBackground.png');
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0;
@@ -186,4 +186,14 @@
   width:150px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.hero-name-input {
+  margin-bottom: 15px;
+}
+
+.userPrompt {
+  color: yellow;
+  font-size: 30px;
+  padding-top: 15px;
 }

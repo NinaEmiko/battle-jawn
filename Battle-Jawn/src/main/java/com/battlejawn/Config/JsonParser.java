@@ -32,6 +32,16 @@ public class JsonParser {
         }
     }
 
+    public String extractHeroName(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("heroName").asText();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return null;
+        }
+    }
+
     public Long extractHeroId(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);

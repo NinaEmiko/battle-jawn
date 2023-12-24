@@ -7,7 +7,7 @@ import LoginForm from "./components/LoginForm";
 import { request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
 import AccountSettings from "./components/AccountSettings";
-import PlayerSelection from "./components/PlayerSelection";
+import CreateNewHero from "./components/CreateNewHero";
 import LeaderBoard from "./components/LeaderBoard";
 
 function App() {
@@ -76,7 +76,7 @@ function App() {
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
             )}
             {currentUser.loggedIn && (
-              <Route key="player-selection" path="/player-selection" element={ <PlayerSelection props={currentUser} />} />
+              <Route key="create-hero" path="/create-hero" element={ <CreateNewHero props={currentUser} />} />
             )}
             {currentUser.loggedIn && (
               <Route key="leader-board" path="/leader-board" element={ <LeaderBoard props={currentUser} />} />

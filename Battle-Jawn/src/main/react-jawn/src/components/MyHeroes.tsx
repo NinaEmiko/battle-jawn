@@ -54,7 +54,6 @@ function handleRest(id: any): void {
         console.error('Error deleting hero:', error);
       })
   }
-
   return (
     <>
 
@@ -66,13 +65,15 @@ function handleRest(id: any): void {
     <h1 className="title-jawn">{props.userName} Heroes</h1>
     {heroList.length < 5 &&
     <div className="btn-cntr">
-    <button className="btn" id="new-hero-btn" onClick={() => handleNavigation('/player-selection')}>Create New Hero</button>
+    <button className="btn" id="new-hero-btn" onClick={() => handleNavigation('/create-hero')}>Create New Hero</button>
     </div>
     }
     <div className="">
     {heroList.map((hero) => (
   <div className="container-jawn-hero-card" key={hero.id}>
-    <p className="title-jawn">Name Goes Here</p>
+    <div className="userPrompt">
+        {hero.name}
+    </div>
     <table>
       <tbody>
         <tr>

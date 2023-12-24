@@ -26,7 +26,7 @@ public class HeroServiceTest {
     void testGetHeroByIdReturnsCorrectHero() {
 
         long id = 1L;
-        Tank tank = new Tank();
+        Tank tank = new Tank("name");
         tank.setId(id);
 
         when(heroRepository.findById(id)).thenReturn(Optional.of(tank));

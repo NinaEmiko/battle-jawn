@@ -1,7 +1,6 @@
 package com.battlejawn.Entities.Hero;
 
 import java.time.LocalDateTime;
-
 import com.battlejawn.Entities.UserAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -18,6 +17,8 @@ public abstract class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column
+    private String name;
     @Column
     private int health;
     @Column
@@ -46,7 +47,8 @@ public abstract class Hero {
 
     }
 
-    public Hero(int health, int maxHealth, int potions, int maxPotions, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
+    public Hero(String name, int health, int maxHealth, int potions, int maxPotions, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
+        this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
         this.potions = potions;

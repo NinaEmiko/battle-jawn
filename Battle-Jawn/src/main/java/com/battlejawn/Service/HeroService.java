@@ -127,13 +127,13 @@ public class HeroService {
     }
 
     @Transactional
-    public Hero saveHero(String role, Long userAccountId) {
+    public Hero saveHero(String role, String name, Long userAccountId) {
         try {
             Hero hero = switch (role) {
-                case "Tank" -> new Tank();
-                case "DPS" -> new DPS();
-                case "Caster" -> new Caster();
-                default -> new Healer();
+                case "Tank" -> new Tank(name);
+                case "DPS" -> new DPS(name);
+                case "Caster" -> new Caster(name);
+                default -> new Healer(name);
             };
             Optional<UserAccount> userAccount = userAccountRepository.findById(userAccountId);
             logger.info("Inside saveHero Service Method. User Account: " + userAccount);

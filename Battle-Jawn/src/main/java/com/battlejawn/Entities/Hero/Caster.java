@@ -7,9 +7,12 @@ import jakarta.persistence.*;
 @Entity 
 @DiscriminatorValue("CASTER")
 public class Caster extends Hero {
-    
+    private String name;
     public Caster() {
-        super(90, 90, 3, 3, "Caster", 0, 0, 0, LocalDateTime.now());
+
+    }
+    public Caster(String name) {
+        super(name, 90, 90, 3, 3, "Caster", 0, 0, 0, LocalDateTime.now());
     }
 
 }

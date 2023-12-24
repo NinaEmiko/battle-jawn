@@ -29,10 +29,11 @@ public class HeroController {
         logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
         JsonParser jsonParser;
         jsonParser = new JsonParser();
+        String parsedName = jsonParser.extractHeroName(data);
         String parsedRole = jsonParser.extractRole(data);
         Long parsedUserAccountId = jsonParser.extractUserAccountId(data);
         logger.info("Inside createNewHero controller method. Parsed User Account Id: " + parsedUserAccountId + ".");
-        Hero hero = heroService.saveHero(parsedRole, parsedUserAccountId);
+        Hero hero = heroService.saveHero(parsedRole, parsedName, parsedUserAccountId);
         UserResponse userResponse;
         if (hero != null) {
             URI location = URI.create("/hero/" + hero.getId());
