@@ -75,7 +75,7 @@
 .btn {
   background-color: hsl(181, 84%, 44%);
   border: 1px solid hsl(200, 100%, 30%);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 5px 10px;
   color: black;
   outline: none;
@@ -117,7 +117,7 @@
   text-align: center;
   background-color: hsl(181, 84%, 44%);
   color: black;
-  border-radius: 10px;
+  border-radius: 0;
   font-size: 20px;
   height: 50px;
   width: 200px;
@@ -181,8 +181,12 @@
   padding-left: 190px;
   text-align: right;
 }
+.data-jawn-win {
+  padding-left: 240px;
+  text-align: right;
+}
 
-#rest-btn, #fight-btn, #delete-btn {
+#rest-btn, #fight-btn, #delete-btn, #submit-btn {
   background-color: transparent;
   border-color: gray;
   color: hsl(181, 84%, 44%);

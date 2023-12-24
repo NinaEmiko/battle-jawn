@@ -27,12 +27,12 @@ const LeaderBoard = ({props}:{props:any}) => {
                         <table>
                             <tbody>
                                 <tr>
-                                    <td className="row-jawn">ID:</td>
-                                    <td className="data-jawn">{hero.id}</td>
+                                    <td className="row-jawn">Hero:</td>
+                                    <td className="data-jawn-win">{hero.name}</td>
                                 </tr>
                                 <tr>
                                     <td className="row-jawn">Wins:</td>
-                                    <td className="data-jawn">{hero.winCount}</td>
+                                    <td className="data-jawn-win">{hero.winCount}</td>
                                 </tr>
                             </tbody>
                         </table>

@@ -73,14 +73,14 @@ const AccountSettings = ({props}:{props:any}) => {
                       {"New Password: "}
                   </div>
                   <input className="hero-name-input" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}></input>
-                  <button onClick={handlePasswordChange} className="btn">Submit</button>
+                  <button onClick={handlePasswordChange} className="btn" id="submit-btn">Submit</button>
                   <p>{message}</p>
               </div>
             )}
 
             {showDeleteAccount && (
               <div>
-                <button onClick={() => onSubmitDelete()} className="btn">Submit</button>
+                <button onClick={() => onSubmitDelete()} className="btn" id="submit-btn">Submit</button>
               </div>
             )}
       </div>
