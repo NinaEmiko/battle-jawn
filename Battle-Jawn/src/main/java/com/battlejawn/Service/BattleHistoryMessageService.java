@@ -23,8 +23,7 @@ public class BattleHistoryMessageService {
         battleHistoryMessage.setMessage(message);
         battleHistoryMessage.setCreatedAt(LocalDateTime.now());
         battleHistoryMessage.setBattleSessionId(battleSessionId);
-        battleHistoryMessageRepository.save(battleHistoryMessage);
-        return battleHistoryMessage;
+        return battleHistoryMessageRepository.save(battleHistoryMessage);
     }
 
     public List<String> getBattleHistoryMessagesByBattleSessionId(Long id) {
