@@ -24,24 +24,15 @@ public class HeroController {
         this.heroService = heroService;
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
-        logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
-        JsonParser jsonParser;
-        jsonParser = new JsonParser();
-        String parsedName = jsonParser.extractHeroName(data);
-        String parsedRole = jsonParser.extractRole(data);
-        Long parsedUserAccountId = jsonParser.extractUserAccountId(data);
-        logger.info("Inside createNewHero controller method. Parsed User Account Id: " + parsedUserAccountId + ".");
-        Hero hero = heroService.saveHero(parsedRole, parsedName, parsedUserAccountId);
-        UserResponse userResponse;
-        if (hero != null) {
-            URI location = URI.create("/hero/" + hero.getId());
-            userResponse = new UserResponse(location, hero.getId());
-            logger.info("Inside createNewHero. User response: " + userResponse);
-            return ResponseEntity.created(location).body(userResponse);
+    @GetMapping("/all")
+    public ResponseEntity<List<Hero>> getAllHeroes() {
+        logger.info("Inside getAllHeroes controller method.");
+        List<Hero> heroes = heroService.getAllHeroes();
+
+        if (heroes != null) {
+            return new ResponseEntity<>(heroes, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -53,17 +44,6 @@ public class HeroController {
 
         if (hero != null) {
             return new ResponseEntity<>(hero, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    @GetMapping("/all")
-    public ResponseEntity<List<Hero>> getAllHeroes() {
-        logger.info("Inside getAllHeroes controller method.");
-        List<Hero> heroes = heroService.getAllHeroes();
-
-        if (heroes != null) {
-            return new ResponseEntity<>(heroes, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -99,6 +79,27 @@ public class HeroController {
             return new ResponseEntity<>(heroList, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
+        logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
+        JsonParser jsonParser;
+        jsonParser = new JsonParser();
+        String parsedName = jsonParser.extractHeroName(data);
+        String parsedRole = jsonParser.extractRole(data);
+        Long parsedUserAccountId = jsonParser.extractUserAccountId(data);
+        logger.info("Inside createNewHero controller method. Parsed User Account Id: " + parsedUserAccountId + ".");
+        Hero hero = heroService.saveHero(parsedRole, parsedName, parsedUserAccountId);
+        UserResponse userResponse;
+        if (hero != null) {
+            URI location = URI.create("/hero/" + hero.getId());
+            userResponse = new UserResponse(location, hero.getId());
+            logger.info("Inside createNewHero. User response: " + userResponse);
+            return ResponseEntity.created(location).body(userResponse);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

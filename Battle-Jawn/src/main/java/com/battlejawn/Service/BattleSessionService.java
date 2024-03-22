@@ -37,7 +37,7 @@ public class BattleSessionService {
     public BattleSession createNewBattleSession(Long heroId) {
         logger.info("Inside createNewBattleSession service method. Hero ID: " + heroId + ".");
         try {
-            Enemy enemy = enemyService.createNewEnemy();
+            Enemy enemy = enemyService.createNewEnemy(1);
 
             BattleSession battleSession = new BattleSession();
 

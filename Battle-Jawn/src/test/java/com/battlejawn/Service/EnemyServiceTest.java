@@ -27,7 +27,7 @@ class EnemyServiceTest {
     @Test
     void testGetEnemyById(){
         long enemyId = 1L;
-        Orc orc = new Orc();
+        Orc orc = new Orc(1);
         orc.setId(enemyId);
 
         when(enemyRepository.findById(enemyId)).thenReturn(Optional.of(orc));

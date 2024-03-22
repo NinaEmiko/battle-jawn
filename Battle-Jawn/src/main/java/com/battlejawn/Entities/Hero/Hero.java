@@ -35,6 +35,10 @@ public abstract class Hero {
     private int winCount;
     @Column
     private int lossCount;
+    @Column
+    private int level;
+    @Column
+    private long experience;
     @JsonIgnore
     @ToString.Exclude
     @ManyToOne
@@ -47,7 +51,7 @@ public abstract class Hero {
 
     }
 
-    public Hero(String name, int health, int maxHealth, int potions, int maxPotions, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
+    public Hero(String name, int health, int maxHealth, int potions, int maxPotions, String role, int runCount, int winCount, int lossCount, int level, long experience, LocalDateTime createdAt) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
@@ -57,6 +61,8 @@ public abstract class Hero {
         this.runCount = runCount;
         this.winCount = winCount;
         this.lossCount = lossCount;
+        this.level = level;
+        this.experience = experience;
         this.createdAt = createdAt;
 
     }

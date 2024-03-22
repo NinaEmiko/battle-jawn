@@ -25,7 +25,6 @@ public class BattleHistoryMessageService {
         battleHistoryMessage.setBattleSessionId(battleSessionId);
         battleHistoryMessageRepository.save(battleHistoryMessage);
         return battleHistoryMessage;
-
     }
 
     public List<String> getBattleHistoryMessagesByBattleSessionId(Long id) {

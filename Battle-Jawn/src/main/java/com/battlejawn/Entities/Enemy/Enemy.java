@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "enemy_type")
 public abstract class Enemy {
@@ -28,18 +30,18 @@ public abstract class Enemy {
     @Column
     private int strength;
     @Column
+    private int level;
+    @Column
     private LocalDateTime createdAt;
 
-    public Enemy(String name, int health, int maxHealth, int potions, int maxPotions, int strength, LocalDateTime createdAt) {
+    public Enemy(String name, int health, int maxHealth, int potions, int maxPotions, int strength, int level, LocalDateTime createdAt) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
         this.potions = potions;
         this.maxPotions = maxPotions;
         this.strength = strength;
+        this.level = level;
         this.createdAt = createdAt;
-    }
-
-    public Enemy() {
     }
 }

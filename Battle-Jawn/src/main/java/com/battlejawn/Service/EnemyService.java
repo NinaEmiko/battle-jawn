@@ -62,26 +62,26 @@ public class EnemyService {
     }
 
     @Transactional
-    public Enemy createNewEnemy() {
+    public Enemy createNewEnemy(int heroLevel) {
         try {
             Enemy enemy;
             logger.info("Inside createNewEnemy service method.");
             int randomIndex = (int) Math.floor(Math.random() * 3) + 1;
 
             switch (randomIndex) {
-                case 1: enemy = new Orc();
+                case 1: enemy = new Orc(determineEnemyLevel(heroLevel));
                         logger.info("New Orc created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 2: enemy = new Spirit();
+                case 2: enemy = new Spirit(determineEnemyLevel(heroLevel));
                     logger.info("New Spirit created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 3: enemy = new Thief();
+                case 3: enemy = new Thief(determineEnemyLevel(heroLevel));
                         logger.info("New Thief created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 4: enemy = new Wolf();
+                case 4: enemy = new Wolf(determineEnemyLevel(heroLevel));
                         logger.info("New Wolf created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         break;
@@ -90,6 +90,10 @@ public class EnemyService {
         } catch(Exception e) {
             throw new RuntimeException("Failed to save enemy: " + e.getMessage() + ".");
         }
+    }
+
+    public int determineEnemyLevel(int heroLevel){
+        return (int) Math.floor(Math.random() * heroLevel) + 1;
     }
 
 }

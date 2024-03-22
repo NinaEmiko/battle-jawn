@@ -11,6 +11,7 @@
 //import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
 //import org.springframework.test.web.servlet.MockMvc;
+//import org.springframework.test.web.servlet.ResultActions;
 //
 //@WebMvcTest(controllers = HeroController.class)
 //@AutoConfigureMockMvc(addFilters = false)
@@ -31,21 +32,21 @@
 //
 //    @Test
 //    public void testGetHeroById() throws Exception {
-////        //GIVEN
-////        Long id = 1L;
-////        Caster caster = new Caster();
-////        caster.setId(id);
-////        //WHEN
-////        when(heroService.getHeroById(id)).thenReturn(caster);
-////        ResultActions result = mvc.perform(get("http://localhost:8080/api/hero/1").accept(MediaType.APPLICATION_JSON)
-////                );
-////        //THEN
-////        verify(heroService, times(1)).getHeroById(id);
-////        result.andExpectAll(
-////                status().isOk(),
-////                content().contentType(MediaType.APPLICATION_JSON),
-////                content().json(objectMapper.writeValueAsString(heroService))
-////        );
+//        //GIVEN
+//        Long id = 1L;
+//        Caster caster = new Caster();
+//        caster.setId(id);
+//        //WHEN
+//        when(heroService.getHeroById(id)).thenReturn(caster);
+//        ResultActions result = mvc.perform(get("http://localhost:8080/api/hero/1").accept(MediaType.APPLICATION_JSON)
+//                );
+//        //THEN
+//        verify(heroService, times(1)).getHeroById(id);
+//        result.andExpectAll(
+//                status().isOk(),
+//                content().contentType(MediaType.APPLICATION_JSON),
+//                content().json(objectMapper.writeValueAsString(heroService))
+//        );
 //    }
 //
 //    @Test

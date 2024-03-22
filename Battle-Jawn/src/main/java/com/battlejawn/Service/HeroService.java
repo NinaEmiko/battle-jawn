@@ -30,35 +30,70 @@ public class HeroService {
         this.userAccountRepository = userAccountRepository;
     }
 
-    public Hero getHeroById(Long id){
-        logger.info("Inside getHeroById service method. Hero ID: " + id + ".");
-        Optional<Hero> hero = heroRepository.findById(id);
-        if (hero.isPresent()) {
-            return hero.get();
-        } else {
-            throw new EntityNotFoundException("Hero with ID " + id + " not found.");
+    public List<Hero> getAllHeroes(){
+        logger.info("Inside getAllHeroes service method.");
+        try {
+            return heroRepository.findAll();
+        } catch(Exception e) {
+            throw new EntityNotFoundException("Error fetching heroes.");
         }
     }
 
-    public List<Hero> getAllHeroes(){
-        logger.info("Inside getAllHeroes service method.");
-        List<Hero> heroes = heroRepository.findAll();
-        if (!heroes.isEmpty()) {
-            return heroes;
-        } else {
-            throw new EntityNotFoundException("Error fetching heroes.");
+    public Hero getHeroById(Long id){
+        logger.info("Inside getHeroById service method. Hero ID: " + id + ".");
+        try {
+            return heroRepository.findById(id).get();
+        } catch(Exception e) {
+            throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
 
     public Integer getHeroHealthById(Long id){
         logger.info("Inside getHeroHealthById service method. Hero ID: " + id);
-        Optional<Hero> hero = heroRepository.findById(id);
-        if (hero.isPresent()) {
-            return hero.get().getHealth();
-        } else {
+        try {
+            return heroRepository.findById(id).get().getHealth();
+        } catch(Exception e) {
             throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
+
+    public List<Hero> getHeroListByAccountId(Long id) {
+        logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);
+        try {
+            return heroRepository.findByUserAccountId(id);
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Hero List with User Account ID " + id + " not found.");
+        }
+    }
+
+    public List<Hero> getHeroListByWinCount() {
+        logger.info("Inside getHeroListByWinCount service method.");
+        try {
+            return heroRepository.findByWinCount();
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Error returning hero list by win count.");
+        }
+    }
+
+    @Transactional
+    public Hero saveHero(String role, String name, Long userAccountId) {
+        try {
+            Hero hero = switch (role) {
+                case "Tank" -> new Tank(name);
+                case "DPS" -> new DPS(name);
+                case "Caster" -> new Caster(name);
+                default -> new Healer(name);
+            };
+            Optional<UserAccount> userAccount = userAccountRepository.findById(userAccountId);
+            logger.info("Inside saveHero Service Method. User Account: " + userAccount);
+            userAccount.ifPresent(hero::setUserAccount);
+            heroRepository.save(hero);
+            return hero;
+        } catch(Exception e) {
+            throw new RuntimeException("Failed to save hero: " + e.getMessage() + ".");
+        }
+    }
+
     @Transactional
     public Hero restHeroById(Long id) {
         logger.info("Inside restHeroById service method. Hero ID: " + id);
@@ -68,35 +103,6 @@ public class HeroService {
             heroRepository.restHeroById(id, actualHero.getMaxHealth(), actualHero.getMaxPotions());
         }
         return null;
-    }
-
-    public List<Hero> getHeroListByAccountId(Long id) {
-        logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);
-        List<Hero> heroList = heroRepository.findByUserAccountId(id);
-        if (heroList != null) {
-            return heroList;
-        } else {
-            throw new EntityNotFoundException("Hero List with User Account ID " + id + " not found.");
-        }
-    }
-
-    public List<Hero> getHeroListByWinCount() {
-        logger.info("Inside getHeroListByWinCount service method.");
-        List<Hero> heroList = heroRepository.findByWinCount();
-        if (heroList != null) {
-            return heroList;
-        } else {
-            throw new EntityNotFoundException("Error returning hero list by win count.");
-        }
-    }
-    @Transactional
-    public String deleteHeroById(Long id) {
-        if (heroRepository.existsById(id)) {
-            heroRepository.deleteById(id);
-            return "Hero successfully deleted.";
-        } else {
-            throw new EntityNotFoundException("Hero with ID " + id + " not found");
-        }
     }
 
     @Transactional
@@ -127,21 +133,13 @@ public class HeroService {
     }
 
     @Transactional
-    public Hero saveHero(String role, String name, Long userAccountId) {
-        try {
-            Hero hero = switch (role) {
-                case "Tank" -> new Tank(name);
-                case "DPS" -> new DPS(name);
-                case "Caster" -> new Caster(name);
-                default -> new Healer(name);
-            };
-            Optional<UserAccount> userAccount = userAccountRepository.findById(userAccountId);
-            logger.info("Inside saveHero Service Method. User Account: " + userAccount);
-            userAccount.ifPresent(hero::setUserAccount);
-            heroRepository.save(hero);
-            return hero;
-        } catch(Exception e) {
-            throw new RuntimeException("Failed to save hero: " + e.getMessage() + ".");
+    public String deleteHeroById(Long id) {
+        if (heroRepository.existsById(id)) {
+            heroRepository.deleteById(id);
+            return "Hero successfully deleted.";
+        } else {
+            throw new EntityNotFoundException("Hero with ID " + id + " not found");
         }
     }
+
 }
