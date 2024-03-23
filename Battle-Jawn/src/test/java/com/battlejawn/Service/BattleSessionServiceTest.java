@@ -5,6 +5,7 @@ import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Hero.Hero;
+import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Repository.BattleSessionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ class BattleSessionServiceTest {
     BattleSessionService battleSessionService;
     @BeforeEach
     void setup() {
-
+        hero = new Tank();
     }
     @Test
     void getBattleSessionByIdTest() {
@@ -56,16 +57,5 @@ class BattleSessionServiceTest {
         when(battleSessionRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> battleSessionService.getBattleSessionById(anyLong()));
     }
-
-    @Test
-    void createNewBattleSessionTest(){
-
-    }
-
-//    @Test
-//    void createNewBattleSessionExceptionTest(){
-//        when(enemyService.createNewEnemy(anyInt())).thenThrow(new RuntimeException());
-//        assertThrows(RuntimeException.class, () -> battleSessionService.createNewBattleSession(anyLong()));
-//    }
 
 }
