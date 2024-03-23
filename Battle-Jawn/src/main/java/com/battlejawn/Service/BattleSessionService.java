@@ -6,7 +6,6 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Repository.BattleSessionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -15,12 +14,14 @@ public class BattleSessionService {
     private final BattleSessionRepository battleSessionRepository;
     private final EnemyService enemyService;
     private final BattleHistoryMessageService battleHistoryMessageService;
+    private final HeroService heroService;
     private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
 
-    public BattleSessionService(BattleSessionRepository battleSessionRepository, EnemyService enemyService, BattleHistoryMessageService battleHistoryMessageService) {
+    public BattleSessionService(BattleSessionRepository battleSessionRepository, EnemyService enemyService, BattleHistoryMessageService battleHistoryMessageService, HeroService heroService) {
         this.battleSessionRepository = battleSessionRepository;
         this.enemyService = enemyService;
         this.battleHistoryMessageService = battleHistoryMessageService;
+        this.heroService = heroService;
     }
 
     public BattleSession getBattleSessionById(Long id) {
@@ -37,7 +38,7 @@ public class BattleSessionService {
     public BattleSession createNewBattleSession(Long heroId) {
         logger.info("Inside createNewBattleSession service method. Hero ID: " + heroId + ".");
         try {
-            Enemy enemy = enemyService.createNewEnemy(1);
+            Enemy enemy = enemyService.createNewEnemy(heroService.getHeroById(heroId).getLevel());
 
             BattleSession battleSession = new BattleSession();
 

@@ -32,12 +32,15 @@ public class EnemyService {
     }
 
     public Enemy getEnemyById(Long id) {
-        logger.info("Inside getEnemyById service method. Enemy ID: " + id + ".");
-        Optional<Enemy> enemy = enemyRepository.findById(id);
-        if (enemy.isPresent()) {
-            return enemy.get();
-        } else {
-            throw new EntityNotFoundException("Enemy with ID " + id + " not found.");
+        try {
+            logger.info("Inside getEnemyById service method. Enemy ID: " + id + ".");
+            Optional<Enemy> enemy = enemyRepository.findById(id);
+            if (enemy.isPresent()) {
+                return enemy.get();
+            }
+            return null;
+        } catch(Exception e) {
+            throw new EntityNotFoundException("Enemy with ID " + id + " not found: " + e);
         }
     }
 
