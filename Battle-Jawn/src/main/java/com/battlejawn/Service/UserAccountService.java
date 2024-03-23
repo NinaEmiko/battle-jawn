@@ -34,15 +34,9 @@ public class UserAccountService {
     public UserAccountDTO login(CredentialsDTO credentialsDTO) {
         UserAccount userAccount = userAccountRepository.findByLogin(credentialsDTO.getLogin())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), userAccount.getPassword())) {
-            logger.info("Inside login service method. userAccount.getPassword()" + userAccount.getPassword() + ".");
-
             return userAccountMapper.toUserAccountDTO(userAccount);
-
         }
-        logger.info("Inside login service method. userAccount.getPassword()" + userAccount.getPassword() + ".");
-
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
