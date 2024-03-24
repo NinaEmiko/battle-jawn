@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -66,12 +67,12 @@ public class HeroServiceTest {
         when(heroRepository.findById(anyLong())).thenThrow(EntityNotFoundException.class);
         assertThrows(EntityNotFoundException.class, () -> heroService.getHeroById(anyLong()));
     }
-//    @Test
-//    void getHeroHealthByIdTest() {
-//        when(heroRepository.findById(anyLong()).get().getHealth()).thenReturn(7);
-//        int actual = heroService.getHeroHealthById(anyLong());
-//        assertEquals(actual, 7);
-//    }
+    @Test
+    void getHeroHealthByIdTest() {
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.of(hero));
+        heroService.getHeroHealthById(anyLong());
+        verify(heroRepository, times(1)).findById(anyLong());
+    }
     @Test
     void getHeroListByAccountIdTest() {
         when(heroRepository.findByUserAccountId(anyLong())).thenReturn(heroes);
@@ -93,5 +94,48 @@ public class HeroServiceTest {
     void getHeroListByWinCountExceptionTest() {
         when(heroRepository.findByWinCount()).thenThrow(EntityNotFoundException.class);
         assertThrows(EntityNotFoundException.class, () -> heroService.getHeroListByWinCount());
+    }
+    @Test
+    void restHeroByIdTest() {
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.of(hero));
+        heroService.restHeroById(anyLong());
+        verify(heroRepository, times(1)).findById(anyLong());
+    }
+    @Test
+    void updateHealthByIdTest(){
+        doNothing().when(heroRepository).updateHealthById(anyInt(), anyLong());
+        heroService.updateHealthById(anyInt(),anyLong());
+        verify(heroRepository, times(1)).updateHealthById(anyInt(), anyLong());
+    }
+    @Test
+    void updatePotionCountByIdTest(){
+        doNothing().when(heroRepository).updatePotionCountById(anyInt(), anyLong());
+        heroService.updatePotionCountById(anyInt(), anyLong());
+        verify(heroRepository, times(1)).updatePotionCountById(anyInt(), anyLong());
+    }
+    @Test
+    void updateRunCountByIdTest() {
+        doNothing().when(heroRepository).updateRunCountByHeroId(anyInt(), anyLong());
+        heroService.updateRunCountById(anyLong(), anyInt());
+        verify(heroRepository, times(1)).updateRunCountByHeroId(anyInt(), anyLong());
+    }
+    @Test
+    void updateWinCountByIdTest(){
+        doNothing().when(heroRepository).updateWinCountById(anyInt(), anyLong());
+        heroService.updateWinCountById(anyLong(), anyInt());
+        verify(heroRepository, times(1)).updateWinCountById(anyInt(), anyLong());
+    }
+    @Test
+    void updateLossCountByIdTest(){
+        doNothing().when(heroRepository).updateLossCountById(anyInt(), anyLong());
+        heroService.updateLossCountById(anyLong(), anyInt());
+        verify(heroRepository, times(1)).updateLossCountById(anyInt(), anyLong());
+    }
+    @Test
+    void deleteHeroByIdTest() {
+        doNothing().when(heroRepository).deleteById(anyLong());
+        when(heroRepository.existsById(anyLong())).thenReturn(true);
+        heroService.deleteHeroById(anyLong());
+        verify(heroRepository, times(1)).deleteById(anyLong());
     }
 }

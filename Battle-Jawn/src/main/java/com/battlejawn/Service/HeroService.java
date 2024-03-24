@@ -50,9 +50,10 @@ public class HeroService {
 
     public Integer getHeroHealthById(Long id){
         logger.info("Inside getHeroHealthById service method. Hero ID: " + id);
-        try {
-            return heroRepository.findById(id).get().getHealth();
-        } catch(Exception e) {
+        Optional<Hero> hero = heroRepository.findById(id);
+        if (hero.isPresent()) {
+            return hero.get().getHealth();
+        } else {
             throw new EntityNotFoundException("Hero with ID " + id + " not found.");
         }
     }
