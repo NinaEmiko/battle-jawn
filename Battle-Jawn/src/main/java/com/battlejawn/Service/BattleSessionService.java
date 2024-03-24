@@ -3,6 +3,7 @@ package com.battlejawn.Service;
 import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
+import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Repository.BattleSessionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,9 @@ public class BattleSessionService {
     public BattleSession createNewBattleSession(Long heroId) {
         logger.info("Inside createNewBattleSession service method. Hero ID: " + heroId + ".");
         try {
-            Enemy enemy = enemyService.createNewEnemy(heroService.getHeroById(heroId).getLevel());
+            Hero hero = heroService.getHeroById(heroId);
+            int heroLevel = hero.getLevel();
+            Enemy enemy = enemyService.createNewEnemy(heroLevel);
 
             BattleSession battleSession = new BattleSession();
 

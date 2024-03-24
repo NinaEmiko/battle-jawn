@@ -4,6 +4,7 @@ import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Enemy.Orc;
+import com.battlejawn.Entities.Enemy.Wolf;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Repository.BattleSessionRepository;
@@ -15,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +47,13 @@ class BattleSessionServiceTest {
     @BeforeEach
     void setup() {
         hero = new Tank();
+        battleSession = new BattleSession();
+        battleHistoryMessage = new BattleHistoryMessage();
+        battleSession.setId(4L);
+        enemy = new Wolf(1);
+        hero.setId(1L);
+        enemy.setId(2L);
+
     }
     @Test
     void getBattleSessionByIdTest() {
@@ -58,4 +67,18 @@ class BattleSessionServiceTest {
         assertThrows(EntityNotFoundException.class, () -> battleSessionService.getBattleSessionById(anyLong()));
     }
 
+    @Test
+    void createNewBattleSessionTest() {
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(enemyService.createNewEnemy(anyInt())).thenReturn(enemy);
+        when(battleSessionRepository.save(any())).thenReturn(battleSession);
+        when(battleHistoryMessageService.createNewMessage(null, "You encountered an enemy!")).thenReturn(battleHistoryMessage);
+        battleSessionService.createNewBattleSession(hero.getId());
+        verify(battleSessionRepository, times(1)).save(any());
+    }
+    @Test
+    void createNewBattleSessionExceptionTest() {
+        when(heroService.getHeroById(anyLong())).thenThrow(new RuntimeException());
+        assertThrows(RuntimeException.class, () -> battleSessionService.createNewBattleSession(anyLong()));
+    }
 }
