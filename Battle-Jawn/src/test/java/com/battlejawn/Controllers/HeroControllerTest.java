@@ -1,7 +1,6 @@
 package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.JsonParser;
-import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Service.HeroService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,10 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.ResultActions;
-
 import java.util.List;
-
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

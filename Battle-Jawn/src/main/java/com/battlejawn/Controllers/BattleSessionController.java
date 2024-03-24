@@ -40,8 +40,7 @@ public class BattleSessionController {
     @ResponseBody
     public ResponseEntity<BattleSession> createNewBattleSession(@RequestBody String heroId) {
         logger.info("Inside createNewBattleSession controller method. Hero ID: " + heroId + ".");
-        JsonParser jsonParser;
-        jsonParser = new JsonParser();
+        JsonParser jsonParser = new JsonParser();
         Long parsedHeroId = jsonParser.extractHeroId(heroId);
         BattleSession battleSession = battleSessionService.createNewBattleSession(parsedHeroId);
         if (battleSession != null) {

@@ -85,8 +85,7 @@ public class HeroController {
     @PostMapping
     public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
         logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
-        JsonParser jsonParser;
-        jsonParser = new JsonParser();
+        JsonParser jsonParser = new JsonParser();
         String parsedName = jsonParser.extractHeroName(data);
         String parsedRole = jsonParser.extractRole(data);
         Long parsedUserAccountId = jsonParser.extractUserAccountId(data);
