@@ -47,12 +47,20 @@ class EnemyMoveServiceTest {
         battleSession.setId(3L);
         battleSession.setEnemyId(1L);
         battleSession.setHeroId(2L);
-
-        Enemy enemy = new Orc(1);
-        Hero hero = new Tank();
+        hero = new Tank("Name");
     }
     @Test
     void enemyMoveTest() {
+//        enemy = enemyService.createNewEnemy(1);
+//
+//        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+//        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+//        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+//        when(enemyMoveService.processEnemyMove(anyInt(), any(), anyLong(), any(), anyString())).thenReturn(enemyMoveDTO);
+//
+//        enemyMoveService.processEnemyMove(anyInt(), any(), anyLong(), any(), anyString());
+//
+//        verify(battleSessionService, times(1)).getBattleSessionById(anyLong());
 
     }
     @Test

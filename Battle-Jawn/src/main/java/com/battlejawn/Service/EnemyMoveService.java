@@ -31,7 +31,6 @@ public class EnemyMoveService {
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
         int moveIndex = getRandomIndex();
-        int damage;
 
         return switch (enemy.getName()) {
             case "Wolf" -> {
