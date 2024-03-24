@@ -32,27 +32,21 @@ class HeroMoveControllerTest {
     @BeforeEach
     void setup() {
     }
-//    @Test
-//    void heroMoveTest() {
-//
-//        String data = "{\"thing\":\"parsedThing\",\"id\":123}";
-//
-//        when(jsonParser.extractMove(data)).thenReturn("parsedThing");
-//        when(jsonParser.extractBattleSessionId(data)).thenReturn(123L);
-//
-//        when(heroMoveService.heroMove("parsedThing", 123L)).thenReturn(heroMoveDTO);
-//
-//        ResponseEntity<HeroMoveDTO> responseEntity = heroMoveController.heroMove(data);
-//
-//        verify(jsonParser).extractMove(data);
-//        verify(jsonParser).extractBattleSessionId(data);
-//        verify(heroMoveService).heroMove("parsedThing", 123L);
-//
-//        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-//        assertEquals(heroMoveDTO, responseEntity.getBody());
-//
-//        URI expectedLocation = URI.create("/thing-dto/");
-//        assertEquals(expectedLocation, responseEntity.getHeaders().getLocation());
-//    }
+    @Test
+    void heroMoveTest() {
+        when(jsonParser.extractMove(anyString())).thenReturn("This");
+        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
+        when(heroMoveService.heroMove(anyString(), anyLong())).thenReturn(heroMoveDTO);
+        heroMoveController.heroMove(anyString());
+        verify(heroMoveService, times(1)).heroMove(anyString(), anyLong());
+    }
+    @Test
+    void heroMoveNullTest() {
+        when(jsonParser.extractMove(anyString())).thenReturn("This");
+        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
+        when(heroMoveService.heroMove(anyString(), anyLong())).thenReturn(null);
+        heroMoveController.heroMove(anyString());
+        verify(heroMoveService, times(1)).heroMove(anyString(), anyLong());
+    }
 
 }
