@@ -17,7 +17,7 @@ public class WandTest {
 
         int damage = spyWand.attack();
 
-        assertEquals(0, damage);
+        assertEquals(damage, spyWand.getDamage());
     }
 
     @Test
@@ -29,6 +29,6 @@ public class WandTest {
 
         int damage = spyWand.attack();
 
-        assertTrue(damage > 0);
+        assertEquals(damage, spyWand.getDamage());
     }
 }

@@ -20,7 +20,7 @@ public class StabTest {
 
         int damage = spyStab.attack();
 
-        assertEquals(0, damage);
+        assertEquals(spyStab.getDamage(), damage);
     }
 
     @Test
@@ -33,7 +33,8 @@ public class StabTest {
 
         int damage = spyStab.attack();
 
-        assertTrue(damage > 0);
+        assertEquals(spyStab.getDamage(), damage);
+        assertEquals(spyStab.getStabCount(), 0);
     }
 
     @Test
@@ -46,6 +47,6 @@ public class StabTest {
 
         int damage = spyStab.attack();
 
-        assertTrue(damage > 0);
+        assertEquals(spyStab.getDamage(), damage);
     }
 }

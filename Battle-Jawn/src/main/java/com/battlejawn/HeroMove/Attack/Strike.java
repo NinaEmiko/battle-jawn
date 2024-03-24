@@ -17,6 +17,10 @@ public class Strike implements CriticalHit, Missable, Stagger, Attack {
         } else if (criticalHit()){
             damage = (int) (Math.floor(Math.random() * 6) + 10 /* * user.strength */);
             return damage;
+        } else if (stagger()) {
+            //Incorporate actual logic later
+            damage = (int) (Math.floor(Math.random() * 6) + 10 /* * user.strength */);
+            return damage;
         } else {
             damage = (int) (Math.floor(Math.random() * 6) + 10 /* * user.strength */);
             return damage;
