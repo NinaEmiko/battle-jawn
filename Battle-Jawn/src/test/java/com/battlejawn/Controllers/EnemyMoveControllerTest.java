@@ -27,23 +27,22 @@ class EnemyMoveControllerTest {
     EnemyMoveController enemyMoveController;
     @BeforeEach
     void setup(){
-        jsonParser = new JsonParser();
         heroMoveDTO = new HeroMoveDTO();
 
     }
-//    @Test
-//    void enemyMoveTest(){
-//        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
-//        when(enemyMoveService.enemyMove(anyLong())).thenReturn(heroMoveDTO);
-//        enemyMoveController.enemyMove(anyString());
-//        verify(enemyMoveService, times(1)).enemyMove(anyLong());
-//    }
-//    @Test
-//    void enemyMoveNullTest(){
-//        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
-//        when(enemyMoveService.enemyMove(anyLong())).thenReturn(null);
-//        enemyMoveController.enemyMove(anyString());
-//        verify(enemyMoveService, times(1)).enemyMove(anyLong());
-//    }
+    @Test
+    void enemyMoveTest(){
+        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
+        when(enemyMoveService.enemyMove(anyLong())).thenReturn(heroMoveDTO);
+        enemyMoveController.enemyMove(anyString());
+        verify(enemyMoveService, times(1)).enemyMove(anyLong());
+    }
+    @Test
+    void enemyMoveNullTest(){
+        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
+        when(enemyMoveService.enemyMove(anyLong())).thenReturn(null);
+        enemyMoveController.enemyMove(anyString());
+        verify(enemyMoveService, times(1)).enemyMove(anyLong());
+    }
 
 }
