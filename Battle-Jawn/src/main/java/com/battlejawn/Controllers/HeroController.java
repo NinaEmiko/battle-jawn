@@ -18,10 +18,14 @@ import com.battlejawn.Entities.Hero.Hero;
 public class HeroController {
     @Autowired
     private final HeroService heroService;
+    private JsonParser jsonParser;
+    private UserResponse userResponse;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
 
-    public HeroController(HeroService heroService){
+    public HeroController(HeroService heroService, JsonParser jsonParser, UserResponse userResponse){
         this.heroService = heroService;
+        this.jsonParser = jsonParser;
+        this.userResponse = userResponse;
     }
 
     @GetMapping("/all")
@@ -85,13 +89,11 @@ public class HeroController {
     @PostMapping
     public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
         logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
-        JsonParser jsonParser = new JsonParser();
         String parsedName = jsonParser.extractHeroName(data);
         String parsedRole = jsonParser.extractRole(data);
         Long parsedUserAccountId = jsonParser.extractUserAccountId(data);
         logger.info("Inside createNewHero controller method. Parsed User Account Id: " + parsedUserAccountId + ".");
         Hero hero = heroService.saveHero(parsedRole, parsedName, parsedUserAccountId);
-        UserResponse userResponse;
         if (hero != null) {
             URI location = URI.create("/hero/" + hero.getId());
             userResponse = new UserResponse(location, hero.getId());

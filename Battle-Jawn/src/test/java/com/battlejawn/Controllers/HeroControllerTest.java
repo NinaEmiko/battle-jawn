@@ -2,6 +2,7 @@ package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Entities.Hero.Hero;
+import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Service.HeroService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -92,21 +93,26 @@ public class HeroControllerTest {
         heroController.getHeroListByWinCount();
         verify(heroService, times(1)).getHeroListByWinCount();
     }
-//    @Test
-//    public void createNewHeroTest() {
-//        when(heroService.saveHero(anyString(), anyString(), anyLong())).thenReturn(hero);
-//        heroController.createNewHero(anyString());
-//        verify(heroService, times(1)).saveHero(anyString(), anyString(), anyLong());
-//    }
-//    @Test
-//    public void createNewHeroNullTest() {
-//        when(jsonParser.extractHeroName(anyString())).thenReturn("This");
-//        when(jsonParser.extractRole(anyString())).thenReturn("That");
-//        when(jsonParser.extractUserAccountId(anyString())).thenReturn(1L);
-//        when(heroService.saveHero(anyString(), anyString(), anyLong())).thenReturn(null);
-//        heroController.createNewHero(anyString());
-//        verify(heroService, times(1)).saveHero(anyString(), anyString(), anyLong());
-//    }
+    @Test
+    public void createNewHeroTest() {
+        hero = new Tank();
+        when(heroService.saveHero(anyString(), anyString(), anyLong())).thenReturn(hero);
+        when(jsonParser.extractHeroName(anyString())).thenReturn("This");
+        when(jsonParser.extractRole(anyString())).thenReturn("That");
+        when(jsonParser.extractUserAccountId(anyString())).thenReturn(1L);
+        heroController.createNewHero(anyString());
+        verify(heroService, times(1)).saveHero(anyString(), anyString(), anyLong());
+    }
+    @Test
+    public void createNewHeroNullTest() {
+        hero = new Tank();
+        when(heroService.saveHero(anyString(), anyString(), anyLong())).thenReturn(null);
+        when(jsonParser.extractHeroName(anyString())).thenReturn("This");
+        when(jsonParser.extractRole(anyString())).thenReturn("That");
+        when(jsonParser.extractUserAccountId(anyString())).thenReturn(1L);
+        heroController.createNewHero(anyString());
+        verify(heroService, times(1)).saveHero(anyString(), anyString(), anyLong());
+    }
 
     @Test
     public void restHeroByIdTest() {
