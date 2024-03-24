@@ -32,12 +32,17 @@ public class UserAccountService {
     }
 
     public UserAccountDTO login(CredentialsDTO credentialsDTO) {
-        UserAccount userAccount = userAccountRepository.findByLogin(credentialsDTO.getLogin())
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), userAccount.getPassword())) {
-            return userAccountMapper.toUserAccountDTO(userAccount);
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findByLogin(credentialsDTO.getLogin());
+        if (optionalUserAccount.isPresent()) {
+            UserAccount userAccount = optionalUserAccount.get();
+            if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.getPassword()), userAccount.getPassword())) {
+                return userAccountMapper.toUserAccountDTO(userAccount);
+            } else {
+                throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            throw new AppException("User not found", HttpStatus.NOT_FOUND);
         }
-        throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
 
     @Transactional
@@ -58,15 +63,23 @@ public class UserAccountService {
     }
 
     public UserAccountDTO findByLogin(String login) {
-        UserAccount userAccount = userAccountRepository.findByLogin(login)
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-        return userAccountMapper.toUserAccountDTO(userAccount);
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findByLogin(login);
+        if(optionalUserAccount.isPresent()) {
+            UserAccount userAccount = optionalUserAccount.get();
+            return userAccountMapper.toUserAccountDTO(userAccount);
+        } else {
+                throw new AppException("Unknown user", HttpStatus.NOT_FOUND);
+        }
     }
 
     public UserAccountDTO getUserAccountById(Long id) {
-        UserAccount userAccount = userAccountRepository.findById(id)
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
-        return userAccountMapper.toUserAccountDTO(userAccount);
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(id);
+        if(optionalUserAccount.isPresent()) {
+            UserAccount userAccount = optionalUserAccount.get();
+            return userAccountMapper.toUserAccountDTO(userAccount);
+        } else {
+                throw new AppException("Unknown user", HttpStatus.NOT_FOUND);
+        }
     }
 
     @Transactional

@@ -2,6 +2,9 @@ package com.battlejawn.Service;
 
 import com.battlejawn.Config.AppException;
 import com.battlejawn.DTO.CredentialsDTO;
+import com.battlejawn.DTO.SignUpDTO;
+import com.battlejawn.DTO.UpdatePasswordDTO;
+import com.battlejawn.DTO.UserAccountDTO;
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Mapper.UserAccountMapper;
 import com.battlejawn.Repository.UserAccountRepository;
@@ -13,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.nio.CharBuffer;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -29,27 +34,89 @@ class UserAccountServiceTest {
     @Mock
     UserAccount userAccount;
     @Mock
-    CredentialsDTO credentialsDTO;
+    UserAccount existingUserAccount;
+    @Mock
+    CredentialsDTO validCredentials;
+    @Mock
+    CredentialsDTO invalidCredentials;
+    @Mock
+    UserAccount validUserAccount;
+    @Mock
+    SignUpDTO signUpDTO;
     @InjectMocks
     UserAccountService userAccountService;
     @BeforeEach
     void setup(){
-        char[] password = new char[5];
-        credentialsDTO = new CredentialsDTO("login", password);
+        signUpDTO = new SignUpDTO();
+
+        validCredentials = new CredentialsDTO();
+        validCredentials.setLogin("validUser");
+        validCredentials.setPassword("validPassword".toCharArray());
+
+        invalidCredentials = new CredentialsDTO();
+        invalidCredentials.setLogin("invalidUser");
+        invalidCredentials.setPassword("invalidPassword".toCharArray());
+
+        validUserAccount = new UserAccount();
+        validUserAccount.setLogin("validUser");
+        validUserAccount.setPassword("hashedValidPassword");
     }
     @Test
-    void loginTest() {
-        when(userAccountRepository.findByLogin(credentialsDTO.getLogin())).thenReturn(Optional.of(userAccount));
-        when(passwordEncoder.matches(any(), any())).thenReturn(true);
-        userAccountService.login(credentialsDTO);
-        verify(userAccountMapper, times(1)).toUserAccountDTO(any());
+    void testLoginValidUser() {
+        when(userAccountRepository.findByLogin(validCredentials.getLogin())).thenReturn(Optional.of(validUserAccount));
+        when(passwordEncoder.matches(any(CharBuffer.class), any(String.class))).thenReturn(true);
+        when(userAccountMapper.toUserAccountDTO(validUserAccount)).thenReturn(new UserAccountDTO());
+
+        UserAccountDTO result = userAccountService.login(validCredentials);
+
+        assertEquals(UserAccountDTO.class, result.getClass());
     }
+
     @Test
-    void loginExceptionTest() {
-        when(userAccountRepository.findByLogin(credentialsDTO.getLogin())).thenReturn(Optional.of(userAccount));
-        when(passwordEncoder.matches(any(), any())).thenReturn(true);
-        when(userAccountMapper.toUserAccountDTO(userAccount)).thenThrow(new AppException("Invalid password", HttpStatus.BAD_REQUEST));
-        assertThrows(AppException.class, () -> userAccountService.login(credentialsDTO));
+    void testLoginInvalidPassword() {
+        when(userAccountRepository.findByLogin(validCredentials.getLogin())).thenReturn(Optional.of(validUserAccount));
+        when(passwordEncoder.matches(any(CharBuffer.class), any(String.class))).thenReturn(false);
+
+        assertThrows(AppException.class, () -> userAccountService.login(validCredentials));
+    }
+
+    @Test
+    void testLoginUserNotFound() {
+        when(userAccountRepository.findByLogin(invalidCredentials.getLogin())).thenReturn(Optional.empty());
+
+        assertThrows(AppException.class, () -> userAccountService.login(invalidCredentials));
+    }
+
+    @Test
+    void testRegisterNewUser() {
+        signUpDTO.setLogin("newUser");
+        signUpDTO.setPassword("password123".toCharArray());
+
+        userAccount.setLogin(signUpDTO.getLogin());
+        userAccount.setPassword("encodedPassword");
+
+        when(userAccountRepository.findByLogin(signUpDTO.getLogin())).thenReturn(Optional.empty());
+        when(userAccountMapper.signUpToUserAccount(signUpDTO)).thenReturn(userAccount);
+        when(passwordEncoder.encode(any(CharBuffer.class))).thenReturn("encodedPassword");
+        when(userAccountRepository.save(userAccount)).thenReturn(userAccount);
+        when(userAccountMapper.toUserAccountDTO(userAccount)).thenReturn(new UserAccountDTO());
+
+        UserAccountDTO result = userAccountService.register(signUpDTO);
+
+        assertEquals(UserAccountDTO.class, result.getClass());
+    }
+
+    @Test
+    void testRegisterExistingUser() {
+        signUpDTO.setLogin("existingUser");
+        signUpDTO.setPassword("password123".toCharArray());
+
+        existingUserAccount.setLogin(signUpDTO.getLogin());
+
+        when(userAccountRepository.findByLogin(signUpDTO.getLogin())).thenReturn(Optional.of(existingUserAccount));
+
+        assertThrows(AppException.class, () -> userAccountService.register(signUpDTO));
+        verify(userAccountRepository, never()).save(any());
     }
     @Test
     void deleteUserAccountByIdTest() {
@@ -64,11 +131,94 @@ class UserAccountServiceTest {
         userAccountService.deleteUserAccountById(anyLong());
         verify(userAccountRepository, times(0)).deleteById(anyLong());
     }
+    @Test
+    void testFindByLoginUserFound() {
+        // Arrange
+        String login = "existingUser";
+        UserAccount existingUserAccount = new UserAccount();
+        existingUserAccount.setLogin(login);
+
+        when(userAccountRepository.findByLogin(login)).thenReturn(Optional.of(existingUserAccount));
+        when(userAccountMapper.toUserAccountDTO(existingUserAccount)).thenReturn(new UserAccountDTO());
+
+        // Act
+        UserAccountDTO result = userAccountService.findByLogin(login);
+
+        // Assert
+        assertEquals(UserAccountDTO.class, result.getClass());
+    }
+
+    @Test
+    void testFindByLoginUserNotFound() {
+        // Arrange
+        String login = "nonExistingUser";
+        when(userAccountRepository.findByLogin(login)).thenReturn(Optional.empty());
+
+        // Act and Assert
+        assertThrows(AppException.class, () -> userAccountService.findByLogin(login));
+    }
+
+    @Test
+    void testGetUserAccountByIdUserFound() {
+        // Arrange
+        Long id = 1L;
+        UserAccount existingUserAccount = new UserAccount();
+        existingUserAccount.setId(id);
+
+        when(userAccountRepository.findById(id)).thenReturn(Optional.of(existingUserAccount));
+        when(userAccountMapper.toUserAccountDTO(existingUserAccount)).thenReturn(new UserAccountDTO());
+
+        // Act
+        UserAccountDTO result = userAccountService.getUserAccountById(id);
+
+        // Assert
+        assertEquals(UserAccountDTO.class, result.getClass());
+    }
+
+    @Test
+    void testGetUserAccountByIdUserNotFound() {
+        // Arrange
+        Long id = 1L;
+        when(userAccountRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Act and Assert
+        assertThrows(AppException.class, () -> userAccountService.getUserAccountById(id));
+    }
+
 //    @Test
-//    void findByLoginTest() {
-//        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
-//        userAccountService.findByLogin(anyString());
-//        verify(userAccountRepository, times(1)).findByLogin(anyString());
+//    void testUpdatePasswordByUserAccountIdUserFound() {
+
+//        Long id = 1L;
+//        String newPassword = "newPassword123";
+//        UpdatePasswordDTO updatePasswordDTO = new UpdatePasswordDTO();
+//        updatePasswordDTO.setNewPassword(newPassword.toCharArray());
+//
+//        UserAccount existingUserAccount = new UserAccount();
+//        existingUserAccount.setId(id);
+//
+//        when(userAccountRepository.findById(id)).thenReturn(Optional.of(existingUserAccount));
+//        when(passwordEncoder.encode(any(CharBuffer.class))).thenReturn("encodedNewPassword");
+//        when(userAccountRepository.save(existingUserAccount)).thenReturn(existingUserAccount);
+//
+//        String result = userAccountService.updatePasswordByUserAccountId(id, updatePasswordDTO);
+//
+//        assertEquals("Password updated successfully for user account ID: " + id + ".", result);
+//        verify(passwordEncoder, times(1)).encode(any(CharBuffer.class)); // Ensure method is called only once
+//        verify(userAccountRepository).save(existingUserAccount);
 //    }
+
+    @Test
+    void testUpdatePasswordByUserAccountIdUserNotFound() {
+        Long id = 1L;
+        UpdatePasswordDTO updatePasswordDTO = new UpdatePasswordDTO();
+        updatePasswordDTO.setNewPassword("newPassword123".toCharArray());
+
+        when(userAccountRepository.findById(id)).thenReturn(Optional.empty());
+
+        String result = userAccountService.updatePasswordByUserAccountId(id, updatePasswordDTO);
+
+        assertEquals("User Account with ID: " + id + " not found.", result);
+        verify(userAccountRepository, never()).save(any());
+    }
 
 }
