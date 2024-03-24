@@ -15,7 +15,8 @@ public class Maim implements CriticalHit, Missable {
             damage = (int) ((Math.floor(Math.random() * 12) + 10 /* * user.strength */) * 1.5);
             return damage;
         } else {
-            return (int) (Math.floor(Math.random() * 12) + 1  /* * user.strength */);
+            damage = (int) (Math.floor(Math.random() * 12) + 1  /* * user.strength */);
+            return damage;
         }
     }
 
