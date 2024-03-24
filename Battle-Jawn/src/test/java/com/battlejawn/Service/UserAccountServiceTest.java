@@ -51,5 +51,24 @@ class UserAccountServiceTest {
         when(userAccountMapper.toUserAccountDTO(userAccount)).thenThrow(new AppException("Invalid password", HttpStatus.BAD_REQUEST));
         assertThrows(AppException.class, () -> userAccountService.login(credentialsDTO));
     }
+    @Test
+    void deleteUserAccountByIdTest() {
+        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
+        doNothing().when(userAccountRepository).deleteById(anyLong());
+        userAccountService.deleteUserAccountById(anyLong());
+        verify(userAccountRepository, times(1)).deleteById(anyLong());
+    }
+    @Test
+    void deleteUserAccountByIdNullTest() {
+        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.empty());
+        userAccountService.deleteUserAccountById(anyLong());
+        verify(userAccountRepository, times(0)).deleteById(anyLong());
+    }
+//    @Test
+//    void findByLoginTest() {
+//        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
+//        userAccountService.findByLogin(anyString());
+//        verify(userAccountRepository, times(1)).findByLogin(anyString());
+//    }
 
 }
