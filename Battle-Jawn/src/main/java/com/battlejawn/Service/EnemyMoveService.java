@@ -2,6 +2,7 @@ package com.battlejawn.Service;
 
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.EnemyMove.*;
+import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.HeroMove.Heal.Potion;
@@ -17,7 +18,6 @@ public class EnemyMoveService {
     private final BattleSessionService battleSessionService;
     private final Logger logger = Logger.getLogger(EnemyMoveService.class.getName());
 
-
     public EnemyMoveService(BattleSessionService battleSessionService, EnemyService enemyService, HeroService heroService, BattleHistoryMessageService battleHistoryMessageService) {
         this.battleSessionService = battleSessionService;
         this.enemyService = enemyService;
@@ -28,10 +28,13 @@ public class EnemyMoveService {
     public HeroMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
 
-        Enemy enemy = enemyService.getEnemyById(battleSessionService.getBattleSessionById(battleSessionId).getEnemyId());
-        Hero hero = heroService.getHeroById(battleSessionService.getBattleSessionById(battleSessionId).getHeroId());
+        BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
+        Long enemyId = battleSession.getEnemyId();
+        Long heroId = battleSession.getHeroId();
+        Enemy enemy = enemyService.getEnemyById(enemyId);
+        Hero hero = heroService.getHeroById(heroId);
 
-        int moveIndex = (int) Math.floor(Math.random() * 9) + 1;
+        int moveIndex = getRandomIndex();
         HeroMoveDTO enemyMoveDTO;
         int damage;
 
@@ -188,6 +191,10 @@ public class EnemyMoveService {
         heroMoveDTO.setBattleHistory(battleHistory);
         heroMoveDTO.setGameOver(gameOver);
         return heroMoveDTO;
+    }
+
+    public int getRandomIndex(){
+        return (int) Math.floor(Math.random() * 9) + 1;
     }
 
 }
