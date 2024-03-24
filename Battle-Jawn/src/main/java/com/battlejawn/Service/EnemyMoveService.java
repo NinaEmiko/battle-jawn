@@ -27,75 +27,55 @@ public class EnemyMoveService {
 
     public HeroMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
-
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
-        Long enemyId = battleSession.getEnemyId();
-        Long heroId = battleSession.getHeroId();
-        Enemy enemy = enemyService.getEnemyById(enemyId);
-        Hero hero = heroService.getHeroById(heroId);
-
+        Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
+        Hero hero = heroService.getHeroById(battleSession.getHeroId());
         int moveIndex = getRandomIndex();
-        HeroMoveDTO enemyMoveDTO;
         int damage;
 
-        //                else if (moveIndex == 11) {
-        //                    Paralyze paralyze = new Paralyze();
-        //                    boolean paralyzeSuccess = paralyze.useParalyze();
-        //                }
         return switch (enemy.getName()) {
             case "Wolf" -> {
                 if (moveIndex > 3) {
                     Bite bite = new Bite();
-                    damage = bite.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Bite");
+                    yield processEnemyMove(bite.attack(), enemy, battleSessionId, hero, "Bite");
                 } else {
                     Maim maim = new Maim();
-                    damage = maim.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Maim");
+                    yield processEnemyMove(maim.attack(), enemy, battleSessionId, hero, "Maim");
                 }
-                yield enemyMoveDTO;
             }
             case "Spirit" -> {
                 if (moveIndex > 0) {
                     ShadowBlast shadowBlast = new ShadowBlast();
-                    damage = shadowBlast.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Shadow Blast");
+                    yield processEnemyMove(shadowBlast.attack(), enemy, battleSessionId, hero, "Shadow Blast");
                 } else {
                     SoulEater soulEater = new SoulEater();
-                    damage = soulEater.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Soul Eater");
+                    yield processEnemyMove(soulEater.attack(), enemy, battleSessionId, hero, "Soul Eater");
                 }
-                yield enemyMoveDTO;
             }
             case "Thief" -> {
                 if (enemy.getHealth() < 30 && moveIndex < 3 && enemy.getPotions() > 0) {
-                    enemyMoveDTO = processPotion(enemy, battleSessionId, hero);
+                    yield processPotion(enemy, battleSessionId, hero);
                 } else if (moveIndex > 9 && enemy.getPotions() > 0 && enemy.getHealth() != enemy.getMaxHealth()) {
-                    enemyMoveDTO = processPotion(enemy, battleSessionId, hero);
+                    yield processPotion(enemy, battleSessionId, hero);
                 } else if (moveIndex > 1) {
                     Stab stab = new Stab();
-                    damage = stab.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Stab");
+                    yield processEnemyMove(stab.attack(), enemy, battleSessionId, hero, "Stab");
                 } else {
-                    enemyMoveDTO = processSteal(enemy, battleSessionId, hero);
+                    yield processSteal(enemy, battleSessionId, hero);
                 }
-                yield enemyMoveDTO;
             }
             case "Orc" -> {
                 if (enemy.getHealth() < 40 && moveIndex < 3 && enemy.getPotions() > 0) {
-                    enemyMoveDTO = processPotion(enemy, battleSessionId, hero);
+                    yield processPotion(enemy, battleSessionId, hero);
                 } else if (moveIndex > 8 && enemy.getPotions() > 0 && enemy.getHealth() != enemy.getMaxHealth()) {
-                    enemyMoveDTO = processPotion(enemy, battleSessionId, hero);
+                    yield processPotion(enemy, battleSessionId, hero);
                 } else if (moveIndex > 4) {
                     Strike strike = new Strike();
-                    damage = strike.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Strike");
+                    yield processEnemyMove(strike.attack(), enemy, battleSessionId, hero, "Strike");
                 } else {
                     Impale impale = new Impale();
-                    damage = impale.attack();
-                    enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Impale");
+                    yield processEnemyMove(impale.attack(), enemy, battleSessionId, hero, "Impale");
                 }
-                yield enemyMoveDTO;
             }
             default -> null;
         };
