@@ -44,33 +44,19 @@ class BattleSessionControllerTest {
         battleSessionController.getBattleSessionById(anyLong());
         verify(battleSessionService, times(1)).getBattleSessionById(anyLong());
     }
-//    @Test
-//    void createNewBattleSessionTest() {
-//        String requestBody = "{\"id\": 123}";
-//
-//        Long parsedHeroId = 123L;
-//        when(jsonParser.extractHeroId(requestBody)).thenReturn(parsedHeroId);
-//
-//        BattleSession battleSession = new BattleSession();
-//        when(battleSessionService.createNewBattleSession(parsedHeroId)).thenReturn(battleSession);
-//
-//        ResponseEntity<BattleSession> response = battleSessionController.createNewBattleSession(requestBody);
-//
-//        verify(jsonParser, times(1)).extractHeroId(requestBody);
-//        verify(battleSessionService, times(1)).createNewBattleSession(parsedHeroId);
-//
-//        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-//        assertNotNull(response.getBody());
-//        assertEquals(battleSession, response.getBody());
-//        assertEquals(URI.create("/session/" + battleSession.getId()), response.getHeaders().getLocation());
-//
-//    }
-//    @Test
-//    void createNewBattleSessionNullTest() {
-//        when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
-//        when(battleSessionService.createNewBattleSession(anyLong())).thenReturn(null);
-//        battleSessionController.createNewBattleSession(anyString());
-//        verify(battleSessionService, times(1)).createNewBattleSession(anyLong());
-//    }
+    @Test
+    void createNewBattleSessionTest() {
+        when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
+        when(battleSessionService.createNewBattleSession(anyLong())).thenReturn(battleSession);
+        battleSessionController.createNewBattleSession(anyString());
+        verify(battleSessionService, times(1)).createNewBattleSession(anyLong());
+    }
+    @Test
+    void createNewBattleSessionNullTest() {
+        when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
+        when(battleSessionService.createNewBattleSession(anyLong())).thenReturn(null);
+        battleSessionController.createNewBattleSession(anyString());
+        verify(battleSessionService, times(1)).createNewBattleSession(anyLong());
+    }
 
 }
