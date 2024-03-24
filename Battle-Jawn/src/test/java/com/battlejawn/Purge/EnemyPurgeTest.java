@@ -46,7 +46,8 @@ class EnemyPurgeTest {
     }
     @Test
     void purgeEnemyExceptionTest() {
-        when(enemyRepository.findAll()).thenThrow(new RuntimeException());
+        when(enemyRepository.findAll()).thenReturn(enemies);
+        doThrow(new RuntimeException()).when(enemyRepository).deleteById(anyLong());
         assertThrows(RuntimeException.class, () -> enemyPurge.purgeEnemy());
     }
 

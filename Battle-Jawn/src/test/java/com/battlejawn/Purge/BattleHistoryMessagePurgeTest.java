@@ -45,7 +45,8 @@ class BattleHistoryMessagePurgeTest {
 
     @Test
     void purgeBattleHistoryMessagesExceptionTest() {
-        when(battleHistoryMessageRepository.findAll()).thenThrow(new RuntimeException());
+        when(battleHistoryMessageRepository.findAll()).thenReturn(battleHistoryMessages);
+        doThrow(new RuntimeException()).when(battleHistoryMessageRepository).deleteById(anyLong());
         assertThrows(RuntimeException.class, () -> battleHistoryMessagePurge.purgeBattleHistoryMessage());
     }
 
