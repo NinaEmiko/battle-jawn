@@ -1,7 +1,9 @@
 package com.battlejawn.Service;
 
 import com.battlejawn.Entities.Enemy.*;
+import com.battlejawn.Randomizer.Randomizer;
 import com.battlejawn.Repository.EnemyRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,6 +22,8 @@ class EnemyServiceTest {
     private EnemyRepository enemyRepository;
     @Mock
     List<Enemy> enemies;
+    @Mock
+    Randomizer randomizer;
     @Mock
     Enemy enemy;
     @InjectMocks
@@ -48,7 +52,7 @@ class EnemyServiceTest {
 
     @Test
     void getEnemyByIdExceptionTest(){
-        when(enemyRepository.findById(anyLong())).thenThrow(EntityNotFoundException.class);
+        when(enemyRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> enemyService.getEnemyById(anyLong()));
     }
 
@@ -60,7 +64,7 @@ class EnemyServiceTest {
     }
     @Test
     void getEnemyHealthByIdExceptionTest(){
-        when(enemyRepository.findById(anyLong())).thenThrow(new EntityNotFoundException());
+        when(enemyRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> enemyService.getEnemyHealthById(anyLong()));
     }
     @Test
@@ -77,6 +81,29 @@ class EnemyServiceTest {
     }
     @Test
     void createNewEnemyTest() {
+        when(randomizer.getRandomInt(anyInt())).thenReturn(1);
+        Enemy orc = enemyService.createNewEnemy();
+        verify(randomizer, times(1)).getRandomInt(anyInt());
+        when(randomizer.getRandomInt(anyInt())).thenReturn(2);
+        Enemy spirit = enemyService.createNewEnemy();
+        verify(randomizer, times(2)).getRandomInt(anyInt());
+        when(randomizer.getRandomInt(anyInt())).thenReturn(3);
+        Enemy thief = enemyService.createNewEnemy();
+        verify(randomizer, times(3)).getRandomInt(anyInt());
+        when(randomizer.getRandomInt(anyInt())).thenReturn(4);
+        Enemy wolf = enemyService.createNewEnemy();
+        verify(randomizer, times(4)).getRandomInt(anyInt());
+
+        Assertions.assertEquals("Thief", thief.getName());
+        Assertions.assertEquals("Wolf", wolf.getName());
+        Assertions.assertEquals("Spirit", spirit.getName());
+        Assertions.assertEquals("Orc", orc.getName());
+
+    }
+    @Test
+    void createNewEnemyExceptionTest() {
+        when(randomizer.getRandomInt(anyInt())).thenThrow(new RuntimeException());
+        assertThrows(RuntimeException.class, () -> enemyService.createNewEnemy());
 
     }
 }

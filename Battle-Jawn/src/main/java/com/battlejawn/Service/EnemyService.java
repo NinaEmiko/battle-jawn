@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
+
+import com.battlejawn.Randomizer.Randomizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
@@ -19,11 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class EnemyService {
 
     private final EnemyRepository enemyRepository;
+    private final Randomizer randomizer;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
 
     @Autowired
-    public EnemyService(EnemyRepository enemyRepository) {
+    public EnemyService(EnemyRepository enemyRepository, Randomizer randomizer) {
         this.enemyRepository = enemyRepository;
+        this.randomizer = randomizer;
     }
 
     public List<Enemy> getAllEnemies() {
@@ -66,7 +70,7 @@ public class EnemyService {
         try {
             Enemy enemy;
             logger.info("Inside createNewEnemy service method.");
-            int randomIndex = (int) Math.floor(Math.random() * 3) + 1;
+            int randomIndex = randomizer.getRandomInt(4);
 
             switch (randomIndex) {
                 case 1: enemy = new Orc();
@@ -84,12 +88,11 @@ public class EnemyService {
                 case 4: enemy = new Wolf();
                         logger.info("New Wolf created: " + enemy + ".");
                         enemyRepository.save(enemy);
-                        break;
+                        return enemy;
             }
             return null;
         } catch(Exception e) {
             throw new RuntimeException("Failed to save enemy: " + e.getMessage() + ".");
         }
     }
-
 }
