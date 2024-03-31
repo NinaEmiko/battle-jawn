@@ -97,7 +97,6 @@ public class UserAccountService {
             UserAccount userAccount = optionalUserAccount.get();
 
             userAccount.setPassword(passwordEncoder.encode(CharBuffer.wrap(updatePasswordDTO.getNewPassword())));
-            logger.info("passwordEncode.encode(CharBuffer.wrap(newPassword: " + passwordEncoder.encode(CharBuffer.wrap(updatePasswordDTO.getNewPassword())) + " .");
 
 
             userAccountRepository.save(userAccount);

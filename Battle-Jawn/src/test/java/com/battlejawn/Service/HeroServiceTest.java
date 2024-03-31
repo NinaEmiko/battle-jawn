@@ -48,7 +48,8 @@ public class HeroServiceTest {
     }
     @Test
     void getAllHeroesExceptionTest() {
-        when(heroRepository.findAll()).thenThrow(EntityNotFoundException.class);
+
+        when(heroRepository.findAll()).thenReturn(heroes);
         assertThrows(EntityNotFoundException.class, () -> heroService.getAllHeroes());
     }
 
@@ -60,7 +61,7 @@ public class HeroServiceTest {
     }
     @Test
     void getHeroByIdExceptionTest() {
-        when(heroRepository.findById(anyLong())).thenThrow(EntityNotFoundException.class);
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> heroService.getHeroById(anyLong()));
     }
     @Test
@@ -71,7 +72,7 @@ public class HeroServiceTest {
     }
     @Test
     void getHeroHealthByIdExceptionTest() {
-        when(heroRepository.findById(anyLong())).thenThrow(new EntityNotFoundException());
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.empty());
         assertThrows(EntityNotFoundException.class, () -> heroService.getHeroHealthById(anyLong()));
 
     }
@@ -83,7 +84,7 @@ public class HeroServiceTest {
     }
     @Test
     void getHeroListByAccountIdExceptionTest() {
-        when(heroRepository.findByUserAccountId(anyLong())).thenThrow(EntityNotFoundException.class);
+        when(heroRepository.findByUserAccountId(anyLong())).thenReturn(null);
         assertThrows(EntityNotFoundException.class, () -> heroService.getHeroListByAccountId(anyLong()));
     }
     @Test
@@ -94,7 +95,7 @@ public class HeroServiceTest {
     }
     @Test
     void getHeroListByWinCountExceptionTest() {
-        when(heroRepository.findByWinCount()).thenThrow(EntityNotFoundException.class);
+        when(heroRepository.findByWinCount()).thenReturn(null);
         assertThrows(EntityNotFoundException.class, () -> heroService.getHeroListByWinCount());
     }
     @Test
@@ -202,5 +203,16 @@ public class HeroServiceTest {
 
         verify(userAccountRepository, times(1)).findById(anyLong());
         verify(heroRepository, times(1)).save(any());
+    }
+    @Test
+    void saveHeroExceptionTest() {
+        Long id = 1L;
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(id);
+
+        when(userAccountRepository.findById(anyLong())).thenThrow(new RuntimeException());
+
+        assertThrows(RuntimeException.class, () -> heroService.saveHero("Healer", "Name", 1L));
+
     }
 }
