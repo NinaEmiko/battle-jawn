@@ -118,4 +118,9 @@ class EnemyMoveServiceTest {
         String actual = enemyMoveService.getDamageMessage("This move", 0);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void processPotionTest() {
+
+    }
 }

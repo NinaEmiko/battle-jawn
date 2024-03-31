@@ -106,4 +106,11 @@ class EnemyServiceTest {
         assertThrows(RuntimeException.class, () -> enemyService.createNewEnemy());
 
     }
+    @Test
+    void createNewEnemyNullTest() {
+        when(randomizer.getRandomInt(anyInt())).thenReturn(0);
+        Enemy nullEnemy = enemyService.createNewEnemy();
+        assertNull(nullEnemy);
+
+    }
 }
