@@ -26,6 +26,7 @@ public class HeroMoveService {
     private final EnemyService enemyService;
     private final Run run;
     private final Steal steal;
+    private final Potion potion;
     private final Logger logger = Logger.getLogger(HeroMoveService.class.getName());
     private HeroMoveDTO heroMoveDTO;
 
@@ -34,13 +35,15 @@ public class HeroMoveService {
                            HeroService heroService,
                            EnemyService enemyService,
                            Run run,
-                           Steal steal) {
+                           Steal steal,
+                           Potion potion) {
         this.battleHistoryMessageService = battleHistoryMessageService;
         this.battleSessionService = battleSessionService;
         this.heroService = heroService;
         this.enemyService = enemyService;
         this.run = run;
         this.steal = steal;
+        this.potion = potion;
     }
 
     @Transactional
@@ -101,11 +104,10 @@ public class HeroMoveService {
             case "Steal":
                 heroMoveDTO = processSteal(enemy, battleSessionId, hero);
                 return heroMoveDTO;
-            case "Run":
+            default:
                 heroMoveDTO = processRun(enemy, battleSessionId, hero);
                 return heroMoveDTO;
         }
-        return null;
     }
 
     public HeroMoveDTO processHeroMove(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move) {
@@ -141,7 +143,7 @@ public String getDamageMessage(String move, int damage) {
 
     public HeroMoveDTO processHeroHeal(int healAmount, Enemy enemy, Long battleSessionId, Hero hero) {
         int updatedHeroHealth;
-        if (healAmount > hero.getMaxHealth()) {
+        if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
             updatedHeroHealth = hero.getMaxHealth();
         } else {
             updatedHeroHealth = hero.getHealth() + healAmount;
@@ -156,11 +158,10 @@ public String getDamageMessage(String move, int damage) {
     public HeroMoveDTO processPotion(Enemy enemy, Long battleSessionId, Hero hero) {
 
         if (hero.getPotions() > 0 && hero.getHealth() != hero.getMaxHealth()) {
-            Potion potion = new Potion();
             int updatedHeroHealth;
             int updatedPotionCount = hero.getPotions() - 1;
             int healAmount = potion.usePotion();
-            if (healAmount > hero.getMaxHealth()) {
+            if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
                 updatedHeroHealth = hero.getMaxHealth();
             } else {
                 updatedHeroHealth = hero.getHealth() + healAmount;

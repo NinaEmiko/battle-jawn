@@ -1,7 +1,9 @@
 package com.battlejawn.HeroMove.Heal;
 
-public class Potion {
+import org.springframework.stereotype.Component;
 
+@Component
+public class Potion {
     public int usePotion() {
             return 30;
     }

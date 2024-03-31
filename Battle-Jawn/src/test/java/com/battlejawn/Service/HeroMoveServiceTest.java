@@ -7,6 +7,7 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
+import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
 import org.junit.jupiter.api.Assertions;
@@ -47,6 +48,8 @@ class HeroMoveServiceTest {
     @Mock
     Steal steal;
     @Mock
+    Potion potion;
+    @Mock
     BattleHistoryMessage battleHistoryMessage;
     @Mock
     List<String> battleHistoryMessageList;
@@ -55,6 +58,8 @@ class HeroMoveServiceTest {
     @BeforeEach
     void setup(){
         battleHistoryMessageList = new ArrayList<>();
+        enemy = new Orc();
+        hero = new Tank("Name");
     }
     @Test
     void heroMoveWandTest() {
@@ -185,6 +190,140 @@ class HeroMoveServiceTest {
     }
     @Test
     void heroMoveStealSuccessTest() {
+        enemy.setPotions(2);
+        enemy.setId(1L);
+        hero.setPotions(1);
+        hero.setId(2L);
 
+        when(steal.useSteal()).thenReturn(true);
+        doNothing().when(heroService).updatePotionCountById(2, 2L);
+        doNothing().when(enemyService).updatePotionCountById(1, 1L);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processSteal(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void heroMoveStealFailTest() {
+        enemy.setPotions(2);
+        enemy.setId(1L);
+        hero.setPotions(1);
+        hero.setId(2L);
+
+        when(steal.useSteal()).thenReturn(false);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processSteal(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+
+    @Test
+    void heroMoveStealElseTest() {
+        enemy.setPotions(2);
+        enemy.setId(1L);
+        hero.setId(2L);
+
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processSteal(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+
+    @Test
+    void processPotionSuccessTest() {
+        hero.setHealth(1);
+        hero.setId(2L);
+
+        when(potion.usePotion()).thenReturn(30);
+        doNothing().when(heroService).updatePotionCountById(2, 2L);
+        doNothing().when(heroService).updateHealthById(31, 2L);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processPotion(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processPotionSuccessMaxHealthTest() {
+        hero.setHealth(100);
+        hero.setId(2L);
+
+        when(potion.usePotion()).thenReturn(30);
+        doNothing().when(heroService).updatePotionCountById(2, 2L);
+        doNothing().when(heroService).updateHealthById(120, 2L);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processPotion(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processPotionSuccessAlreadyFullTest() {
+
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processPotion(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processPotionOutOfPotionsTest() {
+        hero.setPotions(0);
+
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processPotion(enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+
+    @Test
+    void processHeroHeal() {
+        hero.setHealth(100);
+        hero.setId(2L);
+
+        doNothing().when(heroService).updateHealthById(101,2L);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroHeal(1, enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+
+    }
+
+    @Test
+    void processHeroMaxHealthHeal() {
+        hero.setId(2L);
+
+        doNothing().when(heroService).updateHealthById(120,2L);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroHeal(1, enemy, 1L, hero);
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+
+    }
+
+    @Test
+    void getDamageMessageMissedTest() {
+        String result = heroMoveService.getDamageMessage("Move", 0);
+        Assertions.assertEquals(result, "Move missed!");
+    }
+    @Test
+    void getDamageMessageHitTest() {
+        String result = heroMoveService.getDamageMessage("Move", 1);
+        Assertions.assertEquals(result, "Move did 1 damage.");
     }
 }
