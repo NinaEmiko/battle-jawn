@@ -82,7 +82,7 @@ function handleRest(id: any): void {
         </tr>
         <tr>
           <td className="row-jawn">Health:</td>
-          <td className="data-jawn">{hero.health} / {hero.maxHealth}</td>
+          <td className="data-jawn" id="health-jawn">{hero.health} / {hero.maxHealth}</td>
         </tr>
         <tr>
           <td className="row-jawn">Potions:</td>

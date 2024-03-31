@@ -178,8 +178,9 @@
   text-align: left;
 }
 .data-jawn {
-  padding-left: 190px;
+  padding-left: 150px;
   text-align: right;
+  padding-right: 30px;
 }
 .data-jawn-win {
   padding-left: 240px;
