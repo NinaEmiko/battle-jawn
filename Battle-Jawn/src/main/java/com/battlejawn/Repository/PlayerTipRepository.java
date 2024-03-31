@@ -6,5 +6,6 @@ import com.battlejawn.Entities.PlayerTip;
 
 @Repository
 public interface PlayerTipRepository extends JpaRepository<PlayerTip, Long> {
+
 }
 

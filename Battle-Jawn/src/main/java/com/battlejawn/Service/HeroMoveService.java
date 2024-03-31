@@ -24,14 +24,23 @@ public class HeroMoveService {
     private final BattleSessionService battleSessionService;
     private final HeroService heroService;
     private final EnemyService enemyService;
+    private final Run run;
+    private final Steal steal;
     private final Logger logger = Logger.getLogger(HeroMoveService.class.getName());
     private HeroMoveDTO heroMoveDTO;
 
-    public HeroMoveService(BattleHistoryMessageService battleHistoryMessageService, BattleSessionService battleSessionService, HeroService heroService, EnemyService enemyService) {
+    public HeroMoveService(BattleHistoryMessageService battleHistoryMessageService,
+                           BattleSessionService battleSessionService,
+                           HeroService heroService,
+                           EnemyService enemyService,
+                           Run run,
+                           Steal steal) {
         this.battleHistoryMessageService = battleHistoryMessageService;
         this.battleSessionService = battleSessionService;
         this.heroService = heroService;
         this.enemyService = enemyService;
+        this.run = run;
+        this.steal = steal;
     }
 
     @Transactional
@@ -177,7 +186,6 @@ public String getDamageMessage(String move, int damage) {
 
     public HeroMoveDTO processSteal(Enemy enemy, Long battleSessionId, Hero hero) {
         if (enemy.getPotions() > 0 && hero.getPotions() < hero.getMaxPotions()) {
-            Steal steal = new Steal();
             boolean stealSuccess = steal.useSteal();
             if (stealSuccess) {
                 int updatedPotionCount = hero.getPotions() + 1;
@@ -203,7 +211,6 @@ public String getDamageMessage(String move, int damage) {
     }
 
     public HeroMoveDTO processRun(Enemy enemy, Long battleSessionId, Hero hero) {
-        Run run = new Run();
         boolean gameOver = run.useRun();
         if (gameOver) {
             hero.setRunCount(hero.getRunCount() + 1);

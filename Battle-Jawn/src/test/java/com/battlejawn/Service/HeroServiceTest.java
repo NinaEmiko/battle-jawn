@@ -1,9 +1,13 @@
 package com.battlejawn.Service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import com.battlejawn.Entities.UserAccount;
+import com.battlejawn.Repository.UserAccountRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Repository.HeroRepository;
+import javax.persistence.EntityNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 public class HeroServiceTest {
@@ -21,21 +26,181 @@ public class HeroServiceTest {
 
     @Mock
     HeroRepository heroRepository;
+    @Mock
+    UserAccountRepository userAccountRepository;
+    @Mock
+    List<Hero> heroes;
+    @Mock
+    Hero hero;
 
-    @Test
-    void testGetHeroByIdReturnsCorrectHero() {
-
-        long id = 1L;
-        Tank tank = new Tank("name");
-        tank.setId(id);
-
-        when(heroRepository.findById(id)).thenReturn(Optional.of(tank));
-
-        Hero actual = heroService.getHeroById(id);
-
-        assertEquals(actual.getId(), id);
-
-        verify(heroRepository).findById(id);
+    @BeforeEach
+    void setup() {
+        hero = new Tank();
+        heroes = new ArrayList<>();
     }
 
+    @Test
+    void getAllHeroesTest() {
+        heroes.add(hero);
+        when(heroRepository.findAll()).thenReturn(heroes);
+        heroService.getAllHeroes();
+        verify(heroRepository, times(1)).findAll();
+    }
+    @Test
+    void getAllHeroesExceptionTest() {
+        when(heroRepository.findAll()).thenThrow(EntityNotFoundException.class);
+        assertThrows(EntityNotFoundException.class, () -> heroService.getAllHeroes());
+    }
+
+    @Test
+    void getHeroByIdTest() {
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.ofNullable(hero));
+        heroService.getHeroById(anyLong());
+        verify(heroRepository, times(1)).findById(anyLong());
+    }
+    @Test
+    void getHeroByIdExceptionTest() {
+        when(heroRepository.findById(anyLong())).thenThrow(EntityNotFoundException.class);
+        assertThrows(EntityNotFoundException.class, () -> heroService.getHeroById(anyLong()));
+    }
+    @Test
+    void getHeroHealthByIdTest() {
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.of(hero));
+        heroService.getHeroHealthById(anyLong());
+        verify(heroRepository, times(1)).findById(anyLong());
+    }
+    @Test
+    void getHeroHealthByIdExceptionTest() {
+        when(heroRepository.findById(anyLong())).thenThrow(new EntityNotFoundException());
+        assertThrows(EntityNotFoundException.class, () -> heroService.getHeroHealthById(anyLong()));
+
+    }
+    @Test
+    void getHeroListByAccountIdTest() {
+        when(heroRepository.findByUserAccountId(anyLong())).thenReturn(heroes);
+        heroService.getHeroListByAccountId(anyLong());
+        verify(heroRepository, times(1)).findByUserAccountId(anyLong());
+    }
+    @Test
+    void getHeroListByAccountIdExceptionTest() {
+        when(heroRepository.findByUserAccountId(anyLong())).thenThrow(EntityNotFoundException.class);
+        assertThrows(EntityNotFoundException.class, () -> heroService.getHeroListByAccountId(anyLong()));
+    }
+    @Test
+    void getHeroListByWinCountTest() {
+        when(heroRepository.findByWinCount()).thenReturn(heroes);
+        heroService.getHeroListByWinCount();
+        verify(heroRepository, times(1)).findByWinCount();
+    }
+    @Test
+    void getHeroListByWinCountExceptionTest() {
+        when(heroRepository.findByWinCount()).thenThrow(EntityNotFoundException.class);
+        assertThrows(EntityNotFoundException.class, () -> heroService.getHeroListByWinCount());
+    }
+    @Test
+    void restHeroByIdTest() {
+        when(heroRepository.findById(anyLong())).thenReturn(Optional.of(hero));
+        heroService.restHeroById(anyLong());
+        verify(heroRepository, times(1)).findById(anyLong());
+    }
+    @Test
+    void updateHealthByIdTest(){
+        doNothing().when(heroRepository).updateHealthById(anyInt(), anyLong());
+        heroService.updateHealthById(anyInt(),anyLong());
+        verify(heroRepository, times(1)).updateHealthById(anyInt(), anyLong());
+    }
+    @Test
+    void updatePotionCountByIdTest(){
+        doNothing().when(heroRepository).updatePotionCountById(anyInt(), anyLong());
+        heroService.updatePotionCountById(anyInt(), anyLong());
+        verify(heroRepository, times(1)).updatePotionCountById(anyInt(), anyLong());
+    }
+    @Test
+    void updateRunCountByIdTest() {
+        doNothing().when(heroRepository).updateRunCountByHeroId(anyInt(), anyLong());
+        heroService.updateRunCountById(anyLong(), anyInt());
+        verify(heroRepository, times(1)).updateRunCountByHeroId(anyInt(), anyLong());
+    }
+    @Test
+    void updateWinCountByIdTest(){
+        doNothing().when(heroRepository).updateWinCountById(anyInt(), anyLong());
+        heroService.updateWinCountById(anyLong(), anyInt());
+        verify(heroRepository, times(1)).updateWinCountById(anyInt(), anyLong());
+    }
+    @Test
+    void updateLossCountByIdTest(){
+        doNothing().when(heroRepository).updateLossCountById(anyInt(), anyLong());
+        heroService.updateLossCountById(anyLong(), anyInt());
+        verify(heroRepository, times(1)).updateLossCountById(anyInt(), anyLong());
+    }
+    @Test
+    void deleteHeroByIdTest() {
+        doNothing().when(heroRepository).deleteById(anyLong());
+        when(heroRepository.existsById(anyLong())).thenReturn(true);
+        heroService.deleteHeroById(anyLong());
+        verify(heroRepository, times(1)).deleteById(anyLong());
+    }
+    @Test
+    void deleteHeroByIdExceptionTest() {
+        when(heroRepository.existsById(anyLong())).thenReturn(false);
+        assertThrows(EntityNotFoundException.class, () -> heroService.deleteHeroById(anyLong()));
+    }
+    @Test
+    void saveHeroTankTest() {
+        Long id = 1L;
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(id);
+
+        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
+        when(heroRepository.save(any())).thenReturn(hero);
+
+        heroService.saveHero("Tank", "Name", 1L);
+
+        verify(userAccountRepository, times(1)).findById(anyLong());
+        verify(heroRepository, times(1)).save(any());
+    }
+    @Test
+    void saveHeroDPSTest() {
+        Long id = 1L;
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(id);
+
+        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
+        when(heroRepository.save(any())).thenReturn(hero);
+
+        heroService.saveHero("DPS", "Name", 1L);
+
+        verify(userAccountRepository, times(1)).findById(anyLong());
+        verify(heroRepository, times(1)).save(any());
+    }
+
+    @Test
+    void saveHeroCasterTest() {
+        Long id = 1L;
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(id);
+
+        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
+        when(heroRepository.save(any())).thenReturn(hero);
+
+        heroService.saveHero("Caster", "Name", 1L);
+
+        verify(userAccountRepository, times(1)).findById(anyLong());
+        verify(heroRepository, times(1)).save(any());
+    }
+
+    @Test
+    void saveHeroHealerTest() {
+        Long id = 1L;
+        UserAccount userAccount = new UserAccount();
+        userAccount.setId(id);
+
+        when(userAccountRepository.findById(anyLong())).thenReturn(Optional.of(userAccount));
+        when(heroRepository.save(any())).thenReturn(hero);
+
+        heroService.saveHero("Healer", "Name", 1L);
+
+        verify(userAccountRepository, times(1)).findById(anyLong());
+        verify(heroRepository, times(1)).save(any());
+    }
 }
