@@ -5,6 +5,7 @@ import com.battlejawn.EnemyMove.*;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.HeroMove.Heal.Potion;
+import com.battlejawn.Randomizer.Randomizer;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.logging.Logger;
@@ -12,33 +13,40 @@ import java.util.logging.Logger;
 @Service
 public class EnemyMoveService {
     private final HeroService heroService;
+    private final Potion potion;
+    private final Steal steal;
+    private final Randomizer randomizer;
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final EnemyService enemyService;
     private final BattleSessionService battleSessionService;
     private final Logger logger = Logger.getLogger(EnemyMoveService.class.getName());
 
 
-    public EnemyMoveService(BattleSessionService battleSessionService, EnemyService enemyService, HeroService heroService, BattleHistoryMessageService battleHistoryMessageService) {
+    public EnemyMoveService(BattleSessionService battleSessionService,
+                            EnemyService enemyService,
+                            HeroService heroService,
+                            BattleHistoryMessageService battleHistoryMessageService,
+                            Potion potion,
+                            Steal steal,
+                            Randomizer randomizer) {
         this.battleSessionService = battleSessionService;
         this.enemyService = enemyService;
         this.heroService = heroService;
         this.battleHistoryMessageService = battleHistoryMessageService;
+        this.potion = potion;
+        this.steal = steal;
+        this.randomizer = randomizer;
     }
-
     public HeroMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
 
         Enemy enemy = enemyService.getEnemyById(battleSessionService.getBattleSessionById(battleSessionId).getEnemyId());
         Hero hero = heroService.getHeroById(battleSessionService.getBattleSessionById(battleSessionId).getHeroId());
 
-        int moveIndex = (int) Math.floor(Math.random() * 9) + 1;
+        int moveIndex = randomizer.getRandomInt(9);
         HeroMoveDTO enemyMoveDTO;
         int damage;
 
-        //                else if (moveIndex == 11) {
-        //                    Paralyze paralyze = new Paralyze();
-        //                    boolean paralyzeSuccess = paralyze.useParalyze();
-        //                }
         return switch (enemy.getName()) {
             case "Wolf" -> {
                 if (moveIndex > 3) {
@@ -123,11 +131,10 @@ public class EnemyMoveService {
 
     public HeroMoveDTO processPotion(Enemy enemy, Long battleSessionId, Hero hero) {
 
-            Potion potion = new Potion();
             int updatedEnemyHealth;
             int updatedPotionCount = enemy.getPotions() - 1;
             int healAmount = potion.usePotion();
-            if (healAmount > enemy.getMaxHealth()) {
+            if (healAmount + enemy.getHealth() > enemy.getMaxHealth()) {
                 updatedEnemyHealth = enemy.getMaxHealth();
             } else {
                 updatedEnemyHealth = enemy.getHealth() + healAmount;
@@ -144,7 +151,6 @@ public class EnemyMoveService {
         logger.info("Inside processSteal move method.");
         if (hero.getPotions() > 0 && enemy.getPotions() < enemy.getMaxPotions()) {
             logger.info("Inside first if statement. Hero potion count: " + hero.getPotions() + ". Enemy potion count: " + enemy.getPotions() + ". Enemy potion capacity: " + enemy.getMaxPotions());
-            Steal steal = new Steal();
             boolean stealSuccess = steal.useSteal();
             logger.info("stealSuccess: " + stealSuccess);
             if (stealSuccess) {

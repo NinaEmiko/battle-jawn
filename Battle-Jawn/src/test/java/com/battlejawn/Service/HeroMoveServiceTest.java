@@ -353,7 +353,5 @@ class HeroMoveServiceTest {
         heroMoveService.processHeroMove(10, enemy, 1L, hero, "Move");
 
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
-
-
     }
 }
