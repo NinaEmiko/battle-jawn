@@ -67,18 +67,16 @@ class BattleSessionServiceTest {
         assertThrows(EntityNotFoundException.class, () -> battleSessionService.getBattleSessionById(anyLong()));
     }
 
-//    @Test
-//    void createNewBattleSessionTest() {
-//        when(heroService.getHeroById(anyLong())).thenReturn(hero);
-//        when(enemyService.createNewEnemy()).thenReturn(enemy);
-//        when(battleSessionRepository.save(any())).thenReturn(battleSession);
-//        when(battleHistoryMessageService.createNewMessage(null, "You encountered an enemy!")).thenReturn(battleHistoryMessage);
-//        battleSessionService.createNewBattleSession(hero.getId());
-//        verify(battleSessionRepository, times(1)).save(any());
-//    }
-//    @Test
-//    void createNewBattleSessionExceptionTest() {
-//        when(heroService.getHeroById(anyLong())).thenThrow(new RuntimeException());
-//        assertThrows(RuntimeException.class, () -> battleSessionService.createNewBattleSession(anyLong()));
-//    }
+    @Test
+    void createNewBattleSessionTest() {
+        when(enemyService.createNewEnemy()).thenReturn(enemy);
+        when(battleSessionRepository.save(any())).thenReturn(battleSession);
+        when(battleHistoryMessageService.createNewMessage(null, "You encountered an enemy!")).thenReturn(battleHistoryMessage);
+        battleSessionService.createNewBattleSession(1L);
+        verify(battleSessionRepository, times(1)).save(any());
+    }
+    @Test
+    void createNewBattleSessionExceptionTest() {
+        assertThrows(RuntimeException.class, () -> battleSessionService.createNewBattleSession(anyLong()));
+    }
 }
