@@ -13,94 +13,26 @@ import ghost from "../assets/ghost.png";
 import { useNavigate } from "react-router-dom";
 
 function Battle({props}:{props:any}) {
-  const [battleIdSet, setBattleIdSet] = useState(false);
+  const [battleSessionCreated, setBattleSessionCreated] = useState(false);
+  const [sessionInitialized, setSessionInitialized] = useState(false);
   const [beginBattle, setBeginBattle] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [battleSessionId, setBattleSessionId] = useState(0);
   const [enemyId, setEnemyId] = useState(0);
-  const [battleHistoryMessageId, setBattleHistoryMessageId] = useState(0);
   const [role, setRole] = useState('');
   const [health, setHealth] = useState(1);
   const [maxHealth, setMaxHealth] = useState(0);
   const [potionCount, setPotionCount] = useState(0);
   const [enemyName, setEnemyName] = useState('');
-  const [enemyHealth, setEnemyHealth] = useState(1);
+  const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
-  const [battleHistory, setBattleHistory] = useState<string[]>([]);
-  const [gameOver, setGameOver] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [battleHistory, setBattleHistory] = useState<string[]>(["Retrieving battle history. Please wait."]);
 
   const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
     navigate(path);
   };
-
-  useEffect(() => {
-    if (!battleIdSet){
-    const createNewBattleSession = async () => {
-      try {
-        const response = await axios.post('http://localhost:8080/api/battle-session', {
-          heroId: props
-          
-        });
-        setBattleSessionId(response.data.id);
-        setEnemyId(response.data.enemyId);
-        setBattleHistoryMessageId(response.data.battleHistoryMessageId)
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    createNewBattleSession();
-    setBattleIdSet(true);
-  }
-  },[props, battleSessionId, enemyId, battleHistoryMessageId, battleIdSet])
-
-  useEffect(() => {
-
-  if (battleIdSet) {
-    const fetchHero = async () => {
-      try {
-        const response = await
-        axios.get('http://localhost:8080/api/hero/' + props)
-        setRole(response.data.role);
-        setHealth(response.data.health);
-        setMaxHealth(response.data.maxHealth);
-        setPotionCount(response.data.potions)
-        console.log("Inside Battle. Response: " + response.data);
-      } catch (error) {
-        console.error('Error fetching Hero data: ', error)
-      }
-    }
-
-    const fetchEnemy = async () => {
-      try {
-        const response = await
-        axios.get('http://localhost:8080/api/enemy/' + enemyId)
-        setEnemyName(response.data.name);
-        setEnemyHealth(response.data.health);
-        setEnemyMaxHealth(response.data.maxHealth);
-      } catch (error) {
-        console.error('Error fetching Enemy data: ', error)
-      }
-    }
-
-    const fetchBattleHistory = async () => {
-      try {
-        const response = await
-        axios.get('http://localhost:8080/api/battle-history-message/' + battleSessionId)
-        setBattleHistory(response.data);
-      } catch (error) {
-        console.error('Error fetching Battle History data: ', error)
-      }
-    }
-          
-    fetchHero();
-    fetchEnemy();
-    fetchBattleHistory();
-    setBeginBattle(true);
-  }
-  }, [props, role, health, maxHealth, potionCount, enemyName, enemyHealth, enemyMaxHealth, battleHistory, beginBattle, battleIdSet])
 
   function handleEnemyMove() {
     console.log("Inside handleEnemyMove: " + battleSessionId)
@@ -111,12 +43,11 @@ function Battle({props}:{props:any}) {
         battleSessionId: battleSessionId
           })
         .then(response => {
-          setHealth(response.data.heroHealth);
-          setGameOver(response.data.gameOver);
-          setPotionCount(response.data.potionCount);
-          setEnemyHealth(response.data.enemyHealth);
-          setBattleHistory(response.data.battleHistory);
-          setButtonDisabled(false);
+            setHealth(response.data.heroHealth);
+            setPotionCount(response.data.potionCount);
+            setEnemyHealth(response.data.enemyHealth);
+            setBattleHistory(response.data.battleHistory);
+            setButtonDisabled(false);
         })
         .catch(error => {
           console.error('Error fetching enemy move data:', error);
@@ -132,11 +63,10 @@ function Battle({props}:{props:any}) {
       battleSessionId: battleSessionId
         })
     .then((response) => {
-      setHealth(response.data.heroHealth);
-      setPotionCount(response.data.potionCount);
-      setEnemyHealth(response.data.enemyHealth);
-      setBattleHistory(response.data.battleHistory);
-      setGameOver(response.data.gameOver);
+        setHealth(response.data.heroHealth);
+        setPotionCount(response.data.potionCount);
+        setEnemyHealth(response.data.enemyHealth);
+        setBattleHistory(response.data.battleHistory);
     })
     .catch((error) => {
     console.error('Error occurred while trying to use: ' + move + " ", error);
@@ -145,12 +75,86 @@ function Battle({props}:{props:any}) {
     handleEnemyMove();
   }
 
-  if (battleHistory.includes('You have defeated the enemy!')||
-  battleHistory.includes('You have been defeated by the enemy!')||
-  battleHistory.includes('You successfully ran away!')) {
-    setButtonDisabled(true);
-    handleNavigation('/leader-board');
+  const createNewBattleSession = () => {
+      
+    axios.post('http://localhost:8080/api/battle-session', {
+        heroId: props
+        
+      })
+      .then((response) => {
+        setBattleSessionId(response.data.id);
+        setEnemyId(response.data.enemyId);
+
+        setBattleSessionCreated(true);
+      })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+    }
+    )
   }
+
+  const fetchInitialData = () => {
+
+    axios.get('http://localhost:8080/api/hero/' + props)
+    .then((heroResponse) => {
+      setRole(heroResponse.data.role);
+      setHealth(heroResponse.data.health);
+      setMaxHealth(heroResponse.data.maxHealth);
+      setPotionCount(heroResponse.data.potions);
+    })
+    .catch((error) => {
+      console.error('Error fetching hero data: ', error)
+    })
+
+    axios.get('http://localhost:8080/api/enemy/' + enemyId)
+    .then((enemyResponse) => {
+      setEnemyName(enemyResponse.data.name);
+      setEnemyHealth(enemyResponse.data.health);
+      setEnemyMaxHealth(enemyResponse.data.maxHealth);
+    })
+    .catch((error) => {
+      console.error('Error fetching enemy data: ', error)
+    })
+
+    axios.get('http://localhost:8080/api/battle-history-message/' + battleSessionId)
+    .then((battleHistoryResponse) => {
+      setBattleHistory(battleHistoryResponse.data);
+    })
+    .catch((error) => {
+      console.error('Error fetching battle history data: ', error)
+    })
+
+    setSessionInitialized(true);
+}
+
+  useEffect(() => {
+    if (!battleSessionCreated) {
+      createNewBattleSession();
+    }
+  },[])
+
+  useEffect(() => {
+    if (battleSessionCreated) {
+      fetchInitialData();
+    }
+  }, [battleSessionCreated])
+
+  useEffect(() => {
+    if (sessionInitialized) {
+      setBeginBattle(true);
+    }
+  }, [sessionInitialized])
+
+  useEffect(() => {
+    if(battleHistory) {
+      if (battleHistory.includes('You have defeated the enemy!')||
+      battleHistory.includes('You have been defeated by the enemy!')||
+      battleHistory.includes('You successfully ran away!')) {
+        setButtonDisabled(true);
+        handleNavigation('/leader-board');
+      }
+    }
+  })
 
   return (
 <>
