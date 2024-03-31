@@ -16,17 +16,17 @@ import java.util.logging.Logger;
 public class HeroMoveController {
     @Autowired
     private final HeroMoveService heroMoveService;
+    private final JsonParser jsonParser;
     private final Logger logger = Logger.getLogger(HeroMoveController.class.getName());
 
-    public HeroMoveController(HeroMoveService heroMoveService) {
+    public HeroMoveController(HeroMoveService heroMoveService, JsonParser jsonParser) {
         this.heroMoveService = heroMoveService;
+        this.jsonParser = jsonParser;
     }
 
     @PostMapping
     public ResponseEntity<HeroMoveDTO> heroMove(@RequestBody String data) {
         logger.info("Inside heroMove controller method. Data: " + data + ".");
-        JsonParser jsonParser;
-        jsonParser = new JsonParser();
         String parsedMove = jsonParser.extractMove(data);
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);
         HeroMoveDTO heroMoveDTO = heroMoveService.heroMove(parsedMove, parsedBattleId);

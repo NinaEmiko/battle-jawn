@@ -18,17 +18,17 @@ import com.battlejawn.Entities.Hero.Hero;
 public class HeroController {
     @Autowired
     private final HeroService heroService;
+    private final JsonParser jsonParser;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
 
-    public HeroController(HeroService heroService){
+    public HeroController(HeroService heroService, JsonParser jsonParser){
         this.heroService = heroService;
+        this.jsonParser = jsonParser;
     }
 
     @PostMapping
     public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
         logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
-        JsonParser jsonParser;
-        jsonParser = new JsonParser();
         String parsedName = jsonParser.extractHeroName(data);
         String parsedRole = jsonParser.extractRole(data);
         Long parsedUserAccountId = jsonParser.extractUserAccountId(data);

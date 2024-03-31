@@ -1,6 +1,5 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Config.AppException;
 import com.battlejawn.Entities.PlayerTip;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,12 +8,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.battlejawn.Repository.PlayerTipRepository;
-import org.springframework.http.HttpStatus;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -70,6 +67,13 @@ public class PlayerTipServiceTest {
         playerTipService.savePlayerTip(playerTip);
 
         verify(playerTipRepository).save(playerTip);
+    }
+
+    @Test
+    void updatePlayerTipTest() {
+        doNothing().when(playerTipRepository).updatePlayerTipBodyById(anyString(), anyLong());
+        playerTipService.updatePlayerTip(anyLong(), anyString());
+        verify(playerTipRepository, times(1)).updatePlayerTipBodyById(anyString(), anyLong());
     }
 
     @Test

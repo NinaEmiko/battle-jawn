@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.PlayerTip;
 import com.battlejawn.Repository.PlayerTipRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import javax.persistence.EntityNotFoundException;
@@ -53,8 +54,15 @@ public class PlayerTipService {
         return playerTipRepository.findAll();
     }
 
-    public void deletePlayerTip(Long id) {
+    @Transactional
+    public void updatePlayerTip(long id, String newBody) {
+        logger.info("Inside updatePlayerTip service method. ID: " + id + ".");
+        playerTipRepository.updatePlayerTipBodyById(newBody, id);
+    }
+
+    public String deletePlayerTip(Long id) {
         logger.info("Inside deletePlayerTip service method. Player tip ID: " + id + ".");
         playerTipRepository.deleteById(id);
+        return "PlayerTip deleted successfully";
     }
 }

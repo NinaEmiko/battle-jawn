@@ -3,9 +3,11 @@ package com.battlejawn.Config;
 import com.battlejawn.Controllers.PlayerTipController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
 
+@Component
 public class JsonParser {
     private final ObjectMapper objectMapper;
     public JsonParser() {

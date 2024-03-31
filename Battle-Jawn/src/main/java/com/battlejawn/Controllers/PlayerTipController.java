@@ -1,11 +1,13 @@
 package com.battlejawn.Controllers;
 
+import java.net.URI;
 import java.util.List;
 import java.util.logging.Logger;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import com.battlejawn.Entities.PlayerTip;
 import com.battlejawn.Service.PlayerTipService;
 
@@ -32,6 +34,34 @@ public class PlayerTipController {
         String randomTip = playerTipService.getRandomPlayerTip();
         logger.info("Current tip: " + randomTip);
         return randomTip;
+    }
+
+    @GetMapping("/{id}")
+    public PlayerTip getPlayerTipById(@PathVariable long id) {
+        logger.info("Inside getPlayerTipById controller method.");
+        return playerTipService.getPlayerTipById(id);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<PlayerTip> createNewPlayerTip(@RequestBody @Valid String body) {
+        logger.info("Inside createNewPlayerTip controller method. Body: " + body);
+        PlayerTip playerTip = new PlayerTip();
+        playerTip.setBody(body);
+        PlayerTip response = playerTipService.savePlayerTip(playerTip);
+        return ResponseEntity.created(URI.create("/player-tip/" + response.getId())).body(response);
+    }
+
+    @PutMapping("/update/{id}")
+    public void updatePlayerTip(@PathVariable long id, @RequestBody @Valid String newBody) {
+        logger.info("Inside updatePlayerTip controller method.");
+        playerTipService.updatePlayerTip(id, newBody);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePlayerTipById(@PathVariable Long id) {
+        logger.info("Inside deletePlayerTipById controller method. ID: " + id);
+        String response = playerTipService.deletePlayerTip(id);
+        return ResponseEntity.ok(response);
     }
 
 }
