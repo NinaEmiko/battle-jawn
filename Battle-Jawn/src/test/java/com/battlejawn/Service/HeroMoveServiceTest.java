@@ -326,4 +326,34 @@ class HeroMoveServiceTest {
         String result = heroMoveService.getDamageMessage("Move", 1);
         Assertions.assertEquals(result, "Move did 1 damage.");
     }
+
+    @Test
+    void processHeroMoveDefeatTest() {
+        enemy.setId(1L);
+        hero.setId(2L);
+        doNothing().when(enemyService).updateHealthById(0, 1L);
+        doNothing().when(heroService).updateWinCountById(2L, 1);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroMove(1000, enemy, 1L, hero, "Move");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+
+    }
+
+    @Test
+    void processHeroMoveDamageTest() {
+        enemy.setId(1L);
+        hero.setId(2L);
+        doNothing().when(enemyService).updateHealthById(90, 1L);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroMove(10, enemy, 1L, hero, "Move");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+
+
+    }
 }
