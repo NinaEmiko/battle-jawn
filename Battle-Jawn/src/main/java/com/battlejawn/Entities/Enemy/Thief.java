@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 @DiscriminatorValue("THIEF")
 public class Thief extends Enemy {
 
-    public Thief() {
-        super("Thief", 90, 90, 2, 4, 17, LocalDateTime.now());
+    public Thief(int level) {
+        super("Thief", 90, 90, 2, 4, 17, LocalDateTime.now(), level);
     }
 
 }

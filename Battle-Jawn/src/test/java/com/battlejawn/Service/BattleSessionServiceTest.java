@@ -50,7 +50,7 @@ class BattleSessionServiceTest {
         battleSession = new BattleSession();
         battleHistoryMessage = new BattleHistoryMessage();
         battleSession.setId(4L);
-        enemy = new Wolf();
+        enemy = new Wolf(2);
         hero.setId(1L);
         enemy.setId(2L);
 
@@ -69,7 +69,10 @@ class BattleSessionServiceTest {
 
     @Test
     void createNewBattleSessionTest() {
-        when(enemyService.createNewEnemy()).thenReturn(enemy);
+        Tank tank = new Tank("Name");
+        tank.setLevel(1);
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        when(enemyService.createNewEnemy(anyInt())).thenReturn(enemy);
         when(battleSessionRepository.save(any())).thenReturn(battleSession);
         when(battleHistoryMessageService.createNewMessage(null, "You encountered an enemy!")).thenReturn(battleHistoryMessage);
         battleSessionService.createNewBattleSession(1L);

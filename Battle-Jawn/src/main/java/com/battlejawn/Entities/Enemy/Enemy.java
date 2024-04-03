@@ -29,8 +29,10 @@ public abstract class Enemy {
     private int strength;
     @Column
     private LocalDateTime createdAt;
+    @Column
+    private int level;
 
-    public Enemy(String name, int health, int maxHealth, int potions, int maxPotions, int strength, LocalDateTime createdAt) {
+    public Enemy(String name, int health, int maxHealth, int potions, int maxPotions, int strength, LocalDateTime createdAt, int level) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
@@ -38,6 +40,7 @@ public abstract class Enemy {
         this.maxPotions = maxPotions;
         this.strength = strength;
         this.createdAt = createdAt;
+        this.level = level;
     }
 
     public Enemy() {

@@ -10,7 +10,6 @@ import com.battlejawn.DTO.UserAccountDTO;
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
 import jakarta.transaction.Transactional;
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

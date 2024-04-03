@@ -58,7 +58,7 @@ class HeroMoveServiceTest {
     @BeforeEach
     void setup(){
         battleHistoryMessageList = new ArrayList<>();
-        enemy = new Orc();
+        enemy = new Orc(2);
         hero = new Tank("Name");
     }
     @Test

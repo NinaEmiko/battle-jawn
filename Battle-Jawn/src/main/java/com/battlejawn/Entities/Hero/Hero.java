@@ -42,6 +42,10 @@ public abstract class Hero {
     private UserAccount userAccount;
     @Column
     private LocalDateTime createdAt;
+    @Column
+    private int level;
+    @Column
+    private Long experience;
 
     public Hero() {
 
@@ -58,7 +62,8 @@ public abstract class Hero {
         this.winCount = winCount;
         this.lossCount = lossCount;
         this.createdAt = createdAt;
-
+        this.level = 1;
+        this.experience = 0L;
     }
     
 }

@@ -66,26 +66,27 @@ public class EnemyService {
     }
 
     @Transactional
-    public Enemy createNewEnemy() {
+    public Enemy createNewEnemy(int level) {
         try {
             Enemy enemy;
             logger.info("Inside createNewEnemy service method.");
             int randomIndex = randomizer.getRandomInt(4);
+            int randomLevel = randomizer.getRandomInt(level);
 
             switch (randomIndex) {
-                case 1: enemy = new Orc();
+                case 1: enemy = new Orc(randomLevel);
                         logger.info("New Orc created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 2: enemy = new Spirit();
+                case 2: enemy = new Spirit(randomLevel);
                     logger.info("New Spirit created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 3: enemy = new Thief();
+                case 3: enemy = new Thief(randomLevel);
                         logger.info("New Thief created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 4: enemy = new Wolf();
+                case 4: enemy = new Wolf(randomLevel);
                         logger.info("New Wolf created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;

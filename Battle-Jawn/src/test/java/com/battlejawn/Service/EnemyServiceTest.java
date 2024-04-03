@@ -35,11 +35,11 @@ class EnemyServiceTest {
         enemyService.getAllEnemies();
         verify(enemyRepository, times(1)).findAll();
     }
-    //OLD TEST
+
     @Test
-    void testGetEnemyById(){
+    void GetEnemyByIdTest(){
         long enemyId = 1L;
-        Orc orc = new Orc();
+        Orc orc = new Orc(2);
         orc.setId(enemyId);
 
         when(enemyRepository.findById(enemyId)).thenReturn(Optional.of(orc));
@@ -82,17 +82,17 @@ class EnemyServiceTest {
     @Test
     void createNewEnemyTest() {
         when(randomizer.getRandomInt(anyInt())).thenReturn(1);
-        Enemy orc = enemyService.createNewEnemy();
-        verify(randomizer, times(1)).getRandomInt(anyInt());
-        when(randomizer.getRandomInt(anyInt())).thenReturn(2);
-        Enemy spirit = enemyService.createNewEnemy();
+        Enemy orc = enemyService.createNewEnemy(2);
         verify(randomizer, times(2)).getRandomInt(anyInt());
-        when(randomizer.getRandomInt(anyInt())).thenReturn(3);
-        Enemy thief = enemyService.createNewEnemy();
-        verify(randomizer, times(3)).getRandomInt(anyInt());
-        when(randomizer.getRandomInt(anyInt())).thenReturn(4);
-        Enemy wolf = enemyService.createNewEnemy();
+        when(randomizer.getRandomInt(anyInt())).thenReturn(2);
+        Enemy spirit = enemyService.createNewEnemy(2);
         verify(randomizer, times(4)).getRandomInt(anyInt());
+        when(randomizer.getRandomInt(anyInt())).thenReturn(3);
+        Enemy thief = enemyService.createNewEnemy(2);
+        verify(randomizer, times(6)).getRandomInt(anyInt());
+        when(randomizer.getRandomInt(anyInt())).thenReturn(4);
+        Enemy wolf = enemyService.createNewEnemy(2);
+        verify(randomizer, times(8)).getRandomInt(anyInt());
 
         Assertions.assertEquals("Thief", thief.getName());
         Assertions.assertEquals("Wolf", wolf.getName());
@@ -103,13 +103,13 @@ class EnemyServiceTest {
     @Test
     void createNewEnemyExceptionTest() {
         when(randomizer.getRandomInt(anyInt())).thenThrow(new RuntimeException());
-        assertThrows(RuntimeException.class, () -> enemyService.createNewEnemy());
+        assertThrows(RuntimeException.class, () -> enemyService.createNewEnemy(2));
 
     }
     @Test
     void createNewEnemyNullTest() {
         when(randomizer.getRandomInt(anyInt())).thenReturn(0);
-        Enemy nullEnemy = enemyService.createNewEnemy();
+        Enemy nullEnemy = enemyService.createNewEnemy(2);
         assertNull(nullEnemy);
 
     }
