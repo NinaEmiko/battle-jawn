@@ -22,13 +22,9 @@ public class EnemyPurge {
     public void purgeEnemy() {
         logger.info("Inside purgeEnemy service class. This job runs every hour.");
         List<Enemy> enemyList = enemyRepository.findAll();
-        LocalDateTime now;
-        LocalDateTime createdAt;
         Duration timeDifference;
         Duration oneDay = Duration.ofDays(1);
         for (Enemy enemy: enemyList) {
-            createdAt = enemy.getCreatedAt();
-            now = LocalDateTime.now();
             timeDifference = Duration.between(enemy.getCreatedAt(), LocalDateTime.now());
             try {
             if (timeDifference.compareTo(oneDay) > 0) {

@@ -77,7 +77,7 @@ public class UserAccountService {
 
         if (optionalUserAccount.isPresent()) {
             userAccountRepository.deleteById(id);
-            return "Account with ID " + id + " not found.";
+            return "Account with ID " + id + " deleted successfully.";
         } else {
             return "Account with ID " + id + " not found.";
         }

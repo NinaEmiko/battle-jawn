@@ -3,13 +3,11 @@ package com.battlejawn.Service;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
-@NoArgsConstructor
 public class ExperienceProcessorService {
     private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
     public String processExperience(Hero hero, Enemy enemy, String battleResult) {

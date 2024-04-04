@@ -22,13 +22,9 @@ public class BattleHistoryMessagePurge {
     public void purgeBattleHistoryMessage() {
         logger.info("Inside purgeBattleHistoryMessage service class. This job runs every hour.");
         List<BattleHistoryMessage> battleHistoryMessageList = battleHistoryMessageRepository.findAll();
-        LocalDateTime now;
-        LocalDateTime createdAt;
         Duration timeDifference;
         Duration oneDay = Duration.ofDays(5);
         for (BattleHistoryMessage battleHistoryMessage: battleHistoryMessageList) {
-            createdAt = battleHistoryMessage.getCreatedAt();
-            now = LocalDateTime.now();
             timeDifference = Duration.between(battleHistoryMessage.getCreatedAt(), LocalDateTime.now());
             try {
                 if (timeDifference.compareTo(oneDay) > 0) {

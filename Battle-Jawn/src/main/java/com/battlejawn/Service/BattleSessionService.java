@@ -70,5 +70,4 @@ public class BattleSessionService {
         }
         return endOfBattleMessage;
     }
-
 }
