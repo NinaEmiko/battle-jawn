@@ -12,6 +12,7 @@ import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
 import com.battlejawn.HeroMove.StrongAttack.*;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
+@AllArgsConstructor
 public class HeroMoveService {
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final BattleSessionService battleSessionService;
@@ -29,22 +31,6 @@ public class HeroMoveService {
     private final Potion potion;
     private final Logger logger = Logger.getLogger(HeroMoveService.class.getName());
     private HeroMoveDTO heroMoveDTO;
-
-    public HeroMoveService(BattleHistoryMessageService battleHistoryMessageService,
-                           BattleSessionService battleSessionService,
-                           HeroService heroService,
-                           EnemyService enemyService,
-                           Run run,
-                           Steal steal,
-                           Potion potion) {
-        this.battleHistoryMessageService = battleHistoryMessageService;
-        this.battleSessionService = battleSessionService;
-        this.heroService = heroService;
-        this.enemyService = enemyService;
-        this.run = run;
-        this.steal = steal;
-        this.potion = potion;
-    }
 
     @Transactional
     public HeroMoveDTO heroMove(String move, Long battleSessionId) {

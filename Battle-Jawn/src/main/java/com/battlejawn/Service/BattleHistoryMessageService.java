@@ -2,6 +2,7 @@ package com.battlejawn.Service;
 
 import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Repository.BattleHistoryMessageRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,13 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class BattleHistoryMessageService {
 
     private final BattleHistoryMessageRepository battleHistoryMessageRepository;
-
-    public BattleHistoryMessageService(BattleHistoryMessageRepository battleHistoryMessageRepository) {
-        this.battleHistoryMessageRepository = battleHistoryMessageRepository;
-    }
 
     @Transactional
     public BattleHistoryMessage createNewMessage(Long battleSessionId, String message) {

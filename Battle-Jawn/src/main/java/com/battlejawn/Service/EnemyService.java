@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
 
 import com.battlejawn.Randomizer.Randomizer;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
@@ -18,17 +19,12 @@ import com.battlejawn.Repository.EnemyRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class EnemyService {
 
     private final EnemyRepository enemyRepository;
     private final Randomizer randomizer;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-
-    @Autowired
-    public EnemyService(EnemyRepository enemyRepository, Randomizer randomizer) {
-        this.enemyRepository = enemyRepository;
-        this.randomizer = randomizer;
-    }
 
     public List<Enemy> getAllEnemies() {
         logger.info("Inside getAllEnemies service method.");
@@ -66,27 +62,27 @@ public class EnemyService {
     }
 
     @Transactional
-    public Enemy createNewEnemy(int level) {
+    public Enemy createNewEnemy(int heroLevel) {
         try {
             Enemy enemy;
             logger.info("Inside createNewEnemy service method.");
             int randomIndex = randomizer.getRandomInt(4);
-            int randomLevel = randomizer.getRandomInt(level);
+            int enemyLevel = randomizer.getRandomInt(heroLevel);
 
             switch (randomIndex) {
-                case 1: enemy = new Orc(randomLevel);
+                case 1: enemy = new Orc(enemyLevel);
                         logger.info("New Orc created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 2: enemy = new Spirit(randomLevel);
+                case 2: enemy = new Spirit(enemyLevel);
                     logger.info("New Spirit created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 3: enemy = new Thief(randomLevel);
+                case 3: enemy = new Thief(enemyLevel);
                         logger.info("New Thief created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;
-                case 4: enemy = new Wolf(randomLevel);
+                case 4: enemy = new Wolf(enemyLevel);
                         logger.info("New Wolf created: " + enemy + ".");
                         enemyRepository.save(enemy);
                         return enemy;

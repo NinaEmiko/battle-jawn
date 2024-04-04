@@ -73,4 +73,13 @@ public class JsonParser {
         }
         return null;
     }
+    public String extractBattleResult(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("battleResult").asText();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return null;
+        }
+    }
 }

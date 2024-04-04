@@ -6,11 +6,13 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.Randomizer.Randomizer;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Service
+@AllArgsConstructor
 public class EnemyMoveService {
     private final HeroService heroService;
     private final Potion potion;
@@ -21,22 +23,6 @@ public class EnemyMoveService {
     private final BattleSessionService battleSessionService;
     private final Logger logger = Logger.getLogger(EnemyMoveService.class.getName());
 
-
-    public EnemyMoveService(BattleSessionService battleSessionService,
-                            EnemyService enemyService,
-                            HeroService heroService,
-                            BattleHistoryMessageService battleHistoryMessageService,
-                            Potion potion,
-                            Steal steal,
-                            Randomizer randomizer) {
-        this.battleSessionService = battleSessionService;
-        this.enemyService = enemyService;
-        this.heroService = heroService;
-        this.battleHistoryMessageService = battleHistoryMessageService;
-        this.potion = potion;
-        this.steal = steal;
-        this.randomizer = randomizer;
-    }
     public HeroMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
 
