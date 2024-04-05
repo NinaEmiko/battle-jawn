@@ -40,13 +40,5 @@ public interface HeroRepository extends JpaRepository<Hero, Long> {
     @Modifying
     @Query("UPDATE Hero e SET e.lossCount = :lossCount WHERE e.id = :id")
     void updateLossCountById(@Param("lossCount") int lossCount, @Param("id") Long id);
-
-    @Modifying
-    @Query("UPDATE Hero e SET e.experience = :experience WHERE e.id = :idValue")
-    void updateExperienceById(@Param("experience") Long experience, @Param("idValue") Long id);
-
-    @Modifying
-    @Query("UPDATE Hero e SET e.level = :level WHERE e.id = :id")
-    void updateLevelById(@Param("level") int level, @Param("id") Long id);
     
 }

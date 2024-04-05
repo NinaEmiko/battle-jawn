@@ -122,17 +122,6 @@ public class HeroService {
     }
 
     @Transactional
-    public void updateExperienceById(Long heroId, Long updatedExperience){
-        logger.info("Inside updateExperienceById service method. Hero ID: " + heroId + ". Updated experience: " + updatedExperience + ".");
-        heroRepository.updateExperienceById(updatedExperience, heroId);
-    }
-
-    @Transactional
-    public void updateLevelById(Long heroId, int updatedLevel){
-        logger.info("Inside updateExperienceById service method. Hero ID: " + heroId + ". Updated experience: " + updatedLevel + ".");
-        heroRepository.updateLevelById(updatedLevel, heroId);
-    }
-    @Transactional
     public void updateHero(Hero hero){
         logger.info("Inside save service method. Hero ID: " + hero + ".");
         heroRepository.save(hero);
