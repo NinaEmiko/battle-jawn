@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 @Service
 @AllArgsConstructor
 public class ExperienceProcessorService {
+    private final HeroService heroService;
     private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
     public String processExperience(Hero hero, Enemy enemy, String battleResult) {
         logger.info("Inside processExperience service method.");
@@ -19,17 +20,18 @@ public class ExperienceProcessorService {
 
         if (battleResult.equals("Hero wins")){
             hero.setExperience(hero.getExperience() + experience);
-            endOfBattleMessage = "You won the battle! You've gained " + experience + " experience!";
+            int heroLevelAfterBattle = determineLevel(hero.getExperience());
+            if (initialHeroLevel < heroLevelAfterBattle) {
+                endOfBattleMessage = "Congratulations! You've reached level " + heroLevelAfterBattle + "!";
+            } else {
+                endOfBattleMessage = "You've gained " + experience + " experience!";
+            }
         } else if (battleResult.equals("Hero loses")){
-            Long updatedExperience = calculateExperienceLoss(hero, experience);
+            Long updatedExperience = calculateExperienceLoss(hero.getExperience(), experience);
             hero.setExperience(updatedExperience);
-            endOfBattleMessage = "You lost the battle! You've lost " + updatedExperience + " experience.";
+            endOfBattleMessage = "You've lost " + experience + " experience.";
         }
-        determineLevel(hero);
-        int heroLevelAfterBattle = hero.getLevel();
-        if (initialHeroLevel < heroLevelAfterBattle) {
-            endOfBattleMessage = "Congratulations! You've reached level " + heroLevelAfterBattle + "!";
-        }
+        heroService.updateHero(hero);
         return endOfBattleMessage;
     }
 
@@ -103,49 +105,51 @@ public class ExperienceProcessorService {
         };
     }
 
-    private void determineLevel(Hero hero) {
-        if (hero.getExperience() > 5000L) {
-            hero.setLevel(10);
-        } else if (hero.getExperience() > 3000L) {
-            hero.setLevel(9);
-        } else if (hero.getExperience() > 2000L) {
-            hero.setLevel(8);
-        } else if (hero.getExperience() > 1250L) {
-            hero.setLevel(7);
-        } else if (hero.getExperience() > 750L) {
-            hero.setLevel(6);
-        } else if (hero.getExperience() > 500L) {
-            hero.setLevel(5);
-        } else if (hero.getExperience() > 300L) {
-            hero.setLevel(4);
-        } else if (hero.getExperience() > 125L) {
-            hero.setLevel(3);
-        } else if (hero.getExperience() > 50L) {
-            hero.setLevel(2);
+    private int determineLevel(Long experience) {
+        if (experience >= 5000L) {
+            return 10;
+        } else if (experience >= 3000L) {
+            return 9;
+        } else if (experience >= 2000L) {
+            return 8;
+        } else if (experience >= 1250L) {
+            return 7;
+        } else if (experience >= 750L) {
+            return 6;
+        } else if (experience >= 500L) {
+            return 5;
+        } else if (experience >= 300L) {
+            return 4;
+        } else if (experience >= 125L) {
+            return 3;
+        } else if (experience >= 50L) {
+            return 2;
+        } else {
+            return 1;
         }
     }
 
-    private Long calculateExperienceLoss(Hero hero, Long experience){
-        if (hero.getExperience() > 5000L) {
-            return Math.max(hero.getExperience() - experience, 5000L);
-        } else if (hero.getExperience() > 3000L) {
-            return Math.max(hero.getExperience() - experience, 3000L);
-        } else if (hero.getExperience() > 2000L) {
-            return Math.max(hero.getExperience() - experience, 2000L);
-        } else if (hero.getExperience() > 1250L) {
-            return Math.max(hero.getExperience() - experience, 1250L);
-        } else if (hero.getExperience() > 750L) {
-            return Math.max(hero.getExperience() - experience, 750L);
-        } else if (hero.getExperience() > 500L) {
-            return Math.max(hero.getExperience() - experience, 500L);
-        } else if (hero.getExperience() > 300L) {
-            return Math.max(hero.getExperience() - experience, 300L);
-        } else if (hero.getExperience() > 125L) {
-            return Math.max(hero.getExperience() - experience, 125L);
-        } else if (hero.getExperience() > 50L) {
-            return Math.max(hero.getExperience() - experience, 50L);
+    private Long calculateExperienceLoss(Long heroExperience, Long experience){
+        if (heroExperience > 5000L) {
+            return Math.max(heroExperience - experience, 5000L);
+        } else if (heroExperience > 3000L) {
+            return Math.max(heroExperience - experience, 3000L);
+        } else if (heroExperience > 2000L) {
+            return Math.max(heroExperience - experience, 2000L);
+        } else if (heroExperience > 1250L) {
+            return Math.max(heroExperience - experience, 1250L);
+        } else if (heroExperience > 750L) {
+            return Math.max(heroExperience - experience, 750L);
+        } else if (heroExperience > 500L) {
+            return Math.max(heroExperience - experience, 500L);
+        } else if (heroExperience > 300L) {
+            return Math.max(heroExperience - experience, 300L);
+        } else if (heroExperience > 125L) {
+            return Math.max(heroExperience - experience, 125L);
+        } else if (heroExperience > 50L) {
+            return Math.max(heroExperience - experience, 50L);
         } else {
-            return Math.max(hero.getExperience() - experience, 0L);
+            return Math.max(heroExperience - experience, 0L);
         }
 
     }
