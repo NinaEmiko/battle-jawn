@@ -81,6 +81,10 @@ function handleRest(id: any): void {
           <td className="data-jawn">{hero.role}</td>
         </tr>
         <tr>
+          <td className="row-jawn">Level:</td>
+          <td className="data-jawn">{hero.level}</td>
+        </tr>
+        <tr>
           <td className="row-jawn">Health:</td>
           <td className="data-jawn" id="health-jawn">{hero.health} / {hero.maxHealth}</td>
         </tr>
