@@ -15,4 +15,12 @@ public class RandomizerTest {
         Assertions.assertTrue(result < 3);
     }
 
+    @Test
+    void getRandomLongTest() {
+        Randomizer randomizer = new Randomizer();
+        long result = randomizer.getRandomLong(2L);
+        Assertions.assertTrue(result > 0L);
+        Assertions.assertTrue(result < 3L);
+    }
+
 }
