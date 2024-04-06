@@ -46,6 +46,8 @@ public abstract class Hero {
     private int level;
     @Column
     private Long experience;
+    @Column
+    private Long coins;
 
     public Hero() {
 
@@ -64,6 +66,7 @@ public abstract class Hero {
         this.createdAt = createdAt;
         this.level = 1;
         this.experience = 0L;
+        this.coins = 3L;
     }
     
 }

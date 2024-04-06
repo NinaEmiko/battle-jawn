@@ -25,6 +25,8 @@ public class ExperienceProcessorServiceTest {
     Hero hero;
     @Mock
     Enemy enemy;
+    @Mock
+            CoinProcessorService coinProcessorService;
     List<Long> heroExperience;
     @InjectMocks
     ExperienceProcessorService experienceProcessorService;
@@ -48,16 +50,19 @@ public class ExperienceProcessorServiceTest {
     void processExperienceHeroLevelsTest() {
         hero.setExperience(51L);
         enemy = new Wolf(1);
+        when(coinProcessorService.processCoins(any())).thenReturn(1L);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero wins");
-        Assertions.assertEquals(result, "Congratulations! You've reached level 2!");
+        Assertions.assertEquals(result, "Congratulations! You win! You've reached level 2!" +
+                " Enemy dropped 1 coins.");
     }
     @Test
     void processExperienceHeroWinsTest() {
         enemy = new Wolf(1);
+        when(coinProcessorService.processCoins(any())).thenReturn(1L);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero wins");
-        Assertions.assertEquals(result, "You've gained 15 experience!");
+        Assertions.assertEquals(result, "You win! You've gained 15 experience! Enemy dropped 1 coins.");
     }
     @Test
     void processExperienceHeroRunsTest() {
@@ -77,15 +82,17 @@ public class ExperienceProcessorServiceTest {
     void processExperienceHeroLevel10Test() {
         hero.setLevel(10);
         enemy = new Wolf(1);
+        when(coinProcessorService.processCoins(any())).thenReturn(1L);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero wins");
-        Assertions.assertEquals(result, "You've gained 0 experience!");
+        Assertions.assertEquals(result, "You win! You've gained 0 experience! Enemy dropped 1 coins.");
     }
     @Test
     void processExperienceOrcTest() {
         enemy = new Orc(1);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
             doNothing().when(heroService).updateHero(any());
             experienceProcessorService.processExperience(hero, enemy, "Hero wins");
             verify(heroService, times(i)).updateHero(any());
@@ -96,6 +103,7 @@ public class ExperienceProcessorServiceTest {
         enemy = new Spirit(1);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
             doNothing().when(heroService).updateHero(any());
             experienceProcessorService.processExperience(hero, enemy, "Hero wins");
             verify(heroService, times(i)).updateHero(any());
@@ -106,6 +114,7 @@ public class ExperienceProcessorServiceTest {
         enemy = new Thief(1);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
             doNothing().when(heroService).updateHero(any());
             experienceProcessorService.processExperience(hero, enemy, "Hero wins");
             verify(heroService, times(i)).updateHero(any());
@@ -116,6 +125,7 @@ public class ExperienceProcessorServiceTest {
         enemy = new Wolf(1);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
             doNothing().when(heroService).updateHero(any());
             experienceProcessorService.processExperience(hero, enemy, "Hero wins");
             verify(heroService, times(i)).updateHero(any());
@@ -128,6 +138,7 @@ public class ExperienceProcessorServiceTest {
         for (int i = 1; i <= 10; i++) {
             hero.setLevel(i);
             enemy.setLevel(i);
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
             hero.setExperience(heroExperience.get(i));
             doNothing().when(heroService).updateHero(any());
             experienceProcessorService.processExperience(hero, enemy, "Hero wins");

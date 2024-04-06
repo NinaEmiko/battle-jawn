@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 public class ExperienceProcessorService {
     private final HeroService heroService;
+    private final CoinProcessorService coinProcessorService;
     private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
     public String processExperience(Hero hero, Enemy enemy, String battleResult) {
         logger.info("Inside processExperience service method.");
@@ -19,13 +20,19 @@ public class ExperienceProcessorService {
         String endOfBattleMessage = "";
 
         if (battleResult.equals("Hero wins")){
+            Long coinsGained = coinProcessorService.processCoins(enemy);
+            hero.setCoins(hero.getCoins() + coinsGained);
+
             hero.setExperience(hero.getExperience() + experience);
             int heroLevelAfterBattle = determineLevel(hero.getExperience());
+
             if (initialHeroLevel < heroLevelAfterBattle) {
                 hero.setLevel(heroLevelAfterBattle);
-                endOfBattleMessage = "Congratulations! You've reached level " + heroLevelAfterBattle + "!";
+                endOfBattleMessage = "Congratulations! You win! You've reached level " + heroLevelAfterBattle + "!" +
+                        " Enemy dropped " + coinsGained + " coins.";
             } else {
-                endOfBattleMessage = "You've gained " + experience + " experience!";
+                endOfBattleMessage = "You win! You've gained " + experience + " experience!" +
+                        " Enemy dropped " + coinsGained + " coins.";
             }
         } else if (battleResult.equals("Hero loses")){
             Long updatedExperience = calculateExperienceLoss(hero.getExperience(), experience);
