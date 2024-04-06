@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.PlayerTip;
@@ -15,15 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import javax.persistence.EntityNotFoundException;
 
 @Service
+@AllArgsConstructor
 public class PlayerTipService {
 
     private final PlayerTipRepository playerTipRepository;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-
-    @Autowired
-    public PlayerTipService(PlayerTipRepository playerTipRepository) {
-        this.playerTipRepository = playerTipRepository;
-    }
 
     public String getRandomPlayerTip() {
         logger.info("Inside getRandomPlayerTip service method.");

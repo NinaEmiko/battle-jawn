@@ -57,14 +57,14 @@ class EnemyControllerTest {
     }
     @Test
     void createNewEnemyTest() {
-        when(enemyService.createNewEnemy()).thenReturn(enemy);
-        enemyController.createNewEnemy();
-        verify(enemyService, times(1)).createNewEnemy();
+        when(enemyService.createNewEnemy(anyInt())).thenReturn(enemy);
+        enemyController.createNewEnemy(anyInt());
+        verify(enemyService, times(1)).createNewEnemy(anyInt());
     }
     @Test
     void createNewEnemyNullTest() {
-        when(enemyService.createNewEnemy()).thenReturn(null);
-        enemyController.createNewEnemy();
-        verify(enemyService, times(1)).createNewEnemy();
+        when(enemyService.createNewEnemy(anyInt())).thenReturn(null);
+        enemyController.createNewEnemy(anyInt());
+        verify(enemyService, times(1)).createNewEnemy(anyInt());
     }
 }

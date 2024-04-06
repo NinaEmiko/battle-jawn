@@ -6,37 +6,23 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.Randomizer.Randomizer;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Service
+@AllArgsConstructor
 public class EnemyMoveService {
     private final HeroService heroService;
     private final Potion potion;
-    private final Steal steal;
+    private final EnemySteal enemySteal;
     private final Randomizer randomizer;
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final EnemyService enemyService;
     private final BattleSessionService battleSessionService;
     private final Logger logger = Logger.getLogger(EnemyMoveService.class.getName());
 
-
-    public EnemyMoveService(BattleSessionService battleSessionService,
-                            EnemyService enemyService,
-                            HeroService heroService,
-                            BattleHistoryMessageService battleHistoryMessageService,
-                            Potion potion,
-                            Steal steal,
-                            Randomizer randomizer) {
-        this.battleSessionService = battleSessionService;
-        this.enemyService = enemyService;
-        this.heroService = heroService;
-        this.battleHistoryMessageService = battleHistoryMessageService;
-        this.potion = potion;
-        this.steal = steal;
-        this.randomizer = randomizer;
-    }
     public HeroMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
 
@@ -82,7 +68,7 @@ public class EnemyMoveService {
                     damage = stab.attack();
                     enemyMoveDTO = processEnemyMove(damage, enemy, battleSessionId, hero, "Stab");
                 } else {
-                    enemyMoveDTO = processSteal(enemy, battleSessionId, hero);
+                    enemyMoveDTO = processEnemySteal(enemy, battleSessionId, hero);
                 }
                 yield enemyMoveDTO;
             }
@@ -147,11 +133,11 @@ public class EnemyMoveService {
             return getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getPotions(), battleHistory, false);
     }
 
-    public HeroMoveDTO processSteal(Enemy enemy, Long battleSessionId, Hero hero) {
-        logger.info("Inside processSteal move method.");
+    public HeroMoveDTO processEnemySteal(Enemy enemy, Long battleSessionId, Hero hero) {
+        logger.info("Inside processEnemySteal move method.");
         if (hero.getPotions() > 0 && enemy.getPotions() < enemy.getMaxPotions()) {
             logger.info("Inside first if statement. Hero potion count: " + hero.getPotions() + ". Enemy potion count: " + enemy.getPotions() + ". Enemy potion capacity: " + enemy.getMaxPotions());
-            boolean stealSuccess = steal.useSteal();
+            boolean stealSuccess = enemySteal.useSteal();
             logger.info("stealSuccess: " + stealSuccess);
             if (stealSuccess) {
                 int updatedHeroPotionCount = hero.getPotions() - 1;

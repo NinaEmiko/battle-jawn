@@ -22,13 +22,9 @@ public class BattleSessionPurge {
     public void purgeBattleSession() {
         logger.info("Inside purgeBattleSession service class. This job runs every hour.");
         List<BattleSession> battleSessionList = battleSessionRepository.findAll();
-        LocalDateTime now;
-        LocalDateTime createdAt;
         Duration timeDifference;
         Duration oneDay = Duration.ofDays(5);
         for (BattleSession battleSession: battleSessionList) {
-            createdAt = battleSession.getCreatedAt();
-            now = LocalDateTime.now();
             timeDifference = Duration.between(battleSession.getCreatedAt(), LocalDateTime.now());
             try {
                 if (timeDifference.compareTo(oneDay) > 0) {

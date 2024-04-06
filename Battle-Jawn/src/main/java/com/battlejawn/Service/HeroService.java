@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
-
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.Hero.Caster;
@@ -19,16 +18,12 @@ import com.battlejawn.Repository.HeroRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class HeroService {
 
     private final HeroRepository heroRepository;
     private final UserAccountRepository userAccountRepository;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-    @Autowired
-    public HeroService(HeroRepository heroRepository, UserAccountRepository userAccountRepository) {
-        this.heroRepository = heroRepository;
-        this.userAccountRepository = userAccountRepository;
-    }
 
     public Hero getHeroById(Long id){
         logger.info("Inside getHeroById service method. Hero ID: " + id + ".");
@@ -124,6 +119,12 @@ public class HeroService {
     public void updateLossCountById(Long heroId, int updatedLossCount) {
         logger.info("Inside updateLossCountById service method. Hero ID: " + heroId + ". Updated loss count: " + updatedLossCount + ".");
         heroRepository.updateLossCountById(updatedLossCount, heroId);
+    }
+
+    @Transactional
+    public void updateHero(Hero hero){
+        logger.info("Inside save service method. Hero ID: " + hero + ".");
+        heroRepository.save(hero);
     }
 
     @Transactional

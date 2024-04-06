@@ -213,6 +213,12 @@ public class HeroServiceTest {
         when(userAccountRepository.findById(anyLong())).thenThrow(new RuntimeException());
 
         assertThrows(RuntimeException.class, () -> heroService.saveHero("Healer", "Name", 1L));
+    }
 
+    @Test
+    void updateHeroTest() {
+        when(heroRepository.save(any())).thenReturn(hero);
+        heroService.updateHero(hero);
+        verify(heroRepository, times(1)).save(any());
     }
 }

@@ -81,6 +81,10 @@ function handleRest(id: any): void {
           <td className="data-jawn">{hero.role}</td>
         </tr>
         <tr>
+          <td className="row-jawn">Level:</td>
+          <td className="data-jawn">{hero.level}</td>
+        </tr>
+        <tr>
           <td className="row-jawn">Health:</td>
           <td className="data-jawn" id="health-jawn">{hero.health} / {hero.maxHealth}</td>
         </tr>
@@ -102,6 +106,10 @@ function handleRest(id: any): void {
         </tr>
       </tbody>
     </table>
+    <div className="experience-bar-container">
+      <progress className='experienceBar' id="playerExperience" value={hero.experience} max={50}></progress>
+      <span className="experience-fraction">{hero.experience}/50</span>
+    </div>
     <div className="row justify-content-center">
           <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
           <button onClick={() => handleFight(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>

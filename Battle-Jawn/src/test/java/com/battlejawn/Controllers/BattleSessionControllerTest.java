@@ -28,6 +28,7 @@ class BattleSessionControllerTest {
     }
     @Test
     void getBattleSessionByIdTest() {
+        battleSession.setId(1L);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         battleSessionController.getBattleSessionById(anyLong());
         verify(battleSessionService, times(1)).getBattleSessionById(anyLong());
@@ -53,4 +54,20 @@ class BattleSessionControllerTest {
         verify(battleSessionService, times(1)).createNewBattleSession(anyLong());
     }
 
+    @Test
+    void processEndOfBattleTest() {
+        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
+        when(jsonParser.extractBattleResult(anyString())).thenReturn("String");
+        when(battleSessionService.processEndOfBattle(anyLong(), anyString())).thenReturn("Another string");
+        battleSessionController.processEndOfBattle(anyString());
+        verify(battleSessionService, times(1)).processEndOfBattle(anyLong(), anyString());
+    }
+    @Test
+    void processEndOfBattleNullTest() {
+        when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
+        when(jsonParser.extractBattleResult(anyString())).thenReturn("String");
+        when(battleSessionService.processEndOfBattle(anyLong(), anyString())).thenReturn(null);
+        battleSessionController.processEndOfBattle(anyString());
+        verify(battleSessionService, times(1)).processEndOfBattle(anyLong(), anyString());
+    }
 }

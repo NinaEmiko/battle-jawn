@@ -10,7 +10,7 @@ import com.battlejawn.DTO.UserAccountDTO;
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
 import jakarta.transaction.Transactional;
-import org.apache.catalina.User;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,17 +19,12 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
+@AllArgsConstructor
 public class UserAccountService {
     private final UserAccountRepository userAccountRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserAccountMapper userAccountMapper;
     private final Logger logger = Logger.getLogger(HeroController.class.getName());
-
-    public UserAccountService(UserAccountRepository userAccountRepository, PasswordEncoder passwordEncoder, UserAccountMapper userAccountMapper) {
-        this.userAccountRepository = userAccountRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.userAccountMapper = userAccountMapper;
-    }
 
     public UserAccountDTO login(CredentialsDTO credentialsDTO) {
         UserAccount userAccount = userAccountRepository.findByLogin(credentialsDTO.getLogin())
@@ -82,7 +77,7 @@ public class UserAccountService {
 
         if (optionalUserAccount.isPresent()) {
             userAccountRepository.deleteById(id);
-            return "Account with ID " + id + " not found.";
+            return "Account with ID " + id + " deleted successfully.";
         } else {
             return "Account with ID " + id + " not found.";
         }

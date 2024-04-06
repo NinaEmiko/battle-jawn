@@ -216,3 +216,40 @@
 ul {
   list-style-type: none;
 }
+
+.experienceBar {
+  background-color:#00788c;
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+}
+.experienceBar::-webkit-progress-bar {
+  accent-color: rgb(4, 133, 4);
+  border: 0;
+  border-radius: 20px;
+}
+.experienceBar::-webkit-progress-value {
+  accent-color: rgb(4, 133, 4);
+  border: 0;
+  border-radius: 20px;
+}
+.experienceBar::-moz-progress-bar {
+  accent-color: rgb(4, 133, 4);
+  border: 0;
+  border-radius: 20px;
+}
+
+.experience-bar-container {
+  position: relative;
+  height: 25px;
+}
+
+.experience-fraction {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: bold;
+}

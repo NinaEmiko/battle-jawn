@@ -14,31 +14,31 @@ import java.util.List;
 public interface HeroRepository extends JpaRepository<Hero, Long> {
 
     @Modifying
-    @Query("UPDATE Hero e SET e.health = :newHealth, e.potions = :newPotions WHERE e.id = :id")
-    int restHeroById(@Param("id") Long id, @Param("newHealth") int health, @Param("newPotions") int potions);
+    @Query("UPDATE Hero e SET e.health = :updatedHealth, e.potions = :updatedPotions WHERE e.id = :id")
+    int restHeroById(@Param("id") Long id, @Param("updatedHealth") int updatedHealth, @Param("updatedPotions") int updatedPotions);
 
     List<Hero> findByUserAccountId(Long userAccountId);
     @Query("SELECT b FROM Hero b ORDER BY b.winCount DESC Limit 5")
     List<Hero> findByWinCount();
 
     @Modifying
-    @Query("UPDATE Hero e SET e.health = :newValue WHERE e.id = :idValue")
-    void updateHealthById(@Param("newValue") int newValue, @Param("idValue") Long id);
+    @Query("UPDATE Hero e SET e.health = :health WHERE e.id = :id")
+    void updateHealthById(@Param("health") int health, @Param("id") Long id);
 
     @Modifying
-    @Query("UPDATE Hero e SET e.potions = :newValue WHERE e.id = :idValue")
-    void updatePotionCountById(@Param("newValue") int newValue, @Param("idValue") Long id);
+    @Query("UPDATE Hero e SET e.potions = :potions WHERE e.id = :id")
+    void updatePotionCountById(@Param("potions") int potions, @Param("id") Long id);
 
     @Modifying
-    @Query("UPDATE Hero e SET e.runCount = :newValue WHERE e.id = :idValue")
-    void updateRunCountByHeroId(@Param("newValue") int newValue, @Param("idValue") Long id);
+    @Query("UPDATE Hero e SET e.runCount = :runCount WHERE e.id = :id")
+    void updateRunCountByHeroId(@Param("runCount") int runCount, @Param("id") Long id);
 
     @Modifying
-    @Query("UPDATE Hero e SET e.winCount = :newValue WHERE e.id = :idValue")
-    void updateWinCountById(@Param("newValue") int newValue, @Param("idValue") Long id);
+    @Query("UPDATE Hero e SET e.winCount = :winCount WHERE e.id = :id")
+    void updateWinCountById(@Param("winCount") int winCount, @Param("id") Long id);
 
     @Modifying
-    @Query("UPDATE Hero e SET e.lossCount = :newValue WHERE e.id = :idValue")
-    void updateLossCountById(@Param("newValue") int newValue, @Param("idValue") Long id);
+    @Query("UPDATE Hero e SET e.lossCount = :lossCount WHERE e.id = :id")
+    void updateLossCountById(@Param("lossCount") int lossCount, @Param("id") Long id);
     
 }
