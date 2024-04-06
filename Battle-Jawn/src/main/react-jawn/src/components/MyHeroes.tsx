@@ -9,6 +9,34 @@ function MyHeroes( {props}:{props:any} ) {
     const [beginBattle, setBeginBattle] = useState(false);
     const [heroList, setHeroList] = useState([]);
 
+    let maxExperience = 50;
+
+    function determineMaxExperience(level: number) {
+      switch (level) {
+        case 1:
+          return 50;
+        case 2:
+          return 125;
+        case 3:
+          return 300;
+        case 4:
+          return 500;
+        case 5:
+          return 750;
+        case 6:
+          return 1250;
+        case 7:
+          return 2000;
+        case 8:
+          return 3000;
+        case 9:
+        case 10:
+          return 5000;
+        default:
+          return 50;
+      }
+    }
+
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
@@ -107,8 +135,8 @@ function handleRest(id: any): void {
       </tbody>
     </table>
     <div className="experience-bar-container">
-      <progress className='experienceBar' id="playerExperience" value={hero.experience} max={50}></progress>
-      <span className="experience-fraction">{hero.experience}/50</span>
+      <progress className='experience-bar' value={hero.experience} max={determineMaxExperience(hero.level)}></progress>
+      <span className="experience-fraction">{hero.experience}/{determineMaxExperience(hero.level)}</span>
     </div>
     <div className="row justify-content-center">
           <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>

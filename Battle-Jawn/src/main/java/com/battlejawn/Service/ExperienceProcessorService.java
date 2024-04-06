@@ -22,6 +22,7 @@ public class ExperienceProcessorService {
             hero.setExperience(hero.getExperience() + experience);
             int heroLevelAfterBattle = determineLevel(hero.getExperience());
             if (initialHeroLevel < heroLevelAfterBattle) {
+                hero.setLevel(heroLevelAfterBattle);
                 endOfBattleMessage = "Congratulations! You've reached level " + heroLevelAfterBattle + "!";
             } else {
                 endOfBattleMessage = "You've gained " + experience + " experience!";

@@ -217,25 +217,26 @@ ul {
   list-style-type: none;
 }
 
-.experienceBar {
-  background-color:#00788c;
+.experience-bar {
+  background-color: #00788c;
+  /* background-color: #753ea5; */
   border-radius: 20px;
   margin: 5px;
   width: 90%;
   height: 100%;
 }
-.experienceBar::-webkit-progress-bar {
-  accent-color: rgb(4, 133, 4);
+.experience-bar::-webkit-progress-bar {
+  background-color: yellow;
   border: 0;
   border-radius: 20px;
 }
-.experienceBar::-webkit-progress-value {
-  accent-color: rgb(4, 133, 4);
+.experience-bar::-webkit-progress-value {
+  background-color: yellow;
   border: 0;
   border-radius: 20px;
 }
-.experienceBar::-moz-progress-bar {
-  accent-color: rgb(4, 133, 4);
+.experience-bar::-moz-progress-bar {
+  background-color: yellow;
   border: 0;
   border-radius: 20px;
 }
