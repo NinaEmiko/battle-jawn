@@ -107,7 +107,7 @@ function handleRest(id: any): void {
       </tbody>
     </table>
     <div className="experience-bar-container">
-      <progress className='experienceBar' id="playerExperience" value={hero.experience} max={50}></progress>
+      <progress className='experience-bar' value={hero.experience} max={50}></progress>
       <span className="experience-fraction">{hero.experience}/50</span>
     </div>
     <div className="row justify-content-center">
