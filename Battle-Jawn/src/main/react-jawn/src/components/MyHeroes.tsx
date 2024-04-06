@@ -68,9 +68,13 @@ function handleRest(id: any): void {
       fetchHeroes();
   };
 
-  function handleFight(id: any): void {
-    setHeroId(id);
-    setBeginBattle(true);
+  function handleFight(id: any, health: number): void {
+    if (health > 0) {
+        setHeroId(id);
+        setBeginBattle(true);
+    } else {
+      alert("You cannot fight! You have no health!")
+    }
   }
 
   function handleDelete(id: any): void {
@@ -140,7 +144,7 @@ function handleRest(id: any): void {
     </div>
     <div className="row justify-content-center">
           <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
-          <button onClick={() => handleFight(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
+          <button onClick={() => handleFight(hero.id, hero.health)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
           <button onClick={() => handleDelete(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Delete</button>
 
         </div>

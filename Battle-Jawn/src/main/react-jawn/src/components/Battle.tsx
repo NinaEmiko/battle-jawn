@@ -11,6 +11,7 @@ import wolf from "../assets/wolf.png";
 import orc from "../assets/orc.png";
 import ghost from "../assets/ghost.png";
 import { useNavigate } from "react-router-dom";
+import PostBattleComponent from "./PostBattleComponent";
 
 function Battle({props}:{props:any}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
@@ -28,6 +29,7 @@ function Battle({props}:{props:any}) {
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [battleHistory, setBattleHistory] = useState<string[]>(["Retrieving battle history. Please wait."]);
   const [battleResult, setBattleResult] = useState("");
+  const [endOfBattleMessage, setEndOfBattleMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -74,6 +76,10 @@ function Battle({props}:{props:any}) {
     });
 
     handleEnemyMove();
+  }
+
+  function handleClickEndOfBattle() {
+    handleNavigation('/leader-board');
   }
 
   const createNewBattleSession = () => {
@@ -156,7 +162,7 @@ function Battle({props}:{props:any}) {
           
         })
         .then((response) => {
-          
+          setEndOfBattleMessage(response.data);
         })
       .catch((error) => {
         console.error('Error processing end of battle:', error);
@@ -167,7 +173,6 @@ function Battle({props}:{props:any}) {
     if (battleResult != "") {
     processEndOfBattle();
     setButtonDisabled(true);
-    handleNavigation('/leader-board');
   }
     
   }, [battleResult])
@@ -186,7 +191,7 @@ function Battle({props}:{props:any}) {
 
   return (
 <>
-{beginBattle ?
+{beginBattle && !battleResult &&
     <div className="battle-container">
       <div className="name" id="enemyName">
       {enemyName == "Wolf" && 
@@ -314,9 +319,17 @@ function Battle({props}:{props:any}) {
         </div>
       </div>
     </div>
-    :
-    <h1 className="title-jawn">Loading...</h1>
+    // :
+    // <h1 className="title-jawn">Loading...</h1>
     }
+
+    {battleResult &&
+        <div className="container-jawn-login-form">
+        <h1 className="title-jawn">{endOfBattleMessage}</h1>
+        <button onClick={handleClickEndOfBattle} className="btn">OK</button>
+    </div>
+    }
+
     </>
   );
 }
