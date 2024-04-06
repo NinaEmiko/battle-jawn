@@ -2,8 +2,10 @@ package com.battlejawn.Entities.Enemy;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
-@Entity 
+@Entity
+@NoArgsConstructor
 @DiscriminatorValue("ORC")
 public class Orc extends Enemy {
 

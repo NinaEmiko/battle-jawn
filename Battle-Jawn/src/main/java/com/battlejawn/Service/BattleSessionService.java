@@ -37,13 +37,12 @@ public class BattleSessionService {
         try {
             Hero hero = heroService.getHeroById(heroId);
             int heroLevel = hero.getLevel();
+
             Enemy enemy = enemyService.createNewEnemy(heroLevel);
 
             BattleSession battleSession = new BattleSession();
-
             battleSession.setEnemyId(enemy.getId());
             battleSession.setHeroId(heroId);
-
             battleSessionRepository.save(battleSession);
 
             BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSession.getId(), "You encountered an enemy!");

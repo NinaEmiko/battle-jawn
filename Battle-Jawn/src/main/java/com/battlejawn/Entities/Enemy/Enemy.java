@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "enemy_type")
 public abstract class Enemy {
@@ -41,8 +43,5 @@ public abstract class Enemy {
         this.strength = strength;
         this.createdAt = createdAt;
         this.level = level;
-    }
-
-    public Enemy() {
     }
 }

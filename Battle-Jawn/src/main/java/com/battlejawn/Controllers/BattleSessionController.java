@@ -35,7 +35,7 @@ public class BattleSessionController {
         }
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<BattleSession> createNewBattleSession(@RequestBody String heroId) {
         logger.info("Inside createNewBattleSession controller method. Hero ID: " + heroId + ".");
@@ -49,7 +49,7 @@ public class BattleSessionController {
         }
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/end", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<String> processEndOfBattle(@RequestBody String data) {
         logger.info("Inside processEndOfBattle controller method. Data: " + data + ".");

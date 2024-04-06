@@ -3,8 +3,10 @@ package com.battlejawn.Entities.Enemy;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
-@Entity 
+@Entity
+@NoArgsConstructor
 @DiscriminatorValue("WOLF")
 public class Wolf extends Enemy {
 

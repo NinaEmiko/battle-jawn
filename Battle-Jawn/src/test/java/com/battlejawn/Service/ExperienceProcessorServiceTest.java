@@ -60,6 +60,13 @@ public class ExperienceProcessorServiceTest {
         Assertions.assertEquals(result, "You've gained 15 experience!");
     }
     @Test
+    void processExperienceHeroRunsTest() {
+        enemy = new Wolf(1);
+        doNothing().when(heroService).updateHero(any());
+        String result = experienceProcessorService.processExperience(hero, enemy, "Hero runs");
+        Assertions.assertEquals(result, "You've gained 0 experience.");
+    }
+    @Test
     void processExperienceHeroLosesTest() {
         enemy = new Wolf(1);
         doNothing().when(heroService).updateHero(any());

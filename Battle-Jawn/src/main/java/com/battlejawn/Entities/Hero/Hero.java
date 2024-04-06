@@ -42,7 +42,7 @@ public abstract class Hero {
     private UserAccount userAccount;
     @Column
     private LocalDateTime createdAt;
-    @Column
+    @Column(nullable = false)
     private int level;
     @Column
     private Long experience;

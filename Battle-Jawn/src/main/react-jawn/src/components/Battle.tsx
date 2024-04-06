@@ -27,6 +27,7 @@ function Battle({props}:{props:any}) {
   const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [battleHistory, setBattleHistory] = useState<string[]>(["Retrieving battle history. Please wait."]);
+  const [battleResult, setBattleResult] = useState("");
 
   const navigate = useNavigate();
 
@@ -77,7 +78,7 @@ function Battle({props}:{props:any}) {
 
   const createNewBattleSession = () => {
       
-    axios.post('http://localhost:8080/api/battle-session', {
+    axios.post('http://localhost:8080/api/battle-session/create', {
         heroId: props
         
       })
@@ -146,12 +147,39 @@ function Battle({props}:{props:any}) {
   }, [sessionInitialized])
 
   useEffect(() => {
+
+    const processEndOfBattle = () => {
+      
+      axios.post('http://localhost:8080/api/battle-session/end', {
+          battleSessionId: battleSessionId, 
+          battleResult: battleResult
+          
+        })
+        .then((response) => {
+          
+        })
+      .catch((error) => {
+        console.error('Error processing end of battle:', error);
+      }
+      )
+    }
+
+    if (battleResult != "") {
+    processEndOfBattle();
+    setButtonDisabled(true);
+    handleNavigation('/leader-board');
+  }
+    
+  }, [battleResult])
+
+  useEffect(() => {
     if(battleHistory) {
-      if (battleHistory.includes('You have defeated the enemy!')||
-      battleHistory.includes('You have been defeated by the enemy!')||
-      battleHistory.includes('You successfully ran away!')) {
-        setButtonDisabled(true);
-        handleNavigation('/leader-board');
+      if(battleHistory.includes('You have defeated the enemy!')) {
+        setBattleResult("Hero wins");
+      } else if (battleHistory.includes('You have been defeated by the enemy!')) {
+        setBattleResult("Hero loses");
+      } else if (battleHistory.includes('You successfully ran away!')) {
+        setBattleResult("Hero runs");
       }
     }
   })

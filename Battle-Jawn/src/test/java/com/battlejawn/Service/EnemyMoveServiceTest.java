@@ -1,7 +1,7 @@
 package com.battlejawn.Service;
 
 import com.battlejawn.DTO.HeroMoveDTO;
-import com.battlejawn.EnemyMove.Steal;
+import com.battlejawn.EnemyMove.EnemySteal;
 import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.*;
@@ -40,7 +40,7 @@ class EnemyMoveServiceTest {
     @Mock
     BattleSession battleSession;
     @Mock
-    Steal steal;
+    EnemySteal enemySteal;
     @Mock
     BattleSessionService battleSessionService;
     @Mock
@@ -306,12 +306,12 @@ class EnemyMoveServiceTest {
         enemy = new Thief(2);
         enemy.setId(4L);
         enemy.setPotions(1);
-        when(steal.useSteal()).thenReturn(true);
+        when(enemySteal.useSteal()).thenReturn(true);
         doNothing().when(heroService).updatePotionCountById(2, 5L);
         doNothing().when(enemyService).updatePotionCountById(2, 4L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
-        enemyMoveService.processSteal(enemy, 1L, hero);
+        enemyMoveService.processEnemySteal(enemy, 1L, hero);
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
     }
     @Test
@@ -321,10 +321,10 @@ class EnemyMoveServiceTest {
         enemy = new Thief(2);
         enemy.setId(4L);
         enemy.setPotions(1);
-        when(steal.useSteal()).thenReturn(false);
+        when(enemySteal.useSteal()).thenReturn(false);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
-        enemyMoveService.processSteal(enemy, 1L, hero);
+        enemyMoveService.processEnemySteal(enemy, 1L, hero);
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
     }
     @Test
@@ -336,7 +336,7 @@ class EnemyMoveServiceTest {
         enemy.setId(4L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
-        enemyMoveService.processSteal(enemy, 1L, hero);
+        enemyMoveService.processEnemySteal(enemy, 1L, hero);
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
     }
 

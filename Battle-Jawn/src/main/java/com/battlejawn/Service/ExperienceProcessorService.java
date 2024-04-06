@@ -30,6 +30,8 @@ public class ExperienceProcessorService {
             Long updatedExperience = calculateExperienceLoss(hero.getExperience(), experience);
             hero.setExperience(updatedExperience);
             endOfBattleMessage = "You've lost " + experience + " experience.";
+        } else if (battleResult.equals("Hero runs")) {
+            endOfBattleMessage = "You've gained 0 experience.";
         }
         heroService.updateHero(hero);
         return endOfBattleMessage;
