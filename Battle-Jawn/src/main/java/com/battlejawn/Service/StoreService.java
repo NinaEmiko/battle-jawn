@@ -21,7 +21,10 @@ public class StoreService {
                 hero.setPotions(hero.getPotions() + quantity);
                 hero.setCoins(hero.getCoins() - (2L * quantity));
                 heroService.updateHero(hero);
-                return "You purchased " + quantity + "potions";
+                switch (quantity) {
+                    case 1: return "You purchased " + quantity + " potion";
+                    case 2: return "You purchased " + quantity + " potions";
+                }
             }
         }
         return "There was a problem processing your purchase. Please try again.";

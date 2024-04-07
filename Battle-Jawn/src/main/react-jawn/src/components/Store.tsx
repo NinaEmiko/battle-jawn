@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 const Store = ({props}:{props:any}) => {
     const [heroList, setHeroList] = useState([]);
+    const [purchases, setPurchases] = useState(1);
 
     const fetchHeroes = async () => {
         try {
@@ -23,7 +24,8 @@ const Store = ({props}:{props:any}) => {
                 quantity: 1
             })
             .then((response) => {
-
+                alert("" + response.data);
+                setPurchases(purchases + 1);
               })
             .catch((error) => {
               console.error('Error buying items:', error);
@@ -39,6 +41,9 @@ const Store = ({props}:{props:any}) => {
     useEffect(() => {
         fetchHeroes();
     }, [])
+    useEffect(() => {
+        fetchHeroes();
+    }, [purchases])
 
     return (
         <div className="container-jawn-login-form">
