@@ -134,7 +134,8 @@ public String getDamageMessage(String move, int damage) {
         } else {
             updatedHeroHealth = hero.getHealth() + healAmount;
         }
-        heroService.updateHealthById(updatedHeroHealth, hero.getId());
+        hero.setHealth(updatedHeroHealth);
+        heroService.updateHero(hero);
         String newMessage = "You healed yourself for " + healAmount + ".";
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
@@ -152,8 +153,9 @@ public String getDamageMessage(String move, int damage) {
             } else {
                 updatedHeroHealth = hero.getHealth() + healAmount;
             }
-            heroService.updatePotionCountById(updatedPotionCount, hero.getId());
-            heroService.updateHealthById(updatedHeroHealth, hero.getId());
+            hero.setPotions(updatedPotionCount);
+            hero.setHealth(updatedHeroHealth);
+            heroService.updateHero(hero);
             String newMessage = "You feel better now.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
@@ -177,7 +179,8 @@ public String getDamageMessage(String move, int damage) {
             if (stealSuccess) {
                 int updatedPotionCount = hero.getPotions() + 1;
                 int updatedEnemyPotionCount = enemy.getPotions() - 1;
-                heroService.updatePotionCountById(updatedPotionCount, hero.getId());
+                hero.setPotions(updatedPotionCount);
+                heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
                 String newMessage = "You stole a potion!";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);

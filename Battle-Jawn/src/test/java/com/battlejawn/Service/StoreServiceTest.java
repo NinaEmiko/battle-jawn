@@ -32,6 +32,14 @@ public class StoreServiceTest {
         verify(heroService, times(1)).updateHero(any());
     }
     @Test
+    void buyTwoPotionSuccessTest() {
+        hero.setCoins(10L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        doNothing().when(heroService).updateHero(any());
+        storeService.buy(1L, "potion", 2);
+        verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
     void buyPotionFailTest() {
         hero.setCoins(0L);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);

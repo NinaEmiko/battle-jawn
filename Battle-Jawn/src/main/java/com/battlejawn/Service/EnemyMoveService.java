@@ -109,7 +109,8 @@ public class EnemyMoveService {
         } else {
             updatedHeroHealth = hero.getHealth() - damage;
             newMessage = getDamageMessage(move, damage);
-            heroService.updateHealthById(updatedHeroHealth, hero.getId());
+            hero.setHealth(updatedHeroHealth);
+            heroService.updateHero(hero);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             return getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getPotions(), battleHistory, false);
@@ -143,7 +144,8 @@ public class EnemyMoveService {
             if (stealSuccess) {
                 int updatedHeroPotionCount = hero.getPotions() - 1;
                 int updatedEnemyPotionCount = enemy.getPotions() + 1;
-                heroService.updatePotionCountById(updatedHeroPotionCount, hero.getId());
+                hero.setPotions(updatedEnemyPotionCount);
+                heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
                 String newMessage = "Enemy stole a potion!";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);

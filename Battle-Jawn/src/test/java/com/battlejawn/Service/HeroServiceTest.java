@@ -105,18 +105,6 @@ public class HeroServiceTest {
         verify(heroRepository, times(1)).findById(anyLong());
     }
     @Test
-    void updateHealthByIdTest(){
-        doNothing().when(heroRepository).updateHealthById(anyInt(), anyLong());
-        heroService.updateHealthById(anyInt(),anyLong());
-        verify(heroRepository, times(1)).updateHealthById(anyInt(), anyLong());
-    }
-    @Test
-    void updatePotionCountByIdTest(){
-        doNothing().when(heroRepository).updatePotionCountById(anyInt(), anyLong());
-        heroService.updatePotionCountById(anyInt(), anyLong());
-        verify(heroRepository, times(1)).updatePotionCountById(anyInt(), anyLong());
-    }
-    @Test
     void deleteHeroByIdTest() {
         doNothing().when(heroRepository).deleteById(anyLong());
         when(heroRepository.existsById(anyLong())).thenReturn(true);

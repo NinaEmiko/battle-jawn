@@ -60,7 +60,8 @@ public class HeroService {
         Optional<Hero> hero = heroRepository.findById(id);
         if (hero.isPresent()) {
             Hero actualHero = hero.get();
-            heroRepository.restHeroById(id, actualHero.getMaxHealth(), actualHero.getMaxPotions());
+            actualHero.setHealth(actualHero.getMaxHealth());
+            updateHero(actualHero);
         }
         return null;
     }
@@ -92,17 +93,6 @@ public class HeroService {
         } else {
             throw new EntityNotFoundException("Hero with ID " + id + " not found");
         }
-    }
-
-    @Transactional
-    public void updateHealthById(int updatedHeroHealth, Long heroId) {
-        logger.info("Inside updateHealthById service method. Hero ID: " + heroId + ". Updated Hero Health: " + updatedHeroHealth + ".");
-        heroRepository.updateHealthById(updatedHeroHealth, heroId);
-    }
-    @Transactional
-    public void updatePotionCountById(int updatedPotionCount, Long heroId) {
-        logger.info("Inside updatePotionCountById service method. Hero ID: " + heroId + ". Updated potion count: " + updatedPotionCount + ".");
-        heroRepository.updatePotionCountById(updatedPotionCount, heroId);
     }
 
     @Transactional

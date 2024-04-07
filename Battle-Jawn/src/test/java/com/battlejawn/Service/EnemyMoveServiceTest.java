@@ -290,7 +290,7 @@ class EnemyMoveServiceTest {
         hero = new Tank("Name");
         hero.setId(5L);
 
-        doNothing().when(heroService).updateHealthById(119, 5L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -306,7 +306,7 @@ class EnemyMoveServiceTest {
         enemy.setId(4L);
         enemy.setPotions(1);
         when(enemySteal.useSteal()).thenReturn(true);
-        doNothing().when(heroService).updatePotionCountById(2, 5L);
+        doNothing().when(heroService).updateHero(hero);
         doNothing().when(enemyService).updatePotionCountById(2, 4L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);

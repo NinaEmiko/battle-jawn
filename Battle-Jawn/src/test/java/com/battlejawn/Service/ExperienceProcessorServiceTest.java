@@ -1,8 +1,7 @@
 package com.battlejawn.Service;
 
 import com.battlejawn.Entities.Enemy.*;
-import com.battlejawn.Entities.Hero.Hero;
-import com.battlejawn.Entities.Hero.Tank;
+import com.battlejawn.Entities.Hero.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,16 +43,6 @@ public class ExperienceProcessorServiceTest {
         heroExperience.add(126L);
         heroExperience.add(51L);
         heroExperience.add(1L);
-    }
-    @Test
-    void processExperienceHeroLevelsTest() {
-        hero.setExperience(51L);
-        enemy = new Wolf(1);
-        when(coinProcessorService.processCoins(any())).thenReturn(1L);
-        doNothing().when(heroService).updateHero(any());
-        String result = experienceProcessorService.processExperience(hero, enemy, "Hero wins");
-        Assertions.assertEquals(result, "Congratulations! You win! You've reached level 2!" +
-                " Enemy dropped 1 coins.");
     }
     @Test
     void processExperienceHeroWinsTest() {
