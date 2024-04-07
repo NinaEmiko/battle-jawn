@@ -10,13 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EnemyRepository extends JpaRepository<Enemy, Long> {
 
-    @Modifying
-    @Query("UPDATE Enemy e SET e.health = :newValue WHERE e.id = :idValue")
-    void updateHealthById(@Param("newValue") int newValue, @Param("idValue") Long id);
-
-    @Modifying
-    @Query("UPDATE Enemy e SET e.potions = :newValue WHERE e.id = :idValue")
-    void updatePotionCountById(@Param("newValue") int newValue, @Param("idValue") Long id);
-
 }
 

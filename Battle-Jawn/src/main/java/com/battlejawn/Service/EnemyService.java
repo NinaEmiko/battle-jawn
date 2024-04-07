@@ -53,12 +53,22 @@ public class EnemyService {
     @Transactional
     public void updatePotionCountById(int updatedPotionCount, Long enemyId) {
         logger.info("Inside updatePotionCountById service method. Enemy ID: " + enemyId + ". Updated potion count: " + updatedPotionCount + ".");
-        enemyRepository.updatePotionCountById(updatedPotionCount, enemyId);
+        Optional<Enemy> optionalEnemy = enemyRepository.findById(enemyId);
+        if(optionalEnemy.isPresent()){
+            Enemy enemy = optionalEnemy.get();
+            enemy.setPotions(updatedPotionCount);
+            enemyRepository.save(enemy);
+        }
     }
     @Transactional
     public void updateHealthById(int updatedEnemyHealth, Long enemyId) {
         logger.info("Inside updateHealthById service method. Enemy ID: " + enemyId + ". Updated Enemy Health: " + updatedEnemyHealth + ".");
-        enemyRepository.updateHealthById(updatedEnemyHealth, enemyId);
+        Optional<Enemy> optionalEnemy = enemyRepository.findById(enemyId);
+        if(optionalEnemy.isPresent()){
+            Enemy enemy = optionalEnemy.get();
+            enemy.setHealth(updatedEnemyHealth);
+            enemyRepository.save(enemy);
+        }
     }
 
     @Transactional
