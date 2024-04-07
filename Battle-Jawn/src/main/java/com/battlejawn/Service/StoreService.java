@@ -15,11 +15,13 @@ public class StoreService {
         logger.info("Inside buy service method");
         Hero hero = heroService.getHeroById(heroId);
         if (item.equals("potion")) {
-            if (hero.getCoins() - (2L * quantity) < 0) {
+            if (hero.getCoins() - (quantity) < 0) {
                 return "Insufficient coins.";
-            } else {
+            } else if(hero.getPotions() + quantity > hero.getMaxPotions()) {
+                return "You cannot hold that many potions";
+            }else {
                 hero.setPotions(hero.getPotions() + quantity);
-                hero.setCoins(hero.getCoins() - (2L * quantity));
+                hero.setCoins(hero.getCoins() - (quantity));
                 heroService.updateHero(hero);
                 switch (quantity) {
                     case 1: return "You purchased " + quantity + " potion";

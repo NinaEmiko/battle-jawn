@@ -26,6 +26,7 @@ public class StoreServiceTest {
     }
     @Test
     void buyPotionSuccessTest() {
+        hero.setPotions(0);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
         doNothing().when(heroService).updateHero(any());
         storeService.buy(1L, "potion", 1);
@@ -34,10 +35,17 @@ public class StoreServiceTest {
     @Test
     void buyTwoPotionSuccessTest() {
         hero.setCoins(10L);
+        hero.setPotions(0);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
         doNothing().when(heroService).updateHero(any());
         storeService.buy(1L, "potion", 2);
         verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
+    void buyTwoPotionFailTest() {
+        hero.setCoins(10L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);storeService.buy(1L, "potion", 2);
+        verify(heroService, times(0)).updateHero(any());
     }
     @Test
     void buyPotionFailTest() {
