@@ -16,7 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -276,8 +275,7 @@ class EnemyMoveServiceTest {
         hero = new Tank("Name");
         hero.setId(5L);
 
-        doNothing().when(heroService).updateLossCountById(5L, 1);
-        doNothing().when(heroService).updateHealthById(0, 5L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -291,7 +289,7 @@ class EnemyMoveServiceTest {
         hero = new Tank("Name");
         hero.setId(5L);
 
-        doNothing().when(heroService).updateHealthById(119, 5L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -307,7 +305,7 @@ class EnemyMoveServiceTest {
         enemy.setId(4L);
         enemy.setPotions(1);
         when(enemySteal.useSteal()).thenReturn(true);
-        doNothing().when(heroService).updatePotionCountById(2, 5L);
+        doNothing().when(heroService).updateHero(hero);
         doNothing().when(enemyService).updatePotionCountById(2, 4L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);

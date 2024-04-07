@@ -69,15 +69,17 @@ class EnemyServiceTest {
     }
     @Test
     void updateHealthByIdTest() {
-        doNothing().when(enemyRepository).updateHealthById(anyInt(), anyLong());
-        enemyService.updateHealthById(anyInt(), anyLong());
-        verify(enemyRepository, times(1)).updateHealthById(anyInt(), anyLong());
+        when(enemyRepository.findById(anyLong())).thenReturn(Optional.of(enemy));
+        when(enemyRepository.save(enemy)).thenReturn(enemy);
+        enemyService.updateHealthById(1, 1L);
+        verify(enemyRepository, times(1)).save(any());
     }
     @Test
     void updatePotionCountByIdTest() {
-        doNothing().when(enemyRepository).updatePotionCountById(anyInt(), anyLong());
-        enemyService.updatePotionCountById(anyInt(), anyLong());
-        verify(enemyRepository, times(1)).updatePotionCountById(anyInt(), anyLong());
+        when(enemyRepository.findById(anyLong())).thenReturn(Optional.of(enemy));
+        when(enemyRepository.save(enemy)).thenReturn(enemy);
+        enemyService.updatePotionCountById(1, 1L);
+        verify(enemyRepository, times(1)).save(any());
     }
     @Test
     void createNewEnemyTest() {

@@ -17,7 +17,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -182,7 +181,7 @@ class HeroMoveServiceTest {
     @Test
     void heroMoveRunSuccessTest() {
         when(run.useRun()).thenReturn(true);
-        doNothing().when(heroService).updateRunCountById(anyLong(), anyInt());
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), any())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
         HeroMoveDTO heroMoveDTO = heroMoveService.processRun(enemy, 1L, hero);
@@ -196,7 +195,7 @@ class HeroMoveServiceTest {
         hero.setId(2L);
 
         when(steal.useSteal()).thenReturn(true);
-        doNothing().when(heroService).updatePotionCountById(2, 2L);
+        doNothing().when(heroService).updateHero(hero);
         doNothing().when(enemyService).updatePotionCountById(1, 1L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
@@ -241,8 +240,7 @@ class HeroMoveServiceTest {
         hero.setId(2L);
 
         when(potion.usePotion()).thenReturn(30);
-        doNothing().when(heroService).updatePotionCountById(2, 2L);
-        doNothing().when(heroService).updateHealthById(31, 2L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -256,8 +254,7 @@ class HeroMoveServiceTest {
         hero.setId(2L);
 
         when(potion.usePotion()).thenReturn(30);
-        doNothing().when(heroService).updatePotionCountById(2, 2L);
-        doNothing().when(heroService).updateHealthById(120, 2L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -292,7 +289,7 @@ class HeroMoveServiceTest {
         hero.setHealth(100);
         hero.setId(2L);
 
-        doNothing().when(heroService).updateHealthById(101,2L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -306,7 +303,7 @@ class HeroMoveServiceTest {
     void processHeroMaxHealthHeal() {
         hero.setId(2L);
 
-        doNothing().when(heroService).updateHealthById(120,2L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -332,7 +329,7 @@ class HeroMoveServiceTest {
         enemy.setId(1L);
         hero.setId(2L);
         doNothing().when(enemyService).updateHealthById(0, 1L);
-        doNothing().when(heroService).updateWinCountById(2L, 1);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 

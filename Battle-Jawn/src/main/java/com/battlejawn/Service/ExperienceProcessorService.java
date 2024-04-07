@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 public class ExperienceProcessorService {
     private final HeroService heroService;
+    private final CoinProcessorService coinProcessorService;
     private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
     public String processExperience(Hero hero, Enemy enemy, String battleResult) {
         logger.info("Inside processExperience service method.");
@@ -19,13 +20,22 @@ public class ExperienceProcessorService {
         String endOfBattleMessage = "";
 
         if (battleResult.equals("Hero wins")){
+            Long coinsGained = coinProcessorService.processCoins(enemy);
+            hero.setCoins(hero.getCoins() + coinsGained);
+
             hero.setExperience(hero.getExperience() + experience);
             int heroLevelAfterBattle = determineLevel(hero.getExperience());
+
             if (initialHeroLevel < heroLevelAfterBattle) {
                 hero.setLevel(heroLevelAfterBattle);
-                endOfBattleMessage = "Congratulations! You've reached level " + heroLevelAfterBattle + "!";
+                endOfBattleMessage = "Congratulations! You win! You've reached level " + heroLevelAfterBattle + "!" +
+                        " Enemy dropped " + coinsGained + " coins.";
+                hero.setHealth(determineLevelMaxHealth(hero.getLevel(), hero.getRole()));
+                hero.setMaxHealth(determineLevelMaxHealth(hero.getLevel(), hero.getRole()));
+                hero.setMaxPotions(determineLevelMaxPotions(hero.getLevel(), hero.getRole()));
             } else {
-                endOfBattleMessage = "You've gained " + experience + " experience!";
+                endOfBattleMessage = "You win! You've gained " + experience + " experience!" +
+                        " Enemy dropped " + coinsGained + " coins.";
             }
         } else if (battleResult.equals("Hero loses")){
             Long updatedExperience = calculateExperienceLoss(hero.getExperience(), experience);
@@ -154,6 +164,93 @@ public class ExperienceProcessorService {
         } else {
             return Math.max(heroExperience - experience, 0L);
         }
+    }
 
+    private int determineLevelMaxHealth(int level, String role){
+            switch(role) {
+                case "Tank":
+                    return switch (level) {
+                        case 2 -> 131;
+                        case 3 -> 137;
+                        case 4 -> 145;
+                        case 5 -> 156;
+                        case 6 -> 169;
+                        case 7 -> 185;
+                        case 8 -> 200;
+                        case 9 -> 217;
+                        default -> 250;
+                    };
+                case "Healer":
+                    return switch (level) {
+                        case 2 -> 111;
+                        case 3 -> 117;
+                        case 4 -> 125;
+                        case 5 -> 136;
+                        case 6 -> 149;
+                        case 7 -> 165;
+                        case 8 -> 185;
+                        case 9 -> 210;
+                        default -> 230;
+                    };
+                case "DPS":
+                    return switch (level) {
+                        case 2 -> 101;
+                        case 3 -> 107;
+                        case 4 -> 115;
+                        case 5 -> 126;
+                        case 6 -> 139;
+                        case 7 -> 155;
+                        case 8 -> 175;
+                        case 9 -> 200;
+                        default -> 220;
+                    };
+                case "Caster":
+                    return switch (level) {
+                        case 2 -> 98;
+                        case 3 -> 105;
+                        case 4 -> 112;
+                        case 5 -> 123;
+                        case 6 -> 136;
+                        case 7 -> 150;
+                        case 8 -> 165;
+                        case 9 -> 185;
+                        default -> 210;
+                    };
+            }
+        return 0;
+    }
+    private int determineLevelMaxPotions(int level, String role){
+            switch(role) {
+                case "Tank":
+                    return switch (level) {
+                        case 1 -> 3;
+                        case 2,3 -> 4;
+                        case 4,5 -> 5;
+                        case 6,7 -> 6;
+                        case 8 -> 7;
+                        case 9 -> 8;
+                        default -> 10;
+                    };
+                case "Healer":
+                    return 0;
+                case "DPS":
+                    return switch (level) {
+                        case 1,2 -> 3;
+                        case 3,4 -> 4;
+                        case 5,6 -> 5;
+                        case 7,8 -> 6;
+                        case 9 -> 7;
+                        default -> 9;
+                    };
+                case "Caster":
+                    return switch (level) {
+                        case 1,2,3 -> 3;
+                        case 4,5,6 -> 4;
+                        case 7,8 -> 5;
+                        case 9 -> 6;
+                        default -> 7;
+                    };
+            }
+        return 0;
     }
 }

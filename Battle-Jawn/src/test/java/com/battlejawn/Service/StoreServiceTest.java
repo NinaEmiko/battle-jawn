@@ -1,0 +1,63 @@
+package com.battlejawn.Service;
+
+import com.battlejawn.Entities.Hero.Hero;
+import com.battlejawn.Entities.Hero.Tank;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
+public class StoreServiceTest {
+    @Mock
+    HeroService heroService;
+    @Mock
+    Hero hero;
+    @InjectMocks
+    StoreService storeService;
+    @BeforeEach
+    void setup(){
+        hero = new Tank("Name");
+    }
+    @Test
+    void buyPotionSuccessTest() {
+        hero.setPotions(0);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        doNothing().when(heroService).updateHero(any());
+        storeService.buy(1L, "potion", 1);
+        verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
+    void buyTwoPotionSuccessTest() {
+        hero.setCoins(10L);
+        hero.setPotions(0);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        doNothing().when(heroService).updateHero(any());
+        storeService.buy(1L, "potion", 2);
+        verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
+    void buyTwoPotionFailTest() {
+        hero.setCoins(10L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);storeService.buy(1L, "potion", 2);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void buyPotionFailTest() {
+        hero.setCoins(0L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        storeService.buy(1L, "potion", 1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void buyFailTest() {
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        storeService.buy(1L, "gucci", 1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+}

@@ -254,3 +254,25 @@ ul {
   color: black;
   font-weight: bold;
 }
+
+.store-hero-name {
+  color: yellow;
+  font-size: 30px;
+  padding-top: 10px;
+  text-align: left;
+  padding-left: 10px;
+}
+.store-hero-coins {
+  color: hsl(181, 84%, 44%);
+  font-size: 20px;
+  text-align: left;
+  padding-left: 10px;
+}
+.buy-btn {
+  text-align: right;
+  background-color: transparent;
+  border-color: gray;
+  color: hsl(181, 84%, 44%);
+  border-radius: 0;
+  margin-bottom: 20px;
+}
