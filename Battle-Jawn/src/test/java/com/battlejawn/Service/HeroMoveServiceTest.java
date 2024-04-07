@@ -182,7 +182,7 @@ class HeroMoveServiceTest {
     @Test
     void heroMoveRunSuccessTest() {
         when(run.useRun()).thenReturn(true);
-        doNothing().when(heroService).updateRunCountById(anyLong(), anyInt());
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), any())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
         HeroMoveDTO heroMoveDTO = heroMoveService.processRun(enemy, 1L, hero);
@@ -332,7 +332,7 @@ class HeroMoveServiceTest {
         enemy.setId(1L);
         hero.setId(2L);
         doNothing().when(enemyService).updateHealthById(0, 1L);
-        doNothing().when(heroService).updateWinCountById(2L, 1);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 

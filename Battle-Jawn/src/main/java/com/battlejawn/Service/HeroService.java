@@ -104,22 +104,6 @@ public class HeroService {
         logger.info("Inside updatePotionCountById service method. Hero ID: " + heroId + ". Updated potion count: " + updatedPotionCount + ".");
         heroRepository.updatePotionCountById(updatedPotionCount, heroId);
     }
-    @Transactional
-    public void updateRunCountById(Long heroId, int updatedRunCount) {
-        logger.info("Inside updateRunCountById service method. Hero ID: " + heroId + ". Updated run count: " + updatedRunCount + ".");
-        heroRepository.updateRunCountByHeroId(updatedRunCount, heroId);
-    }
-    @Transactional
-    public void updateWinCountById(Long heroId, int updatedWinCount) {
-        logger.info("Inside updateWinCountById service method. Hero ID: " + heroId + ". Updated win count: " + updatedWinCount + ".");
-        heroRepository.updateWinCountById(updatedWinCount, heroId);
-    }
-
-    @Transactional
-    public void updateLossCountById(Long heroId, int updatedLossCount) {
-        logger.info("Inside updateLossCountById service method. Hero ID: " + heroId + ". Updated loss count: " + updatedLossCount + ".");
-        heroRepository.updateLossCountById(updatedLossCount, heroId);
-    }
 
     @Transactional
     public void updateHero(Hero hero){

@@ -98,8 +98,9 @@ public class EnemyMoveService {
         if (damage > hero.getHealth()) {
             updatedHeroHealth = 0;
             newMessage = getDamageMessage(move, damage);
-            heroService.updateLossCountById(hero.getId(), hero.getLossCount() + 1);
-            heroService.updateHealthById(updatedHeroHealth, hero.getId());
+            hero.setLossCount(hero.getLossCount() + 1);
+            hero.setHealth(updatedHeroHealth);
+            heroService.updateHero(hero);
             String heroDefeatedMessage = "You have been defeated by the enemy!";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, heroDefeatedMessage);

@@ -9,6 +9,7 @@ import MyHeroes from "./components/MyHeroes";
 import AccountSettings from "./components/AccountSettings";
 import CreateNewHero from "./components/CreateNewHero";
 import LeaderBoard from "./components/LeaderBoard";
+import Store from "./components/Store";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -77,6 +78,9 @@ function App() {
             )}
             {currentUser.loggedIn && (
               <Route key="create-hero" path="/create-hero" element={ <CreateNewHero props={currentUser} />} />
+            )}
+            {currentUser.loggedIn && (
+              <Route key="store" path="/store" element={ <Store props={currentUser} />} />
             )}
             {currentUser.loggedIn && (
               <Route key="leader-board" path="/leader-board" element={ <LeaderBoard props={currentUser} />} />

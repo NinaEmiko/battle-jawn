@@ -82,4 +82,22 @@ public class JsonParser {
             return null;
         }
     }
+    public String extractItem(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("item").asText();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return null;
+        }
+    }
+    public int extractQuantity(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("quantity").asInt();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return 0;
+        }
+    }
 }

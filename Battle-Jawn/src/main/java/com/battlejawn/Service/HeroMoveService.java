@@ -103,7 +103,8 @@ public class HeroMoveService {
             newMessage = getDamageMessage(move, damage);
             enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
             String enemyDefeatedMessage = "You have defeated the enemy!";
-            heroService.updateWinCountById(hero.getId(), hero.getWinCount() + 1);
+            hero.setWinCount(hero.getWinCount() + 1);
+            heroService.updateHero(hero);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, enemyDefeatedMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
@@ -200,7 +201,7 @@ public String getDamageMessage(String move, int damage) {
         boolean gameOver = run.useRun();
         if (gameOver) {
             hero.setRunCount(hero.getRunCount() + 1);
-            heroService.updateRunCountById(hero.getId(), hero.getRunCount());
+            heroService.updateHero(hero);
             String newMessage = "You successfully ran away!";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);

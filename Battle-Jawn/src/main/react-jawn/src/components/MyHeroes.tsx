@@ -5,57 +5,58 @@ import classNames from 'classnames';
 import Battle from "./Battle";
 
 function MyHeroes( {props}:{props:any} ) {
-    const [heroId, setHeroId] = useState(0);
-    const [beginBattle, setBeginBattle] = useState(false);
-    const [heroList, setHeroList] = useState([]);
+  const [heroId, setHeroId] = useState(0);
+  const [beginBattle, setBeginBattle] = useState(false);
+  const [heroList, setHeroList] = useState([]);
+  const [rested, setRested] = useState(1);
 
-    let maxExperience = 50;
+  let maxExperience = 50;
 
-    function determineMaxExperience(level: number) {
-      switch (level) {
-        case 1:
-          return 50;
-        case 2:
-          return 125;
-        case 3:
-          return 300;
-        case 4:
-          return 500;
-        case 5:
-          return 750;
-        case 6:
-          return 1250;
-        case 7:
-          return 2000;
-        case 8:
-          return 3000;
-        case 9:
-        case 10:
-          return 5000;
-        default:
-          return 50;
-      }
+  function determineMaxExperience(level: number) {
+    switch (level) {
+      case 1:
+        return 50;
+      case 2:
+        return 125;
+      case 3:
+        return 300;
+      case 4:
+        return 500;
+      case 5:
+        return 750;
+      case 6:
+        return 1250;
+      case 7:
+        return 2000;
+      case 8:
+        return 3000;
+      case 9:
+      case 10:
+        return 5000;
+      default:
+        return 50;
     }
+  }
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleNavigation = (path: string) => {
-      navigate(path);
-    };
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
 
-    const fetchHeroes = async () => {
-      try {
-          const response = await
-          axios.get('http://localhost:8080/api/hero/list/' + props.id)
-          setHeroList(response.data);
-          } catch (error) {
-          console.error('Error fetching Hero data: ', error)
-          }
-      }
+  const fetchHeroes = async () => {
+    try {
+        const response = await
+        axios.get('http://localhost:8080/api/hero/list/' + props.id)
+        setHeroList(response.data);
+        } catch (error) {
+        console.error('Error fetching Hero data: ', error)
+        }
+    }
     
-    useEffect(() => {
-      fetchHeroes();
-    }, [])
+  useEffect(() => {
+    fetchHeroes();
+  }, [rested])
 
 function handleRest(id: any): void {
     axios.post('http://localhost:8080/api/hero/rest/' + id)
@@ -66,6 +67,7 @@ function handleRest(id: any): void {
         console.error('Error fetching rest data:', error);
       })
       fetchHeroes();
+      setRested(rested + 1);
   };
 
   function handleFight(id: any, health: number): void {

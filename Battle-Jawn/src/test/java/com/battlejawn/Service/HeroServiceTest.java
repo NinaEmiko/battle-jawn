@@ -117,24 +117,6 @@ public class HeroServiceTest {
         verify(heroRepository, times(1)).updatePotionCountById(anyInt(), anyLong());
     }
     @Test
-    void updateRunCountByIdTest() {
-        doNothing().when(heroRepository).updateRunCountByHeroId(anyInt(), anyLong());
-        heroService.updateRunCountById(anyLong(), anyInt());
-        verify(heroRepository, times(1)).updateRunCountByHeroId(anyInt(), anyLong());
-    }
-    @Test
-    void updateWinCountByIdTest(){
-        doNothing().when(heroRepository).updateWinCountById(anyInt(), anyLong());
-        heroService.updateWinCountById(anyLong(), anyInt());
-        verify(heroRepository, times(1)).updateWinCountById(anyInt(), anyLong());
-    }
-    @Test
-    void updateLossCountByIdTest(){
-        doNothing().when(heroRepository).updateLossCountById(anyInt(), anyLong());
-        heroService.updateLossCountById(anyLong(), anyInt());
-        verify(heroRepository, times(1)).updateLossCountById(anyInt(), anyLong());
-    }
-    @Test
     void deleteHeroByIdTest() {
         doNothing().when(heroRepository).deleteById(anyLong());
         when(heroRepository.existsById(anyLong())).thenReturn(true);

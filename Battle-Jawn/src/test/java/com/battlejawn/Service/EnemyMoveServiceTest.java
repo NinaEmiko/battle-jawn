@@ -276,8 +276,7 @@ class EnemyMoveServiceTest {
         hero = new Tank("Name");
         hero.setId(5L);
 
-        doNothing().when(heroService).updateLossCountById(5L, 1);
-        doNothing().when(heroService).updateHealthById(0, 5L);
+        doNothing().when(heroService).updateHero(hero);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
