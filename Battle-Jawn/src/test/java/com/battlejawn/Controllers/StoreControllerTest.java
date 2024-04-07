@@ -25,7 +25,16 @@ public class StoreControllerTest {
     }
     @Test
     void buyTest() {
-        doNothing().when(storeService).buy(anyLong(), anyString(), anyInt());
+        when(storeService.buy(anyLong(), anyString(), anyInt())).thenReturn("Hi");
+        when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
+        when(jsonParser.extractItem(anyString())).thenReturn("");
+        when(jsonParser.extractQuantity(anyString())).thenReturn(1);
+        storeController.buy(anyString());
+        verify(storeService, times(1)).buy(anyLong(), anyString(), anyInt());
+    }
+    @Test
+    void buyNullTest() {
+        when(storeService.buy(anyLong(), anyString(), anyInt())).thenReturn(null);
         when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
         when(jsonParser.extractItem(anyString())).thenReturn("");
         when(jsonParser.extractQuantity(anyString())).thenReturn(1);

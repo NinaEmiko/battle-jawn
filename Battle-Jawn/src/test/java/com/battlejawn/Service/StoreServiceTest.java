@@ -25,10 +25,23 @@ public class StoreServiceTest {
         hero = new Tank("Name");
     }
     @Test
-    void buyTest() {
+    void buyPotionSuccessTest() {
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
         doNothing().when(heroService).updateHero(any());
         storeService.buy(1L, "potion", 1);
         verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
+    void buyPotionFailTest() {
+        hero.setCoins(0L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        storeService.buy(1L, "potion", 1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void buyFailTest() {
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        storeService.buy(1L, "gucci", 1);
+        verify(heroService, times(0)).updateHero(any());
     }
 }

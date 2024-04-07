@@ -14,6 +14,27 @@ const Store = ({props}:{props:any}) => {
             console.error('Error fetching Hero data: ', error)
             }
         }
+
+    const buyItems = async (id: number, item: string) => {
+            const response = await
+            axios.post('http://localhost:8080/api/store/buy', {
+                heroId: id,
+                item: item,
+                quantity: 1
+            })
+            .then((response) => {
+
+              })
+            .catch((error) => {
+              console.error('Error buying items:', error);
+            }
+            )
+        }
+    
+
+        function handleClickBuy(id: number, item: string) {
+            buyItems(id, item);
+        }
       
     useEffect(() => {
         fetchHeroes();
@@ -42,7 +63,7 @@ const Store = ({props}:{props:any}) => {
                                 </tr>
                                 <tr>
                                     <td className="row-jawn"></td>
-                                    <td className="buy-btn"><button className="buy-btn">Buy</button></td>
+                                    <td className="buy-btn"><button onClick={() => handleClickBuy(hero.id, "potion")} className="buy-btn">Buy</button></td>
                                 </tr>
                             
                             </tbody>
