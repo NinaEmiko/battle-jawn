@@ -32,7 +32,7 @@ class EnemyPurgeTest {
     @BeforeEach
     void setup() {
         enemies = new ArrayList<>();
-        enemy = new Wolf(2);
+        enemy = new Wolf(2, 55, 12);
         enemy.setId(1L);
         enemy.setCreatedAt(LocalDateTime.now().minusDays(6));
         enemies.add(enemy);

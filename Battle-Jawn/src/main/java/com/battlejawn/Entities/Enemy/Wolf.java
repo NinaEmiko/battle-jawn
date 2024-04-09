@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("WOLF")
 public class Wolf extends Enemy {
 
-    public Wolf(int level) {
-        super("Wolf", 50, 50, 0, 0, 10, LocalDateTime.now(), level);
+    public Wolf(int level, int health, int strength) {
+        super("Wolf", health, health, 0, 0, strength, LocalDateTime.now(), level);
     }
 
 }

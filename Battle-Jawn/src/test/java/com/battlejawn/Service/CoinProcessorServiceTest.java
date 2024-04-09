@@ -28,7 +28,7 @@ public class CoinProcessorServiceTest {
     }
     @Test
     void processCoinsThiefTest() {
-        enemy = new Thief(1);
+        enemy = new Thief(1, 90, 2, 4, 17);
         enemy.setName("Thief");
 
         for (int i = 1; i <= 10; i++) {
@@ -42,7 +42,7 @@ public class CoinProcessorServiceTest {
     @Test
     void processCoinsOrcTest() {
 
-        enemy = new Orc(1);
+        enemy = new Orc(1, 100, 3, 20);
         enemy.setName("Orc");
 
         for (int i = 1; i <= 10; i++) {
@@ -55,7 +55,7 @@ public class CoinProcessorServiceTest {
     @Test
     void processCoinsWolfTest() {
 
-        enemy = new Wolf(1);
+        enemy = new Wolf(1, 50, 10);
         enemy.setName("Wolf");
 
         coinProcessorService.processCoins(enemy);

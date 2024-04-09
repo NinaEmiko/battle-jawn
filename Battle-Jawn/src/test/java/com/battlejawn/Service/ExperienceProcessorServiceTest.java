@@ -24,8 +24,9 @@ public class ExperienceProcessorServiceTest {
     @Mock
     Enemy enemy;
     @Mock
-            CoinProcessorService coinProcessorService;
+    CoinProcessorService coinProcessorService;
     List<Long> heroExperience;
+    List<Long> heroExperienceBackwards;
     @InjectMocks
     ExperienceProcessorService experienceProcessorService;
     @BeforeEach
@@ -43,10 +44,22 @@ public class ExperienceProcessorServiceTest {
         heroExperience.add(126L);
         heroExperience.add(51L);
         heroExperience.add(1L);
+
+        heroExperienceBackwards = new ArrayList<>();
+        heroExperienceBackwards.add(49L);
+        heroExperienceBackwards.add(49L);
+        heroExperienceBackwards.add(124L);
+        heroExperienceBackwards.add(299L);
+        heroExperienceBackwards.add(499L);
+        heroExperienceBackwards.add(749L);
+        heroExperienceBackwards.add(1249L);
+        heroExperienceBackwards.add(1999L);
+        heroExperienceBackwards.add(2999L);
+        heroExperienceBackwards.add(4999L);
     }
     @Test
     void processExperienceHeroWinsTest() {
-        enemy = new Wolf(1);
+        enemy = new Wolf(1, 50, 10);
         when(coinProcessorService.processCoins(any())).thenReturn(1L);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero wins");
@@ -54,14 +67,14 @@ public class ExperienceProcessorServiceTest {
     }
     @Test
     void processExperienceHeroRunsTest() {
-        enemy = new Wolf(1);
+        enemy = new Wolf(1, 50, 10);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero runs");
         Assertions.assertEquals(result, "You've gained 0 experience.");
     }
     @Test
     void processExperienceHeroLosesTest() {
-        enemy = new Wolf(1);
+        enemy = new Wolf(1, 50, 10);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero loses");
         Assertions.assertEquals(result, "You've lost 15 experience.");
@@ -69,7 +82,7 @@ public class ExperienceProcessorServiceTest {
     @Test
     void processExperienceHeroLevel10Test() {
         hero.setLevel(10);
-        enemy = new Wolf(1);
+        enemy = new Wolf(1, 50, 10);
         when(coinProcessorService.processCoins(any())).thenReturn(1L);
         doNothing().when(heroService).updateHero(any());
         String result = experienceProcessorService.processExperience(hero, enemy, "Hero wins");
@@ -77,7 +90,7 @@ public class ExperienceProcessorServiceTest {
     }
     @Test
     void processExperienceOrcTest() {
-        enemy = new Orc(1);
+        enemy = new Orc(1, 100, 3, 20);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
             when(coinProcessorService.processCoins(any())).thenReturn(1L);
@@ -88,7 +101,7 @@ public class ExperienceProcessorServiceTest {
     }
     @Test
     void processExperienceSpiritTest() {
-        enemy = new Spirit(1);
+        enemy = new Spirit(1, 150, 20);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
             when(coinProcessorService.processCoins(any())).thenReturn(1L);
@@ -99,7 +112,7 @@ public class ExperienceProcessorServiceTest {
     }
     @Test
     void processExperienceThiefTest() {
-        enemy = new Thief(1);
+        enemy = new Thief(1, 90, 2, 4, 17);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
             when(coinProcessorService.processCoins(any())).thenReturn(1L);
@@ -110,7 +123,7 @@ public class ExperienceProcessorServiceTest {
     }
     @Test
     void processExperienceWolfTest() {
-        enemy = new Wolf(1);
+        enemy = new Wolf(1, 50, 10);
         for (int i = 1; i <= 10; i++) {
             enemy.setLevel(i);
             when(coinProcessorService.processCoins(any())).thenReturn(1L);
@@ -122,7 +135,7 @@ public class ExperienceProcessorServiceTest {
 
     @Test
     void determineLevelTest(){
-        enemy = new Orc(1);
+        enemy = new Orc(1, 100, 3, 20);
         for (int i = 1; i <= 10; i++) {
             hero.setLevel(i);
             enemy.setLevel(i);
@@ -135,13 +148,69 @@ public class ExperienceProcessorServiceTest {
     }
     @Test
     void calculateExperienceLossTest(){
-        enemy = new Orc(1);
+        enemy = new Orc(1, 100, 3, 20);
         for (int i = 1; i <= 10; i++) {
             hero.setLevel(i);
             enemy.setLevel(i);
             hero.setExperience(heroExperience.get(i));
             doNothing().when(heroService).updateHero(any());
             experienceProcessorService.processExperience(hero, enemy, "Hero loses");
+            verify(heroService, times(i)).updateHero(any());
+        }
+    }
+
+    @Test
+    void determineMaxHealthTankTest() {
+        enemy = new Orc(1, 100, 3, 20);
+        for (int i = 1; i <= 9; i++) {
+            hero.setExperience(heroExperienceBackwards.get(i));
+            hero.setLevel(i);
+            enemy.setLevel(i);
+            doNothing().when(heroService).updateHero(any());
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
+            experienceProcessorService.processExperience(hero, enemy, "Hero wins");
+            verify(heroService, times(i)).updateHero(any());
+        }
+    }
+    @Test
+    void determineMaxHealthHealerTest() {
+        hero = new Healer("Name");
+        enemy = new Orc(1, 100, 3, 20);
+        for (int i = 1; i <= 9; i++) {
+            hero.setExperience(heroExperienceBackwards.get(i));
+            hero.setLevel(i);
+            enemy.setLevel(i);
+            doNothing().when(heroService).updateHero(any());
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
+            experienceProcessorService.processExperience(hero, enemy, "Hero wins");
+            verify(heroService, times(i)).updateHero(any());
+        }
+    }
+    @Test
+    void determineMaxHealthDPSTest() {
+        hero = new DPS("Name");
+        enemy = new Orc(1, 100, 3, 20);
+        for (int i = 1; i <= 9; i++) {
+            hero.setExperience(heroExperienceBackwards.get(i));
+            hero.setLevel(i);
+            enemy.setLevel(i);
+            doNothing().when(heroService).updateHero(any());
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
+            experienceProcessorService.processExperience(hero, enemy, "Hero wins");
+            verify(heroService, times(i)).updateHero(any());
+        }
+    }
+    @Test
+    void determineMaxHealthCasterTest() {
+        hero = new Caster("Name");
+        enemy = new Orc(1, 100, 3, 20);
+        for (int i = 1; i <= 9; i++) {
+            hero.setExperience(heroExperienceBackwards.get(i));
+            hero.setLevel(i);
+            enemy.setLevel(i);
+            doNothing().when(heroService).updateHero(any());
+            when(coinProcessorService.processCoins(any())).thenReturn(1L);
+            experienceProcessorService.processExperience(hero, enemy, "Hero wins");
             verify(heroService, times(i)).updateHero(any());
         }
     }

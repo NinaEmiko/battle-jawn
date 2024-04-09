@@ -39,7 +39,7 @@ class EnemyServiceTest {
     @Test
     void GetEnemyByIdTest(){
         long enemyId = 1L;
-        Orc orc = new Orc(2);
+        Orc orc = new Orc(2, 105, 3, 25);
         orc.setId(enemyId);
 
         when(enemyRepository.findById(enemyId)).thenReturn(Optional.of(orc));
@@ -113,6 +113,42 @@ class EnemyServiceTest {
         when(randomizer.getRandomInt(anyInt())).thenReturn(0);
         Enemy nullEnemy = enemyService.createNewEnemy(2);
         assertNull(nullEnemy);
+    }
 
+    @Test
+    void createNewOrcTest() {
+        for (int i = 1; i <= 10; i++) {
+            when(randomizer.getRandomInt(anyInt())).thenReturn(1).thenReturn(i);
+            when(enemyRepository.save(any())).thenReturn(enemy);
+            enemyService.createNewEnemy(i);
+            verify(enemyRepository, times(i)).save(any());
+        }
+    }
+    @Test
+    void createNewThiefTest() {
+        for (int i = 1; i <= 10; i++) {
+            when(randomizer.getRandomInt(anyInt())).thenReturn(3).thenReturn(i);
+            when(enemyRepository.save(any())).thenReturn(enemy);
+            enemyService.createNewEnemy(i);
+            verify(enemyRepository, times(i)).save(any());
+        }
+    }
+    @Test
+    void createNewWolfTest() {
+        for (int i = 1; i <= 10; i++) {
+            when(randomizer.getRandomInt(anyInt())).thenReturn(4).thenReturn(i);
+            when(enemyRepository.save(any())).thenReturn(enemy);
+            enemyService.createNewEnemy(i);
+            verify(enemyRepository, times(i)).save(any());
+        }
+    }
+    @Test
+    void createNewSpiritTest() {
+        for (int i = 1; i <= 10; i++) {
+            when(randomizer.getRandomInt(anyInt())).thenReturn(2).thenReturn(i);
+            when(enemyRepository.save(any())).thenReturn(enemy);
+            enemyService.createNewEnemy(i);
+            verify(enemyRepository, times(i)).save(any());
+        }
     }
 }

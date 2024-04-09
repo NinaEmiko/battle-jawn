@@ -49,7 +49,7 @@ class BattleSessionServiceTest {
         battleSession = new BattleSession();
         battleHistoryMessage = new BattleHistoryMessage();
         battleSession.setId(4L);
-        enemy = new Wolf(2);
+        enemy = new Wolf(2, 55, 12);
         hero.setId(1L);
         enemy.setId(2L);
 
