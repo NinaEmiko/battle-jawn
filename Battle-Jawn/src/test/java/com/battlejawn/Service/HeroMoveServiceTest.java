@@ -10,6 +10,7 @@ import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
+import com.battlejawn.Repository.EnemyRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,8 @@ class HeroMoveServiceTest {
     BattleHistoryMessageService battleHistoryMessageService;
     @Mock
     BattleSessionService battleSessionService;
+    @Mock
+    EnemyRepository enemyRepository;
     @Mock
     HeroService heroService;
     @Mock
@@ -57,7 +60,7 @@ class HeroMoveServiceTest {
     @BeforeEach
     void setup(){
         battleHistoryMessageList = new ArrayList<>();
-        enemy = new Orc(2);
+        enemy = new Orc(2, 105, 2, 25);
         hero = new Tank("Name");
     }
     @Test
@@ -343,7 +346,7 @@ class HeroMoveServiceTest {
     void processHeroMoveDamageTest() {
         enemy.setId(1L);
         hero.setId(2L);
-        doNothing().when(enemyService).updateHealthById(90, 1L);
+        doNothing().when(enemyService).updateHealthById(95, 1L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 

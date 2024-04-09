@@ -60,7 +60,7 @@ class EnemyMoveServiceTest {
     }
     @Test
     void enemyMoveWolfBiteTest() {
-        enemy = new Wolf(2);
+        enemy = new Wolf(2, 55, 12);
 
         when(randomizer.getRandomInt(9)).thenReturn(4);
 
@@ -73,7 +73,7 @@ class EnemyMoveServiceTest {
     }
     @Test
     void enemyMoveWolfMaimTest() {
-        enemy = new Wolf(2);
+        enemy = new Wolf(2, 55, 12);
 
         when(randomizer.getRandomInt(9)).thenReturn(1);
 
@@ -87,7 +87,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveSpiritShadowBlastTest() {
 
-        enemy = new Spirit(2);
+        enemy = new Spirit(2, 157, 25);
         when(randomizer.getRandomInt(9)).thenReturn(4);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
@@ -99,7 +99,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveSpiritSoulEaterTest() {
 
-        enemy = new Spirit(2);
+        enemy = new Spirit(2, 157, 25);
         when(randomizer.getRandomInt(9)).thenReturn(0);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
@@ -111,7 +111,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveOrcPotionTest() {
 
-        enemy = new Orc(2);
+        enemy = new Orc(2, 105, 3, 25);
         enemy.setHealth(1);
         when(randomizer.getRandomInt(9)).thenReturn(1);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -124,7 +124,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveOrcSecondPotionTest() {
 
-        enemy = new Orc(2);
+        enemy = new Orc(2, 105, 3, 25);
         enemy.setHealth(41);
         when(randomizer.getRandomInt(9)).thenReturn(9);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -137,7 +137,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveOrcStrikeTest() {
 
-        enemy = new Orc(2);
+        enemy = new Orc(2, 105, 3, 25);
         enemy.setHealth(41);
         when(randomizer.getRandomInt(9)).thenReturn(7);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -150,7 +150,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveOrcImpaleTest() {
 
-        enemy = new Orc(2);
+        enemy = new Orc(2, 105, 3, 25);
         enemy.setHealth(41);
         when(randomizer.getRandomInt(9)).thenReturn(1);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -163,7 +163,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveThiefPotionTest() {
 
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setHealth(1);
         when(randomizer.getRandomInt(9)).thenReturn(1);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -176,7 +176,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveThiefSecondPotionTest() {
 
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setHealth(31);
         when(randomizer.getRandomInt(9)).thenReturn(10);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -189,7 +189,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveThiefStabTest() {
 
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setHealth(31);
         when(randomizer.getRandomInt(9)).thenReturn(2);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -202,7 +202,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveThiefStealTest() {
 
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setHealth(31);
         when(randomizer.getRandomInt(9)).thenReturn(1);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -215,7 +215,7 @@ class EnemyMoveServiceTest {
     @Test
     void enemyMoveNullEnemyNameTest() {
 
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setName("Name");
         when(randomizer.getRandomInt(9)).thenReturn(12);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -227,7 +227,7 @@ class EnemyMoveServiceTest {
     }
     @Test
     void processPotionTest() {
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setId(4L);
         enemy.setHealth(30);
 
@@ -244,14 +244,14 @@ class EnemyMoveServiceTest {
     }
     @Test
     void processPotionFullHealthTest() {
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setId(4L);
         enemy.setHealth(80);
 
         when(potion.usePotion()).thenReturn(30);
 
         doNothing().when(enemyService).updatePotionCountById(1, 4L);
-        doNothing().when(enemyService).updateHealthById(90, 4L);
+        doNothing().when(enemyService).updateHealthById(95, 4L);
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -271,7 +271,7 @@ class EnemyMoveServiceTest {
     }
     @Test
     void processEnemyMoveTest() {
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         hero = new Tank("Name");
         hero.setId(5L);
 
@@ -285,7 +285,7 @@ class EnemyMoveServiceTest {
     }
     @Test
     void processEnemyMoveElseTest() {
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         hero = new Tank("Name");
         hero.setId(5L);
 
@@ -301,7 +301,7 @@ class EnemyMoveServiceTest {
     void processStealTrueTest(){
         hero = new Tank("Name");
         hero.setId(5L);
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setId(4L);
         enemy.setPotions(1);
         when(enemySteal.useSteal()).thenReturn(true);
@@ -316,7 +316,7 @@ class EnemyMoveServiceTest {
     void processStealFalseTest(){
         hero = new Tank("Name");
         hero.setId(5L);
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setId(4L);
         enemy.setPotions(1);
         when(enemySteal.useSteal()).thenReturn(false);
@@ -330,7 +330,7 @@ class EnemyMoveServiceTest {
         hero = new Tank("Name");
         hero.setId(5L);
         hero.setPotions(0);
-        enemy = new Thief(2);
+        enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setId(4L);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
