@@ -11,7 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class LootService {
     private Randomizer randomizer;
-
     public List<String> getLoot(Enemy enemy) {
         return switch (enemy.getName()) {
             case "Wolf" -> determineWolfLoot();
@@ -21,7 +20,6 @@ public class LootService {
             default -> null;
         };
     }
-
     private List<String> determineWolfLoot() {
         List<String> wolfLoot = new ArrayList<>();
         int wolfPawChance = randomizer.getRandomInt(10);
@@ -37,7 +35,6 @@ public class LootService {
         spiritLoot.add("Spirit trinket");
         return spiritLoot;
     }
-
     private List<String> determineOrcLoot(int potionsLeft) {
         List<String> orcLoot = new ArrayList<>();
 
@@ -70,7 +67,6 @@ public class LootService {
         }
         return orcLoot;
     }
-
     private List<String> determineThiefLoot(int potionsLeft) {
         List<String> thiefLoot = new ArrayList<>();
 

@@ -4,13 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
-
-import com.battlejawn.Entities.Inventory;
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.Hero.Caster;
 import com.battlejawn.Entities.Hero.DPS;
 import com.battlejawn.Entities.Hero.Healer;
@@ -25,7 +22,6 @@ public class HeroService {
 
     private final HeroRepository heroRepository;
     private final UserAccountRepository userAccountRepository;
-    private final InventoryService inventoryService;
     private final Logger logger = Logger.getLogger(HeroService.class.getName());
 
     public Hero getHeroById(Long id){

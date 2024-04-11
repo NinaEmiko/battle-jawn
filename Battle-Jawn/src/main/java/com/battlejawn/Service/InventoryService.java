@@ -1,6 +1,5 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
@@ -9,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -50,41 +48,45 @@ public class InventoryService {
             addToFirstEmptySlot(inventory, loot);
         }
     }
-    public void removeFromInventory(Long id, List<String> selectedItems){
-        Hero hero = heroService.getHeroById(id);
-        Inventory inventory = hero.getInventory();
 
-        for(String item : selectedItems) {
-            if(inventory.getSlotOne().equals(item)){
-                inventory.setSlotOne(null);
-            } else if(inventory.getSlotTwo().equals(item)){
-                inventory.setSlotTwo(null);
-            } else if(inventory.getSlotThree().equals(item)){
-                inventory.setSlotThree(null);
-            } else if(inventory.getSlotFour().equals(item)){
-                inventory.setSlotFour(null);
-            } else if(inventory.getSlotFive().equals(item)){
-                inventory.setSlotFive(null);
-            } else if(inventory.getSlotSix().equals(item)){
-                inventory.setSlotSix(null);
-            } else if(inventory.getSlotSeven().equals(item)){
-                inventory.setSlotSeven(null);
-            } else if(inventory.getSlotEight().equals(item)){
-                inventory.setSlotEight(null);
-            } else if(inventory.getSlotNine().equals(item)){
-                inventory.setSlotNine(null);
-            } else if(inventory.getSlotTen().equals(item)){
-                inventory.setSlotTen(null);
-            } else if(inventory.getSlotEleven().equals(item)){
-                inventory.setSlotEleven(null);
-            } else if(inventory.getSlotTwelve().equals(item)){
-                inventory.setSlotTwelve(null);
-            }
-            inventoryRepository.save(inventory);
+    public void removeMultipleFromInventory(Long id, List<String> items){
+        for (String item : items) {
+            removeFromInventory(id, item);
         }
     }
 
-    private void addToFirstEmptySlot(Inventory inventory, String item){
+    public void removeFromInventory(Long id, String item){
+        Hero hero = heroService.getHeroById(id);
+        Inventory inventory = hero.getInventory();
+
+        if(inventory.getSlotOne().equals(item)){
+            inventory.setSlotOne(null);
+        } else if(inventory.getSlotTwo().equals(item)){
+            inventory.setSlotTwo(null);
+        } else if(inventory.getSlotThree().equals(item)){
+            inventory.setSlotThree(null);
+        } else if(inventory.getSlotFour().equals(item)){
+            inventory.setSlotFour(null);
+        } else if(inventory.getSlotFive().equals(item)){
+            inventory.setSlotFive(null);
+        } else if(inventory.getSlotSix().equals(item)){
+            inventory.setSlotSix(null);
+        } else if(inventory.getSlotSeven().equals(item)){
+            inventory.setSlotSeven(null);
+        } else if(inventory.getSlotEight().equals(item)){
+            inventory.setSlotEight(null);
+        } else if(inventory.getSlotNine().equals(item)){
+            inventory.setSlotNine(null);
+        } else if(inventory.getSlotTen().equals(item)){
+            inventory.setSlotTen(null);
+        } else if(inventory.getSlotEleven().equals(item)){
+            inventory.setSlotEleven(null);
+        } else if(inventory.getSlotTwelve().equals(item)){
+            inventory.setSlotTwelve(null);
+        }
+        inventoryRepository.save(inventory);
+    }
+    public void addToFirstEmptySlot(Inventory inventory, String item){
         if (inventory.getSlotOne().isEmpty()) {
             inventory.setSlotOne(item);
         } else if (inventory.getSlotTwo().isEmpty()){
