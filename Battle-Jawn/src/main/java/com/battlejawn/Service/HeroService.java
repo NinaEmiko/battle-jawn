@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 import javax.persistence.EntityNotFoundException;
+
+import com.battlejawn.Entities.Inventory;
 import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
 import lombok.AllArgsConstructor;
@@ -23,7 +25,8 @@ public class HeroService {
 
     private final HeroRepository heroRepository;
     private final UserAccountRepository userAccountRepository;
-    private final Logger logger = Logger.getLogger(HeroController.class.getName());
+    private final InventoryService inventoryService;
+    private final Logger logger = Logger.getLogger(HeroService.class.getName());
 
     public Hero getHeroById(Long id){
         logger.info("Inside getHeroById service method. Hero ID: " + id + ".");

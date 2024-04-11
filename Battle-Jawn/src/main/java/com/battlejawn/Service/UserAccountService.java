@@ -24,7 +24,7 @@ public class UserAccountService {
     private final UserAccountRepository userAccountRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserAccountMapper userAccountMapper;
-    private final Logger logger = Logger.getLogger(HeroController.class.getName());
+    private final Logger logger = Logger.getLogger(UserAccountService.class.getName());
 
     public UserAccountDTO login(CredentialsDTO credentialsDTO) {
         UserAccount userAccount = userAccountRepository.findByLogin(credentialsDTO.getLogin())

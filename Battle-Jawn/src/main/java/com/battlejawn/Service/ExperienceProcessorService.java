@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class ExperienceProcessorService {
     private final HeroService heroService;
     private final CoinProcessorService coinProcessorService;
-    private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
+    private final Logger logger = Logger.getLogger(ExperienceProcessorService.class.getName());
     public String processExperience(Hero hero, Enemy enemy, String battleResult) {
         logger.info("Inside processExperience service method.");
 
@@ -226,7 +226,6 @@ public class ExperienceProcessorService {
                 case 9 -> 8;
                 default -> 10;
             };
-            case "Healer" -> 0;
             case "DPS" -> switch (level) {
                 case 1, 2 -> 3;
                 case 3, 4 -> 4;

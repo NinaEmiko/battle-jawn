@@ -214,4 +214,17 @@ public class ExperienceProcessorServiceTest {
             verify(heroService, times(i)).updateHero(any());
         }
     }
+    @Test
+    void determineMaxHealthInvalidRoleTest(){
+        hero = new Caster("Name");
+        hero.setRole("No");
+        enemy = new Orc(1, 100, 3, 20);
+        hero.setExperience(49L);
+        hero.setLevel(1);
+        enemy.setLevel(1);
+        doNothing().when(heroService).updateHero(any());
+        when(coinProcessorService.processCoins(any())).thenReturn(1L);
+        experienceProcessorService.processExperience(hero, enemy, "Hero wins");
+        verify(heroService, times(1)).updateHero(any());
+    }
 }

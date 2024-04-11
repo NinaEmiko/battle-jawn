@@ -1,9 +1,12 @@
 package com.battlejawn.Entities.Hero;
 
 import java.time.LocalDateTime;
+
+import com.battlejawn.Entities.Inventory;
 import com.battlejawn.Entities.UserAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
@@ -48,9 +51,11 @@ public abstract class Hero {
     private Long experience;
     @Column
     private Long coins;
+    @JoinColumn(name = "inventory_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    private Inventory inventory;
 
     public Hero() {
-
     }
 
     public Hero(String name, int health, int maxHealth, int potions, int maxPotions, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
@@ -67,6 +72,7 @@ public abstract class Hero {
         this.level = 1;
         this.experience = 0L;
         this.coins = 3L;
+        this.inventory = new Inventory();
     }
     
 }

@@ -1,10 +1,11 @@
 package com.battlejawn.Config;
 
-import com.battlejawn.Controllers.PlayerTipController;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Component
@@ -13,7 +14,7 @@ public class JsonParser {
     public JsonParser() {
         objectMapper = new ObjectMapper();
     }
-    private final Logger logger = Logger.getLogger(PlayerTipController.class.getName());
+    private final Logger logger = Logger.getLogger(JsonParser.class.getName());
 
     public String extractRole(String jsonString) {
         try {
@@ -48,6 +49,15 @@ public class JsonParser {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);
             return jsonNode.get("heroId").asLong();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+        }
+        return null;
+    }
+
+    public List<String> extractSelectedItems(String jsonString) {
+        try {
+            return objectMapper.readValue(jsonString, new TypeReference<List<String>>() {});
         } catch (Exception e) {
             logger.info("Exception: " + e);
         }
