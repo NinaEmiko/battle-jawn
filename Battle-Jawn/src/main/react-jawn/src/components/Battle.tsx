@@ -11,7 +11,6 @@ import wolf from "../assets/wolf.png";
 import orc from "../assets/orc.png";
 import ghost from "../assets/ghost.png";
 import { useNavigate } from "react-router-dom";
-import PostBattleComponent from "./PostBattleComponent";
 
 function Battle({props}:{props:any}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
