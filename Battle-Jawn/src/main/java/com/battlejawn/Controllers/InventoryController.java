@@ -57,8 +57,12 @@ public class InventoryController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<List<String>> getInventoryById(@PathVariable Long id){
-            List<String> inventory = inventoryService.getInventoryById(id);
-            URI location = URI.create("/inventory/");
-            return ResponseEntity.created(location).body(inventory);
+        List<String> inventory = inventoryService.getInventoryById(id);
+
+        if (inventory != null) {
+            return new ResponseEntity<>(inventory, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

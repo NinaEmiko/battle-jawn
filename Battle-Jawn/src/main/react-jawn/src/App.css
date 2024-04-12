@@ -187,12 +187,12 @@
   text-align: right;
 }
 
-#rest-btn, #fight-btn, #delete-btn, #submit-btn {
+#rest-btn, #fight-btn, #delete-btn, #inventory-btn, #submit-btn {
   background-color: transparent;
   border-color: gray;
   color: hsl(181, 84%, 44%);
   border-radius: 0;
-  width:150px;
+  width:120px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -275,4 +275,21 @@ ul {
   color: hsl(181, 84%, 44%);
   border-radius: 0;
   margin-bottom: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.grid-item {
+  border: 1px solid black;
+  text-align: center;
+  padding: 20px;
+  aspect-ratio: 1;
+}
+
+.toss-btn{
+  padding-top: 10px;
 }
