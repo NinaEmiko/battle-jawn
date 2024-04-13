@@ -12,7 +12,7 @@ public class DPS extends Hero {
 
     }
     public DPS(String name) {
-        super(name, 90, 90, 2, 3, "DPS", 0, 0, 0, LocalDateTime.now());
+        super(name, 90, 90, "DPS", 0, 0, 0, LocalDateTime.now());
     }
 
 }

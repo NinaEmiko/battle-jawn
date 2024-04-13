@@ -19,7 +19,7 @@ public class StoreService {
         logger.info("Inside buy service method");
         Hero hero = heroService.getHeroById(heroId);
         Inventory inventory = hero.getInventory();
-        if (inventoryService.getEmptySlotSize(inventory.getId()) < quantity) {
+        if (inventoryService.getEmptySlotSize(heroId) < quantity) {
             return "You do not have room in your inventory for this purchase.";
         }
         return switch (item){
@@ -50,6 +50,8 @@ public class StoreService {
         };
     }
     private String buyPotion(Hero hero, int quantity, Inventory inventory) {
+        logger.info("Inside buyPotion service method");
+
         String msg = "";
         if (hero.getCoins() - (quantity) < 0) {
             msg = "Insufficient coins.";

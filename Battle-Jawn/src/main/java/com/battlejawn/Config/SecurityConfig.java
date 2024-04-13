@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/register", "/api/battle-session/create", "/api/battle-session/end", "/api/enemy", "/api/enemy-move", "/api/hero", "/api/hero-move", "/api/hero/rest/{id}", "/api/store/buy", "/api/store/sell").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/battle-history-message/{id}", "/api/battle-session/{id}", "/api/enemy/all", "/api/enemy/{id}", "/api/enemy/health/{id}", "/api/hero/{id}", "/api/hero/health/{id}", "/api/player-tip/all", "/api/player-tip/random", "/api/hero/list/{id}", "/api/hero/all", "/api/hero/list", "/api/inventory/loot-options/{id}", "/api/inventory/slots/{id}", "/api/inventory/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/battle-history-message/{id}", "/api/battle-session/{id}", "/api/enemy/all", "/api/enemy/{id}", "/api/enemy/health/{id}", "/api/hero/{id}", "/api/hero/health/{id}", "/api/player-tip/all", "/api/player-tip/random", "/api/hero/list/{id}", "/api/hero/all", "/api/hero/list", "/api/inventory/loot-options/{id}", "/api/inventory/slots/{id}", "/api/inventory/{id}", "/api/inventory/potions/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/hero/delete/{id}", "/delete/{id}", "/api/inventory/remove/{id}").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/update/{id}", "/api/inventory/add/{id}").permitAll()
                         .anyRequest().authenticated())

@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +18,8 @@ public class InventoryService {
     private InventoryRepository inventoryRepository;
     private EnemyService enemyService;
     private HeroService heroService;
+    private final Logger logger = Logger.getLogger(InventoryService.class.getName());
+
     public List<String> getInventoryById(Long id) {
         Hero hero = heroService.getHeroById(id);
         Inventory inventory = hero.getInventory();
@@ -87,6 +91,8 @@ public class InventoryService {
         inventoryRepository.save(inventory);
     }
     public void addToFirstEmptySlot(Inventory inventory, String item){
+        logger.info("Inside addToFirstEmptySlot service method");
+
         if (inventory.getSlotOne().isEmpty()) {
             inventory.setSlotOne(item);
         } else if (inventory.getSlotTwo().isEmpty()){
@@ -145,5 +151,52 @@ public class InventoryService {
         emptySlots.add(inventory.getSlotEleven().isEmpty());
         emptySlots.add(inventory.getSlotTwelve().isEmpty());
         return emptySlots;
+    }
+
+    public Integer findPotionCountById(Long id) {
+        Hero hero = heroService.getHeroById(id);
+        Inventory inventory = hero.getInventory();
+        return findPotionCount(inventory);
+    }
+
+    public int findPotionCount(Inventory inventory) {
+        int potionCount = 0;
+        if (Objects.equals(inventory.getSlotOne(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotTwo(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotThree(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotFour(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotFive(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotSix(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotSeven(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotEight(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotNine(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotTen(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotEleven(), "potion")){
+            potionCount++;
+        }
+        if (Objects.equals(inventory.getSlotTwelve(), "potion")){
+            potionCount++;
+        }
+        return potionCount;
     }
 }

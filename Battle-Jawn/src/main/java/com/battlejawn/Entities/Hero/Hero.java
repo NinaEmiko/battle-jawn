@@ -27,10 +27,6 @@ public abstract class Hero {
     @Column
     private int maxHealth;
     @Column
-    private int potions;
-    @Column
-    private int maxPotions;
-    @Column
     private String role;
     @Column
     private int runCount;
@@ -58,12 +54,10 @@ public abstract class Hero {
     public Hero() {
     }
 
-    public Hero(String name, int health, int maxHealth, int potions, int maxPotions, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
+    public Hero(String name, int health, int maxHealth, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
-        this.potions = potions;
-        this.maxPotions = maxPotions;
         this.role = role;
         this.runCount = runCount;
         this.winCount = winCount;

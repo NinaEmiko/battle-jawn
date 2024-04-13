@@ -151,10 +151,6 @@ function handleRest(id: any): void {
               <td className="data-jawn" id="health-jawn">{hero.coins}</td>
             </tr>
             <tr>
-              <td className="row-jawn">Potions:</td>
-              <td className="data-jawn">{hero.potions}</td>
-            </tr>
-            <tr>
               <td className="row-jawn">Wins:</td>
               <td className="data-jawn">{hero.winCount}</td>
             </tr>

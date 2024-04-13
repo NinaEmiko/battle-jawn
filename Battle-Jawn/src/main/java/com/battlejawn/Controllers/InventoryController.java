@@ -65,4 +65,15 @@ public class InventoryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/potions/{id}")
+    public ResponseEntity<Integer> getPotionCountById(@PathVariable Long id){
+        Integer potionCount = inventoryService.findPotionCountById(id);
+
+        if (potionCount != null) {
+            return new ResponseEntity<>(potionCount, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

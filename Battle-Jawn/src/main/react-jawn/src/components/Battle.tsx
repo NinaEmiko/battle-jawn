@@ -22,7 +22,6 @@ function Battle({props}:{props:any}) {
   const [role, setRole] = useState('');
   const [health, setHealth] = useState(1);
   const [maxHealth, setMaxHealth] = useState(0);
-  const [potionCount, setPotionCount] = useState(0);
   const [enemyName, setEnemyName] = useState('');
   const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
@@ -46,7 +45,6 @@ function Battle({props}:{props:any}) {
           })
         .then(response => {
             setHealth(response.data.heroHealth);
-            setPotionCount(response.data.potionCount);
             setEnemyHealth(response.data.enemyHealth);
             setBattleHistory(response.data.battleHistory);
             setButtonDisabled(false);
@@ -66,7 +64,6 @@ function Battle({props}:{props:any}) {
         })
     .then((response) => {
         setHealth(response.data.heroHealth);
-        setPotionCount(response.data.potionCount);
         setEnemyHealth(response.data.enemyHealth);
         setBattleHistory(response.data.battleHistory);
     })
@@ -106,7 +103,6 @@ function Battle({props}:{props:any}) {
       setRole(heroResponse.data.role);
       setHealth(heroResponse.data.health);
       setMaxHealth(heroResponse.data.maxHealth);
-      setPotionCount(heroResponse.data.potions);
     })
     .catch((error) => {
       console.error('Error fetching hero data: ', error)
@@ -225,17 +221,7 @@ function Battle({props}:{props:any}) {
         
         
         {role}</div>
-        <div className="potionDisplay">
-          <a href="#" onClick={(e) => handleClickBattle('Potion')}>
-          {Array.from({ length: potionCount }).map((_, index) => (
-            <img className="potion"
-            key={index}
-            src={healthPotion}
-            alt={`Potion ${index + 1}`}
-          />
-        ))}
-    </a>
-  </div>
+
       <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
       <div className="logbox-and-user-input">
         <div className="logBox" id="logBox">
