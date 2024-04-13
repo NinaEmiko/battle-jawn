@@ -27,11 +27,11 @@ public class InventoryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping("/add/{id}")
-    public ResponseEntity<String> addToInventory(@PathVariable Long id, @RequestBody String selectedItems) {
-        List<String> extractedSelectedItems = jsonParser.extractSelectedItems(selectedItems);
-        if (extractedSelectedItems != null){
-            inventoryService.updateInventory(id, extractedSelectedItems);
+    @PostMapping("/add/{id}")
+    public ResponseEntity<String> addToInventory(@PathVariable Long id, @RequestBody List<String> selectedItems) {
+
+        if (selectedItems != null){
+            inventoryService.updateInventory(id, selectedItems);
             URI location = URI.create("/inventory/");
             return ResponseEntity.created(location).body("Inventory successfully updated.");
         } else {

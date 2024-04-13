@@ -2,7 +2,6 @@ import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../styling/BattleContainer.css";
-import healthPotion from "../assets/healthPotion.png";
 import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
 import athena from "../assets/athena.png";
@@ -10,7 +9,7 @@ import antibiotics from "../assets/antibiotics.png";
 import wolf from "../assets/wolf.png";
 import orc from "../assets/orc.png";
 import ghost from "../assets/ghost.png";
-import { useNavigate } from "react-router-dom";
+import PostBattle from "./PostBattle";
 
 function Battle({props}:{props:any}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
@@ -27,17 +26,15 @@ function Battle({props}:{props:any}) {
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
   const [battleHistory, setBattleHistory] = useState<string[]>(["Retrieving battle history. Please wait."]);
   const [battleResult, setBattleResult] = useState("");
-  const [endOfBattleMessage, setEndOfBattleMessage] = useState("");
+  const [postBattleActive, setPostBattleActive] = useState(false);
+  const [postBattleObject, setPostBattleObject] = useState({
+    message: "",
+    enemyId: 0,
+    heroId: 0
 
-  const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
+})
 
   function handleEnemyMove() {
-    console.log("Inside handleEnemyMove: " + battleSessionId)
-
     let timeoutId: number | undefined;
     timeoutId = setTimeout(() => {
       axios.post('http://localhost:8080/api/enemy-move', {
@@ -72,10 +69,6 @@ function Battle({props}:{props:any}) {
     });
 
     handleEnemyMove();
-  }
-
-  function handleClickEndOfBattle() {
-    handleNavigation('/leader-board');
   }
 
   const createNewBattleSession = () => {
@@ -156,8 +149,13 @@ function Battle({props}:{props:any}) {
           battleResult: battleResult
           
         })
-        .then((response) => {
-          setEndOfBattleMessage(response.data);
+        .then((response) => {          
+          setPostBattleObject({
+            message: response.data,
+            enemyId: enemyId,
+            heroId: props
+          })
+          
         })
       .catch((error) => {
         console.error('Error processing end of battle:', error);
@@ -168,6 +166,7 @@ function Battle({props}:{props:any}) {
     if (battleResult != "") {
     processEndOfBattle();
     setButtonDisabled(true);
+    setPostBattleActive(true);
   }
     
   }, [battleResult])
@@ -186,7 +185,7 @@ function Battle({props}:{props:any}) {
 
   return (
 <>
-{beginBattle && !battleResult &&
+{beginBattle && !postBattleActive &&
     <div className="battle-container">
       <div className="name" id="enemyName">
       {enemyName == "Wolf" && 
@@ -308,11 +307,8 @@ function Battle({props}:{props:any}) {
     // <h1 className="title-jawn">Loading...</h1>
     }
 
-    {battleResult &&
-        <div className="container-jawn-login-form">
-        <h1 className="title-jawn">{endOfBattleMessage}</h1>
-        <button onClick={handleClickEndOfBattle} className="btn">OK</button>
-    </div>
+    {postBattleActive && 
+      <PostBattle props={postBattleObject} />
     }
 
     </>

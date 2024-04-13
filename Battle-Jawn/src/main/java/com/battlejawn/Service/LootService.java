@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Randomizer.Randomizer;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 public class LootService {
     private Randomizer randomizer;
-    public List<String> getLoot(Enemy enemy) {
+    private EnemyService enemyService;
+
+    public List<String> getLoot(Long id) {
+        Enemy enemy = enemyService.getEnemyById(id);
         return switch (enemy.getName()) {
             case "Wolf" -> determineWolfLoot();
             case "Spirit" -> determineSpiritLoot();

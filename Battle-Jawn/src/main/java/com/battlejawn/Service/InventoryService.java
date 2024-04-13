@@ -41,8 +41,7 @@ public class InventoryService {
         return inventoryList;
     }
     public List<String> getLootOptions(Long enemyId){
-        Enemy enemy = enemyService.getEnemyById(enemyId);
-        return lootService.getLoot(enemy);
+        return lootService.getLoot(enemyId);
     }
     public void updateInventory(Long id, List<String> selectedLoot){
         Hero hero = heroService.getHeroById(id);
