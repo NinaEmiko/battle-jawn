@@ -60,7 +60,7 @@ const Store = ({props}:{props:any}) => {
     }
 
     const fetchHero = async () => {
-        axios.get('http://localhost:8080/api/hero/' + props)
+        axios.get('http://localhost:8080/api/hero/' + props.heroId)
         .then((heroResponse) => {
           setHeroName(heroResponse.data.name);
           setHeroCoins(heroResponse.data.coins);
@@ -73,7 +73,7 @@ const Store = ({props}:{props:any}) => {
     const fetchInventory = async () => {
         try {
             const response = await
-            axios.get('http://localhost:8080/api/inventory/' + props)
+            axios.get('http://localhost:8080/api/inventory/' + props.heroId)
             console.log("props: " + props)
             setInventoryList(response.data);
             } catch (error) {
@@ -165,7 +165,7 @@ const Store = ({props}:{props:any}) => {
 
     return (
         <div className="container-jawn-hero">
-            <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={handleBackButtonClick}>back</button>
+            <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={handleBackButtonClick}>Leave</button>
             <h1 className="title-jawn">Store</h1>
             <div className="row justify-content-center">
                 <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={() => handleClickBuyTab()}>Buy</button>

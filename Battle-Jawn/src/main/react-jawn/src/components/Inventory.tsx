@@ -87,7 +87,7 @@ const Inventory = ({props}:{props:any}) => {
 
     return (
         <div className="container-jawn-login-form">
-            <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={handleBackButtonClick}>back</button>
+            <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={handleBackButtonClick}>Close</button>
             <h1 className="title-jawn">Inventory</h1>
             <div className="">
                 <div className="grid-container">
