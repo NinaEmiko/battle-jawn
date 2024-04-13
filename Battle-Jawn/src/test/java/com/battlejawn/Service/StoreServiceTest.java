@@ -136,7 +136,7 @@ public class StoreServiceTest {
         items.add("Spirit trinket");
         items.add("Dagger");
         items.add("Jewelery");
-        items.add("Orc necklace");
+        items.add("Orc Necklace");
         items.add("Sword");
 
         for (int i = 0; i < items.size(); i++) {
@@ -164,7 +164,7 @@ public class StoreServiceTest {
         items.add("Spirit trinket");
         items.add("Dagger");
         items.add("Jewelery");
-        items.add("Orc necklace");
+        items.add("Orc Necklace");
         items.add("Sword");
 
         for (int i = 0; i < items.size(); i++) {

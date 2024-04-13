@@ -43,15 +43,13 @@ public class InventoryControllerTest {
     @Test
     void addToInventoryTest(){
         stringList.add("Hi");
-        when(jsonParser.extractSelectedItems(anyString())).thenReturn(stringList);
         doNothing().when(inventoryService).updateInventory(anyLong(), any());
-        inventoryController.addToInventory(1L, "String");
+        inventoryController.addToInventory(1L, stringList);
         verify(inventoryService, times(1)).updateInventory(anyLong(), any());
     }
     @Test
     void addToInventoryNullTest(){
-        when(jsonParser.extractSelectedItems(anyString())).thenReturn(null);
-        inventoryController.addToInventory(1L, "String");
+        inventoryController.addToInventory(1L, null);
         verify(inventoryService, times(0)).updateInventory(anyLong(), any());
     }
     @Test
@@ -86,5 +84,18 @@ public class InventoryControllerTest {
         when(inventoryService.getInventoryById(anyLong())).thenReturn(null);
         inventoryController.getInventoryById(1L);
         verify(inventoryService, times(1)).getInventoryById(anyLong());
+    }
+
+    @Test
+    void getPotionCountByIdTest() {
+        when(inventoryService.findPotionCountById(any())).thenReturn(1);
+        inventoryController.getPotionCountById(1L);
+        verify(inventoryService, times(1)).findPotionCountById(any());
+    }
+    @Test
+    void getPotionCountByIdNullTest() {
+        when(inventoryService.findPotionCountById(any())).thenReturn(null);
+        inventoryController.getPotionCountById(1L);
+        verify(inventoryService, times(1)).findPotionCountById(any());
     }
 }

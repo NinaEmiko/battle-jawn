@@ -41,5 +41,24 @@ public class StoreControllerTest {
         storeController.buy(anyString());
         verify(storeService, times(1)).buy(anyLong(), anyString(), anyInt());
     }
+
+    @Test
+    void sellTest() {
+        when(storeService.sell(anyLong(), anyString(), anyInt())).thenReturn("Hi");
+        when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
+        when(jsonParser.extractItem(anyString())).thenReturn("");
+        when(jsonParser.extractQuantity(anyString())).thenReturn(1);
+        storeController.sell(anyString());
+        verify(storeService, times(1)).sell(anyLong(), anyString(), anyInt());
+    }
+    @Test
+    void sellNullTest() {
+        when(storeService.sell(anyLong(), anyString(), anyInt())).thenReturn(null);
+        when(jsonParser.extractHeroId(anyString())).thenReturn(1L);
+        when(jsonParser.extractItem(anyString())).thenReturn("");
+        when(jsonParser.extractQuantity(anyString())).thenReturn(1);
+        storeController.sell(anyString());
+        verify(storeService, times(1)).sell(anyLong(), anyString(), anyInt());
+    }
 }
 

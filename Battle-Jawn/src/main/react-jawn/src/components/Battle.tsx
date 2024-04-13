@@ -29,8 +29,8 @@ function Battle({props}:{props:any}) {
   const [postBattleActive, setPostBattleActive] = useState(false);
   const [postBattleObject, setPostBattleObject] = useState({
     message: "",
-    enemyId: 0,
-    heroId: 0
+    enemyId: enemyId,
+    heroId: props
 
 })
 

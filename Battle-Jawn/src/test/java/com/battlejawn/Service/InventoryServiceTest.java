@@ -14,7 +14,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,9 +52,8 @@ public class InventoryServiceTest {
 
     @Test
     void getLootOptionsTest() {
-        Enemy enemy = new Orc();
-        enemy.setId(1L);
-        when(enemyService.getEnemyById(any())).thenReturn(enemy);
+        List<String> list = new ArrayList<>();
+        when(lootService.getLoot(anyLong())).thenReturn(list);
         List<String> jawn = inventoryService.getLootOptions(1L);
         Assertions.assertNotNull(jawn);
     }
@@ -181,6 +179,28 @@ public class InventoryServiceTest {
         when(inventoryRepository.save(any())).thenReturn(inventory);
         inventoryService.addToFirstEmptySlot(inventory, "Hi");
         verify(inventoryRepository, times(12)).save(any());
+    }
+
+    @Test
+    void findPotionCountById() {
+        Hero hero = new Healer("Name");
+        Inventory inventory = new Inventory();
+        inventory.setSlotOne("potion");
+        inventory.setSlotTwo("potion");
+        inventory.setSlotThree("potion");
+        inventory.setSlotFour("potion");
+        inventory.setSlotFive("potion");
+        inventory.setSlotSix("potion");
+        inventory.setSlotSeven("potion");
+        inventory.setSlotEight("potion");
+        inventory.setSlotNine("potion");
+        inventory.setSlotTen("potion");
+        inventory.setSlotEleven("potion");
+        inventory.setSlotTwelve("potion");
+        hero.setInventory(inventory);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        inventoryService.findPotionCountById(1L);
+        verify(heroService, times(1)).getHeroById(anyLong());
     }
 
 }

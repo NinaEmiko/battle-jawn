@@ -23,10 +23,11 @@ const PostBattle = ({props}:{props:any}) => {
         .catch((error) => {
           console.error('Error fetching loot data: ', error)
         })
+        console.log("Enemy ID: " + props.enemyId)
       }
 
       function getEmptySlots() {
-        axios.get('http://localhost:8080/api/slots/' + props.heroId)
+        axios.get('http://localhost:8080/api/inventory/slots/' + props.heroId)
         .then((lootResponse) => {
           setEmptySlots(lootResponse.data);
         })
@@ -37,24 +38,25 @@ const PostBattle = ({props}:{props:any}) => {
 
       function selectLoot() {
         const selectedItems = JSON.stringify(selectedOptions);
-        console.log("Empty slots: " + emptySlots)
-        console.log("selectedOptions.length: " + selectedOptions.length)
-            if (selectedOptions.length == 0) {
-                // handleNavigation("/leader-board")
-            } else if (emptySlots >= selectedOptions.length) {
-            axios.post('http://localhost:8080/api/inventory/add/' + props.heroId, selectedOptions, {
+
+        if (selectedOptions.length === 0) {
+            handleNavigation("/leader-board")
+        } else if (emptySlots === 0){
+            alert("You have no more room in your inventory to pick up loot.")
+            handleNavigation("/leader-board")
+        } else if (emptySlots < selectedOptions.length){
+            alert("You do not have room in your inventory for all the loot you've selected. Please unselect and try again.")
+        } else {
+            axios.post('http://localhost:8080/api/inventory/add/' + props.heroId, selectedItems, {
                 headers: {
                 'Content-Type': 'application/json'
                 }})
             .then((lootResponse) => {
-            console.log(lootResponse.data);
             })
             .catch((error) => {
             console.error('Error selecting loot data: ', error)
             })
             handleNavigation("/leader-board")
-        } else {
-            alert("You do not have enough room in your inventory.")
         }
       }
 
@@ -62,29 +64,22 @@ const PostBattle = ({props}:{props:any}) => {
         if (selectedOptions) {
             selectLoot();
         }
-
-
-        handleNavigation('/leader-board');
       }
 
       const handleSelect = (option: string) => {
         setSelectedOptions(prevOptions => {
             if (prevOptions.includes(option)) {
-              return prevOptions.filter(item => item !== option); // Deselect the option
+              return prevOptions.filter(item => item !== option);
             } else {
-              return [...prevOptions, option]; // Select the option
+              return [...prevOptions, option];
             }
           });
       }
 
       useEffect(() => {
-        console.log("selected items: " + selectedOptions)
-      },[selectedOptions])
-
-      useEffect(() => {
         if (!lootActive) {
-            getLoot();
             getEmptySlots();
+            getLoot();
         }
       })
 
