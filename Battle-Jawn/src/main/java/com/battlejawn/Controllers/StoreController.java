@@ -33,4 +33,19 @@ public class StoreController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PostMapping("/sell")
+    public ResponseEntity<String> sell(@RequestBody @Valid String sellOrder) {
+        logger.info("Inside sell controller method. purchaseOrder: " + sellOrder);
+        Long heroId = jsonParser.extractHeroId(sellOrder);
+        String item = jsonParser.extractItem(sellOrder);
+        int quantity = jsonParser.extractQuantity(sellOrder);
+
+        String response = storeService.sell(heroId, item, quantity);
+
+        if (response != null) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

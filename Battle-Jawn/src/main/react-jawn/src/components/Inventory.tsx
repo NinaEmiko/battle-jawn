@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import healthPotion from "../assets/healthPotion.png";
-import ninja from "../assets/ninja.png";
 import vest from "../assets/vest.png";
 import sword from "../assets/sword.png";
 import pelt from "../assets/pelt.png";

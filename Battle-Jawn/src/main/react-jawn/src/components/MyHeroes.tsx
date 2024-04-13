@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
 import Battle from "./Battle";
 import Inventory from "./Inventory";
+import Store from "./Store";
 
 function MyHeroes( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
   const [battleActive, setBattleActive] = useState(false);
   const [inventoryActive, setInventoryActive] = useState(false);
+  const [storeActive, setStoreActive] = useState(false);
   const [heroList, setHeroList] = useState([]);
   const [rested, setRested] = useState(1);
 
@@ -86,6 +88,11 @@ function handleRest(id: any): void {
     setInventoryActive(true);
   }
 
+  function handleStore(id: any) {
+    setHeroId(id);
+    setStoreActive(true);
+  }
+
   function handleDelete(id: any): void {
     axios.delete('http://localhost:8080/api/hero/delete/' + id)
       .then(response => {
@@ -106,7 +113,11 @@ function handleRest(id: any): void {
       <Inventory props={heroId} />
     }
 
-    {!battleActive && !inventoryActive &&
+    {storeActive && 
+      <Store props={heroId} />
+    }
+
+    {!battleActive && !inventoryActive && !storeActive &&
 
         <div className="container-jawn-hero">
         <h1 className="title-jawn">{props.userName} Heroes</h1>
@@ -162,6 +173,7 @@ function handleRest(id: any): void {
           <span className="experience-fraction">{hero.experience}/{determineMaxExperience(hero.level)}</span>
         </div>
         <div className="row justify-content-center">
+              <button onClick={() => handleStore(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn">Store</button>
               <button onClick={() => handleInventory(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn">Inventory</button>
               <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
               <button onClick={() => handleFight(hero.id, hero.health)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
