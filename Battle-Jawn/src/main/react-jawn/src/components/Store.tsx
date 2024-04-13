@@ -159,8 +159,13 @@ const Store = ({props}:{props:any}) => {
         }
     }
 
+    function handleBackButtonClick() {
+        props.setIsVisible("store")
+    }
+
     return (
         <div className="container-jawn-hero">
+            <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={handleBackButtonClick}>back</button>
             <h1 className="title-jawn">Store</h1>
             <div className="row justify-content-center">
                 <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={() => handleClickBuyTab()}>Buy</button>

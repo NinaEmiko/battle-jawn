@@ -14,6 +14,7 @@ import necklace from "../assets/necklace.png";
 import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
+import classNames from "classnames";
 
 const Inventory = ({props}:{props:any}) => {
 
@@ -22,8 +23,8 @@ const Inventory = ({props}:{props:any}) => {
     const fetchInventory = async () => {
         try {
             const response = await
-            axios.get('http://localhost:8080/api/inventory/' + props)
-            console.log("props: " + props)
+            axios.get('http://localhost:8080/api/inventory/' + props.heroId)
+            console.log("props: " + props.heroId)
             setInventoryList(response.data);
             } catch (error) {
             console.error('Error fetching inventory data: ', error)
@@ -80,9 +81,13 @@ const Inventory = ({props}:{props:any}) => {
                 src={pants}/>;
         }
     }
+    function handleBackButtonClick() {
+        props.setIsVisible("inventory")
+    }
 
     return (
         <div className="container-jawn-login-form">
+            <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={handleBackButtonClick}>back</button>
             <h1 className="title-jawn">Inventory</h1>
             <div className="">
                 <div className="grid-container">

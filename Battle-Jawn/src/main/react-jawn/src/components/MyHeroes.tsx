@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Battle from "./Battle";
 import Inventory from "./Inventory";
 import Store from "./Store";
+import React from "react";
 
 function MyHeroes( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
@@ -102,6 +103,14 @@ function handleRest(id: any): void {
         console.error('Error deleting hero:', error);
       })
   }
+
+  function handleSubComponentButtonClick(component: string) {
+      if (component === "store"){
+        setStoreActive(false);
+      } else if (component === "inventory") {
+        setInventoryActive(false);
+      }
+  }
   return (
     <>
 
@@ -110,11 +119,11 @@ function handleRest(id: any): void {
     }
 
     {inventoryActive &&
-      <Inventory props={heroId} />
+      <Inventory props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
     }
 
     {storeActive && 
-      <Store props={heroId} />
+      <Store props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
     }
 
     {!battleActive && !inventoryActive && !storeActive &&
