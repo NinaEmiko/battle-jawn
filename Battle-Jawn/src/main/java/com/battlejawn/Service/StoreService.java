@@ -19,65 +19,49 @@ public class StoreService {
         logger.info("Inside buy service method");
         Hero hero = heroService.getHeroById(heroId);
         Inventory inventory = hero.getInventory();
+        if (inventoryService.getEmptySlotSize(inventory.getId()) < quantity) {
+            return "You do not have room in your inventory for this purchase.";
+        }
         return switch (item){
-            case "potion":
-                buyPotion(hero, quantity);
-            case "Sword":
-                buySword(hero, quantity, inventory);
-            default:
-                yield "There was a problem processing your purchase. Please try again.";
+            case "potion" -> buyPotion(hero, quantity, inventory);
+            case "Sword" -> buySword(hero, quantity, inventory);
+            default -> "There was a problem processing your purchase. Please try again.";
         };
     }
     public String sell(Long heroId, String item, int quantity) {
         logger.info("Inside sell service method");
         Hero hero = heroService.getHeroById(heroId);
         return switch (item){
-            case "potion":
-                sellPotion(hero, quantity);
-            case "Wolf paw":
-                sellWolfPaw(hero, quantity);
-            case "Wolf scraps":
-                sellWolfScraps(hero, quantity);
-            case "Wolf pelt":
-                sellWolfPelt(hero, quantity);
-            case "Vest":
-                sellVest(hero, quantity);
-            case "Sword":
-                sellSword(hero, quantity);
-            case "Pants":
-                sellPants(hero, quantity);
-            case "Boots":
-                sellBoots(hero, quantity);
-            case "Dagger":
-                sellDagger(hero, quantity);
-            case "Helm":
-                sellHelm(hero, quantity);
-            case "Mask":
-                sellMask(hero, quantity);
-            case "Orc necklace":
-                sellOrcNecklace(hero, quantity);
-            case "Jewelry":
-                sellJewelry(hero, quantity);
-            case "Spirit trinket":
-                sellSpiritTrinket(hero, quantity);
-            default:
-                yield "There was a problem processing your transaction. Please try again.";
+            case "potion" -> sellPotion(hero, quantity);
+            case "Wolf paw" -> sellWolfPaw(hero, quantity);
+            case "Wolf scraps" -> sellWolfScraps(hero, quantity);
+            case "Wolf pelt" -> sellWolfPelt(hero, quantity);
+            case "Vest" -> sellVest(hero, quantity);
+            case "Sword" -> sellSword(hero, quantity);
+            case "Pants" -> sellPants(hero, quantity);
+            case "Boots" -> sellBoots(hero, quantity);
+            case "Dagger" -> sellDagger(hero, quantity);
+            case "Helm" -> sellHelm(hero, quantity);
+            case "Mask" -> sellMask(hero, quantity);
+            case "Orc necklace" -> sellOrcNecklace(hero, quantity);
+            case "Jewelery" -> sellJewelery(hero, quantity);
+            case "Spirit trinket" -> sellSpiritTrinket(hero, quantity);
+            default -> "There was a problem processing your transaction. Please try again.";
         };
     }
-
-    private String buyPotion(Hero hero, int quantity) {
+    private String buyPotion(Hero hero, int quantity, Inventory inventory) {
         if (hero.getCoins() - (quantity) < 0) {
             return "Insufficient coins.";
         } else {
-            hero.setPotions(hero.getPotions() + quantity);
-            hero.setCoins(hero.getCoins() - (quantity));
+            inventoryService.addToFirstEmptySlot(inventory, "potion");
+            hero.setCoins(hero.getCoins() - quantity);
             heroService.updateHero(hero);
-            switch (quantity) {
-                case 1: return "You purchased " + quantity + " potion";
-                case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12: return "You purchased " + quantity + " potions";
+            if (quantity == 1) {
+                return "You purchased " + quantity + " potion.";
+            } else {
+                return "You purchased " + quantity + " potions.";
             }
         }
-        return "There was a problem processing your purchase. Please try again.";
     }
     private String buySword(Hero hero, int quantity, Inventory inventory) {
         if (hero.getCoins() - (quantity * 5L) < 0) {
@@ -86,190 +70,144 @@ public class StoreService {
             inventoryService.addToFirstEmptySlot(inventory, "Sword");
             hero.setCoins(hero.getCoins() - (quantity * 5L));
             heroService.updateHero(hero);
-            switch (quantity) {
-                case 1: return "You purchased " + quantity + " sword";
-                case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12: return "You purchased " + quantity + " swords";
+            if (quantity == 1) {
+                return "You purchased " + quantity + " sword.";
+            } else {
+                return "You purchased " + quantity + " swords.";
             }
         }
-        return "There was a problem processing your purchase. Please try again.";
     }
     private String sellPotion(Hero hero, int quantity) {
-        hero.setPotions(hero.getPotions() - quantity);
+        for (int i = 0; i < quantity; i++) {
+            inventoryService.removeFromInventory(hero.getId(), "potion");
+        }
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " potion";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " potions";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "potion");
     }
     private String sellWolfPaw(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Wolf paw");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 2L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " wolf paw";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " wolf paws";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "wolf paw");
     }
     private String sellWolfScraps(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Wolf scraps");
         }
-
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " wolf scraps";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericSetMessage(quantity, "wold scraps");
     }
     private String sellWolfPelt(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Wolf pelt");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 2L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " wolf pelt";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " wolf pelts";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "wolf pelt");
     }
     private String sellVest(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Vest");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " vest";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " vests";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "vest");
     }
-
     private String sellSword(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Sword");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 5L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " sword";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " swords";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "sword");
     }
     private String sellPants(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Pants");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " pair of pants";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " pairs of pants";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericPairMessage(quantity, "pants");
     }
     private String sellOrcNecklace(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Orc necklace");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 4L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " Orc necklace";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " Orc necklaces";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "orc necklace");
     }
     private String sellBoots(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Boots");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " pair of boots";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " pairs of boots";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericPairMessage(quantity, "boots");
     }
     private String sellHelm(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Helm");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " helm";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " helms";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "helm");
     }
     private String sellSpiritTrinket(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Spirit trinket");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 15L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " spirit trinket";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " spirit trinkets";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "spirit trinket");
     }
     private String sellDagger(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Dagger");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 5L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " dagger";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " daggers";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "dagger");
     }
     private String sellMask(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Mask");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " mask";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " masks";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericMessage(quantity, "mask");
     }
-    private String sellJewelry(Hero hero, int quantity) {
+    private String sellJewelery(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
             inventoryService.removeFromInventory(hero.getId(), "Jewelery");
         }
-
         hero.setCoins(hero.getCoins() + (quantity * 4L));
         heroService.updateHero(hero);
-        return switch (quantity) {
-            case 1 -> "You sold " + quantity + " jewel";
-            case 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 -> "You sold " + quantity + " jewels";
-            default -> "There was a problem processing your transaction. Please try again.";
-        };
+        return produceGenericSetMessage(quantity, "jewelery");
+    }
+    private String produceGenericMessage(int quantity, String item) {
+        if (quantity == 1) {
+            return "You sold " + quantity + " " + item + ".";
+        } else {
+            return "You sold " + quantity + " " + item + "s.";
+        }
+    }
+    private String produceGenericSetMessage(int quantity, String item) {
+        if (quantity == 1) {
+            return "You sold " + quantity + " set of " + item + ".";
+        } else {
+            return "You sold " + quantity + " sets of " + item + "s.";
+        }
+    }
+    private String produceGenericPairMessage(int quantity, String item) {
+        if (quantity == 1) {
+            return "You sold " + quantity + " pair of " + item + ".";
+        } else {
+            return "You sold " + quantity + " pairs of " + item + "s.";
+        }
     }
 }

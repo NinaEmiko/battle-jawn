@@ -218,7 +218,6 @@ public class ExperienceProcessorService {
     private int determineLevelMaxPotions(int level, String role){
         return switch (role) {
             case "Tank" -> switch (level) {
-                case 1 -> 3;
                 case 2, 3 -> 4;
                 case 4, 5 -> 5;
                 case 6, 7 -> 6;

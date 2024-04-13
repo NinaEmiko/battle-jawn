@@ -11,8 +11,6 @@ import lombok.ToString;
 @Data
 @Entity
 @Table(name = "inventory")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,4 +43,19 @@ public class Inventory {
     private String slotEleven;
     @Column
     private String slotTwelve;
+
+    public Inventory() {
+        this.slotOne = "";
+        this.slotTwo = "";
+        this.slotThree = "";
+        this.slotFour = "";
+        this.slotFive = "";
+        this.slotSix = "";
+        this.slotSeven = "";
+        this.slotEight = "";
+        this.slotNine = "";
+        this.slotTen = "";
+        this.slotEleven = "";
+        this.slotTwelve = "";
+    }
 }

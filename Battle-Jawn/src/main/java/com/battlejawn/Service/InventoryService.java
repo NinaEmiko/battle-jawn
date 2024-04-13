@@ -59,30 +59,30 @@ public class InventoryService {
         Hero hero = heroService.getHeroById(id);
         Inventory inventory = hero.getInventory();
 
-        if(inventory.getSlotOne().equals(item)){
-            inventory.setSlotOne(null);
-        } else if(inventory.getSlotTwo().equals(item)){
-            inventory.setSlotTwo(null);
+        if(inventory.getSlotOne().equals(item)) {
+                inventory.setSlotOne("");
+        } else if(inventory.getSlotTwo().equals(item)) {
+                inventory.setSlotTwo("");
         } else if(inventory.getSlotThree().equals(item)){
-            inventory.setSlotThree(null);
+            inventory.setSlotThree("");
         } else if(inventory.getSlotFour().equals(item)){
-            inventory.setSlotFour(null);
+            inventory.setSlotFour("");
         } else if(inventory.getSlotFive().equals(item)){
-            inventory.setSlotFive(null);
+            inventory.setSlotFive("");
         } else if(inventory.getSlotSix().equals(item)){
-            inventory.setSlotSix(null);
+            inventory.setSlotSix("");
         } else if(inventory.getSlotSeven().equals(item)){
-            inventory.setSlotSeven(null);
+            inventory.setSlotSeven("");
         } else if(inventory.getSlotEight().equals(item)){
-            inventory.setSlotEight(null);
+            inventory.setSlotEight("");
         } else if(inventory.getSlotNine().equals(item)){
-            inventory.setSlotNine(null);
+            inventory.setSlotNine("");
         } else if(inventory.getSlotTen().equals(item)){
-            inventory.setSlotTen(null);
+            inventory.setSlotTen("");
         } else if(inventory.getSlotEleven().equals(item)){
-            inventory.setSlotEleven(null);
+            inventory.setSlotEleven("");
         } else if(inventory.getSlotTwelve().equals(item)){
-            inventory.setSlotTwelve(null);
+            inventory.setSlotTwelve("");
         }
         inventoryRepository.save(inventory);
     }
@@ -122,7 +122,7 @@ public class InventoryService {
         List<Boolean> emptySlots = getEmptySlots(inventory);
 
         for (Boolean value : emptySlots) {
-            if (!value){
+            if (value){
                 inventorySize++;
             }
         }

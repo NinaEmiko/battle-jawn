@@ -54,14 +54,14 @@ public class InventoryControllerTest {
         inventoryController.addToInventory(1L, "String");
         verify(inventoryService, times(0)).updateInventory(anyLong(), any());
     }
-//    @Test
-//    void removeFromInventoryTest() {
-//        stringList.add("Hi");
-//        when(jsonParser.extractSelectedItems(anyString())).thenReturn(stringList);
-//        doNothing().when(inventoryService).removeFromInventory(anyLong(), any());
-//        inventoryController.removeFromInventory(1L, "String");
-//        verify(inventoryService, times(1)).removeFromInventory(anyLong(), any());
-//    }
+    @Test
+    void removeFromInventoryTest() {
+        stringList.add("Hi");
+        when(jsonParser.extractSelectedItems(anyString())).thenReturn(stringList);
+        doNothing().when(inventoryService).removeMultipleFromInventory(anyLong(), any());
+        inventoryController.removeFromInventory(1L, "String");
+        verify(inventoryService, times(1)).removeMultipleFromInventory(anyLong(), any());
+    }
     @Test
     void removeFromInventoryNullTest() {
         when(jsonParser.extractSelectedItems(anyString())).thenReturn(null);
@@ -78,6 +78,12 @@ public class InventoryControllerTest {
     void getInventoryByIdTest() {
         stringList.add("Hi");
         when(inventoryService.getInventoryById(anyLong())).thenReturn(stringList);
+        inventoryController.getInventoryById(1L);
+        verify(inventoryService, times(1)).getInventoryById(anyLong());
+    }
+    @Test
+    void getInventoryByIdNullTest() {
+        when(inventoryService.getInventoryById(anyLong())).thenReturn(null);
         inventoryController.getInventoryById(1L);
         verify(inventoryService, times(1)).getInventoryById(anyLong());
     }

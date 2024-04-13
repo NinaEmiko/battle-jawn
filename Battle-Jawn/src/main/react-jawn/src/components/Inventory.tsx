@@ -89,8 +89,8 @@ const Inventory = ({props}:{props:any}) => {
                 <div className="grid-container">
                     {[...Array(12).keys()].map(index => (
                         <div key={index} className="grid-item">
-                            {/* {inventoryList[index]} */}
-                            {determineIcon(inventoryList[index])}
+                            <div className="icon">{determineIcon(inventoryList[index])}</div>
+                            <div className="item-name">{inventoryList[index]}</div>
                         </div>
                     ))}
                 </div>

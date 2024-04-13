@@ -288,6 +288,31 @@ ul {
   text-align: center;
   padding: 20px;
   aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.grid-item:hover {
+  font-size: 0.8em; /* Reduce font size on hover */
+}
+
+.item-name {
+  position: absolute;
+  bottom: 5px; /* Position item name at the bottom */
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* Center item name horizontally */
+}
+
+.grid-item.smaller .item-name {
+  font-size: 0.8em;
 }
 
 .toss-btn{
