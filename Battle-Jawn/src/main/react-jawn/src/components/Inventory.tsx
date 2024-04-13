@@ -8,7 +8,7 @@ import scraps from "../assets/scraps.png";
 import boots from "../assets/boots.png";
 import dagger from "../assets/dagger.png";
 import helm from "../assets/helm.png";
-import jewelery from "../assets/jewelery.png";
+import jewels from "../assets/jewelery.png";
 import mask from "../assets/mask.png";
 import necklace from "../assets/necklace.png";
 import paw from "../assets/paw.png";
@@ -37,7 +37,7 @@ const Inventory = ({props}:{props:any}) => {
 
     const determineIcon = (item: string) => {
         switch (item) {
-            case "potion":
+            case "Potion":
                 return <img className="potion"
                 src={healthPotion}/>;
             case "Sword":
@@ -58,7 +58,7 @@ const Inventory = ({props}:{props:any}) => {
             case "Spirit trinket":
                 return <img className="potion"
                 src={trinket}/>;
-            case "Orc Necklace":
+            case "Orc necklace":
                 return <img className="potion"
                 src={necklace}/>;
             case "Helm":
@@ -67,9 +67,9 @@ const Inventory = ({props}:{props:any}) => {
             case "Mask":
                 return <img className="potion"
                 src={mask}/>;
-            case "Jewelry":
+            case "Jewels":
                 return <img className="potion"
-                src={jewelery}/>;
+                src={jewels}/>;
             case "Boots":
                 return <img className="potion"
                 src={boots}/>;

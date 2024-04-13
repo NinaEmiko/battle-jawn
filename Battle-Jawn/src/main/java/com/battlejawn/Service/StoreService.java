@@ -23,7 +23,7 @@ public class StoreService {
             return "You do not have room in your inventory for this purchase.";
         }
         return switch (item){
-            case "potion" -> buyPotion(hero, quantity, inventory);
+            case "Potion" -> buyPotion(hero, quantity, inventory);
             case "Sword" -> buySword(hero, quantity, inventory);
             default -> "There was a problem processing your purchase. Please try again.";
         };
@@ -32,7 +32,7 @@ public class StoreService {
         logger.info("Inside sell service method");
         Hero hero = heroService.getHeroById(heroId);
         return switch (item){
-            case "potion" -> sellPotion(hero, quantity);
+            case "Potion" -> sellPotion(hero, quantity);
             case "Wolf paw" -> sellWolfPaw(hero, quantity);
             case "Wolf scraps" -> sellWolfScraps(hero, quantity);
             case "Wolf pelt" -> sellWolfPelt(hero, quantity);
@@ -43,8 +43,8 @@ public class StoreService {
             case "Dagger" -> sellDagger(hero, quantity);
             case "Helm" -> sellHelm(hero, quantity);
             case "Mask" -> sellMask(hero, quantity);
-            case "Orc Necklace" -> sellOrcNecklace(hero, quantity);
-            case "Jewelery" -> sellJewelery(hero, quantity);
+            case "Orc necklace" -> sellOrcNecklace(hero, quantity);
+            case "Jewels" -> sellJewels(hero, quantity);
             case "Spirit trinket" -> sellSpiritTrinket(hero, quantity);
             default -> "There was a problem processing your transaction. Please try again.";
         };
@@ -56,7 +56,7 @@ public class StoreService {
         if (hero.getCoins() - (quantity) < 0) {
             msg = "Insufficient coins.";
         } else {
-            inventoryService.addToFirstEmptySlot(inventory, "potion");
+            inventoryService.addToFirstEmptySlot(inventory, "Potion");
             hero.setCoins(hero.getCoins() - quantity);
             heroService.updateHero(hero);
             msg = produceGenericMessage("purchased", quantity, "potion");
@@ -75,7 +75,7 @@ public class StoreService {
     }
     private String sellPotion(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "potion");
+            inventoryService.removeFromInventory(hero.getId(), "Potion");
         }
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
@@ -131,7 +131,7 @@ public class StoreService {
     }
     private String sellOrcNecklace(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Orc Necklace");
+            inventoryService.removeFromInventory(hero.getId(), "Orc necklace");
         }
         hero.setCoins(hero.getCoins() + (quantity * 4L));
         heroService.updateHero(hero);
@@ -177,13 +177,13 @@ public class StoreService {
         heroService.updateHero(hero);
         return produceGenericMessage("sold", quantity, "mask");
     }
-    private String sellJewelery(Hero hero, int quantity) {
+    private String sellJewels(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Jewelery");
+            inventoryService.removeFromInventory(hero.getId(), "Jewels");
         }
         hero.setCoins(hero.getCoins() + (quantity * 4L));
         heroService.updateHero(hero);
-        return produceGenericSetMessage("sold", quantity, "jewelery");
+        return produceGenericSetMessage("sold", quantity, "jewels");
     }
     private String produceGenericMessage(String transaction, int quantity, String item) {
         if (quantity == 1) {

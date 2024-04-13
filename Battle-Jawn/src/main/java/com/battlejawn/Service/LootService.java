@@ -61,7 +61,7 @@ public class LootService {
             orcLoot.add("Pants");
         }
         if (necklaceChance > 9) {
-            orcLoot.add("Necklace");
+            orcLoot.add("Orc necklace");
         }
         if (bootsChance > 9) {
             orcLoot.add("Boots");

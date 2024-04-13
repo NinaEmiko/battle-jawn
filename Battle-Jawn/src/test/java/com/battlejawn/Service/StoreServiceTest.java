@@ -43,7 +43,7 @@ public class StoreServiceTest {
         when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
         doNothing().when(heroService).updateHero(any());
         doNothing().when(inventoryService).addToFirstEmptySlot(any(), anyString());
-        String jawn = storeService.buy(1L, "potion", 1);
+        String jawn = storeService.buy(1L, "Potion", 1);
         verify(heroService, times(1)).updateHero(any());
         Assertions.assertEquals(jawn, "You purchased 1 potion.");
     }
@@ -53,7 +53,7 @@ public class StoreServiceTest {
         inventory.setId(2L);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
         when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
-        storeService.buy(1L, "potion", 13);
+        storeService.buy(1L, "Potion", 13);
         verify(heroService, times(0)).updateHero(any());
     }
 
@@ -65,7 +65,7 @@ public class StoreServiceTest {
         when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
         doNothing().when(heroService).updateHero(any());
         doNothing().when(inventoryService).addToFirstEmptySlot(any(), anyString());
-        String jawn = storeService.buy(1L, "potion", 2);
+        String jawn = storeService.buy(1L, "Potion", 2);
         verify(heroService, times(1)).updateHero(any());
         Assertions.assertEquals(jawn, "You purchased 2 potions.");
     }
@@ -75,7 +75,7 @@ public class StoreServiceTest {
         inventory.setId(2L);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
         when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
-        storeService.buy(1L, "potion", 2);
+        storeService.buy(1L, "Potion", 2);
         verify(heroService, times(0)).updateHero(any());
     }
 
@@ -124,7 +124,7 @@ public class StoreServiceTest {
     @Test
     void sellTest() {
         List<String> items = new ArrayList<>();
-        items.add("potion");
+        items.add("Potion");
         items.add("Wolf paw");
         items.add("Wolf scraps");
         items.add("Wolf pelt");
@@ -135,8 +135,8 @@ public class StoreServiceTest {
         items.add("Boots");
         items.add("Spirit trinket");
         items.add("Dagger");
-        items.add("Jewelery");
-        items.add("Orc Necklace");
+        items.add("Jewels");
+        items.add("Orc necklace");
         items.add("Sword");
 
         for (int i = 0; i < items.size(); i++) {
@@ -152,7 +152,7 @@ public class StoreServiceTest {
     @Test
     void sellMultipleTest() {
         List<String> items = new ArrayList<>();
-        items.add("potion");
+        items.add("Potion");
         items.add("Wolf paw");
         items.add("Wolf scraps");
         items.add("Wolf pelt");
@@ -163,8 +163,8 @@ public class StoreServiceTest {
         items.add("Boots");
         items.add("Spirit trinket");
         items.add("Dagger");
-        items.add("Jewelery");
-        items.add("Orc Necklace");
+        items.add("Jewels");
+        items.add("Orc necklace");
         items.add("Sword");
 
         for (int i = 0; i < items.size(); i++) {

@@ -150,7 +150,7 @@ public String getDamageMessage(String move, int damage) {
 
         if (potionCount > 0 && hero.getHealth() != hero.getMaxHealth()) {
             int updatedHeroHealth;
-            inventoryService.removeFromInventory(hero.getId(), "potion");
+            inventoryService.removeFromInventory(hero.getId(), "Potion");
             int healAmount = potion.usePotion();
             if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
                 updatedHeroHealth = hero.getMaxHealth();
@@ -184,7 +184,7 @@ public String getDamageMessage(String move, int damage) {
         if (enemy.getPotions() > 0 && emptySpaces > 0) {
             boolean stealSuccess = steal.useSteal();
             if (stealSuccess) {
-                inventoryService.addToFirstEmptySlot(inventory, "potion");
+                inventoryService.addToFirstEmptySlot(inventory, "Potion");
                 int updatedEnemyPotionCount = enemy.getPotions() - 1;
                 heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
