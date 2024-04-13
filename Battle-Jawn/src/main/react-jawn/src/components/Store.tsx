@@ -191,7 +191,7 @@ const Store = ({props}:{props:any}) => {
                                                             </div>
                                                 <span className="store-buy-item-price">1 coin</span>
                                             </div>
-                                            <button onClick={() => handleClickBuy(props, "potion")} className="buy-btn">Buy</button>
+                                            <button onClick={() => handleClickBuy(props.heroId, "potion")} className="buy-btn">Buy</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -218,7 +218,7 @@ const Store = ({props}:{props:any}) => {
                                                             {determineIcon(item)}
                                                             </div>
                                                             <span className="store-sell-item-price">1 coin</span>
-                                                            <button onClick={() => handleClickSell(props, item)} className="sell-btn">Sell {item}</button>
+                                                            <button onClick={() => handleClickSell(props.heroId, item)} className="sell-btn">Sell {item}</button>
                                                         </td>
                                                     </tr>
                                                     <tr>
