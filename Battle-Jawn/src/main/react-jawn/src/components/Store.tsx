@@ -205,11 +205,11 @@ const Store = ({props}:{props:any}) => {
 
 
                                 <div>
-                                    {filteredInventoryList.map((item) => (
+                                    {filteredInventoryList.map((item, index) => (
 
                                     
                                        
-                                        <div>
+                                        <div key={index}>
                                             <table className="store-sell-table">
                                                 <tbody>
                                                     <tr>

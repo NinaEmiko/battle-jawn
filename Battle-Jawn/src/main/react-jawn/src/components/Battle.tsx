@@ -30,7 +30,8 @@ function Battle({props}:{props:any}) {
   const [postBattleObject, setPostBattleObject] = useState({
     message: "",
     enemyId: enemyId,
-    heroId: props
+    heroId: props,
+    ran: false
 
 })
 
@@ -143,6 +144,11 @@ function Battle({props}:{props:any}) {
   useEffect(() => {
 
     const processEndOfBattle = () => {
+      let heroRan = false;
+
+      if (battleHistory.includes('You successfully ran away!')) {
+        heroRan = true;
+      }
       
       axios.post('http://localhost:8080/api/battle-session/end', {
           battleSessionId: battleSessionId, 
@@ -153,7 +159,8 @@ function Battle({props}:{props:any}) {
           setPostBattleObject({
             message: response.data,
             enemyId: enemyId,
-            heroId: props
+            heroId: props,
+            ran: heroRan
           })
           
         })

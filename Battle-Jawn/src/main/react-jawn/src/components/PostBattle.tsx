@@ -15,16 +15,18 @@ const PostBattle = ({props}:{props:any}) => {
     };
     
     function getLoot() {
-        axios.get('http://localhost:8080/api/loot/' + props.enemyId)
-        .then((lootResponse) => {
-          setLoot(lootResponse.data);
-          setLootActive(true);
-        })
-        .catch((error) => {
-          console.error('Error fetching loot data: ', error)
-        })
-        console.log("Enemy ID: " + props.enemyId)
-      }
+        if (props.enemyId !== 0) {
+            axios.get('http://localhost:8080/api/loot/' + props.enemyId)
+            .then((lootResponse) => {
+            setLoot(lootResponse.data);
+            setLootActive(true);
+            })
+            .catch((error) => {
+            console.error('Error fetching loot data: ', error)
+            })
+            console.log("Enemy ID: " + props.enemyId)
+        }
+    }
 
       function getEmptySlots() {
         axios.get('http://localhost:8080/api/inventory/slots/' + props.heroId)
@@ -85,16 +87,24 @@ const PostBattle = ({props}:{props:any}) => {
 
     return (
         <div className="container-jawn-login-form">
-            <h1 className="title-jawn">{props.message}</h1>
-            Select loot you wish to pick up:
-            {loot.map ((item, index) =>
-            <div key={index}>
-                <input 
-                    type="checkbox" 
-                    onChange={() => handleSelect(item)}/>
-                <label>{item}</label>
-            </div>
+
+            {props.ran ? (
+                <h1 className="title-jawn">You ran away.</h1>
+            ) : (
+                <div>
+                    <h1 className="title-jawn">{props.message}</h1>
+                    Select loot you wish to pick up:
+                    {loot.map ((item, index) =>
+                        <div key={index}>
+                            <input 
+                                type="checkbox" 
+                                onChange={() => handleSelect(item)}/>
+                            <label>{item}</label>
+                        </div>
+                    )}
+                </div>
             )}
+
             <button onClick={handleClickEndOfBattle} className="btn">OK</button>
         </div>
     );
