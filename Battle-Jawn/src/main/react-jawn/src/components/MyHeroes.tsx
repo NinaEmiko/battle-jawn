@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import Battle from "./Battle";
 import Inventory from "./Inventory";
 import Store from "./Store";
-import React from "react";
 
 function MyHeroes( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);

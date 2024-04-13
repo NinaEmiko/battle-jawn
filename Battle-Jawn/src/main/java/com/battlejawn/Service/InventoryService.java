@@ -160,40 +160,40 @@ public class InventoryService {
 
     public int findPotionCount(Inventory inventory) {
         int potionCount = 0;
-        if (Objects.equals(inventory.getSlotOne(), "potion")){
+        if (Objects.equals(inventory.getSlotOne(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotTwo(), "potion")){
+        if (Objects.equals(inventory.getSlotTwo(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotThree(), "potion")){
+        if (Objects.equals(inventory.getSlotThree(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotFour(), "potion")){
+        if (Objects.equals(inventory.getSlotFour(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotFive(), "potion")){
+        if (Objects.equals(inventory.getSlotFive(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotSix(), "potion")){
+        if (Objects.equals(inventory.getSlotSix(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotSeven(), "potion")){
+        if (Objects.equals(inventory.getSlotSeven(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotEight(), "potion")){
+        if (Objects.equals(inventory.getSlotEight(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotNine(), "potion")){
+        if (Objects.equals(inventory.getSlotNine(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotTen(), "potion")){
+        if (Objects.equals(inventory.getSlotTen(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotEleven(), "potion")){
+        if (Objects.equals(inventory.getSlotEleven(), "Potion")){
             potionCount++;
         }
-        if (Objects.equals(inventory.getSlotTwelve(), "potion")){
+        if (Objects.equals(inventory.getSlotTwelve(), "Potion")){
             potionCount++;
         }
         return potionCount;

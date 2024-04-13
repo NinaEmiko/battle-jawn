@@ -8,7 +8,7 @@ import scraps from "../assets/scraps.png";
 import boots from "../assets/boots.png";
 import dagger from "../assets/dagger.png";
 import helm from "../assets/helm.png";
-import jewelery from "../assets/jewelery.png";
+import jewels from "../assets/jewelery.png";
 import mask from "../assets/mask.png";
 import necklace from "../assets/necklace.png";
 import paw from "../assets/paw.png";
@@ -114,7 +114,7 @@ const Store = ({props}:{props:any}) => {
 
     const determineIcon = (item: string) => {
         switch (item) {
-            case "potion":
+            case "Potion":
                 return <img className="top-left"
                 src={healthPotion}/>;
             case "Sword":
@@ -135,7 +135,7 @@ const Store = ({props}:{props:any}) => {
             case "Spirit trinket":
                 return <img className="top-left"
                 src={trinket}/>;
-            case "Orc Necklace":
+            case "Orc necklace":
                 return <img className="top-left"
                 src={necklace}/>;
             case "Helm":
@@ -144,9 +144,9 @@ const Store = ({props}:{props:any}) => {
             case "Mask":
                 return <img className="top-left"
                 src={mask}/>;
-            case "Jewelry":
+            case "Jewels":
                 return <img className="top-left"
-                src={jewelery}/>;
+                src={jewels}/>;
             case "Boots":
                 return <img className="top-left"
                 src={boots}/>;
@@ -187,11 +187,11 @@ const Store = ({props}:{props:any}) => {
                                         <td className="store-buy-item">
                                             <div>
                                             <div>
-                                                            {determineIcon("potion")}
+                                                            {determineIcon("Potion")}
                                                             </div>
                                                 <span className="store-buy-item-price">1 coin</span>
                                             </div>
-                                            <button onClick={() => handleClickBuy(props.heroId, "potion")} className="buy-btn">Buy</button>
+                                            <button onClick={() => handleClickBuy(props.heroId, "Potion")} className="buy-btn">Buy</button>
                                         </td>
                                     </tr>
                                     <tr>
