@@ -24,7 +24,7 @@ public class EnemyService {
 
     private final EnemyRepository enemyRepository;
     private final Randomizer randomizer;
-    private final Logger logger = Logger.getLogger(HeroController.class.getName());
+    private final Logger logger = Logger.getLogger(EnemyService.class.getName());
 
     public List<Enemy> getAllEnemies() {
         logger.info("Inside getAllEnemies service method.");

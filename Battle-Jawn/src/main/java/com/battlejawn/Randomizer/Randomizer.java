@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 @Component
 public class Randomizer {
-    private final Logger logger = Logger.getLogger(HeroController.class.getName());
+    private final Logger logger = Logger.getLogger(Randomizer.class.getName());
     public int getRandomInt(int ceiling) {
         return (int) Math.floor(Math.random() * ceiling) + 1;
     }

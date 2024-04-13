@@ -4,6 +4,8 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -11,7 +13,7 @@ import java.util.logging.Logger;
 public class ExperienceProcessorService {
     private final HeroService heroService;
     private final CoinProcessorService coinProcessorService;
-    private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
+    private final Logger logger = Logger.getLogger(ExperienceProcessorService.class.getName());
     public String processExperience(Hero hero, Enemy enemy, String battleResult) {
         logger.info("Inside processExperience service method.");
 
@@ -32,7 +34,6 @@ public class ExperienceProcessorService {
                         " Enemy dropped " + coinsGained + " coins.";
                 hero.setHealth(determineLevelMaxHealth(hero.getLevel(), hero.getRole()));
                 hero.setMaxHealth(determineLevelMaxHealth(hero.getLevel(), hero.getRole()));
-                hero.setMaxPotions(determineLevelMaxPotions(hero.getLevel(), hero.getRole()));
             } else {
                 endOfBattleMessage = "You win! You've gained " + experience + " experience!" +
                         " Enemy dropped " + coinsGained + " coins.";
@@ -211,36 +212,6 @@ public class ExperienceProcessorService {
                 case 8 -> 165;
                 case 9 -> 185;
                 default -> 210;
-            };
-            default -> 0;
-        };
-    }
-    private int determineLevelMaxPotions(int level, String role){
-        return switch (role) {
-            case "Tank" -> switch (level) {
-                case 1 -> 3;
-                case 2, 3 -> 4;
-                case 4, 5 -> 5;
-                case 6, 7 -> 6;
-                case 8 -> 7;
-                case 9 -> 8;
-                default -> 10;
-            };
-            case "Healer" -> 0;
-            case "DPS" -> switch (level) {
-                case 1, 2 -> 3;
-                case 3, 4 -> 4;
-                case 5, 6 -> 5;
-                case 7, 8 -> 6;
-                case 9 -> 7;
-                default -> 9;
-            };
-            case "Caster" -> switch (level) {
-                case 1, 2, 3 -> 3;
-                case 4, 5, 6 -> 4;
-                case 7, 8 -> 5;
-                case 9 -> 6;
-                default -> 7;
             };
             default -> 0;
         };

@@ -41,6 +41,8 @@ class EnemyMoveServiceTest {
     @Mock
     EnemySteal enemySteal;
     @Mock
+    InventoryService inventoryService;
+    @Mock
     BattleSessionService battleSessionService;
     @Mock
     BattleHistoryMessage battleHistoryMessage;
@@ -199,9 +201,9 @@ class EnemyMoveServiceTest {
         HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
         assertNotNull(heroMoveDTO);
     }
-    @Test
-    void enemyMoveThiefStealTest() {
 
+    @Test
+    void enemyMoveStealTest(){
         enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setHealth(31);
         when(randomizer.getRandomInt(9)).thenReturn(1);
@@ -211,6 +213,51 @@ class EnemyMoveServiceTest {
 
         HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
         assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void enemyMoveThiefStealTest() {
+        enemy = new Thief(2, 95, 2, 4, 20);
+        enemy.setName("Thief");
+
+        when(inventoryService.findPotionCount(any())).thenReturn(1);
+        when(enemySteal.useSteal()).thenReturn(true);
+        doNothing().when(inventoryService).removeFromInventory(anyLong(),anyString());
+        doNothing().when(heroService).updateHero(any());
+        doNothing().when(enemyService).updatePotionCountById(3,null);
+        when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        HeroMoveDTO heroMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        assertNotNull(heroMoveDTO);
+
+    }
+
+    @Test
+    void enemyMoveThiefStealFailTest() {
+        enemy = new Thief(2, 95, 2, 4, 20);
+        enemy.setName("Thief");
+
+        when(inventoryService.findPotionCount(any())).thenReturn(1);
+        when(enemySteal.useSteal()).thenReturn(false);
+        when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        HeroMoveDTO heroMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        assertNotNull(heroMoveDTO);
+
+    }
+
+    @Test
+    void enemyMoveThiefStealNoPotionsTest() {
+        enemy = new Thief(2, 95, 0, 4, 20);
+        enemy.setName("Thief");
+
+        when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        HeroMoveDTO heroMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        assertNotNull(heroMoveDTO);
+
     }
     @Test
     void enemyMoveNullEnemyNameTest() {
@@ -295,46 +342,6 @@ class EnemyMoveServiceTest {
 
         enemyMoveService.processEnemyMove(1, enemy, 1L, hero, "Move");
 
-        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
-    }
-    @Test
-    void processStealTrueTest(){
-        hero = new Tank("Name");
-        hero.setId(5L);
-        enemy = new Thief(2, 95, 2, 4, 20);
-        enemy.setId(4L);
-        enemy.setPotions(1);
-        when(enemySteal.useSteal()).thenReturn(true);
-        doNothing().when(heroService).updateHero(hero);
-        doNothing().when(enemyService).updatePotionCountById(2, 4L);
-        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
-        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
-        enemyMoveService.processEnemySteal(enemy, 1L, hero);
-        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
-    }
-    @Test
-    void processStealFalseTest(){
-        hero = new Tank("Name");
-        hero.setId(5L);
-        enemy = new Thief(2, 95, 2, 4, 20);
-        enemy.setId(4L);
-        enemy.setPotions(1);
-        when(enemySteal.useSteal()).thenReturn(false);
-        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
-        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
-        enemyMoveService.processEnemySteal(enemy, 1L, hero);
-        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
-    }
-    @Test
-    void processStealMaxPotionsTest(){
-        hero = new Tank("Name");
-        hero.setId(5L);
-        hero.setPotions(0);
-        enemy = new Thief(2, 95, 2, 4, 20);
-        enemy.setId(4L);
-        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
-        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
-        enemyMoveService.processEnemySteal(enemy, 1L, hero);
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
     }
 

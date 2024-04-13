@@ -19,7 +19,7 @@ import javax.persistence.EntityNotFoundException;
 public class PlayerTipService {
 
     private final PlayerTipRepository playerTipRepository;
-    private final Logger logger = Logger.getLogger(HeroController.class.getName());
+    private final Logger logger = Logger.getLogger(PlayerTipService.class.getName());
 
     public String getRandomPlayerTip() {
         logger.info("Inside getRandomPlayerTip service method.");

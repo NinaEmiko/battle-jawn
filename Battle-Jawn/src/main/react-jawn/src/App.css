@@ -15,7 +15,7 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: center;
+  /* flex-direction: center; */
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -187,12 +187,12 @@
   text-align: right;
 }
 
-#rest-btn, #fight-btn, #delete-btn, #submit-btn {
+#rest-btn, #fight-btn, #delete-btn, #inventory-btn, #store-btn, #submit-btn {
   background-color: transparent;
   border-color: gray;
   color: hsl(181, 84%, 44%);
   border-radius: 0;
-  width:150px;
+  width:120px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -268,11 +268,90 @@ ul {
   text-align: left;
   padding-left: 10px;
 }
-.buy-btn {
-  text-align: right;
-  background-color: transparent;
-  border-color: gray;
-  color: hsl(181, 84%, 44%);
-  border-radius: 0;
-  margin-bottom: 20px;
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
+
+.grid-item {
+  border: 1px solid black;
+  text-align: center;
+  padding: 20px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.grid-item:hover {
+  font-size: 0.8em; /* Reduce font size on hover */
+}
+
+.item-name {
+  position: absolute;
+  bottom: 5px; /* Position item name at the bottom */
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* Center item name horizontally */
+}
+
+.grid-item.smaller .item-name {
+  font-size: 0.8em;
+}
+
+.toss-btn{
+  padding-top: 10px;
+}
+
+.store-buy-table, .store-sell-table {
+  width: 100%;
+  border-collapse: collapse; /* Merge border styles */
+}
+
+.store-buy-item, .store-sell-item {
+  height: 120px;
+  padding: 8px;
+  border-bottom: 1px solid #ddd; /* Add border between rows */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+}
+
+.store-buy-item-price, .store-sell-item-price {
+  /* float: right; */
+}
+
+.top-left {
+  width: 32px;
+  text-align: center; /* Center horizontally */
+  vertical-align: middle;
+}
+
+.buy-btn, .sell-btn {
+  background-color: yellow; /* Green */
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.store-sell-item-price {
+  /* float: right; Float price to the right */
+}
+
+.buy-btn:hover, .sell-btn:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+.buy-btn-separator, .sell-btn-separator {
+  height: 10px; /* Adjust the height of the separator */
+}
+

@@ -12,7 +12,7 @@ public class Caster extends Hero {
 
     }
     public Caster(String name) {
-        super(name, 90, 90, 3, 3, "Caster", 0, 0, 0, LocalDateTime.now());
+        super(name, 90, 90, "Caster", 0, 0, 0, LocalDateTime.now());
     }
 
 }

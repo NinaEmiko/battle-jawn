@@ -8,7 +8,6 @@ import com.battlejawn.Entities.UserAccount;
 import com.battlejawn.Repository.UserAccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.battlejawn.Controllers.HeroController;
 import com.battlejawn.Entities.Hero.Caster;
 import com.battlejawn.Entities.Hero.DPS;
 import com.battlejawn.Entities.Hero.Healer;
@@ -23,7 +22,7 @@ public class HeroService {
 
     private final HeroRepository heroRepository;
     private final UserAccountRepository userAccountRepository;
-    private final Logger logger = Logger.getLogger(HeroController.class.getName());
+    private final Logger logger = Logger.getLogger(HeroService.class.getName());
 
     public Hero getHeroById(Long id){
         logger.info("Inside getHeroById service method. Hero ID: " + id + ".");

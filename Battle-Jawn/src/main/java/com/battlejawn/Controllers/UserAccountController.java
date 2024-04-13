@@ -23,19 +23,15 @@ import java.util.logging.Logger;
 @RequiredArgsConstructor
 @RestController
 public class UserAccountController {
-
     private final UserAccountService userAccountService;
-    private final List<UserAccount> userAccounts = new ArrayList<>();
     private final UserAuthenticationProvider userAuthenticationProvider;
     private final Logger logger = Logger.getLogger(UserAccountController.class.getName());
-
     @PostMapping("/login")
     public ResponseEntity<UserAccountDTO> login(@RequestBody @Valid CredentialsDTO credentialsDTO) {
         UserAccountDTO userAccountDTO = userAccountService.login(credentialsDTO);
         userAccountDTO.setToken(userAuthenticationProvider.createToken(userAccountDTO.getLogin()));
         return ResponseEntity.ok(userAccountDTO);
     }
-
     @PostMapping("/register")
     public ResponseEntity<UserAccountDTO> register(@RequestBody @Valid SignUpDTO signUpDTO) {
         logger.info("Inside register controller method. Sign Up DTO: " + signUpDTO);
@@ -45,7 +41,6 @@ public class UserAccountController {
         logger.info("Token created: " + userAccountDTO.getToken());
         return ResponseEntity.created(URI.create("/user-account/" + userAccountDTO.getId())).body(userAccountDTO);
     }
-
     @GetMapping("/api/user-account/{id}")
     public ResponseEntity<UserAccountDTO> getUserAccountById(@PathVariable("id") Long id) {
         logger.info("Inside getUserAccountById controller method. User Account ID: " + id + ".");
@@ -57,14 +52,12 @@ public class UserAccountController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteAccountById(@PathVariable Long id) {
         logger.info("Inside deleteAccountById controller method. User Account Id: " + id);
         String response = userAccountService.deleteUserAccountById(id);
         return ResponseEntity.ok(response);
     }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updatePasswordByUserAccountId(@PathVariable Long id, @RequestBody @Valid UpdatePasswordDTO updatePasswordDTO) {
         logger.info("Inside updatePasswordByAccountById controller method. User Account Id: " + id + ". New Password: " + updatePasswordDTO + ".");
