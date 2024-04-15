@@ -34,7 +34,7 @@ const LeaderBoard = ({props}:{props:any}) => {
                 <div className="">
                     {heroList.map((hero) => (
                         <div className="container-jawn-leader-board-card" key={hero.winCount}>
-                            <table>
+                            <table className="leader-board-table">
                                 <tbody>
                                     <tr>
                                         <td className="row-jawn">Hero:</td>

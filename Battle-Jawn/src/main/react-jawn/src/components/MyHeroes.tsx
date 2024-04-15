@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import Battle from "./Battle";
 import Inventory from "./Inventory";
 import Store from "./Store";
+import "../styling/MyHeroes.css";
 
 function MyHeroes( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
@@ -140,7 +141,7 @@ function handleRest(id: any): void {
             <div className="userPrompt">
                 {hero.name}
             </div>
-            <table>
+            <table className="my-heroes-table">
               <tbody>
                 <tr>
                   <td className="row-jawn">Class:</td>

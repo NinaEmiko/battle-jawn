@@ -49,6 +49,7 @@
 .data-jawn-win {
     float: right;
     color: white;
+    padding-right: 30px;
 }
 
 #leader-board-ok-btn {
@@ -79,4 +80,7 @@
 .btn:active {
     box-shadow: 0 5px rgb(43, 43, 36);
     transform: translateY(2px);
+}
+.leader-board-table {
+    width: 100%;
 }
