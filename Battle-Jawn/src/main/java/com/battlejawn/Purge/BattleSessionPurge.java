@@ -18,7 +18,7 @@ public class BattleSessionPurge {
         this.battleSessionRepository = battleSessionRepository;
     }
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 10 * * * *")
     public void purgeBattleSession() {
         logger.info("Inside purgeBattleSession service class. This job runs every hour.");
         List<BattleSession> battleSessionList = battleSessionRepository.findAll();

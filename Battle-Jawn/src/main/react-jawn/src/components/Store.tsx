@@ -15,6 +15,7 @@ import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import healthPotion from "../assets/healthPotion.png";
+import "../styling/Store.css";
 
 const Store = ({props}:{props:any}) => {
     const [purchases, setPurchases] = useState(1);
@@ -164,15 +165,14 @@ const Store = ({props}:{props:any}) => {
     }
 
     return (
-        <div className="container-jawn-hero">
-            <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={handleBackButtonClick}>Leave</button>
-            <h1 className="title-jawn">Store</h1>
-            <div className="row justify-content-center">
-                <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={() => handleClickBuyTab()}>Buy</button>
-                <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={() => handleClickSellTab()}>Sell</button>
-            </div>
-            <div className="">
-                <div className="container-jawn-hero-card">
+        <div className="store-background-jawn">
+            <div className="container-jawn-store">
+                <h1 className="store-title-jawn">Store</h1>
+                <div className="row justify-content-center">
+                    <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={() => handleClickBuyTab()}>Buy</button>
+                    <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={() => handleClickSellTab()}>Sell</button>
+                </div>
+                <div className="container-jawn-store-card">
                     <div className="store-hero-name">
                         {heroName}
                     </div>
@@ -186,57 +186,52 @@ const Store = ({props}:{props:any}) => {
                                     <tr>
                                         <td className="store-buy-item">
                                             <div>
-                                            <div>
-                                                            {determineIcon("Potion")}
-                                                            </div>
+                                                <div>
+                                                    {determineIcon("Potion")}
+                                                </div>
                                                 <span className="store-buy-item-price">1 coin</span>
                                             </div>
                                             <button onClick={() => handleClickBuy(props.heroId, "Potion")} className="buy-btn">Buy</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="buy-btn-separator" colSpan={2}></td>
+                                        <td className="buy-btn-separator" colSpan={2}>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         }
-
-                            {sellActive && filteredInventoryList &&
-
-
-                                <div>
-                                    {filteredInventoryList.map((item, index) => (
-
-                                    
-                                       
-                                        <div key={index}>
-                                            <table className="store-sell-table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="store-sell-item">
-                                                            <div>
-                                                            {determineIcon(item)}
-                                                            </div>
-                                                            <span className="store-sell-item-price">1 coin</span>
-                                                            <button onClick={() => handleClickSell(props.heroId, item)} className="sell-btn">Sell {item}</button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="sell-btn-separator" colSpan={2}></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    
-                                    ))}
-                                </div>
-                            }   
+                        {sellActive && filteredInventoryList &&
+                            <div>
+                                {filteredInventoryList.map((item, index) => (
+                                    <div key={index}>
+                                        <table className="store-sell-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td className="store-sell-item">
+                                                        <div>
+                                                        {determineIcon(item)}
+                                                        </div>
+                                                        <span className="store-sell-item-price">1 coin</span>
+                                                        <button onClick={() => handleClickSell(props.heroId, item)} className="sell-btn">Sell {item}</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="sell-btn-separator" colSpan={2}></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ))}
+                            </div>
+                        }   
                     </div>
                 </div>
+                <button className={classNames('nav-link', 'btn')} id="store-leave-btn" onClick={handleBackButtonClick}>Leave</button>
             </div>
         </div>
     );
-  };
+};
   
   export default Store;
   

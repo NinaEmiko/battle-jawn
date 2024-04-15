@@ -15,6 +15,7 @@ import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import classNames from "classnames";
+import "../styling/Inventory.css";
 
 const Inventory = ({props}:{props:any}) => {
 
@@ -86,22 +87,19 @@ const Inventory = ({props}:{props:any}) => {
     }
 
     return (
-        <div className="container-jawn-login-form">
-            <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={handleBackButtonClick}>Close</button>
-            <h1 className="title-jawn">Inventory</h1>
-            <div className="">
-                <div className="grid-container">
+        <div className="inventory-background-jawn">
+            <div className="container-jawn-inventory">
+                <h1 className="inventory-title-jawn">Inventory</h1>
+                <div className="inventory-grid-container">
                     {[...Array(12).keys()].map(index => (
-                        <div key={index} className="grid-item">
-                            <div className="icon">{determineIcon(inventoryList[index])}</div>
-                            <div className="item-name">{inventoryList[index]}</div>
+                        <div key={index} className="inventory-grid-item">
+                            <div className="inventory-icon">{determineIcon(inventoryList[index])}</div>
+                            <div className="inventory-item-name">{inventoryList[index]}</div>
                         </div>
                     ))}
                 </div>
+                <button className={classNames('nav-link', 'btn')} id="inventory-close-btn" onClick={handleBackButtonClick}>Close</button>
             </div>
-            {/* <div className="toss-btn">
-                <button className="btn">Toss</button>
-            </div> */}
         </div>
     );
   };

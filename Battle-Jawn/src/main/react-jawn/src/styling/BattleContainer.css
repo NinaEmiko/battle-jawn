@@ -1,9 +1,31 @@
-.potion {
-    /* display: none; */
-    float: right;
+.background-jawn {
+    background-image: url('./assets/BattleJawnBackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    width: 45px;
-}
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .container-jawn-hero-battle {
+    background-color: #333;
+    opacity: 90%;
+    /* Rounds edges of Display Box */
+    border-radius: 5px;
+    /* Shadow Effect */
+    box-shadow: 0 0 10px 2px;
+    padding-top: .50em;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    text-align: center;
+    overflow-y: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 
 .role-icon {
     /* display: none; */
@@ -16,6 +38,7 @@
     font-size: 25px;
     color:  hsl(181, 84%, 44%);
     float: left;
+    margin-left: 10px;
 }
 
 .name {
@@ -26,9 +49,13 @@
     padding-right: 5px;
 }
 
+.battle-btn-display {
+    width: 100%;
+}
+
 .logBox {
-    height: 250px;
-    width: 45%;
+    margin-top: 10px;
+    height: 200px;
     border: 3px solid #ccc;
     display: flex;
     flex-direction: column-reverse;
@@ -36,14 +63,14 @@
     overflow: auto;
     background-color: #333;
     color: yellow;
-    margin-top: 30px;
+    text-align: right;
 }
 
 .healthBar, .manaBar {
     background-color:#00788c;
     border-radius: 20px;
     margin: 5px;
-    width: 100%;
+    width: 90%;
 }
 .healthBar::-webkit-progress-bar {
     accent-color: rgb(161, 2, 2);
@@ -60,3 +87,49 @@
     border: 0;
     border-radius: 20px;
  }
+ 
+ .btn-grid-roles{
+    justify-content: center;
+ }
+
+ .btn-grid {
+    /* Keeps Buttons in grid format */
+        display: grid;
+        /* Keeps grid in columns of 2 */
+        grid-template-columns: repeat(2, auto);
+        /* Adds spacing between buttons */
+        gap: 10px;
+    }
+  
+  .btn-role-battle {
+    background-color: hsl(181, 84%, 44%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 0;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    font-size: 20px;
+    height: 50px;
+    width: 150px;
+    align-items: center;
+  }
+
+  
+  .btn-role-battle:hover {
+    border-color: black;
+  }
+  
+  .btn-role-battle:active {
+    box-shadow: 0 5px rgb(43, 43, 36);
+    transform: translateY(2px);
+  }
+
+  .user-prompt-wrapper-battle{
+
+  }
+
+  .userPrompt-battle{
+    margin-top: 10px;
+    color: yellow;
+    font-size: 30px;
+  }

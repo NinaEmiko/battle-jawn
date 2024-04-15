@@ -6,6 +6,7 @@ import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
 import athena from "../assets/athena.png";
 import antibiotics from "../assets/antibiotics.png";
+import "../styling/CreateNewHero.css";
   
 function CreateNewHero({props}:{props:any}): React.ReactNode {
     const [heroName, setHeroName] = useState('');
@@ -56,35 +57,37 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
     }
 console.log("Hero name: " + heroName);
     return (
-        <div className="container-jawn">
-            <PlayerTips />
-            <div className="user-prompt-wrapper">
-                <div className="userPrompt">
-                    {"Hero Name: "}
+        <div className="create-hero-background-jawn">
+            <div className="container-jawn-new-hero">
+                <PlayerTips />
+                <div className="user-prompt-wrapper-create">
+                    <div className="userPrompt">
+                        {"Hero Name: "}
+                    </div>
+                    <div className="hero-name-input">
+                        <input className="create-new-hero-name-text"
+                        type="text"
+                        value={heroName}
+                        onChange={(e) => setHeroName(e.target.value)}
+                        />
+                    </div>
+                    <div className="userPrompt">
+                        {"Choose a class: "}
+                    </div>
+                    {heroRoleMessage && (
+                        <p>{heroRoleMessage}</p>
+                    )}
+                    <div className="btn-grid-roles" id="option-buttons">
+                        <button onClick={(e) => handleHeroRoleSelection('Tank')} className="btn-role" id="button1"><img className="role-icon" src={athena}></img>Tank</button>
+                        <button onClick={(e) => handleHeroRoleSelection('Healer')} className="btn-role" id="button2"><img className="role-icon" src={antibiotics}></img>Healer</button>
+                        <button onClick={(e) => handleHeroRoleSelection('DPS')} className="btn-role" id="button3"><img className="role-icon" src={ninja}></img>DPS</button>
+                        <button onClick={(e) => handleHeroRoleSelection('Caster')} className="btn-role" id="button4"><img className="role-icon" src={wizard}></img>Caster</button>
+                    </div>
+                    <button onClick={handleFormSubmit} className="" id="button5">Create Hero</button>
                 </div>
-                <div className="hero-name-input">
-                    <input
-                    type="text"
-                    value={heroName}
-                    onChange={(e) => setHeroName(e.target.value)}
-                    />
-                </div>
-                <div className="userPrompt">
-                    {"Choose a class: "}
-                </div>
-                {heroRoleMessage && (
-                    <p>{heroRoleMessage}</p>
-                )}
-                <div className="btn-grid" id="option-buttons">
-                    <button onClick={(e) => handleHeroRoleSelection('Tank')} className="btn" id="button1"><img className="role-icon" src={athena}></img>Tank</button>
-                    <button onClick={(e) => handleHeroRoleSelection('Healer')} className="btn" id="button2"><img className="role-icon" src={antibiotics}></img>Healer</button>
-                    <button onClick={(e) => handleHeroRoleSelection('DPS')} className="btn" id="button3"><img className="role-icon" src={ninja}></img>DPS</button>
-                    <button onClick={(e) => handleHeroRoleSelection('Caster')} className="btn" id="button4"><img className="role-icon" src={wizard}></img>Caster</button>
-                </div>
-                <button onClick={handleFormSubmit} className="btn" id="button5">Create Hero</button>
             </div>
         </div>
     )
-  };
+};
   
   export default CreateNewHero;

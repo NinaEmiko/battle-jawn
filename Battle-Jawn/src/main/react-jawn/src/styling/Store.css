@@ -1,0 +1,158 @@
+/* BACKGROUND STYLINGS */
+
+.store-background-jawn {
+    background-image: url('./assets/store-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* CONTAINER STYLINGS */
+
+.container-jawn-store {
+    background-color: #333;
+    opacity: 90%;
+    /* Rounds edges of Display Box */
+    border-radius: 5px;
+    /* Shadow Effect */
+    box-shadow: 0 0 10px 2px;
+    padding-top: .50em;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    text-align: center;
+    max-height: 550px;
+    overflow-y: auto;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.container-jawn-store-card {
+    justify-content: center;
+    border-radius: 5px;
+    /* Shadow Effect */
+    box-shadow: 0 0 10px 2px;
+    margin-bottom: 15px;
+  }
+
+/* CONTENT STYLINGS */
+
+.store-title-jawn {
+    margin-top: 15px;
+}
+
+.store-hero-name {
+    color: yellow;
+    font-size: 30px;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.store-hero-coins {
+    color: hsl(181, 84%, 44%);
+    font-size: 20px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+/* BUTTON STYLINGS */
+
+.nav-link.custom-button.active {
+    background-color: hsl(181, 84%, 44%);
+    color: black;
+}
+
+.store-buy-table, .store-sell-table {
+    width: 100%;
+    border-collapse: collapse; /* Merge border styles */
+}
+  
+.store-buy-item, .store-sell-item {
+    height: 120px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd; /* Add border between rows */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack children vertically */
+}
+  
+.store-buy-item-price, .store-sell-item-price {
+    /* float: right; */
+}
+
+#store-leave-btn {
+    background-color: transparent;
+    border-color: gray;
+    color: hsl(123, 68%, 54%);
+    border-radius: 0;
+    width:25%;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    float: right;
+}
+
+.btn {
+    background-color: hsl(181, 84%, 44%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 0;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+}
+  
+.btn:hover {
+    border-color: black;
+}
+  
+.btn:active {
+    box-shadow: 0 5px rgb(43, 43, 36);
+    transform: translateY(2px);
+}
+
+.buy-btn, .sell-btn {
+    background-color: yellow; /* Green */
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+.store-sell-item-price {
+    /* float: right; Float price to the right */
+}
+  
+.buy-btn:hover, .sell-btn:hover {
+    background-color: #45a049; /* Darker green */
+}
+  
+.buy-btn-separator, .sell-btn-separator {
+    height: 10px; /* Adjust the height of the separator */
+}
+
+/* MOBILE STYLINGS */
+
+@media only screen and (max-width: 767px) {
+    .container-jawn-store {
+        background-color: #333;
+        opacity: 90%;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 2px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        justify-content: center;
+        text-align: center;
+        /* max-height: 550px; */
+        overflow-y: auto;
+        width: 100%;
+    }
+}
