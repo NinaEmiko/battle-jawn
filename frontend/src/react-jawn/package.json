@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "NODE_ENV=production vite build",
+    "preview": "vite preview",
+    "backend-build": "cd ../../../backend && mvn clean install"
   },
   "dependencies": {
     "axios": "^1.5.0",
