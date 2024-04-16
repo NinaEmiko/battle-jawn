@@ -67,9 +67,9 @@ function App() {
   
   return (
     <BrowserRouter>
-      <div>
+      <div className="login-screen-background-jawn">
         <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn}/>
-        <div className="background-jawn">
+        {/* <div className="background-jawn"> */}
         <Routes>
             {currentUser.loggedIn && (
               <Route key="my-heroes" path="/" element={<MyHeroes props={currentUser} />} />
@@ -91,7 +91,7 @@ function App() {
             )}
           </Routes>
         </div>
-      </div>
+      {/* </div> */}
     </BrowserRouter>
   )
 }

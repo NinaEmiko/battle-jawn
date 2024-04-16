@@ -1,0 +1,101 @@
+.create-hero-background-jawn {
+    background-image: url('./assets/create-hero-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .container-jawn-new-hero {
+    background-color: #333;
+    opacity: 90%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 2px;
+    padding-top: .50em;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    text-align: center;
+    max-height: 550px;
+    overflow-y: auto;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .userPrompt {
+    color: yellow;
+    font-size: 30px;
+  }
+
+  .user-prompt-wrapper-create{
+
+    align-items: center;
+    margin-left: 5px;
+  }
+
+  .hero-name-input {
+    margin-bottom: 10px;
+  }
+  
+  .create-new-hero-name-text {
+    margin-bottom: 10px;
+    color: black;
+  }
+
+  .btn-role{
+    background-color: hsl(181, 84%, 44%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 0;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    margin-top: 5px;
+    align-items: center;
+  
+  }
+
+.btn-grid-roles {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+}
+  
+  .btn-role {
+    background-color: hsl(181, 84%, 44%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 0;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    font-size: 20px;
+    height: 50px;
+    width: 150px;
+    align-items: center;
+  }
+  
+  .btn-role:hover {
+    border-color: black;
+  }
+  
+  .btn-role:active {
+    box-shadow: 0 5px rgb(43, 43, 36);
+    transform: translateY(2px);
+  }
+
+#button5 {
+    border-color: black;
+    font-size: 20px;
+    width: 180px;
+    height: 50px;
+    margin-top: 15px;
+    background-color: hsl(181, 84%, 44%);
+    color: black;
+}

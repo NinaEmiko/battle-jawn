@@ -1,14 +1,6 @@
 security.jwt.token.secret-key: my-secret-key
 
 spring:
-  datasource:
-    platform: mysql
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/battlejawn
-    username: root
-    initialization-mode: always
-    testWhileIdle: true
-    validationQuery: SELECT 1
   mvc:
     throw-exception-if-no-handler-found: true
   resources:
@@ -22,3 +14,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+    repositories:
+      base-packages: com.battlejawn.Repository
+    entityScan: com.battlejawn.Entities

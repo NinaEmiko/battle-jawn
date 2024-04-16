@@ -18,7 +18,7 @@ public class BattleHistoryMessagePurge {
         this.battleHistoryMessageRepository = battleHistoryMessageRepository;
     }
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 10 * * * *")
     public void purgeBattleHistoryMessage() {
         logger.info("Inside purgeBattleHistoryMessage service class. This job runs every hour.");
         List<BattleHistoryMessage> battleHistoryMessageList = battleHistoryMessageRepository.findAll();

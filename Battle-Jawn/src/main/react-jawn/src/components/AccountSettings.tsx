@@ -43,6 +43,7 @@ const AccountSettings = ({props}:{props:any}) => {
   }
 
   return (
+    <div className="account-settings-background-jawn">
     <div className="container-jawn-login-form log-reg">
       <div className="row justify-content-center">
         <h1 className="title-jawn">Account Settings</h1>
@@ -84,6 +85,7 @@ const AccountSettings = ({props}:{props:any}) => {
               </div>
             )}
       </div>
+    </div>
     </div>
   );
 };

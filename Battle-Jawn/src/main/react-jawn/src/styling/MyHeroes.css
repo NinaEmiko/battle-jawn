@@ -1,0 +1,15 @@
+.row-jawn{
+    padding-left: 30px;
+    text-align: left;
+    color: white;
+}
+.data-jawn {
+    float: right;
+    color: white;
+    padding-right: 30px;
+    text-align: right;
+}
+
+.my-heroes-table {
+    width: 100%;
+}

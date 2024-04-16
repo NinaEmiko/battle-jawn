@@ -146,7 +146,7 @@ function Battle({props}:{props:any}) {
     const processEndOfBattle = () => {
       let heroRan = false;
 
-      if (battleHistory.includes('You successfully ran away!')) {
+      if (battleHistory.includes('You successfully ran away!') || battleHistory.includes('You have been defeated by the enemy!')) {
         heroRan = true;
       }
       
@@ -192,8 +192,9 @@ function Battle({props}:{props:any}) {
 
   return (
 <>
+<div className="background-jawn">
 {beginBattle && !postBattleActive &&
-    <div className="battle-container">
+    <div className="container-jawn-hero-battle">
       <div className="name" id="enemyName">
       {enemyName == "Wolf" && 
         <img className="role-icon" src={wolf}></img>
@@ -229,7 +230,7 @@ function Battle({props}:{props:any}) {
         {role}</div>
 
       <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
-      <div className="logbox-and-user-input">
+      <div className="logBox-container">
         <div className="logBox" id="logBox">
           {battleHistory.slice().reverse().map((item, index) => (
         <div key={index}>
@@ -238,70 +239,70 @@ function Battle({props}:{props:any}) {
     </div>
   ))}
       </div>
-      <div>
-          <div className="user-prompt-wrapper">
-            <div className="userPrompt">{"What would you like to do?"}</div>
+      <div className="battle-btn-display">
+          <div className="user-prompt-wrapper-battle">
+            <div className="userPrompt-battle">{"What would you like to do?"}</div>
 
             {role == "Tank" &&
-              <div className="btn-grid" id="option-buttons">
-                  <button onClick={(e) => handleClickBattle('Strike')} disabled={buttonDisabled} className="btn" id="button1">
+              <div className="btn-grid-roles" id="option-buttons">
+                  <button onClick={(e) => handleClickBattle('Strike')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
                     Strike
                   </button>
-                  <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn" id="button2">
+                  <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
                     Potion
                   </button>
-                  <button onClick={(e) => handleClickBattle('Impale')} disabled={buttonDisabled} className="btn" id="button3">
+                  <button onClick={(e) => handleClickBattle('Impale')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
                     Impale
                   </button>
-                  <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn" id="button4">
+                  <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
                     Run
                   </button>
                 </div>
             }
             {role == "Healer" &&
-              <div className="btn-grid" id="option-buttons">
-                  <button onClick={(e) => handleClickBattle('Wand')} disabled={buttonDisabled} className="btn" id="button1">
+              <div className="btn-grid-roles" id="option-buttons">
+                  <button onClick={(e) => handleClickBattle('Wand')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
                     Wand
                   </button>
-                  <button onClick={(e) => handleClickBattle('Heal')} disabled={buttonDisabled} className="btn" id="button2">
+                  <button onClick={(e) => handleClickBattle('Heal')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
                     Heal
                   </button>
-                  <button onClick={(e) => handleClickBattle('Holy')} disabled={buttonDisabled} className="btn" id="button3">
+                  <button onClick={(e) => handleClickBattle('Holy')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
                     Holy
                   </button>
-                  <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn" id="button4">
+                  <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
                     Run
                   </button>
                 </div>
             }
             {role == "Caster" &&
-                <div className="btn-grid" id="option-buttons">
-                    <button onClick={(e) => handleClickBattle('Wand')} disabled={buttonDisabled} className="btn" id="button1">
+                <div className="btn-grid-roles" id="option-buttons">
+                    <button onClick={(e) => handleClickBattle('Wand')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
                       Wand
                     </button>
-                    <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn" id="button2">
+                    <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
                       Potion
                     </button>
-                    <button onClick={(e) => handleClickBattle('Blast')} disabled={buttonDisabled} className="btn" id="button3">
+                    <button onClick={(e) => handleClickBattle('Blast')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
                       Blast
                     </button>
-                    <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn" id="button4">
+                    <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
                       Run
                     </button>
                   </div>
             }
             {role == "DPS" &&
-                <div className="btn-grid" id="option-buttons">
-                    <button onClick={(e) => handleClickBattle('Stab')} disabled={buttonDisabled} className="btn" id="button1">
+                <div className="btn-grid-roles" id="option-buttons">
+                    <button onClick={(e) => handleClickBattle('Stab')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
                       Stab
                     </button>
-                    <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn" id="button2">
+                    <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
                       Potion
                     </button>
-                    <button onClick={(e) => handleClickBattle('Steal')} disabled={buttonDisabled} className="btn" id="button3">
+                    <button onClick={(e) => handleClickBattle('Steal')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
                       Steal
                     </button>
-                    <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn" id="button4">
+                    <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
                       Run
                     </button>
                   </div>
@@ -317,7 +318,7 @@ function Battle({props}:{props:any}) {
     {postBattleActive && 
       <PostBattle props={postBattleObject} />
     }
-
+</div>
     </>
   );
 }
