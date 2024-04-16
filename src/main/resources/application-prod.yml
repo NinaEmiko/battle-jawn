@@ -9,4 +9,11 @@ spring:
     testWhileIdle: true
     validationQuery: SELECT 1
 
-security.jwt.token.secret-key: ${PROD_SECRET_KEY}
+security:
+  jwt:
+    token:
+      secret-key: ${PROD_SECRET_KEY}
+
+logging:
+  level:
+    root: DEBUG

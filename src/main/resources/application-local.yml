@@ -8,4 +8,7 @@ spring:
     testWhileIdle: true
     validationQuery: SELECT 1
 
-security.jwt.token.secret-key: ${LOCAL_SECRET_KEY}
+security:
+  jwt:
+    token:
+      secret-key: ${LOCAL_SECRET_KEY}
