@@ -1,0 +1,9 @@
+[react]
+path = "src/main/react-jawn"
+build = "npm run build"
+start = "npm run dev"
+
+[java]
+path = "src/main/java"
+build = "mvn clean package"
+start = 'java -jar target/BattleJawn.jar'
