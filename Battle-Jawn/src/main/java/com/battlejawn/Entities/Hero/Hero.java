@@ -65,7 +65,7 @@ public abstract class Hero {
         this.createdAt = createdAt;
         this.level = 1;
         this.experience = 0L;
-        this.coins = 3L;
+        this.coins = 10L;
         this.inventory = new Inventory();
     }
     

@@ -18,7 +18,7 @@ public class EnemyPurge {
         this.enemyRepository = enemyRepository;
     }
 
-    @Scheduled(cron = "0 0 * * * *")
+    @Scheduled(cron = "0 10 * * * *")
     public void purgeEnemy() {
         logger.info("Inside purgeEnemy service class. This job runs every hour.");
         List<Enemy> enemyList = enemyRepository.findAll();

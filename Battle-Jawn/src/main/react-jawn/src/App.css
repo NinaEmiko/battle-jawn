@@ -1,26 +1,64 @@
+/* UNIVERSAL STYLINGS */
+
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: fantasy;
   color: hsl(181, 84%, 44%);
-  /* color: #1d1160; */
-  /* color: #00788c; */
 }
 
 /******* BACKGROUND STYLINGS *******/
 
-.background-jawn {
-  background-image: url('./assets/BattleJawnBackground.png');
+.home-background-jawn {
+  background-image: url('./assets/home-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0;
-  margin: 0;
   display: flex;
-  /* flex-direction: center; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login-screen-background-jawn {
+  background-image: url('./assets/login-screen-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
+}
+
+.account-settings-background-jawn {
+  background-image: url('./assets/account-settings-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* CONTAINER STYLINGS */
+
+.container-jawn-hero {
   background-color: #333;
+  opacity: 90%;
+  /* Rounds edges of Display Box */
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+  padding-top: .50em;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+  width: 380px;
+  text-align: center;
+  max-height: 550px;
+  overflow-y: auto;
 }
 
 /******* NAVBAR STYLINGS *******/
@@ -44,11 +82,6 @@
 
 .basic-text {
   text-align: center;
-}
-
-/* Aligns account settings display items to the left */
-.account-settings-jawn {
-  text-align: left;
 }
 
 /* Idk why, but removing messes up login container styling */
@@ -91,12 +124,6 @@
 .btn:active {
   box-shadow: 0 5px rgb(43, 43, 36);
   transform: translateY(2px);
-}
-
-#button5 {
-  margin-top: 10px;
-  background-color: hsl(181, 84%, 44%);
-  color: black;
 }
 
 #new-hero-btn {
@@ -155,56 +182,19 @@
   margin-bottom: 15px;
 }
 
-.container-jawn-hero {
-  background-color: #333;
-  opacity: 90%;
-  /* Rounds edges of Display Box */
-  border-radius: 5px;
-  /* Shadow Effect */
-  box-shadow: 0 0 10px 2px;
-  padding-top: .50em;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  justify-content: center;
-  width: 400px;
-  text-align: center;
-  max-height: 550px;
-  overflow-y: auto;
-}
-
-.row-jawn{
-  padding-left: 30px;
-  text-align: left;
-}
-.data-jawn {
-  padding-left: 150px;
-  text-align: right;
-  padding-right: 30px;
-}
-.data-jawn-win {
-  padding-left: 240px;
-  text-align: right;
-}
-
 #rest-btn, #fight-btn, #delete-btn, #inventory-btn, #store-btn, #submit-btn {
   background-color: transparent;
   border-color: gray;
-  color: hsl(181, 84%, 44%);
+  color: hsl(123, 68%, 54%);
   border-radius: 0;
-  width:120px;
+  width:110px;
   margin-top: 20px;
   margin-bottom: 20px;
-}
-
-.hero-name-input {
-  margin-bottom: 10px;
 }
 
 .userPrompt {
   color: yellow;
   font-size: 30px;
-  padding-top: 10px;
 }
 .tab-update-password{
   width: 50%;
@@ -226,17 +216,17 @@ ul {
   height: 100%;
 }
 .experience-bar::-webkit-progress-bar {
-  background-color: yellow;
+  background-color: rgb(170, 99, 200);
   border: 0;
   border-radius: 20px;
 }
 .experience-bar::-webkit-progress-value {
-  background-color: yellow;
+  background-color: rgb(170, 99, 200);
   border: 0;
   border-radius: 20px;
 }
 .experience-bar::-moz-progress-bar {
-  background-color: yellow;
+  background-color: rgb(170, 99, 200);
   border: 0;
   border-radius: 20px;
 }
@@ -255,20 +245,6 @@ ul {
   font-weight: bold;
 }
 
-.store-hero-name {
-  color: yellow;
-  font-size: 30px;
-  padding-top: 10px;
-  text-align: left;
-  padding-left: 10px;
-}
-.store-hero-coins {
-  color: hsl(181, 84%, 44%);
-  font-size: 20px;
-  text-align: left;
-  padding-left: 10px;
-}
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -282,6 +258,8 @@ ul {
   aspect-ratio: 1;
   cursor: pointer;
   position: relative;
+  box-shadow: 0 0 10px 2px;
+  border-radius: 5px;
 }
 
 .icon {
@@ -307,51 +285,27 @@ ul {
   font-size: 0.8em;
 }
 
-.toss-btn{
-  padding-top: 10px;
-}
-
-.store-buy-table, .store-sell-table {
-  width: 100%;
-  border-collapse: collapse; /* Merge border styles */
-}
-
-.store-buy-item, .store-sell-item {
-  height: 120px;
-  padding: 8px;
-  border-bottom: 1px solid #ddd; /* Add border between rows */
-  display: flex; /* Use flexbox */
-  flex-direction: column; /* Stack children vertically */
-}
-
-.store-buy-item-price, .store-sell-item-price {
-  /* float: right; */
-}
-
 .top-left {
   width: 32px;
   text-align: center; /* Center horizontally */
   vertical-align: middle;
 }
 
-.buy-btn, .sell-btn {
-  background-color: yellow; /* Green */
-  color: black;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+#enemyName {
   margin-top: 10px;
 }
 
-.store-sell-item-price {
-  /* float: right; Float price to the right */
+.user-prompt-wrapper{
+  margin-right: 425px;
+  align-items: center;
+  margin-left: 5px;
+}
+.btn-role{
+  width: 150px;
+  align-items: center;
+
 }
 
-.buy-btn:hover, .sell-btn:hover {
-  background-color: #45a049; /* Darker green */
+.ms-auto{
+  text-align: right;
 }
-
-.buy-btn-separator, .sell-btn-separator {
-  height: 10px; /* Adjust the height of the separator */
-}
-
