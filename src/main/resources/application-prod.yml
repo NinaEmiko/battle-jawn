@@ -8,3 +8,5 @@ spring:
     initialization-mode: always
     testWhileIdle: true
     validationQuery: SELECT 1
+
+security.jwt.token.secret-key: ${PROD_SECRET_KEY}
