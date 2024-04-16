@@ -7,9 +7,9 @@ name = "Battle Jawn"
 [env.production]
 # Define the deployment steps for the production environment
 # Build and deploy the frontend (React)
-build = "cd frontend/src/react-app && npm install && npm run build"
+build = "cd frontend/src/react-jawn && npm install && npm run build"
 # Deploy the frontend (React) to the specified directory (e.g., public/)
-public = "frontend/src/react-app/build"
+public = "frontend/src/react-jawn/build"
 
 # Build and deploy the backend (Java)
 # Specify the path to the backend directory
