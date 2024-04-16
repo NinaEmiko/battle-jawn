@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    platform: mysql
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/battlejawn
-    username: root
-    initialization-mode: always
-    testWhileIdle: true
-    validationQuery: SELECT 1
