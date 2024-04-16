@@ -1,42 +1,32 @@
 package com.battlejawn.EnemyMove;
 
-import com.battlejawn.Interfaces.CriticalHit;
-import com.battlejawn.Interfaces.Missable;
+import com.battlejawn.AttackInterfaces.CriticalHit;
+import com.battlejawn.AttackInterfaces.Missable;
+import lombok.Data;
 
+@Data
 public class Maim implements CriticalHit, Missable {
     private int damage;
+    public int attack() {
 
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void attack() {
-            setDamage(/* enemy.strength * 1.5 */ 10);
-    
-            if (miss()) {
-                setDamage(0);
-            } else if (criticalHit()){
-                setDamage(damage *= 1.5);
-            }
+        if (miss()) {
+            return 0;
+        } else if (criticalHit()){
+            damage = (int) ((Math.floor(Math.random() * 12) + 10 /* * user.strength */) * 1.5);
+            return damage;
+        } else {
+            damage = (int) (Math.floor(Math.random() * 12) + 1  /* * user.strength */);
+            return damage;
         }
+    }
 
     public boolean criticalHit() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
+        return chance > 90;
     }
 
     public boolean miss() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 95) {
-            return true;
-        }
-        return false;
+        return chance > 95;
     }
 }

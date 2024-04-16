@@ -1,31 +1,23 @@
 package com.battlejawn.EnemyMove;
 
-import com.battlejawn.Interfaces.CriticalHit;
+import com.battlejawn.AttackInterfaces.CriticalHit;
+import lombok.Data;
 
+@Data   
 public class Impale implements CriticalHit {
     private int damage;
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void attack() {
-        setDamage(/* enemy.strength * 1.2 */ 10);
+    public int attack() {
 
         if (criticalHit()){
-            setDamage(damage *= 1.5);
+            damage = (int) ((Math.floor(Math.random() * 17) + 10 /* * user.strength */) * 1.5);
+        } else {
+            damage = (int) (Math.floor(Math.random() * 17) + 10 /* * user.strength */);
         }
+        return damage;
     }
 
     public boolean criticalHit() {
         int chance = (int) Math.floor(Math.random() * 100);
-        if (chance > 90) {
-            return true;
-        }
-        return false;
+        return chance > 90;
     }
 }

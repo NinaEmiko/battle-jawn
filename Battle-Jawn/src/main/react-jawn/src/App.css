@@ -1,23 +1,311 @@
+/* UNIVERSAL STYLINGS */
+
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: fantasy;
   color: hsl(181, 84%, 44%);
 }
 
+/******* BACKGROUND STYLINGS *******/
 
-body {
-  background-image: "url('../../resources/images/BattleJawnBackground.png')";
+.home-background-jawn {
+  background-image: url('./assets/home-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  /* Centering Content */
-  padding: 0;
-  margin: 0;
   display: flex;
-  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login-screen-background-jawn {
+  background-image: url('./assets/login-screen-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  /* Background Color */
+}
+
+.account-settings-background-jawn {
+  background-image: url('./assets/account-settings-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* CONTAINER STYLINGS */
+
+.container-jawn-hero {
   background-color: #333;
+  opacity: 90%;
+  /* Rounds edges of Display Box */
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+  padding-top: .50em;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+  width: 380px;
+  text-align: center;
+  max-height: 550px;
+  overflow-y: auto;
+}
+
+/******* NAVBAR STYLINGS *******/
+
+.navbar-nav .nav-link, .navbar-brand  {
+  color: white;
+}
+
+.navbar {
+  background-color: #00788c;
+  box-shadow: 0 0 10px 2px;
+  padding-bottom: 0px;
+  opacity: 80%;
+}
+
+/******* WRITTEN CONTENT STYLINGS *******/
+
+.title-jawn {
+  padding-top: 15px;
+}
+
+.basic-text {
+  text-align: center;
+}
+
+/* Idk why, but removing messes up login container styling */
+
+.log-reg {
+  width: 200px;
+}
+
+.log-reg-2 {
+  display: flex;
+}
+
+/******* BUTTON STYLINGS *******/
+
+.btn-grid {
+  /* Keeps Buttons in grid format */
+      display: grid;
+      /* Keeps grid in columns of 2 */
+      grid-template-columns: repeat(2, auto);
+      /* Adds spacing between buttons */
+      gap: 10px;
+  }
+
+.btn {
+  background-color: hsl(181, 84%, 44%);
+  border: 1px solid hsl(200, 100%, 30%);
+  border-radius: 0;
+  padding: 5px 10px;
+  color: black;
+  outline: none;
+  font-size: 20px;
+  width: 200px;
+  height: 50px;
+}
+
+.btn:hover {
+  border-color: black;
+}
+
+.btn:active {
+  box-shadow: 0 5px rgb(43, 43, 36);
+  transform: translateY(2px);
+}
+
+#new-hero-btn {
+  background-color: hsl(181, 84%, 44%);
+  color: black;
+}
+
+.btn-cntr {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15px;
+
+}
+
+/* Submit button for login/registration form */
+
+#submit-btn {
+  text-align: center;
+  background-color: hsl(181, 84%, 44%);
+  color: black;
+  border-radius: 0;
+  font-size: 20px;
+  height: 50px;
+  width: 200px;
+}
+
+#submit-btn:hover {
+  border-color: black;
+}
+
+#submit-btn:active {
+  box-shadow: 0 5px rgb(43, 43, 36);
+  transform: translateY(2px);}
+
+/* Non-active button between login and register is transparent */
+
+.nav-link.custom-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: hsl(181, 84%, 44%);
+  border-radius: 0;
+}
+
+/* Active button between login and register is blue */
+
+.nav-link.custom-button.active {
+  background-color: hsl(181, 84%, 44%);
+  color: black;
+}
+
+.container-jawn-hero-card {
+  justify-content: center;
+  border-radius: 5px;
+  /* Shadow Effect */
+  box-shadow: 0 0 10px 2px;
+  margin-bottom: 15px;
+}
+
+#rest-btn, #fight-btn, #delete-btn, #inventory-btn, #store-btn, #submit-btn {
+  background-color: transparent;
+  border-color: gray;
+  color: hsl(123, 68%, 54%);
+  border-radius: 0;
+  width:110px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.userPrompt {
+  color: yellow;
+  font-size: 30px;
+}
+.tab-update-password{
+  width: 50%;
+}
+.tab-delete-account{
+  width: 50%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.experience-bar {
+  background-color: #00788c;
+  /* background-color: #753ea5; */
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+}
+.experience-bar::-webkit-progress-bar {
+  background-color: rgb(170, 99, 200);
+  border: 0;
+  border-radius: 20px;
+}
+.experience-bar::-webkit-progress-value {
+  background-color: rgb(170, 99, 200);
+  border: 0;
+  border-radius: 20px;
+}
+.experience-bar::-moz-progress-bar {
+  background-color: rgb(170, 99, 200);
+  border: 0;
+  border-radius: 20px;
+}
+
+.experience-bar-container {
+  position: relative;
+  height: 25px;
+}
+
+.experience-fraction {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: bold;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.grid-item {
+  border: 1px solid black;
+  text-align: center;
+  padding: 20px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 10px 2px;
+  border-radius: 5px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.grid-item:hover {
+  font-size: 0.8em; /* Reduce font size on hover */
+}
+
+.item-name {
+  position: absolute;
+  bottom: 5px; /* Position item name at the bottom */
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* Center item name horizontally */
+}
+
+.grid-item.smaller .item-name {
+  font-size: 0.8em;
+}
+
+.top-left {
+  width: 32px;
+  text-align: center; /* Center horizontally */
+  vertical-align: middle;
+}
+
+#enemyName {
+  margin-top: 10px;
+}
+
+.user-prompt-wrapper{
+  margin-right: 425px;
+  align-items: center;
+  margin-left: 5px;
+}
+.btn-role{
+  width: 150px;
+  align-items: center;
+
+}
+
+.ms-auto{
+  text-align: right;
 }
