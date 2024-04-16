@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: com.battlejawn.BattleJawnApplication
+jar tf my-project-1.0.0.jar
