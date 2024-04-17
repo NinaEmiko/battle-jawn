@@ -5,8 +5,7 @@ FROM maven:3.8.1-openjdk-17-slim AS builder
 WORKDIR /app
 
 # Copy the backend project files to the container
-COPY ./battlejawn/backend/pom.xml ./backend/
-COPY ./battlejawn/backend/src ./backend/src/
+COPY ./battlejawn/backend/ ./backend/
 
 # Build the backend project
 RUN mvn -f ./backend/pom.xml clean package -DskipTests
