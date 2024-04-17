@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prod": "vite",
+    "prod": "NODE_ENV=production vite",
     "dev": "vite",
     "build": "NODE_ENV=production vite build",
     "preview": "vite preview"
