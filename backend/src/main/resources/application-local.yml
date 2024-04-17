@@ -11,4 +11,4 @@ spring:
 security:
   jwt:
     token:
-      secret-key: ${LOCAL_SECRET_KEY}
+      secret-key: "my-secret-key"

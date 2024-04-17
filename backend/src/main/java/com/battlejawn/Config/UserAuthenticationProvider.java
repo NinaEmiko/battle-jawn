@@ -20,10 +20,8 @@ import java.util.logging.Logger;
 
 @Component
 public class UserAuthenticationProvider {
-
     private final String secretKey;
     private final UserAccountService userAccountService;
-    private final Logger logger = Logger.getLogger(UserAuthenticationProvider.class.getName());
     @Autowired
     public UserAuthenticationProvider(@Value("${security.jwt.token.secret-key:secret-key}") String secretKey,
                                       UserAccountService userAccountService) {
@@ -32,7 +30,6 @@ public class UserAuthenticationProvider {
     }
 
     public String createToken(String login) {
-        logger.info("Creating token for login: " + login);
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000); // 1 hour
 

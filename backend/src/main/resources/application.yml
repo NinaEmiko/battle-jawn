@@ -15,3 +15,5 @@ spring:
     repositories:
       base-packages: com.battlejawn.Repository
     entityScan: com.battlejawn.Entities
+  profiles:
+    include: local
