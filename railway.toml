@@ -10,3 +10,6 @@ public = "frontend/build"
 [build]
 root = "battlejawn/backend"
 artifact = "backend/target/Battle-Jawn-1.0.0.jar"
+
+[maven]
+root = "battlejawn/backend"
