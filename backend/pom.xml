@@ -165,6 +165,8 @@
     </dependencies>
 
     <build>
+
+        <directory>target</directory>
         <plugins>
 
             <plugin>
@@ -201,4 +203,5 @@
 
         </plugins>
     </build>
+
 </project>
