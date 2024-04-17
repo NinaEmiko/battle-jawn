@@ -28,7 +28,7 @@ const Store = ({props}:{props:any}) => {
 
     const buyItems = async (id: number, item: string) => {
         const response = await
-        axios.post('http://localhost:8080/api/store/buy', {
+        axios.post('${REACT_APP_API_URL}/api/store/buy', {
             heroId: id,
             item: item,
             quantity: 1
@@ -45,7 +45,7 @@ const Store = ({props}:{props:any}) => {
 
     const sellItems = async (id: number, item: string) => {
         const response = await
-        axios.post('http://localhost:8080/api/store/sell', {
+        axios.post('${REACT_APP_API_URL}/api/store/sell', {
             heroId: id,
             item: item,
             quantity: 1
@@ -61,7 +61,7 @@ const Store = ({props}:{props:any}) => {
     }
 
     const fetchHero = async () => {
-        axios.get('http://localhost:8080/api/hero/' + props.heroId)
+        axios.get('${REACT_APP_API_URL}/api/hero/' + props.heroId)
         .then((heroResponse) => {
           setHeroName(heroResponse.data.name);
           setHeroCoins(heroResponse.data.coins);
@@ -74,7 +74,7 @@ const Store = ({props}:{props:any}) => {
     const fetchInventory = async () => {
         try {
             const response = await
-            axios.get('http://localhost:8080/api/inventory/' + props.heroId)
+            axios.get('${REACT_APP_API_URL}/api/inventory/' + props.heroId)
             console.log("props: " + props)
             setInventoryList(response.data);
             } catch (error) {

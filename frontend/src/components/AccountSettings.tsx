@@ -11,7 +11,7 @@ const AccountSettings = ({props}:{props:any}) => {
 
   const onSubmitDelete = async () => {
     try {
-      const response = await request('DELETE', `http://localhost:8080/delete/${props.id}`, {});
+      const response = await request('DELETE', "${REACT_APP_API_URL}/delete/${props.id}", {});
       setAuthHeader(null);
     }
     catch (error) {
@@ -21,7 +21,7 @@ const AccountSettings = ({props}:{props:any}) => {
 
   const handlePasswordChange = async () => {
     try {
-      const response = await request('PUT', `http://localhost:8080/update/${props.id}`, {
+      const response = await request('PUT', "${REACT_APP_API_URL}/update/${props.id}", {
       newPassword: newPassword,
     });
     setMessage(response.data);

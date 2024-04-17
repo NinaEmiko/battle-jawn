@@ -38,7 +38,7 @@ function Battle({props}:{props:any}) {
   function handleEnemyMove() {
     let timeoutId: number | undefined;
     timeoutId = setTimeout(() => {
-      axios.post('http://localhost:8080/api/enemy-move', {
+      axios.post('${REACT_APP_API_URL}/api/enemy-move', {
         battleSessionId: battleSessionId
           })
         .then(response => {
@@ -56,7 +56,7 @@ function Battle({props}:{props:any}) {
   function handleClickBattle(move: string) {
     setButtonDisabled(true);
 
-    axios.post('http://localhost:8080/api/hero-move', {
+    axios.post('${REACT_APP_API_URL}/api/hero-move', {
       move: move,
       battleSessionId: battleSessionId
         })
@@ -74,7 +74,7 @@ function Battle({props}:{props:any}) {
 
   const createNewBattleSession = () => {
       
-    axios.post('http://localhost:8080/api/battle-session/create', {
+    axios.post('${REACT_APP_API_URL}/api/battle-session/create', {
         heroId: props
         
       })
@@ -92,7 +92,7 @@ function Battle({props}:{props:any}) {
 
   const fetchInitialData = () => {
 
-    axios.get('http://localhost:8080/api/hero/' + props)
+    axios.get('${REACT_APP_API_URL}/api/hero/' + props)
     .then((heroResponse) => {
       setRole(heroResponse.data.role);
       setHealth(heroResponse.data.health);
@@ -102,7 +102,7 @@ function Battle({props}:{props:any}) {
       console.error('Error fetching hero data: ', error)
     })
 
-    axios.get('http://localhost:8080/api/enemy/' + enemyId)
+    axios.get('${REACT_APP_API_URL}/api/enemy/' + enemyId)
     .then((enemyResponse) => {
       setEnemyName(enemyResponse.data.name);
       setEnemyHealth(enemyResponse.data.health);
@@ -112,7 +112,7 @@ function Battle({props}:{props:any}) {
       console.error('Error fetching enemy data: ', error)
     })
 
-    axios.get('http://localhost:8080/api/battle-history-message/' + battleSessionId)
+    axios.get('${REACT_APP_API_URL}/api/battle-history-message/' + battleSessionId)
     .then((battleHistoryResponse) => {
       setBattleHistory(battleHistoryResponse.data);
     })
@@ -150,7 +150,7 @@ function Battle({props}:{props:any}) {
         heroRan = true;
       }
       
-      axios.post('http://localhost:8080/api/battle-session/end', {
+      axios.post('${REACT_APP_API_URL}/api/battle-session/end', {
           battleSessionId: battleSessionId, 
           battleResult: battleResult
           

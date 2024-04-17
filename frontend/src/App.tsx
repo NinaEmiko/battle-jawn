@@ -28,7 +28,7 @@ function App() {
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
     e.preventDefault();
-    request('POST', 'http://localhost:8080/login', {
+    request('POST', '${REACT_APP_API_URL}/login', {
       login: username,
       password: password,
     })
@@ -47,7 +47,7 @@ function App() {
 
   const onRegister = (event: FormEvent, username: string, password: string) => {
     event.preventDefault();
-    request('POST', 'http://localhost:8080/register', {
+    request('POST', '${REACT_APP_API_URL}/register', {
       login: username,
       password: password,
     })

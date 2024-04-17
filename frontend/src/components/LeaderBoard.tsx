@@ -16,7 +16,7 @@ const LeaderBoard = ({props}:{props:any}) => {
     const fetchHeroes = async () => {
         try {
             const response = await
-            axios.get('http://localhost:8080/api/hero/list')
+            axios.get('${REACT_APP_API_URL}/api/hero/list')
             setHeroList(response.data);
             } catch (error) {
             console.error('Error fetching Hero data: ', error)

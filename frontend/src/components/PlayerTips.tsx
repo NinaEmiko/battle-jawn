@@ -8,7 +8,7 @@ const PlayerTips = () => {
           const fetchPlayerTip = async () => {
               try {
                   const response = await
-                  axios.get('http://localhost:8080/api/player-tip/random')
+                  axios.get('${REACT_APP_API_URL}/api/player-tip/random')
                   const randomTipBody = response.data;
                           setRandomTip(randomTipBody);
                   } catch (error) {

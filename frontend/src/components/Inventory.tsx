@@ -24,7 +24,7 @@ const Inventory = ({props}:{props:any}) => {
     const fetchInventory = async () => {
         try {
             const response = await
-            axios.get('http://localhost:8080/api/inventory/' + props.heroId)
+            axios.get('${REACT_APP_API_URL}/api/inventory/' + props.heroId)
             console.log("props: " + props.heroId)
             setInventoryList(response.data);
             } catch (error) {
