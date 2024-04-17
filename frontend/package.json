@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prod": "NODE_ENV=production vite",
+    "prod": "vite --mode production --omit=dev",
     "dev": "vite",
-    "build": "NODE_ENV=production vite build",
+    "build": "vite build --mode production --omit=dev",
+    "build-dev": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
