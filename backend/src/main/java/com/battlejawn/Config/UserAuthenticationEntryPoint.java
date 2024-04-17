@@ -15,8 +15,7 @@ import java.io.IOException;
 @Component
 public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void commence(
@@ -25,6 +24,9 @@ public class UserAuthenticationEntryPoint implements AuthenticationEntryPoint {
             AuthenticationException authException) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        OBJECT_MAPPER.writeValue(response.getOutputStream(), new ErrorDTO("Unauthorized path"));
+
+        ErrorDTO errorDTO = new ErrorDTO("Unauthorized access", authException.getMessage());
+        String jsonResponse = objectMapper.writeValueAsString(errorDTO);
+        response.getWriter().write(jsonResponse);
     }
 }
