@@ -8,4 +8,5 @@ build = "cd frontend && npm install && npm run build && npm run dev && npm run b
 public = "frontend/build"
 
 [build]
+root = "battlejawn/backend"
 artifact = "backend/target/Battle-Jawn-1.0.0.jar"
