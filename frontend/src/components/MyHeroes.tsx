@@ -52,7 +52,7 @@ function MyHeroes( {props}:{props:any} ) {
   const fetchHeroes = async () => {
     try {
         const response = await
-        axios.get('${REACT_APP_API_URL}/api/hero/list/' + props.id)
+        axios.get('http://${REACT_APP_API_URL}:${PORT}/api/hero/list/' + props.id)
         setHeroList(response.data);
         } catch (error) {
         console.error('Error fetching Hero data: ', error)
@@ -64,7 +64,7 @@ function MyHeroes( {props}:{props:any} ) {
   }, [rested])
 
 function handleRest(id: any): void {
-    axios.post('${REACT_APP_API_URL}/api/hero/rest/' + id)
+    axios.post('http://${REACT_APP_API_URL}:${PORT}/api/hero/rest/' + id)
       .then(response => {
         console.log("Hero successfully rested. Response: " + response.data)
       })
@@ -95,7 +95,7 @@ function handleRest(id: any): void {
   }
 
   function handleDelete(id: any): void {
-    axios.delete('${REACT_APP_API_URL}/api/hero/delete/' + id)
+    axios.delete('http://${REACT_APP_API_URL}:${PORT}/api/hero/delete/' + id)
       .then(response => {
         console.log("Hero successfully deleted. Response: " + response.data);
         fetchHeroes();

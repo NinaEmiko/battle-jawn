@@ -28,7 +28,7 @@ function App() {
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
     e.preventDefault();
-    request('POST', '${REACT_APP_API_URL}/login', {
+    request('POST', 'http://${REACT_APP_API_URL}:${PORT}/login', {
       login: username,
       password: password,
     })
@@ -47,7 +47,7 @@ function App() {
 
   const onRegister = (event: FormEvent, username: string, password: string) => {
     event.preventDefault();
-    request('POST', '${REACT_APP_API_URL}/register', {
+    request('POST', 'http://${REACT_APP_API_URL}:${PORT}/register', {
       login: username,
       password: password,
     })

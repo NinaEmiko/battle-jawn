@@ -38,7 +38,7 @@ function Battle({props}:{props:any}) {
   function handleEnemyMove() {
     let timeoutId: number | undefined;
     timeoutId = setTimeout(() => {
-      axios.post('${REACT_APP_API_URL}/api/enemy-move', {
+      axios.post('http://${REACT_APP_API_URL}:${PORT}/api/enemy-move', {
         battleSessionId: battleSessionId
           })
         .then(response => {
@@ -56,7 +56,7 @@ function Battle({props}:{props:any}) {
   function handleClickBattle(move: string) {
     setButtonDisabled(true);
 
-    axios.post('${REACT_APP_API_URL}/api/hero-move', {
+    axios.post('http://${REACT_APP_API_URL}:${PORT}/api/hero-move', {
       move: move,
       battleSessionId: battleSessionId
         })
@@ -74,7 +74,7 @@ function Battle({props}:{props:any}) {
 
   const createNewBattleSession = () => {
       
-    axios.post('${REACT_APP_API_URL}/api/battle-session/create', {
+    axios.post('http://${REACT_APP_API_URL}:${PORT}/api/battle-session/create', {
         heroId: props
         
       })
@@ -92,7 +92,7 @@ function Battle({props}:{props:any}) {
 
   const fetchInitialData = () => {
 
-    axios.get('${REACT_APP_API_URL}/api/hero/' + props)
+    axios.get('http://${REACT_APP_API_URL}:${PORT}/api/hero/' + props)
     .then((heroResponse) => {
       setRole(heroResponse.data.role);
       setHealth(heroResponse.data.health);
@@ -102,7 +102,7 @@ function Battle({props}:{props:any}) {
       console.error('Error fetching hero data: ', error)
     })
 
-    axios.get('${REACT_APP_API_URL}/api/enemy/' + enemyId)
+    axios.get('http://${REACT_APP_API_URL}:${PORT}/api/enemy/' + enemyId)
     .then((enemyResponse) => {
       setEnemyName(enemyResponse.data.name);
       setEnemyHealth(enemyResponse.data.health);
@@ -112,7 +112,7 @@ function Battle({props}:{props:any}) {
       console.error('Error fetching enemy data: ', error)
     })
 
-    axios.get('${REACT_APP_API_URL}/api/battle-history-message/' + battleSessionId)
+    axios.get('http://${REACT_APP_API_URL}:${PORT}/api/battle-history-message/' + battleSessionId)
     .then((battleHistoryResponse) => {
       setBattleHistory(battleHistoryResponse.data);
     })

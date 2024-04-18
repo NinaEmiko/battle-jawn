@@ -16,7 +16,7 @@ const PostBattle = ({props}:{props:any}) => {
     
     function getLoot() {
         if (props.enemyId !== 0) {
-            axios.get('${REACT_APP_API_URL}/api/loot/' + props.enemyId)
+            axios.get('http://${REACT_APP_API_URL}:${PORT}/api/loot/' + props.enemyId)
             .then((lootResponse) => {
             setLoot(lootResponse.data);
             setLootActive(true);
@@ -29,7 +29,7 @@ const PostBattle = ({props}:{props:any}) => {
     }
 
       function getEmptySlots() {
-        axios.get('${REACT_APP_API_URL}/api/inventory/slots/' + props.heroId)
+        axios.get('http://${REACT_APP_API_URL}:${PORT}/api/inventory/slots/' + props.heroId)
         .then((lootResponse) => {
           setEmptySlots(lootResponse.data);
         })
@@ -49,7 +49,7 @@ const PostBattle = ({props}:{props:any}) => {
         } else if (emptySlots < selectedOptions.length){
             alert("You do not have room in your inventory for all the loot you've selected. Please unselect and try again.")
         } else {
-            axios.post('${REACT_APP_API_URL}/api/inventory/add/' + props.heroId, selectedItems, {
+            axios.post('http://${REACT_APP_API_URL}:${PORT}/api/inventory/add/' + props.heroId, selectedItems, {
                 headers: {
                 'Content-Type': 'application/json'
                 }})

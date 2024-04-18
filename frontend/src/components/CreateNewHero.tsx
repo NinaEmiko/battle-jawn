@@ -24,7 +24,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
             alert('Must enter a hero name and select a class to continue');
         } else {
             try {
-                const response = await request('POST', "${REACT_APP_API_URL}/api/hero", {
+                const response = await request('POST', "http://${REACT_APP_API_URL}:${PORT}/api/hero", {
                     userAccountId: props.id,
                     heroName: heroName,
                     role: heroRole
