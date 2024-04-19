@@ -42,13 +42,13 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
           <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <NavDropdown.Item onClick={() => handleNavigation('/')}>
-                Home
+                Home 
               </NavDropdown.Item>
               <NavDropdown.Item onClick={() => handleNavigation('/leader-board')}>
-                Leader Board
+                Leader Board 
               </NavDropdown.Item>
               <NavDropdown.Item onClick={() => handleNavigation('/account-settings')}>
-                Account Settings
+                Account Settings 
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item onClick={handleLogout}>
