@@ -35,9 +35,11 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
         <Link to="/" className="navbar-brand">
           <Navbar.Brand>{pageTitle}</Navbar.Brand>
         </Link>
+
+          {isLoggedIn &&
+          <>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-          {isLoggedIn &&
           <Nav className="ms-auto">
             <NavDropdown.Item onClick={() => handleNavigation('/')}>
                 Home
@@ -53,8 +55,10 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
                 Log Out
               </NavDropdown.Item>
           </Nav>
-          }
+          
         </Navbar.Collapse>
+        </>
+}
       </Container>
     </Navbar>
     </div>

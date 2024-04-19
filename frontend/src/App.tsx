@@ -12,7 +12,6 @@ import LeaderBoard from "./components/LeaderBoard";
 import Inventory from "./components/Inventory";
 
 function App() {
-  const apiUrl = import.meta.env.VITE_REACT_APP_URL;
   const [currentUser, setCurrentUser] = useState({
     userName: '',
     id: 0,
@@ -29,7 +28,7 @@ function App() {
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
     e.preventDefault();
-    request('POST', apiUrl + '/login', {
+    request('POST', `${import.meta.env.VITE_REACT_APP_URL}/login`, {
       login: username,
       password: password,
     })
@@ -48,7 +47,8 @@ function App() {
 
   const onRegister = (event: FormEvent, username: string, password: string) => {
     event.preventDefault();
-    request('POST', apiUrl + '/register', {
+      request('POST', `${import.meta.env.VITE_REACT_APP_URL}/register`, {
+
       login: username,
       password: password,
     })
