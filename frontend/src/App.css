@@ -1,8 +1,16 @@
 /* UNIVERSAL STYLINGS */
 
+@font-face {
+  font-family: 'FantaisieArtistique';
+  src: local('FantaisieArtistique'), url(./fonts/FantaisieArtistique.ttf) format('truetype');}
+
+@font-face {
+  font-family: 'Alice';
+  src: local('Alice'), url(./fonts/Alice\ in\ Wonderland.ttf) format('truetype');}
+
 *, *::before, *::after {
   box-sizing: border-box;
-  font-family: fantasy;
+  font-family: FantaisieArtistique;
   color: hsl(181, 84%, 44%);
 }
 
