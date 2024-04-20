@@ -72,7 +72,14 @@
     bottom: 5px; /* Position item name at the bottom */
     left: 0;
     right: 0;
+    width: 75%;
+    height: 75%;
     margin: 0 auto; /* Center item name horizontally */
+}
+
+.potion-icon{
+    width: 100%;
+    height: 100%;
 }
 
 /* BUTTON STYLINGS */

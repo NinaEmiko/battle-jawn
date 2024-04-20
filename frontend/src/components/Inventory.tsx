@@ -39,7 +39,7 @@ const Inventory = ({props}:{props:any}) => {
     const determineIcon = (item: string) => {
         switch (item) {
             case "Potion":
-                return <img className="potion"
+                return <img className="potion-icon"
                 src={healthPotion}/>;
             case "Sword":
                 return <img className="potion"
@@ -94,7 +94,7 @@ const Inventory = ({props}:{props:any}) => {
                     {[...Array(12).keys()].map(index => (
                         <div key={index} className="inventory-grid-item">
                             <div className="inventory-icon">{determineIcon(inventoryList[index])}</div>
-                            <div className="inventory-item-name">{inventoryList[index]}</div>
+                            {/* <div className="inventory-item-name">{inventoryList[index]}</div> */}
                         </div>
                     ))}
                 </div>
