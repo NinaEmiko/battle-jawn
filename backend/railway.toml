@@ -9,7 +9,7 @@ protocol = "https"
 
 [services.environments]
 [services.environments.production]
-start_command = "java -jar Battle-Jawn-1.0.0.jar"
+start_command = "java -jar target/Battle-Jawn-1.0.0.jar"
 
 [services.routes]
 [services.routes.main]
