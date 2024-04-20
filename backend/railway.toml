@@ -1,0 +1,17 @@
+# Railway Project Configuration
+
+name = "battlejawn-backend"
+region = "us-west-1"
+
+[[services]]
+internal_port = 8080
+protocol = "https"
+
+[services.environments]
+[services.environments.production]
+start_command = "java -jar Battle-Jawn-1.0.0.jar"
+
+[services.routes]
+[services.routes.main]
+port = 8080
+public = true
