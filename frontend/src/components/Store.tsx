@@ -16,6 +16,7 @@ import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import healthPotion from "../assets/healthPotion.png";
 import "../styling/Store.css";
+import PopUp from "./PopUp";
 
 const Store = ({props}:{props:any}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -27,6 +28,9 @@ const Store = ({props}:{props:any}) => {
     const [sellActive, setSellActive] = useState(false);
     const [filteredInventoryList, setFilteredInventoryList] = useState([]);
     const [buttonActive, setButtonActive] = useState(true);
+    const [popUpType, setPopUpType] = useState("");
+    const [popUpContent, setPopUpContent] = useState("");
+    const [showPopUp, setShowPopUp] = useState(false);
 
     const buyItems = async (id: number, item: string) => {
         const response = await
@@ -36,8 +40,10 @@ const Store = ({props}:{props:any}) => {
             quantity: 1
         })
         .then((response) => {
-            alert("" + response.data);
+            setPopUpType("jawn");
+            setPopUpContent(response.data);
             setPurchases(purchases + 1);
+            setShowPopUp(true);
             })
         .catch((error) => {
             console.error('Error buying items:', error);
@@ -53,8 +59,10 @@ const Store = ({props}:{props:any}) => {
             quantity: 1
         })
         .then((response) => {
-            alert("" + response.data);
+            setPopUpType("jawn");
+            setPopUpContent(response.data);
             setPurchases(purchases + 1);
+            setShowPopUp(true);
             })
         .catch((error) => {
             console.error('Error selling items:', error);
@@ -167,9 +175,14 @@ const Store = ({props}:{props:any}) => {
     function handleBackButtonClick() {
         props.setIsVisible("store")
     }
+    
+    function handleOkButtonClick() {
+        setShowPopUp(false);
+    }
 
     return (
         <div className="store-background-jawn">
+            {!showPopUp ?
             <div className="container-jawn-store">
                 <h1 className="store-title-jawn">Store</h1>
                 <div className="row justify-content-center">
@@ -188,6 +201,8 @@ const Store = ({props}:{props:any}) => {
                   Sell
                 </button>
                 </div>
+
+
                 <div className="container-jawn-store-card">
                     <div className="store-hero-name">
                         {heroName}
@@ -241,10 +256,20 @@ const Store = ({props}:{props:any}) => {
                                 ))}
                             </div>
                         }   
-                    </div>
+                    </div>             
                 </div>
                 <button className={classNames('nav-link', 'btn')} id="store-leave-btn" onClick={handleBackButtonClick}>Leave</button>
-            </div>
+                </div>
+
+                :
+                <PopUp 
+                    props={{
+                        type: popUpType,
+                        content: popUpContent,
+                        onClickOk: handleOkButtonClick
+                    }} 
+                />   
+}
         </div>
     );
 };

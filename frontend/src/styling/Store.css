@@ -101,13 +101,13 @@
 .justify-content-center{
     margin-bottom: 20px;
 }
-#tab-login{
+/* #tab-login{
     width: 25%;
 }
 
 #tab-register{
     width: 25%;
-}
+} */
 
 .btn {
     background-color: hsl(181, 84%, 44%);

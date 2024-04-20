@@ -6,15 +6,20 @@ import Battle from "./Battle";
 import Inventory from "./Inventory";
 import Store from "./Store";
 import "../styling/MyHeroes.css";
+import PopUp from "./PopUp";
 
 function MyHeroes( {props}:{props:any} ) {
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
   const [heroId, setHeroId] = useState(0);
+  const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [battleActive, setBattleActive] = useState(false);
   const [inventoryActive, setInventoryActive] = useState(false);
   const [storeActive, setStoreActive] = useState(false);
   const [heroList, setHeroList] = useState([]);
   const [rested, setRested] = useState(1);
+  const [popUpType, setPopUpType] = useState("");
+  const [popUpContent, setPopUpContent] = useState("");
+  const [showPopUp, setShowPopUp] = useState(false);
 
   let maxExperience = 50;
 
@@ -81,7 +86,9 @@ function handleRest(id: any): void {
         setHeroId(id);
         setBattleActive(true);
     } else {
-      alert("You cannot fight! You have no health!")
+      setPopUpType("jawn");
+      setPopUpContent("You cannot fight! You have no health!");
+      setShowPopUp(true);
     }
   }
 
@@ -104,6 +111,13 @@ function handleRest(id: any): void {
         console.error('Error deleting hero:', error);
       })
   }
+
+  function handleDeleteConfirmation(id: any): void {
+      setPopUpType("confirmation");
+      setPopUpContent("delete hero");
+      setShowPopUp(true);
+      setDeleteHeroId(id);
+  }
   
   function handleSubComponentButtonClick(component: string) {
       if (component === "store"){
@@ -111,6 +125,15 @@ function handleRest(id: any): void {
       } else if (component === "inventory") {
         setInventoryActive(false);
       }
+  }
+
+  function handleOkButtonClick() {
+    setShowPopUp(false);
+}
+  function handleConfirmButtonClick() {
+    console.log("confirm button clicked")
+    setShowPopUp(false);
+    handleDelete(deleteHeroId);
   }
   return (
     <>
@@ -127,7 +150,18 @@ function handleRest(id: any): void {
           <Store props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
         }
 
-        {!battleActive && !inventoryActive && !storeActive &&
+        {showPopUp &&
+          <PopUp 
+            props={{
+                type: popUpType,
+                content: popUpContent,
+                onClickOk: handleOkButtonClick,
+                onClickConfirm: handleConfirmButtonClick
+            }} 
+          />   
+        }
+
+        {!battleActive && !inventoryActive && !storeActive && !showPopUp &&
 
           <div className="container-jawn-hero">
             <h1 className="title-jawn-hero">{props.userName} Heroes</h1>
@@ -185,7 +219,7 @@ function handleRest(id: any): void {
                   {import.meta.env.VITE_REACT_APP_URL == "http://localhost:8080" &&
                   <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
                    }
-                  <button onClick={() => handleDelete(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Delete</button>
+                  <button onClick={() => handleDeleteConfirmation(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Delete</button>
             </div>
               
 
