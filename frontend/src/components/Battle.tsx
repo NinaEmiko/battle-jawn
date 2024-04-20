@@ -151,7 +151,7 @@ function Battle({props}:{props:any}) {
         heroRan = true;
       }
       
-      axios.post('${apiUrl}/api/battle-session/end', {
+      axios.post(`${import.meta.env.VITE_REACT_APP_URL}/api/battle-session/end`, {
           battleSessionId: battleSessionId, 
           battleResult: battleResult
           
