@@ -67,6 +67,10 @@
     text-align: right;
 }
 
+.dialog{
+  color: hsl(123, 68%, 54%);
+}
+
 .healthBar, .manaBar {
     background-color:#00788c;
     border-radius: 20px;

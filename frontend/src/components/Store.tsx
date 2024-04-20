@@ -170,8 +170,8 @@ const Store = ({props}:{props:any}) => {
             <div className="container-jawn-store">
                 <h1 className="store-title-jawn">Store</h1>
                 <div className="row justify-content-center">
-                    <button className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn" onClick={() => handleClickBuyTab()}>Buy</button>
-                    <button className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn" onClick={() => handleClickSellTab()}>Sell</button>
+                    <button className={classNames('nav-link', 'btn', 'custom-button')} id=" buy-switch-btn" onClick={() => handleClickBuyTab()}>Buy</button>
+                    <button className={classNames('nav-link', 'btn', 'custom-button')} id="sell-switch-btn" onClick={() => handleClickSellTab()}>Sell</button>
                 </div>
                 <div className="container-jawn-store-card">
                     <div className="store-hero-name">

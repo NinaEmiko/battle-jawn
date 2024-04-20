@@ -45,6 +45,7 @@
 
 .store-title-jawn {
     margin-top: 15px;
+    color: hsl(123, 68%, 54%);
 }
 
 .store-hero-name {
@@ -95,6 +96,10 @@
     margin-bottom: 10px;
     margin-top: 15px;
     float: right;
+}
+
+#buy-switch-btn, #sell-switch-btn{
+    color: hsl(181, 84%, 44%);
 }
 
 .btn {

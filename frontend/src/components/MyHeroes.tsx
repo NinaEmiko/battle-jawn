@@ -130,7 +130,7 @@ function handleRest(id: any): void {
         {!battleActive && !inventoryActive && !storeActive &&
 
           <div className="container-jawn-hero">
-            <h1 className="title-jawn">{props.userName} Heroes</h1>
+            <h1 className="title-jawn-hero">{props.userName} Heroes</h1>
             {heroList.length < 5 &&
             <div className="btn-cntr">
             <button className="btn" id="new-hero-btn" onClick={() => handleNavigation('/create-hero')}>Create New Hero</button>

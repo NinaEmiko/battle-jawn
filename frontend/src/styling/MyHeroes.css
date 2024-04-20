@@ -20,6 +20,11 @@
     overflow-y: auto;
   }
 
+.title-jawn-hero {
+padding-top: 15px;
+color: hsl(123, 68%, 54%);
+}
+
 .row-jawn{
     padding-left: 30px;
     text-align: left;

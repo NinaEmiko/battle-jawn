@@ -234,7 +234,7 @@ function Battle({props}:{props:any}) {
       <div className="logBox-container">
         <div className="logBox" id="logBox">
           {battleHistory.slice().reverse().map((item, index) => (
-        <div key={index}>
+        <div className="dialog" key={index}>
       {item}
       <br />
     </div>
