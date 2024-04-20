@@ -16,6 +16,6 @@ security:
 
 logging:
   level:
-    root: DEBUG
+    root: INFO
 
 URL: ${PROD_ORIGIN_URL}
