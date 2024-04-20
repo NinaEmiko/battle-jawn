@@ -26,6 +26,7 @@ const Store = ({props}:{props:any}) => {
     const [buyActive, setBuyActive] = useState(true);
     const [sellActive, setSellActive] = useState(false);
     const [filteredInventoryList, setFilteredInventoryList] = useState([]);
+    const [buttonActive, setButtonActive] = useState(true);
 
     const buyItems = async (id: number, item: string) => {
         const response = await
@@ -93,11 +94,13 @@ const Store = ({props}:{props:any}) => {
     function handleClickBuyTab() {
         setBuyActive(true);
         setSellActive(false);
+        setButtonActive(true);
     }
 
     function handleClickSellTab() {
         setSellActive(true);
         setBuyActive(false);
+        setButtonActive(false);
     }
           
     useEffect(() => {
@@ -170,8 +173,20 @@ const Store = ({props}:{props:any}) => {
             <div className="container-jawn-store">
                 <h1 className="store-title-jawn">Store</h1>
                 <div className="row justify-content-center">
-                    <button className={classNames('nav-link', 'btn', 'custom-button')} id=" buy-switch-btn" onClick={() => handleClickBuyTab()}>Buy</button>
-                    <button className={classNames('nav-link', 'btn', 'custom-button')} id="sell-switch-btn" onClick={() => handleClickSellTab()}>Sell</button>
+                <button
+                  className={classNames('nav-link', 'btn', 'custom-button', buttonActive === true ? 'active' : '')}
+                  id="tab-login"
+                  onClick={() => handleClickBuyTab()}
+                >
+                  Buy
+                </button>
+                <button
+                  className={classNames('nav-link', 'btn', 'custom-button', buttonActive === false ? 'active' : '')}
+                  id="tab-register"
+                  onClick={() => handleClickSellTab()}
+                >
+                  Sell
+                </button>
                 </div>
                 <div className="container-jawn-store-card">
                     <div className="store-hero-name">

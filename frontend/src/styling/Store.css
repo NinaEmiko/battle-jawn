@@ -98,8 +98,15 @@
     float: right;
 }
 
-#buy-switch-btn, #sell-switch-btn{
-    color: hsl(181, 84%, 44%);
+.justify-content-center{
+    margin-bottom: 20px;
+}
+#tab-login{
+    width: 25%;
+}
+
+#tab-register{
+    width: 25%;
 }
 
 .btn {
