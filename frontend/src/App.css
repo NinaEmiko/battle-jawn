@@ -171,16 +171,6 @@
   margin-bottom: 15px;
 }
 
-#rest-btn, #fight-btn, #delete-btn, #inventory-btn, #store-btn, #submit-btn {
-  background-color: transparent;
-  border-color: gray;
-  color: hsl(123, 68%, 54%);
-  border-radius: 0;
-  width:110px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
 .userPrompt {
   color: yellow;
   font-size: 30px;

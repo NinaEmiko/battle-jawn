@@ -181,8 +181,10 @@ function handleRest(id: any): void {
             <div className="row justify-content-center">
                   <button onClick={() => handleStore(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn">Store</button>
                   <button onClick={() => handleInventory(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn">Inventory</button>
-                  <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
                   <button onClick={() => handleFight(hero.id, hero.health)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
+                  {import.meta.env.VITE_REACT_APP_URL == "http://localhost:8080" &&
+                  <button onClick={() => handleRest(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
+                   }
                   <button onClick={() => handleDelete(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="delete-btn">Delete</button>
             </div>
               

@@ -41,6 +41,26 @@ color: hsl(123, 68%, 54%);
     width: 100%;
 }
 
+#rest-btn, #fight-btn, #inventory-btn, #store-btn, #submit-btn {
+  background-color: transparent;
+  border-color: gray;
+  color: hsl(123, 68%, 54%);
+  border-radius: 0;
+  width:110px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#delete-btn{
+  background-color: transparent;
+  border-color: gray;
+  color: red;
+  border-radius: 0;
+  width:110px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 768px) {
 
   }
