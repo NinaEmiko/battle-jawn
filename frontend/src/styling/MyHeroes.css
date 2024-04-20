@@ -16,7 +16,7 @@
     margin-left: 5px;
     margin-right: 5px;
     text-align: center;
-    max-height: 550px;
+    max-height: 540px;
     overflow-y: auto;
   }
 
@@ -82,8 +82,9 @@ color: hsl(123, 68%, 54%);
         margin-left: 5px;
         margin-right: 5px;
         text-align: center;
-        max-height: 550px;
+        max-height: 540px;
         overflow-y: auto;
+
       }
 
 }
