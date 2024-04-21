@@ -31,3 +31,23 @@ export const buyItems = async (id: number, item: string) => {
       throw error;
     }
   };
+
+  export const fetchHero = async (id: number) => {
+    try {
+        const response = await axios.get(`${baseURL}/api/hero/${id}` )
+        return response.data;
+    } catch (error) {
+        console.error('Error retrieving hero data:', error);
+        throw error;
+      }
+}
+
+export const fetchInventory = async (id: number) => {
+    try {
+        const response = await axios.get(`${baseURL}/api/inventory/${id}` )
+        return response.data;
+    } catch (error) {
+        console.error('Error retrieving inventory data:', error);
+        throw error;
+      }
+    }

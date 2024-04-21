@@ -17,7 +17,7 @@ import pants from "../assets/pants.png";
 import healthPotion from "../assets/healthPotion.png";
 import "../styling/Store.css";
 import PopUp from "./PopUp";
-import { buyItems, sellItems } from "../api/api";
+import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
 
 const Store = ({props}:{props:any}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -57,23 +57,20 @@ const Store = ({props}:{props:any}) => {
           }
     }
 
-    const fetchHero = async () => {
-        axios.get(apiUrl + '/api/hero/' + props.heroId)
-        .then((heroResponse) => {
-          setHeroName(heroResponse.data.name);
-          setHeroCoins(heroResponse.data.coins);
-        })
-        .catch((error) => {
-          console.error('Error fetching hero data: ', error)
-        })
+    const handleFetchHero = async () => {
+        try {
+            const data = await fetchHero(props.heroId)
+            setHeroName(data.name);
+            setHeroCoins(data.coins);
+        } catch (error) {
+            console.error('Error fetching hero data:', error);
+        }
     }
 
-    const fetchInventory = async () => {
+    const handleFetchInventory = async () => {
         try {
-            const response = await
-            axios.get(apiUrl + '/api/inventory/' + props.heroId)
-            console.log("props: " + props)
-            setInventoryList(response.data);
+            const data = await fetchInventory(props.heroId)
+            setInventoryList(data);
             } catch (error) {
             console.error('Error fetching inventory data: ', error)
             }
@@ -99,13 +96,13 @@ const Store = ({props}:{props:any}) => {
     }
           
     useEffect(() => {
-        fetchHero();
-        fetchInventory();
+        handleFetchHero();
+        handleFetchInventory();
     }, [])
 
     useEffect(() => {
-        fetchHero();
-        fetchInventory();
+        handleFetchHero();
+        handleFetchInventory();
     }, [purchases])
 
     useEffect(() => {
