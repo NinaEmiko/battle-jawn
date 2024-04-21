@@ -1,11 +1,14 @@
 import "../styling/LeaderBoard.css";
+import "../styling/AboutUs.css";
 
 const AboutUs = () => {
 
     return (
         <div className="about-us-background-jawn">
-            <h1>About Us</h1>
-            <p>Under Construction</p>
+            <div className="container-jawn-about-us">
+                <h1 className="about-us-title-jawn">About Us</h1>
+                <p>Under Construction</p>
+            </div>
         </div>
     );
   };
