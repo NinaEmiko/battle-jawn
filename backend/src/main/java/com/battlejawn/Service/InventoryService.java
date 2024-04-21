@@ -20,6 +20,14 @@ public class InventoryService {
     private HeroService heroService;
     private final Logger logger = Logger.getLogger(InventoryService.class.getName());
 
+    public String usePotion(Long id) {
+        Hero hero = heroService.getHeroById(id);
+        removeFromInventory(id, "Potion");
+        hero.setHealth(hero.getHealth() + 30);
+        heroService.updateHero(hero);
+        return hero.getName() + " used a potion.";
+    }
+
     public List<String> getInventoryById(Long id) {
         Hero hero = heroService.getHeroById(id);
         Inventory inventory = hero.getInventory();

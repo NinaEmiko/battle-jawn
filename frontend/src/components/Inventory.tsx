@@ -16,69 +16,96 @@ import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import classNames from "classnames";
 import "../styling/Inventory.css";
+import PopUp from "./PopUp";
 
 const Inventory = ({props}:{props:any}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [inventoryList, setInventoryList] = useState([])
+    const [popUpType, setPopUpType] = useState("");
+    const [popUpContent, setPopUpContent] = useState("");
+    const [showPopUp, setShowPopUp] = useState(false);
 
     const fetchInventory = async () => {
         try {
             const response = await
             axios.get(apiUrl + '/api/inventory/' + props.heroId)
-            console.log("props: " + props.heroId)
             setInventoryList(response.data);
             } catch (error) {
             console.error('Error fetching inventory data: ', error)
             }
         }
+
+    const usePotion = () => {
+    
+        axios.post(apiUrl + '/api/inventory/potion/' + props.heroId)
+            .then((response) => {
+                setPopUpType("jawn");
+                setPopUpContent(response.data);
+                setShowPopUp(true);
+            })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        }
+        )
+        }
       
     useEffect(() => {
         fetchInventory();
     }, [])
+    useEffect(() => {
+        fetchInventory();
+    }, [showPopUp])
+
+    function handleClickPotion() {
+        usePotion();
+    }
+    function handleClickNotPotion() {
+        console.log("Not a potion")
+    }
 
     const determineIcon = (item: string) => {
         switch (item) {
             case "Potion":
-                return <img className="potion-icon"
+                return <img className="potion-icon" onClick={handleClickPotion}
                 src={healthPotion}/>;
             case "Sword":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={sword}/>;
             case "Wolf pelt":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={pelt}/>;
             case "Vest":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={vest}/>;
             case "Wolf scraps":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={scraps}/>;
             case "Wolf paw":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={paw}/>;
             case "Spirit trinket":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={trinket}/>;
             case "Orc necklace":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={necklace}/>;
             case "Helm":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={helm}/>;
             case "Mask":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={mask}/>;
             case "Jewels":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={jewels}/>;
             case "Boots":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={boots}/>;
             case "Dagger":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={dagger}/>;
             case "Pants":
-                return <img className="potion"
+                return <img className="potion" onClick={handleClickNotPotion}
                 src={pants}/>;
         }
     }
@@ -86,8 +113,15 @@ const Inventory = ({props}:{props:any}) => {
         props.setIsVisible("inventory")
     }
 
+    function handleOkButtonClick() {
+        setShowPopUp(false);
+    }
+
     return (
         <div className="inventory-background-jawn">
+
+            {!showPopUp ? 
+        
             <div className="container-jawn-inventory">
                 <h1 className="inventory-title-jawn">Inventory</h1>
                 <div className="inventory-grid-container">
@@ -100,6 +134,15 @@ const Inventory = ({props}:{props:any}) => {
                 </div>
                 <button className={classNames('nav-link', 'btn')} id="inventory-close-btn" onClick={handleBackButtonClick}>Close</button>
             </div>
+            :
+            <PopUp 
+                props={{
+                    type: popUpType,
+                    content: popUpContent,
+                    onClickOk: handleOkButtonClick
+                }} 
+            />   
+}
         </div>
     );
   };

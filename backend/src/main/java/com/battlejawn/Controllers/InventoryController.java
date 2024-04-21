@@ -17,6 +17,17 @@ public class InventoryController {
     private InventoryService inventoryService;
     private JsonParser jsonParser;
     private final Logger logger = Logger.getLogger(InventoryController.class.getName());
+
+    @PostMapping("/potion/{id}")
+    public ResponseEntity<String> usePotion(@PathVariable Long id){
+        String response = inventoryService.usePotion(id);
+        if (response != null) {
+            URI location = URI.create("/potion/");
+            return ResponseEntity.created(location).body(response);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @GetMapping("/loot-options/{id}")
     public ResponseEntity<List<String>> getLootOptions(@PathVariable Long id) {
         List<String> loot = inventoryService.getLootOptions(id);
