@@ -14,7 +14,6 @@ interface CustomNavBarProps {
 const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLoggedIn }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
@@ -55,16 +54,16 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
           {isLoggedIn &&
           <>
           <NavDropdown onSelect={handleSelect} align="end" title="Menu" id="basic-nav-dropdown">
-            <NavDropdown.Item active={location.pathname === '/'} className="drop-down-item" onClick={() => handleNavigation('/')}>
+            <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/')}>
                 Home 
               </NavDropdown.Item>
-              <NavDropdown.Item active={location.pathname === '/leader-board'} className="drop-down-item" onClick={() => handleNavigation('/leader-board')}>
+              <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/leader-board')}>
                 Leader Board 
               </NavDropdown.Item>
-              <NavDropdown.Item active={location.pathname === '/about-us'} className="drop-down-item" onClick={() => handleNavigation('/about-us')}>
+              <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/about-us')}>
                 About Us
               </NavDropdown.Item>
-              <NavDropdown.Item active={location.pathname === '/account-settings}'} className="drop-down-item" onClick={() => handleNavigation('/account-settings')}>
+              <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/account-settings')}>
                 Account Settings 
               </NavDropdown.Item>
               <NavDropdown.Divider />
