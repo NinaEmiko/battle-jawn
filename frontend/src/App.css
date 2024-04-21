@@ -292,9 +292,17 @@ ul {
 .drop-down-item{
   margin-left: 25px;
   font-size: 20px;
+  margin-left: 0px;
 
 
 }
+
+/* #basic-nav-dropdown{
+  float: right;
+} */
+/* .dropdown-menu{
+  float: right;
+} */
 
 @media (max-width: 576px) {
 .drop-down-item{
