@@ -17,6 +17,7 @@ import pants from "../assets/pants.png";
 import healthPotion from "../assets/healthPotion.png";
 import "../styling/Store.css";
 import PopUp from "./PopUp";
+import { buyItems, sellItems } from "../api/api";
 
 const Store = ({props}:{props:any}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -32,42 +33,28 @@ const Store = ({props}:{props:any}) => {
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
 
-    const buyItems = async (id: number, item: string) => {
-        const response = await
-        axios.post(apiUrl + '/api/store/buy', {
-            heroId: id,
-            item: item,
-            quantity: 1
-        })
-        .then((response) => {
-            setPopUpType("jawn");
-            setPopUpContent(response.data);
-            setPurchases(purchases + 1);
-            setShowPopUp(true);
-            })
-        .catch((error) => {
+    const handleBuyItems = async (id: number, item: string) => {
+        try {
+          const data = await buyItems(id, item);
+          setPopUpType('jawn');
+          setPopUpContent(data);
+          setPurchases(prevPurchases => prevPurchases + 1);
+          setShowPopUp(true);
+        } catch (error) {
             console.error('Error buying items:', error);
         }
-        )
-    }
+      };
 
-    const sellItems = async (id: number, item: string) => {
-        const response = await
-        axios.post(apiUrl + '/api/store/sell', {
-            heroId: id,
-            item: item,
-            quantity: 1
-        })
-        .then((response) => {
-            setPopUpType("jawn");
-            setPopUpContent(response.data);
-            setPurchases(purchases + 1);
+    const handleSellItems = async (id: number, item: string) => {
+        try {
+            const data = await sellItems(id, item);
+            setPopUpType('jawn');
+            setPopUpContent(data);
+            setPurchases(prevPurchases => prevPurchases + 1);
             setShowPopUp(true);
-            })
-        .catch((error) => {
-            console.error('Error selling items:', error);
-        }
-        )
+          } catch (error) {
+              console.error('Error buying items:', error);
+          }
     }
 
     const fetchHero = async () => {
@@ -93,11 +80,11 @@ const Store = ({props}:{props:any}) => {
         }
 
     function handleClickBuy(id: number, item: string) {
-        buyItems(id, item);
+        handleBuyItems(id, item);
     }
 
     function handleClickSell(id: number, item: string) {
-        sellItems(id, item);
+        handleSellItems(id, item);
     }
     function handleClickBuyTab() {
         setBuyActive(true);
