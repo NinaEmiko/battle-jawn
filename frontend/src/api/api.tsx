@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAuthToken } from '../helpers/axios_helper';
 
 const baseURL = import.meta.env.VITE_REACT_APP_URL;
 
@@ -49,3 +50,4 @@ export const fetchInventory = async (id: number) => {
         throw error;
     }
 }
+

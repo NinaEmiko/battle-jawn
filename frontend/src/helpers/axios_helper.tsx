@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export const getAuthToken = () => {
     return window.localStorage.getItem('auth_token');
 };
@@ -24,3 +23,7 @@ export const request = (method: any, url: any, data: any) => {
         headers: headers,
         data: data});
 };
+
+function jwt_decode(token: string) {
+    throw new Error('Function not implemented.');
+}

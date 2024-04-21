@@ -4,13 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
-import { request, setAuthHeader } from "./helpers/axios_helper";
+import { getAuthToken, request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
 import AccountSettings from "./components/AccountSettings";
 import CreateNewHero from "./components/CreateNewHero";
 import LeaderBoard from "./components/LeaderBoard";
 import Inventory from "./components/Inventory";
 import AboutUs from "./components/AboutUs";
+import axios from "axios";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -18,6 +19,18 @@ function App() {
     id: 0,
     loggedIn: false,
 }) 
+
+const authenticator = axios.create({
+  baseURL: import.meta.env.VITE_REACT_APP_URL,
+});
+
+authenticator.interceptors.request.use((config: any) => {
+  const token = getAuthToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
   const logout = () => {
     setCurrentUser((prev) => ({
