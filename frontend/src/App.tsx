@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
-import { getAuthToken, isAuthenticated, request, setAuthHeader } from "./helpers/axios_helper";
+import { getAuthToken, request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
 import AccountSettings from "./components/AccountSettings";
 import CreateNewHero from "./components/CreateNewHero";
@@ -28,7 +28,7 @@ function App() {
     setAuthHeader(null);
   };
 
-
+  
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
     e.preventDefault();
@@ -75,25 +75,25 @@ function App() {
         <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn}/>
         {/* <div className="background-jawn"> */}
         <Routes>
-            {isAuthenticated() && (
+            {currentUser.loggedIn && (
               <Route key="my-heroes" path="/" element={<MyHeroes props={currentUser} />} />
             )}
             {!currentUser.loggedIn && (
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
             )}
-            {isAuthenticated() && (
+            {currentUser.loggedIn && (
               <Route key="create-hero" path="/create-hero" element={ <CreateNewHero props={currentUser} />} />
             )}
-            {isAuthenticated() && (
+            {currentUser.loggedIn && (
               <Route key="leader-board" path="/leader-board" element={ <LeaderBoard props={currentUser} />} />
             )}
-            {isAuthenticated() && (
+            {currentUser.loggedIn && (
               <Route key="account-settings" path="/account-settings" element={ <AccountSettings props={currentUser} />} />
             )}
-            {isAuthenticated() && (
+            {currentUser.loggedIn && (
               <Route key="inventory" path="/inventory" element={ <Inventory props={currentUser} />} />
             )}
-            {isAuthenticated() && (
+            {currentUser.loggedIn && (
               <Route key="about-us" path="/about-us" element={ <AboutUs />} />
             )}
           </Routes>
