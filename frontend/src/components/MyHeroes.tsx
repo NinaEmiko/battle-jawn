@@ -69,6 +69,10 @@ function MyHeroes( {props}:{props:any} ) {
     fetchHeroes();
   }, [rested])
 
+  useEffect(() => {
+    fetchHeroes();
+  }, [showPopUp])
+
 function handleRest(id: any): void {
     axios.post(apiUrl + '/api/hero/rest/' + id)
       .then(response => {

@@ -21,11 +21,21 @@ public class InventoryService {
     private final Logger logger = Logger.getLogger(InventoryService.class.getName());
 
     public String usePotion(Long id) {
+        String msg = "";
         Hero hero = heroService.getHeroById(id);
-        removeFromInventory(id, "Potion");
-        hero.setHealth(hero.getHealth() + 30);
+        if (hero.getHealth() == hero.getMaxHealth()) {
+            msg = hero.getName() + " is at max health.";
+        } else if (hero.getMaxHealth() - hero.getHealth() < 30) {
+            removeFromInventory(id, "Potion");
+            msg = hero.getName() + " used a potion.";
+            hero.setHealth(hero.getMaxHealth());
+        } else {
+            removeFromInventory(id, "Potion");
+            msg = hero.getName() + " used a potion.";
+            hero.setHealth(hero.getHealth() + 30);
+        }
         heroService.updateHero(hero);
-        return hero.getName() + " used a potion.";
+        return msg;
     }
 
     public List<String> getInventoryById(Long id) {
