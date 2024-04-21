@@ -1,5 +1,6 @@
 package com.battlejawn.DTO;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SignUpDTO {
 
-    @NotEmpty
+    @NotBlank(message = "Username is required")
     private String login;
-
     @NotEmpty
     private char[] password;
 

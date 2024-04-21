@@ -3,15 +3,18 @@ package com.battlejawn.Controllers;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Service.HeroMoveService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.logging.Logger;
 
 @Controller
+@Validated
 @RequestMapping("/api/hero-move")
 public class HeroMoveController {
     @Autowired
@@ -25,7 +28,7 @@ public class HeroMoveController {
     }
 
     @PostMapping
-    public ResponseEntity<HeroMoveDTO> heroMove(@RequestBody String data) {
+    public ResponseEntity<HeroMoveDTO> heroMove(@Valid @RequestBody String data) {
         logger.info("Inside heroMove controller method. Data: " + data + ".");
         String parsedMove = jsonParser.extractMove(data);
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);

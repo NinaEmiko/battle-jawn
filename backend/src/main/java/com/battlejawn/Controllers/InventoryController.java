@@ -2,15 +2,18 @@ package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Service.InventoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
+@Validated
 @RequestMapping("/api/inventory")
 @AllArgsConstructor
 public class InventoryController {
@@ -39,7 +42,7 @@ public class InventoryController {
         }
     }
     @PostMapping("/add/{id}")
-    public ResponseEntity<String> addToInventory(@PathVariable Long id, @RequestBody List<String> selectedItems) {
+    public ResponseEntity<String> addToInventory(@PathVariable Long id,@Valid @RequestBody List<String> selectedItems) {
 
         if (selectedItems != null){
             inventoryService.updateInventory(id, selectedItems);
@@ -50,7 +53,7 @@ public class InventoryController {
         }
     }
     @DeleteMapping("/remove/{id}")
-    public ResponseEntity<String> removeFromInventory(@PathVariable Long id, @RequestBody String selectedItems) {
+    public ResponseEntity<String> removeFromInventory(@PathVariable Long id, @Valid @RequestBody String selectedItems) {
         List<String> extractedSelectedItems = jsonParser.extractSelectedItems(selectedItems);
         if (extractedSelectedItems != null) {
             inventoryService.removeMultipleFromInventory(id, extractedSelectedItems);

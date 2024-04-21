@@ -3,10 +3,12 @@ package com.battlejawn.Controllers;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Service.EnemyMoveService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import java.net.URI;
 import java.util.logging.Logger;
 
 @Controller
+@Validated
 @RequestMapping("/api/enemy-move")
 public class EnemyMoveController {
     @Autowired
@@ -27,7 +30,7 @@ public class EnemyMoveController {
     }
 
     @PostMapping
-    public ResponseEntity<HeroMoveDTO> enemyMove(@RequestBody String data) {
+    public ResponseEntity<HeroMoveDTO> enemyMove(@Valid @RequestBody String data) {
         logger.info("Inside enemyMove controller method. Data: " + data + ".");
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);
         HeroMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(parsedBattleId);

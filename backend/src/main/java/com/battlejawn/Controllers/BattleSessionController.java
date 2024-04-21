@@ -3,17 +3,20 @@ package com.battlejawn.Controllers;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Service.BattleSessionService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.logging.Logger;
 
 @RestController
+@Validated
 @RequestMapping("/api/battle-session")
 @AllArgsConstructor
 public class BattleSessionController {
@@ -37,7 +40,7 @@ public class BattleSessionController {
 
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<BattleSession> createNewBattleSession(@RequestBody String heroId) {
+    public ResponseEntity<BattleSession> createNewBattleSession(@Valid @RequestBody String heroId) {
         logger.info("Inside createNewBattleSession controller method. Hero ID: " + heroId + ".");
         Long parsedHeroId = jsonParser.extractHeroId(heroId);
         BattleSession battleSession = battleSessionService.createNewBattleSession(parsedHeroId);
@@ -51,7 +54,7 @@ public class BattleSessionController {
 
     @PostMapping(path = "/end", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<String> processEndOfBattle(@RequestBody String data) {
+    public ResponseEntity<String> processEndOfBattle(@Valid @RequestBody String data) {
         logger.info("Inside processEndOfBattle controller method. Data: " + data + ".");
         Long battleSessionId = jsonParser.extractBattleSessionId(data);
         String battleResult = jsonParser.extractBattleResult(data);

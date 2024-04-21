@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -22,6 +23,7 @@ import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 @RestController
+@Validated
 public class UserAccountController {
     private final UserAccountService userAccountService;
     private final UserAuthenticationProvider userAuthenticationProvider;
@@ -42,7 +44,7 @@ public class UserAccountController {
         return ResponseEntity.created(URI.create("/user-account/" + userAccountDTO.getId())).body(userAccountDTO);
     }
     @GetMapping("/api/user-account/{id}")
-    public ResponseEntity<UserAccountDTO> getUserAccountById(@PathVariable("id") Long id) {
+    public ResponseEntity<UserAccountDTO> getUserAccountById(@Valid @PathVariable("id") Long id) {
         logger.info("Inside getUserAccountById controller method. User Account ID: " + id + ".");
         UserAccountDTO userAccountDTO = userAccountService.getUserAccountById(id);
 
@@ -53,7 +55,7 @@ public class UserAccountController {
         }
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteAccountById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAccountById(@Valid @PathVariable Long id) {
         logger.info("Inside deleteAccountById controller method. User Account Id: " + id);
         String response = userAccountService.deleteUserAccountById(id);
         return ResponseEntity.ok(response);

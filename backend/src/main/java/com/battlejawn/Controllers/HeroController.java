@@ -5,15 +5,18 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.battlejawn.Service.HeroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Config.UserResponse;
 import com.battlejawn.Entities.Hero.Hero;
 
 @RestController
+@Validated
 @RequestMapping("/api/hero")
 public class HeroController {
     @Autowired
@@ -27,7 +30,7 @@ public class HeroController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> createNewHero(@RequestBody String data) {
+    public ResponseEntity<UserResponse> createNewHero(@Valid @RequestBody String data) {
         logger.info("Inside createNewHero controller method. New Hero Object: " + data + ".");
         String parsedName = jsonParser.extractHeroName(data);
         String parsedRole = jsonParser.extractRole(data);

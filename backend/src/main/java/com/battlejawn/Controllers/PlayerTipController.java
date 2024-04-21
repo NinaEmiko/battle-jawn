@@ -7,11 +7,13 @@ import java.util.logging.Logger;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.battlejawn.Entities.PlayerTip;
 import com.battlejawn.Service.PlayerTipService;
 
 @RestController
+@Validated
 @RequestMapping("/api/player-tip")
 public class PlayerTipController {
     @Autowired
