@@ -24,6 +24,7 @@ export const request = (method: any, url: any, data: any) => {
         data: data});
 };
 
-function jwt_decode(token: string) {
-    throw new Error('Function not implemented.');
-}
+export const isAuthenticated = () => {
+    const token = getAuthToken();
+    return token !== null; // Return true if token exists, false otherwise
+  };

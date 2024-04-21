@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
-import { getAuthToken, request, setAuthHeader } from "./helpers/axios_helper";
+import { getAuthToken, isAuthenticated, request, setAuthHeader } from "./helpers/axios_helper";
 import MyHeroes from "./components/MyHeroes";
 import AccountSettings from "./components/AccountSettings";
 import CreateNewHero from "./components/CreateNewHero";
@@ -20,18 +20,6 @@ function App() {
     loggedIn: false,
 }) 
 
-const authenticator = axios.create({
-  baseURL: import.meta.env.VITE_REACT_APP_URL,
-});
-
-authenticator.interceptors.request.use((config: any) => {
-  const token = getAuthToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
   const logout = () => {
     setCurrentUser((prev) => ({
       ...prev,
@@ -39,6 +27,8 @@ authenticator.interceptors.request.use((config: any) => {
     }));
     setAuthHeader(null);
   };
+
+
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
     e.preventDefault();
@@ -85,25 +75,25 @@ authenticator.interceptors.request.use((config: any) => {
         <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn}/>
         {/* <div className="background-jawn"> */}
         <Routes>
-            {currentUser.loggedIn && (
+            {isAuthenticated() && (
               <Route key="my-heroes" path="/" element={<MyHeroes props={currentUser} />} />
             )}
             {!currentUser.loggedIn && (
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
             )}
-            {currentUser.loggedIn && (
+            {isAuthenticated() && (
               <Route key="create-hero" path="/create-hero" element={ <CreateNewHero props={currentUser} />} />
             )}
-            {currentUser.loggedIn && (
+            {isAuthenticated() && (
               <Route key="leader-board" path="/leader-board" element={ <LeaderBoard props={currentUser} />} />
             )}
-            {currentUser.loggedIn && (
+            {isAuthenticated() && (
               <Route key="account-settings" path="/account-settings" element={ <AccountSettings props={currentUser} />} />
             )}
-            {currentUser.loggedIn && (
+            {isAuthenticated() && (
               <Route key="inventory" path="/inventory" element={ <Inventory props={currentUser} />} />
             )}
-            {currentUser.loggedIn && (
+            {isAuthenticated() && (
               <Route key="about-us" path="/about-us" element={ <AboutUs />} />
             )}
           </Routes>
