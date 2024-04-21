@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import classNames from 'classnames';
 import vest from "../assets/vest.png";
@@ -20,7 +19,6 @@ import PopUp from "./PopUp";
 import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
 
 const Store = ({props}:{props:any}) => {
-    const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [purchases, setPurchases] = useState(1);
     const [inventoryList, setInventoryList] = useState([]);
     const [heroName, setHeroName] = useState("");
