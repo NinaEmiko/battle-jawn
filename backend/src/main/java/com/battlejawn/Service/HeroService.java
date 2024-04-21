@@ -65,6 +65,12 @@ public class HeroService {
         return null;
     }
 
+    @Transactional
+    public void restAllHeroes() {
+        logger.info("Inside restAllHeroes service method.");
+        heroRepository.restAllHeroes();
+    }
+
     public List<Hero> getHeroListByAccountId(Long id) {
         logger.info("Inside getHeroListByAccountId service method. User Account ID: " + id);
         List<Hero> heroList = heroRepository.findByUserAccountId(id);
