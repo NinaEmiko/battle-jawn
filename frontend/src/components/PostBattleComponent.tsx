@@ -7,7 +7,7 @@ const PostBattleComponent = ({props}:{props:any}) => {
 
     return (
         <div className="container-jawn-login-form">
-            <h1 className="title-jawn">{props}</h1>
+            <h1 className="post-battle-text">{props}</h1>
             <button className="btn">OK</button>
         </div>
     );

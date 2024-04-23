@@ -68,7 +68,8 @@
 }
 
 .dialog{
-  color: hsl(123, 68%, 54%);
+  color: white;
+  font-size: 20px;
 }
 
 .healthBar, .manaBar {

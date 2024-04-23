@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styling/PostBattle.css";
 
 const PostBattle = ({props}:{props:any}) => {
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -90,17 +91,17 @@ const PostBattle = ({props}:{props:any}) => {
         <div className="container-jawn-login-form">
 
             {props.ran ? (
-                <h1 className="title-jawn">You ran away.</h1>
+                <h1 className="post-battle-text">You ran away.</h1>
             ) : (
                 <div>
                     <h1 className="title-jawn">{props.message}</h1>
-                    Select loot you wish to pick up:
+                    <p className="select-text">Select loot you wish to pick up:</p>
                     {loot.map ((item, index) =>
                         <div key={index}>
                             <input 
                                 type="checkbox" 
                                 onChange={() => handleSelect(item)}/>
-                            <label>{item}</label>
+                            <label className="label-jawn">{item}</label>
                         </div>
                     )}
                 </div>
