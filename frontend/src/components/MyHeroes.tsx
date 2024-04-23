@@ -177,7 +177,7 @@ function handleRest(id: any): void {
             <div className="">
             {heroList.map((hero) => (
           <div className="container-jawn-hero-card" key={hero.id}>
-            <div className="userPrompt">
+            <div className="hero-name">
                 {hero.name}
             </div>
             <table className="my-heroes-table">

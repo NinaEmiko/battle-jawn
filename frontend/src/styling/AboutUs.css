@@ -24,4 +24,9 @@
     margin-top: 15px;
     margin-bottom: 15px;
     color: hsl(123, 68%, 54%);
+    font-size: 50px;
+}
+
+.about-us-content{
+    font-size: 30px;
 }

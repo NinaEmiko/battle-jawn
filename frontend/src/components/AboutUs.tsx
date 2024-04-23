@@ -7,7 +7,7 @@ const AboutUs = () => {
         <div className="about-us-background-jawn">
             <div className="container-jawn-about-us">
                 <h1 className="about-us-title-jawn">About Us</h1>
-                <p>Under Construction</p>
+                <p className="about-us-content">Under Construction</p>
             </div>
         </div>
     );
