@@ -194,12 +194,23 @@ ul {
   height: 100%;
   border: 0;
 }
+
 .experience-bar::-webkit-progress-value {
   background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+  border: 0;
 }
 
 .experience-bar::-moz-progress-bar {
   background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+  border: 0;
 }
 
 .experience-bar-container {
@@ -302,4 +313,31 @@ ul {
   margin-left: 0px;
   font-size: 25px;
 }
+
+.experience-bar {
+  background-color: rgb(61, 163, 191);
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+  border: 0;
+}
+.experience-bar::-webkit-progress-value {
+  background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+  border: 0;
+}
+
+.experience-bar::-moz-progress-bar {
+  background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+  border: 0;
+}
+
 }
