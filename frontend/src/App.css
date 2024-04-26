@@ -197,20 +197,10 @@ ul {
 
 .experience-bar::-webkit-progress-value {
   background-color: rgb(211, 113, 231); 
-  border-radius: 20px;
-  margin: 5px;
-  width: 90%;
-  height: 100%;
-  border: 0;
 }
 
 .experience-bar::-moz-progress-bar {
   background-color: rgb(211, 113, 231); 
-  border-radius: 20px;
-  margin: 5px;
-  width: 90%;
-  height: 100%;
-  border: 0;
 }
 
 .experience-bar-container {
@@ -324,20 +314,10 @@ ul {
 }
 .experience-bar::-webkit-progress-value {
   background-color: rgb(211, 113, 231); 
-  border-radius: 20px;
-  margin: 5px;
-  width: 90%;
-  height: 100%;
-  border: 0;
 }
 
 .experience-bar::-moz-progress-bar {
   background-color: rgb(211, 113, 231); 
-  border-radius: 20px;
-  margin: 5px;
-  width: 90%;
-  height: 100%;
-  border: 0;
 }
 
 }
