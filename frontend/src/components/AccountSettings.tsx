@@ -1,6 +1,7 @@
 import { request, setAuthHeader } from "../helpers/axios_helper";
 import { useState } from 'react';
 import classNames from 'classnames';
+import "../styling/AccountSettings.css";
 
 const AccountSettings = ({props}:{props:any}) => {
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -47,7 +48,7 @@ const AccountSettings = ({props}:{props:any}) => {
     <div className="account-settings-background-jawn">
     <div className="container-jawn-login-form log-reg">
       <div className="row justify-content-center">
-        <h1 className="title-jawn">Account Settings</h1>
+        <h1 className="account-settings-title-jawn">Account Settings</h1>
         <ul className="nav-justified mb-3 log-reg-2" id="ex1" role="tablist">
           <li className="nav-item" role="presentation">
             <button

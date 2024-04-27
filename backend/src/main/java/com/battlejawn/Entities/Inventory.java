@@ -45,9 +45,9 @@ public class Inventory {
     private String slotTwelve;
 
     public Inventory() {
-        this.slotOne = "";
-        this.slotTwo = "";
-        this.slotThree = "";
+        this.slotOne = "Potion";
+        this.slotTwo = "Potion";
+        this.slotThree = "Potion";
         this.slotFour = "";
         this.slotFive = "";
         this.slotSix = "";

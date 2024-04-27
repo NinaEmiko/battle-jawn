@@ -314,10 +314,12 @@ ul {
 }
 .experience-bar::-webkit-progress-value {
   background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
 }
 
 .experience-bar::-moz-progress-bar {
   background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
 }
 
 }

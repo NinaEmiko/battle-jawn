@@ -71,9 +71,9 @@ public class InventoryServiceTest {
     void removeFromInventoryTest() {
         List<String> jawn = new ArrayList<>();
 
-        jawn.add("One");
-        jawn.add("Two");
-        jawn.add("Three");
+        jawn.add("Potion");
+        jawn.add("Potion");
+        jawn.add("Potion");
         jawn.add("Four");
         jawn.add("Five");
         jawn.add("Six");
@@ -86,9 +86,6 @@ public class InventoryServiceTest {
 
         Inventory inventoryFull = new Inventory();
 
-        inventoryFull.setSlotOne("One");
-        inventoryFull.setSlotTwo("Two");
-        inventoryFull.setSlotThree("Three");
         inventoryFull.setSlotFour("Four");
         inventoryFull.setSlotFive("Five");
         inventoryFull.setSlotSix("Six");
@@ -108,18 +105,18 @@ public class InventoryServiceTest {
 
         inventoryService.removeMultipleFromInventory(1L, jawn);
 
-        Assertions.assertEquals(inventory.getSlotOne(), "");
-        Assertions.assertEquals(inventory.getSlotTwo(), "");
-        Assertions.assertEquals(inventory.getSlotThree(), "");
-        Assertions.assertEquals(inventory.getSlotFour(), "");
-        Assertions.assertEquals(inventory.getSlotFive(), "");
-        Assertions.assertEquals(inventory.getSlotSix(), "");
-        Assertions.assertEquals(inventory.getSlotSeven(), "");
-        Assertions.assertEquals(inventory.getSlotEight(), "");
-        Assertions.assertEquals(inventory.getSlotNine(), "");
-        Assertions.assertEquals(inventory.getSlotTen(), "");
-        Assertions.assertEquals(inventory.getSlotEleven(), "");
-        Assertions.assertEquals(inventory.getSlotTwelve(), "");
+        Assertions.assertEquals(inventoryFull.getSlotOne(), "");
+        Assertions.assertEquals(inventoryFull.getSlotTwo(), "");
+        Assertions.assertEquals(inventoryFull.getSlotThree(), "");
+        Assertions.assertEquals(inventoryFull.getSlotFour(), "");
+        Assertions.assertEquals(inventoryFull.getSlotFive(), "");
+        Assertions.assertEquals(inventoryFull.getSlotSix(), "");
+        Assertions.assertEquals(inventoryFull.getSlotSeven(), "");
+        Assertions.assertEquals(inventoryFull.getSlotEight(), "");
+        Assertions.assertEquals(inventoryFull.getSlotNine(), "");
+        Assertions.assertEquals(inventoryFull.getSlotTen(), "");
+        Assertions.assertEquals(inventoryFull.getSlotEleven(), "");
+        Assertions.assertEquals(inventoryFull.getSlotTwelve(), "");
     }
 
     @Test
@@ -127,7 +124,7 @@ public class InventoryServiceTest {
         when(heroService.getHeroById(anyLong())).thenReturn(tank);
         System.out.println(tank.getInventory());
         Integer slotSize = inventoryService.getEmptySlotSize(1L);
-        Assertions.assertEquals(slotSize, 12);
+        Assertions.assertEquals(slotSize, 9);
     }
 
     @Test
