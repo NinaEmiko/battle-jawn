@@ -304,13 +304,17 @@ ul {
   font-size: 25px;
 }
 
+.experience-bar-container {
+  position: relative;
+  height: 25px;
+}
+
 .experience-bar {
   background-color: rgb(61, 163, 191);
   border-radius: 20px;
   margin: 5px;
   width: 90%;
   height: 100%;
-  border: 0;
 }
 .experience-bar::-webkit-progress-value {
   background-color: rgb(211, 113, 231); 
