@@ -49,6 +49,59 @@ function MyHeroes( {props}:{props:any} ) {
     }
   }
 
+  function determineMaxExperience(level: number) {
+    switch (level) {
+      case 1:
+        return 50;
+      case 2:
+        return 125;
+      case 3:
+        return 300;
+      case 4:
+        return 500;
+      case 5:
+        return 750;
+      case 6:
+        return 1250;
+      case 7:
+        return 2000;
+      case 8:
+        return 3000;
+      case 9:
+      case 10:
+        return 5000;
+      default:
+        return 50;
+    }
+  }
+
+  function determineNumerator(level: number, experience: number) {
+    switch (level) {
+      case 1:
+        return experience;
+      case 2:
+        return experience - 50;
+      case 3:
+        return experience - 125;
+      case 4:
+        return experience - 300;
+      case 5:
+        return experience - 500;
+      case 6:
+        return experience - 750;
+      case 7:
+        return experience - 1250;
+      case 8:
+        return experience - 2000;
+      case 9:
+        return experience - 3000;
+      case 10:
+        return experience - 5000;
+      default:
+        return experience - 50;
+    }
+  }
+
   const navigate = useNavigate();
 
   const handleNavigation = (path: string) => {
@@ -208,7 +261,7 @@ function handleRest(id: any): void {
             </table>
             <div className="experience-bar-container">
               <progress className='experience-bar' value={hero.experience} max={determineMaxExperience(hero.level)}></progress>
-              <span className="experience-fraction">{hero.experience}/{determineMaxExperience(hero.level)}</span>
+              <span className="experience-fraction">{determineNumerator(hero.level, hero.experience)}/{determineMaxExperience(hero.level)}</span>
             </div>
             <div className="row justify-content-center">
                   <button onClick={() => handleStore(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn">Store</button>

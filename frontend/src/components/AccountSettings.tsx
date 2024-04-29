@@ -15,7 +15,6 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
   const [popUpType, setPopUpType] = useState("");
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
-  const [accountDeleted, setAccountDeleted] = useState(false);
 
   const navigate = useNavigate();
 
