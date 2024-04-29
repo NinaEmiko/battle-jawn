@@ -67,8 +67,20 @@ font-size: 50px;
 }
 
 .hero-name{
-  font-size: 30px;
+  font-size: 40px;
   color: yellow;
+}
+
+.hero-name-level{
+  display: flex;
+  justify-content: center;
+}
+
+.hero-level{
+  padding-top: 20px;
+  padding-left: 10px;
+  color: grey;
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {

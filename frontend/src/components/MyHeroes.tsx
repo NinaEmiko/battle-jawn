@@ -177,19 +177,13 @@ function handleRest(id: any): void {
             <div className="">
             {heroList.map((hero) => (
           <div className="container-jawn-hero-card" key={hero.id}>
-            <div className="hero-name">
-                {hero.name}
+            <div className="hero-name-level">
+              <div className="hero-name"> {hero.name} </div>
+              <div className="hero-level"> Lvl {hero.level} {hero.role} </div>
             </div>
+            
             <table className="my-heroes-table">
               <tbody>
-                <tr>
-                  <td className="row-jawn">Class:</td>
-                  <td className="data-jawn">{hero.role}</td>
-                </tr>
-                <tr>
-                  <td className="row-jawn">Level:</td>
-                  <td className="data-jawn">{hero.level}</td>
-                </tr>
                 <tr>
                   <td className="row-jawn">Health:</td>
                   <td className="data-jawn" id="health-jawn">{hero.health} / {hero.maxHealth}</td>
