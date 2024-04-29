@@ -88,7 +88,7 @@ function App() {
               <Route key="leader-board" path="/leader-board" element={ <LeaderBoard props={currentUser} />} />
             )}
             {currentUser.loggedIn && (
-              <Route key="account-settings" path="/account-settings" element={ <AccountSettings props={currentUser} />} />
+              <Route key="account-settings" path="/account-settings" element={ <AccountSettings props={currentUser} logout={logout} />} />
             )}
             {currentUser.loggedIn && (
               <Route key="inventory" path="/inventory" element={ <Inventory props={currentUser} />} />

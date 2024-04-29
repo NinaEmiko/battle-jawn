@@ -1,10 +1,11 @@
 import { request, setAuthHeader } from "../helpers/axios_helper";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import "../styling/AccountSettings.css";
 import PopUp from "./PopUp";
+import { useNavigate } from "react-router-dom";
 
-const AccountSettings = ({props}:{props:any}) => {
+const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -14,10 +15,17 @@ const AccountSettings = ({props}:{props:any}) => {
   const [popUpType, setPopUpType] = useState("");
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
+  const [accountDeleted, setAccountDeleted] = useState(false);
 
-  const onSubmitDelete = async () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
+  const handleDeleteAccount = async () => {
     try {
-      const response = await request('DELETE', apiUrl + '/delete/${props.id}', {});
+      const response = await request('DELETE', apiUrl + '/delete/' + props.id, {});
       setAuthHeader(null);
     }
     catch (error) {
@@ -58,9 +66,10 @@ function handleOkButtonClick() {
   setShowPopUp(false);
 }
 function handleConfirmButtonClick() {
-  console.log("confirm button clicked")
   setShowPopUp(false);
-  onSubmitDelete();
+  handleDeleteAccount();
+  logout();
+  handleNavigation("/");
 }
 
   return (
@@ -114,7 +123,7 @@ function handleConfirmButtonClick() {
 
             {showDeleteAccount && (
               <div>
-                <button onClick={() => handleDeleteConfirmation()} className="btn" id="delete-btn">Delete</button>
+                <button onClick={handleDeleteConfirmation} className="btn" id="delete-btn">Delete</button>
               </div>
             )}
       </div>
