@@ -105,6 +105,17 @@ public class HeroController {
         }
     }
 
+    @GetMapping("/list/high-score")
+    public ResponseEntity<List<Hero>> getHeroListByHighScore() {
+        logger.info("Inside getHeroListByHighScore controller method.");
+        List<Hero> heroList = heroService.getHeroListByHighScore();
+        if (heroList != null) {
+            return new ResponseEntity<>(heroList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/rest/{id}")
     public ResponseEntity<Hero> restHeroById(@PathVariable("id") Long id) {
         logger.info("Inside restHeroById controller method. Hero ID: " + id + ".");

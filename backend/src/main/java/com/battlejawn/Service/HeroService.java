@@ -90,6 +90,16 @@ public class HeroService {
             throw new EntityNotFoundException("Error returning hero list by win count.");
         }
     }
+
+    public List<Hero> getHeroListByHighScore() {
+        logger.info("Inside getHeroListByHighScore service method.");
+        List<Hero> heroList = heroRepository.findByHighScore();
+        if (heroList != null) {
+            return heroList;
+        } else {
+            throw new EntityNotFoundException("Error returning hero list by high score.");
+        }
+    }
     @Transactional
     public String deleteHeroById(Long id) {
         if (heroRepository.existsById(id)) {
