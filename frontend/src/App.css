@@ -214,6 +214,9 @@ ul {
   height: 25px;
   border-radius: 20px;
 }
+#basic-nav-dropdown{
+  font-size: 20px;
+}
 
 .experience-fraction {
   position: absolute;
