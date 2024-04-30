@@ -35,16 +35,20 @@
   .user-prompt-wrapper-create{
 
     align-items: center;
-    margin-left: 5px;
+    /* margin-left: 5px; */
   }
 
-  .hero-name-input {
+  .hero-name-input-create {
     margin-bottom: 10px;
   }
   
   .create-new-hero-name-text {
     margin-bottom: 10px;
     color: black;
+    justify-content: center;
+    text-align: center;
+    width: 75%;
+    /* margin-left: 15px; */
   }
 
   .btn-role{

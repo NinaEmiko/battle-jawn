@@ -56,7 +56,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
             setHeroRoleMessage('Invalid role');
         }
     }
-console.log("Hero name: " + heroName);
+
     return (
         <div className="create-hero-background-jawn">
             <div className="container-jawn-new-hero">
@@ -65,7 +65,7 @@ console.log("Hero name: " + heroName);
                     <div className="userPrompt">
                         {"Hero Name: "}
                     </div>
-                    <div className="hero-name-input">
+                    <div className="hero-name-input-create">
                         <input className="create-new-hero-name-text"
                         type="text"
                         value={heroName}
