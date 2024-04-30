@@ -4,10 +4,12 @@
 }
 .select-text{
     padding-top: 15px;
-    color: hsl(334, 100%, 58%)
+    color: hsl(334, 100%, 58%);
+    font-size: 25px;
 }
 
 .label-jawn{
-    padding-top: 15px;
+    font-size: 25px;
+    padding-bottom: 15px;
     color: white;
 }

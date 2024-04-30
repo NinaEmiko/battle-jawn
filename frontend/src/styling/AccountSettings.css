@@ -3,3 +3,17 @@
     color: hsl(123, 68%, 54%);
     font-size: 50px;
 }
+
+#submit-btn{
+  background-color: transparent;
+  border-color: gray;
+  color: hsl(123, 68%, 54%);
+  border-radius: 0;
+  width:110px;
+  margin-top: 20px;
+  font-size:20px;
+}
+
+.hero-name-input{
+    width: 90%;
+}

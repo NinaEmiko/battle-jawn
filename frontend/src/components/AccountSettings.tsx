@@ -2,18 +2,29 @@ import { request, setAuthHeader } from "../helpers/axios_helper";
 import { useState } from 'react';
 import classNames from 'classnames';
 import "../styling/AccountSettings.css";
+import PopUp from "./PopUp";
+import { useNavigate } from "react-router-dom";
 
-const AccountSettings = ({props}:{props:any}) => {
+const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
   const [showUpdatePassword, setShowUpdatePassword] = useState(false);
-  const [active, setActive] = useState('')
+  const [active, setActive] = useState('');
+  const [popUpType, setPopUpType] = useState("");
+  const [popUpContent, setPopUpContent] = useState("");
+  const [showPopUp, setShowPopUp] = useState(false);
 
-  const onSubmitDelete = async () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
+  const handleDeleteAccount = async () => {
     try {
-      const response = await request('DELETE', apiUrl + '/delete/${props.id}', {});
+      const response = await request('DELETE', apiUrl + '/delete/' + props.id, {});
       setAuthHeader(null);
     }
     catch (error) {
@@ -44,8 +55,36 @@ const AccountSettings = ({props}:{props:any}) => {
     }
   }
 
+  function handleDeleteConfirmation(): void {
+    setPopUpType("confirmation");
+    setPopUpContent("delete account");
+    setShowPopUp(true);
+}
+
+function handleOkButtonClick() {
+  setShowPopUp(false);
+}
+function handleConfirmButtonClick() {
+  setShowPopUp(false);
+  handleDeleteAccount();
+  logout();
+  handleNavigation("/");
+}
+
   return (
     <div className="account-settings-background-jawn">
+
+        {showPopUp ?
+          <PopUp 
+            props={{
+                type: popUpType,
+                content: popUpContent,
+                onClickOk: handleOkButtonClick,
+                onClickConfirm: handleConfirmButtonClick
+            }} 
+          />   
+        :
+
     <div className="container-jawn-login-form log-reg">
       <div className="row justify-content-center">
         <h1 className="account-settings-title-jawn">Account Settings</h1>
@@ -83,11 +122,12 @@ const AccountSettings = ({props}:{props:any}) => {
 
             {showDeleteAccount && (
               <div>
-                <button onClick={() => onSubmitDelete()} className="btn" id="submit-btn">Submit</button>
+                <button onClick={handleDeleteConfirmation} className="btn" id="delete-btn">Delete</button>
               </div>
             )}
       </div>
     </div>
+}
     </div>
   );
 };

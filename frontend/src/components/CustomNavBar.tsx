@@ -36,7 +36,6 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
   const handleLogout = () => {
     handleSelect();
     onLogout();
-    navigate('/');
   };
 
   useEffect(() => {

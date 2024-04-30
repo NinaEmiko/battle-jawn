@@ -26,5 +26,5 @@ export const request = (method: any, url: any, data: any) => {
 
 export const isAuthenticated = () => {
     const token = getAuthToken();
-    return token !== null; // Return true if token exists, false otherwise
+    return token !== null;
   };

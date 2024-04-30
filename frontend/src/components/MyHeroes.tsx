@@ -7,6 +7,7 @@ import Inventory from "./Inventory";
 import Store from "./Store";
 import "../styling/MyHeroes.css";
 import PopUp from "./PopUp";
+import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
 
 function MyHeroes( {props}:{props:any} ) {
   const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -20,34 +21,6 @@ function MyHeroes( {props}:{props:any} ) {
   const [popUpType, setPopUpType] = useState("");
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
-
-  let maxExperience = 50;
-
-  function determineMaxExperience(level: number) {
-    switch (level) {
-      case 1:
-        return 50;
-      case 2:
-        return 125;
-      case 3:
-        return 300;
-      case 4:
-        return 500;
-      case 5:
-        return 750;
-      case 6:
-        return 1250;
-      case 7:
-        return 2000;
-      case 8:
-        return 3000;
-      case 9:
-      case 10:
-        return 5000;
-      default:
-        return 50;
-    }
-  }
 
   const navigate = useNavigate();
 
@@ -135,7 +108,6 @@ function handleRest(id: any): void {
     setShowPopUp(false);
 }
   function handleConfirmButtonClick() {
-    console.log("confirm button clicked")
     setShowPopUp(false);
     handleDelete(deleteHeroId);
   }
@@ -177,19 +149,13 @@ function handleRest(id: any): void {
             <div className="">
             {heroList.map((hero) => (
           <div className="container-jawn-hero-card" key={hero.id}>
-            <div className="hero-name">
-                {hero.name}
+            <div className="hero-name-level">
+              <div className="hero-name"> {hero.name} </div>
+              <div className="hero-level"> Lvl {hero.level} {hero.role} </div>
             </div>
+            
             <table className="my-heroes-table">
               <tbody>
-                <tr>
-                  <td className="row-jawn">Class:</td>
-                  <td className="data-jawn">{hero.role}</td>
-                </tr>
-                <tr>
-                  <td className="row-jawn">Level:</td>
-                  <td className="data-jawn">{hero.level}</td>
-                </tr>
                 <tr>
                   <td className="row-jawn">Health:</td>
                   <td className="data-jawn" id="health-jawn">{hero.health} / {hero.maxHealth}</td>
@@ -214,7 +180,7 @@ function handleRest(id: any): void {
             </table>
             <div className="experience-bar-container">
               <progress className='experience-bar' value={hero.experience} max={determineMaxExperience(hero.level)}></progress>
-              <span className="experience-fraction">{hero.experience}/{determineMaxExperience(hero.level)}</span>
+              <span className="experience-fraction">{determineNumerator(hero.level, hero.experience)}/{determineMaxExperience(hero.level)}</span>
             </div>
             <div className="row justify-content-center">
                   <button onClick={() => handleStore(hero.id)} className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn">Store</button>
