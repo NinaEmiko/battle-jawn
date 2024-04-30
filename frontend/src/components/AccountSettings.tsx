@@ -1,5 +1,5 @@
 import { request, setAuthHeader } from "../helpers/axios_helper";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import "../styling/AccountSettings.css";
 import PopUp from "./PopUp";
