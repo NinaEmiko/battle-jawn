@@ -17,51 +17,45 @@ import pants from "../assets/pants.png";
 import classNames from "classnames";
 import "../styling/Inventory.css";
 import PopUp from "./PopUp";
+import { fetchInventory, usePotion } from "../api/api";
 
 const Inventory = ({props}:{props:any}) => {
-    const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [inventoryList, setInventoryList] = useState([])
     const [popUpType, setPopUpType] = useState("");
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
 
-    const fetchInventory = async () => {
-        try {
-            const response = await
-            axios.get(apiUrl + '/api/inventory/' + props.heroId)
-            setInventoryList(response.data);
-            } catch (error) {
-            console.error('Error fetching inventory data: ', error)
-            }
-        }
-
-    const usePotion = () => {
-    
-        axios.post(apiUrl + '/api/inventory/potion/' + props.heroId)
-            .then((response) => {
-                setPopUpType("jawn");
-                setPopUpContent(response.data);
-                setShowPopUp(true);
-            })
-        .catch((error) => {
-            console.error('Error fetching data:', error);
-        }
-        )
-        }
-      
-    useEffect(() => {
-        fetchInventory();
-    }, [])
-    useEffect(() => {
-        fetchInventory();
-    }, [showPopUp])
-
-    function handleClickPotion() {
-        usePotion();
+    const fetchInventoryCall = async () => {
+        const data = await fetchInventory(props.heroId)
+        setInventoryList(data);
     }
-    function handleClickNotPotion() {
+
+    const handleClickPotion = async () => {
+        const data = await usePotion(props.heroId)
+        setPopUpType("jawn");
+        setPopUpContent(data);
+        setShowPopUp(true);
+    }
+
+    const handleClickNotPotion = () => {
         console.log("Not a potion")
     }
+
+    const handleBackButtonClick = () => {
+        props.setIsVisible("inventory")
+    }
+
+    const handleOkButtonClick = () => {
+        setShowPopUp(false);
+    }
+      
+    useEffect(() => {
+        fetchInventoryCall();
+    }, [])
+
+    useEffect(() => {
+        fetchInventoryCall();
+    }, [showPopUp])
 
     const determineIcon = (item: string) => {
         switch (item) {
@@ -108,13 +102,6 @@ const Inventory = ({props}:{props:any}) => {
                 return <img className="potion" onClick={handleClickNotPotion}
                 src={pants}/>;
         }
-    }
-    function handleBackButtonClick() {
-        props.setIsVisible("inventory")
-    }
-
-    function handleOkButtonClick() {
-        setShowPopUp(false);
     }
 
     return (

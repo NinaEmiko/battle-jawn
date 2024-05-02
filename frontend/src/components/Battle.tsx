@@ -1,6 +1,5 @@
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "../styling/BattleContainer.css";
 import wizard from "../assets/wizard.png";
 import ninja from "../assets/ninja.png";
@@ -10,9 +9,9 @@ import wolf from "../assets/wolf.png";
 import orc from "../assets/orc.png";
 import ghost from "../assets/ghost.png";
 import PostBattle from "./PostBattle";
+import { heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession } from "../api/api";
 
 function Battle({props}:{props:any}) {
-  const apiUrl = import.meta.env.VITE_REACT_APP_URL;
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
   const [sessionInitialized, setSessionInitialized] = useState(false);
   const [beginBattle, setBeginBattle] = useState(false);
@@ -34,99 +33,72 @@ function Battle({props}:{props:any}) {
     heroId: props,
     ran: false
 
-})
+  })
 
-  function handleEnemyMove() {
-    let timeoutId: number | undefined;
-    timeoutId = setTimeout(() => {
-      axios.post(apiUrl + '/api/enemy-move', {
-        battleSessionId: battleSessionId
-          })
-        .then(response => {
-            setHealth(response.data.heroHealth);
-            setEnemyHealth(response.data.enemyHealth);
-            setBattleHistory(response.data.battleHistory);
-            setButtonDisabled(false);
-        })
-        .catch(error => {
-          console.error('Error fetching enemy move data:', error);
-        })
+  const handleEnemyMove = () => {
+    let timeoutId: number | undefined | any;
+    timeoutId = setTimeout(async () => {
+      const data = await enemyMove(battleSessionId);
+      setHealth(data.heroHealth);
+      setEnemyHealth(data.enemyHealth);
+      setBattleHistory(data.battleHistory);
+      setButtonDisabled(false);
     }, 1500);
   }
 
-  function handleClickBattle(move: string) {
+  const handleClickBattle = async (move: string) => {
     setButtonDisabled(true);
-
-    axios.post(apiUrl + '/api/hero-move', {
-      move: move,
-      battleSessionId: battleSessionId
-        })
-    .then((response) => {
-        setHealth(response.data.heroHealth);
-        setEnemyHealth(response.data.enemyHealth);
-        setBattleHistory(response.data.battleHistory);
-    })
-    .catch((error) => {
-    console.error('Error occurred while trying to use: ' + move + " ", error);
-    });
-
+    const data = await heroMove(move, battleSessionId)
+    setHealth(data.heroHealth);
+    setEnemyHealth(data.enemyHealth);
+    setBattleHistory(data.battleHistory);
     handleEnemyMove();
   }
 
-  const createNewBattleSession = () => {
-      
-    axios.post(apiUrl + '/api/battle-session/create', {
-        heroId: props
-        
-      })
-      .then((response) => {
-        setBattleSessionId(response.data.id);
-        setEnemyId(response.data.enemyId);
-
-        setBattleSessionCreated(true);
-      })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    }
-    )
+  const createNewBattleSessionCall = async () => {
+    const data = await createNewBattleSession(props)
+    setBattleSessionId(data.id);
+    setEnemyId(data.enemyId);
+    setBattleSessionCreated(true);
   }
 
-  const fetchInitialData = () => {
+  const fetchInitialData = async () => {
 
-    axios.get(apiUrl + '/api/hero/' + props)
-    .then((heroResponse) => {
-      setRole(heroResponse.data.role);
-      setHealth(heroResponse.data.health);
-      setMaxHealth(heroResponse.data.maxHealth);
-    })
-    .catch((error) => {
-      console.error('Error fetching hero data: ', error)
-    })
+    const data = await fetchHero(props);
+    setRole(data.role);
+    setHealth(data.health);
+    setMaxHealth(data.maxHealth);
 
-    axios.get(apiUrl + '/api/enemy/' + enemyId)
-    .then((enemyResponse) => {
-      setEnemyName(enemyResponse.data.name);
-      setEnemyHealth(enemyResponse.data.health);
-      setEnemyMaxHealth(enemyResponse.data.maxHealth);
-    })
-    .catch((error) => {
-      console.error('Error fetching enemy data: ', error)
-    })
+    const enemyData = await fetchEnemy(enemyId);
+    setEnemyName(enemyData.name);
+    setEnemyHealth(enemyData.health);
+    setEnemyMaxHealth(enemyData.maxHealth);
 
-    axios.get(apiUrl + '/api/battle-history-message/' + battleSessionId)
-    .then((battleHistoryResponse) => {
-      setBattleHistory(battleHistoryResponse.data);
-    })
-    .catch((error) => {
-      console.error('Error fetching battle history data: ', error)
-    })
+    const battleHistoryMessageData = await fetchBattleHistoryMessage(battleSessionId);
+    setBattleHistory(battleHistoryMessageData);
 
     setSessionInitialized(true);
-}
+  }
+
+  const processEndOfBattle = async () => {
+    let heroRan = false;
+
+    if (battleHistory.includes('You successfully ran away!') || battleHistory.includes('You have been defeated by the enemy!')) {
+      heroRan = true;
+    }
+    
+    const endBattleSessionData = await endBattleSession(battleSessionId, battleResult);      
+      setPostBattleObject({
+        message: endBattleSessionData,
+        enemyId: enemyId,
+        heroId: props,
+        ran: heroRan
+      })
+  }
 
   useEffect(() => {
     if (!battleSessionCreated) {
-      createNewBattleSession();
+      createNewBattleSessionCall();
     }
   },[])
 
@@ -143,38 +115,10 @@ function Battle({props}:{props:any}) {
   }, [sessionInitialized])
 
   useEffect(() => {
-
-    const processEndOfBattle = () => {
-      let heroRan = false;
-
-      if (battleHistory.includes('You successfully ran away!') || battleHistory.includes('You have been defeated by the enemy!')) {
-        heroRan = true;
-      }
-      
-      axios.post(`${import.meta.env.VITE_REACT_APP_URL}/api/battle-session/end`, {
-          battleSessionId: battleSessionId, 
-          battleResult: battleResult
-          
-        })
-        .then((response) => {          
-          setPostBattleObject({
-            message: response.data,
-            enemyId: enemyId,
-            heroId: props,
-            ran: heroRan
-          })
-          
-        })
-      .catch((error) => {
-        console.error('Error processing end of battle:', error);
-      }
-      )
-    }
-
     if (battleResult != "") {
-    processEndOfBattle();
-    setButtonDisabled(true);
-    setPostBattleActive(true);
+      processEndOfBattle();
+      setButtonDisabled(true);
+      setPostBattleActive(true);
   }
     
   }, [battleResult])

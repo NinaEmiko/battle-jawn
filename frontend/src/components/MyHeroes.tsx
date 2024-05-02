@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
@@ -8,16 +7,15 @@ import Store from "./Store";
 import "../styling/MyHeroes.css";
 import PopUp from "./PopUp";
 import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
+import { fetchHeroes, restHero, deleteHero } from "../api/api";
 
 function MyHeroes( {props}:{props:any} ) {
-  const apiUrl = import.meta.env.VITE_REACT_APP_URL;
   const [heroId, setHeroId] = useState(0);
   const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [battleActive, setBattleActive] = useState(false);
   const [inventoryActive, setInventoryActive] = useState(false);
   const [storeActive, setStoreActive] = useState(false);
   const [heroList, setHeroList] = useState([]);
-  const [rested, setRested] = useState(1);
   const [popUpType, setPopUpType] = useState("");
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
@@ -28,40 +26,30 @@ function MyHeroes( {props}:{props:any} ) {
     navigate(path);
   };
 
-  const fetchHeroes = async () => {
-    try {
-        const response = await
-        axios.get(apiUrl + '/api/hero/list/' + props.id)
-        setHeroList(response.data);
-        } catch (error) {
-        console.error('Error fetching Hero data: ', error)
-        }
-    }
-    
-  useEffect(() => {
-    fetchHeroes();
-  }, [rested])
+  const fetchHeroesCall = async () => {
+    const data = await fetchHeroes(props.id);
+    setHeroList(data);
+  }
 
-  useEffect(() => {
-    fetchHeroes();
-  }, [inventoryActive])
+  const handleRest = async (id: any) => {
+    await restHero(id);
+    fetchHeroesCall()
+  }
 
-function handleRest(id: any): void {
-    axios.post(apiUrl + '/api/hero/rest/' + id)
-      .then(response => {
-        console.log("Hero successfully rested. Response: " + response.data)
-      })
-      .catch(error => {
-        console.error('Error fetching rest data:', error);
-      })
-      fetchHeroes();
-      setRested(rested + 1);
-  };
+  const handleOkButtonClick = () => {
+    setShowPopUp(false);
+  }
 
-  function handleFight(id: any, health: number): void {
+  const handleConfirmButtonClick = async () => {
+    setShowPopUp(false);
+    await deleteHero(deleteHeroId);
+    fetchHeroesCall();
+  }
+
+  const handleFight = (id: any, health: number) => {
     if (health > 0) {
-        setHeroId(id);
-        setBattleActive(true);
+      setHeroId(id);
+      setBattleActive(true);
     } else {
       setPopUpType("jawn");
       setPopUpContent("You cannot fight! You have no health!");
@@ -69,48 +57,35 @@ function handleRest(id: any): void {
     }
   }
 
-  function handleInventory(id: any): void {
+  const handleInventory = (id: any) => {
     setHeroId(id);
     setInventoryActive(true);
   }
 
-  function handleStore(id: any) {
+  const handleStore = (id: any) => {
     setHeroId(id);
     setStoreActive(true);
   }
 
-  function handleDelete(id: any): void {
-    axios.delete(apiUrl + '/api/hero/delete/' + id)
-      .then(response => {
-        console.log("Hero successfully deleted. Response: " + response.data);
-        fetchHeroes();
-      }).catch(error => {
-        console.error('Error deleting hero:', error);
-      })
-  }
-
-  function handleDeleteConfirmation(id: any): void {
-      setPopUpType("confirmation");
-      setPopUpContent("delete hero");
-      setShowPopUp(true);
-      setDeleteHeroId(id);
+  const handleDeleteConfirmation = (id: any) => {
+    setPopUpType("confirmation");
+    setPopUpContent("delete hero");
+    setShowPopUp(true);
+    setDeleteHeroId(id);
   }
   
-  function handleSubComponentButtonClick(component: string) {
-      if (component === "store"){
-        setStoreActive(false);
-      } else if (component === "inventory") {
-        setInventoryActive(false);
-      }
+  const handleSubComponentButtonClick = (component: string) => {
+    if (component === "store"){
+      setStoreActive(false);
+    } else if (component === "inventory") {
+      setInventoryActive(false);
+    }
   }
+    
+  useEffect(() => {
+    fetchHeroesCall();
+  }, [inventoryActive, showPopUp])
 
-  function handleOkButtonClick() {
-    setShowPopUp(false);
-}
-  function handleConfirmButtonClick() {
-    setShowPopUp(false);
-    handleDelete(deleteHeroId);
-  }
   return (
     <>
       <div className="home-background-jawn">

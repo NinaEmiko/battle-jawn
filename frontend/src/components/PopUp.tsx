@@ -1,4 +1,3 @@
-import axios from "axios";
 import classNames from 'classnames';
 import "../styling/PopUp.css";
 

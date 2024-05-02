@@ -1,10 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styling/PostBattle.css";
+import { fetchLoot, fetchEmptySlots, selectLootCall } from "../api/api";
 
 const PostBattle = ({props}:{props:any}) => {
-  const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [loot, setLoot] = useState<string[]>([]);
     const [lootActive, setLootActive] = useState(false);
     const [emptySlots, setEmptySlots] = useState(0);
@@ -16,31 +15,20 @@ const PostBattle = ({props}:{props:any}) => {
       navigate(path);
     };
     
-    function getLoot() {
+    const getLoot = async () => {
         if (props.enemyId !== 0) {
-            axios.get(apiUrl + '/api/loot/' + props.enemyId)
-            .then((lootResponse) => {
-            setLoot(lootResponse.data);
+            const data = await fetchLoot(props.enemyId)
+            setLoot(data);
             setLootActive(true);
-            })
-            .catch((error) => {
-            console.error('Error fetching loot data: ', error)
-            })
-            console.log("Enemy ID: " + props.enemyId)
         }
     }
 
-      function getEmptySlots() {
-        axios.get(apiUrl + '/api/inventory/slots/' + props.heroId)
-        .then((lootResponse) => {
-          setEmptySlots(lootResponse.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching slot data: ', error)
-        })
-      }
+    const getEmptySlots = async () => {
+        const data = await fetchEmptySlots(props.heroId)
+        setEmptySlots(data);
+    }
 
-      function selectLoot() {
+    const selectLoot = async () => {
         const selectedItems = JSON.stringify(selectedOptions);
 
         if (selectedOptions.length === 0) {
@@ -51,41 +39,33 @@ const PostBattle = ({props}:{props:any}) => {
         } else if (emptySlots < selectedOptions.length){
             alert("You do not have room in your inventory for all the loot you've selected. Please unselect and try again.")
         } else {
-            axios.post(apiUrl + '/api/inventory/add/' + props.heroId, selectedItems, {
-                headers: {
-                'Content-Type': 'application/json'
-                }})
-            .then((lootResponse) => {
-            })
-            .catch((error) => {
-            console.error('Error selecting loot data: ', error)
-            })
+            selectLootCall(props.heroId, selectedItems)
             handleNavigation("/leader-board")
         }
-      }
+    }
 
-      function handleClickEndOfBattle() {
+    const handleClickEndOfBattle = () => {
         if (selectedOptions) {
             selectLoot();
         }
-      }
+    }
 
-      const handleSelect = (option: string) => {
+    const handleSelect = (option: string) => {
         setSelectedOptions(prevOptions => {
             if (prevOptions.includes(option)) {
-              return prevOptions.filter(item => item !== option);
+                return prevOptions.filter(item => item !== option);
             } else {
-              return [...prevOptions, option];
+                return [...prevOptions, option];
             }
-          });
-      }
+        });
+    }
 
-      useEffect(() => {
+    useEffect(() => {
         if (!lootActive) {
             getEmptySlots();
             getLoot();
         }
-      })
+    })
 
     return (
         <div className="container-jawn-login-form">

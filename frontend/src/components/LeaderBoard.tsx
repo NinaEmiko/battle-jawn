@@ -1,11 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import "../styling/LeaderBoard.css";
 import classNames from 'classnames';
 import { useNavigate } from "react-router-dom";
+import { fetchLeaderboard } from "../api/api";
 
 const LeaderBoard = ({props}:{props:any}) => {
-    const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [heroList, setHeroList] = useState([]);
 
     const navigate = useNavigate();
@@ -15,14 +14,9 @@ const LeaderBoard = ({props}:{props:any}) => {
       };
 
     const fetchHeroes = async () => {
-        try {
-            const response = await
-            axios.get(apiUrl + '/api/hero/list')
-            setHeroList(response.data);
-            } catch (error) {
-            console.error('Error fetching Hero data: ', error)
-            }
-        }
+        const data = await fetchLeaderboard()
+        setHeroList(data);
+    }
       
     useEffect(() => {
         fetchHeroes();
