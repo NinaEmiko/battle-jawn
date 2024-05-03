@@ -1,15 +1,12 @@
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import "../styling/BattleContainer.css";
-import wizard from "../assets/wizard.png";
-import ninja from "../assets/ninja.png";
-import athena from "../assets/athena.png";
-import antibiotics from "../assets/antibiotics.png";
-import wolf from "../assets/wolf.png";
-import orc from "../assets/orc.png";
-import ghost from "../assets/ghost.png";
 import PostBattle from "./PostBattle";
 import { heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession } from "../api/api";
+import HeroMove from "./HeroMove";
+import EnemyIcon from "./EnemyIcon";
+import HeroIcon from "./HeroIcon";
+import LogBox from "./LogBox";
 
 function Battle({props}:{props:any}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
@@ -136,134 +133,31 @@ function Battle({props}:{props:any}) {
   })
 
   return (
-<>
-<div className="background-jawn">
-{beginBattle && !postBattleActive &&
-    <div className="container-jawn-hero-battle">
-      <div className="name" id="enemyName">
-      {enemyName == "Wolf" && 
-        <img className="role-icon" src={wolf}></img>
-        }
-        {enemyName == "Orc" && 
-        <img className="role-icon" src={orc}></img>
-        }
-        {enemyName == "Spirit" && 
-        <img className="role-icon" src={ghost}></img>
-        }
-        {enemyName == "Thief" && 
-        <img className="role-icon" src={ninja}></img>
-        }
-        
-        
-        {enemyName}</div>
-      <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
-      <div className="name" id="playerName">
-        {role == "Tank" && 
-        <img className="role-icon" src={athena}></img>
-        }
-        {role == "Healer" && 
-        <img className="role-icon" src={antibiotics}></img>
-        }
-        {role == "Caster" && 
-        <img className="role-icon" src={wizard}></img>
-        }
-        {role == "DPS" && 
-        <img className="role-icon" src={ninja}></img>
-        }
-        
-        
-        {role}</div>
-
-      <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
-      <div className="logBox-container">
-        <div className="logBox" id="logBox">
-          {battleHistory.slice().reverse().map((item, index) => (
-        <div className="dialog" key={index}>
-      {item}
-      <br />
-    </div>
-  ))}
-      </div>
-      <div className="battle-btn-display">
-          <div className="user-prompt-wrapper-battle">
-            <div className="userPrompt-battle">{"What would you like to do?"}</div>
-
-            {role == "Tank" &&
-              <div className="btn-grid-roles" id="option-buttons">
-                  <button onClick={(e) => handleClickBattle('Strike')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
-                    Strike
-                  </button>
-                  <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
-                    Potion
-                  </button>
-                  <button onClick={(e) => handleClickBattle('Impale')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
-                    Impale
-                  </button>
-                  <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
-                    Run
-                  </button>
-                </div>
-            }
-            {role == "Healer" &&
-              <div className="btn-grid-roles" id="option-buttons">
-                  <button onClick={(e) => handleClickBattle('Wand')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
-                    Wand
-                  </button>
-                  <button onClick={(e) => handleClickBattle('Heal')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
-                    Heal
-                  </button>
-                  <button onClick={(e) => handleClickBattle('Holy')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
-                    Holy
-                  </button>
-                  <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
-                    Run
-                  </button>
-                </div>
-            }
-            {role == "Caster" &&
-                <div className="btn-grid-roles" id="option-buttons">
-                    <button onClick={(e) => handleClickBattle('Wand')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
-                      Wand
-                    </button>
-                    <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
-                      Potion
-                    </button>
-                    <button onClick={(e) => handleClickBattle('Blast')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
-                      Blast
-                    </button>
-                    <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
-                      Run
-                    </button>
-                  </div>
-            }
-            {role == "DPS" &&
-                <div className="btn-grid-roles" id="option-buttons">
-                    <button onClick={(e) => handleClickBattle('Stab')} disabled={buttonDisabled} className="btn-role-battle" id="button1">
-                      Stab
-                    </button>
-                    <button onClick={(e) => handleClickBattle('Potion')} disabled={buttonDisabled} className="btn-role-battle" id="button2">
-                      Potion
-                    </button>
-                    <button onClick={(e) => handleClickBattle('Steal')} disabled={buttonDisabled} className="btn-role-battle" id="button3">
-                      Steal
-                    </button>
-                    <button onClick={(e) => handleClickBattle('Run')} disabled={buttonDisabled} className="btn-role-battle" id="button4">
-                      Run
-                    </button>
-                  </div>
-            }
+    <>
+      <div className="background-jawn">
+        {beginBattle && !postBattleActive &&
+          <div className="container-jawn-hero-battle">
+            <div className="name" id="enemyName">
+              <EnemyIcon enemyNameProp={enemyName} />
+              {enemyName}
+            </div>
+            <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
+            <div className="name" id="playerName">
+              <HeroIcon heroNameProp={role} />
+              {role}
+            </div>
+            <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
+            <div className="logBox-container">
+              <LogBox battleHistoryProp={battleHistory} />
+              <HeroMove roleProp={role} buttonDisabledProp={buttonDisabled} handleClickBattleProp={handleClickBattle} />
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-    // :
-    // <h1 className="title-jawn">Loading...</h1>
-    }
+        }
 
-    {postBattleActive && 
-      <PostBattle props={postBattleObject} />
-    }
-</div>
+        {postBattleActive && 
+          <PostBattle props={postBattleObject} />
+        }
+      </div>
     </>
   );
 }

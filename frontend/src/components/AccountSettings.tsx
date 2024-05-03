@@ -59,17 +59,18 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     setPopUpType("confirmation");
     setPopUpContent("delete account");
     setShowPopUp(true);
-}
+  }
 
-function handleOkButtonClick() {
-  setShowPopUp(false);
-}
-function handleConfirmButtonClick() {
-  setShowPopUp(false);
-  handleDeleteAccount();
-  logout();
-  handleNavigation("/");
-}
+  function handleOkButtonClick() {
+    setShowPopUp(false);
+  }
+  
+  function handleConfirmButtonClick() {
+    setShowPopUp(false);
+    handleDeleteAccount();
+    logout();
+    handleNavigation("/");
+  }
 
   return (
     <div className="account-settings-background-jawn">
