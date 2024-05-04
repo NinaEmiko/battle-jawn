@@ -1,6 +1,5 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
 import com.battlejawn.Repository.InventoryRepository;
@@ -115,28 +114,40 @@ public class InventoryService {
         switch (slot) {
             case 1:
                 inventory.setSlotOne("");
+                break;
             case 2:
                 inventory.setSlotTwo("");
+                break;
             case 3:
                 inventory.setSlotThree("");
+                break;
             case 4:
                 inventory.setSlotFour("");
+                break;
             case 5:
                 inventory.setSlotFive("");
+                break;
             case 6:
                 inventory.setSlotSix("");
+                break;
             case 7:
                 inventory.setSlotSeven("");
+                break;
             case 8:
                 inventory.setSlotEight("");
+                break;
             case 9:
                 inventory.setSlotNine("");
+                break;
             case 10:
                 inventory.setSlotTen("");
+                break;
             case 11:
                 inventory.setSlotEleven("");
+                break;
             case 12:
                 inventory.setSlotTwelve("");
+                break;
         }
         inventoryRepository.save(inventory);
     }
