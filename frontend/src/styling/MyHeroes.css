@@ -21,9 +21,11 @@
   }
 
 .title-jawn-hero {
+  flex: 1;
 padding-top: 15px;
 color: hsl(123, 68%, 54%);
 font-size: 50px;
+text-align: center;
 }
 
 .row-jawn{
@@ -79,7 +81,7 @@ font-size: 50px;
 .hero-level{
   padding-top: 20px;
   padding-left: 10px;
-  color: grey;
+  color: rgb(203, 5, 157);
   font-size: 20px;
 }
 
@@ -109,4 +111,21 @@ font-size: 50px;
 
       }
 
+}
+
+#prev-btn{
+  flex: 0 0 auto;
+  width: 100px;
+  color: rgb(15, 175, 117);
+}
+
+#next-btn{
+  flex: 0 0 auto;
+  width: 100px;
+  color: rgb(15, 175, 117);
+}
+
+.carousel-jawn{
+  display: flex;
+  justify-content: space-between;
 }

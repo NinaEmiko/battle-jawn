@@ -165,6 +165,7 @@
 
 .container-jawn-hero-card {
   justify-content: center;
+  color: rgb(243, 114, 16);
   border-radius: 5px;
   /* Shadow Effect */
   box-shadow: 0 0 10px 2px;
