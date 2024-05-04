@@ -50,6 +50,8 @@ public abstract class Hero {
     @JoinColumn(name = "inventory_id", nullable = false)
     @OneToOne(cascade = CascadeType.ALL)
     private Inventory inventory;
+    @Column
+    private Long activeBattleSession;
 
     public Hero() {
     }
@@ -67,6 +69,7 @@ public abstract class Hero {
         this.experience = 0L;
         this.coins = 10L;
         this.inventory = new Inventory();
+        this.activeBattleSession = null;
     }
     
 }

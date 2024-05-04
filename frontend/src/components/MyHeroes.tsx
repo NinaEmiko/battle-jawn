@@ -20,6 +20,7 @@ function MyHeroes( {props}:{props:any} ) {
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const [activeSession, setActiveSession] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,6 +49,10 @@ function MyHeroes( {props}:{props:any} ) {
   }
 
   const handleFight = (id: any, health: number) => {
+    if (heroList[currentHeroIndex].activeBattleSession){
+      console.log("heroList[currentHeroIndex].activeBattleSession: " + heroList[currentHeroIndex].activeBattleSession)
+      setActiveSession(true);
+    }
     if (health > 0) {
       setHeroId(id);
       setBattleActive(true);
@@ -59,13 +64,25 @@ function MyHeroes( {props}:{props:any} ) {
   }
 
   const handleInventory = (id: any) => {
-    setHeroId(id);
-    setInventoryActive(true);
+    if (heroList[currentHeroIndex].activeBattleSession > 0) {
+      setPopUpType("jawn");
+      setPopUpContent("You must complete current battle before checking your inventory.");
+      setShowPopUp(true);
+    } else {
+      setHeroId(id);
+      setInventoryActive(true);
+    }
   }
 
   const handleStore = (id: any) => {
-    setHeroId(id);
-    setStoreActive(true);
+    if (heroList[currentHeroIndex].activeBattleSession > 0) {
+      setPopUpType("jawn");
+      setPopUpContent("You cannot shop while in a fight.");
+      setShowPopUp(true);
+    } else {
+      setHeroId(id);
+      setStoreActive(true);
+    }
   }
 
   const handleDeleteConfirmation = (id: any) => {
@@ -108,7 +125,7 @@ function MyHeroes( {props}:{props:any} ) {
     <>
       <div className="home-background-jawn">
         {battleActive &&  
-              <Battle  props={heroId} />
+          <Battle  props={heroId} activeSessionProp={activeSession} battleSessionProp={heroList[currentHeroIndex].activeBattleSession} />
         }
 
         {inventoryActive &&

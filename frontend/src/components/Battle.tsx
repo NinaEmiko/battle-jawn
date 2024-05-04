@@ -2,13 +2,13 @@ import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import "../styling/BattleContainer.css";
 import PostBattle from "./PostBattle";
-import { heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession } from "../api/api";
+import { fetchBattleSession, heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession } from "../api/api";
 import HeroMove from "./HeroMove";
 import EnemyIcon from "./EnemyIcon";
 import HeroIcon from "./HeroIcon";
 import LogBox from "./LogBox";
 
-function Battle({props}:{props:any}) {
+function Battle({props, activeSessionProp, battleSessionProp}:{props:any; activeSessionProp: boolean; battleSessionProp: number}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
   const [sessionInitialized, setSessionInitialized] = useState(false);
   const [beginBattle, setBeginBattle] = useState(false);
@@ -59,6 +59,13 @@ function Battle({props}:{props:any}) {
     setBattleSessionCreated(true);
   }
 
+  const fetchBattleSessionCall = async (id: number) => {
+    const data = await fetchBattleSession(id)
+    setBattleSessionId(data.id);
+    setEnemyId(data.enemyId);
+    setBattleSessionCreated(true);
+  }
+
   const fetchInitialData = async () => {
 
     const data = await fetchHero(props);
@@ -94,7 +101,9 @@ function Battle({props}:{props:any}) {
   }
 
   useEffect(() => {
-    if (!battleSessionCreated) {
+    if (activeSessionProp) {
+      fetchBattleSessionCall(battleSessionProp);
+    } else if (!battleSessionCreated) {
       createNewBattleSessionCall();
     }
   },[])

@@ -29,6 +29,16 @@ export const sellItems = async (id: number, item: string) => {
     }
 };
 
+export const fetchBattleSession = async (id: number) => {
+    try {
+        const response = await axios.get(`${ENDPOINTS.FETCH_BATTLE_SESSION}${id}` )
+        return response.data;
+    } catch (error) {
+        console.error('Error retrieving battle session data:', error);
+        throw error;
+      }
+}
+
 export const fetchHero = async (id: number) => {
     try {
         const response = await axios.get(`${ENDPOINTS.FETCH_HERO}${id}` )

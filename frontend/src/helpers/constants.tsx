@@ -20,4 +20,5 @@ export const ENDPOINTS = {
   FETCH_ENEMY: `${BASE_URL}/api/enemy/`,
   FETCH_BATTLE_HISTORY_MESSAGE: `${BASE_URL}/api/battle-history-message/`,
   END_BATTLE_SESSION: `${BASE_URL}/api/battle-session/end`,
+  FETCH_BATTLE_SESSION: `${BASE_URL}/api/battle-session/`,
 };

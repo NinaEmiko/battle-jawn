@@ -1,7 +1,9 @@
 package com.battlejawn.Purge;
 
 import com.battlejawn.Entities.Battle.BattleSession;
+import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Repository.BattleSessionRepository;
+import com.battlejawn.Service.HeroService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.time.Duration;
@@ -12,10 +14,12 @@ import java.util.logging.Logger;
 @Service
 public class BattleSessionPurge {
     private final BattleSessionRepository battleSessionRepository;
+    private final HeroService heroService;
     private final Logger logger = Logger.getLogger(BattleSessionPurge.class.getName());
 
-    public BattleSessionPurge(BattleSessionRepository battleSessionRepository) {
+    public BattleSessionPurge(BattleSessionRepository battleSessionRepository, HeroService heroService) {
         this.battleSessionRepository = battleSessionRepository;
+        this.heroService = heroService;
     }
 
     @Scheduled(cron = "0 10 * * * *")
@@ -29,6 +33,9 @@ public class BattleSessionPurge {
             try {
                 if (timeDifference.compareTo(oneDay) > 0) {
                     logger.info("Inside BattleSessionPurge service class. Purging battleSession with ID: " + battleSession.getId() + ".");
+                    Hero hero = heroService.getHeroById(battleSession.getHeroId());
+                    hero.setActiveBattleSession(null);
+                    heroService.updateHero(hero);
                     battleSessionRepository.deleteById(battleSession.getId());
                 }
             }catch(Exception e) {

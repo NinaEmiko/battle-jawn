@@ -49,6 +49,9 @@ public class BattleSessionService {
             Long battleHistoryMessageId = battleHistoryMessage.getId();
             battleSession.setBattleHistoryMessageId(battleHistoryMessageId);
 
+            hero.setActiveBattleSession(battleSession.getId());
+            heroService.updateHero(hero);
+
             return battleSession;
         } catch(Exception e) {
             throw new RuntimeException("Failed to create new battle session: " + e.getMessage());
@@ -64,6 +67,9 @@ public class BattleSessionService {
             BattleSession battleSession = optionalBattleSession.get();
             Hero hero = heroService.getHeroById(battleSession.getHeroId());
             Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
+
+            hero.setActiveBattleSession(null);
+            heroService.updateHero(hero);
 
             endOfBattleMessage = experienceProcessorService.processExperience(hero, enemy, battleResult);
         }

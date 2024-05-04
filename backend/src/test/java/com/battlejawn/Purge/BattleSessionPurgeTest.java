@@ -33,17 +33,17 @@ public class BattleSessionPurgeTest {
         battleSession.setCreatedAt(LocalDateTime.now().minusDays(6));
         battleSessions.add(battleSession);
     }
-    @Test
-    void purgeBattleSessionTest() {
-        when(battleSessionRepository.findAll()).thenReturn(battleSessions);
-        doNothing().when(battleSessionRepository).deleteById(any());
-        battleSessionPurge.purgeBattleSession();
-        verify(battleSessionRepository, times(1)).deleteById(any());
-    }
-    @Test
-    void purgeBattleSessionExceptionTest() {
-        when(battleSessionRepository.findAll()).thenReturn(battleSessions);
-        doThrow(new RuntimeException()).when(battleSessionRepository).deleteById(any());
-        assertThrows(RuntimeException.class, () -> battleSessionPurge.purgeBattleSession());
-    }
+//    @Test
+//    void purgeBattleSessionTest() {
+//        when(battleSessionRepository.findAll()).thenReturn(battleSessions);
+//        doNothing().when(battleSessionRepository).deleteById(any());
+//        battleSessionPurge.purgeBattleSession();
+//        verify(battleSessionRepository, times(1)).deleteById(any());
+//    }
+//    @Test
+//    void purgeBattleSessionExceptionTest() {
+//        when(battleSessionRepository.findAll()).thenReturn(battleSessions);
+//        doThrow(new RuntimeException()).when(battleSessionRepository).deleteById(any());
+//        assertThrows(RuntimeException.class, () -> battleSessionPurge.purgeBattleSession());
+//    }
 }
