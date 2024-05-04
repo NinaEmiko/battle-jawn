@@ -185,6 +185,10 @@ function MyHeroes( {props}:{props:any} ) {
                   <td className="data-jawn" id="health-jawn">{heroList[currentHeroIndex].coins}</td>
                 </tr>
                 <tr>
+                  <td className="row-jawn">Current Streak:</td>
+                  <td className="data-jawn">{heroList[currentHeroIndex].winStreak}</td>
+                </tr>
+                <tr>
                   <td className="row-jawn">Wins:</td>
                   <td className="data-jawn">{heroList[currentHeroIndex].winCount}</td>
                 </tr>

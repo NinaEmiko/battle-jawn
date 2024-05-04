@@ -70,9 +70,15 @@ const PostBattle = ({props}:{props:any}) => {
     return (
         <div className="container-jawn-login-form">
 
-            {props.ran ? (
+            {props.ran &&
                 <h1 className="post-battle-text">You ran away.</h1>
-            ) : (
+            }
+
+            {props.lost &&
+                <h1 className="post-battle-text">You have been defeated.</h1>
+            }
+
+            {props.won &&
                 <div>
                     <h1 className="title-jawn">{props.message}</h1>
                     <p className="select-text">Select loot you wish to pick up:</p>
@@ -85,7 +91,7 @@ const PostBattle = ({props}:{props:any}) => {
                         </div>
                     )}
                 </div>
-            )}
+            }
 
             <button onClick={handleClickEndOfBattle} className="btn">OK</button>
         </div>

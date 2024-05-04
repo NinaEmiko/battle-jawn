@@ -52,6 +52,8 @@ public abstract class Hero {
     private Inventory inventory;
     @Column
     private Long activeBattleSession;
+    @Column
+    private int winStreak;
 
     public Hero() {
     }
@@ -70,6 +72,7 @@ public abstract class Hero {
         this.coins = 10L;
         this.inventory = new Inventory();
         this.activeBattleSession = null;
+        this.winStreak = 0;
     }
     
 }

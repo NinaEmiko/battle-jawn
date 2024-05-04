@@ -28,7 +28,9 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
     message: "",
     enemyId: enemyId,
     heroId: props,
-    ran: false
+    ran: false,
+    lost: false,
+    won: false
 
   })
 
@@ -86,9 +88,15 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
 
   const processEndOfBattle = async () => {
     let heroRan = false;
+    let heroLost = false;
+    let heroWon = false;
 
-    if (battleHistory.includes('You successfully ran away!') || battleHistory.includes('You have been defeated by the enemy!')) {
+    if (battleHistory.includes('You successfully ran away!')) {
       heroRan = true;
+    } else if (battleHistory.includes('You have been defeated by the enemy!')) {
+      heroLost = true;
+    } else {
+      heroWon = true;
     }
     
     const endBattleSessionData = await endBattleSession(battleSessionId, battleResult);      
@@ -96,7 +104,9 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
         message: endBattleSessionData,
         enemyId: enemyId,
         heroId: props,
-        ran: heroRan
+        ran: heroRan,
+        lost: heroLost,
+        won: heroWon
       })
   }
 

@@ -24,6 +24,7 @@ public class ExperienceProcessorService {
         if (battleResult.equals("Hero wins")){
             Long coinsGained = coinProcessorService.processCoins(enemy);
             hero.setCoins(hero.getCoins() + coinsGained);
+            hero.setWinStreak(hero.getWinStreak() + 1);
 
             hero.setExperience(hero.getExperience() + experience);
             int heroLevelAfterBattle = determineLevel(hero.getExperience());
@@ -41,8 +42,10 @@ public class ExperienceProcessorService {
         } else if (battleResult.equals("Hero loses")){
             Long updatedExperience = calculateExperienceLoss(hero.getExperience(), experience);
             hero.setExperience(updatedExperience);
+            hero.setWinStreak(0);
             endOfBattleMessage = "You've lost " + experience + " experience.";
         } else if (battleResult.equals("Hero runs")) {
+            hero.setWinStreak(0);
             endOfBattleMessage = "You've gained 0 experience.";
         }
         heroService.updateHero(hero);
