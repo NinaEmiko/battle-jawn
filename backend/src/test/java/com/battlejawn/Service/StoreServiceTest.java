@@ -143,7 +143,7 @@ public class StoreServiceTest {
 
             when(heroService.getHeroById(anyLong())).thenReturn(hero);
             doNothing().when(heroService).updateHero(any());
-            doNothing().when(inventoryService).removeFromInventory(anyLong(), anyString());
+            doNothing().when(inventoryService).removeFirstFromInventory(anyLong(), anyString());
             storeService.sell(1L, items.get(i), 1);
             verify(heroService, times(i + 1)).updateHero(any());
         }
@@ -171,7 +171,7 @@ public class StoreServiceTest {
 
             when(heroService.getHeroById(anyLong())).thenReturn(hero);
             doNothing().when(heroService).updateHero(any());
-            doNothing().when(inventoryService).removeFromInventory(anyLong(), anyString());
+            doNothing().when(inventoryService).removeFirstFromInventory(anyLong(), anyString());
             storeService.sell(1L, items.get(i), 2);
             verify(heroService, times(i + 1)).updateHero(any());
         }

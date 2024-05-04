@@ -1,4 +1,3 @@
-import "../styling/LeaderBoard.css";
 import "../styling/AboutUs.css";
 
 const AboutUs = () => {
@@ -11,7 +10,7 @@ const AboutUs = () => {
             </div>
         </div>
     );
-  };
+};
   
-  export default AboutUs;
+export default AboutUs;
   

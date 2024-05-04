@@ -110,4 +110,13 @@ public class JsonParser {
             return 0;
         }
     }
+    public int extractSlot(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("slot").asInt();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return 0;
+        }
+    }
 }

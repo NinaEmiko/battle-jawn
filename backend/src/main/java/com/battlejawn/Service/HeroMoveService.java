@@ -150,7 +150,7 @@ public String getDamageMessage(String move, int damage) {
 
         if (potionCount > 0 && hero.getHealth() != hero.getMaxHealth()) {
             int updatedHeroHealth;
-            inventoryService.removeFromInventory(hero.getId(), "Potion");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Potion");
             int healAmount = potion.usePotion();
             if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
                 updatedHeroHealth = hero.getMaxHealth();

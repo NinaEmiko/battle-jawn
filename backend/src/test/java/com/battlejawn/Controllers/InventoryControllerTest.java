@@ -64,7 +64,7 @@ public class InventoryControllerTest {
     void removeFromInventoryNullTest() {
         when(jsonParser.extractSelectedItems(anyString())).thenReturn(null);
         inventoryController.removeFromInventory(1L, "String");
-        verify(inventoryService, times(0)).removeFromInventory(anyLong(), any());
+        verify(inventoryService, times(0)).removeFirstFromInventory(anyLong(), any());
     }
     @Test
     void getEmptySlotSizeTest() {
@@ -97,5 +97,19 @@ public class InventoryControllerTest {
         when(inventoryService.findPotionCountById(any())).thenReturn(null);
         inventoryController.getPotionCountById(1L);
         verify(inventoryService, times(1)).findPotionCountById(any());
+    }
+    @Test
+    void usePotionTest() {
+        when(jsonParser.extractSlot(any())).thenReturn(1);
+        when(inventoryService.usePotion(anyLong(), anyInt())).thenReturn("Hi");
+        inventoryController.usePotion(1L, "1");
+        verify(inventoryService, times(1)).usePotion(anyLong(), anyInt());
+    }
+    @Test
+    void usePotionNullTest() {
+        when(jsonParser.extractSlot(any())).thenReturn(1);
+        when(inventoryService.usePotion(anyLong(), anyInt())).thenReturn(null);
+        inventoryController.usePotion(1L, "1");
+        verify(inventoryService, times(1)).usePotion(anyLong(), anyInt());
     }
 }

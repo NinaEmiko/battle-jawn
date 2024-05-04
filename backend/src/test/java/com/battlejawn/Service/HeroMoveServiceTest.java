@@ -153,7 +153,7 @@ class HeroMoveServiceTest {
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
         when(inventoryService.findPotionCount(any())).thenReturn(1);
-        doNothing().when(inventoryService).removeFromInventory(anyLong(), anyString());
+        doNothing().when(inventoryService).removeFirstFromInventory(anyLong(), anyString());
         when(potion.usePotion()).thenReturn(1);
         doNothing().when(heroService).updateHero(any());
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
@@ -172,7 +172,7 @@ class HeroMoveServiceTest {
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
         when(inventoryService.findPotionCount(any())).thenReturn(1);
-        doNothing().when(inventoryService).removeFromInventory(anyLong(), anyString());
+        doNothing().when(inventoryService).removeFirstFromInventory(anyLong(), anyString());
         when(potion.usePotion()).thenReturn(30);
         doNothing().when(heroService).updateHero(any());
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);

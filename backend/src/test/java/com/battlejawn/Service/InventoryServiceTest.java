@@ -129,6 +129,11 @@ public class InventoryServiceTest {
 
     @Test
     void addToFirstEmptySlotTest() {
+        inventory.setSlotOne("");
+        inventory.setSlotTwo("");
+        inventory.setSlotThree("");
+
+
         when(inventoryRepository.save(any())).thenReturn(inventory);
         inventoryService.addToFirstEmptySlot(inventory, "Hi");
         verify(inventoryRepository, times(1)).save(any());
@@ -182,22 +187,48 @@ public class InventoryServiceTest {
     void findPotionCountById() {
         Hero hero = new Healer("Name");
         Inventory inventory = new Inventory();
-        inventory.setSlotOne("potion");
-        inventory.setSlotTwo("potion");
-        inventory.setSlotThree("potion");
-        inventory.setSlotFour("potion");
-        inventory.setSlotFive("potion");
-        inventory.setSlotSix("potion");
-        inventory.setSlotSeven("potion");
-        inventory.setSlotEight("potion");
-        inventory.setSlotNine("potion");
-        inventory.setSlotTen("potion");
-        inventory.setSlotEleven("potion");
-        inventory.setSlotTwelve("potion");
+        inventory.setSlotOne("Potion");
+        inventory.setSlotTwo("Potion");
+        inventory.setSlotThree("Potion");
+        inventory.setSlotFour("Potion");
+        inventory.setSlotFive("Potion");
+        inventory.setSlotSix("Potion");
+        inventory.setSlotSeven("Potion");
+        inventory.setSlotEight("Potion");
+        inventory.setSlotNine("Potion");
+        inventory.setSlotTen("Potion");
+        inventory.setSlotEleven("Potion");
+        inventory.setSlotTwelve("Potion");
         hero.setInventory(inventory);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
         inventoryService.findPotionCountById(1L);
         verify(heroService, times(1)).getHeroById(anyLong());
+    }
+
+    @Test
+    void usePotionMaxHealthTest() {
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        doNothing().when(heroService).updateHero(any());
+        inventoryService.usePotion(1L ,1);
+        verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
+    void usePotionAlmostFullTest() {
+        tank.setHealth(110);
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        doNothing().when(heroService).updateHero(any());
+        inventoryService.usePotion(1L ,1);
+        verify(heroService, times(1)).updateHero(any());
+    }
+
+    @Test
+    void usePotionTest() {
+        tank.setHealth(1);
+        tank.setMaxHealth(100);
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        doNothing().when(heroService).updateHero(any());
+        inventoryService.usePotion(1L ,1);
+        verify(heroService, times(1)).updateHero(any());
     }
 
 }

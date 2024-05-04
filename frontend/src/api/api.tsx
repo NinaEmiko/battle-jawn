@@ -121,9 +121,11 @@ export const deleteHero = async (id: any) => {
     }
 }
 
-export const usePotion = async (id: number) => {
+export const usePotion = async (id: number, index: number) => {
     try {
-        const response = await axios.post(`${ENDPOINTS.USE_POTION}${id}`)
+        const response = await axios.post(`${ENDPOINTS.USE_POTION}${id}`,{
+            slot: index
+        })
         return response.data;
     } catch (error) {
         console.error('Error occured while using potion: ', error)

@@ -30,8 +30,8 @@ const Inventory = ({props}:{props:any}) => {
         setInventoryList(data);
     }
 
-    const handleClickPotion = async () => {
-        const data = await usePotion(props.heroId)
+    const handleClickPotion = async (index: number) => {
+        const data = await usePotion(props.heroId, index)
         setPopUpType("jawn");
         setPopUpContent(data);
         setShowPopUp(true);
@@ -57,10 +57,10 @@ const Inventory = ({props}:{props:any}) => {
         fetchInventoryCall();
     }, [showPopUp])
 
-    const determineIcon = (item: string) => {
+    const determineIcon = (item: string, index: number) => {
         switch (item) {
             case "Potion":
-                return <img className="potion-icon" onClick={handleClickPotion}
+                return <img className="potion-icon" onClick={() => handleClickPotion(index)}
                 src={healthPotion}/>;
             case "Sword":
                 return <img className="potion" onClick={handleClickNotPotion}
@@ -114,8 +114,7 @@ const Inventory = ({props}:{props:any}) => {
                 <div className="inventory-grid-container">
                     {[...Array(12).keys()].map(index => (
                         <div key={index} className="inventory-grid-item">
-                            <div className="inventory-icon">{determineIcon(inventoryList[index])}</div>
-                            {/* <div className="inventory-item-name">{inventoryList[index]}</div> */}
+                            <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
                         </div>
                     ))}
                 </div>

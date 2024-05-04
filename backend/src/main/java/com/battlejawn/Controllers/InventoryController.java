@@ -22,8 +22,9 @@ public class InventoryController {
     private final Logger logger = Logger.getLogger(InventoryController.class.getName());
 
     @PostMapping("/potion/{id}")
-    public ResponseEntity<String> usePotion(@PathVariable Long id){
-        String response = inventoryService.usePotion(id);
+    public ResponseEntity<String> usePotion(@PathVariable Long id, @Valid @RequestBody String slot){
+        int extractedSlot = jsonParser.extractSlot(slot);
+        String response = inventoryService.usePotion(id, extractedSlot);
         if (response != null) {
             URI location = URI.create("/potion/");
             return ResponseEntity.created(location).body(response);

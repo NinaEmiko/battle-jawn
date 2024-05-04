@@ -221,7 +221,7 @@ class EnemyMoveServiceTest {
 
         when(inventoryService.findPotionCount(any())).thenReturn(1);
         when(enemySteal.useSteal()).thenReturn(true);
-        doNothing().when(inventoryService).removeFromInventory(anyLong(),anyString());
+        doNothing().when(inventoryService).removeFirstFromInventory(anyLong(),anyString());
         doNothing().when(heroService).updateHero(any());
         doNothing().when(enemyService).updatePotionCountById(3,null);
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);

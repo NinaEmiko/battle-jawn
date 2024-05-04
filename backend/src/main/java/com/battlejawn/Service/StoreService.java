@@ -75,7 +75,7 @@ public class StoreService {
     }
     private String sellPotion(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Potion");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Potion");
         }
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
@@ -83,7 +83,7 @@ public class StoreService {
     }
     private String sellWolfPaw(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Wolf paw");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Wolf paw");
         }
         hero.setCoins(hero.getCoins() + (quantity * 2L));
         heroService.updateHero(hero);
@@ -91,7 +91,7 @@ public class StoreService {
     }
     private String sellWolfScraps(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Wolf scraps");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Wolf scraps");
         }
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
@@ -99,7 +99,7 @@ public class StoreService {
     }
     private String sellWolfPelt(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Wolf pelt");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Wolf pelt");
         }
         hero.setCoins(hero.getCoins() + (quantity * 2L));
         heroService.updateHero(hero);
@@ -107,7 +107,7 @@ public class StoreService {
     }
     private String sellVest(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Vest");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Vest");
         }
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
@@ -115,7 +115,7 @@ public class StoreService {
     }
     private String sellSword(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Sword");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Sword");
         }
         hero.setCoins(hero.getCoins() + (quantity * 5L));
         heroService.updateHero(hero);
@@ -123,7 +123,7 @@ public class StoreService {
     }
     private String sellPants(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Pants");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Pants");
         }
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
@@ -131,7 +131,7 @@ public class StoreService {
     }
     private String sellOrcNecklace(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Orc necklace");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Orc necklace");
         }
         hero.setCoins(hero.getCoins() + (quantity * 4L));
         heroService.updateHero(hero);
@@ -139,7 +139,7 @@ public class StoreService {
     }
     private String sellBoots(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Boots");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Boots");
         }
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
@@ -147,7 +147,7 @@ public class StoreService {
     }
     private String sellHelm(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Helm");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Helm");
         }
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
@@ -155,7 +155,7 @@ public class StoreService {
     }
     private String sellSpiritTrinket(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Spirit trinket");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Spirit trinket");
         }
         hero.setCoins(hero.getCoins() + (quantity * 15L));
         heroService.updateHero(hero);
@@ -163,7 +163,7 @@ public class StoreService {
     }
     private String sellDagger(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Dagger");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Dagger");
         }
         hero.setCoins(hero.getCoins() + (quantity * 5L));
         heroService.updateHero(hero);
@@ -171,7 +171,7 @@ public class StoreService {
     }
     private String sellMask(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Mask");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Mask");
         }
         hero.setCoins(hero.getCoins() + (quantity * 3L));
         heroService.updateHero(hero);
@@ -179,7 +179,7 @@ public class StoreService {
     }
     private String sellJewels(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {
-            inventoryService.removeFromInventory(hero.getId(), "Jewels");
+            inventoryService.removeFirstFromInventory(hero.getId(), "Jewels");
         }
         hero.setCoins(hero.getCoins() + (quantity * 4L));
         heroService.updateHero(hero);

@@ -20,17 +20,17 @@ public class InventoryService {
     private HeroService heroService;
     private final Logger logger = Logger.getLogger(InventoryService.class.getName());
 
-    public String usePotion(Long id) {
+    public String usePotion(Long id, int slot) {
         String msg = "";
         Hero hero = heroService.getHeroById(id);
         if (hero.getHealth() == hero.getMaxHealth()) {
             msg = hero.getName() + " is at max health.";
         } else if (hero.getMaxHealth() - hero.getHealth() < 30) {
-            removeFromInventory(id, "Potion");
+            removeFromInventory(id, slot);
             msg = hero.getName() + " used a potion.";
             hero.setHealth(hero.getMaxHealth());
         } else {
-            removeFromInventory(id, "Potion");
+            removeFromInventory(id, slot);
             msg = hero.getName() + " used a potion.";
             hero.setHealth(hero.getHealth() + 30);
         }
@@ -72,18 +72,18 @@ public class InventoryService {
 
     public void removeMultipleFromInventory(Long id, List<String> items){
         for (String item : items) {
-            removeFromInventory(id, item);
+            removeFirstFromInventory(id, item);
         }
     }
 
-    public void removeFromInventory(Long id, String item){
+    public void removeFirstFromInventory(Long id, String item){
         Hero hero = heroService.getHeroById(id);
         Inventory inventory = hero.getInventory();
 
         if(inventory.getSlotOne().equals(item)) {
-                inventory.setSlotOne("");
+            inventory.setSlotOne("");
         } else if(inventory.getSlotTwo().equals(item)) {
-                inventory.setSlotTwo("");
+            inventory.setSlotTwo("");
         } else if(inventory.getSlotThree().equals(item)){
             inventory.setSlotThree("");
         } else if(inventory.getSlotFour().equals(item)){
@@ -104,6 +104,39 @@ public class InventoryService {
             inventory.setSlotEleven("");
         } else if(inventory.getSlotTwelve().equals(item)){
             inventory.setSlotTwelve("");
+        }
+        inventoryRepository.save(inventory);
+    }
+
+    public void removeFromInventory(Long id, int slot){
+        Hero hero = heroService.getHeroById(id);
+        Inventory inventory = hero.getInventory();
+
+        switch (slot) {
+            case 1:
+                inventory.setSlotOne("");
+            case 2:
+                inventory.setSlotTwo("");
+            case 3:
+                inventory.setSlotThree("");
+            case 4:
+                inventory.setSlotFour("");
+            case 5:
+                inventory.setSlotFive("");
+            case 6:
+                inventory.setSlotSix("");
+            case 7:
+                inventory.setSlotSeven("");
+            case 8:
+                inventory.setSlotEight("");
+            case 9:
+                inventory.setSlotNine("");
+            case 10:
+                inventory.setSlotTen("");
+            case 11:
+                inventory.setSlotEleven("");
+            case 12:
+                inventory.setSlotTwelve("");
         }
         inventoryRepository.save(inventory);
     }

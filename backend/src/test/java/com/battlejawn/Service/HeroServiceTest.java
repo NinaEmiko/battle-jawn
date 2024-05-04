@@ -191,4 +191,21 @@ public class HeroServiceTest {
         heroService.updateHero(hero);
         verify(heroRepository, times(1)).save(any());
     }
+    @Test
+    void restAllHeroesTest() {
+        doNothing().when(heroRepository).restAllHeroes();
+        heroService.restAllHeroes();
+        verify(heroRepository, times(1)).restAllHeroes();
+    }
+    @Test
+    void getHeroListByHighScoreTest(){
+        when(heroRepository.findByHighScore()).thenReturn(heroes);
+        heroService.getHeroListByHighScore();
+        verify(heroRepository, times(1)).findByHighScore();
+    }
+    @Test
+    void getHeroListByHighScoreExceptionTest(){
+        when(heroRepository.findByHighScore()).thenReturn(null);
+        assertThrows(RuntimeException.class, () -> heroService.getHeroListByHighScore());
+    }
 }

@@ -70,25 +70,37 @@ public class HeroControllerTest {
         verify(heroService, times(1)).getHeroHealthById(anyLong());
     }
     @Test
-    void hetHeroListByAccountIdTest(){
+    void getHeroListByHighScoreTest() {
+        when(heroService.getHeroListByHighScore()).thenReturn(heroes);
+        heroController.getHeroListByHighScore();
+        verify(heroService, times(1)).getHeroListByHighScore();
+    }
+    @Test
+    void getHeroListByHighScoreNullTest() {
+        when(heroService.getHeroListByHighScore()).thenReturn(null);
+        heroController.getHeroListByHighScore();
+        verify(heroService, times(1)).getHeroListByHighScore();
+    }
+    @Test
+    void getHeroListByAccountIdTest(){
         when(heroService.getHeroListByAccountId(anyLong())).thenReturn(heroes);
         heroController.getHeroListByAccountId(anyLong());
         verify(heroService, times(1)).getHeroListByAccountId(anyLong());
     }
     @Test
-    void hetHeroListByAccountIdNullTest(){
+    void getHeroListByAccountIdNullTest(){
         when(heroService.getHeroListByAccountId(anyLong())).thenReturn(null);
         heroController.getHeroListByAccountId(anyLong());
         verify(heroService, times(1)).getHeroListByAccountId(anyLong());
     }
     @Test
-    void hetHeroListByWinCountTest() {
+    void getHeroListByWinCountTest() {
         when(heroService.getHeroListByWinCount()).thenReturn(heroes);
         heroController.getHeroListByWinCount();
         verify(heroService, times(1)).getHeroListByWinCount();
     }
     @Test
-    void hetHeroListByWinCountNullTest() {
+    void getHeroListByWinCountNullTest() {
         when(heroService.getHeroListByWinCount()).thenReturn(null);
         heroController.getHeroListByWinCount();
         verify(heroService, times(1)).getHeroListByWinCount();
