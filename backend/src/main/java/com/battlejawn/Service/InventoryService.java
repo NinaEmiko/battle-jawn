@@ -52,7 +52,7 @@ public class InventoryService {
             removeFromInventory(id, slot);
             hero.setResource(hero.getMaxResource());
             heroService.updateHero(hero);
-            return hero.getName() + " used drank water.";
+            return hero.getName() + " drank water.";
         }
     }
 
