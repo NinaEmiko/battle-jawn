@@ -7,6 +7,7 @@ import HeroMove from "./HeroMove";
 import EnemyIcon from "./EnemyIcon";
 import HeroIcon from "./HeroIcon";
 import LogBox from "./LogBox";
+import { determineResourceIcon } from "../helpers/icon_helper";
 
 function Battle({props, activeSessionProp, battleSessionProp}:{props:any; activeSessionProp: boolean; battleSessionProp: number}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
@@ -18,9 +19,11 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
   const [role, setRole] = useState('');
   const [health, setHealth] = useState(1);
   const [maxHealth, setMaxHealth] = useState(0);
+  const [resource, setResource] = useState(0);
   const [enemyName, setEnemyName] = useState('');
   const [enemyHealth, setEnemyHealth] = useState(0);
   const [enemyMaxHealth, setEnemyMaxHealth] = useState(0);
+  const [enemyLevel, setEnemyLevel] = useState(0);
   const [battleHistory, setBattleHistory] = useState<string[]>(["Retrieving battle history. Please wait."]);
   const [battleResult, setBattleResult] = useState("");
   const [postBattleActive, setPostBattleActive] = useState(false);
@@ -39,6 +42,7 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
     timeoutId = setTimeout(async () => {
       const data = await enemyMove(battleSessionId);
       setHealth(data.heroHealth);
+      setResource(data.heroResource);
       setEnemyHealth(data.enemyHealth);
       setBattleHistory(data.battleHistory);
       setButtonDisabled(false);
@@ -49,6 +53,7 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
     setButtonDisabled(true);
     const data = await heroMove(move, battleSessionId)
     setHealth(data.heroHealth);
+    setResource(data.heroResource);
     setEnemyHealth(data.enemyHealth);
     setBattleHistory(data.battleHistory);
     handleEnemyMove();
@@ -74,11 +79,13 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
     setRole(data.role);
     setHealth(data.health);
     setMaxHealth(data.maxHealth);
+    setResource(data.resource);
 
     const enemyData = await fetchEnemy(enemyId);
     setEnemyName(enemyData.name);
     setEnemyHealth(enemyData.health);
     setEnemyMaxHealth(enemyData.maxHealth);
+    setEnemyLevel(enemyData.level);
 
     const battleHistoryMessageData = await fetchBattleHistoryMessage(battleSessionId);
     setBattleHistory(battleHistoryMessageData);
@@ -156,14 +163,16 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
       <div className="background-jawn">
         {beginBattle && !postBattleActive &&
           <div className="container-jawn-hero-battle">
-            <div className="name" id="enemyName">
+            <div className="enemy-name-level" id="enemyName">
               <EnemyIcon enemyNameProp={enemyName} />
               {enemyName}
+              <div className="enemy-level"> Lvl. {enemyLevel} </div>
             </div>
             <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
-            <div className="name" id="playerName">
+            <div className="hero-name-role-resource" id="playerName">
               <HeroIcon heroNameProp={role} />
-              {role}
+                <span>{role}</span>
+                {determineResourceIcon(role, resource)}
             </div>
             <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
             <div className="logBox-container">

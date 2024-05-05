@@ -8,6 +8,7 @@ import "../styling/MyHeroes.css";
 import PopUp from "./PopUp";
 import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
+import Resource from "./Resource";
 
 function MyHeroes( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
@@ -180,6 +181,30 @@ function MyHeroes( {props}:{props:any} ) {
                   <td className="row-jawn">Health:</td>
                   <td className="data-jawn" id="health-jawn">{heroList[currentHeroIndex].health} / {heroList[currentHeroIndex].maxHealth}</td>
                 </tr>
+                {heroList[currentHeroIndex].role == "Tank" &&
+                <tr>
+                    <td className="row-jawn">Power:</td>
+                    <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
+                </tr>
+                }
+                {heroList[currentHeroIndex].role == "Healer" &&
+                <tr>
+                    <td className="row-jawn">Spirit:</td>
+                    <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
+                </tr>
+                }
+                {heroList[currentHeroIndex].role == "Caster" &&
+                <tr>
+                    <td className="row-jawn">Magic:</td>
+                    <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
+                </tr>
+                }
+                {heroList[currentHeroIndex].role == "DPS" &&
+                <tr>
+                    <td className="row-jawn">Energy:</td>
+                    <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
+                </tr>
+                }
                 <tr>
                   <td className="row-jawn">Coins:</td>
                   <td className="data-jawn" id="health-jawn">{heroList[currentHeroIndex].coins}</td>

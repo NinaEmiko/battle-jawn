@@ -12,7 +12,7 @@ public class Healer extends Hero {
 
     }
     public Healer(String name) {
-        super(name, 100, 100, "Healer", 0, 0, 0, LocalDateTime.now());
+        super(name, 100, 100,3, 3, "Healer", 0, 0, 0, LocalDateTime.now());
     }
     
 }

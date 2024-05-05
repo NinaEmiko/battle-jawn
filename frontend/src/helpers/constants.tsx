@@ -14,6 +14,7 @@ export const ENDPOINTS = {
   REST_HERO: `${BASE_URL}/api/hero/rest/`,
   DELETE_HERO: `${BASE_URL}/api/hero/delete/`,
   USE_POTION: `${BASE_URL}/api/inventory/potion/`,
+  USE_WATER: `${BASE_URL}/api/inventory/water/`,
   HERO_MOVE: `${BASE_URL}/api/hero-move`,
   ENEMY_MOVE: `${BASE_URL}/api/enemy-move`,
   CREATE_NEW_BATTLE_SESSION: `${BASE_URL}/api/battle-session/create`,

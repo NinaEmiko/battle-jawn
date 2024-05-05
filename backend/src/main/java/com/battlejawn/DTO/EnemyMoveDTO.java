@@ -4,7 +4,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class HeroMoveDTO {
+public class EnemyMoveDTO {
     private int enemyHealth;
     private int heroHealth;
     private int heroResource;

@@ -4,8 +4,6 @@ import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 @Service
@@ -24,6 +22,7 @@ public class StoreService {
         }
         return switch (item){
             case "Potion" -> buyPotion(hero, quantity, inventory);
+            case "Water" -> buyWater(hero, quantity, inventory);
             case "Sword" -> buySword(hero, quantity, inventory);
             default -> "There was a problem processing your purchase. Please try again.";
         };
@@ -33,6 +32,7 @@ public class StoreService {
         Hero hero = heroService.getHeroById(heroId);
         return switch (item){
             case "Potion" -> sellPotion(hero, quantity);
+            case "Water" -> sellWater(hero, quantity);
             case "Wolf paw" -> sellWolfPaw(hero, quantity);
             case "Wolf scraps" -> sellWolfScraps(hero, quantity);
             case "Wolf pelt" -> sellWolfPelt(hero, quantity);
@@ -52,7 +52,7 @@ public class StoreService {
     private String buyPotion(Hero hero, int quantity, Inventory inventory) {
         logger.info("Inside buyPotion service method");
 
-        String msg = "";
+        String msg;
         if (hero.getCoins() - (quantity) < 0) {
             msg = "Insufficient coins.";
         } else {
@@ -60,6 +60,20 @@ public class StoreService {
             hero.setCoins(hero.getCoins() - quantity);
             heroService.updateHero(hero);
             msg = produceGenericMessage("purchased", quantity, "potion");
+        }
+        return msg;
+    }
+    private String buyWater(Hero hero, int quantity, Inventory inventory) {
+        logger.info("Inside buyWater service method");
+
+        String msg;
+        if (hero.getCoins() - (quantity * 3L) < 0) {
+            msg = "Insufficient coins.";
+        } else {
+            inventoryService.addToFirstEmptySlot(inventory, "Water");
+            hero.setCoins(hero.getCoins() - quantity);
+            heroService.updateHero(hero);
+            msg = produceGenericMessage("purchased", quantity, "water");
         }
         return msg;
     }
@@ -80,6 +94,14 @@ public class StoreService {
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
         return produceGenericMessage("sold", quantity, "potion");
+    }
+    private String sellWater(Hero hero, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            inventoryService.removeFirstFromInventory(hero.getId(), "Water");
+        }
+        hero.setCoins(hero.getCoins() + (quantity * 3L));
+        heroService.updateHero(hero);
+        return produceGenericMessage("sold", quantity, "water");
     }
     private String sellWolfPaw(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {

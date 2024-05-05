@@ -22,9 +22,9 @@ public class BattleSessionPurge {
         this.heroService = heroService;
     }
 
-    @Scheduled(cron = "0 10 * * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void purgeBattleSession() {
-        logger.info("Inside purgeBattleSession service class. This job runs every hour.");
+        logger.info("Inside purgeBattleSession service class. This job runs every day at 1 am.");
         List<BattleSession> battleSessionList = battleSessionRepository.findAll();
         Duration timeDifference;
         Duration oneDay = Duration.ofDays(5);

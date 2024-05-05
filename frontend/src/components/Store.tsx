@@ -4,6 +4,7 @@ import "../styling/Store.css";
 import PopUp from "./PopUp";
 import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
 import { determineIcon } from "../helpers/icon_helper"
+import { determinePrice } from "../helpers/price_helper";
 
 const Store = ({props}:{props:any}) => {
     const [purchases, setPurchases] = useState(1);
@@ -125,6 +126,17 @@ const Store = ({props}:{props:any}) => {
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td className="store-buy-item">
+                                            <div>
+                                                <div>
+                                                    {determineIcon("Water")}
+                                                </div>
+                                                <span className="store-buy-item-price">3 coins</span>
+                                            </div>
+                                            <button onClick={() => handleClickBuy(props.heroId, "Water")} className="buy-btn">Buy</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td className="buy-btn-separator" colSpan={2}>
                                         </td>
                                     </tr>
@@ -142,7 +154,7 @@ const Store = ({props}:{props:any}) => {
                                                         <div>
                                                         {determineIcon(item)}
                                                         </div>
-                                                        <span className="store-sell-item-price">1 coin</span>
+                                                        <span className="store-sell-item-price">{determinePrice(item)}</span>
                                                         <button onClick={() => handleClickSell(props.heroId, item)} className="sell-btn">Sell {item}</button>
                                                     </td>
                                                 </tr>

@@ -15,26 +15,45 @@ import java.util.logging.Logger;
 public class InventoryService {
     private LootService lootService;
     private InventoryRepository inventoryRepository;
-    private EnemyService enemyService;
     private HeroService heroService;
     private final Logger logger = Logger.getLogger(InventoryService.class.getName());
 
     public String usePotion(Long id, int slot) {
-        String msg = "";
         Hero hero = heroService.getHeroById(id);
         if (hero.getHealth() == hero.getMaxHealth()) {
-            msg = hero.getName() + " is at max health.";
+            return hero.getName() + " is at max health.";
         } else if (hero.getMaxHealth() - hero.getHealth() < 30) {
             removeFromInventory(id, slot);
-            msg = hero.getName() + " used a potion.";
             hero.setHealth(hero.getMaxHealth());
+            heroService.updateHero(hero);
+            return hero.getName() + " used a potion.";
         } else {
             removeFromInventory(id, slot);
-            msg = hero.getName() + " used a potion.";
             hero.setHealth(hero.getHealth() + 30);
+            heroService.updateHero(hero);
+            return hero.getName() + " used a potion.";
         }
-        heroService.updateHero(hero);
-        return msg;
+    }
+
+    public String useWater(Long id, int slot) {
+        Hero hero = heroService.getHeroById(id);
+        if (hero.getResource() == hero.getMaxResource()) {
+            switch (hero.getRole()){
+                case "Tank":
+                    return hero.getName() + " is at max power.";
+                case "Healer":
+                    return hero.getName() + " is at max spirit.";
+                case "Caster":
+                    return hero.getName() + " is at max magic.";
+                default:
+                    return hero.getName() + " is at max energy.";
+            }
+        } else {
+            removeFromInventory(id, slot);
+            hero.setResource(hero.getMaxResource());
+            heroService.updateHero(hero);
+            return hero.getName() + " used drank water.";
+        }
     }
 
     public List<String> getInventoryById(Long id) {
@@ -217,47 +236,47 @@ public class InventoryService {
     public Integer findPotionCountById(Long id) {
         Hero hero = heroService.getHeroById(id);
         Inventory inventory = hero.getInventory();
-        return findPotionCount(inventory);
+        return findItemCount(inventory, "Potion");
     }
 
-    public int findPotionCount(Inventory inventory) {
-        int potionCount = 0;
-        if (Objects.equals(inventory.getSlotOne(), "Potion")){
-            potionCount++;
+    public int findItemCount(Inventory inventory, String item) {
+        int count = 0;
+        if (Objects.equals(inventory.getSlotOne(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotTwo(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotTwo(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotThree(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotThree(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotFour(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotFour(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotFive(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotFive(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotSix(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotSix(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotSeven(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotSeven(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotEight(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotEight(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotNine(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotNine(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotTen(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotTen(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotEleven(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotEleven(), item)){
+            count++;
         }
-        if (Objects.equals(inventory.getSlotTwelve(), "Potion")){
-            potionCount++;
+        if (Objects.equals(inventory.getSlotTwelve(), item)){
+            count++;
         }
-        return potionCount;
+        return count;
     }
 }

@@ -1,7 +1,10 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.DTO.EnemyMoveDTO;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.EnemyMove.*;
+import com.battlejawn.Entities.Battle.BattleSession;
+import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
@@ -23,16 +26,17 @@ public class EnemyMoveService {
     private final EnemyService enemyService;
     private final BattleSessionService battleSessionService;
     private final InventoryService inventoryService;
+    private final BattleStatusService battleStatusService;
     private final Logger logger = Logger.getLogger(EnemyMoveService.class.getName());
 
-    public HeroMoveDTO enemyMove(Long battleSessionId){
+    public EnemyMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
 
         Enemy enemy = enemyService.getEnemyById(battleSessionService.getBattleSessionById(battleSessionId).getEnemyId());
         Hero hero = heroService.getHeroById(battleSessionService.getBattleSessionById(battleSessionId).getHeroId());
 
         int moveIndex = randomizer.getRandomInt(9);
-        HeroMoveDTO enemyMoveDTO;
+        EnemyMoveDTO enemyMoveDTO;
         int damage;
 
         return switch (enemy.getName()) {
@@ -94,10 +98,22 @@ public class EnemyMoveService {
         };
     }
 
-    public HeroMoveDTO processEnemyMove(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move) {
+    public EnemyMoveDTO processEnemyMove(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move) {
         int updatedHeroHealth;
         String newMessage;
-        if (damage > hero.getHealth()) {
+        BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
+        BattleStatus battleStatus = battleSession.getBattleStatus();
+
+        if (battleStatus.isHeroBlocking()) {
+            hero.setResource(hero.getMaxResource());
+            heroService.updateHero(hero);
+            battleStatus.setHeroBlocking(false);
+            battleStatusService.saveBattleStatus(battleStatus);
+            newMessage = enemy.getName() + " tried to use " + move + ", but " + hero.getName() + " blocked it.";
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+        } else if (damage > hero.getHealth()) {
             updatedHeroHealth = 0;
             newMessage = getDamageMessage(move, damage);
             hero.setLossCount(hero.getLossCount() + 1);
@@ -107,7 +123,7 @@ public class EnemyMoveService {
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, heroDefeatedMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, battleHistory, true);
+            return getEnemyMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getResource(), battleHistory, true);
         } else {
             updatedHeroHealth = hero.getHealth() - damage;
             newMessage = getDamageMessage(move, damage);
@@ -115,11 +131,11 @@ public class EnemyMoveService {
             heroService.updateHero(hero);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, battleHistory, false);
+            return getEnemyMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getResource(), battleHistory, false);
         }
     }
 
-    public HeroMoveDTO processPotion(Enemy enemy, Long battleSessionId, Hero hero) {
+    public EnemyMoveDTO processPotion(Enemy enemy, Long battleSessionId, Hero hero) {
 
             int updatedEnemyHealth;
             int updatedPotionCount = enemy.getPotions() - 1;
@@ -134,12 +150,12 @@ public class EnemyMoveService {
             String newMessage = "Enemy used a potion.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), battleHistory, false);
+            return getEnemyMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, false);
     }
 
-    public HeroMoveDTO processEnemySteal(Enemy enemy, Long battleSessionId, Hero hero) {
+    public EnemyMoveDTO processEnemySteal(Enemy enemy, Long battleSessionId, Hero hero) {
         Inventory inventory = hero.getInventory();
-        int potionCount = inventoryService.findPotionCount(inventory);
+        int potionCount = inventoryService.findItemCount(inventory, "Potion");
 
         logger.info("Inside processEnemySteal move method.");
         if (potionCount > 0 && enemy.getPotions() < enemy.getMaxPotions()) {
@@ -154,12 +170,12 @@ public class EnemyMoveService {
                 String newMessage = "Enemy stole a potion!";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-                return getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), battleHistory, false);
+                return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
             } else {
                 String newMessage = "Enemy tried to steal. They didn't find anything.";
                 battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
                 List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-                return getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), battleHistory, false);
+                return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
             }
         } else {
             logger.info("Inside first else statement. Enemy potion count: " + enemy.getPotions() + ". Enemy potion capacity: " + enemy.getMaxPotions());
@@ -167,7 +183,7 @@ public class EnemyMoveService {
             String newMessage = "Enemy tried to steal, but you are out of potions!";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), battleHistory, false);
+            return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
         }
     }
 
@@ -179,13 +195,14 @@ public class EnemyMoveService {
         }
     }
 
-    public HeroMoveDTO getHeroMoveReturnObject(int enemyHealth, int heroHealth, List<String> battleHistory, boolean gameOver) {
-        HeroMoveDTO heroMoveDTO = new HeroMoveDTO();
-        heroMoveDTO.setEnemyHealth(enemyHealth);
-        heroMoveDTO.setHeroHealth(heroHealth);
-        heroMoveDTO.setBattleHistory(battleHistory);
-        heroMoveDTO.setGameOver(gameOver);
-        return heroMoveDTO;
+    public EnemyMoveDTO getEnemyMoveReturnObject(int enemyHealth, int heroHealth, int heroResource, List<String> battleHistory, boolean gameOver) {
+        EnemyMoveDTO enemyMoveDTO = new EnemyMoveDTO();
+        enemyMoveDTO.setEnemyHealth(enemyHealth);
+        enemyMoveDTO.setHeroHealth(heroHealth);
+        enemyMoveDTO.setHeroResource(heroResource);
+        enemyMoveDTO.setBattleHistory(battleHistory);
+        enemyMoveDTO.setGameOver(gameOver);
+        return enemyMoveDTO;
     }
 
 }

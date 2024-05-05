@@ -183,6 +183,13 @@
   width: 50%;
 }
 
+.resource-icon {
+  /* display: none; */
+  display: inline-block;
+  width: 50px;
+  padding-right: 10px;
+}
+
 ul {
   list-style-type: none;
 }

@@ -34,20 +34,20 @@
     display: flex;
     width: 45px;
 }
-
-.name {
-    font-size: 25px;
-    color:  hsl(181, 84%, 44%);
-    float: left;
-    margin-left: 10px;
+.hero-name-role-resource{
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  color:  hsl(181, 84%, 44%);
 }
-
-.name {
-    justify-content: flex-end;
-    font-size: 25px;
-    color: yellow;
-    float: left;
-    padding-right: 5px;
+.hero-name-role-resource > span{
+  margin-right: 10px;
+  margin-left: 5px;
+  float: left;
+  justify-content: flex-end;
+  font-size: 25px;
+  color: yellow;
+  padding-right: 5px;
 }
 
 .battle-btn-display {

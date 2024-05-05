@@ -14,7 +14,7 @@ public class Tank extends Hero {
     }
     public Tank(String name) {
 
-        super(name, 120, 120, "Tank", 0, 0, 0, LocalDateTime.now());
+        super(name, 120, 120,3, 3, "Tank", 0, 0, 0, LocalDateTime.now());
     }
     
 }

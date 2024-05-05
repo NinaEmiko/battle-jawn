@@ -6,7 +6,7 @@ import com.battlejawn.AttackInterfaces.Missable;
 import lombok.Data;
 
 @Data
-public class Blast implements CriticalHit, Missable, Attack {
+public class FireBlast implements CriticalHit, Missable, Attack {
     private int damage;
 
     public int attack() {

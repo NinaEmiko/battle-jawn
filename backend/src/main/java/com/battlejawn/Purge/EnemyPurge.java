@@ -18,9 +18,9 @@ public class EnemyPurge {
         this.enemyRepository = enemyRepository;
     }
 
-    @Scheduled(cron = "0 10 * * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void purgeEnemy() {
-        logger.info("Inside purgeEnemy service class. This job runs every hour.");
+        logger.info("Inside purgeEnemy service class. This job runs every day at 1 am.");
         List<Enemy> enemyList = enemyRepository.findAll();
         Duration timeDifference;
         Duration oneDay = Duration.ofDays(1);

@@ -12,6 +12,11 @@ import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import healthPotion from "../assets/healthPotion.png";
+import power from "../assets/power.png";
+import spirit from "../assets/spirit.png";
+import magic from "../assets/magic.png";
+import energy from "../assets/energy.png";
+import water from "../assets/water.png";
 import "../styling/Store.css";
 
 export const determineIcon = (item: string) => {
@@ -19,6 +24,9 @@ export const determineIcon = (item: string) => {
         case "Potion":
             return <img className="top-left"
             src={healthPotion}/>;
+        case "Water":
+            return <img className="top-left"
+            src={water}/>;
         case "Sword":
             return <img className="top-left"
             src={sword}/>;
@@ -58,5 +66,43 @@ export const determineIcon = (item: string) => {
         case "Pants":
             return <img className="top-left"
             src={pants}/>;
+    }
+}
+
+export const determineResourceIcon = (role: string, resource: number) => {
+    switch (role) {
+        case "Tank":
+            return (
+                <div>
+                    {[...Array(resource)].map((_, index) => (
+                        <img key={index} className="resource-icon" src={power} />
+                        
+                    ))}
+                </div>
+            );
+        case "Healer":
+            return (
+                <div>
+                    {[...Array(resource)].map((_, index) => (
+                        <img key={index} className="resource-icon" src={spirit} />
+                    ))}
+                </div>
+            );
+        case "Caster":
+            return (
+                <div>
+                    {[...Array(resource)].map((_, index) => (
+                        <img key={index} className="resource-icon" src={magic} />
+                    ))}
+                </div>
+            );
+        case "DPS":
+            return (
+                <div>
+                    {[...Array(resource)].map((_, index) => (
+                        <img key={index} className="resource-icon" src={energy} />
+                    ))}
+                </div>
+            );
     }
 }

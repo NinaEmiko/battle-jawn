@@ -7,6 +7,7 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
+import com.battlejawn.Entities.Inventory;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
@@ -40,6 +41,8 @@ class HeroMoveServiceTest {
     @Mock
     HeroMoveDTO heroMoveDTO;
     @Mock
+    Inventory inventory;
+    @Mock
     InventoryService inventoryService;
     @Mock
     BattleSession battleSession;
@@ -61,6 +64,7 @@ class HeroMoveServiceTest {
     HeroMoveService heroMoveService;
     @BeforeEach
     void setup(){
+        inventory = new Inventory();
         battleHistoryMessageList = new ArrayList<>();
         enemy = new Orc(2, 105, 2, 25);
         hero = new Tank("Name");
@@ -152,7 +156,7 @@ class HeroMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        when(inventoryService.findPotionCount(any())).thenReturn(1);
+        when(inventoryService.findItemCount(inventory, "Potion")).thenReturn(1);
         doNothing().when(inventoryService).removeFirstFromInventory(anyLong(), anyString());
         when(potion.usePotion()).thenReturn(1);
         doNothing().when(heroService).updateHero(any());
@@ -171,7 +175,7 @@ class HeroMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        when(inventoryService.findPotionCount(any())).thenReturn(1);
+        when(inventoryService.findItemCount(inventory, "Potion")).thenReturn(1);
         doNothing().when(inventoryService).removeFirstFromInventory(anyLong(), anyString());
         when(potion.usePotion()).thenReturn(30);
         doNothing().when(heroService).updateHero(any());
@@ -189,7 +193,7 @@ class HeroMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        when(inventoryService.findPotionCount(any())).thenReturn(1);
+        when(inventoryService.findItemCount(inventory, "Potion")).thenReturn(1);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -203,7 +207,7 @@ class HeroMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        when(inventoryService.findPotionCount(any())).thenReturn(0);
+        when(inventoryService.findItemCount(inventory, "Potion")).thenReturn(0);
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
@@ -333,7 +337,7 @@ class HeroMoveServiceTest {
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        heroMoveService.processHeroMove(1000, enemy, 1L, hero, "Move");
+        heroMoveService.processHeroAttack(1000, enemy, 1L, hero, "Move");
 
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
 
@@ -347,7 +351,7 @@ class HeroMoveServiceTest {
         when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        heroMoveService.processHeroMove(10, enemy, 1L, hero, "Move");
+        heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Move");
 
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
     }

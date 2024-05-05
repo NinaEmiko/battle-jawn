@@ -1,0 +1,18 @@
+.hero-move-btns{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px;
+}
+.hero-move-btn{
+    background-color: hsl(181, 84%, 44%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 0;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    font-size: 20px;
+    height: 50px;
+    width: 100px;
+    align-items: center;
+}

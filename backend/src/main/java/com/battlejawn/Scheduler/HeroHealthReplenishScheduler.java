@@ -14,9 +14,9 @@ public class HeroHealthReplenishScheduler {
         this.heroService = heroService;
     }
 
-    @Scheduled(cron = "0 1 * * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void replenishAllHeroesHealth() {
-        logger.info("Inside replenishAllHeroesHealth service class. This job runs once a day.");
+        logger.info("Inside replenishAllHeroesHealth service class. This job runs once a day at 1 am.");
         try {
             heroService.restAllHeroes();
         }catch(Exception e) {

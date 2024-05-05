@@ -1,7 +1,5 @@
 package com.battlejawn.Service;
 
-import com.battlejawn.Entities.Enemy.Enemy;
-import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Hero.Healer;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
@@ -26,8 +24,6 @@ public class InventoryServiceTest {
     LootService lootService;
     @Mock
     InventoryRepository inventoryRepository;
-    @Mock
-    EnemyService enemyService;
     @Mock
     HeroService heroService;
     @Mock
@@ -132,6 +128,15 @@ public class InventoryServiceTest {
         inventory.setSlotOne("");
         inventory.setSlotTwo("");
         inventory.setSlotThree("");
+        inventory.setSlotFour("");
+        inventory.setSlotFive("");
+        inventory.setSlotSix("");
+        inventory.setSlotSeven("");
+        inventory.setSlotEight("");
+        inventory.setSlotNine("");
+        inventory.setSlotTen("");
+        inventory.setSlotEleven("");
+        inventory.setSlotTwelve("");
 
 
         when(inventoryRepository.save(any())).thenReturn(inventory);
@@ -208,9 +213,8 @@ public class InventoryServiceTest {
     @Test
     void usePotionMaxHealthTest() {
         when(heroService.getHeroById(anyLong())).thenReturn(tank);
-        doNothing().when(heroService).updateHero(any());
         inventoryService.usePotion(1L ,1);
-        verify(heroService, times(1)).updateHero(any());
+        verify(heroService, times(0)).updateHero(any());
     }
     @Test
     void usePotionAlmostFullTest() {

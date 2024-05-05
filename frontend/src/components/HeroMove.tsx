@@ -11,65 +11,89 @@ const HeroMove = ({ roleProp, buttonDisabledProp, handleClickBattleProp }: { rol
                         {"What would you like to do?"}
                     </div>
                     {roleProp == "Tank" &&
-                    <div className="btn-grid-roles" id="option-buttons">
-                        <button onClick={(e) => handleClickBattleProp('Strike')} disabled={buttonDisabledProp} className="btn-role-battle" id="button1">
+                    <div className="hero-move-btns" id="option-buttons">
+                        <button onClick={(e) => handleClickBattleProp('Strike')} disabled={buttonDisabledProp} className="hero-move-btn" id="atk-btn">
                             Strike
                         </button>
-                        <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="btn-role-battle" id="button2">
-                            Potion
-                        </button>
-                        <button onClick={(e) => handleClickBattleProp('Impale')} disabled={buttonDisabledProp} className="btn-role-battle" id="button3">
+                        <button onClick={(e) => handleClickBattleProp('Impale')} disabled={buttonDisabledProp} className="hero-move-btn" id="strong-atk-btn">
                             Impale
                         </button>
-                        <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="btn-role-battle" id="button4">
+                        <button onClick={(e) => handleClickBattleProp('Block')} disabled={buttonDisabledProp} className="hero-move-btn" id="special-btn">
+                            Block
+                        </button>
+                        <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="hero-move-btn" id="ptn-btn">
+                            Potion
+                        </button>
+                        <button onClick={(e) => handleClickBattleProp('Water')} disabled={buttonDisabledProp} className="hero-move-btn" id="wtr-btn">
+                            Water
+                        </button>
+                        <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="hero-move-btn" id="run-btn">
                             Run
                         </button>
                         </div>
                     }
                     {roleProp == "Healer" &&
-                    <div className="btn-grid-roles" id="option-buttons">
-                        <button onClick={(e) => handleClickBattleProp('Wand')} disabled={buttonDisabledProp} className="btn-role-battle" id="button1">
+                    <div className="hero-move-btns" id="option-buttons">
+                        <button onClick={(e) => handleClickBattleProp('Wand')} disabled={buttonDisabledProp} className="hero-move-btn" id="atk-btn">
                             Wand
                         </button>
-                        <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="btn-role-battle" id="button2">
-                            Heal
-                        </button>
-                        <button onClick={(e) => handleClickBattleProp('Holy')} disabled={buttonDisabledProp} className="btn-role-battle" id="button3">
+                        <button onClick={(e) => handleClickBattleProp('Holy')} disabled={buttonDisabledProp} className="hero-move-btn" id="strong-atk-btn">
                             Holy
                         </button>
-                        <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="btn-role-battle" id="button4">
+                        <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="hero-move-btn" id="special-btn">
+                            Heal
+                        </button>
+                        <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="hero-move-btn" id="ptn-btn">
+                            Potion
+                        </button>
+                        <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="hero-move-btn" id="wtr-btn">
+                            Water
+                        </button>
+                        <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="hero-move-btn" id="run-btn">
                             Run
                         </button>
                         </div>
                     }
                     {roleProp == "Caster" &&
-                        <div className="btn-grid-roles" id="option-buttons">
-                            <button onClick={(e) => handleClickBattleProp('Wand')} disabled={buttonDisabledProp} className="btn-role-battle" id="button1">
+                        <div className="hero-move-btns" id="option-buttons">
+                            <button onClick={(e) => handleClickBattleProp('Wand')} disabled={buttonDisabledProp} className="hero-move-btn" id="atk-btn">
                             Wand
                             </button>
-                            <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="btn-role-battle" id="button2">
+                            <button onClick={(e) => handleClickBattleProp('FireBlast')} disabled={buttonDisabledProp} className="hero-move-btn" id="strong-atk-btn">
+                            FireBlast
+                            </button>
+                            <button onClick={(e) => handleClickBattleProp('IceBlast')} disabled={buttonDisabledProp} className="hero-move-btn" id="special-btn">
+                            IceBlast
+                            </button>
+                            <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="hero-move-btn" id="ptn-btn">
                             Potion
                             </button>
-                            <button onClick={(e) => handleClickBattleProp('Blast')} disabled={buttonDisabledProp} className="btn-role-battle" id="button3">
-                            Blast
+                            <button onClick={(e) => handleClickBattleProp('Water')} disabled={buttonDisabledProp} className="hero-move-btn" id="wtr-btn">
+                            Water
                             </button>
-                            <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="btn-role-battle" id="button4">
+                            <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="hero-move-btn" id="run-btn">
                             Run
                             </button>
                         </div>
                     }
                     {roleProp == "DPS" &&
-                        <div className="btn-grid-roles" id="option-buttons">
-                            <button onClick={(e) => handleClickBattleProp('Stab')} disabled={buttonDisabledProp} className="btn-role-battle" id="button1">
+                        <div className="hero-move-btns" id="option-buttons">
+                            <button onClick={(e) => handleClickBattleProp('Stab')} disabled={buttonDisabledProp} className="hero-move-btn" id="atk-btn">
                             Stab
                             </button>
-                            <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="btn-role-battle" id="button2">
-                            Potion
+                            <button onClick={(e) => handleClickBattleProp('BackStab')} disabled={buttonDisabledProp} className="hero-move-btn" id="strong-atk-btn">
+                            BackStab
                             </button>
-                            <button onClick={(e) => handleClickBattleProp('Steal')} disabled={buttonDisabledProp} className="btn-role-battle" id="button3">
+                            <button onClick={(e) => handleClickBattleProp('Steal')} disabled={buttonDisabledProp} className="hero-move-btn" id="special-btn">
                             Steal
                             </button>
-                            <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="btn-role-battle" id="button4">
+                            <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="hero-move-btn" id="ptn-btn">
+                            Potion
+                            </button>
+                            <button onClick={(e) => handleClickBattleProp('Water')} disabled={buttonDisabledProp} className="hero-move-btn" id="wtr-btn">
+                            Water
+                            </button>
+                            <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="hero-move-btn" id="run-btn">
                             Run
                             </button>
                         </div>

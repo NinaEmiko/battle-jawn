@@ -18,9 +18,9 @@ public class BattleHistoryMessagePurge {
         this.battleHistoryMessageRepository = battleHistoryMessageRepository;
     }
 
-    @Scheduled(cron = "0 10 * * * *")
+    @Scheduled(cron = "0 0 1 * * *")
     public void purgeBattleHistoryMessage() {
-        logger.info("Inside purgeBattleHistoryMessage service class. This job runs every hour.");
+        logger.info("Inside purgeBattleHistoryMessage service class. This job runs every day at 1 am.");
         List<BattleHistoryMessage> battleHistoryMessageList = battleHistoryMessageRepository.findAll();
         Duration timeDifference;
         Duration oneDay = Duration.ofDays(5);

@@ -142,6 +142,17 @@ export const usePotion = async (id: number, index: number) => {
     }
 }
 
+export const useWater = async (id: number, index: number) => {
+    try {
+        const response = await axios.post(`${ENDPOINTS.USE_WATER}${id}`,{
+            slot: index
+        })
+        return response.data;
+    } catch (error) {
+        console.error('Error occured while using water: ', error)
+    }
+}
+
 export const heroMove = async (move: string, battleSessionId: number) => {
     try {
         const response = await axios.post(`${ENDPOINTS.HERO_MOVE}`, {

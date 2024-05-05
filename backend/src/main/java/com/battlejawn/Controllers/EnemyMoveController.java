@@ -1,5 +1,6 @@
 package com.battlejawn.Controllers;
 
+import com.battlejawn.DTO.EnemyMoveDTO;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Service.EnemyMoveService;
@@ -30,10 +31,10 @@ public class EnemyMoveController {
     }
 
     @PostMapping
-    public ResponseEntity<HeroMoveDTO> enemyMove(@Valid @RequestBody String data) {
+    public ResponseEntity<EnemyMoveDTO> enemyMove(@Valid @RequestBody String data) {
         logger.info("Inside enemyMove controller method. Data: " + data + ".");
         Long parsedBattleId = jsonParser.extractBattleSessionId(data);
-        HeroMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(parsedBattleId);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(parsedBattleId);
         logger.info("Enemy Move DTO: " + enemyMoveDTO);
 
         if (enemyMoveDTO != null) {

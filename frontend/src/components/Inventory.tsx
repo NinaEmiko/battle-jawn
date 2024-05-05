@@ -14,10 +14,11 @@ import necklace from "../assets/necklace.png";
 import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
+import water from "../assets/water.png";
 import classNames from "classnames";
 import "../styling/Inventory.css";
 import PopUp from "./PopUp";
-import { fetchInventory, usePotion } from "../api/api";
+import { fetchInventory, usePotion, useWater } from "../api/api";
 
 const Inventory = ({props}:{props:any}) => {
     const [inventoryList, setInventoryList] = useState([])
@@ -32,6 +33,13 @@ const Inventory = ({props}:{props:any}) => {
 
     const handleClickPotion = async (index: number) => {
         const data = await usePotion(props.heroId, index)
+        setPopUpType("jawn");
+        setPopUpContent(data);
+        setShowPopUp(true);
+    }
+
+    const handleClickWater = async (index: number) => {
+        const data = await useWater(props.heroId, index)
         setPopUpType("jawn");
         setPopUpContent(data);
         setShowPopUp(true);
@@ -62,6 +70,9 @@ const Inventory = ({props}:{props:any}) => {
             case "Potion":
                 return <img className="potion-icon" onClick={() => handleClickPotion(index)}
                 src={healthPotion}/>;
+            case "Water":
+                return <img className="potion-icon" onClick={() => handleClickWater(index)}
+                src={water}/>;
             case "Sword":
                 return <img className="potion" onClick={handleClickNotPotion}
                 src={sword}/>;

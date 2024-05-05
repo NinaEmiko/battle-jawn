@@ -20,4 +20,12 @@ public class BattleSession {
     private Long enemyId;
     @Column
     private LocalDateTime createdAt;
+    @JoinColumn(name = "battle_status_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    private BattleStatus battleStatus;
+
+    public BattleSession (){
+        this.battleStatus = new BattleStatus();
+        this.createdAt = LocalDateTime.now();
+    }
 }

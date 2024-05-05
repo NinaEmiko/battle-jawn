@@ -33,6 +33,19 @@ public class InventoryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/water/{id}")
+    public ResponseEntity<String> useWater(@PathVariable Long id, @Valid @RequestBody String slot){
+        int extractedSlot = jsonParser.extractSlot(slot);
+        logger.info("Slot: " + extractedSlot);
+        String response = inventoryService.useWater(id, extractedSlot);
+        if (response != null) {
+            URI location = URI.create("/water/");
+            return ResponseEntity.created(location).body(response);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @GetMapping("/loot-options/{id}")
     public ResponseEntity<List<String>> getLootOptions(@PathVariable Long id) {
         List<String> loot = inventoryService.getLootOptions(id);
