@@ -43,10 +43,10 @@ const HeroMove = ({ roleProp, buttonDisabledProp, handleClickBattleProp }: { rol
                         <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="hero-move-btn" id="special-btn">
                             Heal
                         </button>
-                        <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="hero-move-btn" id="ptn-btn">
+                        <button onClick={(e) => handleClickBattleProp('Potion')} disabled={buttonDisabledProp} className="hero-move-btn" id="ptn-btn">
                             Potion
                         </button>
-                        <button onClick={(e) => handleClickBattleProp('Heal')} disabled={buttonDisabledProp} className="hero-move-btn" id="wtr-btn">
+                        <button onClick={(e) => handleClickBattleProp('Water')} disabled={buttonDisabledProp} className="hero-move-btn" id="wtr-btn">
                             Water
                         </button>
                         <button onClick={(e) => handleClickBattleProp('Run')} disabled={buttonDisabledProp} className="hero-move-btn" id="run-btn">
