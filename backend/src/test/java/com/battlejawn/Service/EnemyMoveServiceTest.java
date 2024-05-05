@@ -1,5 +1,6 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.DTO.EnemyMoveDTO;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.EnemyMove.EnemySteal;
 import com.battlejawn.Entities.Battle.BattleHistoryMessage;
@@ -74,8 +75,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveWolfMaimTest() {
@@ -87,8 +88,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveSpiritShadowBlastTest() {
@@ -99,8 +100,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveSpiritSoulEaterTest() {
@@ -111,8 +112,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveOrcPotionTest() {
@@ -124,8 +125,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveOrcSecondPotionTest() {
@@ -137,8 +138,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveOrcStrikeTest() {
@@ -150,8 +151,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveOrcImpaleTest() {
@@ -163,8 +164,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveThiefPotionTest() {
@@ -176,8 +177,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveThiefSecondPotionTest() {
@@ -189,8 +190,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveThiefStabTest() {
@@ -202,8 +203,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
 
     @Test
@@ -215,8 +216,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNotNull(enemyMoveDTO);
     }
     @Test
     void enemyMoveThiefStealTest() {
@@ -231,8 +232,8 @@ class EnemyMoveServiceTest {
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        assertNotNull(enemyMoveDTO);
 
     }
 
@@ -246,8 +247,8 @@ class EnemyMoveServiceTest {
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        assertNotNull(enemyMoveDTO);
 
     }
 
@@ -259,8 +260,8 @@ class EnemyMoveServiceTest {
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
-        assertNotNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        assertNotNull(enemyMoveDTO);
 
     }
     @Test
@@ -273,8 +274,8 @@ class EnemyMoveServiceTest {
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
 
-        HeroMoveDTO heroMoveDTO = enemyMoveService.enemyMove(anyLong());
-        assertNull(heroMoveDTO);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.enemyMove(anyLong());
+        assertNull(enemyMoveDTO);
     }
     @Test
     void processPotionTest() {

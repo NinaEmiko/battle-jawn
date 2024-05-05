@@ -1,6 +1,7 @@
 package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.JsonParser;
+import com.battlejawn.DTO.EnemyMoveDTO;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Service.EnemyMoveService;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,18 +23,18 @@ class EnemyMoveControllerTest {
     @Mock
     JsonParser jsonParser;
     @Mock
-    HeroMoveDTO heroMoveDTO;
+    EnemyMoveDTO enemyMoveDTO;
     @InjectMocks
     EnemyMoveController enemyMoveController;
     @BeforeEach
     void setup(){
-        heroMoveDTO = new HeroMoveDTO();
+        enemyMoveDTO = new EnemyMoveDTO();
 
     }
     @Test
     void enemyMoveTest(){
         when(jsonParser.extractBattleSessionId(anyString())).thenReturn(1L);
-        when(enemyMoveService.enemyMove(anyLong())).thenReturn(heroMoveDTO);
+        when(enemyMoveService.enemyMove(anyLong())).thenReturn(enemyMoveDTO);
         enemyMoveController.enemyMove(anyString());
         verify(enemyMoveService, times(1)).enemyMove(anyLong());
     }
