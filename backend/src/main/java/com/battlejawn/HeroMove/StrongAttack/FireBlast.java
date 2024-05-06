@@ -14,9 +14,9 @@ public class FireBlast implements CriticalHit, Missable, Attack {
         if (miss()) {
             damage = 0;
         } else if (criticalHit()){
-            damage = (int) ((Math.floor(Math.random() * 14) + 10 /* * user.strength */) * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 5) + 15 /* * user.strength */) * 1.5);
         } else {
-            damage = (int) (Math.floor(Math.random() * 14) + 10 /* * user.strength */);
+            damage = (int) (Math.floor(Math.random() * 5) + 15 /* * user.strength */);
         }
         return damage;
     }

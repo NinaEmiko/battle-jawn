@@ -16,11 +16,11 @@ public class Stab implements CriticalHit, Missable, Attack {
             return 0;
         } else if (criticalHit()){
             setStabCount(stabCount++);
-            damage = (int) ((Math.floor(Math.random() * 7) + 10) /* * user.strength */ * 1.5);
+            damage = (int) ((Math.floor(Math.random() * 7) + 15) /* * user.strength */ * 1.5);
             return damage;
         } else {
             setStabCount(stabCount++);
-            damage = (int) (Math.floor(Math.random() * 7) + 10 /* * user.strength */);
+            damage = (int) (Math.floor(Math.random() * 7) + 15 /* * user.strength */);
             return damage;
         }
     }

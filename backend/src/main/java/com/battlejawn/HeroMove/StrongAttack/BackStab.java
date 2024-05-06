@@ -11,9 +11,9 @@ public class BackStab implements CriticalHit, Attack {
     public int attack() {
 
         if (criticalHit()){
-            damage = (int) ((Math.floor(Math.random() * 15) + 10 /* * user.strength */) * 1.5);
+            damage = 40;
         } else {
-            damage = (int) (Math.floor(Math.random() * 15) + 10 /* * user.strength */);
+            damage = 30;
         }
         return damage;
     }

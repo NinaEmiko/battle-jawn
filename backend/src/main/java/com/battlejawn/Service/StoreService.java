@@ -71,7 +71,7 @@ public class StoreService {
             msg = "Insufficient coins.";
         } else {
             inventoryService.addToFirstEmptySlot(inventory, "Water");
-            hero.setCoins(hero.getCoins() - quantity);
+            hero.setCoins(hero.getCoins() - quantity * 3L);
             heroService.updateHero(hero);
             msg = produceGenericMessage("purchased", quantity, "water");
         }
@@ -117,7 +117,7 @@ public class StoreService {
         }
         hero.setCoins(hero.getCoins() + (quantity));
         heroService.updateHero(hero);
-        return produceGenericSetMessage("sold", quantity, "wold scraps");
+        return produceGenericSetMessage("sold", quantity, "wolf scraps");
     }
     private String sellWolfPelt(Hero hero, int quantity) {
         for (int i = 0; i < quantity; i++) {

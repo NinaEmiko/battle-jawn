@@ -57,12 +57,19 @@ public class HeroMoveService {
             case "Stab":
                 Stab stab = new Stab();
                 damage = stab.attack();
+                if (damage == 0) {
+                    hero.setResource(0);
+                    heroService.updateHero(hero);
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "FireBlast":
                 FireBlast fireBlast = new FireBlast();
                 damage = fireBlast.attack();
-                heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
+                int resourceDamage = damage + (hero.getResource() * 5);
+                hero.setResource(0);
+                heroService.updateHero(hero);
+                heroMoveDTO = processHeroAttack(resourceDamage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "IceBlast":
                 IceBlast iceBlast = new IceBlast();
@@ -126,6 +133,10 @@ public class HeroMoveService {
             return getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, false);
         } else if (damage > enemy.getHealth()) {
             updatedEnemyHealth = 0;
+            if (damage > 0 && move.equals("Wand") || move.equals("Strike") || move.equals("Stab")){
+                hero.setResource(hero.getResource() + 1);
+                heroService.updateHero(hero);
+            }
             newMessage = getDamageMessage(move, damage);
             enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
             String enemyDefeatedMessage = "You have defeated the enemy!";
@@ -137,6 +148,10 @@ public class HeroMoveService {
             return getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, true);
         } else {
             updatedEnemyHealth = enemy.getHealth() - damage;
+            if (damage > 0 && move.equals("Wand") || move.equals("Strike") || move.equals("Stab")){
+                hero.setResource(hero.getResource() + 1);
+                heroService.updateHero(hero);
+            }
             newMessage = getDamageMessage(move, damage);
             enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
@@ -204,12 +219,20 @@ public String getDamageMessage(String move, int damage) {
         return getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
     }
     public HeroMoveDTO processBlock(Long battleSessionId, Enemy enemy, Hero hero) {
+        String newMessage;
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         BattleStatus battleStatus = battleSession.getBattleStatus();
-        battleStatus.setHeroBlocking(true);
-        battleStatusService.saveBattleStatus(battleStatus);
 
-        String newMessage = "You prepared to block.";
+        if (hero.getResource() < 1) {
+            newMessage = "You do not have enough power.";
+        } else {
+            battleStatus.setHeroBlocking(true);
+            battleStatusService.saveBattleStatus(battleStatus);
+            newMessage = "You prepared to block.";
+            hero.setResource(hero.getResource() - 1);
+            heroService.updateHero(hero);
+        }
+
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
@@ -251,12 +274,16 @@ public String getDamageMessage(String move, int damage) {
         Inventory inventory = hero.getInventory();
         int emptySpaces = inventoryService.getEmptySlotSize(hero.getId());
 
-
         if (enemy.getPotions() > 0 && emptySpaces > 0) {
             boolean stealSuccess = steal.useSteal();
             if (stealSuccess) {
                 inventoryService.addToFirstEmptySlot(inventory, "Potion");
                 int updatedEnemyPotionCount = enemy.getPotions() - 1;
+                if (hero.getResource() > 0) {
+                    hero.setResource(3);
+                } else {
+                    hero.setResource(2);
+                }
                 heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
                 String newMessage = "You stole a potion!";
@@ -296,13 +323,7 @@ public String getDamageMessage(String move, int damage) {
 
     public boolean processHeroResource(String move, Hero hero) {
         switch (move){
-            case "Wand", "Strike", "Stab":
-                if (hero.getResource() != hero.getMaxResource()){
-                    hero.setResource(hero.getResource() + 1);
-                    heroService.updateHero(hero);
-                }
-                return true;
-            case "IceBlast":
+            case "IceBlast", "Block":
                 if (hero.getResource() < 1) {
                     return false;
                 } else {

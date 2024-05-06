@@ -15,6 +15,6 @@ public interface HeroRepository extends JpaRepository<Hero, Long> {
     @Query("UPDATE Hero b SET b.health = b.maxHealth")
     void restAllHeroes();
 
-    @Query("SELECT b, (b.winCount - b.lossCount - (b.runCount * 2)) AS score FROM Hero b ORDER BY score DESC")
+    @Query("SELECT b, (b.winCount - b.lossCount - (b.runCount * 2)) AS score FROM Hero b ORDER BY score DESC Limit 5")
     List<Hero> findByHighScore();
 }
