@@ -51,7 +51,6 @@ public class BattleSessionService {
 
             hero.setActiveBattleSession(battleSession.getId());
             heroService.updateHero(hero);
-
             return battleSession;
         } catch(Exception e) {
             throw new RuntimeException("Failed to create new battle session: " + e.getMessage());

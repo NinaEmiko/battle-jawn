@@ -74,6 +74,7 @@ class BattleSessionServiceTest {
         when(enemyService.createNewEnemy(anyInt())).thenReturn(enemy);
         when(battleSessionRepository.save(any())).thenReturn(battleSession);
         when(battleHistoryMessageService.createNewMessage(null, "You encountered an enemy!")).thenReturn(battleHistoryMessage);
+        doNothing().when(heroService).updateHero(any());
         battleSessionService.createNewBattleSession(1L);
         verify(battleSessionRepository, times(1)).save(any());
     }
@@ -89,6 +90,7 @@ class BattleSessionServiceTest {
         when(heroService.getHeroById(null)).thenReturn(hero);
         when(enemyService.getEnemyById(null)).thenReturn(enemy);
         when(experienceProcessorService.processExperience(any(), any(), anyString())).thenReturn("Result");
+        doNothing().when(heroService).updateHero(any());
         battleSessionService.processEndOfBattle(1L, "Thing");
         verify(experienceProcessorService, times(1)).processExperience(any(),any(),anyString());
     }
