@@ -112,4 +112,19 @@ public class InventoryControllerTest {
         inventoryController.usePotion(1L, "1");
         verify(inventoryService, times(1)).usePotion(anyLong(), anyInt());
     }
+
+    @Test
+    void useWaterTest() {
+        when(jsonParser.extractSlot(any())).thenReturn(1);
+        when(inventoryService.useWater(anyLong(), anyInt())).thenReturn("Hi");
+        inventoryController.useWater(1L, "1");
+        verify(inventoryService, times(1)).useWater(anyLong(), anyInt());
+    }
+    @Test
+    void useWaterNullTest() {
+        when(jsonParser.extractSlot(any())).thenReturn(1);
+        when(inventoryService.useWater(anyLong(), anyInt())).thenReturn(null);
+        inventoryController.useWater(1L, "1");
+        verify(inventoryService, times(1)).useWater(anyLong(), anyInt());
+    }
 }

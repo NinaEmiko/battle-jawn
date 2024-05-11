@@ -58,7 +58,6 @@ public class InventoryController {
     }
     @PostMapping("/add/{id}")
     public ResponseEntity<String> addToInventory(@PathVariable Long id,@Valid @RequestBody List<String> selectedItems) {
-
         if (selectedItems != null){
             inventoryService.updateInventory(id, selectedItems);
             URI location = URI.create("/inventory/");

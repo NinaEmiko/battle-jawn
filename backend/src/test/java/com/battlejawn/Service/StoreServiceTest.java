@@ -78,7 +78,28 @@ public class StoreServiceTest {
         storeService.buy(1L, "Potion", 2);
         verify(heroService, times(0)).updateHero(any());
     }
-
+    @Test
+    void buyWaterSuccessTest() {
+        hero.setCoins(10L);
+        inventory.setId(2L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
+        doNothing().when(heroService).updateHero(any());
+        doNothing().when(inventoryService).addToFirstEmptySlot(any(), anyString());
+        String jawn = storeService.buy(1L, "Water", 1);
+        verify(heroService, times(1)).updateHero(any());
+        Assertions.assertEquals(jawn, "You purchased 1 water.");
+    }
+    @Test
+    void buyWaterFailTest() {
+        hero.setCoins(0L);
+        inventory.setId(2L);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
+        String jawn = storeService.buy(1L, "Water", 1);
+        verify(heroService, times(0)).updateHero(any());
+        Assertions.assertEquals(jawn, "Insufficient coins.");
+    }
     @Test
     void buySwordSuccessTest() {
         hero.setCoins(10L);
@@ -138,6 +159,7 @@ public class StoreServiceTest {
         items.add("Jewels");
         items.add("Orc necklace");
         items.add("Sword");
+        items.add("Water");
 
         for (int i = 0; i < items.size(); i++) {
 
@@ -166,6 +188,7 @@ public class StoreServiceTest {
         items.add("Jewels");
         items.add("Orc necklace");
         items.add("Sword");
+        items.add("Water");
 
         for (int i = 0; i < items.size(); i++) {
 
