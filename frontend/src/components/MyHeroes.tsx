@@ -3,19 +3,18 @@ import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
 import Battle from "./Battle";
 import Inventory from "./Inventory";
-import Store from "./Store";
+import Map from "./Map";
 import "../styling/MyHeroes.css";
 import PopUp from "./PopUp";
 import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
-import Resource from "./Resource";
 
 function MyHeroes( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
   const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [battleActive, setBattleActive] = useState(false);
   const [inventoryActive, setInventoryActive] = useState(false);
-  const [storeActive, setStoreActive] = useState(false);
+  const [mapActive, setMapActive] = useState(false);
   const [heroList, setHeroList] = useState([]);
   const [popUpType, setPopUpType] = useState("");
   const [popUpContent, setPopUpContent] = useState("");
@@ -49,21 +48,6 @@ function MyHeroes( {props}:{props:any} ) {
     fetchHeroesCall();
   }
 
-  const handleFight = (id: any, health: number) => {
-    if (heroList[currentHeroIndex].activeBattleSession){
-      console.log("heroList[currentHeroIndex].activeBattleSession: " + heroList[currentHeroIndex].activeBattleSession)
-      setActiveSession(true);
-    }
-    if (health > 0) {
-      setHeroId(id);
-      setBattleActive(true);
-    } else {
-      setPopUpType("jawn");
-      setPopUpContent("You cannot fight! You have no health!");
-      setShowPopUp(true);
-    }
-  }
-
   const handleInventory = (id: any) => {
     if (heroList[currentHeroIndex].activeBattleSession > 0) {
       setPopUpType("jawn");
@@ -72,17 +56,6 @@ function MyHeroes( {props}:{props:any} ) {
     } else {
       setHeroId(id);
       setInventoryActive(true);
-    }
-  }
-
-  const handleStore = (id: any) => {
-    if (heroList[currentHeroIndex].activeBattleSession > 0) {
-      setPopUpType("jawn");
-      setPopUpContent("You cannot shop while in a fight.");
-      setShowPopUp(true);
-    } else {
-      setHeroId(id);
-      setStoreActive(true);
     }
   }
 
@@ -95,10 +68,23 @@ function MyHeroes( {props}:{props:any} ) {
   }
   
   const handleSubComponentButtonClick = (component: string) => {
-    if (component === "store"){
-      setStoreActive(false);
+    if (component === "exit"){
+      setMapActive(false);
     } else if (component === "inventory") {
       setInventoryActive(false);
+    } else if (component === "battle") {
+      setMapActive(false);
+      setBattleActive(true);
+    }
+  }
+  const handleMap = (id: number) => {
+    if (heroList[currentHeroIndex].health === 0) {
+      setPopUpType("jawn");
+      setPopUpContent("This hero has no health. You must use a potion or wait until tomorrow to play again.");
+      setShowPopUp(true);
+    } else {
+      setHeroId(id);
+      setMapActive(true);
     }
   }
 
@@ -133,8 +119,8 @@ function MyHeroes( {props}:{props:any} ) {
           <Inventory props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
         }
 
-        {storeActive && 
-          <Store props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+        {mapActive &&
+          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
         }
 
         {showPopUp &&
@@ -148,7 +134,7 @@ function MyHeroes( {props}:{props:any} ) {
           />   
         }
 
-        {!battleActive && !inventoryActive && !storeActive && !showPopUp &&
+        {!battleActive && !inventoryActive && !showPopUp && !mapActive &&
 
           <div className="container-jawn-hero">
             <div className="carousel-jawn">
@@ -232,9 +218,8 @@ function MyHeroes( {props}:{props:any} ) {
               <span className="experience-fraction">{determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)}/{determineMaxExperience(heroList[currentHeroIndex].level)}</span>
             </div>
             <div className="row justify-content-center">
-                  <button onClick={() => handleStore(heroList[currentHeroIndex].id)} className={classNames('nav-link', 'btn', 'custom-button')} id="store-btn">Store</button>
                   <button onClick={() => handleInventory(heroList[currentHeroIndex].id)} className={classNames('nav-link', 'btn', 'custom-button')} id="inventory-btn">Inventory</button>
-                  <button onClick={() => handleFight(heroList[currentHeroIndex].id, heroList[currentHeroIndex].health)} className={classNames('nav-link', 'btn', 'custom-button')} id="fight-btn">Fight</button>
+                  <button onClick={() => handleMap(heroList[currentHeroIndex].id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Play</button>
                   {import.meta.env.VITE_REACT_APP_URL == "http://localhost:8080" &&
                   <button onClick={() => handleRest(heroList[currentHeroIndex].id)} className={classNames('nav-link', 'btn', 'custom-button')} id="rest-btn">Rest</button>
                    }

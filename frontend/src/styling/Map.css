@@ -1,0 +1,84 @@
+.container-map-jawn {
+    /* Rounds edges of Display Box */
+    border-radius: 5px;
+    /* Shadow Effect */
+    box-shadow: 0 0 10px 2px;
+    padding-top: .50em;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* justify-content: center;
+    text-align: center; */
+    margin-left: 5px;
+    margin-right: 5px;
+
+    position: relative;
+    width: 420px;
+    height: 420px;
+    border: 2px solid black;
+    overflow: hidden;
+    background-color: rgb(102, 220, 34);
+  }
+
+  .map {
+    position: absolute;
+    background-image: url('../assets/maps/map6.png');
+  }
+
+  .hero-move-btns{
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px;
+}
+.direction-btn{
+    background-color: hsl(181, 84%, 44%);
+    border: 1px solid hsl(200, 100%, 30%);
+    border-radius: 0;
+    padding: 5px 10px;
+    color: black;
+    outline: none;
+    font-size: 20px;
+    height: 50px;
+    width: 100px;
+    align-items: center;
+}
+
+.controls {
+    position: absolute;
+    top: 87%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .controls button {
+    width: 100px;
+    height: 60px;
+    font-size: 18px;
+  }
+  
+  .controls button:nth-child(1) {
+    grid-column: 2;
+  }
+  
+  .controls button:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  
+  .controls button:nth-child(3) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  
+  .controls button:nth-child(4) {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  .controls button:nth-child(5) {
+    grid-column: 2;
+    grid-row: 2;
+  }
