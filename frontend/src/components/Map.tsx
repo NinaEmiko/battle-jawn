@@ -1,57 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Circle } from 'react-konva';
 import "../styling/Map.css";
-import Store from "./Store";
-import Inventory from "./Inventory";
+import { DOORS, OBSTACLES } from '../helpers/constants';
 
 const Map = ({props}:{props:any}) => {
     const [player, setPlayer] = useState({ x: 210, y: 210});
     const [storeActive, setStoreActive] = useState(false);
-    const [inventoryActive, setInventoryActive] = useState(false);
     const playerSize = 10;
     const boxSize = 420;
     const moveSpeed = 5; 
     const mapSize = 840; 
     const moveInterval = useRef<NodeJS.Timeout | null>(null);
-
-    const targetSection = {
-        x: 325,
-        y: 280,
-        width: 25,
-        height: 10
-    };
-
-    const arena = {
-        x: 400,
-        y: 280,
-        width: 25,
-        height: 10
-    };
-
-    const obstacles = [
-        { x: 165, y: 330, width: 290, height: 100 },
-        { x: 165, y: 200, width: 65, height: 130 },
-        { x: 60, y: 90, width: 185, height: 110 },
-        { x: 285, y: 90, width: 185, height: 135 },
-        { x: 330, y: 30, width: 150, height: 135 },
-        { x: 280, y: 0, width: 150, height: 35 },
-        { x: 0, y: 0, width: 30, height: 500 },
-        { x: 0, y: 0, width: 500, height: 35 },
-        { x: 0, y: 240, width: 110, height: 10 },
-        { x: 100, y: 240, width: 10, height: 230 },
-        { x: 325, y: 245, width: 55, height: 40 },
-        { x: 380, y: 245, width: 55, height: 40 },
-      ];
-
-    const handleSubComponentButtonClick = (component: string) => {
-        if (component === "store"){
-        setStoreActive(false);
-        stopMoving();
-        } else if (component === "inventory") {
-        setInventoryActive(false);
-        stopMoving();
-        }
-    }
+    const storeDoor = DOORS.STORE;
+    const arenaDoor = DOORS.ARENA;
+    const obstacles = OBSTACLES.MAP_1;
 
     const startMoving = (direction: string) => {
         if (moveInterval.current) {
@@ -80,17 +42,17 @@ const Map = ({props}:{props:any}) => {
             }
 
             if (
-                newX < targetSection.x + targetSection.width &&
-                newX + playerSize > targetSection.x &&
-                newY < targetSection.y + targetSection.height &&
-                newY + playerSize > targetSection.y
+                newX < storeDoor.x + storeDoor.width &&
+                newX + playerSize > storeDoor.x &&
+                newY < storeDoor.y + storeDoor.height &&
+                newY + playerSize > storeDoor.y
             ) {
-                setStoreActive(true);
+                handleStore(props.heroId);
             } else if (
-                newX < arena.x + arena.width &&
-                newX + playerSize > targetSection.x &&
-                newY < arena.y + arena.height &&
-                newY + playerSize > targetSection.y
+                newX < arenaDoor.x + arenaDoor.width &&
+                newX + playerSize > storeDoor.x &&
+                newY < arenaDoor.y + arenaDoor.height &&
+                newY + playerSize > storeDoor.y
             ) {
                 props.setIsVisible("battle");
             }
@@ -134,120 +96,110 @@ const Map = ({props}:{props:any}) => {
         }));
         }
     }, [storeActive]);
-
-    const handleInventory = () => {
-        setInventoryActive(true);
-    }  
   
     const handleBackButtonClick = () => {
-        props.setIsVisible("exit-btn-map")
+        props.setIsVisible("exit-btn-map", props.heroId)
+    }
+    const handleInventory = (id: number) => {
+        props.setIsVisible("open-inventory-map", id);
+    }
+    const handleStore = (id: number) => {
+        props.setIsVisible("open-store-map", id);
     }
 
 return (
         <div className="home-background-jawn">
+            <>
+                <div className="container-map-jawn">
+                    <div
+                        className="map"
+                        style={{
+                        top: -player.y + boxSize / 2 - playerSize / 2,
+                        left: -player.x + boxSize / 2 - playerSize / 2,
+                        }}
+                    >
 
-            {storeActive && 
-                <Store props={{heroId:props.heroId, setIsVisible: handleSubComponentButtonClick}} />
-            }
-
-            {inventoryActive &&
-                <Inventory props={{heroId:props.heroId, setIsVisible: handleSubComponentButtonClick}} />
-            }
-
-            {!storeActive && !inventoryActive && (
-
-                <>
-                    <div className="container-map-jawn">
-                        <div
-                            className="map"
-                            style={{
-                            top: -player.y + boxSize / 2 - playerSize / 2,
-                            left: -player.x + boxSize / 2 - playerSize / 2,
-                            }}
-                        >
-
-                            <Stage width={mapSize} height={mapSize}>
-                                <Layer>
-                                    <Circle
-                                        x={player.x}
-                                        y={player.y}
-                                        width={playerSize}
-                                        height={playerSize}
-                                        radius={playerSize}
-                                        fill="red"
-                                    />
+                        <Stage width={mapSize} height={mapSize}>
+                            <Layer>
+                                <Circle
+                                    x={player.x}
+                                    y={player.y}
+                                    width={playerSize}
+                                    height={playerSize}
+                                    radius={playerSize}
+                                    fill="red"
+                                />
+                                <Rect
+                                    x={storeDoor.x}
+                                    y={storeDoor.y}
+                                    width={storeDoor.width}
+                                    height={storeDoor.height}
+                                    // fill="yellow"
+                                />
+                                <Rect
+                                    x={arenaDoor.x}
+                                    y={arenaDoor.y}
+                                    width={arenaDoor.width}
+                                    height={arenaDoor.height}
+                                    // fill="yellow"
+                                />
+                                {obstacles.map((obstacle, index) => (
                                     <Rect
-                                        x={targetSection.x}
-                                        y={targetSection.y}
-                                        width={targetSection.width}
-                                        height={targetSection.height}
-                                        // fill="yellow"
+                                        key={index}
+                                        x={obstacle.x}
+                                        y={obstacle.y}
+                                        width={obstacle.width}
+                                        height={obstacle.height}
+                                        // fill="blue"
                                     />
-                                    <Rect
-                                        x={arena.x}
-                                        y={arena.y}
-                                        width={arena.width}
-                                        height={arena.height}
-                                        // fill="yellow"
-                                    />
-                                    {obstacles.map((obstacle, index) => (
-                                        <Rect
-                                            key={index}
-                                            x={obstacle.x}
-                                            y={obstacle.y}
-                                            width={obstacle.width}
-                                            height={obstacle.height}
-                                            // fill="blue"
-                                        />
-                                    ))}
-                                </Layer>
-                            </Stage>
+                                ))}
+                            </Layer>
+                        </Stage>
 
-                        </div>
                     </div>
+                </div>
 
-                    <div className="controls">
-                        <button className="direction-btn"
-                            onMouseDown={() => startMoving('up')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('up')}
-                            onTouchEnd={stopMoving}
-                        >
-                            Up
-                        </button>
-                        <button className="direction-btn"
-                            onMouseDown={() => startMoving('left')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('left')}
-                            onTouchEnd={stopMoving}
-                        >
-                            Left
-                        </button>
-                        <button className="direction-btn"
-                            onMouseDown={() => startMoving('down')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('down')}
-                            onTouchEnd={stopMoving}
-                        >
-                            Down
-                        </button>
-                        <button className="direction-btn"
-                            onMouseDown={() => startMoving('right')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('right')}
-                            onTouchEnd={stopMoving}
-                        >
-                            Right
-                        </button>
-                        
-                        <button onClick={() => handleInventory()} className="direction-btn">Inventory</button>
-                    </div>
-                </>
-            )}
+                <div className="controls">
+                    <button className="direction-btn"
+                        onMouseDown={() => startMoving('up')}
+                        onMouseUp={stopMoving}
+                        onMouseLeave={stopMoving}
+                        onTouchStart={() => startMoving('up')}
+                        onTouchEnd={stopMoving}
+                    >
+                        Up
+                    </button>
+                    <button className="direction-btn"
+                        onMouseDown={() => startMoving('left')}
+                        onMouseUp={stopMoving}
+                        onMouseLeave={stopMoving}
+                        onTouchStart={() => startMoving('left')}
+                        onTouchEnd={stopMoving}
+                    >
+                        Left
+                    </button>
+                    <button className="direction-btn"
+                        onMouseDown={() => startMoving('down')}
+                        onMouseUp={stopMoving}
+                        onMouseLeave={stopMoving}
+                        onTouchStart={() => startMoving('down')}
+                        onTouchEnd={stopMoving}
+                    >
+                        Down
+                    </button>
+                    <button className="direction-btn"
+                        onMouseDown={() => startMoving('right')}
+                        onMouseUp={stopMoving}
+                        onMouseLeave={stopMoving}
+                        onTouchStart={() => startMoving('right')}
+                        onTouchEnd={stopMoving}
+                    >
+                        Right
+                    </button>
+                    
+                    <button onClick={() => handleInventory(props.heroId)} className="direction-btn">Inventory</button>
+                </div>
+            </>
         </div>
     );
 };

@@ -50,7 +50,7 @@ const Inventory = ({props}:{props:any}) => {
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("inventory")
+        props.setIsVisible("exit-inventory", props.heroId)
     }
 
     const handleOkButtonClick = () => {

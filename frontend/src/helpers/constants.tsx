@@ -23,3 +23,35 @@ export const ENDPOINTS = {
   END_BATTLE_SESSION: `${BASE_URL}/api/battle-session/end`,
   FETCH_BATTLE_SESSION: `${BASE_URL}/api/battle-session/`,
 };
+
+export const DOORS = {
+  STORE: {
+    x: 325,
+    y: 280,
+    width: 25,
+    height: 10
+},
+  ARENA: {
+    x: 400,
+    y: 280,
+    width: 25,
+    height: 10
+  },
+};
+
+export const OBSTACLES = {
+  MAP_1: [
+    { x: 165, y: 330, width: 290, height: 100 },
+    { x: 165, y: 200, width: 65, height: 130 },
+    { x: 60, y: 90, width: 185, height: 110 },
+    { x: 285, y: 90, width: 185, height: 135 },
+    { x: 330, y: 30, width: 150, height: 135 },
+    { x: 280, y: 0, width: 150, height: 35 },
+    { x: 0, y: 0, width: 30, height: 500 },
+    { x: 0, y: 0, width: 500, height: 35 },
+    { x: 0, y: 240, width: 110, height: 10 },
+    { x: 100, y: 240, width: 10, height: 230 },
+    { x: 325, y: 245, width: 55, height: 40 },
+    { x: 380, y: 245, width: 55, height: 40 },
+  ],
+};

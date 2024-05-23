@@ -59,7 +59,7 @@ const Store = ({props}:{props:any}) => {
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("store")
+        props.setIsVisible("exit-store", props.heroId)
     }
     
     const handleOkButtonClick = () => {
