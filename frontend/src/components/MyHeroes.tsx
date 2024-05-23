@@ -68,7 +68,7 @@ function MyHeroes( {props}:{props:any} ) {
   }
   
   const handleSubComponentButtonClick = (component: string) => {
-    if (component === "exit"){
+    if (component === "exit-btn-map"){
       setMapActive(false);
     } else if (component === "inventory") {
       setInventoryActive(false);

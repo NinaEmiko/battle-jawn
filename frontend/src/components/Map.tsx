@@ -140,18 +140,18 @@ const Map = ({props}:{props:any}) => {
     }  
   
     const handleBackButtonClick = () => {
-        props.setIsVisible("map")
+        props.setIsVisible("exit-btn-map")
     }
 
 return (
         <div className="home-background-jawn">
 
             {storeActive && 
-                <Store props={{heroId:props, setIsVisible: handleSubComponentButtonClick}} />
+                <Store props={{heroId:props.heroId, setIsVisible: handleSubComponentButtonClick}} />
             }
 
             {inventoryActive &&
-                <Inventory props={{heroId:props, setIsVisible: handleSubComponentButtonClick}} />
+                <Inventory props={{heroId:props.heroId, setIsVisible: handleSubComponentButtonClick}} />
             }
 
             {!storeActive && !inventoryActive && (
