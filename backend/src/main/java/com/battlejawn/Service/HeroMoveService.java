@@ -134,8 +134,10 @@ public class HeroMoveService {
         } else if (damage > enemy.getHealth()) {
             updatedEnemyHealth = 0;
             if (damage > 0 && move.equals("Wand") || move.equals("Strike") || move.equals("Stab")){
-                hero.setResource(hero.getResource() + 1);
-                heroService.updateHero(hero);
+                if (hero.getResource() != hero.getMaxResource()) {
+                    hero.setResource(hero.getResource() + 1);
+                    heroService.updateHero(hero);
+                }
             }
             newMessage = getDamageMessage(move, damage);
             enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
