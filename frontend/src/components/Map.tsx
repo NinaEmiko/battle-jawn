@@ -160,6 +160,11 @@ return (
                 </div>
 
                 <div className="controls">
+                <button onClick={() => handleInventory(props.heroId)} className="action-btn">Bag</button>
+                <button onClick={() => handleBackButtonClick()} className="action-btn">Exit</button>
+
+
+
                     <button className="direction-btn"
                         onMouseDown={() => startMoving('up')}
                         onMouseUp={stopMoving}
@@ -196,9 +201,9 @@ return (
                     >
                         Right
                     </button>
-                    
-                    <button onClick={() => handleInventory(props.heroId)} className="direction-btn">Inventory</button>
-                </div>
+
+
+                </div>              
             </>
         </div>
     );

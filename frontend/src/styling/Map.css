@@ -32,7 +32,8 @@
     grid-template-columns: repeat(3, auto);
     gap: 10px;
 }
-.direction-btn{
+
+.direction-btn, .action-btn{
     background-color: hsl(181, 84%, 44%);
     border: 1px solid hsl(200, 100%, 30%);
     border-radius: 0;
@@ -41,7 +42,7 @@
     outline: none;
     font-size: 20px;
     height: 50px;
-    width: 100px;
+    width: 50px;
     align-items: center;
     user-select: none;
     -webkit-user-select: none;
@@ -49,42 +50,51 @@
     -ms-user-select: none;
 }
 
+
 .controls {
     position: absolute;
     top: 87%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-gap: 10px;
+    float: right;
   }
   
   .controls button {
-    width: 100px;
+    width: 75px;
     height: 60px;
     font-size: 18px;
   }
-  
+
   .controls button:nth-child(1) {
-    grid-column: 2;
+    grid-column: 1;
+    background-color: rgb(183, 52, 166);
     
   }
-  
   .controls button:nth-child(2) {
     grid-column: 1;
     grid-row: 2;
+    background-color: rgb(183, 52, 166);
   }
   
   .controls button:nth-child(3) {
-    grid-column: 2;
-    grid-row: 3;
+    grid-column: 5;
+    
   }
   
   .controls button:nth-child(4) {
-    grid-column: 3;
+    grid-column: 4;
     grid-row: 2;
   }
+  
   .controls button:nth-child(5) {
-    grid-column: 2;
+    grid-column: 5;
+    grid-row: 2;
+  }
+  
+  .controls button:nth-child(6) {
+    grid-column: 6;
     grid-row: 2;
   }
