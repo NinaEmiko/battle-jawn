@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
-import Battle from "./Battle";
-import Inventory from "./Inventory";
-import Map from "./Map";
 import "../styling/MyHeroes.css";
 import PopUp from "./PopUp";
 import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
-import Store from "./Store";
 
 function Heroes( {props}:{props:any} ) {
-  const [heroId, setHeroId] = useState(0);
   const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [heroList, setHeroList] = useState([]);
   const [popUpType, setPopUpType] = useState("");

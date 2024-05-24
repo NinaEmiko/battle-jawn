@@ -54,7 +54,7 @@ const Map = ({props}:{props:any}) => {
                 newY < arenaDoor.y + arenaDoor.height &&
                 newY + playerSize > storeDoor.y
             ) {
-                props.setIsVisible("battle", props.heroId);
+                props.setIsVisible("open-battle", props.heroId);
             }
 
         const collision = obstacles.some(obstacle => 
@@ -98,13 +98,13 @@ const Map = ({props}:{props:any}) => {
     }, [storeActive]);
   
     const handleBackButtonClick = () => {
-        props.setIsVisible("exit-btn-map", props.heroId)
+        props.setIsVisible("exit-map", props.heroId)
     }
     const handleInventory = (id: number) => {
-        props.setIsVisible("open-inventory-map", id);
+        props.setIsVisible("open-inventory", id);
     }
     const handleStore = (id: number) => {
-        props.setIsVisible("open-store-map", id);
+        props.setIsVisible("open-store", id);
     }
 
 return (
@@ -160,10 +160,8 @@ return (
                 </div>
 
                 <div className="controls">
-                <button onClick={() => handleInventory(props.heroId)} className="action-btn">Bag</button>
-                <button onClick={() => handleBackButtonClick()} className="action-btn">Exit</button>
-
-
+                    <button onClick={() => handleInventory(props.heroId)} className="action-btn">Bag</button>
+                    <button onClick={() => handleBackButtonClick()} className="action-btn">Exit</button>
 
                     <button className="direction-btn"
                         onMouseDown={() => startMoving('up')}
@@ -201,8 +199,6 @@ return (
                     >
                         Right
                     </button>
-
-
                 </div>              
             </>
         </div>

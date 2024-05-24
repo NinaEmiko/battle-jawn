@@ -37,18 +37,7 @@ function Battle({props}:{props:any}) {
 
   })
 
-  const fetchInitialHeroData = async () => {
-    const data = await fetchHero(props.heroId);
-    setRole(data.role);
-    setHealth(data.health);
-    setMaxHealth(data.maxHealth);
-    setResource(data.resource);
-    if(data.activeBattleSession != null) {
-      fetchBattleSessionCall(data.activeBattleSession);
-    } else {
-      createNewBattleSessionCall();
-    }
-  }
+  //HANDLER FUNCTIONS
 
   const handleEnemyMove = () => {
     let timeoutId: number | undefined | any;
@@ -72,6 +61,21 @@ function Battle({props}:{props:any}) {
     handleEnemyMove();
   }
 
+  //API CALLS
+
+  const fetchInitialHeroData = async () => {
+    const data = await fetchHero(props.heroId);
+    setRole(data.role);
+    setHealth(data.health);
+    setMaxHealth(data.maxHealth);
+    setResource(data.resource);
+    if(data.activeBattleSession != null) {
+      fetchBattleSessionCall(data.activeBattleSession);
+    } else {
+      createNewBattleSessionCall();
+    }
+  }
+
   const createNewBattleSessionCall = async () => {
     const data = await createNewBattleSession(props.heroId)
     setBattleSessionId(data.id);
@@ -85,7 +89,6 @@ function Battle({props}:{props:any}) {
     setEnemyId(data.enemyId);
     setBattleSessionCreated(true);
   }
-
 
   const fetchInitialData = async () => {
 
@@ -125,6 +128,8 @@ function Battle({props}:{props:any}) {
       })
   }
 
+  //BATTLE INITIALIZATION
+
   //Fetch hero data on mount
   useEffect(() => {
     fetchInitialHeroData();
@@ -144,6 +149,7 @@ function Battle({props}:{props:any}) {
     }
   }, [sessionInitialized])
 
+  //BATTLE COMPLETION
 
   //Set battle result to end battle
   useEffect(() => {
@@ -165,7 +171,6 @@ function Battle({props}:{props:any}) {
       setButtonDisabled(true);
       setPostBattleActive(true);
   }
-    
   }, [battleResult])
 
   return (

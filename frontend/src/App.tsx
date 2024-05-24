@@ -5,13 +5,14 @@ import CustomNavBar from "./components/CustomNavBar";
 import { FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm";
 import { getAuthToken, request, setAuthHeader } from "./helpers/axios_helper";
-import MyHeroes from "./components/MyHeroes";
+import MyHeroes from "./components/Home";
 import AccountSettings from "./components/AccountSettings";
 import CreateNewHero from "./components/CreateNewHero";
 import LeaderBoard from "./components/LeaderBoard";
 import Inventory from "./components/Inventory";
 import AboutUs from "./components/AboutUs";
 import axios from "axios";
+import Home from "./components/Home";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -76,7 +77,7 @@ function App() {
         {/* <div className="background-jawn"> */}
         <Routes>
             {currentUser.loggedIn && (
-              <Route key="my-heroes" path="/" element={<MyHeroes props={currentUser} />} />
+              <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />
             )}
             {!currentUser.loggedIn && (
               <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />
