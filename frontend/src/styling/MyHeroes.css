@@ -132,3 +132,7 @@ text-align: center;
   display: flex;
   justify-content: space-between;
 }
+
+.my-hero-btns{
+  /* width: 90%; */
+}

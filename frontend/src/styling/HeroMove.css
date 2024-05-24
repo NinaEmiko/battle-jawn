@@ -15,4 +15,13 @@
     height: 50px;
     width: 100px;
     align-items: center;
+    display: inline;
+}
+.resource-ref{
+    height: 15px;
+    width: 15px;
+}
+.resource-ref-div{
+    margin-left: 5px;
+    display: inline;
 }

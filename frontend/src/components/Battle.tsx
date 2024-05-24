@@ -17,6 +17,7 @@ function Battle({props}:{props:any}) {
   const [battleSessionId, setBattleSessionId] = useState(0);
   const [enemyId, setEnemyId] = useState(0);
   const [role, setRole] = useState('');
+  const [heroName, setHeroName] = useState('')
   const [health, setHealth] = useState(1);
   const [maxHealth, setMaxHealth] = useState(0);
   const [resource, setResource] = useState(0);
@@ -65,6 +66,7 @@ function Battle({props}:{props:any}) {
 
   const fetchInitialHeroData = async () => {
     const data = await fetchHero(props.heroId);
+    setHeroName(data.name);
     setRole(data.role);
     setHealth(data.health);
     setMaxHealth(data.maxHealth);
@@ -201,7 +203,7 @@ function Battle({props}:{props:any}) {
               </div>
               <div className="enemy-display-right">
                 <div className="enemy-display-left-top-half">
-                  <span className="enemy-display-right-top-half-name">{role}</span>
+                  <span className="enemy-display-right-top-half-name">{heroName}</span>
                   {determineResourceIcon(role, resource)}
                 </div>
                 <div className="enemy-display-left-bottom-half">
