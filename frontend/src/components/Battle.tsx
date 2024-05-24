@@ -121,7 +121,7 @@ function Battle({props}:{props:any}) {
       setPostBattleObject({
         message: endBattleSessionData,
         enemyId: enemyId,
-        heroId: props,
+        heroId: props.heroId,
         ran: heroRan,
         lost: heroLost,
         won: heroWon
