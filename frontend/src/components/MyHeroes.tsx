@@ -68,14 +68,15 @@ function MyHeroes( {props}:{props:any} ) {
       handleMap(id);
       setInventoryActive(false);
     } else if (component === "open-store-map") {
-      setMapActive(false);
       setHeroId(id);
+      setMapActive(false);
       setStoreActive(true);
     } else if (component === "open-inventory-map") {
-      setMapActive(false);
       setHeroId(id);
+      setMapActive(false);
       setInventoryActive(true);
     } else if (component === "battle") {
+      setHeroId(id);
       setMapActive(false);
       setBattleActive(true);
     }
@@ -115,19 +116,19 @@ function MyHeroes( {props}:{props:any} ) {
     <>
       <div className="home-background-jawn">
         {battleActive &&  
-          <Battle  props={heroId} activeSessionProp={activeSession} battleSessionProp={heroList[currentHeroIndex].activeBattleSession} />
+          <Battle  props={{heroId:heroList[currentHeroIndex].id}} />
         }
 
         {storeActive &&
-          <Store props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+          <Store props={{heroId:heroList[currentHeroIndex].id, setIsVisible: handleSubComponentButtonClick}} />
         }
 
         {inventoryActive &&
-          <Inventory props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+          <Inventory props={{heroId:heroList[currentHeroIndex].id, setIsVisible: handleSubComponentButtonClick}} />
         }
 
         {mapActive &&
-          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+          <Map props={{heroId:heroList[currentHeroIndex].id, setIsVisible: handleSubComponentButtonClick}} />
         }
 
         {showPopUp &&

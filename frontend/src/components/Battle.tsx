@@ -9,7 +9,8 @@ import HeroIcon from "./HeroIcon";
 import LogBox from "./LogBox";
 import { determineResourceIcon } from "../helpers/icon_helper";
 
-function Battle({props, activeSessionProp, battleSessionProp}:{props:any; activeSessionProp: boolean; battleSessionProp: number}) {
+function Battle({props}:{props:any}) {
+  const [heroDataSet, setHeroDataSet] = useState(false);
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
   const [sessionInitialized, setSessionInitialized] = useState(false);
   const [beginBattle, setBeginBattle] = useState(false);
@@ -37,6 +38,19 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
 
   })
 
+  const fetchInitialHeroData = async () => {
+    const data = await fetchHero(props.heroId);
+    setRole(data.role);
+    setHealth(data.health);
+    setMaxHealth(data.maxHealth);
+    setResource(data.resource);
+    if(data.activeBattleSession != null) {
+      fetchBattleSessionCall(data.activeBattleSession);
+    } else {
+      createNewBattleSession(props.heroId);
+    }
+  }
+
   const handleEnemyMove = () => {
     let timeoutId: number | undefined | any;
     timeoutId = setTimeout(async () => {
@@ -60,7 +74,7 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
   }
 
   const createNewBattleSessionCall = async () => {
-    const data = await createNewBattleSession(props)
+    const data = await createNewBattleSession(props.heroId)
     setBattleSessionId(data.id);
     setEnemyId(data.enemyId);
     setBattleSessionCreated(true);
@@ -73,13 +87,8 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
     setBattleSessionCreated(true);
   }
 
-  const fetchInitialData = async () => {
 
-    const data = await fetchHero(props);
-    setRole(data.role);
-    setHealth(data.health);
-    setMaxHealth(data.maxHealth);
-    setResource(data.resource);
+  const fetchInitialData = async () => {
 
     const enemyData = await fetchEnemy(enemyId);
     setEnemyName(enemyData.name);
@@ -117,35 +126,27 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
       })
   }
 
+  //Fetch hero data on mount
   useEffect(() => {
-    if (activeSessionProp) {
-      fetchBattleSessionCall(battleSessionProp);
-    } else if (!battleSessionCreated) {
-      createNewBattleSessionCall();
-    }
+    fetchInitialHeroData();
   },[])
 
+  //Once battle session has been established, fetch enemy and battle session data
   useEffect(() => {
     if (battleSessionCreated) {
       fetchInitialData();
     }
   }, [battleSessionCreated])
 
+  //Once required data has been set, initialize battle
   useEffect(() => {
     if (sessionInitialized) {
       setBeginBattle(true);
     }
   }, [sessionInitialized])
 
-  useEffect(() => {
-    if (battleResult != "") {
-      processEndOfBattle();
-      setButtonDisabled(true);
-      setPostBattleActive(true);
-  }
-    
-  }, [battleResult])
 
+  //Set battle result to end battle
   useEffect(() => {
     if(battleHistory) {
       if(battleHistory.includes('You have defeated the enemy!')) {
@@ -157,6 +158,16 @@ function Battle({props, activeSessionProp, battleSessionProp}:{props:any; active
       }
     }
   })
+
+  //Once battle result has been set, end battle
+  useEffect(() => {
+    if (battleResult != "") {
+      processEndOfBattle();
+      setButtonDisabled(true);
+      setPostBattleActive(true);
+  }
+    
+  }, [battleResult])
 
   return (
     <>
