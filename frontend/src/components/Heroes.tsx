@@ -176,7 +176,7 @@ function Heroes( {props}:{props:any} ) {
               </tbody>
             </table>
             <div className="experience-bar-container">
-              <progress className='experience-bar' value={heroList[currentHeroIndex].experience} max={determineMaxExperience(heroList[currentHeroIndex].level)}></progress>
+              <progress className='experience-bar' value={determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)} max={determineMaxExperience(heroList[currentHeroIndex].level)}></progress>
               <span className="experience-fraction">{determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)}/{determineMaxExperience(heroList[currentHeroIndex].level)}</span>
             </div>
             <div className="row justify-content-center">
