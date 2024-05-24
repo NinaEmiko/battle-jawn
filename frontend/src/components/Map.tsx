@@ -54,7 +54,7 @@ const Map = ({props}:{props:any}) => {
                 newY < arenaDoor.y + arenaDoor.height &&
                 newY + playerSize > storeDoor.y
             ) {
-                props.setIsVisible("battle");
+                props.setIsVisible("battle", props.heroId);
             }
 
         const collision = obstacles.some(obstacle => 

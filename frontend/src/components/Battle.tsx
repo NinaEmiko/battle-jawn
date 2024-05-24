@@ -10,7 +10,6 @@ import LogBox from "./LogBox";
 import { determineResourceIcon } from "../helpers/icon_helper";
 
 function Battle({props}:{props:any}) {
-  const [heroDataSet, setHeroDataSet] = useState(false);
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
   const [sessionInitialized, setSessionInitialized] = useState(false);
   const [beginBattle, setBeginBattle] = useState(false);
@@ -47,7 +46,7 @@ function Battle({props}:{props:any}) {
     if(data.activeBattleSession != null) {
       fetchBattleSessionCall(data.activeBattleSession);
     } else {
-      createNewBattleSession(props.heroId);
+      createNewBattleSessionCall();
     }
   }
 
