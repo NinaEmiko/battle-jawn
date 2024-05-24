@@ -178,18 +178,38 @@ function Battle({props}:{props:any}) {
       <div className="background-jawn">
         {beginBattle && !postBattleActive &&
           <div className="container-jawn-hero-battle">
-            <div className="enemy-name-level" id="enemyName">
-              <EnemyIcon enemyNameProp={enemyName} />
-              {enemyName}
-              <div className="enemy-level"> Lvl. {enemyLevel} </div>
+
+
+            <div className="enemy-display">
+              <div className="enemy-display-left">
+                <EnemyIcon enemyNameProp={enemyName} />
+              </div>
+              <div className="enemy-display-right">
+                <div className="enemy-display-left-top-half">
+                  {enemyName}
+                  <div className="enemy-level"> Lvl. {enemyLevel} </div>
+                </div>
+                <div className="enemy-display-left-bottom-half">
+                  <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
+                </div>
+              </div>
             </div>
-            <progress className="healthBar" id="enemyHealthBar" value={enemyHealth} max={enemyMaxHealth} />
-            <div className="hero-name-role-resource" id="playerName">
-              <HeroIcon heroNameProp={role} />
-                <span>{role}</span>
-                {determineResourceIcon(role, resource)}
+
+            <div className="enemy-display">
+              <div className="enemy-display-left">
+                <HeroIcon heroNameProp={role} />
+              </div>
+              <div className="enemy-display-right">
+                <div className="enemy-display-left-top-half">
+                  <span className="enemy-display-right-top-half-name">{role}</span>
+                  {determineResourceIcon(role, resource)}
+                </div>
+                <div className="enemy-display-left-bottom-half">
+                  <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
+                </div>
+              </div>
             </div>
-            <progress className='healthBar' id="playerHealthBar" value={health} max={maxHealth}></progress>
+
             <div className="logBox-container">
               <LogBox battleHistoryProp={battleHistory} />
               <HeroMove roleProp={role} buttonDisabledProp={buttonDisabled} handleClickBattleProp={handleClickBattle} />

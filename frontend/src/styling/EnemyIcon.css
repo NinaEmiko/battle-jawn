@@ -13,8 +13,8 @@
   }
   
   .enemy-level{
-    padding-top: 7px;
+    /* padding-top: 7px; */
     padding-left: 10px;
     color: rgb(203, 5, 157);
-    font-size: 20px;
+    /* font-size: 20px; */
   }

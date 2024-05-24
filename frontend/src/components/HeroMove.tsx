@@ -8,7 +8,6 @@ const HeroMove = ({ roleProp, buttonDisabledProp, handleClickBattleProp }: { rol
             <div className="battle-btn-display">
                 <div className="user-prompt-wrapper-battle">
                     <div className="userPrompt-battle">
-                        {"What would you like to do?"}
                     </div>
                     {roleProp == "Tank" &&
                     <div className="hero-move-btns" id="option-buttons">
