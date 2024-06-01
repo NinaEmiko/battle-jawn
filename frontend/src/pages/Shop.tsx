@@ -25,6 +25,7 @@ import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import water from "../assets/water.png";
+import cash from '../assets/cash.png'
 
 const Shop = ({props}:{props:any}) => {
     const [purchases, setPurchases] = useState(1);
@@ -171,7 +172,8 @@ const Shop = ({props}:{props:any}) => {
                     {!showPopUp ?
                         <>
                             <div className="coins-container-jawn">
-                                <p className="coins-jawn">{heroName}: {heroCoins} coins</p>
+                                <p className="coins-jawn">{heroCoins} coins</p>
+                                {/* <img className="cash" src={cash}/> */}
                             </div>
 
                             {activeButton === "Buy" &&

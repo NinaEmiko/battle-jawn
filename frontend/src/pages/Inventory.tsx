@@ -18,14 +18,15 @@ import water from "../assets/water.png";
 import classNames from "classnames";
 import "../styling/Inventory.css";
 import PopUp from "./PopUp";
-import { fetchInventory, usePotion, useWater } from "../api/api";
+import { fetchHero, fetchInventory, usePotion, useWater } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
 
 const Inventory = ({props}:{props:any}) => {
-    const [inventoryList, setInventoryList] = useState([])
+    const [inventoryList, setInventoryList] = useState([]);
+    const [heroCoins, setHeroCoins] = useState(0);
     const [popUpType, setPopUpType] = useState("");
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
@@ -33,6 +34,11 @@ const Inventory = ({props}:{props:any}) => {
     const fetchInventoryCall = async () => {
         const data = await fetchInventory(props.heroId)
         setInventoryList(data);
+    }
+
+    const handleFetchHero = async () => {
+        const data = await fetchHero(props.heroId)
+        setHeroCoins(data.coins);
     }
 
     const handleClickPotion = async (index: number) => {
@@ -63,13 +69,13 @@ const Inventory = ({props}:{props:any}) => {
       
     useEffect(() => {
         fetchInventoryCall();
+        handleFetchHero();
     }, [])
 
     useEffect(() => {
         fetchInventoryCall();
+        handleFetchHero();
     }, [showPopUp])
-
-    console.log("id: "+props.heroId)
 
     const determineIcon = (item: string, index: number) => {
         switch (item) {
@@ -138,13 +144,21 @@ const Inventory = ({props}:{props:any}) => {
                 <Display>
                     <>
                         {!showPopUp ? 
+                            <>
+                                <div className="coins-container-jawn">
+                                    <p className="coins-jawn">{heroCoins} coins</p>
+                                    {/* <img className="cash" src={cash}/> */}
+                                </div>
+
                                 <div className="inventory-grid-container">
+                                        
                                     {[...Array(12).keys()].map(index => (
                                         <div key={index} className="inventory-grid-item">
                                             <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
                                         </div>
                                     ))}
                                 </div>
+                            </>
                             :
                             <PopUp 
                                 props={{
