@@ -85,22 +85,19 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                     :
                         <>
                             {activeButton === "Update Password" && (
-                                <>
-                                    <div className="new-password-jawn">
+
+                                <div className="account-settings-container-jawn">
                                         <input type="password"
                                         className="new-password-input"
                                         placeholder="New Password"
                                         value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-                                    </div>
-                                    <div className="new-password-submit-jawn">
                                         <button className="new-password-submit-btn" onClick={handlePasswordChange}>Submit</button>
                                         <p className="new-password-msg">{message}</p>
-                                    </div>
-                                </>
+                                </div>
                             )}
 
                             {activeButton === "Delete Account" && (
-                                <>
+                                <div className="account-settings-container-jawn">
                                     <div className="delete-account-txt">
                                         WARNING: This action cannot be undone.
                                     </div>
@@ -108,7 +105,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                                         <button className="delete-account-btn" onClick={handleDeleteConfirmation}>Delete Account</button>
                                         <p>{message}</p>
                                     </div>
-                                </>
+                                </div>
                             )}
 
                             <div className="display-jawn-tabs">
@@ -124,13 +121,14 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                     <div className="controls-left">
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn">Back</button>                    </div>
+                        <button className="controls-btn"></button>                    
+                    </div>
                     <div className="controls-right">
-                        <button className="controls-btn">Up</button>
-                        <button className="controls-btn">Left</button>
-                        <button className="controls-btn">OK</button>
-                        <button className="controls-btn">Right</button>
-                        <button className="controls-btn">Down</button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={()=> handleTabClick("Update Password")}>Left</button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={()=> handleTabClick("Delete Account")}>Right</button>
+                        <button className="controls-btn"></button>
                     </div>
                 </>
             </Controls>

@@ -15,18 +15,35 @@
   border-radius: 5px;
   }
   
-  #delete-btn{
-    color: red;
+  #yes-btn{
+    /* padding: 10px 20px; */
     background: transparent;
-    font-size: 15px;
-    height: 100%;
-    width: 25%;
+    border: 2px solid grey;
+    color: red;
+    font-size: 16px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  #no-btn{
+    /* padding: 10px 20px; */
+    background: transparent;
+    border: 2px solid grey;
+    color: green;
+    font-size: 16px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    border-radius: 5px;
 
   }
   .confirmation-txt{
     color: red;
     font-size: 20px;
     text-align: center;
+    margin-top: 5px;
   }
   .confirmation-content{
     color: red;
@@ -34,14 +51,18 @@
     text-align: center;
   }
   .confirmation-btns{
-    text-align: center;
-    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   .ok-btn-jawn{
     margin-top: 15px;
     margin-left: 15px;
     margin-right: 15px;
-    /* display: flex; */
+
   }
   .content{
     margin-top: 10px;

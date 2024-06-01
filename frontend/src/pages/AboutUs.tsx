@@ -40,13 +40,13 @@ const AboutUs = () => {
                     <div className="controls-left">
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn">Back</button>                    </div>
+                        <button className="controls-btn"></button>                    </div>
                     <div className="controls-right">
-                        <button className="controls-btn">Up</button>
-                        <button className="controls-btn">Left</button>
-                        <button className="controls-btn">OK</button>
-                        <button className="controls-btn">Right</button>
-                        <button className="controls-btn">Down</button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
                     </div>
                 </>
             </Controls>

@@ -8,24 +8,18 @@
   width: 100%;
   border-radius: 5px;
   text-align: right;
-}
-.new-password-submit-btn{
-  margin-left: 5px;
-  float: right;
-  margin-right: 15px;
-  color: green;
-  width: 33%;
-  background: transparent;
-  font-size: 15px;
-  height: 30px;
-  border-radius: 5px;
+  font-size: 16px;
+  padding-right: 5px;
 }
 .delete-account-jawn{
-  margin-top: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
 }
 .delete-account-txt{
   margin-top: 10px;
@@ -34,15 +28,40 @@
   font-size: 20px;
 }
 .delete-account-btn{
+  font-size: 16px;
+  cursor: pointer;
   color: red;
-  width: 50%;
-  background: transparent;
-  font-size: 15px;
+  background-color: white;
+  width: 33%;
+  /* background: transparent; */
+  border-radius: 5px;
 }
 .new-password-msg{
   color: red;
   text-align: center;
 }
-.new-password-submit-jawn{
-  margin-top: 10px;
+.account-settings-container-jawn {
+  margin-top: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-password-input {
+  font-size: 16px;
+  width: 75%;
+  border-radius: 5px;
+  text-align: right;
+}
+
+.new-password-submit-btn {
+  font-size: 16px;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  width: 33%;
+  /* background: transparent; */
+  border-radius: 5px;
 }

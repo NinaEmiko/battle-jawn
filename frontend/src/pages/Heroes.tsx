@@ -125,9 +125,8 @@ function Heroes( {props}:{props:any} ) {
                     <div className="hero-header-jawn">
                         <div className="hero-name-level">
                         <div className="hero-name"> {heroList[currentHeroIndex].name} </div>
+                        <p className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </p>
                     </div>
-                    <div className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </div>
-
                     <table className="my-heroes-table">
                     <tbody>
                         <tr>
@@ -162,28 +161,32 @@ function Heroes( {props}:{props:any} ) {
                         <td className="row-jawn">Coins:</td>
                         <td className="data-jawn" id="health-jawn">{heroList[currentHeroIndex].coins}</td>
                         </tr>
-                        <tr>
-                        <td className="row-jawn">Current Streak:</td>
-                        <td className="data-jawn">{heroList[currentHeroIndex].winStreak}</td>
-                        </tr>
-                        <tr>
-                        <td className="row-jawn">Wins:</td>
-                        <td className="data-jawn">{heroList[currentHeroIndex].winCount}</td>
-                        </tr>
-                        <tr>
-                        <td className="row-jawn">Losses:</td>
-                        <td className="data-jawn">{heroList[currentHeroIndex].lossCount}</td>
-                        </tr>
-                        <tr>
-                        <td className="row-jawn">Run Count:</td>
-                        <td className="data-jawn">{heroList[currentHeroIndex].runCount}</td>
-                        </tr>
                     </tbody>
                     </table>
+
+                    <div className="table-container">
+                      <table className="stats-table">
+                        <tbody className="stats-table-body">
+                          <tr className="stats-table-row">
+                            <td className="stats-table-data">Won</td>
+                            <td className="stats-table-data">Lost</td>
+                            <td className="stats-table-data">Ran</td>
+                            <td className="stats-table-data">Streak</td>
+                          </tr>
+                          <tr className="stats-table-row">
+                            <td className="stats-table-data">{heroList[currentHeroIndex].winCount}</td>
+                            <td className="stats-table-data">{heroList[currentHeroIndex].lossCount}</td>
+                            <td className="stats-table-data">{heroList[currentHeroIndex].runCount}</td>
+                            <td className="stats-table-data">{heroList[currentHeroIndex].winStreak}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                     <div className="experience-bar-container">
                     <progress className='experience-bar' value={determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)} max={determineMaxExperience(heroList[currentHeroIndex].level)}></progress>
                     <span className="experience-fraction">{determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)}/{determineMaxExperience(heroList[currentHeroIndex].level)}</span>
                     </div>
+                    <p className="experience-tag">Experience</p>
 
                     <div className="display-jawn-tabs">
                         <button className={activeButton === 'Play' ? 'active' : ''} onClick={()=> handleTabClick("Play")}>Play</button>

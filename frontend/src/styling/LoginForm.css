@@ -38,13 +38,13 @@ input {
 .inactive-login{
     background: transparent;
     border: transparent;
-    font-size: 30px;
+    font-size: 25px;
 }
 .active-login{
     background: transparent;
     border: transparent;
     color: rgb(183, 52, 166);
-    font-size: 30px;
+    font-size: 25px;
 }
 .login-submit-btn-jawn{
     display: flex;

@@ -7,11 +7,11 @@ const PopUp = ({props}:{props:any}) => {
         <div className="pop-up-jawn">
             {props.type == "confirmation" ?
                 <div className="yes-no-btn-jawn">
-                    <p className="confirmation-txt">Please Confirm</p>
+                    <p className="confirmation-txt">ATTENTION: Please Confirm</p>
                     <p className="confirmation-content">Are you sure you wish to {props.content}?</p>
                     <div className="confirmation-btns">
                         <button id="no-btn" onClick={props.onClickOk}>No</button>
-                        <button id="delete-btn" onClick={props.onClickConfirm}>Yes</button>
+                        <button id="yes-btn" onClick={props.onClickConfirm}>Yes</button>
                     </div>
                 </div>
             :
