@@ -57,14 +57,15 @@ const LeaderBoard = ({props}:{props:any}) => {
                 </div>
             </PageName>
             <Display>
-            <div >
+            <div className="parent-jawn">
+                <div className="child-jawn">
 
                 {heroList.length > 0 &&
 
                 <div className="hero-header-jawn">
-                    <div className="hero-name-level">
-                    <div className="hero-name">#{currentHeroIndex + 1} {heroList[currentHeroIndex].name} </div>
-                    <p className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </p>
+                    <div className="leader-board-hero-name-level">
+                    <div className="leader-board-hero-name">#{currentHeroIndex + 1} {heroList[currentHeroIndex].name} </div>
+                    <p className="leader-board-hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </p>
                 </div>
 
                 <div className="table-container">
@@ -87,6 +88,7 @@ const LeaderBoard = ({props}:{props:any}) => {
                 </div>
                 </div>
                 }
+                </div>
                 </div>
             </Display>
             <Controls>

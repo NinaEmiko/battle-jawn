@@ -101,10 +101,10 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                             {activeButton === "Delete Account" && (
                                 <div className="account-settings-container-jawn">
                                     <div className="delete-account-txt">
-                                        WARNING: This action cannot be undone.
+                                        WARNING: You are about to delete your account. This action cannot be undone. Are you sure?
                                     </div>
                                     <div className="delete-account-jawn">
-                                        <button className="delete-account-btn" onClick={handleDeleteConfirmation}>Delete Account</button>
+                                        <button className="delete-account-btn" onClick={handleDeleteConfirmation}>Delete</button>
                                         <p>{message}</p>
                                     </div>
                                 </div>
