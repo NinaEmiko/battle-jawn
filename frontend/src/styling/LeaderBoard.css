@@ -15,6 +15,14 @@
     font-size: 25px;
     color: yellow;
 }
+.number-symbol{
+    font-weight: bold;
+    text-align: center;
+    font-size: 25px;
+    color: gold;
+    padding-right: 5px;
+    margin-top: 5px;
+}
 .leader-board-hero-level{
     color: rgb(42, 167, 179);
     font-size: 17.5px;

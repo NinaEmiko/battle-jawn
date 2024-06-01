@@ -159,9 +159,10 @@ text-align: center;
 
 .experience-bar-container {
   position: relative;
-  height: 25px;
+  height: 20px;
   border-radius: 20px;
   margin-left: 20px;
+  margin-top: 5px;
 }
 
 .experience-fraction {
@@ -177,6 +178,7 @@ text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 5px;
   /* height: 10px; */
 }
 

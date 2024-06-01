@@ -11,6 +11,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [activeButton, setActiveButton] = useState("Update Password");
     const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState('');
     const [popUpType, setPopUpType] = useState("");
     const [popUpContent, setPopUpContent] = useState("");
@@ -22,13 +23,17 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
       };
 
     const handlePasswordChange = async () => {
-        try {
-          const response = await request('PUT', apiUrl + '/update/${props.id}', {
-          newPassword: newPassword,
-        });
-        setMessage(response.data);
-        } catch (error) {
-          setMessage('Error updating password.');
+        if (newPassword === confirmNewPassword) {
+            try {
+                const response = await request('PUT', apiUrl + '/update/${props.id}', {
+                newPassword: newPassword,
+              });
+              setMessage(response.data);
+              } catch (error) {
+                setMessage('Error updating password.');
+              }
+        } else {
+            setMessage('Passwords must match.')
         }
     }
 
@@ -93,6 +98,10 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                                         className="new-password-input"
                                         placeholder="New Password"
                                         value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                        <input type="password"
+                                        className="new-password-input"
+                                        placeholder="Confirm New Password"
+                                        value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
                                         <button className="new-password-submit-btn" onClick={handlePasswordChange}>Submit</button>
                                         <p className="new-password-msg">{message}</p>
                                 </div>

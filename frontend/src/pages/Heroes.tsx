@@ -186,7 +186,7 @@ function Heroes( {props}:{props:any} ) {
                     <progress className='experience-bar' value={determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)} max={determineMaxExperience(heroList[currentHeroIndex].level)}></progress>
                     <span className="experience-fraction">{determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)}/{determineMaxExperience(heroList[currentHeroIndex].level)}</span>
                     </div>
-                    <p className="experience-tag">Experience</p>
+                    {/* <p className="experience-tag">Experience</p> */}
 
                     <div className="display-jawn-tabs">
                         <button className={activeButton === 'Play' ? 'active' : ''} onClick={()=> handleTabClick("Play")}>Play</button>

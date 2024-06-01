@@ -64,8 +64,9 @@ const LeaderBoard = ({props}:{props:any}) => {
 
                 <div className="hero-header-jawn">
                     <div className="leader-board-hero-name-level">
-                    <div className="leader-board-hero-name">#{currentHeroIndex + 1} {heroList[currentHeroIndex].name} </div>
-                    <p className="leader-board-hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </p>
+                    <div className="number-symbol">#{currentHeroIndex + 1}</div>
+                    <div className="leader-board-hero-name">{heroList[currentHeroIndex].name} </div>
+                    <p className="leader-board-hero-level">{heroList[currentHeroIndex].role} </p>
                 </div>
 
                 <div className="table-container">
