@@ -127,6 +127,8 @@
 .coins-jawn{
     color: gold;
     font-weight: bold;
+    float: right;
+    margin-top: 5px;
 }
 .coins-container-jawn{
     margin-left: 5px;

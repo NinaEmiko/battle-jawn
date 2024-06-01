@@ -125,7 +125,7 @@ function Heroes( {props}:{props:any} ) {
                     <div className="hero-header-jawn">
                         <div className="hero-name-level">
                         <div className="hero-name"> {heroList[currentHeroIndex].name} </div>
-                        <p className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </p>
+                        <div className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </div>
                     </div>
                     <table className="my-heroes-table">
                     <tbody>

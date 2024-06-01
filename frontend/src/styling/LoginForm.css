@@ -69,6 +69,7 @@ input {
     position: relative;
     height: 50vh;
     width: 100%;
+    overflow-y: hidden;
 }
 .child-jawn{
     align-items: center;

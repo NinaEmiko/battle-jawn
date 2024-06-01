@@ -145,18 +145,21 @@ const Inventory = ({props}:{props:any}) => {
                     <>
                         {!showPopUp ? 
                             <>
-                                <div className="coins-container-jawn">
-                                    <p className="coins-jawn">{heroCoins} coins</p>
-                                    {/* <img className="cash" src={cash}/> */}
-                                </div>
-
-                                <div className="inventory-grid-container">
-                                        
-                                    {[...Array(12).keys()].map(index => (
-                                        <div key={index} className="inventory-grid-item">
-                                            <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
+                                <div className="parent-jawn">
+                                    <div className="child-jawn">
+                                        <div className="inventory-grid-container">
+                                                
+                                            {[...Array(12).keys()].map(index => (
+                                                <div key={index} className="inventory-grid-item">
+                                                    <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))}
+                                        <div className="coins-container-jawn">
+                                            <p className="coins-jawn">{heroCoins} coins</p>
+                                            {/* <img className="cash" src={cash}/> */}
+                                        </div>
+                                    </div>
                                 </div>
                             </>
                             :
