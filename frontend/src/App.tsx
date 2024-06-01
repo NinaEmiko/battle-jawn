@@ -1,18 +1,14 @@
-import "./App.css";
-import "./styling/Container.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CustomNavBar from "./components/CustomNavBar";
+import CustomNavBar from "./pages/CustomNavBar";
 import { FormEvent, useState } from "react";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./pages/LoginForm";
 import { getAuthToken, request, setAuthHeader } from "./helpers/axios_helper";
-import MyHeroes from "./components/Home";
-import AccountSettings from "./components/AccountSettings";
-import CreateNewHero from "./components/CreateNewHero";
-import LeaderBoard from "./components/LeaderBoard";
-import Inventory from "./components/Inventory";
-import AboutUs from "./components/AboutUs";
-import axios from "axios";
-import Home from "./components/Home";
+import AccountSettings from "./pages/AccountSettings";
+import CreateNewHero from "./pages/CreateNewHero";
+import LeaderBoard from "./pages/LeaderBoard";
+import Inventory from "./pages/Inventory";
+import AboutUs from "./pages/AboutUs";
+import Home from "./pages/Home";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -28,8 +24,6 @@ function App() {
     }));
     setAuthHeader(null);
   };
-
-  
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
     e.preventDefault();
@@ -72,7 +66,7 @@ function App() {
   
   return (
     <BrowserRouter>
-      <div className="login-screen-background-jawn">
+      {/* <div className=""> */}
         <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn}/>
         {/* <div className="background-jawn"> */}
         <Routes>
@@ -98,7 +92,7 @@ function App() {
               <Route key="about-us" path="/about-us" element={ <AboutUs />} />
             )}
           </Routes>
-        </div>
+        {/* </div> */}
       {/* </div> */}
     </BrowserRouter>
   )

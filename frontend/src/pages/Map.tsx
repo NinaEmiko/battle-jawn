@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Circle } from 'react-konva';
-import "../styling/Map.css";
 import { DOORS, OBSTACLES } from '../helpers/constants';
+import '../styling/Map.css'
+import Controls from '../components/Controls';
+import Display from '../components/Display';
+import PageName from '../components/PageName';
+import Container from '../components/Container';
 
 const Map = ({props}:{props:any}) => {
-    const [player, setPlayer] = useState({ x: 210, y: 210});
-    const [storeActive, setStoreActive] = useState(false);
+    const [player, setPlayer] = useState({ x: 240, y: 240});
+    const [storeActive, setStoreActive] = useState(true);
     const playerSize = 10;
     const boxSize = 420;
     const moveSpeed = 5; 
@@ -91,11 +95,11 @@ const Map = ({props}:{props:any}) => {
     useEffect(() => {
         if (!storeActive) {
         setPlayer(prev => ({
-            x: 325,
+            x: 340,
             y: 300
         }));
         }
-    }, [storeActive]);
+    }, [setStoreActive]);
   
     const handleBackButtonClick = () => {
         props.setIsVisible("exit-map", props.heroId)
@@ -104,12 +108,24 @@ const Map = ({props}:{props:any}) => {
         props.setIsVisible("open-inventory", id);
     }
     const handleStore = (id: number) => {
+        setStoreActive(true);
         props.setIsVisible("open-store", id);
     }
 
-return (
-        <div className="home-background-jawn">
-            <>
+    return (
+        <Container>
+            <PageName>
+                <div className="page-name-column-1">
+                    {/* <button className="page-name-btn">Close</button> */}
+                </div>
+                <div className="page-name-column-2">
+                    <div className="page-name-txt">Play</div>
+                </div>
+                <div className="page-name-column-3">
+                    {/* <button className="page-name-btn">New Hero</button> */}
+                </div>
+            </PageName>
+            <Display>
                 <div className="container-map-jawn">
                     <div
                         className="map"
@@ -134,14 +150,14 @@ return (
                                     y={storeDoor.y}
                                     width={storeDoor.width}
                                     height={storeDoor.height}
-                                    // fill="yellow"
+                                    fill="yellow"
                                 />
                                 <Rect
                                     x={arenaDoor.x}
                                     y={arenaDoor.y}
                                     width={arenaDoor.width}
                                     height={arenaDoor.height}
-                                    // fill="yellow"
+                                    fill="yellow"
                                 />
                                 {obstacles.map((obstacle, index) => (
                                     <Rect
@@ -150,58 +166,75 @@ return (
                                         y={obstacle.y}
                                         width={obstacle.width}
                                         height={obstacle.height}
-                                        // fill="blue"
+                                        fill="blue"
                                     />
                                 ))}
                             </Layer>
                         </Stage>
-
                     </div>
                 </div>
-
-                <div className="controls">
-                    <button onClick={() => handleInventory(props.heroId)} className="action-btn">Bag</button>
-                    <button onClick={() => handleBackButtonClick()} className="action-btn">Exit</button>
-
-                    <button className="direction-btn"
-                        onMouseDown={() => startMoving('up')}
-                        onMouseUp={stopMoving}
-                        onMouseLeave={stopMoving}
-                        onTouchStart={() => startMoving('up')}
-                        onTouchEnd={stopMoving}
-                    >
-                        Up
-                    </button>
-                    <button className="direction-btn"
-                        onMouseDown={() => startMoving('left')}
-                        onMouseUp={stopMoving}
-                        onMouseLeave={stopMoving}
-                        onTouchStart={() => startMoving('left')}
-                        onTouchEnd={stopMoving}
-                    >
-                        Left
-                    </button>
-                    <button className="direction-btn"
-                        onMouseDown={() => startMoving('down')}
-                        onMouseUp={stopMoving}
-                        onMouseLeave={stopMoving}
-                        onTouchStart={() => startMoving('down')}
-                        onTouchEnd={stopMoving}
-                    >
-                        Down
-                    </button>
-                    <button className="direction-btn"
-                        onMouseDown={() => startMoving('right')}
-                        onMouseUp={stopMoving}
-                        onMouseLeave={stopMoving}
-                        onTouchStart={() => startMoving('right')}
-                        onTouchEnd={stopMoving}
-                    >
-                        Right
-                    </button>
-                </div>              
-            </>
-        </div>
+            </Display>
+            <Controls>
+                <>
+                    <div className="controls-left">
+                        <button 
+                            className="controls-btn"
+                            onClick={() => handleInventory(props.heroId)}>
+                                Bag
+                            </button>
+                        <button className="controls-btn"></button>
+                        <button 
+                            className="controls-btn"
+                            onClick={() => handleBackButtonClick()}>
+                                Back
+                        </button>                    
+                    </div>
+                    <div className="controls-right">
+                        <button 
+                            className="controls-btn"
+                            onMouseDown={() => startMoving('up')}
+                            onMouseUp={stopMoving}
+                            onMouseLeave={stopMoving}
+                            onTouchStart={() => startMoving('up')}
+                            onTouchEnd={stopMoving}>
+                                Up
+                        </button>
+                        <button 
+                            className="controls-btn"
+                            onMouseDown={() => startMoving('left')}
+                            onMouseUp={stopMoving}
+                            onMouseLeave={stopMoving}
+                            onTouchStart={() => startMoving('left')}
+                            onTouchEnd={stopMoving}>
+                                Left
+                        </button>
+                        <button 
+                            className="controls-btn"
+                            >
+                                OK
+                        </button>
+                        <button 
+                            className="controls-btn"
+                            onMouseDown={() => startMoving('right')}
+                            onMouseUp={stopMoving}
+                            onMouseLeave={stopMoving}
+                            onTouchStart={() => startMoving('right')}
+                            onTouchEnd={stopMoving}>
+                                Right
+                        </button>
+                        <button 
+                            className="controls-btn"
+                            onMouseDown={() => startMoving('down')}
+                            onMouseUp={stopMoving}
+                            onMouseLeave={stopMoving}
+                            onTouchStart={() => startMoving('down')}
+                            onTouchEnd={stopMoving}>
+                                Down
+                        </button>
+                    </div>
+                </>
+            </Controls>
+        </Container>
     );
 };
 

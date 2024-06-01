@@ -7,64 +7,61 @@
     align-items: center;
     width: 100vw;
     height: 100vh;
-  }
+}
+.parent-jawn{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.container-jawn-new-hero {
+  background-color: #333;
+  opacity: 90%;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 2px;
+  padding-top: .50em;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: center;
+  text-align: center;
+  max-height: 550px;
+  overflow-y: auto;
+  width: 420px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.userPrompt {
+  color: yellow;
+  font-size: 30px;
+}
+.user-prompt-wrapper-create{
+  align-items: center;
+}
+.hero-name-input-create {
+  margin-bottom: 10px;
+}
+.create-new-hero-name-text {
+  margin-bottom: 10px;
+  color: black;
+  justify-content: center;
+  text-align: center;
+  width: 75%;
+}
+.btn-role{
+  background-color: hsl(181, 84%, 44%);
+  border: 1px solid hsl(200, 100%, 30%);
+  border-radius: 0;
+  padding: 5px 10px;
+  color: black;
+  outline: none;
+  font-size: 20px;
+  width: 200px;
+  height: 50px;
+  margin-top: 5px;
+  align-items: center;
 
-  .container-jawn-new-hero {
-    background-color: #333;
-    opacity: 90%;
-    border-radius: 5px;
-    box-shadow: 0 0 10px 2px;
-    padding-top: .50em;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: center;
-    text-align: center;
-    max-height: 550px;
-    overflow-y: auto;
-    width: 420px;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-
-  .userPrompt {
-    color: yellow;
-    font-size: 30px;
-  }
-
-  .user-prompt-wrapper-create{
-
-    align-items: center;
-    /* margin-left: 5px; */
-  }
-
-  .hero-name-input-create {
-    margin-bottom: 10px;
-  }
-  
-  .create-new-hero-name-text {
-    margin-bottom: 10px;
-    color: black;
-    justify-content: center;
-    text-align: center;
-    width: 75%;
-    /* margin-left: 15px; */
-  }
-
-  .btn-role{
-    background-color: hsl(181, 84%, 44%);
-    border: 1px solid hsl(200, 100%, 30%);
-    border-radius: 0;
-    padding: 5px 10px;
-    color: black;
-    outline: none;
-    font-size: 20px;
-    width: 200px;
-    height: 50px;
-    margin-top: 5px;
-    align-items: center;
-  
-  }
+}
 
 .btn-grid-roles {
     display: grid;
@@ -72,54 +69,81 @@
     gap: 10px;
 }
   
-  .btn-role {
-    background-color: hsl(181, 84%, 44%);
-    border: 1px solid hsl(200, 100%, 30%);
-    border-radius: 0;
-    padding: 5px 10px;
-    color: black;
-    outline: none;
-    font-size: 20px;
-    height: 50px;
-    width: 150px;
-    align-items: center;
-  }
-  
-  .btn-role:hover {
-    border-color: black;
-  }
-  
-  .btn-role:active {
-    box-shadow: 0 5px rgb(43, 43, 36);
-    transform: translateY(2px);
-  }
-
-#button5 {
-    border-color: black;
-    font-size: 20px;
-    width: 180px;
-    height: 50px;
-    margin-top: 15px;
-    background-color: hsl(181, 84%, 44%);
-    color: black;
+.btn-role {
+  background-color: hsl(181, 84%, 44%);
+  border: 1px solid hsl(200, 100%, 30%);
+  border-radius: 0;
+  padding: 5px 10px;
+  color: black;
+  outline: none;
+  font-size: 20px;
+  height: 50px;
+  width: 150px;
+  align-items: center;
 }
 
-@media (max-width: 576px) {
-  .container-jawn-new-hero {
-    background-color: #333;
-    opacity: 90%;
-    border-radius: 5px;
-    box-shadow: 0 0 10px 2px;
-    padding-top: .50em;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: center;
-    text-align: center;
-    max-height: 550px;
-    overflow-y: auto;
-    width: 100%;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
+.btn-role:hover {
+  border-color: black;
+}
+
+.btn-role:active {
+  box-shadow: 0 5px rgb(43, 43, 36);
+  transform: translateY(2px);
+}
+
+#button5 {
+  border-color: black;
+  font-size: 20px;
+  width: 180px;
+  height: 50px;
+  margin-top: 15px;
+  background-color: hsl(181, 84%, 44%);
+  color: black;
+}
+.hero-description-txt{
+  justify-content: center;
+  text-align: center;
+  color: white;
+  /* position: absolute; */
+  /* bottom: 0; */
+  margin: 5px;
+  margin-top: 10px;
+}
+.image-description-jawn{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.hero-img-jawn{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.hero-img{
+  width: 200px;
+}
+.new-hero-name{
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+}
+.new-hero-name-input{
+  margin-left: 5px;
+  float: right;
+  text-align: right;
+  width: 100%; 
+  padding-left: 5px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  height: 35px;
+  padding: 5px 10px;
+}
+.message-jawn{
+  color: red;
+  font-size: 15px;
+  text-align: center;
+}
+.hero-description-txt-container{
+  padding: 10px;
 }

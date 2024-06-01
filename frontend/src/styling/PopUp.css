@@ -1,19 +1,66 @@
 #ok-btn {
-    background-color: transparent;
-    border-color: gray;
-    color: hsl(123, 68%, 54%);
-    border-radius: 0;
-    width:110px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  /* color: green;
+  background: transparent;
+  font-size: 15px;
+  height: 100%;
+  width: 25%; */
+  margin-left: 5px;
+  /* float: right; */
+  margin-right: 15px;
+  color: green;
+  width: 100%;
+  background: transparent;
+  font-size: 15px;
+  height: 30px;
+  border-radius: 5px;
   }
   
   #delete-btn{
-    background-color: transparent;
-    border-color: gray;
     color: red;
-    border-radius: 0;
-    width:110px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    background: transparent;
+    font-size: 15px;
+    height: 100%;
+    width: 25%;
+
+  }
+  .confirmation-txt{
+    color: red;
+    font-size: 20px;
+    text-align: center;
+  }
+  .confirmation-content{
+    color: red;
+    font-size: 15px;
+    text-align: center;
+  }
+  .confirmation-btns{
+    text-align: center;
+    height: 30px;
+  }
+  .ok-btn-jawn{
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
+    /* display: flex; */
+  }
+  .content{
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+  .ok-btn{
+    margin-left: 5px;
+    margin-right: 15px;
+    float: right;
+    color: green;
+    width: 33%;
+    background: transparent;
+    font-size: 15px;
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  .pop-up-jawn{
+    align-items: center;
+    justify-content: center;
   }

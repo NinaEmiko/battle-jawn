@@ -19,6 +19,10 @@ import classNames from "classnames";
 import "../styling/Inventory.css";
 import PopUp from "./PopUp";
 import { fetchInventory, usePotion, useWater } from "../api/api";
+import Container from "../components/Container";
+import Controls from "../components/Controls";
+import Display from "../components/Display";
+import PageName from "../components/PageName";
 
 const Inventory = ({props}:{props:any}) => {
     const [inventoryList, setInventoryList] = useState([])
@@ -64,6 +68,8 @@ const Inventory = ({props}:{props:any}) => {
     useEffect(() => {
         fetchInventoryCall();
     }, [showPopUp])
+
+    console.log("id: "+props.heroId)
 
     const determineIcon = (item: string, index: number) => {
         switch (item) {
@@ -116,33 +122,60 @@ const Inventory = ({props}:{props:any}) => {
     }
 
     return (
-        <div className="inventory-background-jawn">
-
-            {!showPopUp ? 
-        
-            <div className="container-jawn-inventory">
-                <h1 className="inventory-title-jawn">Inventory</h1>
-                <div className="inventory-grid-container">
-                    {[...Array(12).keys()].map(index => (
-                        <div key={index} className="inventory-grid-item">
-                            <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
+        <>
+            <Container>
+                <PageName>
+                    <div className="page-name-column-1">
+                        {/* <button className="page-name-btn">Close</button> */}
+                    </div>
+                    <div className="page-name-column-2">
+                        <div className="page-name-txt">Inventory</div>
+                    </div>
+                    <div className="page-name-column-3">
+                        {/* <button className="page-name-btn">New Hero</button> */}
+                    </div>
+                </PageName>
+                <Display>
+                    <>
+                        {!showPopUp ? 
+                                <div className="inventory-grid-container">
+                                    {[...Array(12).keys()].map(index => (
+                                        <div key={index} className="inventory-grid-item">
+                                            <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            :
+                            <PopUp 
+                                props={{
+                                    type: popUpType,
+                                    content: popUpContent,
+                                    onClickOk: handleOkButtonClick
+                                }} 
+                            />   
+                        }
+                    </>
+                </Display>
+                <Controls>
+                    <>
+                        <div className="controls-left">
+                            <button className="controls-btn"></button>
+                            <button className="controls-btn"></button>
+                            <button className="controls-btn" onClick={() => handleBackButtonClick()}>Close</button>                    
                         </div>
-                    ))}
-                </div>
-                <button className={classNames('nav-link', 'btn')} id="inventory-close-btn" onClick={handleBackButtonClick}>Close</button>
-            </div>
-            :
-            <PopUp 
-                props={{
-                    type: popUpType,
-                    content: popUpContent,
-                    onClickOk: handleOkButtonClick
-                }} 
-            />   
-}
-        </div>
+                        <div className="controls-right">
+                            <button className="controls-btn">Up</button>
+                            <button className="controls-btn">Left</button>
+                            <button className="controls-btn">OK</button>
+                            <button className="controls-btn">Right</button>
+                            <button className="controls-btn">Down</button>
+                        </div>
+                    </>
+                </Controls>
+            </Container>
+        </>
     );
-  };
+};
   
   export default Inventory;
   

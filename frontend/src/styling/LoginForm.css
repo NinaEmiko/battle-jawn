@@ -1,0 +1,83 @@
+.title-jawn{
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 17.5px;
+}
+
+.nav-link.custom-button.active {
+    background-color: hsl(181, 84%, 44%);
+    color: black;
+}
+
+li {
+    display: inline;
+    justify-content: center;
+    align-items: center;
+}
+input {
+    color: black;
+}
+
+.login-submit-btn{
+    margin-top: 10px;
+    background: transparent;
+    border: solid;
+    border-color: gray;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.list-jawn{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+}
+.inactive-login{
+    background: transparent;
+    border: transparent;
+    font-size: 30px;
+}
+.active-login{
+    background: transparent;
+    border: transparent;
+    color: rgb(183, 52, 166);
+    font-size: 30px;
+}
+.login-submit-btn-jawn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tab-jawn{
+    display: inline;
+    align-items: center;
+    justify-content: center;
+}
+.form-label, .form-control{
+    display: block;
+    width: 100%; 
+    padding-left: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    height: 35px;
+    padding: 5px 10px;
+}
+.parent-jawn{
+    position: relative;
+    height: 50vh;
+    width: 100%;
+}
+.child-jawn{
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+.message-container{
+    margin-bottom: 10px;
+}

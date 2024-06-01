@@ -1,6 +1,4 @@
-/* UNIVERSAL STYLINGS */
-
-@font-face {
+/* @font-face {
   font-family: 'FantaisieArtistique';
   src: local('FantaisieArtistique'), url(./fonts/FantaisieArtistique.ttf) format('truetype');}
 
@@ -12,9 +10,10 @@
   box-sizing: border-box;
   font-family: FantaisieArtistique;
   color: hsl(181, 84%, 44%);
-}
+} */
 
-/******* BACKGROUND STYLINGS *******/
+/*
+// BACKGROUND STYLINGS
 
 .home-background-jawn {
   background-image: url('./assets/home-background.jpg');
@@ -49,7 +48,7 @@
   height: 100vh;
 }
 
-/******* NAVBAR STYLINGS *******/
+// NAVBAR STYLINGS
 
 .navbar-nav .nav-link, .navbar-brand  {
   color: white;
@@ -62,7 +61,7 @@
   opacity: 80%;
 }
 
-/******* WRITTEN CONTENT STYLINGS *******/
+// WRITTEN CONTENT STYLINGS
 
 .title-jawn {
   padding-top: 15px;
@@ -73,7 +72,7 @@
   text-align: center;
 }
 
-/* Idk why, but removing messes up login container styling */
+// Idk why, but removing messes up login container styling
 
 .log-reg {
   width: 200px;
@@ -83,14 +82,14 @@
   display: flex;
 }
 
-/******* BUTTON STYLINGS *******/
+// BUTTON STYLINGS
 
 .btn-grid {
-  /* Keeps Buttons in grid format */
+  // Keeps Buttons in grid format
       display: grid;
-      /* Keeps grid in columns of 2 */
+      // Keeps grid in columns of 2
       grid-template-columns: repeat(2, auto);
-      /* Adds spacing between buttons */
+      // Adds spacing between buttons
       gap: 10px;
   }
 
@@ -127,7 +126,7 @@
 
 }
 
-/* Submit button for login/registration form */
+// Submit button for login/registration form
 
 #submit-btn {
   text-align: center;
@@ -147,7 +146,7 @@
   box-shadow: 0 5px rgb(43, 43, 36);
   transform: translateY(2px);}
 
-/* Non-active button between login and register is transparent */
+// Non-active button between login and register is transparent
 
 .nav-link.custom-button {
   background-color: transparent;
@@ -156,7 +155,7 @@
   border-radius: 0;
 }
 
-/* Active button between login and register is blue */
+// Active button between login and register is blue
 
 .nav-link.custom-button.active {
   background-color: hsl(181, 84%, 44%);
@@ -167,7 +166,7 @@
   justify-content: center;
   color: rgb(243, 114, 16);
   border-radius: 5px;
-  /* Shadow Effect */
+  // Shadow Effect
   box-shadow: 0 0 10px 2px;
   margin-bottom: 15px;
 }
@@ -184,7 +183,7 @@
 }
 
 .resource-icon {
-  /* display: none; */
+  // display: none;
   display: inline-block;
   width: 50px;
   padding-right: 10px;
@@ -200,7 +199,7 @@ ul {
   margin: 5px;
   width: 90%;
   height: 100%;
-  /* border: 0; */
+  // border: 0;
 }
 
 .experience-bar::-webkit-progress-value {
@@ -222,9 +221,6 @@ ul {
   height: 25px;
   border-radius: 20px;
 }
-#basic-nav-dropdown{
-  font-size: 20px;
-}
 
 .experience-fraction {
   position: absolute;
@@ -233,6 +229,10 @@ ul {
   transform: translate(-50%, -50%);
   color: black;
   font-weight: bold;
+}
+
+#basic-nav-dropdown{
+  font-size: 20px;
 }
 
 .grid-container {
@@ -260,15 +260,15 @@ ul {
 }
 
 .grid-item:hover {
-  font-size: 0.8em; /* Reduce font size on hover */
+  font-size: 0.8em; // Reduce font size on hover
 }
 
 .item-name {
   position: absolute;
-  bottom: 5px; /* Position item name at the bottom */
+  bottom: 5px; // Position item name at the bottom
   left: 0;
   right: 0;
-  margin: 0 auto; /* Center item name horizontally */
+  margin: 0 auto; // Center item name horizontally
 }
 
 .grid-item.smaller .item-name {
@@ -277,7 +277,7 @@ ul {
 
 .top-left {
   width: 32px;
-  text-align: center; /* Center horizontally */
+  text-align: center; // Center horizontally
   vertical-align: middle;
 }
 
@@ -308,12 +308,12 @@ ul {
 
 }
 
-/* #basic-nav-dropdown{
-  float: right;
-} */
-/* .dropdown-menu{
-  float: right;
-} */
+// #basic-nav-dropdown{
+//  float: right;
+//}
+// .dropdown-menu{
+//  float: right;
+//}
 
 @media (max-width: 576px) {
 .drop-down-item{
@@ -348,3 +348,4 @@ ul {
 }
 
 }
+*/

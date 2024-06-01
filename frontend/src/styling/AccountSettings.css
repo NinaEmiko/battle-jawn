@@ -1,19 +1,48 @@
-.account-settings-title-jawn{
-    padding-top: 15px;
-    color: hsl(123, 68%, 54%);
-    font-size: 50px;
+.new-password-jawn{
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
 }
-
-#submit-btn{
-  background-color: transparent;
-  border-color: gray;
-  color: hsl(123, 68%, 54%);
-  border-radius: 0;
-  width:110px;
-  margin-top: 20px;
-  font-size:20px;
+.new-password-input{
+  width: 100%;
+  border-radius: 5px;
+  text-align: right;
 }
-
-.hero-name-input{
-    width: 90%;
+.new-password-submit-btn{
+  margin-left: 5px;
+  float: right;
+  margin-right: 15px;
+  color: green;
+  width: 33%;
+  background: transparent;
+  font-size: 15px;
+  height: 30px;
+  border-radius: 5px;
+}
+.delete-account-jawn{
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+}
+.delete-account-txt{
+  margin-top: 10px;
+  text-align: center;
+  color: red;
+  font-size: 20px;
+}
+.delete-account-btn{
+  color: red;
+  width: 50%;
+  background: transparent;
+  font-size: 15px;
+}
+.new-password-msg{
+  color: red;
+  text-align: center;
+}
+.new-password-submit-jawn{
+  margin-top: 10px;
 }

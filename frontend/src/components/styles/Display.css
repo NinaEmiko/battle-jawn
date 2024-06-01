@@ -1,0 +1,38 @@
+.display-jawn {
+    margin: 5px;
+    height: 55%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 3px;
+    background-color: #333;
+    opacity: 90%;
+    overflow:hidden;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.display-jawn-tabs{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+}
+.display-jawn-tabs button{
+    width: 50%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+
+.display-jawn-tabs-4 button{
+    padding-top: 15px;
+    width: 25%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+
+button.active {
+    color: rgb(183, 52, 166);
+  }

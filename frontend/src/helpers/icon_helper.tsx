@@ -17,7 +17,6 @@ import spirit from "../assets/spirit.png";
 import magic from "../assets/magic.png";
 import energy from "../assets/energy.png";
 import water from "../assets/water.png";
-import "../styling/Store.css";
 
 export const determineIcon = (item: string) => {
     switch (item) {

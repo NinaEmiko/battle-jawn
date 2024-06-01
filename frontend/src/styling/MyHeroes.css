@@ -82,10 +82,10 @@ text-align: center;
 }
 
 .hero-level{
-  padding-top: 20px;
   padding-left: 10px;
   color: rgb(203, 5, 157);
   font-size: 20px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -135,4 +135,47 @@ text-align: center;
 
 .my-hero-btns{
   /* width: 90%; */
+}
+
+.hero-header-jawn{
+  margin-top:5px;
+}
+
+.experience-bar {
+  background-color: rgb(61, 163, 191);
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 100%;
+  border: 0;
+}
+
+.experience-bar::-webkit-progress-value {
+  background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
+}
+.experience-bar::-webkit-progress-bar {
+  background-color: rgb(61, 163, 191); 
+  border-radius: 20px;
+}
+
+.experience-bar::-moz-progress-bar {
+  background-color: rgb(211, 113, 231); 
+  border-radius: 20px;
+}
+
+.experience-bar-container {
+  position: relative;
+  height: 25px;
+  border-radius: 20px;
+  margin-left: 20px;
+}
+
+.experience-fraction {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-weight: bold;
 }

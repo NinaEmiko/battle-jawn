@@ -2,14 +2,13 @@ import { useState } from "react";
 import Battle from "./Battle";
 import Inventory from "./Inventory";
 import Map from "./Map";
-import "../styling/MyHeroes.css";
-import Store from "./Store";
+import Shop from "./Shop";
 import Heroes from "./Heroes";
 
 function Home( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
   const [battleActive, setBattleActive] = useState(false);
-  const [storeActive, setStoreActive] = useState(false);
+  const [shopActive, setShopActive] = useState(false);
   const [inventoryActive, setInventoryActive] = useState(false);
   const [mapActive, setMapActive] = useState(false);
   
@@ -19,7 +18,7 @@ function Home( {props}:{props:any} ) {
       setMapActive(false);
     } else if (component === "exit-store"){
       setHeroId(id);
-      setStoreActive(false);
+      setShopActive(false);
       setMapActive(true);
     } else if (component === "exit-inventory"){
       setHeroId(id);
@@ -28,7 +27,7 @@ function Home( {props}:{props:any} ) {
     } else if (component === "open-store") {
       setHeroId(id);
       setMapActive(false);
-      setStoreActive(true);
+      setShopActive(true);
     } else if (component === "open-inventory") {
       setHeroId(id);
       setMapActive(false);
@@ -45,13 +44,12 @@ function Home( {props}:{props:any} ) {
 
   return (
     <>
-      <div className="home-background-jawn">
         {battleActive &&  
           <Battle  props={{heroId:heroId}} />
         }
 
-        {storeActive &&
-          <Store props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+        {shopActive &&
+          <Shop props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
         }
 
         {inventoryActive &&
@@ -62,11 +60,9 @@ function Home( {props}:{props:any} ) {
           <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
         }
 
-        {!battleActive && !inventoryActive && !storeActive && !mapActive &&
+        {!battleActive && !inventoryActive && !shopActive && !mapActive &&
           <Heroes props={{accountId:props.id, setIsVisible: handleSubComponentButtonClick}} />
         }
-
-      </div>
     </>
   );
 };

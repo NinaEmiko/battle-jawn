@@ -68,7 +68,7 @@ const PostBattle = ({props}:{props:any}) => {
     })
 
     return (
-        <div className="container-jawn-login-form">
+        <div>
 
             {props.ran &&
                 <h1 className="post-battle-text">You ran away.</h1>
@@ -83,7 +83,7 @@ const PostBattle = ({props}:{props:any}) => {
                     <h1 className="title-jawn">{props.message}</h1>
                     <p className="select-text">Select loot you wish to pick up:</p>
                     {loot.map ((item, index) =>
-                        <div key={index}>
+                        <div className="loot-jawn" key={index}>
                             <input 
                                 type="checkbox" 
                                 onChange={() => handleSelect(item)}/>

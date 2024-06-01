@@ -8,6 +8,10 @@ import EnemyIcon from "./EnemyIcon";
 import HeroIcon from "./HeroIcon";
 import LogBox from "./LogBox";
 import { determineResourceIcon } from "../helpers/icon_helper";
+import Container from "../components/Container";
+import PageName from "../components/PageName";
+import Display from "../components/Display";
+import Controls from "../components/Controls";
 
 function Battle({props}:{props:any}) {
   const [battleSessionCreated, setBattleSessionCreated] = useState(false);
@@ -27,6 +31,9 @@ function Battle({props}:{props:any}) {
   const [enemyLevel, setEnemyLevel] = useState(0);
   const [battleHistory, setBattleHistory] = useState<string[]>(["Retrieving battle history. Please wait."]);
   const [battleResult, setBattleResult] = useState("");
+  const [moveOne, setMoveOne] = useState("");
+  const [moveTwo, setMoveTwo] = useState("");
+  const [moveThree, setMoveThree] = useState("");
   const [postBattleActive, setPostBattleActive] = useState(false);
   const [postBattleObject, setPostBattleObject] = useState({
     message: "",
@@ -175,13 +182,42 @@ function Battle({props}:{props:any}) {
   }
   }, [battleResult])
 
+  useEffect(()=> {
+    if (role === "Tank") {
+      setMoveOne("Strike")
+      setMoveTwo("Impale")
+      setMoveThree("Block")
+    } else if (role === "Healer") {
+      setMoveOne("Wand")
+      setMoveTwo("Holy")
+      setMoveThree("Heal")
+    } else if (role === "DPS") {
+      setMoveOne("Stab")
+      setMoveTwo("BackStab")
+      setMoveThree("Steal")
+    } else if (role === "Caster") {
+      setMoveOne("Wand")
+      setMoveTwo("FireBlast")
+      setMoveThree("IceBlast")
+    }
+  }, [role])
+
   return (
-    <>
-      <div className="background-jawn">
+    <Container>
+      <PageName >
+        <div className="page-name-column-1">
+          {/* <button className="page-name-btn">Sign Out</button> */}
+        </div>
+        <div className="page-name-column-2">
+            <div className="page-name-txt">Battle</div>
+        </div>
+        <div className="page-name-column-3">
+            {/* <button className="page-name-btn">New Hero</button> */}
+        </div>
+      </PageName>
+      <Display>
         {beginBattle && !postBattleActive &&
-          <div className="container-jawn-hero-battle">
-
-
+          <div className="battle-container-jawn">
             <div className="enemy-display">
               <div className="enemy-display-left">
                 <EnemyIcon enemyNameProp={enemyName} />
@@ -214,7 +250,7 @@ function Battle({props}:{props:any}) {
 
             <div className="logBox-container">
               <LogBox battleHistoryProp={battleHistory} />
-              <HeroMove roleProp={role} buttonDisabledProp={buttonDisabled} handleClickBattleProp={handleClickBattle} />
+              {/* <HeroMove roleProp={role} buttonDisabledProp={buttonDisabled} handleClickBattleProp={handleClickBattle} /> */}
             </div>
           </div>
         }
@@ -222,8 +258,24 @@ function Battle({props}:{props:any}) {
         {postBattleActive && 
           <PostBattle props={postBattleObject} />
         }
-      </div>
-    </>
+      </Display>
+      <Controls>
+        <>
+          <div className="controls-left">
+            <button className="controls-btn" onClick={()=> handleClickBattle("Potion")}>Potion</button>
+            <button className="controls-btn" onClick={()=> handleClickBattle("Water")}>Water</button>
+            <button className="controls-btn" onClick={()=> handleClickBattle("Run")}>Run</button>                    
+          </div>
+          <div className="controls-right">
+            <button className="controls-btn" onClick={()=> handleClickBattle(moveOne)}>{moveOne}</button>
+            <button className="controls-btn" onClick={()=> handleClickBattle(moveTwo)}>{moveTwo}</button>
+            <button className="controls-btn"></button>
+            <button className="controls-btn" onClick={()=> handleClickBattle(moveThree)}>{moveThree}</button>
+            <button className="controls-btn"></button>
+          </div>
+        </>
+      </Controls>
+    </Container>
   );
 }
 

@@ -48,6 +48,7 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
+    margin: 5px;
 }
 
 .inventory-grid-item {
@@ -66,6 +67,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.inventory-icon-price{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: gold;
+    font-weight: bold;
 }
 
 .inventory-item-name {
@@ -115,6 +123,14 @@
 .btn:active {
     box-shadow: 0 5px rgb(43, 43, 36);
     transform: translateY(2px);
+}
+.coins-jawn{
+    color: gold;
+    font-weight: bold;
+}
+.coins-container-jawn{
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 @media (max-width: 576px) {
