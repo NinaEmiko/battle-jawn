@@ -10,6 +10,7 @@ import Controls from "../components/Controls";
 
 const LeaderBoard = ({props}:{props:any}) => {
     const [heroList, setHeroList] = useState([]);
+    const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
     const navigate = useNavigate();
 
@@ -21,6 +22,22 @@ const LeaderBoard = ({props}:{props:any}) => {
         const data = await fetchLeaderboard()
         setHeroList(data);
     }
+
+    const previousHero = () => {
+        if(currentHeroIndex == 0) {
+          setCurrentHeroIndex(heroList.length - 1)
+        } else {
+          setCurrentHeroIndex(currentHeroIndex - 1);
+        }
+      };
+    
+      const nextHero = () => {
+        if(currentHeroIndex == heroList.length - 1) {
+          setCurrentHeroIndex(0)
+        } else {
+          setCurrentHeroIndex(currentHeroIndex + 1);
+        }
+      };
       
     useEffect(() => {
         fetchHeroes();
@@ -40,16 +57,37 @@ const LeaderBoard = ({props}:{props:any}) => {
                 </div>
             </PageName>
             <Display>
-                    {heroList.map((hero) => (
-                        <div className="leader-board-jawn" key={hero.winCount}>
-                            <div className="leader-board-hero-name">
-                                {hero.name}
-                            </div>
-                            <div className="value-jawn">
-                                {hero.winCount} wins
-                            </div>
-                        </div>
-                    ))}
+            <div >
+
+                {heroList.length > 0 &&
+
+                <div className="hero-header-jawn">
+                    <div className="hero-name-level">
+                    <div className="hero-name">#{currentHeroIndex + 1} {heroList[currentHeroIndex].name} </div>
+                    <p className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </p>
+                </div>
+
+                <div className="table-container">
+                <table className="stats-table">
+                    <tbody className="stats-table-body">
+                    <tr className="stats-table-row">
+                        <td className="stats-table-data">Won</td>
+                        <td className="stats-table-data">Lost</td>
+                        <td className="stats-table-data">Ran</td>
+                        <td className="stats-table-data">Streak</td>
+                    </tr>
+                    <tr className="stats-table-row">
+                        <td className="stats-table-data">{heroList[currentHeroIndex].winCount}</td>
+                        <td className="stats-table-data">{heroList[currentHeroIndex].lossCount}</td>
+                        <td className="stats-table-data">{heroList[currentHeroIndex].runCount}</td>
+                        <td className="stats-table-data">{heroList[currentHeroIndex].winStreak}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                </div>
+                }
+                </div>
             </Display>
             <Controls>
                 <>
@@ -58,11 +96,11 @@ const LeaderBoard = ({props}:{props:any}) => {
                         <button className="controls-btn"></button>
                         <button className="controls-btn" onClick={() => handleNavigation("/")}>Back</button>                    </div>
                     <div className="controls-right">
+                        <button className="controls-btn" onClick={() => previousHero()}>Up</button>
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={() => nextHero()}>Down</button>
                     </div>
                 </>
             </Controls>
