@@ -203,8 +203,9 @@ function Heroes( {props}:{props:any} ) {
                 <>
                     <div className="controls-left">
                         <button className="controls-btn" onClick={() => handleNavigation("/create-hero")}>New Hero</button>
-                        <button className="controls-btn" onClick={() => props.setIsVisible("open-inventory", heroList[currentHeroIndex].id)}>Bag</button>
-                        <button className="controls-btn" onClick={() => props.setIsVisible("open-store", heroList[currentHeroIndex].id)}>Shop</button>                    </div>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>                    
+                    </div>
                     <div className="controls-right">
                         <button className="controls-btn" onClick={() => previousHero()}>Up</button>
                         <button className="controls-btn" onClick={() => handleTabClick("Play")}>Left</button>

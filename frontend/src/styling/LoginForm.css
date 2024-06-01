@@ -81,3 +81,7 @@ input {
 .message-container{
     margin-bottom: 10px;
 }
+
+.keyboard-open {
+    margin-top: -100px;
+}

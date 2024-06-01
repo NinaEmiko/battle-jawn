@@ -44,6 +44,10 @@
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px;
     margin-left: 15px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
   
   .controls-left button:nth-child(1) {
@@ -76,6 +80,10 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     margin-left: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
   
   .controls-right button:nth-child(1) {

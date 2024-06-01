@@ -150,14 +150,14 @@ const Map = ({props}:{props:any}) => {
                                     y={storeDoor.y}
                                     width={storeDoor.width}
                                     height={storeDoor.height}
-                                    fill="yellow"
+                                    // fill="yellow"
                                 />
                                 <Rect
                                     x={arenaDoor.x}
                                     y={arenaDoor.y}
                                     width={arenaDoor.width}
                                     height={arenaDoor.height}
-                                    fill="yellow"
+                                    // fill="yellow"
                                 />
                                 {obstacles.map((obstacle, index) => (
                                     <Rect
@@ -166,7 +166,7 @@ const Map = ({props}:{props:any}) => {
                                         y={obstacle.y}
                                         width={obstacle.width}
                                         height={obstacle.height}
-                                        fill="blue"
+                                        // fill="blue"
                                     />
                                 ))}
                             </Layer>

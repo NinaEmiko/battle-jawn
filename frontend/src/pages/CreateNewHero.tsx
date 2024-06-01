@@ -58,7 +58,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
             case "DPS":
                 setActiveButton("Caster");
                 break;
-            case "DPS":
+            case "Caster":
                 setActiveButton("Tank");
                 break;
         }
