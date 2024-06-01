@@ -13,7 +13,7 @@
 .display-jawn-tabs{
     width: 100%;
     position: absolute;
-    bottom: 0;
+    top: 0;
     height: 10%;
 }
 .display-jawn-tabs button{
