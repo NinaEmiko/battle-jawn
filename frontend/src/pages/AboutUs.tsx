@@ -27,7 +27,11 @@ const AboutUs = () => {
             </PageName>
             <Display>
                 <div className="about-us-jawn">
-                    <p className="about-us-txt">Coming Soon</p>
+                    <div className="parent-jawn">
+                        <div className="child-jawn">
+                            <p className="about-us-txt">Coming Soon</p>
+                        </div>
+                    </div>
 
                     <div className="display-jawn-tabs">
                         <button className={activeButton === 'About Us' ? 'active' : ''} onClick={()=> handleTabClick("About Us")}>About Us</button>

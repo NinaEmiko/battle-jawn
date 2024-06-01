@@ -84,6 +84,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                         />  
                     :
                         <>
+                            <div className="parent-jawn">
+                                <div className="child-jawn">
                             {activeButton === "Update Password" && (
 
                                 <div className="account-settings-container-jawn">
@@ -107,6 +109,9 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                                     </div>
                                 </div>
                             )}
+
+                            </div>
+                            </div>
 
                             <div className="display-jawn-tabs">
                                 <button className={activeButton === 'Update Password' ? 'active' : ''} onClick={()=> handleTabClick("Update Password")}>Update Password</button>

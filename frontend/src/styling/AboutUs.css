@@ -34,6 +34,19 @@
 .about-us-txt{
     font-size: 50px;
     text-align: center;
-    margin-top: 50%;
 
+}
+
+.parent-jawn{
+    position: relative;
+    height: 50vh;
+    width: 100%;
+}
+.child-jawn{
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
 }
