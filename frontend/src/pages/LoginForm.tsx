@@ -11,9 +11,13 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
-  const [activeButton, setActiveButton] = useState('login');
+  const [activeButton, setActiveButton] = useState('Login');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleTabClick = (button: string) => {
+      setActiveButton(button);
+    };
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -50,29 +54,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
           <Display>
             <div className="parent-jawn">
               <div className="child-jawn">
-              <div className="list-jawn">
-                <ul className="login-register-jawn">
-                  <li className="input-jawn">
-                    <button
-                      className={activeButton === 'login' ? 'active-login' : 'inactive-login'}
-                      onClick={()=> setActiveButton("login")}
-                    >
-                      Login
-                    </button>
-                  </li>
-                  |
-                  <li>
-                    <button
-                      className={activeButton === 'register' ? 'active-login' : 'inactive-login'}
-                      onClick={()=> setActiveButton("register")}
-                    >
-                      Register
-                    </button>
-                  </li>
-                </ul>
-              </div>
+
               <div className="tab-jawn">
-                {activeButton === 'login' &&
+                {activeButton === 'Login' &&
                   <form 
                     className="form-jawn"
                     onSubmit={onSubmitLogin}
@@ -109,7 +93,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
                 }
               
 
-                {activeButton === 'register' &&
+                {activeButton === 'Register' &&
                   <form 
                     onSubmit={onSubmitRegister}
                   >
@@ -145,6 +129,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
                 }
               </div>
               </div>
+              <div className="display-jawn-tabs">
+                <button className={activeButton === 'Login' ? 'active' : ''} onClick={()=> handleTabClick("Login")}>Login</button>
+                <button className={activeButton === 'Register' ? 'active' : ''} onClick={()=> handleTabClick("Register")}>Register</button>
+              </div>
             </div>
           </Display>
           <Controls>
@@ -156,9 +144,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
               </div>
               <div className="controls-right">
                 <button className="controls-btn"></button>
+                <button className="controls-btn" onClick={()=> handleTabClick("Login")}>Left</button>
                 <button className="controls-btn"></button>
-                <button className="controls-btn"></button>
-                <button className="controls-btn"></button>
+                <button className="controls-btn" onClick={()=> handleTabClick("Register")}>Right</button>
                 <button className="controls-btn"></button>
               </div>
             </>

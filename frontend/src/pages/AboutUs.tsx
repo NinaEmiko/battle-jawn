@@ -43,9 +43,9 @@ const AboutUs = () => {
                         <button className="controls-btn"></button>                    </div>
                     <div className="controls-right">
                         <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={()=> handleTabClick("About Us")}>Left</button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={()=> handleTabClick("Contact")}>Right</button>
                         <button className="controls-btn"></button>
                     </div>
                 </>

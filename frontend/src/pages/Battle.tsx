@@ -60,13 +60,15 @@ function Battle({props}:{props:any}) {
   }
 
   const handleClickBattle = async (move: string) => {
-    setButtonDisabled(true);
-    const data = await heroMove(move, battleSessionId)
-    setHealth(data.heroHealth);
-    setResource(data.heroResource);
-    setEnemyHealth(data.enemyHealth);
-    setBattleHistory(data.battleHistory);
-    handleEnemyMove();
+    if (!buttonDisabled){
+      setButtonDisabled(true);
+      const data = await heroMove(move, battleSessionId)
+      setHealth(data.heroHealth);
+      setResource(data.heroResource);
+      setEnemyHealth(data.enemyHealth);
+      setBattleHistory(data.battleHistory);
+      handleEnemyMove();
+    }
   }
 
   //API CALLS

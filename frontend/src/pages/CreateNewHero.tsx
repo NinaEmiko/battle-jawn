@@ -177,11 +177,11 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                         <button className="controls-btn"></button>
                         <button className="controls-btn" onClick={() => handleNavigation("/")}>Back</button>                    </div>
                     <div className="controls-right">
-                        <button className="controls-btn">Up</button>
+                        <button className="controls-btn"></button>
                         <button className="controls-btn" onClick={() => handleLeftButtonClick()}>Left</button>
                         <button className="controls-btn" onClick={handleFormSubmit} >OK</button>
                         <button className="controls-btn" onClick={() => handleRightButtonClick()}>Right</button>
-                        <button className="controls-btn">Down</button>
+                        <button className="controls-btn"></button>
                     </div>
                 </>
             </Controls>

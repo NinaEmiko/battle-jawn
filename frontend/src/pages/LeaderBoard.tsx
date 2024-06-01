@@ -58,11 +58,11 @@ const LeaderBoard = ({props}:{props:any}) => {
                         <button className="controls-btn"></button>
                         <button className="controls-btn" onClick={() => handleNavigation("/")}>Back</button>                    </div>
                     <div className="controls-right">
-                        <button className="controls-btn">Up</button>
-                        <button className="controls-btn">Left</button>
-                        <button className="controls-btn">OK</button>
-                        <button className="controls-btn">Right</button>
-                        <button className="controls-btn">Down</button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
+                        <button className="controls-btn"></button>
                     </div>
                 </>
             </Controls>
