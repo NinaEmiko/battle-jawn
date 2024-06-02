@@ -16,7 +16,6 @@
     text-align: center;
     font-size: 25px;
     display: flex;
-    /* flex-direction: column; */
 }
 
 .controls-btn{
@@ -28,9 +27,9 @@
     font-size: 15px;
     height: 40px;
     width: 60px;
-  }
+}
 
-  /* LEFT STYLES */
+/* LEFT STYLES */
 
 .controls-left {
     /* flex: 1; */
@@ -48,28 +47,28 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-  }
+}
   
-  .controls-left button:nth-child(1) {
+.controls-left button:nth-child(1) {
     background-color: rgb(76, 194, 194);
     width: 100%;
-  }
-  .controls-left button:nth-child(2) {
+}
+
+.controls-left button:nth-child(2) {
     grid-row: 2;
     background-color: rgb(76, 194, 194);
     width: 100%;
-  }
+}
   
-  .controls-left button:nth-child(3) {
+.controls-left button:nth-child(3) {
     grid-row: 3;
     background-color: rgb(76, 194, 194);
     width: 100%;
-  }
+}
   
-  /* RIGHT STYLES */
+/* RIGHT STYLES */
   
-  .controls-right {
-    /* flex: 1; */
+.controls-right {
     width: 75%;
     display: flex;
     flex-direction: column;
@@ -84,38 +83,38 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-  }
+}
   
-  .controls-right button:nth-child(1) {
+.controls-right button:nth-child(1) {
     grid-column: 2;
     background-color: rgb(183, 52, 166);
-  }
-  .controls-right button:nth-child(2) {
+}
+.controls-right button:nth-child(2) {
     grid-column: 1;
     grid-row: 2;
     background-color: rgb(183, 52, 166);
-  }
+}
   
-  .controls-right button:nth-child(3) {
+.controls-right button:nth-child(3) {
     grid-column: 2;
     grid-row: 2;
     background-color: rgb(183, 52, 166);
-  }
+}
   
-  .controls-right button:nth-child(4) {
+.controls-right button:nth-child(4) {
     grid-column: 3;
     grid-row: 2;
     background-color: rgb(183, 52, 166);
-  }
+}
   
-  .controls-right button:nth-child(5) {
+.controls-right button:nth-child(5) {
     grid-column: 2;
     grid-row: 3;
     background-color: rgb(183, 52, 166);
-  }
+}
   
-  .controls-right button:nth-child(6) {
+.controls-right button:nth-child(6) {
     grid-column: 6;
     grid-row: 2;
     background-color: rgb(183, 52, 166);
-  }
+} 

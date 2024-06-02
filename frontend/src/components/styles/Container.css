@@ -13,11 +13,11 @@ body{
 
 @font-face {
   font-family: 'FantaisieArtistique';
-  src: local('FantaisieArtistique'), url(./fonts/FantaisieArtistique.ttf) format('truetype');}
+  src: local('FantaisieArtistique'), url(../../fonts/FantaisieArtistique.ttf) format('truetype');}
 
 @font-face {
   font-family: 'Alice';
-  src: local('Alice'), url(./fonts/Alice\ in\ Wonderland.ttf) format('truetype');}
+  src: local('Alice'), url(../../fonts/Alice\ in\ Wonderland.ttf) format('truetype');}
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -27,9 +27,6 @@ body{
 
 .container-jawn {
   position: absolute;
-  /* top: 50%;
-  left: 50%; */
-  /* transform: translate(-50%, -50%); */
   height: 100%;
   max-height: 100%;
   width: 100%;
@@ -41,3 +38,7 @@ body{
   background-color: #333;
   opacity: 90%;
 } 
+
+input{
+  text-align: right;
+}
