@@ -47,6 +47,10 @@ function Battle({props}:{props:any}) {
 
   //HANDLER FUNCTIONS
 
+  const handleExitPostBattleComponent = () => {
+    props.setIsVisible("open-map-post-battle",props.heroId);
+  }
+
   const handleEnemyMove = () => {
     let timeoutId: number | undefined | any;
     timeoutId = setTimeout(async () => {
@@ -157,6 +161,7 @@ function Battle({props}:{props:any}) {
   useEffect(() => {
     if (sessionInitialized) {
       setBeginBattle(true);
+      setButtonDisabled(false);
     }
   }, [sessionInitialized])
 
@@ -258,7 +263,7 @@ function Battle({props}:{props:any}) {
         }
 
         {postBattleActive && 
-          <PostBattle props={postBattleObject} />
+          <PostBattle props={{postBattleObject: postBattleObject, handleExitPostBattleComponent: handleExitPostBattleComponent}} />
         }
       </Display>
       <Controls>

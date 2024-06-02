@@ -42,13 +42,18 @@ function Home( {props}:{props:any} ) {
     } else if (component === "open-map") {
       setHeroId(id);
       setMapActive(true);
+    } else if (component === "open-map-post-battle") {
+      setHeroId(id);
+      setBattleActive(false);
+      setPrevScreen('Battle');
+      setMapActive(true);
     }
   }
 
   return (
     <>
         {battleActive &&  
-          <Battle  props={{heroId:heroId}} />
+          <Battle  props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
         }
 
         {shopActive &&

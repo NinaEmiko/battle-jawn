@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../styling/PostBattle.css";
 import { fetchLoot, fetchEmptySlots, selectLootCall } from "../api/api";
 
@@ -8,23 +7,17 @@ const PostBattle = ({props}:{props:any}) => {
     const [lootActive, setLootActive] = useState(false);
     const [emptySlots, setEmptySlots] = useState(0);
     const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
-
-    const navigate = useNavigate();
-
-    const handleNavigation = (path: string) => {
-      navigate(path);
-    };
     
     const getLoot = async () => {
-        if (props.enemyId !== 0) {
-            const data = await fetchLoot(props.enemyId)
+        if (props.postBattleObject.enemyId !== 0) {
+            const data = await fetchLoot(props.postBattleObject.enemyId)
             setLoot(data);
             setLootActive(true);
         }
     }
 
     const getEmptySlots = async () => {
-        const data = await fetchEmptySlots(props.heroId)
+        const data = await fetchEmptySlots(props.postBattleObject.heroId)
         setEmptySlots(data);
     }
 
@@ -32,15 +25,15 @@ const PostBattle = ({props}:{props:any}) => {
         const selectedItems = JSON.stringify(selectedOptions);
 
         if (selectedOptions.length === 0) {
-            handleNavigation("/leader-board")
+            props.handleExitPostBattleComponent()
         } else if (emptySlots === 0){
             alert("You have no more room in your inventory to pick up loot.")
-            handleNavigation("/leader-board")
+            props.handleExitPostBattleComponent()
         } else if (emptySlots < selectedOptions.length){
             alert("You do not have room in your inventory for all the loot you've selected. Please unselect and try again.")
         } else {
-            selectLootCall(props.heroId, selectedItems)
-            handleNavigation("/leader-board")
+            selectLootCall(props.postBattleObject.heroId, selectedItems)
+            props.handleExitPostBattleComponent()
         }
     }
 
@@ -70,17 +63,17 @@ const PostBattle = ({props}:{props:any}) => {
     return (
         <div>
 
-            {props.ran &&
+            {props.postBattleObject.ran &&
                 <h1 className="post-battle-text">You ran away.</h1>
             }
 
-            {props.lost &&
+            {props.postBattleObject.lost &&
                 <h1 className="post-battle-text">You have been defeated.</h1>
             }
 
-            {props.won &&
+            {props.postBattleObject.won &&
                 <div>
-                    <h1 className="title-jawn">{props.message}</h1>
+                    <h1 className="title-jawn">{props.postBattleObject.message}</h1>
                     <p className="select-text">Select loot you wish to pick up:</p>
                     {loot.map ((item, index) =>
                         <div className="loot-jawn" key={index}>
