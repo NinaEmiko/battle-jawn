@@ -9,7 +9,7 @@
     height: 7.5%;
     border-radius: 5px;
     box-shadow: 0 0 10px 3px;
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
     text-align: center;
     margin-top: 15%;
@@ -17,6 +17,7 @@
 
 .page-name-txt {
   font-size: 35px;
+  color: var(--orange-jawn);
 }
 
 .page-name-column-1 {
@@ -47,8 +48,8 @@
 }
 
 .page-name-btn{
-    background-color: hsl(181, 84%, 44%);
-    border: 1px solid hsl(200, 100%, 30%);
+    background-color: var(--mid-light-jawn);
+    border: 1px solid var(--mid-dark-jawn);
     border-radius: 5px;
     color: black;
     outline: none;

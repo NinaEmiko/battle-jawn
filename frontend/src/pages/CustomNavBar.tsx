@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styling/CustomNavBar.css'
 
 
 interface CustomNavBarProps {
@@ -46,7 +47,7 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
 
   return (
     <div>
-      <Navbar expand="lg" className="bg-body-tertiary fixed-top" bg="dark" data-bs-theme="dark">
+      <Navbar expand="lg" className="bg-body-tertiary fixed-top" bg="dark" data-bs-theme="dark" id="nav-jawn">
       <Container>
         <Link to="/" className="navbar-brand">
           <Navbar.Brand>{pageTitle}</Navbar.Brand>

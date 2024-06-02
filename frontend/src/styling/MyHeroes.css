@@ -1,7 +1,7 @@
 /* CONTAINER STYLINGS */
 
 .container-jawn-hero {
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
     /* Rounds edges of Display Box */
     border-radius: 5px;
@@ -23,7 +23,7 @@
 .title-jawn-hero {
   flex: 1;
 padding-top: 15px;
-color: hsl(123, 68%, 54%);
+color: var(--mid-light-jawn);
 font-size: 50px;
 text-align: center;
 }
@@ -31,12 +31,12 @@ text-align: center;
 .row-jawn{
     padding-left: 30px;
     text-align: left;
-    color: white;
+    color: var(--light-jawn);
     font-size:20px;
 }
 .data-jawn {
     float: right;
-    color: white;
+    color: var(--light-jawn);
     padding-right: 30px;
     text-align: right;
     font-size:20px;
@@ -49,7 +49,7 @@ text-align: center;
 #rest-btn, #fight-btn, #inventory-btn, #store-btn, #submit-btn {
   background-color: transparent;
   border-color: gray;
-  color: hsl(123, 68%, 54%);
+  color: var(--mid-light-jawn);
   border-radius: 0;
   width:110px;
   margin-top: 20px;
@@ -70,7 +70,7 @@ text-align: center;
 
 .hero-name{
   font-size: 30px;
-  color: yellow;
+  color: gold;
   margin-top:11%;
 }
 
@@ -82,7 +82,7 @@ text-align: center;
 }
 
 .hero-level{
-  color: rgb(42, 167, 179);
+  color: var(--mid-light-jawn);
   font-size: 17.5px;
   text-align: right;
   margin-left: 10px;
@@ -95,7 +95,7 @@ text-align: center;
   
 @media (max-width: 576px) {
     .container-jawn-hero {
-        background-color: #333;
+        background-color: var(--dark-jawn);
         opacity: 90%;
         /* Rounds edges of Display Box */
         border-radius: 5px;
@@ -120,13 +120,13 @@ text-align: center;
 #prev-btn{
   flex: 0 0 auto;
   width: 100px;
-  color: rgb(15, 175, 117);
+  color: var(--mid-dark-jawn);
 }
 
 #next-btn{
   flex: 0 0 auto;
   width: 100px;
-  color: rgb(15, 175, 117);
+  color: var(--mid-dark-jawn);
 }
 
 .carousel-jawn{
@@ -135,7 +135,7 @@ text-align: center;
 }
 
 .experience-bar {
-  background-color: rgb(61, 163, 191);
+  background-color: var(--mid-light-jawn);
   border-radius: 20px;
   margin: 5px;
   width: 90%;
@@ -144,16 +144,16 @@ text-align: center;
 }
 
 .experience-bar::-webkit-progress-value {
-  background-color: rgb(211, 113, 231); 
+  background-color: var(--orange-jawn); 
   border-radius: 20px;
 }
 .experience-bar::-webkit-progress-bar {
-  background-color: rgb(61, 163, 191); 
+  background-color: var(--mid-dark-jawn); 
   border-radius: 20px;
 }
 
 .experience-bar::-moz-progress-bar {
-  background-color: rgb(211, 113, 231); 
+  background-color: var(--orange-jawn); 
   border-radius: 20px;
 }
 
@@ -170,7 +170,7 @@ text-align: center;
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: black;
+  color: var(--light-jawn);
   font-weight: bold;
 }
 
@@ -189,10 +189,11 @@ text-align: center;
 }
 
 .stats-table-data {
-  border: 1px solid grey;
+  border: 1px solid var(--orange-jawn);
   padding: 10px;
   text-align: center;
   height: 100%;
+  color: var(--light-jawn);
 }
 .experience-tag{
   text-align: center;

@@ -3,7 +3,7 @@
 }
 
 .container-jawn-about-us{
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
     border-radius: 5px;
     box-shadow: 0 0 10px 2px;
@@ -23,7 +23,7 @@
 .about-us-title-jawn{
     margin-top: 15px;
     margin-bottom: 15px;
-    color: hsl(123, 68%, 54%);
+    color: var(--mid-light-jawn);
     font-size: 50px;
 }
 

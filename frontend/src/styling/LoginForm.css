@@ -8,7 +8,7 @@ ul {
 }
 
 .nav-link.custom-button.active {
-    background-color: hsl(181, 84%, 44%);
+    background-color: var(--mid-light-jawn);
     color: black;
 }
 
@@ -43,7 +43,7 @@ input {
 .active-login{
     background: transparent;
     border: transparent;
-    color: rgb(183, 52, 166);
+    color: var(--dark-orange);
     font-size: 25px;
 }
 .login-submit-btn-jawn{

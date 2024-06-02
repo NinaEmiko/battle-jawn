@@ -15,7 +15,7 @@
   position: relative;
 }
 .container-jawn-new-hero {
-  background-color: #333;
+  background-color: var(--dark-jawn);
   opacity: 90%;
   border-radius: 5px;
   box-shadow: 0 0 10px 2px;
@@ -32,7 +32,7 @@
   margin-right: 5px;
 }
 .userPrompt {
-  color: yellow;
+  color: gold;
   font-size: 30px;
 }
 .user-prompt-wrapper-create{
@@ -49,8 +49,8 @@
   width: 75%;
 }
 .btn-role{
-  background-color: hsl(181, 84%, 44%);
-  border: 1px solid hsl(200, 100%, 30%);
+  background-color: var(--mid-light-jawn);
+  border: 1px solid var(--mid-dark-jawn);
   border-radius: 0;
   padding: 5px 10px;
   color: black;
@@ -70,8 +70,8 @@
 }
   
 .btn-role {
-  background-color: hsl(181, 84%, 44%);
-  border: 1px solid hsl(200, 100%, 30%);
+  background-color: var(--mid-light-jawn);
+  border: 1px solid var(--mid-dark-jawn);
   border-radius: 0;
   padding: 5px 10px;
   color: black;
@@ -87,7 +87,7 @@
 }
 
 .btn-role:active {
-  box-shadow: 0 5px rgb(43, 43, 36);
+  box-shadow: 0 5px var(--dark-jawn);
   transform: translateY(2px);
 }
 
@@ -97,13 +97,13 @@
   width: 180px;
   height: 50px;
   margin-top: 15px;
-  background-color: hsl(181, 84%, 44%);
+  background-color: var(--mid-light-jawn);
   color: black;
 }
 .hero-description-txt{
   justify-content: center;
   text-align: center;
-  color: white;
+  color: var(--light-jawn);
   /* position: absolute; */
   /* bottom: 0; */
   margin: 5px;

@@ -14,7 +14,7 @@
   }
 
   .container-jawn-hero-battle {
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
     /* Rounds edges of Display Box */
     border-radius: 5px;
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   font-size: 25px;
-  color:  hsl(181, 84%, 44%);
+  color:  var(--mid-light-jawn);
 }
 .hero-name-role-resource > span{
   margin-right: 10px;
@@ -50,7 +50,7 @@
   float: left;
   justify-content: flex-end;
   font-size: 25px;
-  color: yellow;
+  color: gold;
   padding-right: 5px;
 }
 
@@ -66,13 +66,13 @@
     flex-direction: column-reverse;
     box-shadow: 0 0 10px 2px;
     overflow: auto;
-    background-color: #333;
-    color: yellow;
+    background-color: var(--dark-jawn);
+    color: gold;
     text-align: right;
 }
 
 .dialog{
-  color: white;
+  color: var(--light-jawn);
   font-size: 20px;
 }
 
@@ -113,8 +113,8 @@
     }
   
   .btn-role-battle {
-    background-color: hsl(181, 84%, 44%);
-    border: 1px solid hsl(200, 100%, 30%);
+    background-color: var(--mid-light-jawn);
+    border: 1px solid var(--mid-dark-jawn);
     border-radius: 0;
     padding: 5px 10px;
     color: black;
@@ -131,7 +131,7 @@
   }
   
   .btn-role-battle:active {
-    box-shadow: 0 5px rgb(43, 43, 36);
+    box-shadow: 0 5px var(--dark-jawn);
     transform: translateY(2px);
   }
 
@@ -141,13 +141,13 @@
 
   .userPrompt-battle{
     margin-top: 10px;
-    color: yellow;
+    color: gold;
     font-size: 30px;
   }
 
   @media (max-width: 576px) {
     .container-jawn-hero-battle {
-      background-color: #333;
+      background-color: var(--dark-jawn);
       opacity: 90%;
       /* Rounds edges of Display Box */
       border-radius: 5px;
@@ -167,7 +167,7 @@
 
   @media (max-width: 576px) {
     .container-jawn-hero-battle {
-      background-color: #333;
+      background-color: var(--dark-jawn);
       opacity: 90%;
       /* Rounds edges of Display Box */
       border-radius: 5px;
@@ -206,7 +206,7 @@
     justify-content: flex-start;
     margin-left: 20px;
     margin-right: 5px;
-    color: yellow;
+    color: gold;
   }
   .enemy-display-left-bottom-half{
     height: 50%;
@@ -224,5 +224,5 @@
     margin-left: 5px;
   }
   .enemy-display-right-top-half-name{
-    color: yellow;
+    color: gold;
   }

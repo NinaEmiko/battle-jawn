@@ -11,7 +11,7 @@
     height: 29%;
     border-radius: 5px;
     box-shadow: 0 0 10px 3px;
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
     text-align: center;
     font-size: 25px;
@@ -19,8 +19,8 @@
 }
 
 .controls-btn{
-    background-color: hsl(181, 84%, 44%);
-    border: 1px solid hsl(200, 100%, 30%);
+    background-color: var(--mid-light-jawn);
+    border: 1px solid var(--mid-dark-jawn);
     border-radius: 5px;
     color: black;
     outline: none;
@@ -50,19 +50,19 @@
 }
   
 .controls-left button:nth-child(1) {
-    background-color: rgb(76, 194, 194);
+    background-color: var(--mid-light-jawn);
     width: 100%;
 }
 
 .controls-left button:nth-child(2) {
     grid-row: 2;
-    background-color: rgb(76, 194, 194);
+    background-color: var(--mid-light-jawn);
     width: 100%;
 }
   
 .controls-left button:nth-child(3) {
     grid-row: 3;
-    background-color: rgb(76, 194, 194);
+    background-color: var(--mid-light-jawn);
     width: 100%;
 }
   
@@ -87,34 +87,34 @@
   
 .controls-right button:nth-child(1) {
     grid-column: 2;
-    background-color: rgb(183, 52, 166);
+    background-color: var(--orange-jawn);
 }
 .controls-right button:nth-child(2) {
     grid-column: 1;
     grid-row: 2;
-    background-color: rgb(183, 52, 166);
+    background-color: var(--orange-jawn);
 }
   
 .controls-right button:nth-child(3) {
     grid-column: 2;
     grid-row: 2;
-    background-color: rgb(183, 52, 166);
+    background-color: var(--orange-jawn);
 }
   
 .controls-right button:nth-child(4) {
     grid-column: 3;
     grid-row: 2;
-    background-color: rgb(183, 52, 166);
+    background-color: var(--orange-jawn);
 }
   
 .controls-right button:nth-child(5) {
     grid-column: 2;
     grid-row: 3;
-    background-color: rgb(183, 52, 166);
+    background-color: var(--orange-jawn);
 }
   
 .controls-right button:nth-child(6) {
     grid-column: 6;
     grid-row: 2;
-    background-color: rgb(183, 52, 166);
+    background-color: var(--orange-jawn);
 } 

@@ -29,9 +29,10 @@
 }
 .delete-account-btn{
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  color: red;
-  background-color: white;
+  color: black;
+  background-color: red;
   width: 33%;
   /* background: transparent; */
   border-radius: 5px;
@@ -59,7 +60,7 @@
   font-size: 16px;
   cursor: pointer;
   color: black;
-  background-color: white;
+  background-color: var(--orange-jawn);
   width: 33%;
   border-radius: 5px;
 }

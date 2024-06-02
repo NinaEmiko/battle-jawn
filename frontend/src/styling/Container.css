@@ -1,6 +1,6 @@
 /* Display Box */
 .container-jawn {
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
     width: 800px;
     /* Rounds edges of Display Box */
@@ -14,7 +14,7 @@
   }
 
 .battle-container {
-  background-color: #333;
+  background-color: var(--dark-jawn);
   opacity: 90%;
   width: 800px;
   /* Rounds edges of Display Box */
@@ -47,7 +47,7 @@
 }
 
 .container-jawn-login-form {
-  background-color: #333;
+  background-color: var(--dark-jawn);
   opacity: 90%;
   /* Rounds edges of Display Box */
   border-radius: 5px;
@@ -63,7 +63,7 @@
 }
 
 .container-jawn-account-settings {
-  background-color: #333;
+  background-color: var(--dark-jawn);
   opacity: 90%;
   /* Rounds edges of Display Box */
   border-radius: 5px;

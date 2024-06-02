@@ -1,10 +1,10 @@
 .post-battle-text {
     padding-top: 15px;
-    color: hsl(32, 84%, 43%);
+    color: var(--orange-jawn);
 }
 .select-text{
     padding-top: 15px;
-    color: hsl(334, 100%, 58%);
+    color: var(--orange-jawn);
     font-size: 25px;
     text-align: center;
 }
@@ -12,7 +12,7 @@
 .label-jawn{
     font-size: 25px;
     padding-bottom: 15px;
-    color: white;
+    color: var(--light-jawn);
 }
 
 .title-jawn{

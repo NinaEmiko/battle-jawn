@@ -1,13 +1,13 @@
 .enemy-name{
     font-size: 40px;
-    color: yellow;
+    color: gold;
   }
   
   .enemy-name-level{
     display: flex;
     justify-content: flex-end;
     font-size: 25px;
-    color: yellow;
+    color: gold;
     float: left;
     padding-right: 5px;
   }
@@ -15,6 +15,6 @@
   .enemy-level{
     /* padding-top: 7px; */
     padding-left: 10px;
-    color: rgb(203, 5, 157);
+    color: var(--orange-jawn);
     /* font-size: 20px; */
   }

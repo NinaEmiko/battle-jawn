@@ -5,8 +5,8 @@
     gap: 10px;
 }
 .hero-move-btn{
-    background-color: hsl(181, 84%, 44%);
-    border: 1px solid hsl(200, 100%, 30%);
+    background-color: var(--mid-light-jawn);
+    border: 1px solid var(--mid-dark-jawn);
     border-radius: 0;
     padding: 5px 10px;
     color: black;

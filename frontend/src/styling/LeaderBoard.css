@@ -2,7 +2,7 @@
     display: block;
     border-radius: 5px;
     box-shadow: 0 0 10px 3px;
-    background-color: #333;
+    background-color: var(--dark-jawn);
     opacity: 90%;
 }
 
@@ -13,7 +13,7 @@
     font-weight: bold;
     text-align: center;
     font-size: 25px;
-    color: yellow;
+    color: gold;
 }
 .number-symbol{
     font-weight: bold;
@@ -24,7 +24,7 @@
     margin-top: 5px;
 }
 .leader-board-hero-level{
-    color: rgb(42, 167, 179);
+    color: var(--mid-light-jawn);
     font-size: 17.5px;
     text-align: right;
     margin-left: 10px;
@@ -38,7 +38,7 @@
 }
 .leader-board-hero-name{
     font-size: 30px;
-    color: yellow;
+    color: var(--orange-jawn);
   }
   .parent-jawn{
     position: relative;

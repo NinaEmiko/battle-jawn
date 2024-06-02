@@ -1,4 +1,12 @@
- html, body, #root {
+:root {
+  --dark-jawn: #003135;
+  --mid-dark-jawn: #024950;
+  --orange-jawn: #964734;
+  --mid-light-jawn: #0FA4AF;
+  --light-jawn: #AFDDE5;
+}
+
+html, body, #root {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -22,7 +30,8 @@ body{
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: FantaisieArtistique;
-  color: hsl(181, 84%, 44%);
+  /* color: hsl(181, 84%, 44%); */
+  color: var(--mid-light-jawn);
 }
 
 .container-jawn {
@@ -35,7 +44,7 @@ body{
 
   border-radius: 5px;
   box-shadow: 0 0 10px 3px;
-  background-color: #333;
+  background-color: var(--dark-jawn);
   opacity: 90%;
 } 
 
