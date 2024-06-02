@@ -205,7 +205,12 @@ function Heroes( {props}:{props:any} ) {
             <Controls>
                 <>
                     <div className="controls-left">
-                        <button className="controls-btn" onClick={() => handleNavigation("/create-hero")}>New Hero</button>
+
+                        {heroList.length < 5 ? 
+                          <button className="controls-btn" onClick={() => handleNavigation("/create-hero")}>New Hero</button>
+                          :
+                          <button className="controls-btn"></button>
+                        }
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>                    
                     </div>
