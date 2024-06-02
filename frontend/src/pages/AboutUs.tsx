@@ -26,7 +26,7 @@ const AboutUs = () => {
                 </div>
             </PageName>
             <Display>
-                <div className="about-us-jawn">
+                {/* <div className="about-us-jawn"> */}
                     <div className="parent-jawn">
                         <div className="child-jawn">
                             <p className="about-us-txt">Coming Soon</p>
@@ -37,7 +37,7 @@ const AboutUs = () => {
                         <button className={activeButton === 'About Us' ? 'active' : ''} onClick={()=> handleTabClick("About Us")}>About Us</button>
                         <button className={activeButton === 'Contact' ? 'active' : ''} onClick={()=> handleTabClick("Contact")}>Contact</button>
                     </div>
-                </div>
+                {/* </div> */}
             </Display>
             <Controls>
                 <>
