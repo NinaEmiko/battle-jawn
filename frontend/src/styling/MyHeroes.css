@@ -189,7 +189,7 @@ text-align: center;
 }
 
 .stats-table-data {
-  border: 1px solid var(--orange-jawn);
+  border: 1px solid var(--mid-dark-jawn);
   padding: 10px;
   text-align: center;
   height: 100%;

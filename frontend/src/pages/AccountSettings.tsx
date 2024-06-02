@@ -6,6 +6,7 @@ import PageName from "../components/PageName";
 import { request, setAuthHeader } from "../helpers/axios_helper";
 import '../styling/AccountSettings.css';
 import PopUp from "../pages/PopUp";
+import { useNavigate } from "react-router-dom";
 
 const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
@@ -20,6 +21,12 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const handleTabClick = (button: string) => {
         setMessage("");
         setActiveButton(button);
+      };
+
+      const navigate = useNavigate();
+
+      const handleNavigation = (path: string) => {
+          navigate(path);
       };
 
     const handlePasswordChange = async () => {
@@ -135,7 +142,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                     <div className="controls-left">
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>                    
+                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
                     </div>
                     <div className="controls-right">
                         <button className="controls-btn"></button>

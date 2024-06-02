@@ -6,6 +6,7 @@ import Controls from '../components/Controls';
 import Display from '../components/Display';
 import PageName from '../components/PageName';
 import Container from '../components/Container';
+import Cookies from 'js-cookie';
 
 const Map = ({props}:{props:any}) => {
     const [player, setPlayer] = useState({ x: 290, y: 270});
@@ -18,6 +19,13 @@ const Map = ({props}:{props:any}) => {
     const storeDoor = DOORS.STORE;
     const arenaDoor = DOORS.ARENA;
     const obstacles = OBSTACLES.MAP_1;
+
+    const checkCoordinates = () => {
+        const storedCoordinates = Cookies.get('coordinates');
+        if (storedCoordinates) {
+            setPlayer(JSON.parse(storedCoordinates));        
+        }
+    }
 
     const startMoving = (direction: string) => {
         if (moveInterval.current) {
@@ -100,8 +108,10 @@ const Map = ({props}:{props:any}) => {
         if (!startPositionSet) {
 
             if (props.prevScreen === "Heroes"){
+                checkCoordinates();
                 setStartPositionSet(true);
             } else if (props.prevScreen === "Inventory") {
+                checkCoordinates();
                 setStartPositionSet(true);
             } else if (props.prevScreen === "Shop"){
                 setPlayer(prev => ({
@@ -120,9 +130,11 @@ const Map = ({props}:{props:any}) => {
     }
   
     const handleBackButtonClick = () => {
+        Cookies.set('coordinates', JSON.stringify(player)); 
         props.setIsVisible("exit-map", props.heroId)
     }
     const handleInventory = (id: number) => {
+        Cookies.set('coordinates', JSON.stringify(player)); 
         props.setIsVisible("open-inventory", id);
     }
     const handleStore = (id: number) => {

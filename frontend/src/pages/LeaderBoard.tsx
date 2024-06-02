@@ -97,7 +97,8 @@ const LeaderBoard = ({props}:{props:any}) => {
                     <div className="controls-left">
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Back</button>                    </div>
+                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
+                    </div>
                     <div className="controls-right">
                         <button className="controls-btn" onClick={() => previousHero()}>Up</button>
                         <button className="controls-btn"></button>

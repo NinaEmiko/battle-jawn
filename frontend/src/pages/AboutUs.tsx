@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
@@ -10,6 +11,12 @@ const AboutUs = () => {
 
     const handleTabClick = (button: string) => {
         setActiveButton(button);
+      };
+
+      const navigate = useNavigate();
+
+      const handleNavigation = (path: string) => {
+          navigate(path);
       };
 
     return (        
@@ -42,7 +49,8 @@ const AboutUs = () => {
                     <div className="controls-left">
                         <button className="controls-btn"></button>
                         <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>                    </div>
+                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
+                    </div>
                     <div className="controls-right">
                         <button className="controls-btn"></button>
                         <button className="controls-btn" onClick={()=> handleTabClick("About Us")}>Left</button>

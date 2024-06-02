@@ -50,19 +50,25 @@
 }
   
 .controls-left button:nth-child(1) {
-    background-color: var(--mid-light-jawn);
+    color: var(--light-jawn);
+    background: var(--mid-dark-jawn);
+    border-color: var(--mid-light-jawn);
     width: 100%;
 }
 
 .controls-left button:nth-child(2) {
     grid-row: 2;
-    background-color: var(--mid-light-jawn);
+    color: var(--light-jawn);
+    background: var(--mid-dark-jawn);
+    border-color: var(--mid-light-jawn);
     width: 100%;
 }
   
 .controls-left button:nth-child(3) {
     grid-row: 3;
-    background-color: var(--mid-light-jawn);
+    color: var(--light-jawn);
+    background: var(--mid-dark-jawn);
+    border-color: var(--mid-light-jawn);
     width: 100%;
 }
   

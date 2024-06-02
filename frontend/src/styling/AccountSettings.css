@@ -28,14 +28,18 @@
   font-size: 20px;
 }
 .delete-account-btn{
-  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  color: black;
-  background-color: red;
+  color: red;
+  cursor: pointer;
   width: 33%;
-  /* background: transparent; */
+  margin-top: 10px;
+  background: transparent;
+  border: solid;
+  border-color: var(--mid-light-jawn);
+  font-size: 20px;
   border-radius: 5px;
+  padding: 5px 10px;
 }
 .new-password-msg{
   color: red;
@@ -57,12 +61,16 @@
 }
 
 .new-password-submit-btn {
-  font-size: 16px;
   cursor: pointer;
-  color: black;
-  background-color: var(--orange-jawn);
   width: 33%;
+  color: var(--light-jawn);
+  background: var(--mid-dark-jawn);
+  margin-top: 10px;
+  border: solid;
+  border-color: var(--mid-light-jawn);
+  font-size: 20px;
   border-radius: 5px;
+  padding: 5px 10px;
 }
 
 .parent-jawn{

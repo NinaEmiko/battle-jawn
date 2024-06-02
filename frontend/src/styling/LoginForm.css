@@ -23,9 +23,11 @@ input {
 
 .login-submit-btn{
     margin-top: 10px;
-    background: transparent;
     border: solid;
     border-color: gray;
+    color: var(--light-jawn);
+    background: var(--mid-dark-jawn);
+    border-color: var(--mid-light-jawn);
     font-size: 20px;
     border-radius: 5px;
     padding: 5px 10px;
@@ -39,11 +41,12 @@ input {
     background: transparent;
     border: transparent;
     font-size: 25px;
+
 }
 .active-login{
     background: transparent;
     border: transparent;
-    color: var(--dark-orange);
+    color: var(--orange-jawn);
     font-size: 25px;
 }
 .login-submit-btn-jawn{
