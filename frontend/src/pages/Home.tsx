@@ -11,6 +11,7 @@ function Home( {props}:{props:any} ) {
   const [shopActive, setShopActive] = useState(false);
   const [inventoryActive, setInventoryActive] = useState(false);
   const [mapActive, setMapActive] = useState(false);
+  const [prevScreen, setPrevScreen] = useState('Heroes');
   
   const handleSubComponentButtonClick = (component: string, id: number) => {
     if (component === "exit-map"){
@@ -18,10 +19,12 @@ function Home( {props}:{props:any} ) {
       setMapActive(false);
     } else if (component === "exit-store"){
       setHeroId(id);
+      setPrevScreen('Shop')
       setShopActive(false);
       setMapActive(true);
     } else if (component === "exit-inventory"){
       setHeroId(id);
+      setPrevScreen('Inventory')
       setInventoryActive(false);
       setMapActive(true);
     } else if (component === "open-store") {
@@ -57,7 +60,7 @@ function Home( {props}:{props:any} ) {
         }
 
         {mapActive &&
-          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
         }
 
         {!battleActive && !inventoryActive && !shopActive && !mapActive &&

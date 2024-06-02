@@ -8,8 +8,8 @@ import PageName from '../components/PageName';
 import Container from '../components/Container';
 
 const Map = ({props}:{props:any}) => {
-    const [player, setPlayer] = useState({ x: 240, y: 240});
-    const [storeActive, setStoreActive] = useState(true);
+    const [player, setPlayer] = useState({ x: 290, y: 270});
+    const [startPositionSet, setStartPositionSet] = useState(false);
     const playerSize = 10;
     const boxSize = 420;
     const moveSpeed = 5; 
@@ -85,21 +85,39 @@ const Map = ({props}:{props:any}) => {
     };
 
     useEffect(() => {
+        handlePrevScreen(props.prevScreen);
         return () => {
         if (moveInterval.current) {
             clearInterval(moveInterval.current);
         }
         };
     }, []);
+    console.log("Player position: y - " + player.y + ", x - " + player.x)
+    console.log("startPositionSet: " + startPositionSet)
 
-    useEffect(() => {
-        if (!storeActive) {
-        setPlayer(prev => ({
-            x: 340,
-            y: 300
-        }));
+
+    const handlePrevScreen = () => {
+        if (!startPositionSet) {
+
+            if (props.prevScreen === "Heroes"){
+                setStartPositionSet(true);
+            } else if (props.prevScreen === "Inventory") {
+                setStartPositionSet(true);
+            } else if (props.prevScreen === "Shop"){
+                setPlayer(prev => ({
+                    x: 340,
+                    y: 300
+                }));
+                setStartPositionSet(true);
+            } else if (props.prevScreen === "Battle"){
+                setPlayer(prev => ({
+                    x: 410,
+                    y: 300
+                }));
+                setStartPositionSet(true);
+            }
         }
-    }, [setStoreActive]);
+    }
   
     const handleBackButtonClick = () => {
         props.setIsVisible("exit-map", props.heroId)
@@ -108,7 +126,6 @@ const Map = ({props}:{props:any}) => {
         props.setIsVisible("open-inventory", id);
     }
     const handleStore = (id: number) => {
-        setStoreActive(true);
         props.setIsVisible("open-store", id);
     }
 
