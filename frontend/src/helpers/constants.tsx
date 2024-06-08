@@ -54,4 +54,27 @@ export const OBSTACLES = {
     { x: 325, y: 245, width: 55, height: 40 },
     { x: 380, y: 245, width: 55, height: 40 },
   ],
+  STARTING_MAP: [
+    { x: 45, y: 375, width: 500, height: 30 },
+    { x: 270, y: 150, width: 150, height: 15 },
+    { x: 270, y: 325, width: 140, height: 15 },
+    { x: 175, y: 325, width: 65, height: 15 },
+    { x: 175, y: 225, width: 110, height: 25 },
+    { x: 45, y: 45, width: 500, height: 15 },
+    { x: 0, y: 45, width: 15, height: 115 },
+    { x: 270, y: 150, width: 15, height: 100 },
+    { x: 0, y: 220, width: 15, height: 185 },
+    { x: 90, y: 225, width: 15, height: 125 },
+    { x: 90, y: 225, width: 85, height: 100 },
+    { x: 45, y: 80, width: 175, height: 95 },
+    { x: 335, y: 45, width: 15, height: 280 },
+  ],
+};
+
+export const ENTRANCES: { [key: string]: any } = {
+  STARTING_MAP_SOUTH: { x: 15, y: 400, width: 30, height: 5 },
+  STARTING_MAP_NORTH: { x: 15, y: 45, width: 30, height: 5 },
+  STARTING_MAP_WEST: { x: 0, y: 150, width: 5, height: 75 },
+  STARTING_MAP_EAST: { x: 345, y: 335, width: 5, height: 40 },
+  STARTING_MAP_SHOP: { x: 190, y: 175, width: 20, height: 5 },
 };

@@ -100,9 +100,6 @@ const Map = ({props}:{props:any}) => {
         }
         };
     }, []);
-    console.log("Player position: y - " + player.y + ", x - " + player.x)
-    console.log("startPositionSet: " + startPositionSet)
-
 
     const handlePrevScreen = () => {
         if (!startPositionSet) {

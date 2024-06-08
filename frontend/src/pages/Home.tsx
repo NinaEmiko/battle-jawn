@@ -2,6 +2,7 @@ import { useState } from "react";
 import Battle from "./Battle";
 import Inventory from "./Inventory";
 import Map from "./Map";
+import StartingMap from "./StartingMap";
 import Shop from "./Shop";
 import Heroes from "./Heroes";
 
@@ -65,7 +66,7 @@ function Home( {props}:{props:any} ) {
         }
 
         {mapActive &&
-          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
+          <StartingMap props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
         }
 
         {!battleActive && !inventoryActive && !shopActive && !mapActive &&
