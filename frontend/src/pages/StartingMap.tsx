@@ -127,35 +127,35 @@ const StartingMap = ({props}:{props:any}) => {
                                         y={southEntrance.y}
                                         width={southEntrance.width}
                                         height={southEntrance.height}
-                                        // fill="yellow"
+                                        fill="yellow"
                                     />
                                     <Rect 
                                         x={northEntrance.x}
                                         y={northEntrance.y}
                                         width={northEntrance.width}
                                         height={northEntrance.height}
-                                        // fill="yellow"
+                                        fill="yellow"
                                     />
                                     <Rect 
                                         x={westEntrance.x}
                                         y={westEntrance.y}
                                         width={westEntrance.width}
                                         height={westEntrance.height}
-                                        // fill="yellow"
+                                        fill="yellow"
                                     />
                                     <Rect 
                                         x={eastEntrance.x}
                                         y={eastEntrance.y}
                                         width={eastEntrance.width}
                                         height={eastEntrance.height}
-                                        // fill="yellow"
+                                        fill="yellow"
                                     />
                                     <Rect 
                                         x={shop.x}
                                         y={shop.y}
                                         width={shop.width}
                                         height={shop.height}
-                                        // fill="yellow"
+                                        fill="yellow"
                                     />
                                 {obstacles.map((obstacle, index) => (
                                     <Rect
@@ -164,7 +164,7 @@ const StartingMap = ({props}:{props:any}) => {
                                         y={obstacle.y}
                                         width={obstacle.width}
                                         height={obstacle.height}
-                                        // fill="blue"
+                                        fill="blue"
                                     />
                                 ))}
                             </Layer>
