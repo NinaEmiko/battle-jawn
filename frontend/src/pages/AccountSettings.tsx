@@ -12,6 +12,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [activeButton, setActiveButton] = useState("Update Password");
     const [newPassword, setNewPassword] = useState('');
+    const [oldPassword, setOldPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState('');
     const [popUpType, setPopUpType] = useState("");
@@ -32,8 +33,9 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const handlePasswordChange = async () => {
         if (newPassword === confirmNewPassword) {
             try {
-                const response = await request('PUT', apiUrl + '/update/${props.id}', {
+                const response = await request('PUT', apiUrl + '/update/' + props.id, {
                 newPassword: newPassword,
+                oldPassword: oldPassword,
               });
               setMessage(response.data);
               } catch (error) {
@@ -101,6 +103,10 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                             {activeButton === "Update Password" && (
 
                                 <div className="account-settings-container-jawn">
+                                        <input type="password"
+                                        className="new-password-input"
+                                        placeholder="Old Password"
+                                        value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
                                         <input type="password"
                                         className="new-password-input"
                                         placeholder="New Password"

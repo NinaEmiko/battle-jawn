@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -49,6 +51,7 @@ public class BattleSessionPurgeTest {
         doNothing().when(battleSessionRepository).deleteById(any());
         battleSessionPurge.purgeBattleSession();
         verify(battleSessionRepository, times(1)).deleteById(any());
+        assertNotNull(battleSession.getBattleHistoryMessageId());
     }
     @Test
     void purgeBattleSessionExceptionTest() {

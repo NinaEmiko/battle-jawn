@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Circle } from 'react-konva';
-import { DOORS, OBSTACLES } from '../helpers/constants';
+import { DOORS, OBSTACLES, STARTING_POINTS } from '../helpers/constants';
 import '../styling/Map.css'
 import Controls from '../components/Controls';
 import Display from '../components/Display';
 import PageName from '../components/PageName';
 import Container from '../components/Container';
 import Cookies from 'js-cookie';
-
 const Map = ({props}:{props:any}) => {
     const [player, setPlayer] = useState({ x: 290, y: 270});
     const [startPositionSet, setStartPositionSet] = useState(false);
@@ -18,6 +17,7 @@ const Map = ({props}:{props:any}) => {
     const moveInterval = useRef<NodeJS.Timeout | null>(null);
     const storeDoor = DOORS.STORE;
     const arenaDoor = DOORS.ARENA;
+    // const graveStone = STARTING_POINTS.GRAVESTONE;
     const obstacles = OBSTACLES.MAP_1;
 
     const checkCoordinates = () => {
@@ -99,6 +99,10 @@ const Map = ({props}:{props:any}) => {
             clearInterval(moveInterval.current);
         }
         };
+        // if (props.heroDead) {
+        //     setPlayer(graveStone);
+        //     //rest hero
+        // }
     }, []);
 
     const handlePrevScreen = () => {

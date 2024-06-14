@@ -24,6 +24,9 @@ public class HeroMoveService {
     private final BattleSessionService battleSessionService;
     private final HeroService heroService;
     private final EnemyService enemyService;
+    private final Stab stab;
+    private final Strike strike;
+    private final Wand wand;
     private final Run run;
     private final Steal steal;
     private final Potion potion;
@@ -45,17 +48,14 @@ public class HeroMoveService {
 
         switch (move) {
             case "Wand":
-                Wand wand = new Wand();
                 damage = wand.attack();
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Strike":
-                Strike strike = new Strike();
                 damage = strike.attack();
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Stab":
-                Stab stab = new Stab();
                 damage = stab.attack();
                 if (damage == 0) {
                     hero.setResource(0);

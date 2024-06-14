@@ -14,4 +14,6 @@ import lombok.NoArgsConstructor;
 public class UpdatePasswordDTO {
     @NotEmpty
     private char[] newPassword;
+    @NotEmpty
+    private char[] oldPassword;
 }

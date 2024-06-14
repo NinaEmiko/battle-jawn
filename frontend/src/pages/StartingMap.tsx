@@ -9,8 +9,12 @@ import Container from '../components/Container';
 import Cookies from 'js-cookie';
 
 const StartingMap = ({props}:{props:any}) => {
-    const [player, setPlayer] = useState({ x: 200, y: 200});
+    const [offset, setOffset] = useState<{ x: number, y: number }>({ x: 0, y: 0 });
     const playerSize = 20;
+    const stageSize = 500;
+    const playerCenterX = stageSize / 2;
+    const playerCenterY = stageSize / 2;
+    const playerRadius = playerSize / 2;
     const obstacles = OBSTACLES.STARTING_MAP;
     const southEntrance = ENTRANCES.STARTING_MAP_SOUTH;
     const northEntrance = ENTRANCES.STARTING_MAP_NORTH;
@@ -19,37 +23,34 @@ const StartingMap = ({props}:{props:any}) => {
     const shop = ENTRANCES.STARTING_MAP_SHOP;
     const moveInterval = useRef<NodeJS.Timeout | null>(null);
 
-    const isColliding = (newX: number, newY: number) => {
-        const playerRadius = playerSize / 2;
+    const isColliding = (newOffsetX: number, newOffsetY: number) => {
         return obstacles.some((obstacle) => {
           return (
-            newX + playerRadius > obstacle.x &&
-            newX - playerRadius < obstacle.x + obstacle.width &&
-            newY + playerRadius > obstacle.y &&
-            newY - playerRadius < obstacle.y + obstacle.height
+            playerCenterX + playerRadius > obstacle.x + newOffsetX &&
+            playerCenterX - playerRadius < obstacle.x + obstacle.width + newOffsetX &&
+            playerCenterY + playerRadius > obstacle.y + newOffsetY &&
+            playerCenterY - playerRadius < obstacle.y + obstacle.height + newOffsetY
           );
         });
       };
 
-    const enterShop = (newX: number, newY: number) => {
-        const playerRadius = playerSize / 2;
+    const enterShop = (newOffsetX: number, newOffsetY: number) => {
         return (
-            newX + playerRadius > shop.x &&
-            newX - playerRadius < shop.x + shop.width &&
-            newY + playerRadius > shop.y &&
-            newY - playerRadius < shop.y + shop.height
+            playerCenterX + playerRadius > shop.x + newOffsetX &&
+            playerCenterX - playerRadius < shop.x + shop.width + newOffsetX &&
+            playerCenterY + playerRadius > shop.y + newOffsetY &&
+            playerCenterY - playerRadius < shop.y + shop.height + newOffsetY
         );
     };
 
-    const enterBattle = (newX: number, newY: number) => {
-        const playerRadius = playerSize / 2;
+    const enterBattle = (newOffsetX: number, newOffsetY: number) => {
         const newTargets = [southEntrance, northEntrance, westEntrance, eastEntrance];
         return newTargets.some((target) => {
           return (
-            newX + playerRadius > target.x &&
-            newX - playerRadius < target.x + target.width &&
-            newY + playerRadius > target.y &&
-            newY - playerRadius < target.y + target.height
+            playerCenterX + playerRadius > target.x + newOffsetX &&
+            playerCenterX - playerRadius < target.x + target.width + newOffsetX &&
+            playerCenterY + playerRadius > target.y + newOffsetY &&
+            playerCenterY - playerRadius < target.y + target.height + newOffsetY
           );
         });
       };
@@ -58,22 +59,20 @@ const StartingMap = ({props}:{props:any}) => {
         if (moveInterval.current) return;
 
         moveInterval.current = setInterval(() => {
-            setPlayer((prevState) => {
-            const newX = prevState.x + dx;
-            const newY = prevState.y + dy;
-            if (!isColliding(newX, newY)) {
-                if (enterShop(newX, newY)) {
+            setOffset((prevState) => {
+                const newOffsetX = prevState.x + dx;
+                const newOffsetY = prevState.y + dy;
+                if (!isColliding(newOffsetX, newOffsetY)) {
+                  if (enterShop(newOffsetX, newOffsetY)) {
                     handleStore(props.heroId);
-                    console.log("shop entered")
-                }
-                if (enterBattle(newX, newY)) {
+                  }
+                  if (enterBattle(newOffsetX, newOffsetY)) {
                     props.setIsVisible("open-battle", props.heroId);
-                    console.log("battle entered")
                 }
-                return { x: newX, y: newY };
-            } 
-            return prevState;
-            });
+                  return { x: newOffsetX, y: newOffsetY };
+                }
+                return prevState;
+              });
         }, 50);
     };
     
@@ -111,48 +110,49 @@ const StartingMap = ({props}:{props:any}) => {
             </PageName>
             <Display>
                 <div className="container-map-jawn">
-                    <div className="starting-map">
-                        <Stage width={500} height={500}>
+                    <div className="starting-map"
+                    >
+                        <Stage width={stageSize} height={stageSize}>
                             <Layer>
                                 <Circle
-                                    x={player.x}
-                                    y={player.y}
+                                    x={stageSize / 2}
+                                    y={stageSize / 2}
                                     width={playerSize}
                                     height={playerSize}
                                     radius={playerSize / 2}
                                     fill="red"
                                 />
                                     <Rect 
-                                        x={southEntrance.x}
-                                        y={southEntrance.y}
+                                        x={southEntrance.x + offset.x}
+                                        y={southEntrance.y + offset.y}
                                         width={southEntrance.width}
                                         height={southEntrance.height}
                                         fill="yellow"
                                     />
                                     <Rect 
-                                        x={northEntrance.x}
-                                        y={northEntrance.y}
+                                        x={northEntrance.x + offset.x}
+                                        y={northEntrance.y + offset.y}
                                         width={northEntrance.width}
                                         height={northEntrance.height}
                                         fill="yellow"
                                     />
                                     <Rect 
-                                        x={westEntrance.x}
-                                        y={westEntrance.y}
+                                        x={westEntrance.x + offset.x}
+                                        y={westEntrance.y + offset.y}
                                         width={westEntrance.width}
                                         height={westEntrance.height}
                                         fill="yellow"
                                     />
                                     <Rect 
-                                        x={eastEntrance.x}
-                                        y={eastEntrance.y}
+                                        x={eastEntrance.x + offset.x}
+                                        y={eastEntrance.y + offset.y}
                                         width={eastEntrance.width}
                                         height={eastEntrance.height}
                                         fill="yellow"
                                     />
                                     <Rect 
-                                        x={shop.x}
-                                        y={shop.y}
+                                        x={shop.x + offset.x}
+                                        y={shop.y + offset.y}
                                         width={shop.width}
                                         height={shop.height}
                                         fill="yellow"
@@ -160,8 +160,8 @@ const StartingMap = ({props}:{props:any}) => {
                                 {obstacles.map((obstacle, index) => (
                                     <Rect
                                         key={index}
-                                        x={obstacle.x}
-                                        y={obstacle.y}
+                                        x={obstacle.x + offset.x}
+                                        y={obstacle.y + offset.y}
                                         width={obstacle.width}
                                         height={obstacle.height}
                                         fill="blue"

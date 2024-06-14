@@ -5,6 +5,7 @@ import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.EnemyMove.EnemySteal;
 import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
+import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.*;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
@@ -54,6 +55,10 @@ class EnemyMoveServiceTest {
     Potion potion;
     @Mock
     Inventory inventory;
+    @Mock
+    BattleStatusService battleStatusService;
+    @Mock
+    BattleStatus battleStatus;
     @InjectMocks
     EnemyMoveService enemyMoveService;
     @BeforeEach
@@ -320,6 +325,36 @@ class EnemyMoveServiceTest {
     void getDamageMessageHitTest() {
         String result = enemyMoveService.getDamageMessage("Move", 1);
         Assertions.assertEquals(result, "Move did 1 damage.");
+    }
+
+    @Test
+    void isBlockingTest() {
+        BattleStatus blockingStatus = new BattleStatus();
+        blockingStatus.setHeroBlocking(true);
+        BattleSession blockingSession = new BattleSession();
+        blockingStatus.setBattleSession(blockingSession);
+        blockingSession.setBattleStatus(blockingStatus);
+
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(blockingSession);
+        doNothing().when(heroService).updateHero(any());
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        enemyMoveService.processEnemyMove(1, enemy, 3L, hero, "Bite");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(3L);
+    }
+
+    @Test
+    void defeatHeroTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        doNothing().when(heroService).updateHero(any());
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        enemyMoveService.processEnemyMove(1000, enemy, 1L, hero, "Bite");
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(1L);
     }
 //    @Test
 //    void processEnemyMoveTest() {

@@ -39,6 +39,15 @@ export const DOORS = {
   },
 };
 
+// export const STARTING_POINTS = {
+//   GRAVESTONE: {
+//     x: 325,
+//     y: 280,
+//     width: 25,
+//     height: 10
+//   }
+// }
+
 export const OBSTACLES = {
   MAP_1: [
     { x: 165, y: 330, width: 290, height: 100 },

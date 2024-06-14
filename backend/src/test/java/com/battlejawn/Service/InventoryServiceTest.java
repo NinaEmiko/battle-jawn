@@ -64,7 +64,7 @@ public class InventoryServiceTest {
     }
 
     @Test
-    void removeFromInventoryTest() {
+    void removeMulitpleFromInventoryTest() {
         List<String> jawn = new ArrayList<>();
 
         jawn.add("Potion");
@@ -235,4 +235,100 @@ public class InventoryServiceTest {
         verify(heroService, times(1)).updateHero(any());
     }
 
+    @Test
+    void useWaterTest(){
+        tank.setResource(1);
+        tank.setMaxResource(3);
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        doNothing().when(heroService).updateHero(any());
+        inventoryService.useWater(1L ,1);
+        verify(heroService, times(1)).updateHero(any());
+    }
+    @Test
+    void useWaterMaxResourceTankTest(){
+        tank.setResource(3);
+        tank.setMaxResource(3);
+        tank.setRole("Tank");
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        inventoryService.useWater(1L ,1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void useWaterMaxResourceHealerTest(){
+        tank.setResource(3);
+        tank.setMaxResource(3);
+        tank.setRole("Healer");
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        inventoryService.useWater(1L ,1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void useWaterMaxResourceCasterTest(){
+        tank.setResource(3);
+        tank.setMaxResource(3);
+        tank.setRole("Caster");
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        inventoryService.useWater(1L ,1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void useWaterMaxResourceDPSTest(){
+        tank.setResource(3);
+        tank.setMaxResource(3);
+        tank.setRole("DPS");
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        inventoryService.useWater(1L ,1);
+        verify(heroService, times(0)).updateHero(any());
+    }
+    @Test
+    void removeFromInventoryTest(){
+        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+        Inventory inventory1 = new Inventory();
+        tank.setInventory(inventory1);
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 2);
+        verify(inventoryRepository, times(1)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 3);
+        verify(inventoryRepository, times(2)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 4);
+        verify(inventoryRepository, times(3)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 5);
+        verify(inventoryRepository, times(4)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 6);
+        verify(inventoryRepository, times(5)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 7);
+        verify(inventoryRepository, times(6)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 8);
+        verify(inventoryRepository, times(7)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 9);
+        verify(inventoryRepository, times(8)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 10);
+        verify(inventoryRepository, times(9)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 11);
+        verify(inventoryRepository, times(10)).save(any());
+
+        when(inventoryRepository.save(any())).thenReturn(inventory);
+        inventoryService.removeFromInventory(1L, 12);
+        verify(inventoryRepository, times(11)).save(any());
+
+    }
 }

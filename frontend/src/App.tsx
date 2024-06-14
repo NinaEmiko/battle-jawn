@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CustomNavBar from "./pages/CustomNavBar";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import LoginForm from "./pages/LoginForm";
 import { getAuthToken, request, setAuthHeader } from "./helpers/axios_helper";
 import AccountSettings from "./pages/AccountSettings";
@@ -9,6 +9,8 @@ import LeaderBoard from "./pages/LeaderBoard";
 import Inventory from "./pages/Inventory";
 import AboutUs from "./pages/AboutUs";
 import Home from "./pages/Home";
+import HowTo from "./pages/HowTo";
+import Cookies from "js-cookie";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -44,14 +46,16 @@ function App() {
       });
   };
 
-  const onRegister = (event: FormEvent, username: string, password: string) => {
-    event.preventDefault();
+  const onRegister = (username: string, password: string) => {
+    // event.preventDefault();
       request('POST', `${import.meta.env.VITE_REACT_APP_URL}/register`, {
 
       login: username,
       password: password,
     })
       .then((response) => {
+        Cookies.set("storedId", response.data.id)
+        Cookies.set("storedUserName", response.data.userName)
         setAuthHeader(response.data.token);
         setCurrentUser(() => ({
           id: response.data.id,
@@ -64,6 +68,20 @@ function App() {
       });
   };
   
+  useEffect(()=>{
+    const auth = Cookies.get("AuthHeader")
+    const storedId = Cookies.get("storedId");
+    const storedUserName = Cookies.get("storedUserName");
+    if (storedId && storedUserName && auth){
+      setAuthHeader(auth);
+      setCurrentUser(() => ({
+        id: Number(storedId),
+        userName: storedUserName,
+        loggedIn: true,
+      }));
+    }
+  })
+
   return (
     <BrowserRouter>
       {/* <div className=""> */}
@@ -90,6 +108,9 @@ function App() {
             )}
             {currentUser.loggedIn && (
               <Route key="about-us" path="/about-us" element={ <AboutUs />} />
+            )}
+            {currentUser.loggedIn && (
+              <Route key="how-to" path="/how-to" element={ <HowTo />} />
             )}
           </Routes>
         {/* </div> */}

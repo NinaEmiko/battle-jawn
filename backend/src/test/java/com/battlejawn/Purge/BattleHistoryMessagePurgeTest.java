@@ -28,7 +28,7 @@ class BattleHistoryMessagePurgeTest {
     @BeforeEach
     void setup(){
         battleHistoryMessages = new ArrayList<>();
-        BattleHistoryMessage battleHistoryMessage = new BattleHistoryMessage();
+        BattleHistoryMessage battleHistoryMessage = new BattleHistoryMessage(2L, "That", LocalDateTime.now().minusDays(5));
         battleHistoryMessage.setBattleSessionId(1L);
         battleHistoryMessage.setCreatedAt(LocalDateTime.now().minusDays(6));
         battleHistoryMessage.setMessage("This");

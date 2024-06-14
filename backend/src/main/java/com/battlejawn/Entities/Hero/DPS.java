@@ -2,17 +2,19 @@ package com.battlejawn.Entities.Hero;
 
 import java.time.LocalDateTime;
 
+//import com.battlejawn.Entities.TalentTree.DPSTree;
 import jakarta.persistence.*;
 
 @Entity 
 @DiscriminatorValue("DPS")
 public class DPS extends Hero {
-    private String name;
     public DPS() {
 
     }
     public DPS(String name) {
-        super(name, 90, 90,3, 3, "DPS", 0, 0, 0, LocalDateTime.now());
+        super(name, 90, 90,3, 3, "DPS", 0, 0, 0, LocalDateTime.now()
+//    new DPSTree()
+    );
     }
 
 }

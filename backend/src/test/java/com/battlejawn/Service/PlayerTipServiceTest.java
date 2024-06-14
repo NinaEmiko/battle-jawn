@@ -82,4 +82,10 @@ public class PlayerTipServiceTest {
         playerTipService.deletePlayerTip(anyLong());
         verify(playerTipRepository, times(1)).deleteById(anyLong());
     }
+    @Test
+    void constructorTest(){
+        playerTip = new PlayerTip(1L, "test");
+        assertEquals(playerTip.getBody(), "test");
+        assertEquals(playerTip.getId(), 1L);
+    }
 }

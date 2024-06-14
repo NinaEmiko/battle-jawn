@@ -3,11 +3,15 @@ package com.battlejawn.Service;
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
+import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Enemy.Orc;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.HeroMove.Attack.Stab;
+import com.battlejawn.HeroMove.Attack.Strike;
+import com.battlejawn.HeroMove.Attack.Wand;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.HeroMove.Run;
 import com.battlejawn.HeroMove.Steal;
@@ -33,7 +37,11 @@ class HeroMoveServiceTest {
     @Mock
     BattleSessionService battleSessionService;
     @Mock
-    EnemyRepository enemyRepository;
+    Wand wand;
+    @Mock
+    Strike strike;
+    @Mock
+    Stab stab;
     @Mock
     HeroService heroService;
     @Mock
@@ -57,6 +65,8 @@ class HeroMoveServiceTest {
     @Mock
     Potion potion;
     @Mock
+    BattleStatusService battleStatusService;
+    @Mock
     BattleHistoryMessage battleHistoryMessage;
     @Mock
     List<String> battleHistoryMessageList;
@@ -74,6 +84,8 @@ class HeroMoveServiceTest {
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(wand.attack()).thenReturn(1);
+
 
         HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Wand", 1L);
 
@@ -84,6 +96,8 @@ class HeroMoveServiceTest {
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(strike.attack()).thenReturn(1);
+
 
         HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Strike", 1L);
 
@@ -94,8 +108,215 @@ class HeroMoveServiceTest {
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(stab.attack()).thenReturn(1);
+
 
         HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Stab", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+
+    @Test
+    void heroMoveStabMissTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(stab.attack()).thenReturn(0);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Stab", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+
+    @Test
+    void heroMoveFireBlastTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("FireBlast", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+
+    @Test
+    void heroMoveIceBlastTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("IceBlast", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveIceBlastNoMagicTest() {
+        hero.setResource(0);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("IceBlast", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveBlockTest() {
+        BattleStatus blockedStatus = new BattleStatus();
+        BattleSession blockedSession = new BattleSession();
+        blockedSession.setBattleStatus(blockedStatus);
+        enemy.setId(6L);
+        blockedSession.setEnemyId(6L);
+        hero.setId(7L);
+        blockedSession.setHeroId(7L);
+
+        when(battleStatusService.saveBattleStatus(any())).thenReturn(blockedStatus);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(blockedSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Block", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveBlockNoPowerTest() {
+        BattleStatus blockedStatus = new BattleStatus();
+        BattleSession blockedSession = new BattleSession();
+        blockedSession.setBattleStatus(blockedStatus);
+        enemy.setId(6L);
+        blockedSession.setEnemyId(6L);
+        hero.setId(7L);
+        hero.setResource(0);
+        blockedSession.setHeroId(7L);
+
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(blockedSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Block", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveNoWaterTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterTankMaxPowerTest() {
+        hero.setResource(3);
+        hero.setMaxResource(3);
+        hero.setRole("Tank");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterTankTest() {
+        hero.setResource(2);
+        hero.setMaxResource(3);
+        hero.setRole("Tank");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterHealerMaxSpiritTest() {
+        hero.setResource(3);
+        hero.setMaxResource(3);
+        hero.setRole("Healer");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterHealerTest() {
+        hero.setResource(2);
+        hero.setMaxResource(3);
+        hero.setRole("Healer");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterCasterMaxMagicTest() {
+        hero.setResource(2);
+        hero.setMaxResource(3);
+        hero.setRole("Caster");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterCasterTest() {
+        hero.setResource(3);
+        hero.setMaxResource(3);
+        hero.setRole("Caster");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterDPSMaxEnergyTest() {
+        hero.setResource(3);
+        hero.setMaxResource(3);
+        hero.setRole("DPS");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveWaterDPSTest() {
+        hero.setResource(2);
+        hero.setMaxResource(3);
+        hero.setRole("DPS");
+        when(inventoryService.findItemCount(any(),anyString())).thenReturn(1);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        doNothing().when(heroService).updateHero(any());
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Water", 1L);
 
         assertNotNull(heroMoveDTO);
     }
@@ -120,6 +341,17 @@ class HeroMoveServiceTest {
         assertNotNull(heroMoveDTO);
     }
     @Test
+    void heroMoveHolyNoSpiritTest() {
+        hero.setResource(0);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Holy", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
     void heroMoveImpaleTest() {
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
@@ -129,6 +361,18 @@ class HeroMoveServiceTest {
 
         assertNotNull(heroMoveDTO);
     }
+    @Test
+    void heroMoveImpaleNoPowerTest() {
+        hero.setResource(0);
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Impale", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+
     @Test
     void heroMoveBackStabTest() {
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
@@ -141,6 +385,17 @@ class HeroMoveServiceTest {
     }
     @Test
     void heroMoveHealTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Heal", 1L);
+
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveHealNoSpiritTest() {
+        hero.setResource(0);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
@@ -217,6 +472,24 @@ class HeroMoveServiceTest {
     }
     @Test
     void heroMoveStealTest() {
+        when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
+        when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
+        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+
+        when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(1);
+        when(steal.useSteal()).thenReturn(true);
+        doNothing().when(inventoryService).addToFirstEmptySlot(any(),anyString());
+        doNothing().when(heroService).updateHero(any());
+        doNothing().when(enemyService).updatePotionCountById(1, null);
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        HeroMoveDTO heroMoveDTO = heroMoveService.heroMove("Steal", 1L);
+        assertNotNull(heroMoveDTO);
+    }
+    @Test
+    void heroMoveStealNoEnergyTest() {
+        hero.setResource(0);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(anyLong())).thenReturn(enemy);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
@@ -352,6 +625,75 @@ class HeroMoveServiceTest {
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
         heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Move");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processHeroMoveNoPowerDamageTest() {
+        enemy.setId(1L);
+        hero.setId(2L);
+        hero.setResource(0);
+        hero.setRole("Healer");
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Impale");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processHeroMoveNoPowerCasterDamageTest() {
+        enemy.setId(1L);
+        hero.setId(2L);
+        hero.setResource(0);
+        hero.setRole("Caster");
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Impale");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processHeroMoveNoPowerDPSDamageTest() {
+        enemy.setId(1L);
+        hero.setId(2L);
+        hero.setResource(0);
+        hero.setRole("DPS");
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Impale");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processHeroMoveDefeatEnemyTest() {
+        enemy.setId(1L);
+        enemy.setHealth(1);
+        hero.setId(2L);
+        hero.setResource(0);
+        hero.setRole("DPS");
+
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Strike");
+
+        verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
+    }
+    @Test
+    void processHeroMoveHurtEnemyTest() {
+        enemy.setId(1L);
+        enemy.setHealth(11);
+        hero.setId(2L);
+        hero.setResource(0);
+        hero.setRole("DPS");
+
+        when(battleHistoryMessageService.createNewMessage(anyLong(), anyString())).thenReturn(battleHistoryMessage);
+        when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
+
+        heroMoveService.processHeroAttack(10, enemy, 1L, hero, "Strike");
 
         verify(battleHistoryMessageService, times(1)).getBattleHistoryMessagesByBattleSessionId(anyLong());
     }

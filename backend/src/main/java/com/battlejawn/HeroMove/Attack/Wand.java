@@ -4,8 +4,10 @@ import com.battlejawn.AttackInterfaces.Attack;
 import com.battlejawn.AttackInterfaces.Missable;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
+@Component
 public class Wand implements Missable, Attack {
     private int damage;
 

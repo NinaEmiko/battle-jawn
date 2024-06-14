@@ -66,7 +66,9 @@ function Home( {props}:{props:any} ) {
         }
 
         {mapActive &&
-          <StartingMap props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
+          // <StartingMap props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
+          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
+
         }
 
         {!battleActive && !inventoryActive && !shopActive && !mapActive &&

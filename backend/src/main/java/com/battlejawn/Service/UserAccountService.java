@@ -89,13 +89,18 @@ public class UserAccountService {
 
         Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(id);
         if (optionalUserAccount.isPresent()){
-            UserAccount userAccount = optionalUserAccount.get();
 
-            userAccount.setPassword(passwordEncoder.encode(CharBuffer.wrap(updatePasswordDTO.getNewPassword())));
+            if (CharBuffer.wrap(updatePasswordDTO.getNewPassword()).equals(CharBuffer.wrap(updatePasswordDTO.getOldPassword()))) {
+                return "New password must be different than current password.";
+            } else {
+                UserAccount userAccount = optionalUserAccount.get();
 
+                userAccount.setPassword(passwordEncoder.encode(CharBuffer.wrap(updatePasswordDTO.getNewPassword())));
 
-            userAccountRepository.save(userAccount);
-            return "Password updated successfully for user account ID: " + id + ".";
+                userAccountRepository.save(userAccount);
+                return "Password updated successfully for user account ID: " + id + ".";
+            }
+
         } else {
             return "User Account with ID: " + id + " not found.";
         }

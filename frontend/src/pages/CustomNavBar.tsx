@@ -62,6 +62,9 @@ const CustomNavBar: React.FC<CustomNavBarProps> = ({ pageTitle, onLogout, isLogg
               <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/leader-board')}>
                 Leader Board 
               </NavDropdown.Item>
+              <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/how-to')}>
+                How To
+              </NavDropdown.Item>
               <NavDropdown.Item className="drop-down-item" onClick={() => handleNavigation('/about-us')}>
                 About Us
               </NavDropdown.Item>

@@ -4,8 +4,10 @@ import com.battlejawn.AttackInterfaces.Attack;
 import com.battlejawn.AttackInterfaces.CriticalHit;
 import com.battlejawn.AttackInterfaces.Missable;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
+@Component
 public class Stab implements CriticalHit, Missable, Attack {
 
     private int damage;

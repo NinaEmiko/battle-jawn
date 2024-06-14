@@ -5,8 +5,10 @@ import com.battlejawn.AttackInterfaces.CriticalHit;
 import com.battlejawn.AttackInterfaces.Missable;
 import com.battlejawn.AttackInterfaces.Stagger;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
+@Component
 public class Strike implements CriticalHit, Missable, Stagger, Attack {
     private int damage;
 

@@ -3,6 +3,7 @@ package com.battlejawn.Entities.Hero;
 import java.time.LocalDateTime;
 
 import com.battlejawn.Entities.Inventory;
+//import com.battlejawn.Entities.TalentTree.TalentTree;
 import com.battlejawn.Entities.UserAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -58,11 +59,16 @@ public abstract class Hero {
     private Long activeBattleSession;
     @Column
     private int winStreak;
+//    @JoinColumn(name = "talent_tree_id", nullable = false)
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private TalentTree talentTree;
 
     public Hero() {
     }
 
-    public Hero(String name, int health, int maxHealth, int resource, int maxResource, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt) {
+    public Hero(String name, int health, int maxHealth, int resource, int maxResource, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt
+//                TalentTree talentTree
+    ) {
         this.name = name;
         this.health = health;
         this.maxHealth = maxHealth;
@@ -79,6 +85,7 @@ public abstract class Hero {
         this.inventory = new Inventory();
         this.activeBattleSession = null;
         this.winStreak = 0;
+//        this.talentTree = talentTree;
     }
     
 }
