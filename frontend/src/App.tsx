@@ -34,6 +34,8 @@ function App() {
       password: password,
     })
       .then((response) => {
+        Cookies.set("storedId", response.data.id)
+        Cookies.set("storedUserName", response.data.userName)
         setAuthHeader(response.data.token);
         setCurrentUser(() => ({
           id: response.data.id,

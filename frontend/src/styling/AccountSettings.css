@@ -5,12 +5,20 @@
   display: flex;
 }
 .new-password-input{
-  width: 100%;
+  display: block;
+  width: 100%; 
+  padding-left: 5px;
+  margin-bottom: 15px;
   border-radius: 5px;
-  text-align: right;
-  font-size: 16px;
-  padding-right: 5px;
+  height: 35px;
+  padding: 5px 10px;
 }
+.new-password-input:focus{
+  box-shadow: 0 0 10px 5px;
+  /* border: 0 5px var(--orange-jawn); */
+  color: var(--orange-jawn);
+}
+
 .delete-account-jawn{
   display: flex;
   justify-content: center;

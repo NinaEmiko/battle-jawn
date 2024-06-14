@@ -139,6 +139,12 @@
   height: 35px;
   padding: 5px 10px;
 }
+.new-hero-name-input:focus{
+  box-shadow: 0 0 10px 5px;
+  /* border: 0 5px var(--orange-jawn); */
+  color: var(--orange-jawn);
+
+}
 .message-jawn{
   color: red;
   font-size: 15px;
