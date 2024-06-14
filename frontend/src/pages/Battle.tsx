@@ -274,9 +274,9 @@ function Battle({props}:{props:any}) {
             <button className="controls-btn" onClick={()=> handleClickBattle("Run")}>Run</button>                    
           </div>
           <div className="controls-right">
+            <button className="controls-btn"></button>
             <button className="controls-btn" onClick={()=> handleClickBattle(moveOne)}>{moveOne}</button>
             <button className="controls-btn" onClick={()=> handleClickBattle(moveTwo)}>{moveTwo}</button>
-            <button className="controls-btn"></button>
             <button className="controls-btn" onClick={()=> handleClickBattle(moveThree)}>{moveThree}</button>
             <button className="controls-btn"></button>
           </div>

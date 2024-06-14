@@ -30,6 +30,7 @@ public class ExperienceProcessorService {
             int heroLevelAfterBattle = determineLevel(hero.getExperience());
 
             if (initialHeroLevel < heroLevelAfterBattle) {
+                hero.setTalentPoints(hero.getTalentPoints() + 1);
                 hero.setLevel(heroLevelAfterBattle);
                 endOfBattleMessage = "Congratulations! You win! You've reached level " + heroLevelAfterBattle + "!" +
                         " Enemy dropped " + coinsGained + " coins.";

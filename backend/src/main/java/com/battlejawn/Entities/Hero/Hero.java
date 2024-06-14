@@ -59,6 +59,8 @@ public abstract class Hero {
     private Long activeBattleSession;
     @Column
     private int winStreak;
+    @Column
+    private int talentPoints;
 //    @JoinColumn(name = "talent_tree_id", nullable = false)
 //    @OneToOne(cascade = CascadeType.ALL)
 //    private TalentTree talentTree;
@@ -66,7 +68,7 @@ public abstract class Hero {
     public Hero() {
     }
 
-    public Hero(String name, int health, int maxHealth, int resource, int maxResource, String role, int runCount, int winCount, int lossCount, LocalDateTime createdAt
+    public Hero(String name, int health, int maxHealth, int resource, int maxResource, String role
 //                TalentTree talentTree
     ) {
         this.name = name;
@@ -75,16 +77,17 @@ public abstract class Hero {
         this.resource = resource;
         this.maxResource = maxResource;
         this.role = role;
-        this.runCount = runCount;
-        this.winCount = winCount;
-        this.lossCount = lossCount;
-        this.createdAt = createdAt;
+        this.runCount = 0;
+        this.winCount = 0;
+        this.lossCount = 0;
+        this.createdAt = LocalDateTime.now();
         this.level = 1;
         this.experience = 0L;
         this.coins = 10L;
         this.inventory = new Inventory();
         this.activeBattleSession = null;
         this.winStreak = 0;
+        this.talentPoints = 0;
 //        this.talentTree = talentTree;
     }
     
