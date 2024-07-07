@@ -1,87 +1,82 @@
 import { useEffect, useRef, useState } from 'react';
 import { Stage, Layer, Rect, Circle } from 'react-konva';
-import { DOORS, OBSTACLES, STARTING_POINTS } from '../helpers/constants';
+import { DOORS, OBSTACLES } from '../helpers/constants';
 import '../styling/Map.css'
 import Controls from '../components/Controls';
 import Display from '../components/Display';
 import PageName from '../components/PageName';
 import Container from '../components/Container';
 import Cookies from 'js-cookie';
+
 const Map = ({props}:{props:any}) => {
-    const [player, setPlayer] = useState({ x: 290, y: 270});
+    const [player, setPlayer] = useState({ x: 50, y: 50});
     const [startPositionSet, setStartPositionSet] = useState(false);
     const playerSize = 10;
-    const boxSize = 420;
-    const moveSpeed = 5; 
-    const mapSize = 840; 
+    const moveSpeed = 10; 
+    const mapSize = 4500; 
     const moveInterval = useRef<NodeJS.Timeout | null>(null);
-    const storeDoor = DOORS.STORE;
-    const arenaDoor = DOORS.ARENA;
-    // const graveStone = STARTING_POINTS.GRAVESTONE;
-    const obstacles = OBSTACLES.MAP_1;
-
-    const checkCoordinates = () => {
-        const storedCoordinates = Cookies.get('coordinates');
-        if (storedCoordinates) {
-            setPlayer(JSON.parse(storedCoordinates));        
-        }
-    }
+    const obstacles = OBSTACLES.STARTING_MAP_OBSTACLES;
+    const borders = OBSTACLES.STARTING_MAP_BORDER;
+    const shop = DOORS.STORE;
+    const arena = DOORS.ARENA;
 
     const startMoving = (direction: string) => {
         if (moveInterval.current) {
-        clearInterval(moveInterval.current);
+            clearInterval(moveInterval.current);
         }
         moveInterval.current = setInterval(() => {
-        setPlayer((prev) => {
-            let newX = prev.x;
-            let newY = prev.y;
+            setPlayer((prev) => {
+                let newX = prev.x;
+                let newY = prev.y;
 
-            switch (direction) {
-            case 'up':
-                newY = Math.max(prev.y - moveSpeed, 0);
-                break;
-            case 'down':
-                newY = Math.min(prev.y + moveSpeed, boxSize - playerSize);
-                break;
-            case 'left':
-                newX = Math.max(prev.x - moveSpeed, 0);
-                break;
-            case 'right':
-                newX = Math.min(prev.x + moveSpeed, boxSize - playerSize);
-                break;
-            default:
-                break;
-            }
+                switch (direction) {
+                    case 'up':
+                        newY = Math.max(prev.y - moveSpeed, 0);
+                        break;
+                    case 'down':
+                        newY = Math.min(prev.y + moveSpeed, mapSize - playerSize);
+                        break;
+                    case 'left':
+                        newX = Math.max(prev.x - moveSpeed, 0);
+                        break;
+                    case 'right':
+                        newX = Math.min(prev.x + moveSpeed, mapSize - playerSize);
+                        break;
+                    default:
+                        break;
+                }
 
-            if (
-                newX < storeDoor.x + storeDoor.width &&
-                newX + playerSize > storeDoor.x &&
-                newY < storeDoor.y + storeDoor.height &&
-                newY + playerSize > storeDoor.y
-            ) {
-                handleStore(props.heroId);
-            } else if (
-                newX < arenaDoor.x + arenaDoor.width &&
-                newX + playerSize > storeDoor.x &&
-                newY < arenaDoor.y + arenaDoor.height &&
-                newY + playerSize > storeDoor.y
-            ) {
-                props.setIsVisible("open-battle", props.heroId);
-            }
+                // Check collision with shop
+                if (
+                    newX < shop.x + shop.width &&
+                    newX + playerSize > shop.x &&
+                    newY < shop.y + shop.height &&
+                    newY + playerSize > shop.y
+                ) {
+                    handleStore(props.heroId);
+                } else if (
+                    newX < arena.x + arena.width &&
+                    newX + playerSize > arena.x &&
+                    newY < arena.y + arena.height &&
+                    newY + playerSize > arena.y
+                ) {
+                    props.setIsVisible("open-battle", props.heroId);
+                }
 
-        const collision = obstacles.some(obstacle => 
-            newX < obstacle.x + obstacle.width &&
-            newX + playerSize > obstacle.x &&
-            newY < obstacle.y + obstacle.height &&
-            newY + playerSize > obstacle.y
-          );
-  
-          if (collision) {
-            return prev; 
-          }
+                // Check collision with obstacles
+                const collision = obstacles.some((obstacle) =>
+                    newX < obstacle.x + obstacle.width &&
+                    newX + playerSize > obstacle.x &&
+                    newY < obstacle.y + obstacle.height &&
+                    newY + playerSize > obstacle.y
+                );
 
-            return { x: newX, y: newY };
-        });
+                if (collision) {
+                    return prev;
+                }
+
+                return { x: newX, y: newY };
+            });
         }, 100);
     };
 
@@ -116,17 +111,24 @@ const Map = ({props}:{props:any}) => {
                 setStartPositionSet(true);
             } else if (props.prevScreen === "Shop"){
                 setPlayer(prev => ({
-                    x: 340,
-                    y: 300
+                    x: 835,
+                    y: 972
                 }));
                 setStartPositionSet(true);
             } else if (props.prevScreen === "Battle"){
                 setPlayer(prev => ({
-                    x: 410,
-                    y: 300
+                    x: 720,
+                    y: 975
                 }));
                 setStartPositionSet(true);
             }
+        }
+    }
+
+    const checkCoordinates = () => {
+        const storedCoordinates = Cookies.get('coordinates');
+        if (storedCoordinates) {
+            setPlayer(JSON.parse(storedCoordinates));        
         }
     }
   
@@ -142,6 +144,8 @@ const Map = ({props}:{props:any}) => {
         props.setIsVisible("open-store", id);
     }
 
+    // console.log("Position: " + player.x / 2 + ", " + player.y / 2)
+
     return (
         <Container>
             <PageName>
@@ -156,13 +160,22 @@ const Map = ({props}:{props:any}) => {
                 </div>
             </PageName>
             <Display>
-                <div className="container-map-jawn">
+                <div className="container-map-jawn"
+                                    style={{
+                                        position: 'relative',
+                                        overflow: 'hidden',
+                                        width: '100%',
+                                        height: '100%',
+                                        border: '1px solid black',
+                                    }}>
                     <div
                         className="map"
                         style={{
-                        top: -player.y + boxSize / 2 - playerSize / 2,
-                        left: -player.x + boxSize / 2 - playerSize / 2,
+                            position: 'absolute',
+                            top: `calc(50% - ${player.y}px)`,
+                            left: `calc(50% - ${player.x}px)`,
                         }}
+                        
                     >
 
                         <Stage width={mapSize} height={mapSize}>
@@ -170,24 +183,8 @@ const Map = ({props}:{props:any}) => {
                                 <Circle
                                     x={player.x}
                                     y={player.y}
-                                    width={playerSize}
-                                    height={playerSize}
                                     radius={playerSize}
                                     fill="red"
-                                />
-                                <Rect
-                                    x={storeDoor.x}
-                                    y={storeDoor.y}
-                                    width={storeDoor.width}
-                                    height={storeDoor.height}
-                                    // fill="yellow"
-                                />
-                                <Rect
-                                    x={arenaDoor.x}
-                                    y={arenaDoor.y}
-                                    width={arenaDoor.width}
-                                    height={arenaDoor.height}
-                                    // fill="yellow"
                                 />
                                 {obstacles.map((obstacle, index) => (
                                     <Rect
@@ -196,9 +193,33 @@ const Map = ({props}:{props:any}) => {
                                         y={obstacle.y}
                                         width={obstacle.width}
                                         height={obstacle.height}
+                                        fill="blue"
+                                    />
+                                ))}
+                                {borders.map((border, index) => (
+                                    <Rect
+                                        key={index}
+                                        x={border.x}
+                                        y={border.y}
+                                        width={border.width}
+                                        height={border.height}
                                         // fill="blue"
                                     />
                                 ))}
+                                <Rect
+                                    x={arena.x}
+                                    y={arena.y}
+                                    width={arena.width}
+                                    height={arena.height}
+                                    fill="yellow"
+                                />
+                                <Rect
+                                    x={shop.x}
+                                    y={shop.y}
+                                    width={shop.width}
+                                    height={shop.height}
+                                    fill="yellow"
+                                />
                             </Layer>
                         </Stage>
                     </div>
