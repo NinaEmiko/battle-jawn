@@ -9,7 +9,7 @@ import Container from '../components/Container';
 import Cookies from 'js-cookie';
 
 const Map = ({props}:{props:any}) => {
-    const [player, setPlayer] = useState({ x: 50, y: 50});
+    const [player, setPlayer] = useState({ x: 835, y: 972});
     const [startPositionSet, setStartPositionSet] = useState(false);
     const playerSize = 10;
     const moveSpeed = 10; 
@@ -193,7 +193,7 @@ const Map = ({props}:{props:any}) => {
                                         y={obstacle.y}
                                         width={obstacle.width}
                                         height={obstacle.height}
-                                        fill="blue"
+                                        // fill="blue"
                                     />
                                 ))}
                                 {borders.map((border, index) => (
@@ -211,14 +211,14 @@ const Map = ({props}:{props:any}) => {
                                     y={arena.y}
                                     width={arena.width}
                                     height={arena.height}
-                                    fill="yellow"
+                                    // fill="yellow"
                                 />
                                 <Rect
                                     x={shop.x}
                                     y={shop.y}
                                     width={shop.width}
                                     height={shop.height}
-                                    fill="yellow"
+                                    // fill="yellow"
                                 />
                             </Layer>
                         </Stage>
