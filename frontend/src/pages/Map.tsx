@@ -204,7 +204,7 @@ const Map = ({props}:{props:any}) => {
                         top: obstacle.y,
                         width: obstacle.width,
                         height: obstacle.height,
-                        backgroundColor: 'blue',
+                        // backgroundColor: 'blue',
                     }}
                 ></div>
             ))}
@@ -220,7 +220,7 @@ const Map = ({props}:{props:any}) => {
                         top: border.y,
                         width: border.width,
                         height: border.height,
-                        backgroundColor: 'blue',
+                        // backgroundColor: 'blue',
                     }}
                 ></div>
             ))}
@@ -234,7 +234,7 @@ const Map = ({props}:{props:any}) => {
                     top: arena.y,
                     width: arena.width,
                     height: arena.height,
-                    backgroundColor: 'yellow',
+                    // backgroundColor: 'yellow',
                 }}
             ></div>
 
@@ -247,7 +247,7 @@ const Map = ({props}:{props:any}) => {
                     top: shop.y,
                     width: shop.width,
                     height: shop.height,
-                    backgroundColor: 'yellow',
+                    // backgroundColor: 'yellow',
                 }}
             ></div>
         </div>
