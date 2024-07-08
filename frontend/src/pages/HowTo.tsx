@@ -8,6 +8,8 @@ import { useState } from "react";
 
 const HowTo = () => {
     const [activeButton, setActiveButton] = useState("Heroes");
+    const [activeRole, setActiveRole] = useState("Tank");
+    const [playPage, setPlayPage] = useState(1);
 
     const handleTabLeftClick = () => {
         switch (activeButton){
@@ -24,7 +26,6 @@ const HowTo = () => {
                 setActiveButton("Play");
                 break;
         }
-
       };
 
     const handleTabRightClick = () => {
@@ -41,6 +42,64 @@ const HowTo = () => {
             case "Leader Board":
                 setActiveButton("Heroes");
                 break;
+        }
+    };
+
+    const handleUpClick = () => {
+        if (activeButton === "Battle"){
+            switch (activeRole){
+                case "Tank":
+                    setActiveRole("Caster");
+                    break;
+                case "Healer":
+                    setActiveRole("Tank");
+                    break;
+                case "DPS":
+                    setActiveRole("Healer");
+                    break;
+                case "Caster":
+                    setActiveRole("DPS");
+                    break;
+            }
+        }
+        if (activeButton === "Play"){
+            switch (playPage){
+                case 1:
+                    setPlayPage(2);
+                    break;
+                case 2:
+                    setPlayPage(1);
+                    break;
+            }
+        }
+    };
+
+    const handleDownClick = () => {
+        if (activeButton === "Battle"){
+            switch (activeRole){
+                case "Tank":
+                    setActiveRole("Healer");
+                    break;
+                case "Healer":
+                    setActiveRole("DPS");
+                    break;
+                case "DPS":
+                    setActiveRole("Caster");
+                    break;
+                case "Caster":
+                    setActiveRole("Tank");
+                    break;
+            }
+        }
+        if (activeButton === "Play"){
+            switch (playPage){
+                case 1:
+                    setPlayPage(2);
+                    break;
+                case 2:
+                    setPlayPage(1);
+                    break;
+            }
         }
 
     };
@@ -78,30 +137,66 @@ const HowTo = () => {
                         </div>
                             {activeButton === 'Battle' &&
                                 <div className="battle">
-                                    <p style={{color: "white"}}>Strike: Generates 1 Power.</p>
-                                    <p style={{color: "white"}}>Impale: Consumes 2 Power.</p>
-                                    <p style={{color: "white"}}>Block: Successful blocks generate Max Power.</p>
-                                    <p style={{color: "white"}}>Wand: Generates 1 Spirit/Magic.</p>
-                                    <p style={{color: "white"}}>Holy: Consumes 2 Spirit.</p>
-                                    <p style={{color: "white"}}>Heal: Consumes 1 Spirit.</p>
-                                    <p style={{color: "white"}}>Stab: Generates 1 Energy.</p>
-                                    <p style={{color: "white"}}>BackStab: Consumes 3 Energy.</p>
-                                    <p style={{color: "white"}}>Steal: Consumes 1 Energy.</p>
-                                    <p style={{color: "white"}}>FireBlast: Consumes 3 Magic.</p>
-                                    <p style={{color: "white"}}>IceBlast: Consumes 1 Magic.</p>
+
+                                    {activeRole === "Tank" &&
+                                        <div>
+                                            <p>Tank</p>
+                                            <p style={{color: "white"}}>Strike: Generates 1 Power.</p>
+                                            <p style={{color: "white"}}>Impale: Consumes 2 Power.</p>
+                                            <p style={{color: "white"}}>Block: Successful blocks generate Max Power.</p>
+                                        </div>
+                                    }
+
+                                    {activeRole === "Healer" &&
+                                        <div>
+                                            <p>Healer</p>
+                                            <p style={{color: "white"}}>Wand: Generates 1 Spirit.</p>
+                                            <p style={{color: "white"}}>Holy: Consumes 2 Spirit.</p>
+                                            <p style={{color: "white"}}>Heal: Consumes 1 Spirit.</p>
+                                        </div>
+                                    }
+
+                                    {activeRole === "DPS" &&
+                                        <div>
+                                            <p>DPS</p>
+                                            <p style={{color: "white"}}>Stab: Generates 1 Energy.</p>
+                                            <p style={{color: "white"}}>FireBlast: Consumes 3 Magic.</p>
+                                            <p style={{color: "white"}}>IceBlast: Consumes 1 Magic.</p>
+                                        </div>
+                                    }   
+
+                                    {activeRole === "Caster" &&
+                                        <div>
+                                            <p>Caster</p>
+                                            <p style={{color: "white"}}>Wand: Generates 1 Magic.</p>
+                                            <p style={{color: "white"}}>FireBlast: Consumes 3 Magic.</p>
+                                            <p style={{color: "white"}}>IceBlast: Consumes 1 Magic.</p>
+                                        </div>
+                                    }   
                                 </div>
                             }
 
                             {activeButton === "Play" &&
                                 <div className="battle">
-                                    <p style={{color: "white"}}>Arena: Enter to fight enemies.</p>
-                                    <p style={{color: "white"}}>Shop: Enter to purchase and sell items.</p>
-                                    <p style={{color: "white"}}>Leaving Town: Currently Unavailable.</p>
-                                    <p style={{color: "white"}}>Entering Town Homes: Currently Unavailable.</p>
-                                    <p style={{color: "white"}}>Hospital: Currently Unavailable.</p>
-                                    <p style={{color: "white"}}>Hostel: Currently Unavailable.</p>
-                                    <p style={{color: "white"}}>NPCs: Currently Unavailable.</p>
-                                    <p style={{color: "white"}}>Quests: Currently Unavailable.</p>
+
+                                    {playPage === 1 &&
+                                        <div>
+                                            <p style={{color: "white"}}>Arena: Enter to fight enemies.</p>
+                                            <p style={{color: "white"}}>Shop: Enter to purchase and sell items.</p>
+                                        </div>
+                                    }
+
+                                    {playPage === 2 &&
+                                    <div>
+                                        <p>Currently Unavailable:</p>
+                                        <p style={{color: "white"}}>Leaving Town</p>
+                                        <p style={{color: "white"}}>Entering Town Homes</p>
+                                        <p style={{color: "white"}}>Hospital</p>
+                                        <p style={{color: "white"}}>Hostel</p>
+                                        <p style={{color: "white"}}>NPCs</p>
+                                        <p style={{color: "white"}}>Quests</p>
+                                    </div>
+                                    }
                                 </div>
                             }
 
@@ -113,7 +208,8 @@ const HowTo = () => {
 
                             {activeButton === "Heroes" &&
                                 <div className="battle">
-                                    <p style={{color: "white"}}>Talent Tree: Currently Unavailable.</p>
+                                    <p>Currently Unavailable:</p>
+                                    <p style={{color: "white"}}>Talent Tree</p>                                
                                 </div>
                             }
                     </div>
@@ -126,11 +222,11 @@ const HowTo = () => {
                         <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
                     </div>
                     <div className="controls-right">
-                        <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={()=> handleUpClick()}>Up</button>
                         <button className="controls-btn" onClick={()=> handleTabLeftClick()}>Left</button>
                         <button className="controls-btn"></button>
                         <button className="controls-btn" onClick={()=> handleTabRightClick()}>Right</button>
-                        <button className="controls-btn"></button>
+                        <button className="controls-btn" onClick={()=> handleDownClick()}>Down</button>
                     </div>
                 </>
             </Controls>
