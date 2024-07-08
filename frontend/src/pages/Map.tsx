@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
 const Map = ({props}:{props:any}) => {
     const [player, setPlayer] = useState({ x: 835, y: 972});
     const [startPositionSet, setStartPositionSet] = useState(false);
-    const playerSize = 10;
+    const playerSize = 20;
     const moveSpeed = 10; 
     const mapSize = 4500; 
     const moveInterval = useRef<NodeJS.Timeout | null>(null);
@@ -178,13 +178,87 @@ const Map = ({props}:{props:any}) => {
                         
                     >
 
-                        <Stage width={mapSize} height={mapSize}>
+<div className="stage" style={{ width: mapSize, height: mapSize }}>
+            {/* Player */}
+            <div
+                className="circle"
+                style={{
+                    position: 'absolute',
+                    left: player.x,
+                    top: player.y,
+                    width: playerSize,
+                    height: playerSize,
+                    backgroundColor: 'black',
+                    borderRadius: '50%',
+                }}
+            ></div>
+
+            {/* Obstacles */}
+            {obstacles.map((obstacle, index) => (
+                <div
+                    key={index}
+                    className="rect"
+                    style={{
+                        position: 'absolute',
+                        left: obstacle.x,
+                        top: obstacle.y,
+                        width: obstacle.width,
+                        height: obstacle.height,
+                        backgroundColor: 'blue',
+                    }}
+                ></div>
+            ))}
+
+            {/* Borders */}
+            {borders.map((border, index) => (
+                <div
+                    key={index}
+                    className="rect"
+                    style={{
+                        position: 'absolute',
+                        left: border.x,
+                        top: border.y,
+                        width: border.width,
+                        height: border.height,
+                        backgroundColor: 'blue',
+                    }}
+                ></div>
+            ))}
+
+            {/* Arena */}
+            <div
+                className="rect"
+                style={{
+                    position: 'absolute',
+                    left: arena.x,
+                    top: arena.y,
+                    width: arena.width,
+                    height: arena.height,
+                    backgroundColor: 'yellow',
+                }}
+            ></div>
+
+            {/* Shop */}
+            <div
+                className="rect"
+                style={{
+                    position: 'absolute',
+                    left: shop.x,
+                    top: shop.y,
+                    width: shop.width,
+                    height: shop.height,
+                    backgroundColor: 'yellow',
+                }}
+            ></div>
+        </div>
+
+                        {/* <Stage width={mapSize} height={mapSize}>
                             <Layer>
                                 <Circle
                                     x={player.x}
                                     y={player.y}
                                     radius={playerSize}
-                                    fill="red"
+                                    fill="black"
                                 />
                                 {obstacles.map((obstacle, index) => (
                                     <Rect
@@ -221,7 +295,7 @@ const Map = ({props}:{props:any}) => {
                                     // fill="yellow"
                                 />
                             </Layer>
-                        </Stage>
+                        </Stage> */}
                     </div>
                 </div>
             </Display>
