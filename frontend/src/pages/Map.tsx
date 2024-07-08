@@ -126,18 +126,18 @@ const Map = ({props}:{props:any}) => {
     }
 
     const checkCoordinates = () => {
-        const storedCoordinates = Cookies.get('coordinates');
+        const storedCoordinates = Cookies.get('coordinates' + props.heroId);
         if (storedCoordinates) {
             setPlayer(JSON.parse(storedCoordinates));        
         }
     }
   
     const handleBackButtonClick = () => {
-        Cookies.set('coordinates', JSON.stringify(player)); 
+        Cookies.set('coordinates' + props.heroId, JSON.stringify(player)); 
         props.setIsVisible("exit-map", props.heroId)
     }
     const handleInventory = (id: number) => {
-        Cookies.set('coordinates', JSON.stringify(player)); 
+        Cookies.set('coordinates' + props.heroId, JSON.stringify(player)); 
         props.setIsVisible("open-inventory", id);
     }
     const handleStore = (id: number) => {
