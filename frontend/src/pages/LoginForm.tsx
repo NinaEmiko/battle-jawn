@@ -16,6 +16,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
+  const [validUsername, setValidUsername] = useState(false)
+  const [validPassword, setValidPassword] = useState(false)
   const [message, setMessage] = useState('');
 
   const handleTabClick = (button: string) => {
@@ -36,11 +38,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   };
 
   const onSubmitRegister = (e: FormEvent) => {
+
     e.preventDefault();
-    if (password === confirmationPassword) {
+    
+    if (login.length < 4 || login.length > 16) {
+      setMessage("Username must be 4-16 characters.")
+    } else if(password.length < 7 || password.length > 16) {
+      setMessage("Passwords must be 8-16 characters.")
+    } else if (password != confirmationPassword) {
+      setMessage("Passwords must match.")
+    }  else {
       onRegister(login, password);
-    } else {
-      setMessage('Passwords must match.');
     }
   };
 
