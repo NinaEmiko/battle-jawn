@@ -104,31 +104,31 @@ export const OBSTACLES = {
     {x: 0, y: 1270, width: 225, height: 10}, //BOTTOM LEFT CLIFF HORIZONTAL
 
     //TOWN RESIDENCES
-    {x: 71, y: 80, width: 193, height: 65}, //100 FIRST STREET HOUSES
-    {x: 280, y: 80, width: 193, height: 65}, //200 FIRST STREET HOUSES
-    {x: 71, y: 175, width: 193, height: 105}, //100 SECOND STREET HOUSES
-    {x: 280, y: 175, width: 193, height: 105}, //200 SECOND STREET HOUSES
-    {x: 71, y: 310, width: 193, height: 107}, //100 THIRD STREET HOUSES
-    {x: 280, y: 310, width: 193, height: 105}, //200 THIRD STREET HOUSES
-    {x: 71, y: 445, width: 193, height: 107}, //100 FORTH STREET HOUSES
-    {x: 280, y: 445, width: 193, height: 105}, //200 FORTH STREET HOUSES
-    {x: 71, y: 585, width: 193, height: 107}, //100 FIFTH STREET HOUSES
-    {x: 280, y: 585, width: 193, height: 105}, //200 FIFTH STREET HOUSES
-    {x: 71, y: 720, width: 193, height: 107}, //100 SIXTH STREET HOUSES
-    {x: 280, y: 720, width: 193, height: 105}, //200 SIXTH STREET HOUSES
-    {x: 71, y: 855, width: 193, height: 107}, //100 SEVENTH STREET HOUSES
-    {x: 280, y: 855, width: 193, height: 105}, //200 SEVENTH STREET HOUSES
-    {x: 489, y: 855, width: 193, height: 105}, //300 SEVENTH STREET HOUSES
-    {x: 71, y: 990, width: 193, height: 107}, //100 EIGTH STREET HOUSES
-    {x: 280, y: 990, width: 193, height: 105}, //200 EIGTH STREET HOUSES
-    {x: 489, y: 990, width: 193, height: 105}, //300 EIGTH STREET HOUSES
-    {x: 695, y: 991, width: 193, height: 105}, //400 EIGTH STREET HOUSES
-    {x: 71, y: 1125, width: 193, height: 107}, //100 NINTH STREET HOUSES
-    {x: 280, y: 1125, width: 193, height: 105}, //200 NINTH STREET HOUSES
-    {x: 489, y: 1125, width: 193, height: 105}, //300 NINTH STREET HOUSES
-    {x: 695, y: 1125, width: 193, height: 105}, //400 NINTH STREET HOUSES
+    {x: 75, y: 85, width: 185, height: 65}, //100 FIRST STREET HOUSES
+    {x: 285, y: 85, width: 185, height: 65}, //200 FIRST STREET HOUSES
+    {x: 75, y: 180, width: 185, height: 90}, //100 SECOND STREET HOUSES
+    {x: 285, y: 180, width: 185, height: 90}, //200 SECOND STREET HOUSES
+    {x: 75, y: 315, width: 185, height: 107}, //100 THIRD STREET HOUSES
+    {x: 285, y: 315, width: 185, height: 90}, //200 THIRD STREET HOUSES
+    {x: 75, y: 450, width: 185, height: 107}, //100 FORTH STREET HOUSES
+    {x: 285, y: 450, width: 185, height: 90}, //200 FORTH STREET HOUSES
+    {x: 75, y: 590, width: 185, height: 107}, //100 FIFTH STREET HOUSES
+    {x: 285, y: 590, width: 185, height: 90}, //200 FIFTH STREET HOUSES
+    {x: 75, y: 725, width: 185, height: 107}, //100 SIXTH STREET HOUSES
+    {x: 285, y: 725, width: 185, height: 90}, //200 SIXTH STREET HOUSES
+    {x: 75, y: 860, width: 185, height: 107}, //100 SEVENTH STREET HOUSES
+    {x: 285, y: 860, width: 185, height: 90}, //200 SEVENTH STREET HOUSES
+    {x: 489, y: 860, width: 185, height: 90}, //300 SEVENTH STREET HOUSES
+    {x: 75, y: 995, width: 185, height: 107}, //100 EIGTH STREET HOUSES
+    {x: 285, y: 995, width: 185, height: 90}, //200 EIGTH STREET HOUSES
+    {x: 489, y: 995, width: 185, height: 90}, //300 EIGTH STREET HOUSES
+    {x: 700, y: 995, width: 185, height: 90}, //400 EIGTH STREET HOUSES
+    {x: 75, y: 1130, width: 185, height: 107}, //100 NINTH STREET HOUSES
+    {x: 285, y: 1130, width: 185, height: 90}, //200 NINTH STREET HOUSES
+    {x: 489, y: 1130, width: 185, height: 90}, //300 NINTH STREET HOUSES
+    {x: 700, y: 1130, width: 185, height: 90}, //400 NINTH STREET HOUSES
 
-    {x: 812, y: 888, width: 75, height: 65}, // SHOP
+    {x: 815, y: 890, width: 65, height: 65}, // SHOP
     {x: 700, y: 915, width: 52, height: 40},
 
 
@@ -139,9 +139,9 @@ export const OBSTACLES = {
     {x: 515, y: 585, width: 45, height: 240}, //NORTHERN RIVER BOTTOM
     {x: 515, y: 780, width: 435, height: 45}, //NORTHERN RIVER BOTTOM HORIZONTAL
     {x: 1325, y: 1235, width: 375, height: 25}, //SOUTHERN FARM TOP TREELINE
-    {x: 1325, y: 1185, width: 355, height: 27}, //SOUTHERN FARM TOP TREELINE 2
-    {x: 1680, y: 1240, width: 15, height: 103}, //SOUTHERN FARM TOP ROCKLINE
-    {x: 1680, y: 1364, width: 15, height: 75}, //SOUTHERN FARM BOTTOM ROCKLINE
+    {x: 1325, y: 1185, width: 355, height: 15}, //SOUTHERN FARM TOP TREELINE 2
+    {x: 1680, y: 1240, width: 15, height: 95}, //SOUTHERN FARM TOP ROCKLINE
+    {x: 1680, y: 1370, width: 15, height: 60}, //SOUTHERN FARM BOTTOM ROCKLINE
     {x: 1520, y: 1240, width: 70, height: 95}, //SOUTHERN FARM HOUSE
     {x: 1490, y: 1320, width: 80, height: 15}, //SOUTHERN FARM HOUSE FENCE
 
@@ -169,13 +169,13 @@ export const OBSTACLES = {
     {x: 635, y: 0, width: 10, height: 75},
     {x: 636, y: 64, width: 780, height: 15}, //NORTHERN CLIFF
 
-    {x: 612, y: 285, width: 435, height: 33}, //NORTHERN TOP TREELINE
+    {x: 612, y: 285, width: 435, height: 25}, //NORTHERN TOP TREELINE
     {x: 660, y: 350, width: 395, height: 33}, //NORTHERN BOTTOM TREELINE
-    {x: 500, y: 585, width: 185, height: 33}, //NORTHERN RIVER TOP TREELINE
-    {x: 500, y: 525, width: 135, height: 33}, //NORTHERN RIVER BOTTOM TREELINE
+    {x: 515, y: 585, width: 160, height: 33}, //NORTHERN RIVER TOP TREELINE
+    {x: 515, y: 525, width: 115, height: 33}, //NORTHERN RIVER BOTTOM TREELINE
     {x: 1040, y: 350, width: 17, height: 160}, //ROCKLINE
 
-    {x: 612, y: 285, width: 25, height: 270}, //NORTHERN RIVER WEST TREELINE
+    {x: 612, y: 285, width: 20, height: 270}, //NORTHERN RIVER WEST TREELINE
     {x: 660, y: 457, width: 25, height: 160}, //NORTHERN RIVER EAST TREELINE
 
     //LAKE
