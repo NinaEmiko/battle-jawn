@@ -26,13 +26,13 @@ export const ENDPOINTS = {
 
 export const DOORS = {
   STORE: {
-    x: 825,
+    x: 905,
     y: 950,
     width: 20,
     height: 10
 },
   ARENA: {
-    x: 715,
+    x: 755,
     y: 955,
     width: 20,
     height: 10
@@ -93,65 +93,66 @@ export const OBSTACLES = {
     {x: 2240, y: 1040, width: 10, height: 80},
     {x: 2320, y: 975, width: 10, height: 80},
     {x: 1325, y: 1555, width: 450, height: 10}, //BOTTOM TREE LINE
-    {x: 1280, y: 1235, width: 45, height: 375}, //SOUTHERN RIVER
+    {x: 1280, y: 1265, width: 45, height: 375}, //SOUTHERN RIVER
+    {x: 1280, y: 1185, width: 45, height: 45}, //SOUTHERN RIVER TOP
     {x: 515, y: 1565, width: 775, height: 10}, //BOTTOM TREE RIGHT
     {x: 515, y: 1565, width: 10, height: 45}, //BOTTOM TREE RIGHT VERTICAL
-    {x: 235, y: 1565, width: 225, height: 10}, //BOTTOM TREE LEFT
-    {x: 450, y: 1565, width: 10, height: 45}, //BOTTOM TREE LEFT VERTICAL
+    {x: 235, y: 1565, width: 250, height: 10}, //BOTTOM TREE LEFT
+    {x: 475, y: 1565, width: 10, height: 45}, //BOTTOM TREE LEFT VERTICAL
     {x: 225, y: 1270, width: 10, height: 330}, //BOTTOM TREE CLIFF
-    {x: 480, y: 1265, width: 10, height: 240}, //GARDEN FENCE VERTICAL
+    {x: 480, y: 1265, width: 10, height: 110}, //GARDEN FENCE VERTICAL
     {x: 235, y: 1360, width: 250, height: 15}, //GARDIN FENCE HORIZONTAL
     {x: 0, y: 1270, width: 225, height: 10}, //BOTTOM LEFT CLIFF HORIZONTAL
 
     //TOWN RESIDENCES
     {x: 75, y: 85, width: 185, height: 65}, //100 FIRST STREET HOUSES
-    {x: 285, y: 85, width: 185, height: 65}, //200 FIRST STREET HOUSES
+    {x: 300, y: 85, width: 185, height: 65}, //200 FIRST STREET HOUSES
     {x: 75, y: 180, width: 185, height: 90}, //100 SECOND STREET HOUSES
-    {x: 285, y: 180, width: 185, height: 90}, //200 SECOND STREET HOUSES
-    {x: 75, y: 315, width: 185, height: 107}, //100 THIRD STREET HOUSES
-    {x: 285, y: 315, width: 185, height: 90}, //200 THIRD STREET HOUSES
-    {x: 75, y: 450, width: 185, height: 107}, //100 FORTH STREET HOUSES
-    {x: 285, y: 450, width: 185, height: 90}, //200 FORTH STREET HOUSES
-    {x: 75, y: 590, width: 185, height: 107}, //100 FIFTH STREET HOUSES
-    {x: 285, y: 590, width: 185, height: 90}, //200 FIFTH STREET HOUSES
-    {x: 75, y: 725, width: 185, height: 107}, //100 SIXTH STREET HOUSES
-    {x: 285, y: 725, width: 185, height: 90}, //200 SIXTH STREET HOUSES
-    {x: 75, y: 860, width: 185, height: 107}, //100 SEVENTH STREET HOUSES
-    {x: 285, y: 860, width: 185, height: 90}, //200 SEVENTH STREET HOUSES
-    {x: 489, y: 860, width: 185, height: 90}, //300 SEVENTH STREET HOUSES
-    {x: 75, y: 995, width: 185, height: 107}, //100 EIGTH STREET HOUSES
-    {x: 285, y: 995, width: 185, height: 90}, //200 EIGTH STREET HOUSES
-    {x: 489, y: 995, width: 185, height: 90}, //300 EIGTH STREET HOUSES
-    {x: 700, y: 995, width: 185, height: 90}, //400 EIGTH STREET HOUSES
-    {x: 75, y: 1130, width: 185, height: 107}, //100 NINTH STREET HOUSES
-    {x: 285, y: 1130, width: 185, height: 90}, //200 NINTH STREET HOUSES
-    {x: 489, y: 1130, width: 185, height: 90}, //300 NINTH STREET HOUSES
-    {x: 700, y: 1130, width: 185, height: 90}, //400 NINTH STREET HOUSES
+    {x: 300, y: 180, width: 185, height: 90}, //200 SECOND STREET HOUSES
+    {x: 75, y: 315, width: 185, height: 90}, //100 THIRD STREET HOUSES
+    {x: 300, y: 315, width: 185, height: 90}, //200 THIRD STREET HOUSES
+    {x: 75, y: 450, width: 185, height: 90}, //100 FORTH STREET HOUSES
+    {x: 300, y: 450, width: 185, height: 90}, //200 FORTH STREET HOUSES
+    {x: 75, y: 590, width: 185, height: 90}, //100 FIFTH STREET HOUSES
+    // {x: 300, y: 590, width: 185, height: 90}, //200 FIFTH STREET HOUSES
+    {x: 75, y: 725, width: 185, height: 90}, //100 SIXTH STREET HOUSES
+    {x: 300, y: 725, width: 185, height: 90}, //200 SIXTH STREET HOUSES
+    {x: 75, y: 860, width: 185, height: 90}, //100 SEVENTH STREET HOUSES
+    {x: 300, y: 860, width: 185, height: 90}, //200 SEVENTH STREET HOUSES
+    {x: 525, y: 860, width: 185, height: 90}, //300 SEVENTH STREET HOUSES
+    {x: 75, y: 995, width: 185, height: 90}, //100 EIGTH STREET HOUSES
+    {x: 300, y: 995, width: 185, height: 90}, //200 EIGTH STREET HOUSES
+    {x: 525, y: 995, width: 180, height: 90}, //300 EIGTH STREET HOUSES
+    {x: 750, y: 995, width: 180, height: 90}, //400 EIGTH STREET HOUSES
+    {x: 75, y: 1130, width: 185, height: 90}, //100 NINTH STREET HOUSES
+    {x: 300, y: 1130, width: 180, height: 90}, //200 NINTH STREET HOUSES
+    {x: 525, y: 1130, width: 180, height: 90}, //300 NINTH STREET HOUSES
+    {x: 750, y: 1130, width: 180, height: 90}, //400 NINTH STREET HOUSES
 
-    {x: 1700, y: 890, width: 150, height: 40},
+    {x: 1705, y: 870, width: 140, height: 60},
 
-    {x: 815, y: 890, width: 65, height: 65}, // SHOP
-    {x: 1608, y: 875, width: 65, height: 60}, //SHOP 2
-    {x: 700, y: 915, width: 52, height: 40},
+    {x: 840, y: 860, width: 100, height: 95}, // SHOP
+    {x: 1705, y: 980, width: 140, height: 90}, //SHOP 2
+    {x: 740, y: 915, width: 52, height: 40}, //ARENA
 
 
     {x: 0, y: 350, width: 30, height: 925}, //BOTTOM LEFT OBSTACLES TREES & WATER
     {x: 0, y: 0, width: 30, height: 320}, //TOP LEFT TREES
 
-    {x: 515, y: 0, width: 45, height: 560}, //NORTHERN RIVER
+    {x: 515, y: 0, width: 45, height: 550}, //NORTHERN RIVER
     {x: 515, y: 585, width: 45, height: 240}, //NORTHERN RIVER BOTTOM
-    {x: 515, y: 780, width: 435, height: 45}, //NORTHERN RIVER BOTTOM HORIZONTAL
-    {x: 1325, y: 1235, width: 375, height: 25}, //SOUTHERN FARM TOP TREELINE
-    {x: 1325, y: 1185, width: 355, height: 15}, //SOUTHERN FARM TOP TREELINE 2
-    {x: 1680, y: 1240, width: 15, height: 95}, //SOUTHERN FARM TOP ROCKLINE
-    {x: 1680, y: 1370, width: 15, height: 60}, //SOUTHERN FARM BOTTOM ROCKLINE
-    {x: 1520, y: 1240, width: 70, height: 95}, //SOUTHERN FARM HOUSE
-    {x: 1490, y: 1320, width: 80, height: 15}, //SOUTHERN FARM HOUSE FENCE
+    {x: 515, y: 780, width: 450, height: 45}, //NORTHERN RIVER BOTTOM HORIZONTAL
+    {x: 1325, y: 1270, width: 355, height: 25}, //SOUTHERN FARM TOP TREELINE
+    {x: 1325, y: 1205, width: 345, height: 20}, //SOUTHERN FARM TOP TREELINE 2
+    {x: 1665, y: 1280, width: 15, height: 75}, //SOUTHERN FARM TOP ROCKLINE
+    {x: 1665, y: 1400, width: 15, height: 40}, //SOUTHERN FARM BOTTOM ROCKLINE
+    {x: 1520, y: 1300, width: 70, height: 65}, //SOUTHERN FARM HOUSE
+    {x: 1490, y: 1350, width: 80, height: 15}, //SOUTHERN FARM HOUSE FENCE
 
 
     {x: 1840, y: 0, width: 10, height: 945}, //EAST ENTRANCE PLATEAU RIGHT CLIFF
     {x: 2360, y: 675, width: 10, height: 270}, //EAST ENTRANCE TREELINE
-    {x: 2223, y: 927, width: 185, height: 17}, //EAST ENTRANCE RIGHT FENCE
+    {x: 2228, y: 927, width: 195, height: 17}, //EAST ENTRANCE RIGHT FENCE
     {x: 1850, y: 927, width: 325, height: 17}, //EAST ENTRANCE LEFT FENCE
     {x: 1850, y: 705, width: 375, height: 15}, //EAST ENTRANCE BOTTOM LEFT CLIFF
     {x: 2270, y: 705, width: 130, height: 17},
@@ -160,7 +161,7 @@ export const OBSTACLES = {
     {x: 1840, y: 65, width: 570, height: 15},
     {x: 1920, y: 320, width: 320, height: 240}, //EAST ENTRANCE PLATEAU FOREST
 
-    {x: 1550, y: 320, width: 300, height: 17}, //NORTHERN FARM HORIZONTAL RIGHT FENCE
+    {x: 1575, y: 320, width: 275, height: 17}, //NORTHERN FARM HORIZONTAL RIGHT FENCE
     {x: 1415, y: 320, width: 105, height: 17},//NORTHERN FARM HORIZONTAL LEFT FENCE
     {x: 1415, y: 0, width: 10, height: 325}, //NORTHERN FARM VERTICAL FENCE
     {x: 1415, y: 10, width: 425, height: 21}, //NORTHERN FARM TREELINE
@@ -172,18 +173,16 @@ export const OBSTACLES = {
     {x: 635, y: 0, width: 10, height: 75},
     {x: 636, y: 64, width: 780, height: 15}, //NORTHERN CLIFF
 
-    {x: 612, y: 285, width: 435, height: 25}, //NORTHERN TOP TREELINE
-    {x: 660, y: 350, width: 395, height: 33}, //NORTHERN BOTTOM TREELINE
-    {x: 515, y: 585, width: 160, height: 33}, //NORTHERN RIVER TOP TREELINE
-    {x: 515, y: 525, width: 115, height: 33}, //NORTHERN RIVER BOTTOM TREELINE
-    {x: 1040, y: 350, width: 17, height: 160}, //ROCKLINE
-
-    {x: 612, y: 285, width: 20, height: 270}, //NORTHERN RIVER WEST TREELINE
-    {x: 660, y: 457, width: 25, height: 160}, //NORTHERN RIVER EAST TREELINE
+    {x: 890, y: 290, width: 375, height: 20}, //NORTHERN TOP TREELINE
+    {x: 550, y: 340, width: 90, height: 75}, //GRAVEYARD FENCE LEFT
+    {x: 675, y: 340, width: 95, height: 15}, //GRAVEYARD FENCE RIGHT
+    {x: 560, y: 590, width: 215, height: 20}, //NORTHERN RIVER BOTTOM TREELINE
+    {x: 560, y: 525, width: 215, height: 20}, //NORTHERN RIVER TOP TREELINE
+    {x: 760, y: 345, width: 15, height: 200}, //NORTHERN RIVER WEST TREELINE
 
     //LAKE
 
-    {x: 945, y: 780, width: 10, height: 240}, //WEST BORDER SOUTH OF NORTHERN RIVER
+    {x: 965, y: 780, width: 10, height: 280}, //WEST BORDER SOUTH OF NORTHERN RIVER
     {x: 1155, y: 1175, width: 175, height: 30}, //SOUTH BORDER WEST OF SOUTHERN BRIDGE
     {x: 1535, y: 865, width: 10, height: 130}, //EAST BORDER
     {x: 1525, y: 985, width: 10, height: 80}, //EAST BORDER
@@ -254,9 +253,7 @@ export const OBSTACLES = {
     {x: 860, y: 685, width: 10, height: 35},
     {x: 860, y: 720, width: 40, height: 10},
 
-    {x: 955, y: 1020, width: 10, height: 20},
-    {x: 965, y: 1040, width: 10, height: 20},
-    {x: 975, y: 1060, width: 10, height: 10},
+    {x: 975, y: 1060, width: 10, height: 10},//BOTTOM WEST
     {x: 985, y: 1070, width: 10, height: 10},
     {x: 995, y: 1080, width: 10, height: 20},
     {x: 1005, y: 1090, width: 10, height: 20},
