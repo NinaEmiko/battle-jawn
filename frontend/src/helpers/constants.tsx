@@ -99,6 +99,7 @@ export const OBSTACLES = {
     {x: 515, y: 1565, width: 10, height: 45}, //BOTTOM TREE RIGHT VERTICAL
     {x: 235, y: 1565, width: 250, height: 10}, //BOTTOM TREE LEFT
     {x: 475, y: 1565, width: 10, height: 45}, //BOTTOM TREE LEFT VERTICAL
+    {x: 345, y: 1450, width: 30, height: 50}, //GARDIN POND
     {x: 225, y: 1270, width: 10, height: 330}, //BOTTOM TREE CLIFF
     {x: 480, y: 1265, width: 10, height: 110}, //GARDEN FENCE VERTICAL
     {x: 235, y: 1360, width: 250, height: 15}, //GARDIN FENCE HORIZONTAL

@@ -174,128 +174,86 @@ const Map = ({props}:{props:any}) => {
                             position: 'absolute',
                             top: `calc(50% - ${player.y}px)`,
                             left: `calc(50% - ${player.x}px)`,
-                        }}
-                        
+                        }}     
                     >
+                        <div className="stage" style={{ width: mapSize, height: mapSize }}>
+                            {/* Player */}
+                            <div
+                                className="circle"
+                                style={{
+                                    position: 'absolute',
+                                    left: player.x,
+                                    top: player.y,
+                                    width: playerSize,
+                                    height: playerSize,
+                                    backgroundColor: 'black',
+                                    borderRadius: '50%',
+                                }}
+                            >
+                            </div>
 
-<div className="stage" style={{ width: mapSize, height: mapSize }}>
-            {/* Player */}
-            <div
-                className="circle"
-                style={{
-                    position: 'absolute',
-                    left: player.x,
-                    top: player.y,
-                    width: playerSize,
-                    height: playerSize,
-                    backgroundColor: 'black',
-                    borderRadius: '50%',
-                }}
-            ></div>
+                            {/* Obstacles */}
+                            {obstacles.map((obstacle, index) => (
+                                <div
+                                    key={index}
+                                    className="rect"
+                                    style={{
+                                        position: 'absolute',
+                                        left: obstacle.x,
+                                        top: obstacle.y,
+                                        width: obstacle.width,
+                                        height: obstacle.height,
+                                        // backgroundColor: 'blue',
+                                    }}
+                                >
+                                </div>
+                            ))}
 
-            {/* Obstacles */}
-            {obstacles.map((obstacle, index) => (
-                <div
-                    key={index}
-                    className="rect"
-                    style={{
-                        position: 'absolute',
-                        left: obstacle.x,
-                        top: obstacle.y,
-                        width: obstacle.width,
-                        height: obstacle.height,
-                        // backgroundColor: 'blue',
-                    }}
-                ></div>
-            ))}
+                            {/* Borders */}
+                            {borders.map((border, index) => (
+                                <div
+                                    key={index}
+                                    className="rect"
+                                    style={{
+                                        position: 'absolute',
+                                        left: border.x,
+                                        top: border.y,
+                                        width: border.width,
+                                        height: border.height,
+                                        // backgroundColor: 'blue',
+                                    }}
+                                >
+                                </div>
+                            ))}
 
-            {/* Borders */}
-            {borders.map((border, index) => (
-                <div
-                    key={index}
-                    className="rect"
-                    style={{
-                        position: 'absolute',
-                        left: border.x,
-                        top: border.y,
-                        width: border.width,
-                        height: border.height,
-                        // backgroundColor: 'blue',
-                    }}
-                ></div>
-            ))}
+                            {/* Arena */}
+                            <div
+                                className="rect"
+                                style={{
+                                    position: 'absolute',
+                                    left: arena.x,
+                                    top: arena.y,
+                                    width: arena.width,
+                                    height: arena.height,
+                                    // backgroundColor: 'yellow',
+                                }}
+                            >
+                            </div>
 
-            {/* Arena */}
-            <div
-                className="rect"
-                style={{
-                    position: 'absolute',
-                    left: arena.x,
-                    top: arena.y,
-                    width: arena.width,
-                    height: arena.height,
-                    // backgroundColor: 'yellow',
-                }}
-            ></div>
-
-            {/* Shop */}
-            <div
-                className="rect"
-                style={{
-                    position: 'absolute',
-                    left: shop.x,
-                    top: shop.y,
-                    width: shop.width,
-                    height: shop.height,
-                    // backgroundColor: 'yellow',
-                }}
-            ></div>
-        </div>
-
-                        {/* <Stage width={mapSize} height={mapSize}>
-                            <Layer>
-                                <Circle
-                                    x={player.x}
-                                    y={player.y}
-                                    radius={playerSize}
-                                    fill="black"
-                                />
-                                {obstacles.map((obstacle, index) => (
-                                    <Rect
-                                        key={index}
-                                        x={obstacle.x}
-                                        y={obstacle.y}
-                                        width={obstacle.width}
-                                        height={obstacle.height}
-                                        // fill="blue"
-                                    />
-                                ))}
-                                {borders.map((border, index) => (
-                                    <Rect
-                                        key={index}
-                                        x={border.x}
-                                        y={border.y}
-                                        width={border.width}
-                                        height={border.height}
-                                        // fill="blue"
-                                    />
-                                ))}
-                                <Rect
-                                    x={arena.x}
-                                    y={arena.y}
-                                    width={arena.width}
-                                    height={arena.height}
-                                    // fill="yellow"
-                                />
-                                <Rect
-                                    x={shop.x}
-                                    y={shop.y}
-                                    width={shop.width}
-                                    height={shop.height}
-                                    // fill="yellow"
-                                />
-                            </Layer>
-                        </Stage> */}
+                            {/* Shop */}
+                            <div
+                                className="rect"
+                                style={{
+                                    position: 'absolute',
+                                    left: shop.x,
+                                    top: shop.y,
+                                    width: shop.width,
+                                    height: shop.height,
+                                    // backgroundColor: 'yellow',
+                                }}
+                            >
+                            </div>
+                        </div>
                     </div>
                 </div>
             </Display>
