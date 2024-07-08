@@ -9,6 +9,7 @@
   position: absolute;
   background-image: url('../assets/maps/StartingMap.png');
   overflow-y:auto;
+  background-repeat: no-repeat;
 }
 .hero-move-btns{
   justify-content: center;
