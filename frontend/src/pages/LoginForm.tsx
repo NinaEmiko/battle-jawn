@@ -16,8 +16,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [validUsername, setValidUsername] = useState(false)
-  const [validPassword, setValidPassword] = useState(false)
   const [message, setMessage] = useState('');
 
   const handleTabClick = (button: string) => {
@@ -33,8 +31,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   };
 
   const onSubmitLogin = (e: FormEvent) => {
+    
     e.preventDefault();
+
     onLogin(e, login, password);
+    setMessage("Username or password is incorrect.")
   };
 
   const onSubmitRegister = (e: FormEvent) => {
@@ -49,6 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
       setMessage("Passwords must match.")
     }  else {
       onRegister(login, password);
+      setMessage("Username taken.")
     }
   };
 
@@ -131,7 +133,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
                       placeholder="Confirm Password"
                       onChange={onChangeHandler}
                     />
-                    <p>{message}</p>
+                    <p style={{color: "red"}}>{message}</p>
                   </div>
                   <div className="login-submit-btn-jawn">
                     <button type="submit" className="login-submit-btn">
