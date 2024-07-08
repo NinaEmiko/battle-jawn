@@ -135,6 +135,7 @@ export const OBSTACLES = {
     {x: 840, y: 860, width: 100, height: 95}, // SHOP
     {x: 1705, y: 980, width: 140, height: 90}, //SHOP 2
     {x: 740, y: 915, width: 52, height: 40}, //ARENA
+    {x: 975, y: 1100, width: 140, height: 120}, //HOSITAL
 
 
     {x: 0, y: 350, width: 30, height: 925}, //BOTTOM LEFT OBSTACLES TREES & WATER
