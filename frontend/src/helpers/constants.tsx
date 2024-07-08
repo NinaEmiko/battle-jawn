@@ -131,7 +131,7 @@ export const OBSTACLES = {
     {x: 1700, y: 890, width: 150, height: 40},
 
     {x: 815, y: 890, width: 65, height: 65}, // SHOP
-    {x: 1608, y: 875, width: 65, height: 60},
+    {x: 1608, y: 875, width: 65, height: 60}, //SHOP 2
     {x: 700, y: 915, width: 52, height: 40},
 
 
