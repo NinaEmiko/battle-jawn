@@ -128,7 +128,10 @@ export const OBSTACLES = {
     {x: 489, y: 1130, width: 185, height: 90}, //300 NINTH STREET HOUSES
     {x: 700, y: 1130, width: 185, height: 90}, //400 NINTH STREET HOUSES
 
+    {x: 1700, y: 890, width: 150, height: 40},
+
     {x: 815, y: 890, width: 65, height: 65}, // SHOP
+    {x: 1608, y: 875, width: 65, height: 60},
     {x: 700, y: 915, width: 52, height: 40},
 
 
