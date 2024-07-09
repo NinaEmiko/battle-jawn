@@ -16,118 +16,60 @@ import HowToBattleDPS from "../components/HowToComponents/HowToBattleDPS";
 import HowToBattleCaster from "../components/HowToComponents/HowToBattleCaster";
 
 const HowTo = () => {
-    const [activeButton, setActiveButton] = useState("Heroes");
+    const [activeTab, setActiveTab] = useState("Heroes");
     const [activeRole, setActiveRole] = useState("Tank");
-    const [playPage, setPlayPage] = useState(1);
+    const [activePlayPage, setActivePlayPage] = useState("Arena");
+    const tabs = ["Heroes", "Battle", "Play", "Coming Soon"];
+    const roles = ["Tank", "Healer", "DPS", "Caster"];
+    const playPages = ["Arena", "Store", "Bag"];
 
     const handleTabLeftClick = () => {
-        switch (activeButton){
-            case "Heroes":
-                setActiveButton("Coming Soon");
-                break;
-            case "Battle":
-                setActiveButton("Heroes");
-                break;
-            case "Play":
-                setActiveButton("Battle");
-                break;
-            case "Coming Soon":
-                setActiveButton("Play");
-                break;
-        }
-      };
+        const currentIndex = tabs.indexOf(activeTab);
+        const newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        setActiveTab(tabs[newIndex]);
+    };
 
     const handleTabRightClick = () => {
-        switch (activeButton){
-            case "Heroes":
-                setActiveButton("Battle");
-                break;
-            case "Battle":
-                setActiveButton("Play");
-                break;
-            case "Play":
-                setActiveButton("Coming Soon");
-                break;
-            case "Coming Soon":
-                setActiveButton("Heroes");
-                break;
-        }
+        const currentIndex = tabs.indexOf(activeTab);
+        const newIndex = (currentIndex + 1 + tabs.length) % tabs.length;
+        setActiveTab(tabs[newIndex]);
     };
 
     const handleUpClick = () => {
-        if (activeButton === "Battle"){
-            switch (activeRole){
-                case "Tank":
-                    setActiveRole("Caster");
-                    break;
-                case "Healer":
-                    setActiveRole("Tank");
-                    break;
-                case "DPS":
-                    setActiveRole("Healer");
-                    break;
-                case "Caster":
-                    setActiveRole("DPS");
-                    break;
-            }
+        if (activeTab === tabs[1]){
+            const currentIndex = roles.indexOf(activeRole);
+            const newIndex = (currentIndex - 1 + roles.length) % roles.length;
+            setActiveRole(roles[newIndex]);
         }
-        if (activeButton === "Play"){
-            switch (playPage){
-                case 1:
-                    setPlayPage(3);
-                    break;
-                case 2:
-                    setPlayPage(1);
-                    break;
-                case 3:
-                    setPlayPage(2);
-                    break;
-            }
+        if (activeTab === tabs[2]){
+            const currentIndex = playPages.indexOf(activePlayPage);
+            const newIndex = (currentIndex - 1 + playPages.length) % playPages.length;
+            setActivePlayPage(playPages[newIndex]);
         }
     };
 
     const handleDownClick = () => {
-        if (activeButton === "Battle"){
-            switch (activeRole){
-                case "Tank":
-                    setActiveRole("Healer");
-                    break;
-                case "Healer":
-                    setActiveRole("DPS");
-                    break;
-                case "DPS":
-                    setActiveRole("Caster");
-                    break;
-                case "Caster":
-                    setActiveRole("Tank");
-                    break;
-            }
+        if (activeTab === tabs[1]){
+            const currentIndex = roles.indexOf(activeRole);
+            const newIndex = (currentIndex + 1 + roles.length) % roles.length;
+            setActiveRole(roles[newIndex]);
         }
-        if (activeButton === "Play"){
-            switch (playPage){
-                case 1:
-                    setPlayPage(2);
-                    break;
-                case 2:
-                    setPlayPage(3);
-                    break;
-                case 3:
-                    setPlayPage(1);
-                    break;
-            }
+        if (activeTab === tabs[2]){
+            const currentIndex = playPages.indexOf(activePlayPage);
+            const newIndex = (currentIndex + 1 + playPages.length) % playPages.length;
+            setActivePlayPage(playPages[newIndex]);
         }
-
     };
 
     const handleClickSpecificTab = (tab: string) => {
-        setActiveButton(tab);
+        setActiveTab(tab);
     }
 
-      const navigate = useNavigate();
+    const navigate = useNavigate();
 
-      const handleNavigation = (path: string) => {
-          navigate(path);
-      };
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    };
 
     return (        
         <Container>
@@ -145,29 +87,34 @@ const HowTo = () => {
             <Display>
                     <div className="parent-jawn">
                         <div className="display-jawn-tabs-4">
-                            <button className={activeButton === 'Heroes' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Heroes")}>Heroes</button>
-                            <button className={activeButton === 'Battle' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Battle")}>Battle</button>
-                            <button className={activeButton === 'Play' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Play")}>Play</button>
-                            <button className={activeButton === 'Coming Soon' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Coming Soon")}>Coming Soon</button>
+                            <button className={activeTab === tabs[0] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[0])}>{tabs[0]}</button>
+                            <button className={activeTab === tabs[1] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[1])}>{tabs[1]}</button>
+                            <button className={activeTab === tabs[2] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[2])}>{tabs[2]}</button>
+                            <button className={activeTab === tabs[3] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[3])}>{tabs[3]}</button>
                         </div>
-                            {activeButton === 'Battle' &&
+
+                            {activeTab === tabs[0] &&
+                                <HowToHeroes />
+                            }
+
+                            {activeTab === tabs[1] &&
                                 <div className="battle">
 
                                     <p className="battle-role">{activeRole}</p>
 
-                                    {activeRole === "Tank" &&
+                                    {activeRole === roles[0] &&
                                         <HowToBattleTank />
                                     }
 
-                                    {activeRole === "Healer" &&
+                                    {activeRole === roles[1] &&
                                         <HowToBattleHealer />
                                     }
 
-                                    {activeRole === "DPS" &&
+                                    {activeRole === roles[2] &&
                                         <HowToBattleDPS />
                                     }   
 
-                                    {activeRole === "Caster" &&
+                                    {activeRole === roles[3] &&
                                         <HowToBattleCaster />
                                     }   
 
@@ -175,31 +122,27 @@ const HowTo = () => {
                                 </div>
                             }
 
-                            {activeButton === "Play" &&
+                            {activeTab === tabs[2] &&
                                 <div className="battle">
 
-                                    {playPage === 1 &&
+                                    {activePlayPage === playPages[0] &&
                                         <HowToArena />
                                     }
 
-                                    {playPage === 2 &&
+                                    {activePlayPage === playPages[1] &&
                                         <HowToPlay />
                                     }
-                                    {playPage === 3 &&
+                                    {activePlayPage === playPages[2] &&
                                         <HowToBag />
                                     }
-                                    
+
                                     <p className="battle-howto">Press up or down to scroll through available content.</p>
 
                                 </div>
                             }
 
-                            {activeButton === "Coming Soon" &&
+                            {activeTab === tabs[3] &&
                                  <HowToComingSoon />
-                            }
-
-                            {activeButton === "Heroes" &&
-                                <HowToHeroes />
                             }
                     </div>
             </Display>
