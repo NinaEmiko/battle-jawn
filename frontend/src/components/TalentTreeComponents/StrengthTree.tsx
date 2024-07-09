@@ -8,16 +8,16 @@ const StrengthTree = () => {
             <input className="talent-jawn" type="checkbox" /> Improved Strike 1
             </label>
             <label className="label-jawn">
-            <input className="talent-jawn" type="checkbox" /> Improved Strike 2
-            </label>
-            <label className="label-jawn">
-            <input className="talent-jawn" type="checkbox" /> Improved Strike 3
-            </label>
-            <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved Impale 1
             </label>
             <label className="label-jawn">
+            <input className="talent-jawn" type="checkbox" /> Improved Strike 2
+            </label>
+            <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved Impale 2
+            </label>
+            <label className="label-jawn">
+            <input className="talent-jawn" type="checkbox" /> Improved Strike 3
             </label>
             <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved Impale 3

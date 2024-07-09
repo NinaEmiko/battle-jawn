@@ -8,16 +8,16 @@ const SpiritualityTree = () => {
             <input className="talent-jawn" type="checkbox" /> Improved Wand 1
             </label>
             <label className="label-jawn">
-            <input className="talent-jawn" type="checkbox" /> Improved Wand 2
-            </label>
-            <label className="label-jawn">
-            <input className="talent-jawn" type="checkbox" /> Improved Wand 3
-            </label>
-            <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved Holy 1
             </label>
             <label className="label-jawn">
+            <input className="talent-jawn" type="checkbox" /> Improved Wand 2
+            </label>
+            <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved Holy 2
+            </label>
+            <label className="label-jawn">
+            <input className="talent-jawn" type="checkbox" /> Improved Wand 3
             </label>
             <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved Holy 3

@@ -8,19 +8,19 @@ const ArcaneTree = () => {
                 <input className="talent-jawn" type="checkbox" /> Improved FireBlast 1
             </label>
             <label className="label-jawn">
-                <input className="talent-jawn" type="checkbox" /> Improved IceBlast
-            </label>
-            <label className="label-jawn">
-                <input className="talent-jawn" type="checkbox" /> FrostBite
+                <input className="talent-jawn" type="checkbox" /> Resourcefulness 1
             </label>
             <label className="label-jawn">
                 <input className="talent-jawn" type="checkbox" /> Improved FireBlast 2
             </label>
             <label className="label-jawn">
-                <input className="talent-jawn" type="checkbox" /> Resourcefulness 1
+                <input className="talent-jawn" type="checkbox" /> Resourcefulness 2
             </label>
             <label className="label-jawn">
-                <input className="talent-jawn" type="checkbox" /> Resourcefulness 2
+                <input className="talent-jawn" type="checkbox" /> Improved IceBlast
+            </label>
+            <label className="label-jawn">
+                <input className="talent-jawn" type="checkbox" /> FrostBite
             </label>
             <label className="label-jawn center-jawn">
                 <input className="talent-jawn" type="checkbox" /> Second Nature

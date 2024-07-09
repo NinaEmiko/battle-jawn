@@ -8,17 +8,17 @@ const DexterityTree = () => {
             <input className="talent-jawn" type="checkbox" /> Improved Stab 1
             </label>
             <label className="label-jawn">
-            <input className="talent-jawn" type="checkbox" /> Improved Stab 2
-            </label>
-            <label className="label-jawn">
-            <input className="talent-jawn" type="checkbox" /> Improved Stab 3
-            </label>
-            <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved BackStab 1
+            </label>
+            <label className="label-jawn">
+            <input className="talent-jawn" type="checkbox" /> Improved Stab 2
             </label>
             <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Improved BackStab 2
             </label>
+            <label className="label-jawn">
+            <input className="talent-jawn" type="checkbox" /> Improved Stab 3
+            </label>            
             <label className="label-jawn">
             <input className="talent-jawn" type="checkbox" /> Energized
             </label>
