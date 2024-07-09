@@ -138,41 +138,40 @@ const HowTo = () => {
                             {activeButton === 'Battle' &&
                                 <div className="battle">
 
+                                    <p className="battle-role">{activeRole}</p>
+
                                     {activeRole === "Tank" &&
                                         <div>
-                                            <p>Tank</p>
-                                            <p style={{color: "white"}}>Strike: Generates 1 Power.</p>
-                                            <p style={{color: "white"}}>Impale: Consumes 2 Power.</p>
-                                            <p style={{color: "white"}}>Block: Successful blocks generate Max Power.</p>
+                                            <p className="battle-move">Strike: Generates 1 Power.</p>
+                                            <p className="battle-move">Impale: Consumes 2 Power.</p>
+                                            <p className="battle-move">Block: Successful blocks generate Max Power.</p>
                                         </div>
                                     }
 
                                     {activeRole === "Healer" &&
                                         <div>
-                                            <p>Healer</p>
-                                            <p style={{color: "white"}}>Wand: Generates 1 Spirit.</p>
-                                            <p style={{color: "white"}}>Holy: Consumes 2 Spirit.</p>
-                                            <p style={{color: "white"}}>Heal: Consumes 1 Spirit.</p>
+                                            <p className="battle-move">Wand: Generates 1 Spirit.</p>
+                                            <p className="battle-move">Holy: Consumes 2 Spirit.</p>
+                                            <p className="battle-move">Heal: Consumes 1 Spirit.</p>
                                         </div>
                                     }
 
                                     {activeRole === "DPS" &&
                                         <div>
-                                            <p>DPS</p>
-                                            <p style={{color: "white"}}>Stab: Generates 1 Energy.</p>
-                                            <p style={{color: "white"}}>FireBlast: Consumes 3 Magic.</p>
-                                            <p style={{color: "white"}}>IceBlast: Consumes 1 Magic.</p>
+                                            <p className="battle-move">Stab: Generates 1 Energy.</p>
+                                            <p className="battle-move">FireBlast: Consumes 3 Magic.</p>
+                                            <p className="battle-move">IceBlast: Consumes 1 Magic.</p>
                                         </div>
                                     }   
 
                                     {activeRole === "Caster" &&
                                         <div>
-                                            <p>Caster</p>
-                                            <p style={{color: "white"}}>Wand: Generates 1 Magic.</p>
-                                            <p style={{color: "white"}}>FireBlast: Consumes 3 Magic.</p>
-                                            <p style={{color: "white"}}>IceBlast: Consumes 1 Magic.</p>
+                                            <p className="battle-move">Wand: Generates 1 Magic.</p>
+                                            <p className="battle-move">FireBlast: Consumes 3 Magic.</p>
+                                            <p className="battle-move">IceBlast: Consumes 1 Magic.</p>
                                         </div>
                                     }   
+                                    <p className="battle-howto">Press up or down to scroll through classes.</p>
                                 </div>
                             }
 

@@ -2,3 +2,19 @@
     overflow-y: scroll;
     padding-left: 5px;
 }
+
+.battle-role{
+    text-align: center;
+    font-size: 20px;
+    color: gold;
+}
+.battle-move{
+    color: white;
+    text-align: center;
+}
+.battle-howto{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
