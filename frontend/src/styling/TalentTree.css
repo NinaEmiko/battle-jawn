@@ -1,0 +1,49 @@
+.talent-trees-jawn{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+}
+.talent-tree-jawn{
+    width: 50%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    color: var(--mid-dark-jawn);
+}
+.talent-tree-jawn-active{
+    width: 50%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    color: gold;
+}
+.hero-name{
+    font-size: 30px;
+    color: gold;
+    margin-top:11%;
+    text-align: center;
+  }
+  .talent-group-jawn{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 10%;
+  }
+  .label-jawn {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    
+    margin-bottom: 0;
+  }
+  .center-jawn {
+    grid-column: span 2;
+    text-align: center;
+    justify-content: center;
+    margin-left: -10%;
+  }
+  .label-jawn input {
+    margin-right: 5px;
+  }

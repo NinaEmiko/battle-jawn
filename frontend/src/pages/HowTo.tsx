@@ -6,7 +6,7 @@ import PageName from "../components/PageName";
 import "../styling/HowTo.css";
 import { useState } from "react";
 import HowToArena from "../components/HowToComponents/HowToArena";
-import HowToPlay from "../components/HowToComponents/HowToPlay";
+import HowToShop from "../components/HowToComponents/HowToShop";
 import HowToBag from "../components/HowToComponents/HowToBag";
 import HowToComingSoon from "../components/HowToComponents/HowToComingSoon";
 import HowToHeroes from "../components/HowToComponents/HowToHeroes";
@@ -125,12 +125,14 @@ const HowTo = () => {
                             {activeTab === tabs[2] &&
                                 <div className="battle">
 
+                                    <p className="battle-role">{activePlayPage}</p>
+
                                     {activePlayPage === playPages[0] &&
                                         <HowToArena />
                                     }
 
                                     {activePlayPage === playPages[1] &&
-                                        <HowToPlay />
+                                        <HowToShop />
                                     }
                                     {activePlayPage === playPages[2] &&
                                         <HowToBag />

@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import classNames from 'classnames';
 import "../styling/MyHeroes.css";
 import PopUp from "./PopUp";
-import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
 import Cookies from "js-cookie";
+import Hero from "./Hero";
+import TalentTree from "./TalentTree";
 
 function Heroes( {props}:{props:any} ) {
   const [deleteHeroId, setDeleteHeroId] = useState(0);
@@ -18,11 +19,24 @@ function Heroes( {props}:{props:any} ) {
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  const [activeButton, setActiveButton] = useState("Play");
+  const [activeTab, setActiveTab] = useState("Hero");
+  const tabs = ["Hero", "Talent Tree"]
 
-  const handleTabClick = (button: string) => {
-      setActiveButton(button);
-    };
+  const handleTabLeftClick = () => {
+    const currentIndex = tabs.indexOf(activeTab);
+    const newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    setActiveTab(tabs[newIndex]);
+  };
+
+  const handleTabRightClick = () => {
+    const currentIndex = tabs.indexOf(activeTab);
+    const newIndex = (currentIndex + 1 + tabs.length) % tabs.length;
+    setActiveTab(tabs[newIndex]);
+  };
+
+  const handleSpecificTabClick = (tab: string) => {
+    setActiveTab(tab);
+  }
 
   const navigate = useNavigate();
 
@@ -50,47 +64,43 @@ function Heroes( {props}:{props:any} ) {
     fetchHeroesCall();
   }
 
-  const handleClickOKBtn = (id: number) => {
-    if (activeButton === "Play") {
-      if (heroList[currentHeroIndex].health === 0) {
-        setPopUpType("jawn");
-        setPopUpContent("This hero has no health. You must use a potion or wait until tomorrow to play again.");
-        setShowPopUp(true);
-      } else {
-        Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
-        props.setIsVisible("open-map", id);
-      }
-    } else if (activeButton === "Delete") {
-      setPopUpType("confirmation");
-      setPopUpContent("delete hero");
+  const handleClickPlay = (id: number) => {
+    if (heroList[currentHeroIndex].health === 0) {
+      setPopUpType("jawn");
+      setPopUpContent("This hero has no health. You must use a potion or wait until tomorrow to play again.");
       setShowPopUp(true);
-      setDeleteHeroId(id);
-      setCurrentHeroIndex(0);
+    } else {
+      Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
+      props.setIsVisible("open-map", id);
     }
   }
 
+  const handleClickDelete = (id: number) => {
+    setPopUpType("confirmation");
+    setPopUpContent("delete hero");
+    setShowPopUp(true);
+    setDeleteHeroId(id);
+    setCurrentHeroIndex(0);
+  }
+
   const previousHero = () => {
-    if(currentHeroIndex == 0) {
-      setCurrentHeroIndex(heroList.length - 1)
-    } else {
-      setCurrentHeroIndex(currentHeroIndex - 1);
+    if (activeTab === tabs[0]){
+      setCurrentHeroIndex(currentHeroIndex === 0 ? heroList.length - 1 : currentHeroIndex - 1);
     }
   };
 
   const nextHero = () => {
-    if(currentHeroIndex == heroList.length - 1) {
-      setCurrentHeroIndex(0)
-    } else {
-      setCurrentHeroIndex(currentHeroIndex + 1);
+    if (activeTab === tabs[0]){
+      setCurrentHeroIndex(currentHeroIndex === heroList.length - 1 ? 0 : currentHeroIndex + 1);
     }
   };
 
   const checkActiveHero = () =>{
     const storedActiveHero = Cookies.get('activeHero');
     if (storedActiveHero) {
-          setCurrentHeroIndex(Number(JSON.parse(storedActiveHero)));
-        }
-      }       
+      setCurrentHeroIndex(Number(JSON.parse(storedActiveHero)));
+    }
+  }       
     
   useEffect(() => {
     fetchHeroesCall();
@@ -115,120 +125,53 @@ function Heroes( {props}:{props:any} ) {
             </PageName>
             <Display>
                 <>
-                  {showPopUp &&
-                    <PopUp 
-                      props={{
-                          type: popUpType,
-                          content: popUpContent,
-                          onClickOk: handleOkButtonClick,
-                          onClickConfirm: handleConfirmButtonClick
-                      }} 
-                    />   
-                  }
-
-                  {!showPopUp &&
-
-                  <div >
-
-                    {heroList.length > 0 &&
-
-                    <div className="hero-header-jawn">
-                        <div className="hero-name-level">
-                        <div className="hero-name"> {heroList[currentHeroIndex].name} </div>
-                        <div className="hero-level"> Lvl {heroList[currentHeroIndex].level} {heroList[currentHeroIndex].role} </div>
-                    </div>
-                    <table className="my-heroes-table">
-                    <tbody>
-                        <tr>
-                        <td className="row-jawn">Health:</td>
-                        <td className="data-jawn" id="health-jawn">{heroList[currentHeroIndex].health} / {heroList[currentHeroIndex].maxHealth}</td>
-                        </tr>
-                        {heroList[currentHeroIndex].role == "Tank" &&
-                        <tr>
-                            <td className="row-jawn">Power:</td>
-                            <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
-                        </tr>
-                        }
-                        {heroList[currentHeroIndex].role == "Healer" &&
-                        <tr>
-                            <td className="row-jawn">Spirit:</td>
-                            <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
-                        </tr>
-                        }
-                        {heroList[currentHeroIndex].role == "Caster" &&
-                        <tr>
-                            <td className="row-jawn">Magic:</td>
-                            <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
-                        </tr>
-                        }
-                        {heroList[currentHeroIndex].role == "DPS" &&
-                        <tr>
-                            <td className="row-jawn">Energy:</td>
-                            <td className="data-jawn" id="resource-jawn">{heroList[currentHeroIndex].resource} / {heroList[currentHeroIndex].maxResource}</td>
-                        </tr>
-                        }
-                        <tr>
-                        <td className="row-jawn">Coins:</td>
-                        <td className="data-jawn" id="health-jawn">{heroList[currentHeroIndex].coins}</td>
-                        </tr>
-                    </tbody>
-                    </table>
-
-                    <div className="table-container">
-                      <table className="stats-table">
-                        <tbody className="stats-table-body">
-                          <tr className="stats-table-row">
-                            <td className="stats-table-data">Won</td>
-                            <td className="stats-table-data">Lost</td>
-                            <td className="stats-table-data">Ran</td>
-                            <td className="stats-table-data">Streak</td>
-                          </tr>
-                          <tr className="stats-table-row">
-                            <td className="stats-table-data">{heroList[currentHeroIndex].winCount}</td>
-                            <td className="stats-table-data">{heroList[currentHeroIndex].lossCount}</td>
-                            <td className="stats-table-data">{heroList[currentHeroIndex].runCount}</td>
-                            <td className="stats-table-data">{heroList[currentHeroIndex].winStreak}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="experience-bar-container">
-                    <progress className='experience-bar' value={determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)} max={determineMaxExperience(heroList[currentHeroIndex].level)}></progress>
-                    <span className="experience-fraction">{determineNumerator(heroList[currentHeroIndex].level, heroList[currentHeroIndex].experience)}/{determineMaxExperience(heroList[currentHeroIndex].level)}</span>
-                    </div>
-                    {/* <p className="experience-tag">Experience</p> */}
-
-                    <div className="display-jawn-tabs">
-                        <button className={activeButton === 'Play' ? 'active' : ''} onClick={()=> handleTabClick("Play")}>Play</button>
-                        <button className={activeButton === 'Delete' ? 'active' : ''} onClick={()=> handleTabClick("Delete")}>Delete</button>
-                    </div>
-
-
-                    </div>
-
-                
+                    {showPopUp &&
+                        <PopUp 
+                            props={{
+                                type: popUpType,
+                                content: popUpContent,
+                                onClickOk: handleOkButtonClick,
+                                onClickConfirm: handleConfirmButtonClick
+                            }} 
+                        />   
                     }
-                    </div>
+
+                    {!showPopUp &&
+                        <div>
+                            {heroList.length > 0 &&
+                                <div className="hero-header-jawn">
+                                    {activeTab === tabs[0] &&
+                                      <Hero props={heroList[currentHeroIndex]} />
+                                    }
+                                    {activeTab === tabs[1] &&
+                                      <TalentTree props={heroList[currentHeroIndex]} />
+                                    }
+                                    <div className="display-jawn-tabs">
+                                        <button className={activeTab === tabs[0] ? 'active' : ''} onClick={()=> handleSpecificTabClick(tabs[0])}>Hero</button>
+                                        <button className={activeTab === tabs[1] ? 'active' : ''} onClick={()=> handleSpecificTabClick(tabs[1])}>Talent Tree</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     }
                 </>
             </Display>
             <Controls>
                 <>
                     <div className="controls-left">
-
+                    <button style={{color: "green"}} className="controls-btn" onClick={() => handleClickPlay(heroList[currentHeroIndex].id)}>Play</button>
                         {heroList.length < 5 ? 
                           <button className="controls-btn" onClick={() => handleNavigation("/create-hero")}>New Hero</button>
                           :
                           <button className="controls-btn"></button>
                         }
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>                    
+                        <button style={{color: "red"}} className="controls-btn" onClick={() => handleClickDelete(heroList[currentHeroIndex].id)}>Delete</button>                    
                     </div>
                     <div className="controls-right">
                         <button className="controls-btn" onClick={() => previousHero()}>Up</button>
-                        <button className="controls-btn" onClick={() => handleTabClick("Play")}>Left</button>
-                        <button className="controls-btn" onClick={() => handleClickOKBtn(heroList[currentHeroIndex].id)}>OK</button>
-                        <button className="controls-btn" onClick={() => handleTabClick("Delete")}>Right</button>
+                        <button className="controls-btn" onClick={() => handleTabLeftClick()}>Left</button>
+                        <button className="controls-btn" >OK</button>
+                        <button className="controls-btn" onClick={() => handleTabRightClick()}>Right</button>
                         <button className="controls-btn" onClick={() => nextHero()}>Down</button>
                     </div>
                 </>

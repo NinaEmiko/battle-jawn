@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import "../styling/BattleContainer.css";
 import PostBattle from "./PostBattle";
 import { fetchBattleSession, heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession } from "../api/api";
-import HeroMove from "./HeroMove";
 import EnemyIcon from "./EnemyIcon";
 import HeroIcon from "./HeroIcon";
 import LogBox from "./LogBox";
@@ -257,7 +256,6 @@ function Battle({props}:{props:any}) {
 
             <div className="logBox-container">
               <LogBox battleHistoryProp={battleHistory} />
-              {/* <HeroMove roleProp={role} buttonDisabledProp={buttonDisabled} handleClickBattleProp={handleClickBattle} /> */}
             </div>
           </div>
         }
