@@ -22,7 +22,6 @@ const TalentTree = ({props}:{props:any}) => {
     
     useEffect(() => {
         if (activeTree === "" && treeOne === "" && treeTwo === ""){
-            console.log(props.role);
             let returnTreeOne = treeOneSetter(props.role);
             let returnTreeTwo = treeTwoSetter(props.role);
 

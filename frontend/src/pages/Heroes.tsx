@@ -75,6 +75,13 @@ function Heroes( {props}:{props:any} ) {
     }
   }
 
+  const handleClickTalents = () => {
+    setActiveTab(tabs[1]);
+  }
+  const handleClickHeroes = () => {
+    setActiveTab(tabs[0]);
+  }
+
   const handleClickDelete = (id: number) => {
     setPopUpType("confirmation");
     setPopUpContent("delete hero");
@@ -146,10 +153,11 @@ function Heroes( {props}:{props:any} ) {
                                     {activeTab === tabs[1] &&
                                       <TalentTree props={heroList[currentHeroIndex]} />
                                     }
-                                    <div className="display-jawn-tabs">
-                                        <button className={activeTab === tabs[0] ? 'active' : ''} onClick={()=> handleSpecificTabClick(tabs[0])}>Hero</button>
-                                        <button className={activeTab === tabs[1] ? 'active' : ''} onClick={()=> handleSpecificTabClick(tabs[1])}>Talent Tree</button>
-                                    </div>
+                                    {activeTab === "Hero" && heroList.length < 5 &&
+                                        <div className="display-jawn-tab">
+                                            <button  onClick={() => handleNavigation("/create-hero")}>Create New Hero</button>
+                                        </div>
+                                    }
                                 </div>
                             }
                         </div>
@@ -158,22 +166,39 @@ function Heroes( {props}:{props:any} ) {
             </Display>
             <Controls>
                 <>
+                {activeTab === "Talent Tree" &&
+                <>
                     <div className="controls-left">
-                    <button style={{color: "green"}} className="controls-btn" onClick={() => handleClickPlay(heroList[currentHeroIndex].id)}>Play</button>
-                        {heroList.length < 5 ? 
-                          <button className="controls-btn" onClick={() => handleNavigation("/create-hero")}>New Hero</button>
-                          :
-                          <button className="controls-btn"></button>
-                        }
-                        <button style={{color: "red"}} className="controls-btn" onClick={() => handleClickDelete(heroList[currentHeroIndex].id)}>Delete</button>                    
+                        <button className="controls-btn" ></button>
+                        <button className="controls-btn" ></button>
+                        <button className="controls-btn" onClick={() => handleClickHeroes()}>Back</button>                    
                     </div>
                     <div className="controls-right">
-                        <button className="controls-btn" onClick={() => previousHero()}>Up</button>
-                        <button className="controls-btn" onClick={() => handleTabLeftClick()}>Left</button>
+                        <button className="controls-btn" ></button>
+                        <button className="controls-btn" ></button>
                         <button className="controls-btn" >OK</button>
-                        <button className="controls-btn" onClick={() => handleTabRightClick()}>Right</button>
-                        <button className="controls-btn" onClick={() => nextHero()}>Down</button>
+                        <button className="controls-btn" ></button>
+                        <button className="controls-btn" ></button>
                     </div>
+                    </>
+                }
+
+                {activeTab === "Hero" &&
+                  <>
+                      <div className="controls-left">
+                          <button style={{color: "green"}} className="controls-btn" onClick={() => handleClickPlay(heroList[currentHeroIndex].id)}>Play</button>
+                          <button className="controls-btn" onClick={() => handleClickTalents()}>Talents</button>                    
+                          <button style={{color: "red"}} className="controls-btn" onClick={() => handleClickDelete(heroList[currentHeroIndex].id)}>Delete</button>                    
+                      </div>
+                      <div className="controls-right">
+                        <button className="controls-btn" ></button>
+                        <button className="controls-btn" onClick={() => previousHero()}>Left</button>
+                        <button className="controls-btn" >OK</button>
+                        <button className="controls-btn" onClick={() => nextHero()}>Right</button>
+                        <button className="controls-btn" ></button>
+                    </div>
+                  </>
+                }
                 </>
             </Controls>
         </Container>

@@ -16,6 +16,20 @@
     top: 0;
     height: 10%;
 }
+.display-jawn-tab{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 10%;
+    text-align: center;
+}
+.display-jawn-tab button{
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
 
 .display-jawn-tabs button{
     width: 50%;
