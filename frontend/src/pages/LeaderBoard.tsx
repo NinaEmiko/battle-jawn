@@ -57,39 +57,44 @@ const LeaderBoard = ({props}:{props:any}) => {
                 </div>
             </PageName>
             <Display>
-            <div className="parent-jawn">
-                <div className="child-jawn">
+                <div className="parent-jawn">
+                    <div className="child-jawn">
 
-                {heroList.length > 0 &&
+                        {heroList.length > 0 &&
 
-                <div className="leader-board-header-jawn">
-                    <div className="number-symbol">#{currentHeroIndex + 1}</div>
-                    <div className="leader-board-hero-name-level">
-                    <div className="leader-board-hero-name">{heroList[currentHeroIndex].name} </div>
-                    <p className="leader-board-hero-level">{heroList[currentHeroIndex].role} </p>
-                </div>
+                            <div className="leader-board-header-jawn">
+                                <div className="number-symbol">
+                                    #{currentHeroIndex + 1}
+                                </div>
+                                <div className="leader-board-hero-name-level">
+                                    <div className="leader-board-hero-name">
+                                        {heroList[currentHeroIndex].name}
+                                    </div>
+                                    <p className="leader-board-hero-level">{heroList[currentHeroIndex].role} </p>
+                                </div>
 
-                <div className="table-container">
-                <table className="stats-table">
-                    <tbody className="stats-table-body">
-                    <tr className="stats-table-row">
-                        <td className="stats-table-data">Won</td>
-                        <td className="stats-table-data">Lost</td>
-                        <td className="stats-table-data">Ran</td>
-                        <td className="stats-table-data">Streak</td>
-                    </tr>
-                    <tr className="stats-table-row">
-                        <td className="stats-table-data">{heroList[currentHeroIndex].winCount}</td>
-                        <td className="stats-table-data">{heroList[currentHeroIndex].lossCount}</td>
-                        <td className="stats-table-data">{heroList[currentHeroIndex].runCount}</td>
-                        <td className="stats-table-data">{heroList[currentHeroIndex].winStreak}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
-                </div>
-                }
-                </div>
+                                <div className="table-container">
+                                    <table className="stats-table">
+                                        <tbody className="stats-table-body">
+                                            <tr className="stats-table-row">
+                                                <td className="stats-table-data">Won</td>
+                                                <td className="stats-table-data">Lost</td>
+                                                <td className="stats-table-data">Ran</td>
+                                                <td className="stats-table-data">Streak</td>
+                                            </tr>
+                                            <tr className="stats-table-row">
+                                                <td className="stats-table-data">{heroList[currentHeroIndex].winCount}</td>
+                                                <td className="stats-table-data">{heroList[currentHeroIndex].lossCount}</td>
+                                                <td className="stats-table-data">{heroList[currentHeroIndex].runCount}</td>
+                                                <td className="stats-table-data">{heroList[currentHeroIndex].winStreak}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <p className="leaderboard-howto">Press up or down to scroll through the top 5 heroes.</p>
                 </div>
             </Display>
             <Controls>

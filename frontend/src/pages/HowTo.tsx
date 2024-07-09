@@ -14,7 +14,7 @@ const HowTo = () => {
     const handleTabLeftClick = () => {
         switch (activeButton){
             case "Heroes":
-                setActiveButton("Leader Board");
+                setActiveButton("Coming Soon");
                 break;
             case "Battle":
                 setActiveButton("Heroes");
@@ -22,7 +22,7 @@ const HowTo = () => {
             case "Play":
                 setActiveButton("Battle");
                 break;
-            case "Leader Board":
+            case "Coming Soon":
                 setActiveButton("Play");
                 break;
         }
@@ -37,9 +37,9 @@ const HowTo = () => {
                 setActiveButton("Play");
                 break;
             case "Play":
-                setActiveButton("Leader Board");
+                setActiveButton("Coming Soon");
                 break;
-            case "Leader Board":
+            case "Coming Soon":
                 setActiveButton("Heroes");
                 break;
         }
@@ -133,7 +133,7 @@ const HowTo = () => {
                             <button className={activeButton === 'Heroes' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Heroes")}>Heroes</button>
                             <button className={activeButton === 'Battle' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Battle")}>Battle</button>
                             <button className={activeButton === 'Play' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Play")}>Play</button>
-                            <button className={activeButton === 'Leader Board' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Leader Board")}>Leader Board</button>
+                            <button className={activeButton === 'Coming Soon' ? 'active' : ''} onClick={()=> handleClickSpecificTab("Coming Soon")}>Coming Soon</button>
                         </div>
                             {activeButton === 'Battle' &&
                                 <div className="battle">
@@ -159,8 +159,8 @@ const HowTo = () => {
                                     {activeRole === "DPS" &&
                                         <div>
                                             <p className="battle-move">Stab: Generates 1 Energy.</p>
-                                            <p className="battle-move">FireBlast: Consumes 3 Magic.</p>
-                                            <p className="battle-move">IceBlast: Consumes 1 Magic.</p>
+                                            <p className="battle-move">BackStab: Consumes 3 Energy.</p>
+                                            <p className="battle-move">Steal: Consumes 1 Energy.</p>
                                         </div>
                                     }   
 
@@ -180,35 +180,39 @@ const HowTo = () => {
 
                                     {playPage === 1 &&
                                         <div>
-                                            <p style={{color: "white"}}>Arena: Enter to fight enemies.</p>
-                                            <p style={{color: "white"}}>Shop: Enter to purchase and sell items.</p>
+                                            <p className="battle-role">Arena</p>
+                                            <p className="battle-move">Enter to fight enemies.</p>
                                         </div>
                                     }
 
                                     {playPage === 2 &&
-                                    <div>
-                                        <p>Currently Unavailable:</p>
-                                        <p style={{color: "white"}}>Leaving Town</p>
-                                        <p style={{color: "white"}}>Entering Town Homes</p>
-                                        <p style={{color: "white"}}>Hospital</p>
-                                        <p style={{color: "white"}}>Hostel</p>
-                                        <p style={{color: "white"}}>NPCs</p>
-                                        <p style={{color: "white"}}>Quests</p>
-                                    </div>
+                                        <div>
+                                            <p className="battle-role">Shop</p>
+                                            <p className="battle-move">Enter to purchase and sell items.</p>
+                                        </div>
                                     }
+                                    <p className="battle-howto">Press up or down to scroll through available content.</p>
+
                                 </div>
                             }
 
-                            {activeButton === "Leader Board" &&
-                                <div className="battle">
-                                    <p style={{color: "white"}}>Press up or down to scroll through the current Top 5 heroes</p>
+                            {activeButton === "Coming Soon" &&
+                                 <div>
+                                    <p className="battle-role">Currently Unavailable</p>
+                                    <p className="battle-move">Leaving Town</p>
+                                    <p className="battle-move">Hospital</p>
+                                    <p className="battle-move">NPCs</p>
+                                    <p className="battle-move">Talent Tree</p>      
+                                    <p className="battle-move">Quests</p>   
                                 </div>
                             }
 
                             {activeButton === "Heroes" &&
                                 <div className="battle">
-                                    <p>Currently Unavailable:</p>
-                                    <p style={{color: "white"}}>Talent Tree</p>                                
+                                    <p className="battle-move">Each account may have up to 5 heroes.</p>   
+                                    <p className="battle-move">Deleted heroes cannot be recovered.</p>  
+                                    <p className="battle-move">Press up and down buttons to scroll through heroes.</p>
+                                    <p className="battle-move">Press left and right to cycle between play and delete option for hero. Press OK to select option.</p>   
                                 </div>
                             }
                     </div>

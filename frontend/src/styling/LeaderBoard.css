@@ -56,3 +56,9 @@
     transform: translate(-50%, -50%);
     width: 80%;
   }
+  .leaderboard-howto{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
