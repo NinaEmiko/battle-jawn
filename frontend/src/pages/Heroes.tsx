@@ -9,6 +9,7 @@ import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
+import Cookies from "js-cookie";
 
 function Heroes( {props}:{props:any} ) {
   const [deleteHeroId, setDeleteHeroId] = useState(0);
@@ -56,6 +57,7 @@ function Heroes( {props}:{props:any} ) {
         setPopUpContent("This hero has no health. You must use a potion or wait until tomorrow to play again.");
         setShowPopUp(true);
       } else {
+        Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
         props.setIsVisible("open-map", id);
       }
     } else if (activeButton === "Delete") {
@@ -82,12 +84,20 @@ function Heroes( {props}:{props:any} ) {
       setCurrentHeroIndex(currentHeroIndex + 1);
     }
   };
+
+  const checkActiveHero = () =>{
+    const storedActiveHero = Cookies.get('activeHero');
+    if (storedActiveHero) {
+          setCurrentHeroIndex(Number(JSON.parse(storedActiveHero)));
+        }
+      }       
     
   useEffect(() => {
     fetchHeroesCall();
   }, [showPopUp])
   useEffect(() => {
     fetchHeroesCall();
+    checkActiveHero();
   }, [])
 
   return (
