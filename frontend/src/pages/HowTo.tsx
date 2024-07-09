@@ -5,6 +5,15 @@ import Display from "../components/Display";
 import PageName from "../components/PageName";
 import "../styling/HowTo.css";
 import { useState } from "react";
+import HowToArena from "../components/HowToComponents/HowToArena";
+import HowToPlay from "../components/HowToComponents/HowToPlay";
+import HowToBag from "../components/HowToComponents/HowToBag";
+import HowToComingSoon from "../components/HowToComponents/HowToComingSoon";
+import HowToHeroes from "../components/HowToComponents/HowToHeroes";
+import HowToBattleTank from "../components/HowToComponents/HowToBattleTank";
+import HowToBattleHealer from "../components/HowToComponents/HowToBattleHealer";
+import HowToBattleDPS from "../components/HowToComponents/HowToBattleDPS";
+import HowToBattleCaster from "../components/HowToComponents/HowToBattleCaster";
 
 const HowTo = () => {
     const [activeButton, setActiveButton] = useState("Heroes");
@@ -65,10 +74,13 @@ const HowTo = () => {
         if (activeButton === "Play"){
             switch (playPage){
                 case 1:
-                    setPlayPage(2);
+                    setPlayPage(3);
                     break;
                 case 2:
                     setPlayPage(1);
+                    break;
+                case 3:
+                    setPlayPage(2);
                     break;
             }
         }
@@ -97,6 +109,9 @@ const HowTo = () => {
                     setPlayPage(2);
                     break;
                 case 2:
+                    setPlayPage(3);
+                    break;
+                case 3:
                     setPlayPage(1);
                     break;
             }
@@ -141,36 +156,21 @@ const HowTo = () => {
                                     <p className="battle-role">{activeRole}</p>
 
                                     {activeRole === "Tank" &&
-                                        <div>
-                                            <p className="battle-move">Strike: Generates 1 Power.</p>
-                                            <p className="battle-move">Impale: Consumes 2 Power.</p>
-                                            <p className="battle-move">Block: Successful blocks generate Max Power.</p>
-                                        </div>
+                                        <HowToBattleTank />
                                     }
 
                                     {activeRole === "Healer" &&
-                                        <div>
-                                            <p className="battle-move">Wand: Generates 1 Spirit.</p>
-                                            <p className="battle-move">Holy: Consumes 2 Spirit.</p>
-                                            <p className="battle-move">Heal: Consumes 1 Spirit.</p>
-                                        </div>
+                                        <HowToBattleHealer />
                                     }
 
                                     {activeRole === "DPS" &&
-                                        <div>
-                                            <p className="battle-move">Stab: Generates 1 Energy.</p>
-                                            <p className="battle-move">BackStab: Consumes 3 Energy.</p>
-                                            <p className="battle-move">Steal: Consumes 1 Energy.</p>
-                                        </div>
+                                        <HowToBattleDPS />
                                     }   
 
                                     {activeRole === "Caster" &&
-                                        <div>
-                                            <p className="battle-move">Wand: Generates 1 Magic.</p>
-                                            <p className="battle-move">FireBlast: Consumes 3 Magic.</p>
-                                            <p className="battle-move">IceBlast: Consumes 1 Magic.</p>
-                                        </div>
+                                        <HowToBattleCaster />
                                     }   
+
                                     <p className="battle-howto">Press up or down to scroll through classes.</p>
                                 </div>
                             }
@@ -179,41 +179,27 @@ const HowTo = () => {
                                 <div className="battle">
 
                                     {playPage === 1 &&
-                                        <div>
-                                            <p className="battle-role">Arena</p>
-                                            <p className="battle-move">Enter to fight enemies.</p>
-                                        </div>
+                                        <HowToArena />
                                     }
 
                                     {playPage === 2 &&
-                                        <div>
-                                            <p className="battle-role">Shop</p>
-                                            <p className="battle-move">Enter to purchase and sell items.</p>
-                                        </div>
+                                        <HowToPlay />
                                     }
+                                    {playPage === 3 &&
+                                        <HowToBag />
+                                    }
+                                    
                                     <p className="battle-howto">Press up or down to scroll through available content.</p>
 
                                 </div>
                             }
 
                             {activeButton === "Coming Soon" &&
-                                 <div>
-                                    <p className="battle-role">Currently Unavailable</p>
-                                    <p className="battle-move">Leaving Town</p>
-                                    <p className="battle-move">Hospital</p>
-                                    <p className="battle-move">NPCs</p>
-                                    <p className="battle-move">Talent Tree</p>      
-                                    <p className="battle-move">Quests</p>   
-                                </div>
+                                 <HowToComingSoon />
                             }
 
                             {activeButton === "Heroes" &&
-                                <div className="battle">
-                                    <p className="battle-move">Each account may have up to 5 heroes.</p>   
-                                    <p className="battle-move">Deleted heroes cannot be recovered.</p>  
-                                    <p className="battle-move">Press up and down buttons to scroll through heroes.</p>
-                                    <p className="battle-move">Press left and right to cycle between play and delete option for hero. Press OK to select option.</p>   
-                                </div>
+                                <HowToHeroes />
                             }
                     </div>
             </Display>
