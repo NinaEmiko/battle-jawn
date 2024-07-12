@@ -3,6 +3,7 @@ package com.battlejawn.Entities.Hero;
 import java.time.LocalDateTime;
 
 //import com.battlejawn.Entities.TalentTree.TankTree;
+import com.battlejawn.Entities.TalentTree.TankTree;
 import jakarta.persistence.*;
 
 @Entity 
@@ -13,8 +14,8 @@ public class Tank extends Hero {
 
     }
     public Tank(String name) {
-        super(name, 120, 120,3, 3, "Tank"
-//    new TankTree()
+        super(name, 120, 120,3, 3, "Tank",
+    new TankTree()
     );
     }
     

@@ -3,6 +3,7 @@ package com.battlejawn.Entities.Hero;
 import java.time.LocalDateTime;
 
 //import com.battlejawn.Entities.TalentTree.HealerTree;
+import com.battlejawn.Entities.TalentTree.HealerTree;
 import jakarta.persistence.*;
 
 @Entity 
@@ -12,8 +13,8 @@ public class Healer extends Hero {
 
     }
     public Healer(String name) {
-        super(name, 100, 100,3, 3, "Healer"
-//    new HealerTree()
+        super(name, 100, 100,3, 3, "Healer",
+    new HealerTree()
     );
     }
     

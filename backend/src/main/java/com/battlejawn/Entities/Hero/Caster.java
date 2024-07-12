@@ -3,6 +3,7 @@ package com.battlejawn.Entities.Hero;
 import java.time.LocalDateTime;
 
 //import com.battlejawn.Entities.TalentTree.CasterTree;
+import com.battlejawn.Entities.TalentTree.CasterTree;
 import jakarta.persistence.*;
 
 @Entity 
@@ -12,8 +13,8 @@ public class Caster extends Hero {
 
     }
     public Caster(String name) {
-        super(name, 90, 90,3, 3, "Caster"
-//    new CasterTree()
+        super(name, 90, 90,3, 3, "Caster",
+    new CasterTree()
     );
     }
 
