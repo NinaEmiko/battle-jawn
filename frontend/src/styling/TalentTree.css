@@ -21,29 +21,77 @@
     color: gold;
 }
 .hero-name{
-    font-size: 30px;
-    color: gold;
-    margin-top:11%;
-    text-align: center;
-  }
-  .talent-group-jawn{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    margin-left: 10%;
-  }
-  .label-jawn {
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    
-    margin-bottom: 0;
-  }
-  .center-jawn {
-    grid-column: span 2;
-    text-align: center;
-    justify-content: center;
-    margin-left: -10%;
-  }
-  .label-jawn input {
-    margin-right: 5px;
-  }
+  font-size: 30px;
+  color: gold;
+  margin-top:11%;
+  text-align: center;
+}
+.talent-group-jawn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* height: 50%; */
+}
+.left-and-right-container-jawn{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* width: 100%; */
+  border: white;
+  /* height: 75%; */
+}
+.left-container-jawn .right-container-jawn{ 
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+  border: white;
+  /* height: 75%; */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.bottom-container-jawn {
+  width: calc(50% - 10px);
+  text-align: center;
+  box-sizing: border-box;
+  border: white;
+  /* height: 25%; */
+  justify-content: center;
+  display: flex;
+}
+.center-jawn {
+  grid-column: span 2;
+  text-align: center;
+  justify-content: center;
+  margin-left: -10%;
+}
+.talent-jawn-active{
+  margin-right: 5px;
+  color: green;
+  background: transparent;
+  border: transparent;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  width: 100%;
+}
+.talent-jawn-inactive{
+  margin-right: 5px;
+  color: grey;
+  background: transparent;
+  border: transparent;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  width: 100%;
+}
+.talent-jawn-available{
+  margin-right: 5px;
+  color: #0FA4AF;
+  background: transparent;
+  border: transparent;
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  width: 100%;
+}

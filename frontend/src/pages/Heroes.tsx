@@ -47,6 +47,7 @@ function Heroes( {props}:{props:any} ) {
   const fetchHeroesCall = async () => {
     const data = await fetchHeroes(props.accountId);
     setHeroList(data);
+    // console.log(data)
   }
 
   const handleRest = async (id: any) => {
@@ -145,6 +146,12 @@ function Heroes( {props}:{props:any} ) {
 
                     {!showPopUp &&
                         <div>
+                            {activeTab === "Hero" && heroList.length < 5 &&
+                                <div className="display-jawn-tab">
+                                    <button  onClick={() => handleNavigation("/create-hero")}>Create New Hero</button>
+                                </div>
+                            }
+
                             {heroList.length > 0 &&
                                 <div className="hero-header-jawn">
                                     {activeTab === tabs[0] &&
@@ -152,11 +159,6 @@ function Heroes( {props}:{props:any} ) {
                                     }
                                     {activeTab === tabs[1] &&
                                       <TalentTree props={heroList[currentHeroIndex]} />
-                                    }
-                                    {activeTab === "Hero" && heroList.length < 5 &&
-                                        <div className="display-jawn-tab">
-                                            <button  onClick={() => handleNavigation("/create-hero")}>Create New Hero</button>
-                                        </div>
                                     }
                                 </div>
                             }

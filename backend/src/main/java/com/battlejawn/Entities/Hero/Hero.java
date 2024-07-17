@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.battlejawn.Entities.Inventory;
 //import com.battlejawn.Entities.TalentTree.TalentTree;
+import com.battlejawn.Entities.TalentTree.TalentTree;
 import com.battlejawn.Entities.UserAccount;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -61,15 +62,15 @@ public abstract class Hero {
     private int winStreak;
     @Column
     private int talentPoints;
-//    @JoinColumn(name = "talent_tree_id", nullable = false)
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private TalentTree talentTree;
+    @JoinColumn(name = "talent_tree_id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    private TalentTree talentTree;
 
     public Hero() {
     }
 
     public Hero(String name, int health, int maxHealth, int resource, int maxResource, String role
-//                TalentTree talentTree
+                ,TalentTree talentTree
     ) {
         this.name = name;
         this.health = health;
@@ -88,7 +89,7 @@ public abstract class Hero {
         this.activeBattleSession = null;
         this.winStreak = 0;
         this.talentPoints = 0;
-//        this.talentTree = talentTree;
+        this.talentTree = talentTree;
     }
     
 }

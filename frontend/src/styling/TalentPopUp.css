@@ -1,0 +1,87 @@
+#ok-btn {
+    /* color: green;
+    background: transparent;
+    font-size: 15px;
+    height: 100%;
+    width: 25%; */
+    margin-left: 5px;
+    /* float: right; */
+    margin-right: 15px;
+    color: green;
+    width: 100%;
+    background: transparent;
+    font-size: 15px;
+    height: 30px;
+    border-radius: 5px;
+    }
+    
+    #yes-btn{
+      /* padding: 10px 20px; */
+      background: transparent;
+      border: 2px solid grey;
+      color: green;
+      font-size: 16px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      border-radius: 5px;
+    }
+  
+    #no-btn{
+      /* padding: 10px 20px; */
+      background: transparent;
+      border: 2px solid grey;
+      color: var(--light-jawn);
+      font-size: 16px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      border-radius: 5px;
+  
+    }
+    .confirmation-talent{
+      color: var(--mid-light-jawn);
+      font-size: 20px;
+      text-align: center;
+      margin-top: 5px;
+    }
+    .confirmation-description{
+      color: var(--light-jawn);
+      font-size: 15px;
+      text-align: center;
+    }
+    .confirmation-btns{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    .ok-btn-jawn{
+      margin-top: 15px;
+      margin-left: 15px;
+      margin-right: 15px;
+  
+    }
+    .content{
+      margin-top: 10px;
+      width: 100%;
+      text-align: center;
+    }
+    .ok-btn{
+      margin-left: 5px;
+      margin-right: 15px;
+      float: right;
+      color: var(--mid-dark-jawn);
+      width: 33%;
+      background: transparent;
+      font-size: 15px;
+      height: 30px;
+      border-radius: 5px;
+    }
+  
+    .pop-up-jawn{
+      align-items: center;
+      justify-content: center;
+    }
