@@ -89,7 +89,7 @@ export const talentDescriptions = (talent: string) => {
             return "Successful steal grants 3 energy.";
         case "First Strike":
             return "First BackStab costs 0 energy.";
-        case "Honar Among Thieves":
+        case "Honor Among Thieves":
             return "Items cannot be stolen from hero.";
         case "Improved Steal 1":
             return "Hero can steal coins.";

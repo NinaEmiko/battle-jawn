@@ -47,7 +47,7 @@ function Heroes( {props}:{props:any} ) {
   const fetchHeroesCall = async () => {
     const data = await fetchHeroes(props.accountId);
     setHeroList(data);
-    console.log(data)
+    // console.log(data)
   }
 
   const handleRest = async (id: any) => {

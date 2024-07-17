@@ -21,23 +21,23 @@ const DefenseTree = ({props}:{props:any}) => {
                 }
 
                 {props.improvedHealth2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Health 2", "Description", "active")}>Improved Health 2</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Health 2", "Improved Health 2", "active")}>Improved Health 2</button>
                 }
                 {!props.improvedHealth2 && !props.improvedHealth1 &&
                     <button className="talent-jawn-inactive">Improved Health 2</button>
                 }
                 {!props.improvedHealth2 && props.improvedHealth1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Health 2", "Description", "available")}>Improved Health 2</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Health 2", "Improved Health 2", "available")}>Improved Health 2</button>
                 }
 
                 {props.hydration &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Hydration", "Description", "active")}>Hydration</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Hydration", "Hydration", "active")}>Hydration</button>
                 }
                 {!props.hydration && !props.improvedHealth2 &&
                     <button className="talent-jawn-inactive">Hydration</button>
                 }
                 {!props.hydration && props.improvedHealth2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Hydration", "Description", "available")}>Hydration</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Hydration", "Hydration", "available")}>Hydration</button>
                 }
 
 
@@ -52,23 +52,23 @@ const DefenseTree = ({props}:{props:any}) => {
                 }
 
                 {props.improvedBlock2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Block 2", "Description", "active")}>Improved Block 2</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Block 2", "Improved Block 2", "active")}>Improved Block 2</button>
                 }
                 {!props.improvedBlock2 && !props.improvedBlock1 &&
                     <button className="talent-jawn-inactive">Improved Block 2</button>
                 }
                 {!props.improvedBlock2 && props.improvedBlock1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Block 2", "Description", "available")}>Improved Block 2</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Block 2", "Improved Block 2", "available")}>Improved Block 2</button>
                 }
 
                 {props.finalStand &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Final Stand", "Description", "active")}>Final Stand</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Final Stand", "Final Stand", "active")}>Final Stand</button>
                 }
                 {!props.finalStand && !props.improvedBlock2 &&
                     <button className="talent-jawn-inactive">Final Stand</button>
                 }
                 {!props.finalStand && props.improvedBlock2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Final Stand", "Description", "available")}>Final Stand</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Final Stand", "Final Stand", "available")}>Final Stand</button>
                 }
 
             </div>
@@ -77,11 +77,11 @@ const DefenseTree = ({props}:{props:any}) => {
             <div className="bottom-container-jawn">
 
             {props.desperation &&
-                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Desperation", "Description", "active")}>Desperation</button>
+                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Desperation", "Desperation", "active")}>Desperation</button>
             }
             {!props.desperation && props.finalStand && props.improvedHealth2 ||
             !props.desperation && props.hydration && props.improvedBlock2 ?
-                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Desperation", "Description", "available")}>Desperation</button>
+                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Desperation", "Desperation", "available")}>Desperation</button>
             :
                 <button className="talent-jawn-inactive center-jawn">Desperation</button>
             }

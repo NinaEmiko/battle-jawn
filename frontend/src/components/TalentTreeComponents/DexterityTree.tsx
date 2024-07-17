@@ -21,23 +21,23 @@ const DexterityTree = ({props}:{props:any}) => {
                 }
 
                 {props.improvedStab2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Stab 2", "Description", "active")}>Improved Stab 2</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Stab 2", "Improved Stab 2", "active")}>Improved Stab 2</button>
                 }
                 {!props.improvedStab2 && !props.improvedStab1 &&
                     <button className="talent-jawn-inactive">Improved Stab 2</button>
                 }
                 {!props.improvedStab2 && props.improvedStab1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Stab 2", "Description", "available")}>Improved Stab 2</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Stab 2", "Improved Stab 2", "available")}>Improved Stab 2</button>
                 }
 
                 {props.improvedStab3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Stab 3", "Description", "active")}>Improved Stab 3</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Stab 3", "Improved Stab 3", "active")}>Improved Stab 3</button>
                 }
                 {!props.improvedStab3 && !props.improvedStab2 &&
                     <button className="talent-jawn-inactive">Improved Stab 3</button>
                 }
                 {!props.improvedStab3 && props.improvedStab2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Stab 3", "Description", "available")}>Improved Stab 3</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Stab 3", "Improved Stab 3", "available")}>Improved Stab 3</button>
                 }
 
 
@@ -52,23 +52,23 @@ const DexterityTree = ({props}:{props:any}) => {
                 }
 
                 {props.improvedBackStab2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved BackStab 2", "Description", "active")}>Improved BackStab 2</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved BackStab 2", "Improved BackStab 2", "active")}>Improved BackStab 2</button>
                 }
                 {!props.improvedBackStab2 && !props.improvedBackStab1 &&
                     <button className="talent-jawn-inactive">Improved BackStab 2</button>
                 }
                 {!props.improvedBackStab2 && props.improvedBackStab1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved BackStab 2", "Description", "available")}>Improved BackStab 2</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved BackStab 2", "Improved BackStab 2", "available")}>Improved BackStab 2</button>
                 }
 
                 {props.energized &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Energized", "Description", "active")}>Energized</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Energized", "Energized", "active")}>Energized</button>
                 }
                 {!props.energized && !props.improvedBackStab2 &&
                     <button className="talent-jawn-inactive">Energized</button>
                 }
                 {!props.energized && props.improvedBackStab2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Energized", "Description", "available")}>Energized</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Energized", "Energized", "available")}>Energized</button>
                 }
 
             </div>
@@ -77,11 +77,11 @@ const DexterityTree = ({props}:{props:any}) => {
             <div className="bottom-container-jawn">
 
             {props.organizedMess &&
-                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Organized Mess", "Description", "active")}>Organized Mess</button>
+                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Organized Mess", "Organized Mess", "active")}>Organized Mess</button>
             }
             {!props.organizedMess && props.improvedStab2 && props.energized ||
             !props.organizedMess && props.improvedBackStab2 && props.improvedStab3 ?
-                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Organized Mess", "Description", "available")}>Organized Mess</button>
+                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Organized Mess", "Organized Mess", "available")}>Organized Mess</button>
             :
                 <button className="talent-jawn-inactive center-jawn">Organized Mess</button>
             }

@@ -21,23 +21,23 @@ const StrengthTree = ({props}:{props:any}) => {
                 }
 
                 {props.improvedStrike2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 2", "Description", "active")}>Improved Strike 2</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 2", "Improved Strike 2", "active")}>Improved Strike 2</button>
                 }
                 {!props.improvedStrike2 && !props.improvedStrike1 &&
                     <button className="talent-jawn-inactive">Improved Strike 2</button>
                 }
                 {!props.improvedStrike2 && props.improvedStrike1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 2", "Description", "available")}>Improved Strike 2</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 2", "Improved Strike 2", "available")}>Improved Strike 2</button>
                 }
 
                 {props.improvedStrike3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 3", "Description", "active")}>Improved Strike 3</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 3", "Improved Strike 3", "active")}>Improved Strike 3</button>
                 }
                 {!props.improvedStrike3 && !props.improvedStrike2 &&
                     <button className="talent-jawn-inactive">Improved Strike 3</button>
                 }
                 {!props.improvedStrike3 && props.improvedStrike2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 3", "Description", "available")}>Improved Strike 3</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 3", "Improved Strike 3", "available")}>Improved Strike 3</button>
                 }
 
 
@@ -52,23 +52,23 @@ const StrengthTree = ({props}:{props:any}) => {
                 }
 
                 {props.improvedImpale2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 2", "Description", "active")}>Improved Impale 2</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 2", "Improved Impale 2", "active")}>Improved Impale 2</button>
                 }
                 {!props.improvedImpale2 && !props.improvedImpale1 &&
                     <button className="talent-jawn-inactive">Improved Impale 2</button>
                 }
                 {!props.improvedImpale2 && props.improvedImpale1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 2", "Description", "available")}>Improved Impale 2</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 2", "Improved Impale 2", "available")}>Improved Impale 2</button>
                 }
 
                 {props.improvedImpale3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 3", "Description", "active")}>Improved Impale 3</button>
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 3", "Improved Impale 3", "active")}>Improved Impale 3</button>
                 }
                 {!props.improvedImpale3 && !props.improvedImpale2 &&
                     <button className="talent-jawn-inactive">Improved Impale 3</button>
                 }
                 {!props.improvedImpale3 && props.improvedImpale2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 3", "Description", "available")}>Improved Impale 3</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 3", "Improved Impale 3", "available")}>Improved Impale 3</button>
                 }
 
             </div>
@@ -77,11 +77,11 @@ const StrengthTree = ({props}:{props:any}) => {
             <div className="bottom-container-jawn">
 
             {props.titan &&
-                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Titan", "Description", "active")}>Titan</button>
+                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Titan", "Titan", "active")}>Titan</button>
             }
             {!props.titan && props.improvedStrike3 && props.improvedImpale2 ||
             !props.titan && props.improvedStrike2 && props.improvedImpale3 ?
-                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Titan", "Description", "available")}>Titan</button>
+                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Titan", "Titan", "available")}>Titan</button>
             :
                 <button className="talent-jawn-inactive center-jawn">Titan</button>
             }

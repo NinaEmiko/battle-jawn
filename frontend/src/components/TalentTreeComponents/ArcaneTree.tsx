@@ -45,30 +45,30 @@ const ArcaneTree = ({props}:{props:any}) => {
 
                 <div className="right-container-jawn">
 
-                    {props.talentTree.resourcefulness1 ?
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Resourcefulness 1", talentDescriptions("Resourcefulness 1"), "active")}>Resourcefulness 1</button>
+                    {props.talentTree.improvedWand1 ?
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 1", talentDescriptions("Improved Wand 1 - Arcane"), "active")}>Improved Wand 1</button>
                     :
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Resourcefulness 1", talentDescriptions("Resourcefulness 1"), "available")}>Resourcefulness 1</button>
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 1", talentDescriptions("Improved Wand 1 - Arcane"), "available")}>Improved Wand 1</button>
                     }
 
-                    {props.talentTree.resourcefulness2 &&
-                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Resourcefulness 2", talentDescriptions("Resourcefulness 2"), "active")}>Resourcefulness 2</button>
+                    {props.talentTree.improvedWand2 &&
+                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 2", talentDescriptions("Improved Wand 2 - Arcane"), "active")}>Improved Wand 2</button>
                     }
-                    {!props.talentTree.resourcefulness2 && !props.talentTree.resourcefulness1 &&
-                        <button className="talent-jawn-inactive">Resourcefulness 2</button>
+                    {!props.talentTree.improvedWand2 && !props.talentTree.improvedWand1 &&
+                        <button className="talent-jawn-inactive">Improved Wand 2</button>
                     }
-                    {!props.talentTree.resourcefulness2 && props.talentTree.resourcefulness1 &&
-                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Resourcefulness 2", talentDescriptions("Resourcefulness 2"), "available")}>Resourcefulness 1</button>
+                    {!props.talentTree.improvedWand2 && props.talentTree.improvedWand1 &&
+                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 2", talentDescriptions("Improved Wand 2 - Arcane"), "available")}>Improved Wand 1</button>
                     }
 
-                    {props.talentTree.frostBite &&
-                        <button className="talent-jawn-active" onClick={() => handleTalentClick("FrostBite", talentDescriptions("FrostBite"), "active")}>FrostBite</button>
+                    {props.talentTree.improvedWand3 &&
+                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 3", talentDescriptions("Improved Wand 3 - Arcane"), "active")}>Improved Wand 3</button>
                     }
-                    {!props.talentTree.frostBite && !props.talentTree.resourcefulness2 &&
+                    {!props.talentTree.improvedWand3 && !props.talentTree.improvedWand2 &&
                         <button className="talent-jawn-inactive">FrostBite</button>
                     }
-                    {!props.talentTree.frostBite && props.talentTree.resourcefulness2 &&
-                        <button className="talent-jawn-available" onClick={() => handleTalentClick("FrostBite", talentDescriptions("FrostBite"), "available")}>FrostBite</button>
+                    {!props.talentTree.improvedWand3 && props.talentTree.improvedWand2 &&
+                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 3", talentDescriptions("Improved Wand 3 - Arcane"), "available")}>Improved Wand 3</button>
                     }
 
                 </div>
