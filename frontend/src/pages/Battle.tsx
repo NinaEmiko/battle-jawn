@@ -1,11 +1,11 @@
 import "../styling/Container.css";
 import { useEffect, useState } from "react";
 import "../styling/BattleContainer.css";
-import PostBattle from "./PostBattle";
+import PostBattle from "../components/Battle/PostBattle";
 import { fetchBattleSession, heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession } from "../api/api";
-import EnemyIcon from "./EnemyIcon";
-import HeroIcon from "./HeroIcon";
-import LogBox from "./LogBox";
+import EnemyIcon from "../components/Battle/EnemyIcon";
+import HeroIcon from "../components/Battle/HeroIcon";
+import LogBox from "../components/Battle/LogBox";
 import { determineResourceIcon } from "../helpers/icon_helper";
 import Container from "../components/Container";
 import PageName from "../components/PageName";
@@ -47,7 +47,7 @@ function Battle({props}:{props:any}) {
   //HANDLER FUNCTIONS
 
   const handleExitPostBattleComponent = () => {
-    props.setIsVisible("open-map-post-battle",props.heroId);
+    props.setIsVisible("Map",props.heroId);
   }
 
   const handleEnemyMove = () => {
@@ -210,17 +210,7 @@ function Battle({props}:{props:any}) {
 
   return (
     <Container>
-      <PageName >
-        <div className="page-name-column-1">
-          {/* <button className="page-name-btn">Sign Out</button> */}
-        </div>
-        <div className="page-name-column-2">
-            <div className="page-name-txt">Battle</div>
-        </div>
-        <div className="page-name-column-3">
-            {/* <button className="page-name-btn">New Hero</button> */}
-        </div>
-      </PageName>
+      <PageName props={"Battle"} />
       <Display>
         {beginBattle && !postBattleActive &&
           <div className="battle-container-jawn">
@@ -264,22 +254,20 @@ function Battle({props}:{props:any}) {
           <PostBattle props={{postBattleObject: postBattleObject, handleExitPostBattleComponent: handleExitPostBattleComponent}} />
         }
       </Display>
-      <Controls>
-        <>
-          <div className="controls-left">
-            <button className="controls-btn" onClick={()=> handleClickBattle("Potion")}>Potion</button>
-            <button className="controls-btn" onClick={()=> handleClickBattle("Water")}>Water</button>
-            <button className="controls-btn" onClick={()=> handleClickBattle("Run")}>Run</button>                    
-          </div>
-          <div className="controls-right">
-            <button className="controls-btn"></button>
-            <button className="controls-btn" onClick={()=> handleClickBattle(moveOne)}>{moveOne}</button>
-            <button className="controls-btn" onClick={()=> handleClickBattle(moveTwo)}>{moveTwo}</button>
-            <button className="controls-btn" onClick={()=> handleClickBattle(moveThree)}>{moveThree}</button>
-            <button className="controls-btn"></button>
-          </div>
-        </>
-      </Controls>
+      <Controls
+        handleClickLeftBtnTop={() => handleClickBattle("Potion")}
+        leftBtnTopText="Potion"
+        handleClickLeftBtnMiddle={() => handleClickBattle("Water")}
+        leftBtnMiddleText="Water"
+        handleClickLeftBtnBottom={() => handleClickBattle("Run")}
+        leftBtnBottomText="Run"
+        handleClickRightBtnLeft={() => handleClickBattle(moveOne)}
+        rightBtnTopText={moveOne}
+        handleClickRightBtnCenter={() => handleClickBattle(moveTwo)}
+        rightBtnCenterText={moveTwo}
+        handleClickRightBtnRight={() => handleClickBattle(moveThree)}
+        rightBtnRightText={moveThree}
+      />
     </Container>
   );
 }

@@ -4,73 +4,46 @@ import Inventory from "./Inventory";
 import Map from "./Map";
 import Shop from "./Shop";
 import Heroes from "./Heroes";
+import TalentTree from "./TalentTree";
+import CreateNewHero from "./CreateNewHero";
 
 function Home( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
-  const [battleActive, setBattleActive] = useState(false);
-  const [shopActive, setShopActive] = useState(false);
-  const [inventoryActive, setInventoryActive] = useState(false);
-  const [mapActive, setMapActive] = useState(false);
-  const [prevScreen, setPrevScreen] = useState('Heroes');
+  const [activeTab, setActiveTab] = useState("Heroes");
   
-  const handleSubComponentButtonClick = (component: string, id: number) => {
-    if (component === "exit-map"){
-      setHeroId(id);
-      setMapActive(false);
-    } else if (component === "exit-store"){
-      setHeroId(id);
-      setPrevScreen('Shop')
-      setShopActive(false);
-      setMapActive(true);
-    } else if (component === "exit-inventory"){
-      setHeroId(id);
-      setPrevScreen('Inventory')
-      setInventoryActive(false);
-      setMapActive(true);
-    } else if (component === "open-store") {
-      setHeroId(id);
-      setMapActive(false);
-      setShopActive(true);
-    } else if (component === "open-inventory") {
-      setHeroId(id);
-      setMapActive(false);
-      setInventoryActive(true);
-    } else if (component === "open-battle") {
-      setHeroId(id);
-      setMapActive(false);
-      setBattleActive(true);
-    } else if (component === "open-map") {
-      setHeroId(id);
-      setMapActive(true);
-    } else if (component === "open-map-post-battle") {
-      setHeroId(id);
-      setBattleActive(false);
-      setPrevScreen('Battle');
-      setMapActive(true);
-    }
+  const handleRedirect = (component: string, id: number) => {
+    setHeroId(id);
+    setActiveTab(component);
   }
 
   return (
     <>
-        {battleActive &&  
-          <Battle  props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+        {activeTab === "Battle" &&  
+          <Battle props={{heroId:heroId, setIsVisible: handleRedirect}} />
         }
 
-        {shopActive &&
-          <Shop props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+        {activeTab === "Shop" &&
+          <Shop props={{heroId:heroId, setIsVisible: handleRedirect}} />
         }
 
-        {inventoryActive &&
-          <Inventory props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick}} />
+        {activeTab === "Inventory" &&
+          <Inventory props={{heroId:heroId, setIsVisible: handleRedirect}} />
         }
 
-        {mapActive &&
-          <Map props={{heroId:heroId, setIsVisible: handleSubComponentButtonClick, prevScreen: prevScreen}} />
-
+        {activeTab === "Map" &&
+          <Map props={{heroId:heroId, setIsVisible: handleRedirect}} />
         }
 
-        {!battleActive && !inventoryActive && !shopActive && !mapActive &&
-          <Heroes props={{accountId:props.id, setIsVisible: handleSubComponentButtonClick}} />
+        {activeTab === "Heroes" &&
+          <Heroes props={{accountId:props.id, setIsVisible: handleRedirect}} />
+        }
+
+        {activeTab === "Talents" &&
+          <TalentTree props={{id:heroId, setIsVisible: handleRedirect}} />
+        }
+
+        {activeTab === "New Hero" &&
+          <CreateNewHero props={{accountId:props.id, setIsVisible: handleRedirect}} />
         }
     </>
   );

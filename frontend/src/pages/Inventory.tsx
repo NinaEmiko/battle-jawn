@@ -1,23 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import healthPotion from "../assets/healthPotion.png";
-import vest from "../assets/vest.png";
-import sword from "../assets/sword.png";
-import pelt from "../assets/pelt.png";
-import scraps from "../assets/scraps.png";
-import boots from "../assets/boots.png";
-import dagger from "../assets/dagger.png";
-import helm from "../assets/helm.png";
-import jewels from "../assets/jewelery.png";
-import mask from "../assets/mask.png";
-import necklace from "../assets/necklace.png";
-import paw from "../assets/paw.png";
-import trinket from "../assets/spirit-trinket.png";
-import pants from "../assets/pants.png";
-import water from "../assets/water.png";
-import classNames from "classnames";
+import { healthPotion, vest, sword, pelt, scraps, 
+    boots, dagger, helm, jewels, mask, necklace,
+    paw, trinket, pants, water } from "../helpers/image_helper";
 import "../styling/Inventory.css";
-import PopUp from "./PopUp";
+import PopUp from "../components/PopUp";
 import { fetchHero, fetchInventory, usePotion, useWater } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
@@ -60,7 +46,7 @@ const Inventory = ({props}:{props:any}) => {
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("exit-inventory", props.heroId)
+        props.setIsVisible("Map", props.heroId)
     }
 
     const handleOkButtonClick = () => {
@@ -130,17 +116,7 @@ const Inventory = ({props}:{props:any}) => {
     return (
         <>
             <Container>
-                <PageName>
-                    <div className="page-name-column-1">
-                        {/* <button className="page-name-btn">Close</button> */}
-                    </div>
-                    <div className="page-name-column-2">
-                        <div className="page-name-txt">Inventory</div>
-                    </div>
-                    <div className="page-name-column-3">
-                        {/* <button className="page-name-btn">New Hero</button> */}
-                    </div>
-                </PageName>
+                <PageName props={"Inventory"} />
                 <Display>
                     <>
                         {!showPopUp ? 
@@ -157,7 +133,6 @@ const Inventory = ({props}:{props:any}) => {
                                         </div>
                                         <div className="coins-container-jawn">
                                             <p className="coins-jawn">{heroCoins} coins</p>
-                                            {/* <img className="cash" src={cash}/> */}
                                         </div>
                                     </div>
                                 </div>
@@ -173,22 +148,10 @@ const Inventory = ({props}:{props:any}) => {
                         }
                     </>
                 </Display>
-                <Controls>
-                    <>
-                        <div className="controls-left">
-                            <button className="controls-btn"></button>
-                            <button className="controls-btn"></button>
-                            <button className="controls-btn" onClick={() => handleBackButtonClick()}>Close</button>                    
-                        </div>
-                        <div className="controls-right">
-                            <button className="controls-btn">Up</button>
-                            <button className="controls-btn">Left</button>
-                            <button className="controls-btn">OK</button>
-                            <button className="controls-btn">Right</button>
-                            <button className="controls-btn">Down</button>
-                        </div>
-                    </>
-                </Controls>
+                <Controls
+                    handleClickLeftBtnBottom={() => handleBackButtonClick()}
+                    leftBtnBottomText="Close"
+                />
             </Container>
         </>
     );

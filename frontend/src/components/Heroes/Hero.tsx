@@ -1,5 +1,5 @@
-import "../styling/MyHeroes.css";
-import { determineMaxExperience, determineNumerator } from "../helpers/experience_helper";
+import "../../styling/MyHeroes.css";
+import { determineMaxExperience, determineNumerator } from "../../helpers/experience_helper";
 
 const Hero = ({props}:{props:any}) => {
 

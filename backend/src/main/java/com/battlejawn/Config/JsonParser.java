@@ -25,6 +25,15 @@ public class JsonParser {
             return null;
         }
     }
+    public String extractTalent(String jsonString) {
+        try {
+            JsonNode jsonNode = objectMapper.readTree(jsonString);
+            return jsonNode.get("talent").asText();
+        } catch (Exception e) {
+            logger.info("Exception: " + e);
+            return null;
+        }
+    }
     public String extractMove(String jsonString) {
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonString);

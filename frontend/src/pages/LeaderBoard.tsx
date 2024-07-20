@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../styling/LeaderBoard.css";
-import classNames from 'classnames';
 import { useNavigate } from "react-router-dom";
 import { fetchLeaderboard } from "../api/api";
 import Container from "../components/Container";
@@ -8,7 +7,7 @@ import PageName from "../components/PageName";
 import Display from "../components/Display";
 import Controls from "../components/Controls";
 
-const LeaderBoard = ({props}:{props:any}) => {
+const LeaderBoard = () => {
     const [heroList, setHeroList] = useState([]);
     const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
@@ -45,17 +44,7 @@ const LeaderBoard = ({props}:{props:any}) => {
     
     return (        
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Close</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">Leader Board</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"Leader Board"} />
             <Display>
                 <div className="parent-jawn">
                     <div className="child-jawn">
@@ -97,22 +86,14 @@ const LeaderBoard = ({props}:{props:any}) => {
                     <p className="leaderboard-howto">Press up or down to scroll through the top 5 heroes.</p>
                 </div>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn" onClick={() => previousHero()}>Up</button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => nextHero()}>Down</button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnBottom={() => handleNavigation("/")}
+                leftBtnBottomText="Exit"
+                handleClickRightBtnTop={() => previousHero()}
+                rightBtnTopText="Up"
+                handleClickRightBtnBottom={() => nextHero()}
+                rightBtnBottomText="Down"
+            />
         </Container>
     )
 }

@@ -216,3 +216,28 @@ export const endBattleSession = async (battleSessionId: number, battleResult: st
         console.error('Error processing end of battle:', error)
     }
 }
+
+export const activateTalent = async (id: number, talent: string) => {
+    try {
+        const response = await axios.post(`${ENDPOINTS.ACTIVATE_TALENT}`, {
+            heroId: id, 
+            talent: talent 
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error activating talent:', error)
+    }
+}
+
+export const newHero = async (id: number, heroName: string, role: string) => {
+    try {
+        const response = await axios.post(`${ENDPOINTS.NEW_HERO}`, {
+            userAccountId: id,
+            heroName: heroName,
+            role: role
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error creating hero:', error);
+    }
+}

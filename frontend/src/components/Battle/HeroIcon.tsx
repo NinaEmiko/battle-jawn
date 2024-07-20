@@ -1,9 +1,9 @@
-import "../styling/HeroIcon.css";
-import "../styling/Container.css";
-import wizard from "../assets/wizard.png";
-import ninja from "../assets/ninja.png";
-import athena from "../assets/athena.png";
-import antibiotics from "../assets/antibiotics.png";
+import "../../styling/HeroIcon.css";
+import "../../styling/Container.css";
+import wizard from "../../assets/wizard.png";
+import ninja from "../../assets/ninja.png";
+import athena from "../../assets/athena.png";
+import antibiotics from "../../assets/antibiotics.png";
 
 const HeroIcon = ({heroNameProp}:{heroNameProp: string}) => {
 

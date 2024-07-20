@@ -63,13 +63,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
 
   return (
     <Container>
-      <PageName>
-        <div className="page-name-column-1"></div>
-        <div className="page-name-column-2">
-          <div className="page-name-txt">Welcome</div>
-        </div>
-        <div className="page-name-column-3"></div>
-      </PageName>
+      <PageName props={"Welcome"} />
       <Display>
         <div className="parent-jawn">
           <div className="child-jawn">
@@ -160,26 +154,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
           </div>
         </div>
       </Display>
-      <Controls>
-        <>
-          <div className="controls-left">
-            <button className="controls-btn"></button>
-            <button className="controls-btn"></button>
-            <button className="controls-btn"></button>
-          </div>
-          <div className="controls-right">
-            <button className="controls-btn"></button>
-            <button className="controls-btn" onClick={() => handleTabClick('Login')}>
-              Left
-            </button>
-            <button className="controls-btn"></button>
-            <button className="controls-btn" onClick={() => handleTabClick('Register')}>
-              Right
-            </button>
-            <button className="controls-btn"></button>
-          </div>
-        </>
-      </Controls>
+      <Controls
+        handleClickRightBtnLeft={() => handleTabClick("Login")}
+        rightBtnLeftText="Left"
+        handleClickRightBtnRight={() => handleTabClick("Register")}
+        rightBtnRightText="Right"
+      />
     </Container>
   );
 };

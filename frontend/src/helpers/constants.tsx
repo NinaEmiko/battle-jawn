@@ -22,6 +22,8 @@ export const ENDPOINTS = {
   FETCH_BATTLE_HISTORY_MESSAGE: `${BASE_URL}/api/battle-history-message/`,
   END_BATTLE_SESSION: `${BASE_URL}/api/battle-session/end`,
   FETCH_BATTLE_SESSION: `${BASE_URL}/api/battle-session/`,
+  ACTIVATE_TALENT: `${BASE_URL}/api/talent/activate`,
+  NEW_HERO: `${BASE_URL}/api/hero`,
 };
 
 export const DOORS = {

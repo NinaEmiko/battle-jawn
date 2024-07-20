@@ -1,31 +1,15 @@
 import { useEffect, useState } from "react";
-import classNames from 'classnames';
-// import "../styling/Store.css";
-// import "../styling/Inventory.css";
-import PopUp from "./PopUp";
+import PopUp from "../components/PopUp";
 import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
-// import { determineIcon } from "../helpers/icon_helper"
 import { determinePrice } from "../helpers/price_helper";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
-import healthPotion from "../assets/healthPotion.png";
-import vest from "../assets/vest.png";
-import sword from "../assets/sword.png";
-import pelt from "../assets/pelt.png";
-import scraps from "../assets/scraps.png";
-import boots from "../assets/boots.png";
-import dagger from "../assets/dagger.png";
-import helm from "../assets/helm.png";
-import jewels from "../assets/jewelery.png";
-import mask from "../assets/mask.png";
-import necklace from "../assets/necklace.png";
-import paw from "../assets/paw.png";
-import trinket from "../assets/spirit-trinket.png";
-import pants from "../assets/pants.png";
-import water from "../assets/water.png";
-import cash from '../assets/cash.png'
+import { healthPotion, vest, sword, pelt, scraps, 
+    boots, dagger, helm, jewels, mask, necklace,
+    paw, trinket, pants, water } from "../helpers/image_helper";
+
 
 const Shop = ({props}:{props:any}) => {
     const [purchases, setPurchases] = useState(1);
@@ -73,7 +57,7 @@ const Shop = ({props}:{props:any}) => {
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("exit-store", props.heroId)
+        props.setIsVisible("Map", props.heroId)
     }
     
     const handleOkButtonClick = () => {
@@ -156,17 +140,7 @@ const Shop = ({props}:{props:any}) => {
 
     return (        
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Leave</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">Shop</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"Shop"} />
             <Display>
                 <>
                     {!showPopUp ?
@@ -186,7 +160,6 @@ const Shop = ({props}:{props:any}) => {
                                     </div>
                                     <div className="coins-container-jawn">
                                         <p className="coins-jawn">{heroCoins} coins</p>
-                                        {/* <img className="cash" src={cash}/> */}
                                     </div>
                                     </div>
 
@@ -208,7 +181,6 @@ const Shop = ({props}:{props:any}) => {
                                     </div>
                                     <div className="coins-container-jawn">
                                         <p className="coins-jawn">{heroCoins} coins</p>
-                                        {/* <img className="cash" src={cash}/> */}
                                     </div>
                                     </div>
                                     </div>
@@ -231,22 +203,14 @@ const Shop = ({props}:{props:any}) => {
                     }
                 </>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleBackButtonClick()}>Leave</button>                   
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Buy")}>Left</button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Sell")}>Right</button>
-                        <button className="controls-btn"></button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnBottom={handleBackButtonClick}
+                leftBtnBottomText="Leave"
+                handleClickRightBtnLeft={() => handleTabClick("Buy")}
+                rightBtnLeftText="Left"
+                handleClickRightBtnRight={() => handleTabClick("Sell")}
+                rightBtnRightText="Right"
+            />
         </Container>
     )
 }

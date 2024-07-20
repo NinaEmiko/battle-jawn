@@ -21,17 +21,7 @@ const AboutUs = () => {
 
     return (        
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Sign Out</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">About Us</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"About Us"} />
             <Display>
                     <div className="parent-jawn">
                         <div className="child-jawn">
@@ -44,22 +34,14 @@ const AboutUs = () => {
                         <button className={activeButton === 'Contact' ? 'active' : ''} onClick={()=> handleTabClick("Contact")}>Contact</button>
                     </div>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("About Us")}>Left</button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Contact")}>Right</button>
-                        <button className="controls-btn"></button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnBottom={() => handleNavigation("/")}
+                leftBtnBottomText="Exit"
+                handleClickRightBtnLeft={() => handleTabClick("About Us")}
+                rightBtnLeftText="Left"
+                handleClickRightBtnRight={() => handleTabClick("Contact")}
+                rightBtnRightText="Right"
+            />
         </Container>
     )
 }
