@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../styling/MyHeroes.css";
 import PopUp from "../components/PopUp";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
@@ -9,7 +8,6 @@ import Display from "../components/Display";
 import PageName from "../components/PageName";
 import Cookies from "js-cookie";
 import Hero from "../components/Heroes/Hero";
-import TalentTree from "./TalentTree";
 
 function Heroes( {props}:{props:any} ) {
   const [deleteHeroId, setDeleteHeroId] = useState(0);

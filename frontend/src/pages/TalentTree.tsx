@@ -155,6 +155,10 @@ const TalentTree = ({props}:{props:any}) => {
             <Controls 
                 handleClickLeftBtnBottom={() => handleBackButtonClick()}
                 leftBtnBottomText="Back"
+                handleClickRightBtnLeft={() => handleTabClick(treeOne)}
+                rightBtnLeftText="Left"
+                handleClickRightBtnRight={() => handleTabClick(treeTwo)}
+                rightBtnRightText="Right"
             />
         </Container>
     )
