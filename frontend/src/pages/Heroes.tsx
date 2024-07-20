@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import classNames from 'classnames';
 import "../styling/MyHeroes.css";
-import PopUp from "./PopUp";
+import PopUp from "../components/PopUp";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
 import Cookies from "js-cookie";
-import Hero from "./Hero";
+import Hero from "../components/Heroes/Hero";
 import TalentTree from "./TalentTree";
 
 function Heroes( {props}:{props:any} ) {
@@ -72,7 +71,7 @@ function Heroes( {props}:{props:any} ) {
       setShowPopUp(true);
     } else {
       Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
-      props.setIsVisible("open-map", id);
+      props.setIsVisible("Map", id);
     }
   }
 
@@ -120,17 +119,7 @@ function Heroes( {props}:{props:any} ) {
 
   return (
       <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Sign Out</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">Heroes</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"Heroes"} />
             <Display>
                 <>
                     {showPopUp &&
@@ -166,43 +155,27 @@ function Heroes( {props}:{props:any} ) {
                     }
                 </>
             </Display>
-            <Controls>
-                <>
-                {activeTab === "Talent Tree" &&
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn" ></button>
-                        <button className="controls-btn" ></button>
-                        <button className="controls-btn" onClick={() => handleClickHeroes()}>Back</button>                    
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn" ></button>
-                        <button className="controls-btn" ></button>
-                        <button className="controls-btn" >OK</button>
-                        <button className="controls-btn" ></button>
-                        <button className="controls-btn" ></button>
-                    </div>
-                    </>
-                }
-
-                {activeTab === "Hero" &&
-                  <>
-                      <div className="controls-left">
-                          <button style={{color: "green"}} className="controls-btn" onClick={() => handleClickPlay(heroList[currentHeroIndex].id)}>Play</button>
-                          <button className="controls-btn" onClick={() => handleClickTalents()}>Talents</button>                    
-                          <button style={{color: "red"}} className="controls-btn" onClick={() => handleClickDelete(heroList[currentHeroIndex].id)}>Delete</button>                    
-                      </div>
-                      <div className="controls-right">
-                        <button className="controls-btn" ></button>
-                        <button className="controls-btn" onClick={() => previousHero()}>Left</button>
-                        <button className="controls-btn" >OK</button>
-                        <button className="controls-btn" onClick={() => nextHero()}>Right</button>
-                        <button className="controls-btn" ></button>
-                    </div>
-                  </>
-                }
-                </>
-            </Controls>
+            {activeTab === "Talent Tree" &&
+              <Controls
+                handleClickLeftBtnBottom={() => handleClickHeroes()}
+                leftBtnBottomText="Back"
+              />
+            }
+            
+            {activeTab === "Hero" &&
+              <Controls
+                handleClickLeftBtnTop={() => handleClickPlay(heroList[currentHeroIndex].id)}
+                leftBtnTopText="Play"
+                handleClickLeftBtnMiddle={() => handleClickTalents()}
+                leftBtnMiddleText="Talents"
+                handleClickLeftBtnBottom={() => handleClickDelete(heroList[currentHeroIndex].id)}
+                leftBtnBottomText="Delete"
+                handleClickRightBtnLeft={() => previousHero()}
+                rightBtnTopText="Left"
+                handleClickRightBtnRight={() => nextHero()}
+                rightBtnRightText="Right"
+              />
+            }
         </Container>
   );
 };

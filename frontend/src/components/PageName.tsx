@@ -1,12 +1,17 @@
 import { ReactNode } from "react";
 import "./styles/PageName.css";
 
-const PageName: React.FC<{children: ReactNode }> = ( {children}:{children:any} ) => {
-
+const PageName = ({props}:{props:any}) => {
     return (
         <div className="page-name-jawn">
-            {children}
-      </div>
+            <div className="page-name-column-1">
+            </div>
+            <div className="page-name-column-2">
+                <div className="page-name-txt">{props}</div>
+            </div>
+            <div className="page-name-column-3">
+            </div>
+        </div>
     )
 }
 export default PageName;

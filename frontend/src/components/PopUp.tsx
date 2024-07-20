@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import "../styling/PopUp.css";
 
 const PopUp = ({props}:{props:any}) => {

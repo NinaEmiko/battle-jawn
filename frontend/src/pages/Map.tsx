@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { Stage, Layer, Rect, Circle } from 'react-konva';
 import { DOORS, OBSTACLES } from '../helpers/constants';
 import '../styling/Map.css'
 import Controls from '../components/Controls';
@@ -60,7 +59,8 @@ const Map = ({props}:{props:any}) => {
                     newY < arena.y + arena.height &&
                     newY + playerSize > arena.y
                 ) {
-                    props.setIsVisible("open-battle", props.heroId);
+                    Cookies.set('coordinates' + props.heroId, JSON.stringify(player)); 
+                    props.setIsVisible("Battle", props.heroId);
                 }
 
                 // Check collision with obstacles
@@ -88,7 +88,7 @@ const Map = ({props}:{props:any}) => {
     };
 
     useEffect(() => {
-        handlePrevScreen(props.prevScreen);
+        handlePrevScreen();
         return () => {
         if (moveInterval.current) {
             clearInterval(moveInterval.current);
@@ -102,26 +102,8 @@ const Map = ({props}:{props:any}) => {
 
     const handlePrevScreen = () => {
         if (!startPositionSet) {
-
-            if (props.prevScreen === "Heroes"){
-                checkCoordinates();
-                setStartPositionSet(true);
-            } else if (props.prevScreen === "Inventory") {
-                checkCoordinates();
-                setStartPositionSet(true);
-            } else if (props.prevScreen === "Shop"){
-                setPlayer(prev => ({
-                    x: 835,
-                    y: 972
-                }));
-                setStartPositionSet(true);
-            } else if (props.prevScreen === "Battle"){
-                setPlayer(prev => ({
-                    x: 720,
-                    y: 975
-                }));
-                setStartPositionSet(true);
-            }
+            checkCoordinates();
+            setStartPositionSet(true);
         }
     }
 
@@ -134,31 +116,22 @@ const Map = ({props}:{props:any}) => {
   
     const handleBackButtonClick = () => {
         Cookies.set('coordinates' + props.heroId, JSON.stringify(player)); 
-        props.setIsVisible("exit-map", props.heroId)
+        props.setIsVisible("Heroes", props.heroId)
     }
     const handleInventory = (id: number) => {
         Cookies.set('coordinates' + props.heroId, JSON.stringify(player)); 
-        props.setIsVisible("open-inventory", id);
+        props.setIsVisible("Inventory", id);
     }
     const handleStore = (id: number) => {
-        props.setIsVisible("open-store", id);
+        Cookies.set('coordinates' + props.heroId, JSON.stringify(player)); 
+        props.setIsVisible("Shop", id);
     }
 
     // console.log("Position: " + player.x / 2 + ", " + player.y / 2)
 
     return (
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Close</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">Play</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"Play"} />
             <Display>
                 <div className="container-map-jawn"
                                     style={{
@@ -257,66 +230,18 @@ const Map = ({props}:{props:any}) => {
                     </div>
                 </div>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button 
-                            className="controls-btn"
-                            onClick={() => handleInventory(props.heroId)}>
-                                Bag
-                            </button>
-                        <button className="controls-btn"></button>
-                        <button 
-                            className="controls-btn"
-                            onClick={() => handleBackButtonClick()}>
-                                Back
-                        </button>                    
-                    </div>
-                    <div className="controls-right">
-                        <button 
-                            className="controls-btn"
-                            onMouseDown={() => startMoving('up')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('up')}
-                            onTouchEnd={stopMoving}>
-                                Up
-                        </button>
-                        <button 
-                            className="controls-btn"
-                            onMouseDown={() => startMoving('left')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('left')}
-                            onTouchEnd={stopMoving}>
-                                Left
-                        </button>
-                        <button 
-                            className="controls-btn"
-                            >
-                                OK
-                        </button>
-                        <button 
-                            className="controls-btn"
-                            onMouseDown={() => startMoving('right')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('right')}
-                            onTouchEnd={stopMoving}>
-                                Right
-                        </button>
-                        <button 
-                            className="controls-btn"
-                            onMouseDown={() => startMoving('down')}
-                            onMouseUp={stopMoving}
-                            onMouseLeave={stopMoving}
-                            onTouchStart={() => startMoving('down')}
-                            onTouchEnd={stopMoving}>
-                                Down
-                        </button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnTop={() => handleInventory(props.heroId)}
+                leftBtnTopText="Bag"
+                handleClickLeftBtnBottom={() => handleBackButtonClick()}
+                leftBtnBottomText="Back"
+                rightBtnTopText="Up"
+                rightBtnLeftText="Left"
+                rightBtnRightText="Right"
+                rightBtnBottomText="Bottom"
+                startMoving={startMoving}
+                stopMoving={stopMoving}
+            />
         </Container>
     );
 };

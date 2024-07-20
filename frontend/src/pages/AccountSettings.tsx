@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
 import { request, setAuthHeader } from "../helpers/axios_helper";
 import '../styling/AccountSettings.css';
-import PopUp from "../pages/PopUp";
+import PopUp from "../components/PopUp";
 import { useNavigate } from "react-router-dom";
 
 const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
@@ -74,17 +74,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
 
     return (        
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Sign Out</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">Account Settings</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"Account Settings"} />
+
             <Display>
                 <>
                     {showPopUp ?
@@ -159,6 +150,14 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                     </div>
                 </>
             </Controls>
+            <Controls
+                handleClickLeftBtnBottom={() => handleNavigation("/")}
+                leftBtnBottomText="Exit"
+                handleClickRightBtnLeft={() => handleTabClick("Update Password")}
+                rightBtnLeftText="Left"
+                handleClickRightBtnRight={() => handleTabClick("Delete Account")}
+                rightBtnRightText="Right"
+            />
         </Container>
     )
 }

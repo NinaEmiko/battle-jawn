@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "../styling/PostBattle.css";
-import { fetchLoot, fetchEmptySlots, selectLootCall } from "../api/api";
+import "../../styling/PostBattle.css";
+import { fetchLoot, fetchEmptySlots, selectLootCall } from "../../api/api";
 
 const PostBattle = ({props}:{props:any}) => {
     const [loot, setLoot] = useState<string[]>([]);

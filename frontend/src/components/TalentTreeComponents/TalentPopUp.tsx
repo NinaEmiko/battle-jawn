@@ -1,7 +1,13 @@
-import classNames from 'classnames';
-import "../styling/TalentPopUp.css";
+import { activateTalent } from "../../api/api";
+import "../../styling/TalentPopUp.css";
 
 const TalentPopUp = ({props}:{props:any}) => {
+
+    const handleClickConfirm = async () => {
+        const data = await activateTalent(props.heroId, props.talent)
+        console.log(data);
+        props.onClickConfirm();
+    }
 
     return (
         <div className="pop-up-jawn">
@@ -11,7 +17,7 @@ const TalentPopUp = ({props}:{props:any}) => {
                     <p className="confirmation-description">{props.description}</p>
                     <div className="confirmation-btns">
                         <button id="no-btn" onClick={props.onClickOk}>Back</button>
-                        <button id="yes-btn" onClick={props.onClickConfirm}>Activate</button>
+                        <button id="yes-btn" onClick={() => handleClickConfirm()}>Activate</button>
                     </div>
                 </div>
             :

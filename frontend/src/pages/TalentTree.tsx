@@ -10,7 +10,8 @@ import StrengthTree from "../components/TalentTreeComponents/StrengthTree";
 import DefenseTree from "../components/TalentTreeComponents/DefenseTree";
 import ArcaneTree from "../components/TalentTreeComponents/ArcaneTree";
 import MindfulnessTree from "../components/TalentTreeComponents/MindfulnessTree";
-import TalentPopUp from "./TalentPopUp";
+import TalentPopUp from "../components/TalentTreeComponents/TalentPopUp";
+import { activateTalent } from "../api/api";
 
 const TalentTree = ({props}:{props:any}) => {
     const [treeOne, setTreeOne] = useState("");
@@ -29,7 +30,8 @@ const TalentTree = ({props}:{props:any}) => {
         setShowPopUp(false);
     }
 
-    const handleConfirmButtonClick = () => {
+    const handleConfirmButtonClick = async (talent: string) => {
+
         setShowPopUp(false);
     }
 
@@ -60,6 +62,8 @@ const TalentTree = ({props}:{props:any}) => {
             setTreeTwo(returnTreeTwo);
         }
     }, [])
+console.log("improvedImpale1: " + props.talentTree.improvedImpale1)
+console.log("improvedStrike1: " + props.talentTree.improvedStrike1)
 
     return (        
         <>
@@ -69,6 +73,7 @@ const TalentTree = ({props}:{props:any}) => {
                         type: popUpType,
                         talent: popUpTalent,
                         description: popUpDescription,
+                        heroId: props.id,
                         onClickOk: handleOkButtonClick,
                         onClickConfirm: handleConfirmButtonClick
                     }} 

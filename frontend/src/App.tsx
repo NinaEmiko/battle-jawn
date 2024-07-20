@@ -1,11 +1,10 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CustomNavBar from './pages/CustomNavBar';
+import CustomNavBar from './components/CustomNavBar';
 import LoginForm from './pages/LoginForm';
 import AccountSettings from './pages/AccountSettings';
 import CreateNewHero from './pages/CreateNewHero';
 import LeaderBoard from './pages/LeaderBoard';
-import Inventory from './pages/Inventory';
 import AboutUs from './pages/AboutUs';
 import Home from './pages/Home';
 import HowTo from './pages/HowTo';
@@ -86,18 +85,11 @@ function App() {
     <BrowserRouter>
       <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn} />
       <Routes>
-        {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />}
         {!currentUser.loggedIn && <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />}
+        {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />}
         {currentUser.loggedIn && <Route key="create-hero" path="/create-hero" element={<CreateNewHero props={currentUser} />} />}
         {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard props={currentUser} />} />}
-        {currentUser.loggedIn && (
-          <Route
-            key="account-settings"
-            path="/account-settings"
-            element={<AccountSettings props={currentUser} logout={logout} />}
-          />
-        )}
-        {currentUser.loggedIn && <Route key="inventory" path="/inventory" element={<Inventory props={currentUser} />} />}
+        {currentUser.loggedIn && <Route key="account-settings" path="/account-settings" element={<AccountSettings props={currentUser} logout={logout} />} />}
         {currentUser.loggedIn && <Route key="about-us" path="/about-us" element={<AboutUs />} />}
         {currentUser.loggedIn && <Route key="how-to" path="/how-to" element={<HowTo />} />}
       </Routes>

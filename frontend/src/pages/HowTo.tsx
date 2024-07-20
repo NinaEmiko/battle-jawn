@@ -73,17 +73,7 @@ const HowTo = () => {
 
     return (        
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Sign Out</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">How To</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"How To"} />
             <Display>
                     <div className="parent-jawn">
                         <div className="display-jawn-tabs-4">
@@ -148,22 +138,18 @@ const HowTo = () => {
                             }
                     </div>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn" onClick={()=> handleUpClick()}>Up</button>
-                        <button className="controls-btn" onClick={()=> handleTabLeftClick()}>Left</button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabRightClick()}>Right</button>
-                        <button className="controls-btn" onClick={()=> handleDownClick()}>Down</button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnBottom={() => handleNavigation("/")}
+                leftBtnBottomText="Exit"
+                handleClickRightBtnTop={() => handleUpClick()}
+                rightBtnTopText="Up"
+                handleClickRightBtnLeft={() => handleTabLeftClick()}
+                rightBtnLeftText="Left"
+                handleClickRightBtnRight={() => handleTabRightClick()}
+                rightBtnRightText="Right"
+                handleClickRightBtnBottom={() => handleDownClick()}
+                rightBtnBottomText="Down"
+            />
         </Container>
     )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { request, setAuthHeader } from "../helpers/axios_helper";
+import { request } from "../helpers/axios_helper";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
@@ -100,17 +100,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
 
     return (
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Leave</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">New Hero</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"New Hero"} />
             <Display>
                 <div className="parent-jawn">
                     <div className="display-jawn-tabs-4">
@@ -170,21 +160,16 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
 
                 </div>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Back</button>                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleLeftButtonClick()}>Left</button>
-                        <button className="controls-btn" onClick={handleFormSubmit} >OK</button>
-                        <button className="controls-btn" onClick={() => handleRightButtonClick()}>Right</button>
-                        <button className="controls-btn"></button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnBottom={() => handleNavigation("/")}
+                leftBtnBottomText="Back"
+                handleClickRightBtnLeft={() => handleLeftButtonClick()}
+                rightBtnLeftText="Left"
+                handleClickRightBtnCenter={handleFormSubmit}
+                rightBtnCenterText="OK"
+                handleClickRightBtnRight={() => handleRightButtonClick()}
+                rightBtnRightText="Right"
+            />
         </Container>
 
         

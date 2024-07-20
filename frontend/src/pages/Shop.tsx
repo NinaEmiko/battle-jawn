@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import classNames from 'classnames';
-// import "../styling/Store.css";
-// import "../styling/Inventory.css";
-import PopUp from "./PopUp";
+import PopUp from "../components/PopUp";
 import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
-// import { determineIcon } from "../helpers/icon_helper"
 import { determinePrice } from "../helpers/price_helper";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
@@ -25,7 +21,6 @@ import paw from "../assets/paw.png";
 import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import water from "../assets/water.png";
-import cash from '../assets/cash.png'
 
 const Shop = ({props}:{props:any}) => {
     const [purchases, setPurchases] = useState(1);
@@ -73,7 +68,7 @@ const Shop = ({props}:{props:any}) => {
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("exit-store", props.heroId)
+        props.setIsVisible("Map", props.heroId)
     }
     
     const handleOkButtonClick = () => {
@@ -156,17 +151,7 @@ const Shop = ({props}:{props:any}) => {
 
     return (        
         <Container>
-            <PageName>
-                <div className="page-name-column-1">
-                    {/* <button className="page-name-btn">Leave</button> */}
-                </div>
-                <div className="page-name-column-2">
-                    <div className="page-name-txt">Shop</div>
-                </div>
-                <div className="page-name-column-3">
-                    {/* <button className="page-name-btn">New Hero</button> */}
-                </div>
-            </PageName>
+            <PageName props={"Shop"} />
             <Display>
                 <>
                     {!showPopUp ?
@@ -231,22 +216,14 @@ const Shop = ({props}:{props:any}) => {
                     }
                 </>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleBackButtonClick()}>Leave</button>                   
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Buy")}>Left</button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Sell")}>Right</button>
-                        <button className="controls-btn"></button>
-                    </div>
-                </>
-            </Controls>
+            <Controls
+                handleClickLeftBtnBottom={handleBackButtonClick}
+                leftBtnBottomText="Leave"
+                handleClickRightBtnLeft={() => handleTabClick("Buy")}
+                rightBtnLeftText="Left"
+                handleClickRightBtnRight={() => handleTabClick("Sell")}
+                rightBtnRightText="Right"
+            />
         </Container>
     )
 }
