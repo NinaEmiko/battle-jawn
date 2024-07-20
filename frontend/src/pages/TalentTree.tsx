@@ -11,10 +11,18 @@ import DefenseTree from "../components/TalentTreeComponents/DefenseTree";
 import ArcaneTree from "../components/TalentTreeComponents/ArcaneTree";
 import MindfulnessTree from "../components/TalentTreeComponents/MindfulnessTree";
 import TalentPopUp from "../components/TalentTreeComponents/TalentPopUp";
-import { activateTalent } from "../api/api";
+import { fetchHero } from "../api/api";
+import Container from "../components/Container";
+import PageName from "../components/PageName";
+import Display from "../components/Display";
+import Controls from "../components/Controls";
 
 const TalentTree = ({props}:{props:any}) => {
     const [treeOne, setTreeOne] = useState("");
+    const [heroName, setHeroName] = useState("");
+    const [heroRole, setHeroRole] = useState("");
+    const [heroTalentPoints, setHeroTalentPoints] = useState("");
+    const [heroTalentTree, setHeroTalentTree] = useState("");
     const [treeTwo, setTreeTwo] = useState("");
     const [activeTree, setActiveTree] = useState("");
     const [popUpType, setPopUpType] = useState("");
@@ -22,16 +30,29 @@ const TalentTree = ({props}:{props:any}) => {
     const [popUpDescription, setPopUpDescription] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
 
+    const handleFetchHero = async () => {
+        const data = await fetchHero(props.id)
+        setHeroName(data.name);
+        setHeroRole(data.role);
+        handleSetTrees(data.role);
+        setHeroTalentPoints(data.talentPoints);
+        setHeroTalentTree(data.talentTree);
+    }
+
     const handleTabClick = (button: string) => {
         setActiveTree(button);
     };
 
     const handleOkButtonClick = () => {
+        handleFetchHero();
         setShowPopUp(false);
+    }
+    const handleBackButtonClick = () => {
+        props.setIsVisible("Heroes", props.id);
     }
 
     const handleConfirmButtonClick = async (talent: string) => {
-
+        handleFetchHero();
         setShowPopUp(false);
     }
 
@@ -41,32 +62,25 @@ const TalentTree = ({props}:{props:any}) => {
         setPopUpDescription(description);
         setShowPopUp(true);
       }
-    
-    useEffect(() => {
-        if (activeTree === "" && treeOne === "" && treeTwo === ""){
-            let returnTreeOne = treeOneSetter(props.role);
-            let returnTreeTwo = treeTwoSetter(props.role);
 
-            setTreeOne(returnTreeOne);
-            setActiveTree(returnTreeOne);
-            setTreeTwo(returnTreeTwo);
-        }
-    })
-    useEffect(() => {
-        if (activeTree === "" && treeOne === "" && treeTwo === ""){
-            let returnTreeOne = treeOneSetter(props.role);
-            let returnTreeTwo = treeTwoSetter(props.role);
+    const handleSetTrees = (role: string) => {
+        setTreeOne(treeOneSetter(role));
+        setActiveTree(treeOneSetter(role));
+        setTreeTwo(treeTwoSetter(role));
+    }
 
-            setTreeOne(returnTreeOne);
-            setActiveTree(returnTreeOne);
-            setTreeTwo(returnTreeTwo);
+    useEffect(() => {
+        if (heroName == ""){
+            handleFetchHero();
         }
-    }, [])
-console.log("improvedImpale1: " + props.talentTree.improvedImpale1)
-console.log("improvedStrike1: " + props.talentTree.improvedStrike1)
+    },[])
 
     return (        
-        <>
+        <Container>
+            <PageName props={"Talents"} />
+            <Display>
+                <>
+
             {showPopUp ?
                 <TalentPopUp 
                     props={{
@@ -82,50 +96,50 @@ console.log("improvedStrike1: " + props.talentTree.improvedStrike1)
             <div>
                 <div className="hero-name-level">
                     <div className="hero-name">
-                        {props.name}
+                        {heroName}
                     </div>
                     <div className="hero-level">
-                    {props.talentPoints} talent points
+                    {heroTalentPoints} talent points
                     </div>
                 </div>
                 <div>
-                    {props.role === "Tank" &&
+                    {heroRole === "Tank" &&
                         <div>
                             {activeTree === treeOne &&
-                                <DefenseTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <DefenseTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                             {activeTree === treeTwo &&
-                                <StrengthTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <StrengthTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                         </div>
                     }
-                    {props.role === "Healer" &&
+                    {heroRole === "Healer" &&
                         <div>
                             {activeTree === treeOne &&
-                                <ProtectionTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <ProtectionTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                             {activeTree === treeTwo &&
-                                <SpiritualityTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <SpiritualityTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                         </div>
                     }
-                    {props.role === "DPS" &&
+                    {heroRole === "DPS" &&
                         <div>
                             {activeTree === treeTwo &&
-                                <StealthTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <StealthTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                             {activeTree === treeOne &&
-                                <DexterityTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <DexterityTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                         </div>
                     }
-                    {props.role === "Caster" &&
+                    {heroRole === "Caster" &&
                         <div>
                             {activeTree === treeOne &&
-                                <ArcaneTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <ArcaneTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                             {activeTree === treeTwo &&
-                                <MindfulnessTree props={{talentTree: props.talentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                <MindfulnessTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
                             }
                         </div>
                     }
@@ -136,7 +150,13 @@ console.log("improvedStrike1: " + props.talentTree.improvedStrike1)
                 </div>
             </div>
             }
-        </>
+            </>
+            </Display>
+            <Controls 
+                handleClickLeftBtnBottom={() => handleBackButtonClick()}
+                leftBtnBottomText="Back"
+            />
+        </Container>
     )
 
 }

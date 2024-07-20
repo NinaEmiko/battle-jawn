@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { request } from "../helpers/axios_helper";
+import { useState } from "react";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
@@ -11,78 +9,18 @@ import DPS from "../assets/DPS.png"
 import Caster from "../assets/Caster.png"
 import { CASTER_DESCRIPTION, DPS_DESCRIPTION, HEALER_DESCRIPTION, TANK_DESCRIPTION } from "../helpers/content_helper";
 import "../styling/CreateNewHero.css";
+import { newHero } from "../api/api";
   
 function CreateNewHero({props}:{props:any}): React.ReactNode {
-    const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [heroName, setHeroName] = useState('');
     const [activeButton, setActiveButton] = useState("Tank");
-    const [heroDescription, setHeroDescription] = useState("");
+    const [heroDescription, setHeroDescription] = useState(TANK_DESCRIPTION);
     const [message, setMessage] = useState("");
+    const roles = ["Tank", "Healer", "DPS", "Caster"]
 
     const handleTabClick = (button: string) => {
         setActiveButton(button);
-      };
-    const navigate = useNavigate();
-
-    const handleNavigation = (path: string) => {
-        navigate(path);
-      };
-
-    const handleFormSubmit = async () => {
-
-        if (!heroName) {
-            setMessage('WARNING: Must enter a name to continue.');
-        } else {
-            try {
-                const response = await request('POST', apiUrl + '/api/hero', {
-                    userAccountId: props.id,
-                    heroName: heroName,
-                    role: activeButton
-                });
-          
-                console.log('Hero created successfully:', response.data);
-                handleNavigation("/");
-            } catch (error) {
-                console.error('Error creating hero:', error);
-            }
-        }
-    }
-    const handleRightButtonClick = () => {
-        switch (activeButton){
-            case "Tank":
-                setActiveButton("Healer");
-                break;
-            case "Healer":
-                setActiveButton("DPS");
-                break;
-            case "DPS":
-                setActiveButton("Caster");
-                break;
-            case "Caster":
-                setActiveButton("Tank");
-                break;
-        }
-    }
-
-    const handleLeftButtonClick = () => {
-        switch (activeButton){
-            case "Tank":
-                setActiveButton("Caster");
-                break;
-            case "Healer":
-                setActiveButton("Tank");
-                break;
-            case "DPS":
-                setActiveButton("Healer");
-                break;
-            case "Caster":
-                setActiveButton("DPS");
-                break;
-        }
-    }
-
-    useEffect(()=>{
-        switch (activeButton){
+        switch (button){
             case "Tank":
                 setHeroDescription(TANK_DESCRIPTION);
                 break;
@@ -96,7 +34,36 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                 setHeroDescription(CASTER_DESCRIPTION);
                 break;
         }
-    }, [activeButton])
+      };
+
+    const handleReturnToHeroes = (id: number) => {
+        props.setIsVisible("Heroes", id);
+    }
+
+    const newHeroCall = async () => {
+        const data = await newHero(props.accountId, heroName, activeButton);
+        handleReturnToHeroes(data.id);
+    }
+
+    const handleFormSubmit = async () => {
+        if (!heroName) {
+            setMessage('WARNING: Must enter a name to continue.');
+        } else {
+            newHeroCall()
+        }
+    }
+
+    const handleLeftButtonClick = () => {
+        const currentIndex = roles.indexOf(activeButton);
+        const newIndex = (currentIndex - 1 + roles.length) % roles.length;
+        setActiveButton(roles[newIndex]);
+    };
+
+    const handleRightButtonClick = () => {
+        const currentIndex = roles.indexOf(activeButton);
+        const newIndex = (currentIndex + 1 + roles.length) % roles.length;
+        setActiveButton(roles[newIndex]);
+    };
 
     return (
         <Container>
@@ -161,7 +128,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                 </div>
             </Display>
             <Controls
-                handleClickLeftBtnBottom={() => handleNavigation("/")}
+                handleClickLeftBtnBottom={() => handleReturnToHeroes(0)}
                 leftBtnBottomText="Back"
                 handleClickRightBtnLeft={() => handleLeftButtonClick()}
                 rightBtnLeftText="Left"

@@ -18,35 +18,10 @@ function Heroes( {props}:{props:any} ) {
   const [popUpContent, setPopUpContent] = useState("");
   const [showPopUp, setShowPopUp] = useState(false);
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState("Hero");
-  const tabs = ["Hero", "Talent Tree"]
-
-  const handleTabLeftClick = () => {
-    const currentIndex = tabs.indexOf(activeTab);
-    const newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-    setActiveTab(tabs[newIndex]);
-  };
-
-  const handleTabRightClick = () => {
-    const currentIndex = tabs.indexOf(activeTab);
-    const newIndex = (currentIndex + 1 + tabs.length) % tabs.length;
-    setActiveTab(tabs[newIndex]);
-  };
-
-  const handleSpecificTabClick = (tab: string) => {
-    setActiveTab(tab);
-  }
-
-  const navigate = useNavigate();
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
 
   const fetchHeroesCall = async () => {
     const data = await fetchHeroes(props.accountId);
     setHeroList(data);
-    // console.log(data)
   }
 
   const handleRest = async (id: any) => {
@@ -63,6 +38,9 @@ function Heroes( {props}:{props:any} ) {
     await deleteHero(deleteHeroId);
     fetchHeroesCall();
   }
+  const handleClickNewHero = (id: number) => {
+    props.setIsVisible("New Hero", id);
+  }
 
   const handleClickPlay = (id: number) => {
     if (heroList[currentHeroIndex].health === 0) {
@@ -75,11 +53,9 @@ function Heroes( {props}:{props:any} ) {
     }
   }
 
-  const handleClickTalents = () => {
-    setActiveTab(tabs[1]);
-  }
-  const handleClickHeroes = () => {
-    setActiveTab(tabs[0]);
+  const handleClickTalents = (id: number) => {
+    Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
+    props.setIsVisible("Talents", id);
   }
 
   const handleClickDelete = (id: number) => {
@@ -91,15 +67,11 @@ function Heroes( {props}:{props:any} ) {
   }
 
   const previousHero = () => {
-    if (activeTab === tabs[0]){
-      setCurrentHeroIndex(currentHeroIndex === 0 ? heroList.length - 1 : currentHeroIndex - 1);
-    }
+    setCurrentHeroIndex(currentHeroIndex === 0 ? heroList.length - 1 : currentHeroIndex - 1);
   };
 
   const nextHero = () => {
-    if (activeTab === tabs[0]){
-      setCurrentHeroIndex(currentHeroIndex === heroList.length - 1 ? 0 : currentHeroIndex + 1);
-    }
+    setCurrentHeroIndex(currentHeroIndex === heroList.length - 1 ? 0 : currentHeroIndex + 1);
   };
 
   const checkActiveHero = () =>{
@@ -135,47 +107,33 @@ function Heroes( {props}:{props:any} ) {
 
                     {!showPopUp &&
                         <div>
-                            {activeTab === "Hero" && heroList.length < 5 &&
+                            {heroList.length < 5 &&
                                 <div className="display-jawn-tab">
-                                    <button  onClick={() => handleNavigation("/create-hero")}>Create New Hero</button>
+                                    <button onClick={() => handleClickNewHero(heroList[currentHeroIndex])}>Create New Hero</button>
                                 </div>
                             }
 
                             {heroList.length > 0 &&
-                                <div className="hero-header-jawn">
-                                    {activeTab === tabs[0] &&
-                                      <Hero props={heroList[currentHeroIndex]} />
-                                    }
-                                    {activeTab === tabs[1] &&
-                                      <TalentTree props={heroList[currentHeroIndex]} />
-                                    }
-                                </div>
+                              <div className="hero-header-jawn">
+                                <Hero props={heroList[currentHeroIndex]} />
+                              </div>
                             }
                         </div>
                     }
                 </>
             </Display>
-            {activeTab === "Talent Tree" &&
-              <Controls
-                handleClickLeftBtnBottom={() => handleClickHeroes()}
-                leftBtnBottomText="Back"
-              />
-            }
-            
-            {activeTab === "Hero" &&
-              <Controls
-                handleClickLeftBtnTop={() => handleClickPlay(heroList[currentHeroIndex].id)}
-                leftBtnTopText="Play"
-                handleClickLeftBtnMiddle={() => handleClickTalents()}
-                leftBtnMiddleText="Talents"
-                handleClickLeftBtnBottom={() => handleClickDelete(heroList[currentHeroIndex].id)}
-                leftBtnBottomText="Delete"
-                handleClickRightBtnLeft={() => previousHero()}
-                rightBtnTopText="Left"
-                handleClickRightBtnRight={() => nextHero()}
-                rightBtnRightText="Right"
-              />
-            }
+            <Controls
+              handleClickLeftBtnTop={() => handleClickPlay(heroList[currentHeroIndex].id)}
+              leftBtnTopText="Play"
+              handleClickLeftBtnMiddle={() => handleClickTalents(heroList[currentHeroIndex].id)}
+              leftBtnMiddleText="Talents"
+              handleClickLeftBtnBottom={() => handleClickDelete(heroList[currentHeroIndex].id)}
+              leftBtnBottomText="Delete"
+              handleClickRightBtnLeft={() => previousHero()}
+              rightBtnLeftText="Left"
+              handleClickRightBtnRight={() => nextHero()}
+              rightBtnRightText="Right"
+            />
         </Container>
   );
 };

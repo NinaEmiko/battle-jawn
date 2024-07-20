@@ -127,8 +127,6 @@ const Map = ({props}:{props:any}) => {
         props.setIsVisible("Shop", id);
     }
 
-    // console.log("Position: " + player.x / 2 + ", " + player.y / 2)
-
     return (
         <Container>
             <PageName props={"Play"} />

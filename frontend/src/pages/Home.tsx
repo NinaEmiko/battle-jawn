@@ -4,6 +4,8 @@ import Inventory from "./Inventory";
 import Map from "./Map";
 import Shop from "./Shop";
 import Heroes from "./Heroes";
+import TalentTree from "./TalentTree";
+import CreateNewHero from "./CreateNewHero";
 
 function Home( {props}:{props:any} ) {
   const [heroId, setHeroId] = useState(0);
@@ -37,7 +39,11 @@ function Home( {props}:{props:any} ) {
         }
 
         {activeTab === "Talents" &&
-          <Heroes props={{accountId:props.id, setIsVisible: handleRedirect}} />
+          <TalentTree props={{id:heroId, setIsVisible: handleRedirect}} />
+        }
+
+        {activeTab === "New Hero" &&
+          <CreateNewHero props={{accountId:props.id, setIsVisible: handleRedirect}} />
         }
     </>
   );

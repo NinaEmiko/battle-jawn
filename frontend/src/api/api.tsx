@@ -228,3 +228,16 @@ export const activateTalent = async (id: number, talent: string) => {
         console.error('Error activating talent:', error)
     }
 }
+
+export const newHero = async (id: number, heroName: string, role: string) => {
+    try {
+        const response = await axios.post(`${ENDPOINTS.NEW_HERO}`, {
+            userAccountId: id,
+            heroName: heroName,
+            role: role
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error creating hero:', error);
+    }
+}

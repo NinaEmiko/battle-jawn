@@ -22,6 +22,7 @@ import trinket from "../assets/spirit-trinket.png";
 import pants from "../assets/pants.png";
 import water from "../assets/water.png";
 
+
 const Shop = ({props}:{props:any}) => {
     const [purchases, setPurchases] = useState(1);
     const [inventoryList, setInventoryList] = useState([]);

@@ -134,22 +134,6 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                     }
                 </>
             </Display>
-            <Controls>
-                <>
-                    <div className="controls-left">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={() => handleNavigation("/")}>Exit</button>                    
-                    </div>
-                    <div className="controls-right">
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Update Password")}>Left</button>
-                        <button className="controls-btn"></button>
-                        <button className="controls-btn" onClick={()=> handleTabClick("Delete Account")}>Right</button>
-                        <button className="controls-btn"></button>
-                    </div>
-                </>
-            </Controls>
             <Controls
                 handleClickLeftBtnBottom={() => handleNavigation("/")}
                 leftBtnBottomText="Exit"
