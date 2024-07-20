@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CustomNavBar from './components/CustomNavBar';
 import LoginForm from './pages/LoginForm';
 import AccountSettings from './pages/AccountSettings';
-import CreateNewHero from './pages/CreateNewHero';
 import LeaderBoard from './pages/LeaderBoard';
 import AboutUs from './pages/AboutUs';
 import Home from './pages/Home';
@@ -87,7 +86,6 @@ function App() {
       <Routes>
         {!currentUser.loggedIn && <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />}
         {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />}
-        {currentUser.loggedIn && <Route key="create-hero" path="/create-hero" element={<CreateNewHero props={currentUser} />} />}
         {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard props={currentUser} />} />}
         {currentUser.loggedIn && <Route key="account-settings" path="/account-settings" element={<AccountSettings props={currentUser} logout={logout} />} />}
         {currentUser.loggedIn && <Route key="about-us" path="/about-us" element={<AboutUs />} />}

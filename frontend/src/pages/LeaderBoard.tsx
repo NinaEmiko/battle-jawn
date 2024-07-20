@@ -7,7 +7,7 @@ import PageName from "../components/PageName";
 import Display from "../components/Display";
 import Controls from "../components/Controls";
 
-const LeaderBoard = ({props}:{props:any}) => {
+const LeaderBoard = () => {
     const [heroList, setHeroList] = useState([]);
     const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 

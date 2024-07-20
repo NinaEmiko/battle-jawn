@@ -1,19 +1,7 @@
 import { useEffect, useState } from "react";
-import healthPotion from "../assets/healthPotion.png";
-import vest from "../assets/vest.png";
-import sword from "../assets/sword.png";
-import pelt from "../assets/pelt.png";
-import scraps from "../assets/scraps.png";
-import boots from "../assets/boots.png";
-import dagger from "../assets/dagger.png";
-import helm from "../assets/helm.png";
-import jewels from "../assets/jewelery.png";
-import mask from "../assets/mask.png";
-import necklace from "../assets/necklace.png";
-import paw from "../assets/paw.png";
-import trinket from "../assets/spirit-trinket.png";
-import pants from "../assets/pants.png";
-import water from "../assets/water.png";
+import { healthPotion, vest, sword, pelt, scraps, 
+    boots, dagger, helm, jewels, mask, necklace,
+    paw, trinket, pants, water } from "../helpers/image_helper";
 import "../styling/Inventory.css";
 import PopUp from "../components/PopUp";
 import { fetchHero, fetchInventory, usePotion, useWater } from "../api/api";
@@ -145,7 +133,6 @@ const Inventory = ({props}:{props:any}) => {
                                         </div>
                                         <div className="coins-container-jawn">
                                             <p className="coins-jawn">{heroCoins} coins</p>
-                                            {/* <img className="cash" src={cash}/> */}
                                         </div>
                                     </div>
                                 </div>
