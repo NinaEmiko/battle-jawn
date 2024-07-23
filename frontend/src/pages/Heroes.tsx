@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../styling/MyHeroes.css";
-import PopUp from "../components/PopUp";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
@@ -12,10 +11,14 @@ import Hero from "../components/Heroes/Hero";
 function Heroes( {props}:{props:any} ) {
   const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [heroList, setHeroList] = useState([]);
-  const [popUpType, setPopUpType] = useState("");
-  const [popUpContent, setPopUpContent] = useState("");
-  const [showPopUp, setShowPopUp] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
+  const [leftTopButtonText, setLeftTopButtonText] = useState("Play");
+  const [leftCenterButtonText, setLeftCenterButtonText] = useState("Talents");
+  const [leftBottomButtonText, setLeftBottomButtonText] = useState("Delete");
+  const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("Left");
+  const [rightDirectionButtonText, setRightDirectionButtonText] = useState("Right")
+  const [centerDirectionButtonText, setCenterDirectionButtonText] = useState("")
 
   const fetchHeroesCall = async () => {
     const data = await fetchHeroes(props.accountId);
@@ -28,40 +31,66 @@ function Heroes( {props}:{props:any} ) {
   }
 
   const handleOkButtonClick = () => {
-    setShowPopUp(false);
+    setShowDeleteConfirmation(false);
   }
 
+  const setHeroesButtons = () => {
+    setLeftTopButtonText("Play")
+    setLeftCenterButtonText("Talents")
+    setLeftBottomButtonText("Delete")
+    setLeftDirectionButtonText("Left")
+    setRightDirectionButtonText("Right")
+    setCenterDirectionButtonText("");
+  }
+  const setDeleteHeroConfirmationButtons = () => {
+    setLeftTopButtonText("")
+    setLeftCenterButtonText("")
+    setLeftBottomButtonText("Decline")
+    setLeftDirectionButtonText("")
+    setRightDirectionButtonText("")
+    setCenterDirectionButtonText("Delete");
+}
+
   const handleConfirmButtonClick = async () => {
-    setShowPopUp(false);
+    setShowDeleteConfirmation(false);
     await deleteHero(deleteHeroId);
     fetchHeroesCall();
+    setHeroesButtons();
   }
   const handleClickNewHero = (id: number) => {
     props.setIsVisible("New Hero", id);
   }
 
-  const handleClickPlay = (id: number) => {
-    if (heroList[currentHeroIndex].health === 0) {
-      setPopUpType("jawn");
-      setPopUpContent("This hero has no health. You must use a potion or wait until tomorrow to play again.");
-      setShowPopUp(true);
+  const handleClickPlay = () => {
+    if (heroList[currentHeroIndex].health === 0){
+      
     } else {
       Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
-      props.setIsVisible("Map", id);
+      props.setIsVisible("Map", heroList[currentHeroIndex].id);
     }
   }
 
-  const handleClickTalents = (id: number) => {
+  const handleClickTalents = () => {
     Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
-    props.setIsVisible("Talents", id);
+    props.setIsVisible("Talents", heroList[currentHeroIndex].id);
   }
 
-  const handleClickDelete = (id: number) => {
-    setPopUpType("confirmation");
-    setPopUpContent("delete hero");
-    setShowPopUp(true);
-    setDeleteHeroId(id);
-    setCurrentHeroIndex(0);
+  const handleLeftBottomButtonClick = () => {
+    if (showDeleteConfirmation) {
+      setShowDeleteConfirmation(false);
+      setHeroesButtons();
+    } else {
+      setShowDeleteConfirmation(true);
+      setDeleteHeroId(heroList[currentHeroIndex].id);
+      setCurrentHeroIndex(0);
+      setDeleteHeroConfirmationButtons();
+    }
+  }
+
+  const handleCenterDirectionButtonClick = () => {
+    if (showDeleteConfirmation) {
+      handleConfirmButtonClick();
+    }
   }
 
   const previousHero = () => {
@@ -81,7 +110,7 @@ function Heroes( {props}:{props:any} ) {
     
   useEffect(() => {
     fetchHeroesCall();
-  }, [showPopUp])
+  }, [showDeleteConfirmation])
   useEffect(() => {
     fetchHeroesCall();
     checkActiveHero();
@@ -92,18 +121,15 @@ function Heroes( {props}:{props:any} ) {
             <PageName props={"Heroes"} />
             <Display>
                 <>
-                    {showPopUp &&
-                        <PopUp 
-                            props={{
-                                type: popUpType,
-                                content: popUpContent,
-                                onClickOk: handleOkButtonClick,
-                                onClickConfirm: handleConfirmButtonClick
-                            }} 
-                        />   
+                    {showDeleteConfirmation &&
+                    <div className="account-settings-container-jawn">
+                        <div className="delete-account-txt">
+                          WARNING: This action cannot be undone. Are you sure you wish to delete {heroList[currentHeroIndex].name}?
+                        </div>
+                      </div>
                     }
 
-                    {!showPopUp &&
+                    {!showDeleteConfirmation &&
                         <div>
                             {heroList.length < 5 &&
                                 <div className="display-jawn-tab">
@@ -121,16 +147,18 @@ function Heroes( {props}:{props:any} ) {
                 </>
             </Display>
             <Controls
-              handleClickLeftBtnTop={() => handleClickPlay(heroList[currentHeroIndex].id)}
-              leftBtnTopText="Play"
-              handleClickLeftBtnMiddle={() => handleClickTalents(heroList[currentHeroIndex].id)}
-              leftBtnMiddleText="Talents"
-              handleClickLeftBtnBottom={() => handleClickDelete(heroList[currentHeroIndex].id)}
-              leftBtnBottomText="Delete"
+              handleClickLeftBtnTop={() => handleClickPlay()}
+              leftBtnTopText={leftTopButtonText}
+              handleClickLeftBtnMiddle={() => handleClickTalents()}
+              leftBtnMiddleText={leftCenterButtonText}
+              handleClickLeftBtnBottom={() => handleLeftBottomButtonClick()}
+              leftBtnBottomText={leftBottomButtonText}
               handleClickRightBtnLeft={() => previousHero()}
-              rightBtnLeftText="Left"
+              rightBtnLeftText={leftDirectionButtonText}
               handleClickRightBtnRight={() => nextHero()}
-              rightBtnRightText="Right"
+              rightBtnRightText={rightDirectionButtonText}
+              handleClickRightBtnCenter={() => handleCenterDirectionButtonClick()}
+              rightBtnCenterText={centerDirectionButtonText}
             />
         </Container>
   );

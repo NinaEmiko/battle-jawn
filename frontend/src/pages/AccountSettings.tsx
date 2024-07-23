@@ -113,7 +113,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                                 <div className="account-settings-container-jawn">
                                     <div className="delete-account-txt">
                                         WARNING: You are about to delete your account. This action cannot be undone. Are you sure?                                    </div>
-                                </div>
+                                    </div>
                             }
 
                             {activeTab === "Update Password" && (
