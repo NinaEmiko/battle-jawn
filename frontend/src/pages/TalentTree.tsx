@@ -75,13 +75,81 @@ const TalentTree = ({props}:{props:any}) => {
         }
     },[])
 
-    return (        
-        <Container>
-            <PageName props={"Talents"} />
-            <Display>
-                <>
-
-            {showPopUp ?
+    return (  
+        <>
+            {!showPopUp ?      
+                <Container>
+                    <PageName props={"Talents"} />
+                    <Display>
+                        <>
+                            <div>
+                                <div className="hero-name-level">
+                                    <div className="hero-name">
+                                        {heroName}
+                                    </div>
+                                    <div className="hero-level">
+                                    {heroTalentPoints} talent points
+                                    </div>
+                                </div>
+                                <div>
+                                    {heroRole === "Tank" &&
+                                        <div>
+                                            {activeTree === treeOne &&
+                                                <DefenseTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                            {activeTree === treeTwo &&
+                                                <StrengthTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                        </div>
+                                    }
+                                    {heroRole === "Healer" &&
+                                        <div>
+                                            {activeTree === treeOne &&
+                                                <ProtectionTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                            {activeTree === treeTwo &&
+                                                <SpiritualityTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                        </div>
+                                    }
+                                    {heroRole === "DPS" &&
+                                        <div>
+                                            {activeTree === treeTwo &&
+                                                <StealthTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                            {activeTree === treeOne &&
+                                                <DexterityTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                        </div>
+                                    }
+                                    {heroRole === "Caster" &&
+                                        <div>
+                                            {activeTree === treeOne &&
+                                                <ArcaneTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                            {activeTree === treeTwo &&
+                                                <MindfulnessTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                                    <div className="talent-trees-jawn">
+                                        <button className={activeTree === treeOne ? 'talent-tree-jawn-active' : 'talent-tree-jawn'} onClick={()=> handleTabClick(treeOne)}>{treeOne}</button>
+                                        <button className={activeTree === treeTwo ? 'talent-tree-jawn-active' : 'talent-tree-jawn'} onClick={()=> handleTabClick(treeTwo)}>{treeTwo}</button>
+                                    </div>
+                            </div>
+                        </>
+                    </Display>
+                    <Controls 
+                        handleClickLeftBtnBottom={() => handleBackButtonClick()}
+                        leftBtnBottomText="Back"
+                        handleClickRightBtnLeft={() => handleTabClick(treeOne)}
+                        rightBtnLeftText="Left"
+                        handleClickRightBtnRight={() => handleTabClick(treeTwo)}
+                        rightBtnRightText="Right"
+                    />
+                </Container>
+            :
                 <TalentPopUp 
                     props={{
                         type: popUpType,
@@ -92,75 +160,8 @@ const TalentTree = ({props}:{props:any}) => {
                         onClickConfirm: handleConfirmButtonClick
                     }} 
                 />   
-            :
-            <div>
-                <div className="hero-name-level">
-                    <div className="hero-name">
-                        {heroName}
-                    </div>
-                    <div className="hero-level">
-                    {heroTalentPoints} talent points
-                    </div>
-                </div>
-                <div>
-                    {heroRole === "Tank" &&
-                        <div>
-                            {activeTree === treeOne &&
-                                <DefenseTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                            {activeTree === treeTwo &&
-                                <StrengthTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                        </div>
-                    }
-                    {heroRole === "Healer" &&
-                        <div>
-                            {activeTree === treeOne &&
-                                <ProtectionTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                            {activeTree === treeTwo &&
-                                <SpiritualityTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                        </div>
-                    }
-                    {heroRole === "DPS" &&
-                        <div>
-                            {activeTree === treeTwo &&
-                                <StealthTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                            {activeTree === treeOne &&
-                                <DexterityTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                        </div>
-                    }
-                    {heroRole === "Caster" &&
-                        <div>
-                            {activeTree === treeOne &&
-                                <ArcaneTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                            {activeTree === treeTwo &&
-                                <MindfulnessTree props={{talentTree: heroTalentTree, setTalentPopUp: handleSubComponentButtonClick}} />
-                            }
-                        </div>
-                    }
-                </div>
-                <div className="talent-trees-jawn">
-                    <button className={activeTree === treeOne ? 'talent-tree-jawn-active' : 'talent-tree-jawn'} onClick={()=> handleTabClick(treeOne)}>{treeOne}</button>
-                    <button className={activeTree === treeTwo ? 'talent-tree-jawn-active' : 'talent-tree-jawn'} onClick={()=> handleTabClick(treeTwo)}>{treeTwo}</button>
-                </div>
-            </div>
             }
-            </>
-            </Display>
-            <Controls 
-                handleClickLeftBtnBottom={() => handleBackButtonClick()}
-                leftBtnBottomText="Back"
-                handleClickRightBtnLeft={() => handleTabClick(treeOne)}
-                rightBtnLeftText="Left"
-                handleClickRightBtnRight={() => handleTabClick(treeTwo)}
-                rightBtnRightText="Right"
-            />
-        </Container>
+        </>
     )
 
 }

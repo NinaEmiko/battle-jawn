@@ -61,6 +61,7 @@ const PostBattle = ({props}:{props:any}) => {
     })
 
     return (
+        
         <div>
 
             {props.postBattleObject.ran &&

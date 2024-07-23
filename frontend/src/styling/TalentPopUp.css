@@ -85,3 +85,19 @@
       align-items: center;
       justify-content: center;
     }
+
+.talent-description-text{
+  text-align: center;
+  
+}
+
+.talent-description-wrapper{
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.icon-wrapper{
+  height: 50%;
+  align-items: center;
+  justify-content: center;
+}
