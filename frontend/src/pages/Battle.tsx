@@ -262,7 +262,7 @@ function Battle({props}:{props:any}) {
         handleClickLeftBtnBottom={() => handleClickBattle("Run")}
         leftBtnBottomText="Run"
         handleClickRightBtnLeft={() => handleClickBattle(moveOne)}
-        rightBtnTopText={moveOne}
+        rightBtnLeftText={moveOne}
         handleClickRightBtnCenter={() => handleClickBattle(moveTwo)}
         rightBtnCenterText={moveTwo}
         handleClickRightBtnRight={() => handleClickBattle(moveThree)}
