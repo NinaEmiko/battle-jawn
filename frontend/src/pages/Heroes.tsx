@@ -12,6 +12,7 @@ function Heroes( {props}:{props:any} ) {
   const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [heroList, setHeroList] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [currentHeroName, setCurrentHeroName] = useState("")
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [leftTopButtonText, setLeftTopButtonText] = useState("Play");
   const [leftCenterButtonText, setLeftCenterButtonText] = useState("Talents");
@@ -28,10 +29,6 @@ function Heroes( {props}:{props:any} ) {
   const handleRest = async (id: any) => {
     await restHero(id);
     fetchHeroesCall()
-  }
-
-  const handleOkButtonClick = () => {
-    setShowDeleteConfirmation(false);
   }
 
   const setHeroesButtons = () => {
@@ -82,7 +79,6 @@ function Heroes( {props}:{props:any} ) {
     } else {
       setShowDeleteConfirmation(true);
       setDeleteHeroId(heroList[currentHeroIndex].id);
-      setCurrentHeroIndex(0);
       setDeleteHeroConfirmationButtons();
     }
   }
@@ -94,11 +90,15 @@ function Heroes( {props}:{props:any} ) {
   }
 
   const previousHero = () => {
-    setCurrentHeroIndex(currentHeroIndex === 0 ? heroList.length - 1 : currentHeroIndex - 1);
+    if (!showDeleteConfirmation){
+      setCurrentHeroIndex(currentHeroIndex === 0 ? heroList.length - 1 : currentHeroIndex - 1);
+    }
   };
 
   const nextHero = () => {
-    setCurrentHeroIndex(currentHeroIndex === heroList.length - 1 ? 0 : currentHeroIndex + 1);
+    if (!showDeleteConfirmation){
+      setCurrentHeroIndex(currentHeroIndex === heroList.length - 1 ? 0 : currentHeroIndex + 1);
+    }
   };
 
   const checkActiveHero = () =>{
