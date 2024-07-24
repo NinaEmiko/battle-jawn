@@ -1,5 +1,9 @@
 import { activateTalent } from "../../api/api";
 import "../../styling/TalentPopUp.css";
+import Container from "../Container";
+import Controls from "../Controls";
+import Display from "../Display";
+import PageName from "../PageName";
 
 const TalentPopUp = ({props}:{props:any}) => {
 
@@ -9,31 +13,32 @@ const TalentPopUp = ({props}:{props:any}) => {
         props.onClickConfirm();
     }
 
-    return (
-        <div className="pop-up-jawn">
-            {props.type === "available" ?
-                <div className="yes-no-btn-jawn">
-                    <p className="confirmation-talent">{props.talent}</p>
-                    <p className="confirmation-description">{props.description}</p>
-                    <div className="confirmation-btns">
-                        <button id="no-btn" onClick={props.onClickOk}>Back</button>
-                        <button id="yes-btn" onClick={() => handleClickConfirm()}>Activate</button>
-                    </div>
+    return ( 
+        <Container>
+            <PageName props={props.talent} />
+            <Display>
+                <div className="icon-wrapper">
                 </div>
+                <div className="talent-description-wrapper">
+                    <p className="talent-description-text">{props.description}</p>
+                </div>
+            </Display>
+            {props.type === "available" ?
+                <Controls 
+                    handleClickLeftBtnBottom={props.onClickOk}
+                    leftBtnBottomText="Back"
+                    handleClickRightBtnCenter={() => handleClickConfirm()}
+                    rightBtnCenterText="Activate"
+                />
             :
-                <>
-                    <div className="active-jawn">
-                    <p className="confirmation-content">{props.talent}</p>
-                    <p className="confirmation-content">{props.description}?</p>
-                    </div>
-                    <div className="ok-btn-jawn">
-                        <button className="ok-btn" onClick={props.onClickOk}>Back</button>
-                    </div>
-                </>
+                <Controls 
+                    handleClickLeftBtnBottom={props.onClickOk}
+                    leftBtnBottomText="Back"
+                />
             }
-        </div>
+        </Container>
     );
-  };
+};
   
-  export default TalentPopUp;
+export default TalentPopUp;
   

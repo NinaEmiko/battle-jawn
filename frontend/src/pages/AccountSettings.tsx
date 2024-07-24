@@ -5,30 +5,27 @@ import Display from "../components/Display";
 import PageName from "../components/PageName";
 import { request, setAuthHeader } from "../helpers/axios_helper";
 import '../styling/AccountSettings.css';
-import PopUp from "../components/PopUp";
 import { useNavigate } from "react-router-dom";
 
 const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
-    const [activeButton, setActiveButton] = useState("Update Password");
+    const [activeTab, setActiveTab] = useState("Update Password");
     const [newPassword, setNewPassword] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState('');
-    const [popUpType, setPopUpType] = useState("");
-    const [popUpContent, setPopUpContent] = useState("");
-    const [showPopUp, setShowPopUp] = useState(false);
+    const [centerButtonText, setCenterButtonText] = useState("Submit");
+    const [exitButtonText, setExitButtonText] = useState("Exit");
+    const [leftButtonText, setLeftButtonText] = useState("Left");
+    const [rightButtonText, setRightButtonText] = useState("Right");
 
-    const handleTabClick = (button: string) => {
-        setMessage("");
-        setActiveButton(button);
-      };
+    const navigate = useNavigate();
 
-      const navigate = useNavigate();
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    };
 
-      const handleNavigation = (path: string) => {
-          navigate(path);
-      };
+    //API CALLS
 
     const handlePasswordChange = async () => {
         if (newPassword === confirmNewPassword) {
@@ -56,43 +53,70 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
         }
     };
 
-    function handleDeleteConfirmation(): void {
-        setPopUpType("confirmation");
-        setPopUpContent("delete account");
-        setShowPopUp(true);
-      }
+    //BUTTON HANDLERS
+
+    const handleTabClick = (tab: string) => {
+        if (activeTab === "Delete Confirmation") {
+            setLeftButtonText("Left")
+            setRightButtonText("Right")
+            setCenterButtonText("Submit")
+            setExitButtonText("Exit")
+        }
+        setMessage("");
+        setActiveTab(tab);
+
+    };
+    const handleClickDirectionButton = () => {
+        if (activeTab === "Update Password"){
+            setActiveTab("Delete Account");
+        } else if (activeTab === "Delete Account"){
+            setActiveTab("Update Password");
+        }
+    }
+
+    const handleClickSubmit = () => {
+        if (activeTab === "Update Password") {
+            handlePasswordChange()
+        } else if (activeTab === "Delete Confirmation"){
+            handleDeleteAccount();
+            logout();
+        } else if (activeTab === "Delete Account"){
+            setLeftButtonText("")
+            setRightButtonText("")
+            setCenterButtonText("Delete")
+            setExitButtonText("Decline")
+            setActiveTab("Delete Confirmation")
+        }
+    }
     
-      function handleOkButtonClick() {
-        setShowPopUp(false);
-      }
-      
-      function handleConfirmButtonClick() {
-        setShowPopUp(false);
-        handleDeleteAccount();
-        logout();
-      }
+    function handleExitButtonClick() {
+        if (exitButtonText === "Exit"){
+            handleNavigation("/")
+        } else if (exitButtonText === "Decline"){
+            setActiveTab("Delete Account")
+            setLeftButtonText("Left")
+            setRightButtonText("Right")
+            setCenterButtonText("Submit")
+            setExitButtonText("Exit")
+        }
+    }
 
     return (        
         <Container>
             <PageName props={"Account Settings"} />
 
             <Display>
-                <>
-                    {showPopUp ?
-                        <PopUp 
-                            props={{
-                                type: popUpType,
-                                content: popUpContent,
-                                onClickOk: handleOkButtonClick,
-                                onClickConfirm: handleConfirmButtonClick
-                            }} 
-                        />  
-                    :
-                        <>
-                            <div className="parent-jawn">
-                                <div className="child-jawn">
-                            {activeButton === "Update Password" && (
+                <>  
+                    <div className="parent-jawn">
+                        <div className="child-jawn">
+                            {activeTab === "Delete Confirmation" &&     
+                                <div className="account-settings-container-jawn">
+                                    <div className="delete-account-txt">
+                                        WARNING: You are about to delete your account. This action cannot be undone. Are you sure?                                    </div>
+                                    </div>
+                            }
 
+                            {activeTab === "Update Password" && (
                                 <div className="account-settings-container-jawn">
                                         <input type="password"
                                         className="new-password-input"
@@ -106,41 +130,38 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                                         className="new-password-input"
                                         placeholder="Confirm New Password"
                                         value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
-                                        <button className="new-password-submit-btn" onClick={handlePasswordChange}>Submit</button>
                                         <p className="new-password-msg">{message}</p>
                                 </div>
                             )}
 
-                            {activeButton === "Delete Account" && (
+                            {activeTab === "Delete Account" && (
                                 <div className="account-settings-container-jawn">
                                     <div className="delete-account-txt">
-                                        WARNING: You are about to delete your account. This action cannot be undone. Are you sure?
+                                        <p>Do you wish to delete your account?</p>
                                     </div>
                                     <div className="delete-account-jawn">
-                                        <button className="delete-account-btn" onClick={handleDeleteConfirmation}>Delete</button>
                                         <p>{message}</p>
                                     </div>
                                 </div>
                             )}
+                        </div>
+                    </div>
 
-                            </div>
-                            </div>
-
-                            <div className="display-jawn-tabs">
-                                <button className={activeButton === 'Update Password' ? 'active' : ''} onClick={()=> handleTabClick("Update Password")}>Update Password</button>
-                                <button className={activeButton === 'Delete Account' ? 'active' : ''} onClick={()=> handleTabClick("Delete Account")}>Delete Account</button>
-                            </div>
-                        </>
-                    }
+                    <div className="display-jawn-tabs">
+                        <button className={activeTab === 'Update Password' ? 'active' : ''} onClick={()=> handleTabClick("Update Password")}>Update Password</button>
+                        <button className={activeTab === 'Delete Account' ? 'active' : ''} onClick={()=> handleTabClick("Delete Account")}>Delete Account</button>
+                    </div>
                 </>
             </Display>
             <Controls
-                handleClickLeftBtnBottom={() => handleNavigation("/")}
-                leftBtnBottomText="Exit"
-                handleClickRightBtnLeft={() => handleTabClick("Update Password")}
-                rightBtnLeftText="Left"
-                handleClickRightBtnRight={() => handleTabClick("Delete Account")}
-                rightBtnRightText="Right"
+                handleClickLeftBtnBottom={() => handleExitButtonClick()}
+                leftBtnBottomText={exitButtonText}
+                handleClickRightBtnLeft={() => handleClickDirectionButton()}
+                rightBtnLeftText={leftButtonText}
+                handleClickRightBtnCenter={() => handleClickSubmit()}
+                rightBtnCenterText={centerButtonText}
+                handleClickRightBtnRight={() => handleClickDirectionButton()}
+                rightBtnRightText={rightButtonText}
             />
         </Container>
     )
