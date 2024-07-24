@@ -3,7 +3,6 @@ import { healthPotion, vest, sword, pelt, scraps,
     boots, dagger, helm, jewels, mask, necklace,
     paw, trinket, pants, water } from "../helpers/image_helper";
 import "../styling/Inventory.css";
-import PopUp from "../components/PopUp";
 import { fetchHero, fetchInventory, usePotion, useWater } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
@@ -13,9 +12,10 @@ import PageName from "../components/PageName";
 const Inventory = ({props}:{props:any}) => {
     const [inventoryList, setInventoryList] = useState([]);
     const [heroCoins, setHeroCoins] = useState(0);
-    const [popUpType, setPopUpType] = useState("");
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
+    const [rightCenterButtonText, setRightCenterButtonText] = useState("")
+    const [leftBottomButtonText, setLeftBottomButtonText] = useState("Close")
 
     const fetchInventoryCall = async () => {
         const data = await fetchInventory(props.heroId)
@@ -29,15 +29,17 @@ const Inventory = ({props}:{props:any}) => {
 
     const handleClickPotion = async (index: number) => {
         const data = await usePotion(props.heroId, index)
-        setPopUpType("jawn");
         setPopUpContent(data);
+        setLeftBottomButtonText("");
+        setRightCenterButtonText("OK")
         setShowPopUp(true);
     }
 
     const handleClickWater = async (index: number) => {
         const data = await useWater(props.heroId, index)
-        setPopUpType("jawn");
         setPopUpContent(data);
+        setLeftBottomButtonText("");
+        setRightCenterButtonText("OK")
         setShowPopUp(true);
     }
 
@@ -46,11 +48,17 @@ const Inventory = ({props}:{props:any}) => {
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("Map", props.heroId)
+        if (!showPopUp){
+            props.setIsVisible("Map", props.heroId)
+        }
     }
 
     const handleOkButtonClick = () => {
-        setShowPopUp(false);
+        if (showPopUp) {
+            setLeftBottomButtonText("Close");
+            setRightCenterButtonText("")
+            setShowPopUp(false);
+        }
     }
       
     useEffect(() => {
@@ -138,19 +146,19 @@ const Inventory = ({props}:{props:any}) => {
                                 </div>
                             </>
                             :
-                            <PopUp 
-                                props={{
-                                    type: popUpType,
-                                    content: popUpContent,
-                                    onClickOk: handleOkButtonClick
-                                }} 
-                            />   
+                            <div className="account-settings-container-jawn">
+                                <div className="other-txt">
+                                    {popUpContent}
+                                </div>
+                            </div>
                         }
                     </>
                 </Display>
                 <Controls
                     handleClickLeftBtnBottom={() => handleBackButtonClick()}
-                    leftBtnBottomText="Close"
+                    leftBtnBottomText={leftBottomButtonText}
+                    handleClickRightBtnCenter={() => handleOkButtonClick()}
+                    rightBtnCenterText={rightCenterButtonText}
                 />
             </Container>
         </>

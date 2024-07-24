@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PopUp from "../components/PopUp";
 import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
 import { determinePrice } from "../helpers/price_helper";
 import Container from "../components/Container";
@@ -18,15 +17,19 @@ const Shop = ({props}:{props:any}) => {
     const [heroName, setHeroName] = useState("");
     const [heroCoins, setHeroCoins] = useState(0);
     const [filteredInventoryList, setFilteredInventoryList] = useState([]);
-    const [buttonActive, setButtonActive] = useState(true);
-    const [popUpType, setPopUpType] = useState("");
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
+    const [leftBottomButtonText, setLeftBottomButtonText] = useState("Leave");
+    const [rightCenterButtonText, setRightCenterButtonText] = useState("")
+    const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("Left");
+    const [rightDirectionButtonText, setRightDirectionButtonText] = useState("Right")
 
     const purchaseList = ["Potion", "Water"]
 
     const handleTabClick = (button: string) => {
-        setActiveButton(button);
+        if (!showPopUp) {
+            setActiveButton(button);
+        }
       };
 
     const handleFetchHero = async () => {
@@ -42,25 +45,37 @@ const Shop = ({props}:{props:any}) => {
 
     const handleClickBuy = async (id: number, item: string) => {
         const data = await buyItems(id, item);
-        setPopUpType('jawn');
         setPopUpContent(data);
+        setLeftBottomButtonText("")
+        setLeftDirectionButtonText("")
+        setRightDirectionButtonText("")
+        setRightCenterButtonText("OK")
         setPurchases(prevPurchases => prevPurchases + 1);
         setShowPopUp(true);
     }
 
     const handleClickSell = async (id: number, item: string) => {
         const data = await sellItems(id, item);
-        setPopUpType('jawn');
         setPopUpContent(data);
+        setLeftBottomButtonText("")
+        setLeftDirectionButtonText("")
+        setRightDirectionButtonText("")
+        setRightCenterButtonText("OK")
         setPurchases(prevPurchases => prevPurchases + 1);
         setShowPopUp(true);
     }
 
     const handleBackButtonClick = () => {
-        props.setIsVisible("Map", props.heroId)
+        if (!showPopUp){
+            props.setIsVisible("Map", props.heroId)
+        }
     }
     
     const handleOkButtonClick = () => {
+        setLeftBottomButtonText("Leave")
+        setLeftDirectionButtonText("Left")
+        setRightDirectionButtonText("Right")
+        setRightCenterButtonText("")
         setShowPopUp(false);
     }
           
@@ -145,7 +160,6 @@ const Shop = ({props}:{props:any}) => {
                 <>
                     {!showPopUp ?
                         <>
-
                             {activeButton === "Buy" &&
                                 <>
                                 <div className="parent-jawn">
@@ -193,23 +207,23 @@ const Shop = ({props}:{props:any}) => {
                             </div>
                         </>
                         :
-                        <PopUp
-                            props={{
-                            type: popUpType,
-                            content: popUpContent,
-                            onClickOk: handleOkButtonClick
-                            }}
-                        />
+                            <div className="account-settings-container-jawn">
+                                <div className="other-txt">
+                                    {popUpContent}
+                                </div>
+                            </div>
                     }
                 </>
             </Display>
             <Controls
                 handleClickLeftBtnBottom={handleBackButtonClick}
-                leftBtnBottomText="Leave"
+                leftBtnBottomText={leftBottomButtonText}
                 handleClickRightBtnLeft={() => handleTabClick("Buy")}
-                rightBtnLeftText="Left"
+                rightBtnLeftText={leftDirectionButtonText}
                 handleClickRightBtnRight={() => handleTabClick("Sell")}
-                rightBtnRightText="Right"
+                rightBtnRightText={rightDirectionButtonText}
+                handleClickRightBtnCenter={() => handleOkButtonClick()}
+                rightBtnCenterText={rightCenterButtonText}
             />
         </Container>
     )
