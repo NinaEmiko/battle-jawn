@@ -35,6 +35,12 @@
   color: red;
   font-size: 20px;
 }
+.other-txt{
+  margin-top: 10px;
+  text-align: center;
+  color: var(--mid-light-jawn);
+  font-size: 20px;
+}
 .delete-account-btn{
   font-weight: bold;
   cursor: pointer;
