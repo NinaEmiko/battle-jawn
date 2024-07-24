@@ -1,17 +1,17 @@
 .post-battle-text {
-    padding-top: 15px;
+    padding-top: 5px;
     color: var(--orange-jawn);
 }
 .select-text{
-    padding-top: 15px;
+    padding-top: 5px;
     color: var(--orange-jawn);
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
 }
 
 .label-jawn{
-    font-size: 25px;
-    padding-bottom: 15px;
+    font-size: 20px;
+    padding-bottom: 5px;
     color: var(--light-jawn);
 }
 
@@ -20,4 +20,5 @@
 }
 .loot-jawn{
     align-items: center;
+    text-align: center;
 }
