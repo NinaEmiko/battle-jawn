@@ -63,7 +63,7 @@ function Heroes( {props}:{props:any} ) {
 
   const handleClickPlay = () => {
     if (heroList[currentHeroIndex].health === 0){
-      
+
     } else {
       Cookies.set('activeHero', JSON.stringify(currentHeroIndex))
       props.setIsVisible("Map", heroList[currentHeroIndex].id);
