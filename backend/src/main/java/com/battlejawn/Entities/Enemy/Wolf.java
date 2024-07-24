@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 @Entity
-//@NoArgsConstructor
+@NoArgsConstructor
 @DiscriminatorValue("WOLF")
 public class Wolf extends Enemy {
 
