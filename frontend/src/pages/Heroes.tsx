@@ -21,6 +21,7 @@ function Heroes( {props}:{props:any} ) {
   const [rightDirectionButtonText, setRightDirectionButtonText] = useState("Right")
   const [centerDirectionButtonText, setCenterDirectionButtonText] = useState("")
 
+  //API CALLS
   const fetchHeroesCall = async () => {
     const data = await fetchHeroes(props.accountId);
     setHeroList(data);
@@ -30,6 +31,20 @@ function Heroes( {props}:{props:any} ) {
     await restHero(id);
     fetchHeroesCall()
   }
+
+  const handleConfirmButtonClick = async () => {
+    if (showDeleteConfirmation) {
+      if (heroList.length > 0){
+        setCurrentHeroIndex(0);
+      }
+      setShowDeleteConfirmation(false);
+      await deleteHero(deleteHeroId);
+      fetchHeroesCall();
+      setHeroesButtons();
+    }
+  }
+
+  //HANDLER FUNCTIONS
 
   const setHeroesButtons = () => {
     setLeftTopButtonText("Play")
@@ -46,13 +61,6 @@ function Heroes( {props}:{props:any} ) {
     setLeftDirectionButtonText("")
     setRightDirectionButtonText("")
     setCenterDirectionButtonText("Delete");
-}
-
-  const handleConfirmButtonClick = async () => {
-    setShowDeleteConfirmation(false);
-    await deleteHero(deleteHeroId);
-    fetchHeroesCall();
-    setHeroesButtons();
   }
   const handleClickNewHero = (id: number) => {
     props.setIsVisible("New Hero", id);
@@ -83,12 +91,6 @@ function Heroes( {props}:{props:any} ) {
     }
   }
 
-  const handleCenterDirectionButtonClick = () => {
-    if (showDeleteConfirmation) {
-      handleConfirmButtonClick();
-    }
-  }
-
   const previousHero = () => {
     if (!showDeleteConfirmation){
       setCurrentHeroIndex(currentHeroIndex === 0 ? heroList.length - 1 : currentHeroIndex - 1);
@@ -107,6 +109,8 @@ function Heroes( {props}:{props:any} ) {
       setCurrentHeroIndex(Number(JSON.parse(storedActiveHero)));
     }
   }       
+
+  //USE EFFECT
     
   useEffect(() => {
     fetchHeroesCall();
@@ -157,7 +161,7 @@ function Heroes( {props}:{props:any} ) {
               rightBtnLeftText={leftDirectionButtonText}
               handleClickRightBtnRight={() => nextHero()}
               rightBtnRightText={rightDirectionButtonText}
-              handleClickRightBtnCenter={() => handleCenterDirectionButtonClick()}
+              handleClickRightBtnCenter={() => handleConfirmButtonClick()}
               rightBtnCenterText={centerDirectionButtonText}
             />
         </Container>
