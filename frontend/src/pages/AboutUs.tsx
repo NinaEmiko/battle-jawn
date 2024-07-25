@@ -41,6 +41,9 @@ const AboutUs = () => {
                 rightBtnLeftText="ᐊ"
                 handleClickRightBtnRight={() => handleTabClick("Contact")}
                 rightBtnRightText="ᐅ"
+                rightBtnTopText="ᐃ"
+                rightBtnBottomText="ᐁ"
+
             />
         </Container>
     )

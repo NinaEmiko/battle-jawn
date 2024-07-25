@@ -29,11 +29,19 @@ const TalentPopUp = ({props}:{props:any}) => {
                     leftBtnBottomText="Back"
                     handleClickRightBtnCenter={() => handleClickConfirm()}
                     rightBtnCenterText="Activate"
+                    rightBtnTopText="ᐃ"
+                    rightBtnLeftText="ᐊ"
+                    rightBtnRightText="ᐅ"
+                    rightBtnBottomText="ᐁ"
                 />
             :
                 <Controls 
                     handleClickLeftBtnBottom={props.onClickOk}
                     leftBtnBottomText="Back"
+                    rightBtnTopText="ᐃ"
+                    rightBtnLeftText="ᐊ"
+                    rightBtnRightText="ᐅ"
+                    rightBtnBottomText="ᐁ"
                 />
             }
         </Container>

@@ -224,6 +224,8 @@ const Shop = ({props}:{props:any}) => {
                 rightBtnRightText={rightDirectionButtonText}
                 handleClickRightBtnCenter={() => handleOkButtonClick()}
                 rightBtnCenterText={rightCenterButtonText}
+                rightBtnTopText="ᐃ"
+                rightBtnBottomText="ᐁ"
             />
         </Container>
     )

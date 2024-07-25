@@ -136,6 +136,8 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                 rightBtnCenterText="OK"
                 handleClickRightBtnRight={() => handleRightButtonClick()}
                 rightBtnRightText="ᐅ"
+                rightBtnTopText="ᐃ"
+                rightBtnBottomText="ᐁ"
             />
         </Container>
 

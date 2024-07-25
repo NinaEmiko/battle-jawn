@@ -159,6 +159,10 @@ const Inventory = ({props}:{props:any}) => {
                     leftBtnBottomText={leftBottomButtonText}
                     handleClickRightBtnCenter={() => handleOkButtonClick()}
                     rightBtnCenterText={rightCenterButtonText}
+                    rightBtnTopText="ᐃ"
+                    rightBtnLeftText="ᐊ"
+                    rightBtnRightText="ᐅ"
+                    rightBtnBottomText="ᐁ"
                 />
             </Container>
         </>
