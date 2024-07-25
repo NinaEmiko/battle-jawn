@@ -38,9 +38,9 @@ const AboutUs = () => {
                 handleClickLeftBtnBottom={() => handleNavigation("/")}
                 leftBtnBottomText="Exit"
                 handleClickRightBtnLeft={() => handleTabClick("About Us")}
-                rightBtnLeftText="Left"
+                rightBtnLeftText="ᐊ"
                 handleClickRightBtnRight={() => handleTabClick("Contact")}
-                rightBtnRightText="Right"
+                rightBtnRightText="ᐅ"
             />
         </Container>
     )

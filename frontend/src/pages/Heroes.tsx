@@ -16,8 +16,8 @@ function Heroes( {props}:{props:any} ) {
   const [leftTopButtonText, setLeftTopButtonText] = useState("Play");
   const [leftCenterButtonText, setLeftCenterButtonText] = useState("Talents");
   const [leftBottomButtonText, setLeftBottomButtonText] = useState("Delete");
-  const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("Left");
-  const [rightDirectionButtonText, setRightDirectionButtonText] = useState("Right")
+  const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("ᐊ");
+  const [rightDirectionButtonText, setRightDirectionButtonText] = useState("ᐅ")
   const [centerDirectionButtonText, setCenterDirectionButtonText] = useState("")
 
   //API CALLS
@@ -49,8 +49,8 @@ function Heroes( {props}:{props:any} ) {
     setLeftTopButtonText("Play")
     setLeftCenterButtonText("Talents")
     setLeftBottomButtonText("Delete")
-    setLeftDirectionButtonText("Left")
-    setRightDirectionButtonText("Right")
+    setLeftDirectionButtonText("ᐊ")
+    setRightDirectionButtonText("ᐅ")
     setCenterDirectionButtonText("");
   }
   const setDeleteHeroConfirmationButtons = () => {

@@ -156,9 +156,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
       </Display>
       <Controls
         handleClickRightBtnLeft={() => handleTabClick("Login")}
-        rightBtnLeftText="Left"
+        rightBtnLeftText="ᐊ"
         handleClickRightBtnRight={() => handleTabClick("Register")}
-        rightBtnRightText="Right"
+        rightBtnRightText="ᐅ"
       />
     </Container>
   );

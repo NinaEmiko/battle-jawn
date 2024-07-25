@@ -16,8 +16,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
     const [message, setMessage] = useState('');
     const [centerButtonText, setCenterButtonText] = useState("Submit");
     const [exitButtonText, setExitButtonText] = useState("Exit");
-    const [leftButtonText, setLeftButtonText] = useState("Left");
-    const [rightButtonText, setRightButtonText] = useState("Right");
+    const [leftButtonText, setLeftButtonText] = useState("ᐊ");
+    const [rightButtonText, setRightButtonText] = useState("ᐅ");
 
     const navigate = useNavigate();
 
@@ -57,8 +57,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
 
     const handleTabClick = (tab: string) => {
         if (activeTab === "Delete Confirmation") {
-            setLeftButtonText("Left")
-            setRightButtonText("Right")
+            setLeftButtonText("ᐊ")
+            setRightButtonText("ᐅ")
             setCenterButtonText("Submit")
             setExitButtonText("Exit")
         }
@@ -94,8 +94,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
             handleNavigation("/")
         } else if (exitButtonText === "Decline"){
             setActiveTab("Delete Account")
-            setLeftButtonText("Left")
-            setRightButtonText("Right")
+            setLeftButtonText("ᐊ")
+            setRightButtonText("ᐅ")
             setCenterButtonText("Submit")
             setExitButtonText("Exit")
         }

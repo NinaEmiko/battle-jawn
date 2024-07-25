@@ -142,13 +142,13 @@ const HowTo = () => {
                 handleClickLeftBtnBottom={() => handleNavigation("/")}
                 leftBtnBottomText="Exit"
                 handleClickRightBtnTop={() => handleUpClick()}
-                rightBtnTopText="Up"
+                rightBtnTopText="ᐃ"
                 handleClickRightBtnLeft={() => handleTabLeftClick()}
-                rightBtnLeftText="Left"
+                rightBtnLeftText="ᐊ"
                 handleClickRightBtnRight={() => handleTabRightClick()}
-                rightBtnRightText="Right"
+                rightBtnRightText="ᐅ"
                 handleClickRightBtnBottom={() => handleDownClick()}
-                rightBtnBottomText="Down"
+                rightBtnBottomText="ᐁ"
             />
         </Container>
     )
