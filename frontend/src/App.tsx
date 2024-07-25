@@ -88,8 +88,8 @@ function App() {
         {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />}
         {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard props={currentUser} />} />}
         {currentUser.loggedIn && <Route key="account-settings" path="/account-settings" element={<AccountSettings props={currentUser} logout={logout} />} />}
-        {currentUser.loggedIn && <Route key="about-us" path="/about-us" element={<AboutUs />} />}
-        {currentUser.loggedIn && <Route key="how-to" path="/how-to" element={<HowTo />} />}
+        {<Route key="about-us" path="/about-us" element={<AboutUs />} />}
+        {<Route key="how-to" path="/how-to" element={<HowTo />} />}
       </Routes>
     </BrowserRouter>
   );

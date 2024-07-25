@@ -5,6 +5,7 @@ import Display from '../components/Display';
 import PageName from '../components/PageName';
 import '../styling/LoginForm.css';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   onLogin: (e: FormEvent, login: string, password: string) => void;
@@ -20,6 +21,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
 
   const loginFormRef = useRef<HTMLFormElement | null>(null);
   const registerFormRef = useRef<HTMLFormElement | null>(null);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+      navigate(path);
+  };
   
   const submitForm = () => {
     if (activeButton === "Register" && registerFormRef.current) {
@@ -165,6 +171,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
       <Controls
         handleClickLeftBtnTop={() => submitForm()}
         leftBtnTopText={activeButton}
+        handleClickLeftBtnMiddle={() => handleNavigation("/how-to")}
+        leftBtnMiddleText="How To"
+        handleClickLeftBtnBottom={() => handleNavigation("/about-us")}
+        leftBtnBottomText="About Us"
         handleClickRightBtnLeft={() => handleTabClick("Login")}
         rightBtnLeftText="ᐊ"
         handleClickRightBtnRight={() => handleTabClick("Register")}
