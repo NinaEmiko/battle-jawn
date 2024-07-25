@@ -40,18 +40,10 @@ function Battle({props}:{props:any}) {
   const [moveTwo, setMoveTwo] = useState("");
   const [moveThree, setMoveThree] = useState("");
   const [loot, setLoot] = useState<string[]>([]);
-  const [lootActive, setLootActive] = useState(false);
   const [emptySlots, setEmptySlots] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [postBattleActive, setPostBattleActive] = useState(false);
-  const [postBattleObject, setPostBattleObject] = useState({
-    message: "",
-    enemyId: enemyId,
-    heroId: props,
-    ran: false,
-    lost: false,
-    won: false
-  })
+  const [postBattleMessage, setPostBattleMessage] = useState(false);
 
   //HANDLER FUNCTIONS
 
@@ -110,15 +102,14 @@ function Battle({props}:{props:any}) {
   //API CALLS
 
   const getLoot = async () => {
-    if (postBattleObject.enemyId !== 0) {
-        const data = await fetchLoot(postBattleObject.enemyId)
+    if (enemyId !== 0) {
+        const data = await fetchLoot(enemyId)
         setLoot(data);
-        setLootActive(true);
     }
   }
 
   const getEmptySlots = async () => {
-    const data = await fetchEmptySlots(postBattleObject.heroId)
+    const data = await fetchEmptySlots(props.heroId)
     setEmptySlots(data);
   }
 
@@ -133,7 +124,7 @@ function Battle({props}:{props:any}) {
     } else if (emptySlots < selectedOptions.length){
         alert("You do not have room in your inventory for all the loot you've selected. Please unselect and try again.")
     } else {
-        selectLootCall(postBattleObject.heroId, selectedItems)
+        selectLootCall(props.heroId, selectedItems)
         handleExitPostBattleComponent()
     }
   }
@@ -179,29 +170,24 @@ function Battle({props}:{props:any}) {
 
     setSessionInitialized(true);
   }
+  const setPostBattleButtons = () => {
+    setLeftButtonTopText("")
+    setLeftButtonCenterText("")
+    setLeftButtonBottomText("")
+    setRightButtonLeftText("")
+    setRightButtonCenterText("OK")
+    setRightButtonRightText("")
+  }
 
-  const processEndOfBattle = async () => {
-    let heroRan = false;
-    let heroLost = false;
-    let heroWon = false;
-
-    if (battleHistory.includes('You successfully ran away!')) {
-      heroRan = true;
-    } else if (battleHistory.includes('You have been defeated by the enemy!')) {
-      heroLost = true;
-    } else {
-      heroWon = true;
-    }
-    
-    const endBattleSessionData = await endBattleSession(battleSessionId, battleResult);      
-      setPostBattleObject({
-        message: endBattleSessionData,
-        enemyId: enemyId,
-        heroId: props.heroId,
-        ran: heroRan,
-        lost: heroLost,
-        won: heroWon
-      })
+  const processEndOfBattle = async (result: string) => {  
+    setBattleResult(result);
+    setButtonDisabled(true);
+    setPostBattleActive(true);
+    setPostBattleButtons();
+    getEmptySlots();
+    getLoot();
+    const endBattleSessionData = await endBattleSession(battleSessionId, result);      
+    setPostBattleMessage(endBattleSessionData);
   }
 
   //BATTLE INITIALIZATION
@@ -228,37 +214,23 @@ function Battle({props}:{props:any}) {
 
   //BATTLE COMPLETION
 
+  //Set buttons
+
   //Set battle result to end battle
+  //
   useEffect(() => {
-    if(battleHistory) {
+    if(battleHistory && !postBattleActive) {
       if(battleHistory.includes('You have defeated the enemy!')) {
-        setBattleResult("Hero wins");
+        processEndOfBattle("Hero wins");
       } else if (battleHistory.includes('You have been defeated by the enemy!')) {
-        setBattleResult("Hero loses");
+        processEndOfBattle("Hero loses");
       } else if (battleHistory.includes('You successfully ran away!')) {
-        setBattleResult("Hero runs");
+        processEndOfBattle("Hero runs");
       }
     }
   })
 
-  const setPostBattleButtons = () => {
-    setLeftButtonTopText("")
-    setLeftButtonCenterText("")
-    setLeftButtonBottomText("")
-    setRightButtonLeftText("")
-    setRightButtonCenterText("OK")
-    setRightButtonRightText("")
-  }
-
-  //Once battle result has been set, end battle
-  useEffect(() => {
-    if (battleResult != "") {
-      processEndOfBattle();
-      setButtonDisabled(true);
-      setPostBattleActive(true);
-      setPostBattleButtons();
-  }
-  }, [battleResult])
+  //USE EFFECT
 
   useEffect(()=> {
     if (role === "Tank") {
@@ -291,13 +263,6 @@ function Battle({props}:{props:any}) {
       setRightButtonRightText("IceBlast")
     }
   }, [role])
-
-  useEffect(() => {
-    if (!lootActive && postBattleActive) {
-        getEmptySlots();
-        getLoot();
-    }
-  }, [])
 
   return (
     <Container>
@@ -344,17 +309,17 @@ function Battle({props}:{props:any}) {
         {postBattleActive && 
                 <div>
 
-                {postBattleObject.ran &&
+                {battleResult === "Hero runs" &&
                     <h1 className="post-battle-text">You ran away.</h1>
                 }
     
-                {postBattleObject.lost &&
+                {battleResult === "Hero loses" &&
                     <h1 className="post-battle-text">You have been defeated.</h1>
                 }
     
-                {postBattleObject.won &&
+                {battleResult === "Hero wins" &&
                     <div>
-                        <h1 className="title-jawn">{postBattleObject.message}</h1>
+                        <h1 className="title-jawn">{postBattleMessage}</h1>
                         <p className="select-text">Select loot you wish to pick up:</p>
                         {loot.map ((item, index) =>
                             <div className="loot-jawn" key={index}>
@@ -367,7 +332,6 @@ function Battle({props}:{props:any}) {
                     </div>
                 }
               </div>
-          // <PostBattle props={{postBattleObject: postBattleObject, handleExitPostBattleComponent: handleExitPostBattleComponent}} />
         }
       </Display>
       <Controls

@@ -12,7 +12,6 @@ function Heroes( {props}:{props:any} ) {
   const [deleteHeroId, setDeleteHeroId] = useState(0);
   const [heroList, setHeroList] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [currentHeroName, setCurrentHeroName] = useState("")
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const [leftTopButtonText, setLeftTopButtonText] = useState("Play");
   const [leftCenterButtonText, setLeftCenterButtonText] = useState("Talents");
