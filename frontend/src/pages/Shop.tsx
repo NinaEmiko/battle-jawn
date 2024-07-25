@@ -21,8 +21,8 @@ const Shop = ({props}:{props:any}) => {
     const [showPopUp, setShowPopUp] = useState(false);
     const [leftBottomButtonText, setLeftBottomButtonText] = useState("Leave");
     const [rightCenterButtonText, setRightCenterButtonText] = useState("")
-    const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("Left");
-    const [rightDirectionButtonText, setRightDirectionButtonText] = useState("Right")
+    const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("ᐊ");
+    const [rightDirectionButtonText, setRightDirectionButtonText] = useState("ᐅ")
 
     const purchaseList = ["Potion", "Water"]
 
@@ -73,8 +73,8 @@ const Shop = ({props}:{props:any}) => {
     
     const handleOkButtonClick = () => {
         setLeftBottomButtonText("Leave")
-        setLeftDirectionButtonText("Left")
-        setRightDirectionButtonText("Right")
+        setLeftDirectionButtonText("ᐊ")
+        setRightDirectionButtonText("ᐅ")
         setRightCenterButtonText("")
         setShowPopUp(false);
     }

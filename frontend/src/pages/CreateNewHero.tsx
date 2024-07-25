@@ -131,11 +131,11 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                 handleClickLeftBtnBottom={() => handleReturnToHeroes(0)}
                 leftBtnBottomText="Back"
                 handleClickRightBtnLeft={() => handleLeftButtonClick()}
-                rightBtnLeftText="Left"
+                rightBtnLeftText="ᐊ"
                 handleClickRightBtnCenter={handleFormSubmit}
                 rightBtnCenterText="OK"
                 handleClickRightBtnRight={() => handleRightButtonClick()}
-                rightBtnRightText="Right"
+                rightBtnRightText="ᐅ"
             />
         </Container>
 

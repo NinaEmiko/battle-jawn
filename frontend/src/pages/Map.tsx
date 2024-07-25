@@ -233,10 +233,10 @@ const Map = ({props}:{props:any}) => {
                 leftBtnTopText="Bag"
                 handleClickLeftBtnBottom={() => handleBackButtonClick()}
                 leftBtnBottomText="Back"
-                rightBtnTopText="Up"
-                rightBtnLeftText="Left"
-                rightBtnRightText="Right"
-                rightBtnBottomText="Bottom"
+                rightBtnTopText="ᐃ"
+                rightBtnLeftText="ᐊ"
+                rightBtnRightText="ᐅ"
+                rightBtnBottomText="ᐁ"
                 startMoving={startMoving}
                 stopMoving={stopMoving}
             />

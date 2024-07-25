@@ -90,9 +90,9 @@ const LeaderBoard = () => {
                 handleClickLeftBtnBottom={() => handleNavigation("/")}
                 leftBtnBottomText="Exit"
                 handleClickRightBtnTop={() => previousHero()}
-                rightBtnTopText="Up"
+                rightBtnTopText="ᐃ"
                 handleClickRightBtnBottom={() => nextHero()}
-                rightBtnBottomText="Down"
+                rightBtnBottomText="ᐁ"
             />
         </Container>
     )
