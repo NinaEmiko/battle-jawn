@@ -147,6 +147,8 @@ const TalentTree = ({props}:{props:any}) => {
                         rightBtnLeftText="ᐊ"
                         handleClickRightBtnRight={() => handleTabClick(treeTwo)}
                         rightBtnRightText="ᐅ"
+                        rightBtnTopText="ᐃ"
+                        rightBtnBottomText="ᐁ"
                     />
                 </Container>
             :

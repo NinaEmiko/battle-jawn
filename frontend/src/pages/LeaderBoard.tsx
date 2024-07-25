@@ -93,6 +93,8 @@ const LeaderBoard = () => {
                 rightBtnTopText="ᐃ"
                 handleClickRightBtnBottom={() => nextHero()}
                 rightBtnBottomText="ᐁ"
+                rightBtnLeftText="ᐊ"
+                rightBtnRightText="ᐅ"
             />
         </Container>
     )

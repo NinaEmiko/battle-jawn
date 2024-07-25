@@ -162,6 +162,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                 rightBtnCenterText={centerButtonText}
                 handleClickRightBtnRight={() => handleClickDirectionButton()}
                 rightBtnRightText={rightButtonText}
+                rightBtnTopText="ᐃ"
+                rightBtnBottomText="ᐁ"
             />
         </Container>
     )

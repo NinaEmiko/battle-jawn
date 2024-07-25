@@ -162,6 +162,8 @@ function Heroes( {props}:{props:any} ) {
               rightBtnRightText={rightDirectionButtonText}
               handleClickRightBtnCenter={() => handleConfirmButtonClick()}
               rightBtnCenterText={centerDirectionButtonText}
+              rightBtnTopText="ᐃ"
+              rightBtnBottomText="ᐁ"
             />
         </Container>
   );

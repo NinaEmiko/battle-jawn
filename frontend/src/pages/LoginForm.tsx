@@ -1,10 +1,11 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import Container from '../components/Container';
 import Controls from '../components/Controls';
 import Display from '../components/Display';
 import PageName from '../components/PageName';
 import '../styling/LoginForm.css';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormProps {
   onLogin: (e: FormEvent, login: string, password: string) => void;
@@ -17,6 +18,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   const [password, setPassword] = useState('');
   const [confirmationPassword, setConfirmationPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  const loginFormRef = useRef<HTMLFormElement | null>(null);
+  const registerFormRef = useRef<HTMLFormElement | null>(null);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+      navigate(path);
+  };
+  
+  const submitForm = () => {
+    if (activeButton === "Register" && registerFormRef.current) {
+      registerFormRef.current.requestSubmit();
+    } else if (activeButton === "Login" && loginFormRef.current) {
+      loginFormRef.current.requestSubmit();
+    }
+  };
 
   const handleTabClick = (button: string) => {
     setActiveButton(button);
@@ -69,10 +86,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
           <div className="child-jawn">
             <div className="tab-jawn">
               {activeButton === 'Login' && (
-                <form className="form-jawn" onSubmit={onSubmitLogin}>
+                <form 
+                className="form-jawn" 
+                onSubmit={onSubmitLogin}
+                ref={loginFormRef}
+                >
                   <div className="username-jawn">
                     <input
-                      type="login"
+                      type="text"
                       value={login}
                       name="login"
                       className="form-control"
@@ -90,16 +111,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
                       onChange={onChangeHandler}
                     />
                   </div>
-                  <div className="login-submit-btn-jawn">
-                    <button type="submit" className="login-submit-btn">
-                      Sign In
-                    </button>
-                  </div>
                 </form>
               )}
 
               {activeButton === 'Register' && (
-                <form onSubmit={onSubmitRegister}>
+                <form 
+                onSubmit={onSubmitRegister}
+                ref={registerFormRef}
+                >
                   <div className="username-jawn">
                     <input
                       type="text"
@@ -129,11 +148,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
                     />
                     <p style={{color: "red"}}>{message}</p>
                   </div>
-                  <div className="login-submit-btn-jawn">
-                    <button type="submit" className="login-submit-btn">
-                      Register
-                    </button>
-                  </div>
                 </form>
               )}
             </div>
@@ -155,10 +169,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
         </div>
       </Display>
       <Controls
+        handleClickLeftBtnTop={() => submitForm()}
+        leftBtnTopText={activeButton}
+        handleClickLeftBtnMiddle={() => handleNavigation("/how-to")}
+        leftBtnMiddleText="How To"
+        handleClickLeftBtnBottom={() => handleNavigation("/about-us")}
+        leftBtnBottomText="About Us"
         handleClickRightBtnLeft={() => handleTabClick("Login")}
         rightBtnLeftText="ᐊ"
         handleClickRightBtnRight={() => handleTabClick("Register")}
         rightBtnRightText="ᐅ"
+        rightBtnTopText="ᐃ"
+        rightBtnBottomText="ᐁ"
       />
     </Container>
   );
