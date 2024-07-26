@@ -164,6 +164,8 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                 rightBtnRightText={rightButtonText}
                 rightBtnTopText="ᐃ"
                 rightBtnBottomText="ᐁ"
+                leftBtnMiddleText={"-"}
+                leftBtnTopText={"-"}
             />
         </Container>
     )

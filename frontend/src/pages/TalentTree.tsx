@@ -149,6 +149,8 @@ const TalentTree = ({props}:{props:any}) => {
                         rightBtnRightText="ᐅ"
                         rightBtnTopText="ᐃ"
                         rightBtnBottomText="ᐁ"
+                        leftBtnMiddleText={"-"}
+                        leftBtnTopText={"-"}
                     />
                 </Container>
             :

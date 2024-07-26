@@ -50,12 +50,15 @@ const AboutUs = () => {
             <Controls
                 handleClickLeftBtnBottom={() => handleNavigation("/")}
                 leftBtnBottomText="Exit"
+                leftBtnMiddleText={"-"}
+                leftBtnTopText={"-"}
                 handleClickRightBtnLeft={() => handleTabClick("About Us")}
                 rightBtnLeftText="ᐊ"
                 handleClickRightBtnRight={() => handleTabClick("Contact")}
                 rightBtnRightText="ᐅ"
                 rightBtnTopText="ᐃ"
                 rightBtnBottomText="ᐁ"
+                rightBtnCenterText="-"
 
             />
         </Container>

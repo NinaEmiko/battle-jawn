@@ -239,6 +239,7 @@ const Map = ({props}:{props:any}) => {
                 rightBtnBottomText="ᐁ"
                 startMoving={startMoving}
                 stopMoving={stopMoving}
+                leftBtnMiddleText={"-"}
             />
         </Container>
     );

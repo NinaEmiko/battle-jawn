@@ -96,6 +96,8 @@ const LeaderBoard = () => {
                 rightBtnBottomText="ᐁ"
                 rightBtnLeftText="ᐊ"
                 rightBtnRightText="ᐅ"
+                leftBtnMiddleText={"-"}
+                leftBtnTopText={"-"}
             />
         </Container>
     )

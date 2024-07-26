@@ -226,6 +226,8 @@ const Shop = ({props}:{props:any}) => {
                 rightBtnCenterText={rightCenterButtonText}
                 rightBtnTopText="ᐃ"
                 rightBtnBottomText="ᐁ"
+                leftBtnMiddleText={"-"}
+                leftBtnTopText={"-"}
             />
         </Container>
     )

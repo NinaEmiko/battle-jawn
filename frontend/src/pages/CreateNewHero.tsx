@@ -138,6 +138,8 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                 rightBtnRightText="ᐅ"
                 rightBtnTopText="ᐃ"
                 rightBtnBottomText="ᐁ"
+                leftBtnMiddleText={"-"}
+                leftBtnTopText={"-"}
             />
         </Container>
 

@@ -163,6 +163,8 @@ const Inventory = ({props}:{props:any}) => {
                     rightBtnLeftText="ᐊ"
                     rightBtnRightText="ᐅ"
                     rightBtnBottomText="ᐁ"
+                    leftBtnMiddleText={"-"}
+                    leftBtnTopText={"-"}
                 />
             </Container>
         </>

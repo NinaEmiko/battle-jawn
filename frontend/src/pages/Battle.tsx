@@ -33,9 +33,9 @@ function Battle({props}:{props:any}) {
   const [leftButtonTopText, setLeftButtonTopText] = useState("Potion");
   const [leftButtonCenterText, setLeftButtonCenterText] = useState("Water");
   const [leftButtonBottomText, setLeftButtonBottomText] = useState("Run");
-  const [rightButtonLeftText, setRightButtonLeftText] = useState("");
-  const [rightButtonCenterText, setRightButtonCenterText] = useState("");
-  const [rightButtonRightText, setRightButtonRightText] = useState("");
+  const [rightButtonLeftText, setRightButtonLeftText] = useState("-");
+  const [rightButtonCenterText, setRightButtonCenterText] = useState("-");
+  const [rightButtonRightText, setRightButtonRightText] = useState("-");
   const [moveOne, setMoveOne] = useState("");
   const [moveTwo, setMoveTwo] = useState("");
   const [moveThree, setMoveThree] = useState("");
@@ -171,12 +171,12 @@ function Battle({props}:{props:any}) {
     setSessionInitialized(true);
   }
   const setPostBattleButtons = () => {
-    setLeftButtonTopText("")
-    setLeftButtonCenterText("")
-    setLeftButtonBottomText("")
-    setRightButtonLeftText("")
+    setLeftButtonTopText("-")
+    setLeftButtonCenterText("-")
+    setLeftButtonBottomText("-")
+    setRightButtonLeftText("-")
     setRightButtonCenterText("OK")
-    setRightButtonRightText("")
+    setRightButtonRightText("-")
   }
 
   const processEndOfBattle = async (result: string) => {  

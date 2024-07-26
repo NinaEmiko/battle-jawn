@@ -160,6 +160,8 @@ const HowTo = () => {
             <Controls
                 handleClickLeftBtnBottom={() => handleNavigation("/")}
                 leftBtnBottomText="Exit"
+                leftBtnMiddleText={"-"}
+                leftBtnTopText={"-"}
                 handleClickRightBtnTop={() => handleUpClick()}
                 rightBtnTopText="ᐃ"
                 handleClickRightBtnLeft={() => handleTabLeftClick()}
@@ -168,6 +170,7 @@ const HowTo = () => {
                 rightBtnRightText="ᐅ"
                 handleClickRightBtnBottom={() => handleDownClick()}
                 rightBtnBottomText="ᐁ"
+                rightBtnCenterText="-"
             />
         </Container>
     )

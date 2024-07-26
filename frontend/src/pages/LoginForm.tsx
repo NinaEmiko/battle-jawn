@@ -166,6 +166,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
               Register
             </button>
           </div>
+          {/* &nbsp */}
         </div>
       </Display>
       <Controls
@@ -181,6 +182,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
         rightBtnRightText="ᐅ"
         rightBtnTopText="ᐃ"
         rightBtnBottomText="ᐁ"
+        rightBtnCenterText="-"
       />
     </Container>
   );

@@ -33,6 +33,8 @@ const TalentPopUp = ({props}:{props:any}) => {
                     rightBtnLeftText="ᐊ"
                     rightBtnRightText="ᐅ"
                     rightBtnBottomText="ᐁ"
+                    leftBtnMiddleText={"-"}
+                    leftBtnTopText={"-"}
                 />
             :
                 <Controls 
@@ -42,6 +44,8 @@ const TalentPopUp = ({props}:{props:any}) => {
                     rightBtnLeftText="ᐊ"
                     rightBtnRightText="ᐅ"
                     rightBtnBottomText="ᐁ"
+                    leftBtnMiddleText={"-"}
+                    leftBtnTopText={"-"}
                 />
             }
         </Container>
