@@ -8,6 +8,11 @@
     font-size: 20px;
     color: gold;
 }
+.play-how-to-active-scroll{
+    text-align: center;
+    font-size: 20px;
+    color: gold;    
+}
 .battle-move{
     color: white;
     text-align: center;
@@ -17,4 +22,23 @@
     bottom: 0;
     width: 100%;
     text-align: center;
+}
+
+.play-howto-jawn{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+.play-howto{
+    font-size: 15px;
+}
+.shop-howto-jawn{
+    margin-top: 15%;
+}
+.bag-howto-jawn{
+    margin-top: 15%;
+}
+.arena-howto-jawn{
+    margin-top: 15%;
 }

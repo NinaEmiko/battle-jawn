@@ -199,3 +199,30 @@ text-align: center;
   text-align: center;
   margin-top: 5px;
 }
+.hero-scroll-jawn{
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+.hero-scroll{
+  font-size: 15px;
+}
+.hero-active-scroll{
+  text-align: center;
+  font-size: 20px;
+  color: gold;    
+  padding: 5px;
+
+}
+.hero-next-scroll{
+  font-size: 15px;
+  padding: 5px;
+}
+.hero-previous-scroll{
+  font-size: 15px;
+  padding: 5px;
+
+}
