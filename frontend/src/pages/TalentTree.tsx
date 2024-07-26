@@ -87,7 +87,7 @@ const TalentTree = ({props}:{props:any}) => {
                                     <div className="hero-name">
                                         {heroName}
                                     </div>
-                                    <div className="hero-level">
+                                    <div className="hero-level-light">
                                     {heroTalentPoints} talent points
                                     </div>
                                 </div>
