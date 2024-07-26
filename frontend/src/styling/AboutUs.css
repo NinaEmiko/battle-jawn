@@ -43,6 +43,14 @@
     width: 100%;
     overflow-y: hidden;
 }
+.contact-parent-jawn{
+    position: relative;
+    margin-top: 20%;
+    height: 80%;
+    width: 100%;
+    overflow-y: hidden;
+    display: block;
+}
 .child-jawn{
     align-items: center;
     position: absolute;
@@ -50,4 +58,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80%;
+}
+
+.link-jawn{
+    align-items: center;
+    text-align: center;
+    font-size: 25px;
+}
+.about-us-text-jawn{
+    align-items: center;
+    text-align: center;
+    color: white;
 }

@@ -3,11 +3,10 @@ import "../../styling/HowTo.css";
 const HowToHeroes = () => {
 
     return (
-        <div className="battle">
+        <div className="shop-howto-jawn">
             <p className="battle-move">Each account may have up to 5 heroes.</p>   
             <p className="battle-move">Deleted heroes cannot be recovered.</p>  
-            <p className="battle-move">Press up and down buttons to scroll through heroes.</p>
-            <p className="battle-move">Press left and right to cycle between play and delete option for hero. Press OK to select option.</p>   
+            <p className="battle-move">Press left and right buttons to scroll through heroes.</p>
         </div>
     )
 }

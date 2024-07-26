@@ -3,7 +3,7 @@ import "../../styling/HowTo.css";
 const HowToComingSoon = () => {
 
     return (
-        <div>
+        <div className="shop-howto-jawn">
             <p className="battle-role">Currently Unavailable</p>
             <p className="battle-move">Leaving Town</p>
             <p className="battle-move">Hospital</p>

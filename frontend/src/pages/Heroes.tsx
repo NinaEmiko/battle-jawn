@@ -143,7 +143,15 @@ function Heroes( {props}:{props:any} ) {
                             {heroList.length > 0 &&
                               <div className="hero-header-jawn">
                                 <Hero props={heroList[currentHeroIndex]} />
+                                {/* <div className="hero-scroll-jawn">
+                                    <div className="hero-previous-scroll">ᐊ</div>
+                                    <div className="hero-previous-scroll">Previous</div>
+                                    <div className="hero-active-scroll">Current</div>
+                                    <div className="hero-next-scroll">Next</div>
+                                    <div className="hero-next-scroll">ᐅ</div>
+                                </div> */}
                               </div>
+                              
                             }
                         </div>
                     }

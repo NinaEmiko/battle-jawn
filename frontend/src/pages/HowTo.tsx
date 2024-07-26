@@ -4,7 +4,7 @@ import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
 import "../styling/HowTo.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HowToArena from "../components/HowToComponents/HowToArena";
 import HowToShop from "../components/HowToComponents/HowToShop";
 import HowToBag from "../components/HowToComponents/HowToBag";
@@ -17,9 +17,13 @@ import HowToBattleCaster from "../components/HowToComponents/HowToBattleCaster";
 
 const HowTo = () => {
     const [activeTab, setActiveTab] = useState("Heroes");
-    const [activeRole, setActiveRole] = useState("Tank");
-    const [activePlayPage, setActivePlayPage] = useState("Arena");
-    const tabs = ["Heroes", "Battle", "Play", "Coming Soon"];
+    const [previousRole, setPreviousRole] = useState(-1);
+    const [activeRole, setActiveRole] = useState(0);
+    const [nextRole, setNextRole] = useState(1);
+    const [previousPlayPage, setPreviousPlayPage] = useState(-1);
+    const [activePlayPage, setActivePlayPage] = useState(0);
+    const [nextPlayPage, setNextPlayPage] = useState(1);
+    const tabs = ["Heroes", "Battle", "Play", "Upcoming"];
     const roles = ["Tank", "Healer", "DPS", "Caster"];
     const playPages = ["Arena", "Store", "Bag"];
 
@@ -37,27 +41,23 @@ const HowTo = () => {
 
     const handleUpClick = () => {
         if (activeTab === tabs[1]){
-            const currentIndex = roles.indexOf(activeRole);
-            const newIndex = (currentIndex - 1 + roles.length) % roles.length;
-            setActiveRole(roles[newIndex]);
+            const newIndex = (activeRole - 1 + roles.length) % roles.length;
+            setActiveRole(newIndex);
         }
         if (activeTab === tabs[2]){
-            const currentIndex = playPages.indexOf(activePlayPage);
-            const newIndex = (currentIndex - 1 + playPages.length) % playPages.length;
-            setActivePlayPage(playPages[newIndex]);
+            const newIndex = (activePlayPage - 1 + playPages.length) % playPages.length;
+            setActivePlayPage(newIndex);
         }
     };
 
     const handleDownClick = () => {
         if (activeTab === tabs[1]){
-            const currentIndex = roles.indexOf(activeRole);
-            const newIndex = (currentIndex + 1 + roles.length) % roles.length;
-            setActiveRole(roles[newIndex]);
+            const newIndex = (activeRole + 1 + roles.length) % roles.length;
+            setActiveRole(newIndex);
         }
         if (activeTab === tabs[2]){
-            const currentIndex = playPages.indexOf(activePlayPage);
-            const newIndex = (currentIndex + 1 + playPages.length) % playPages.length;
-            setActivePlayPage(playPages[newIndex]);
+            const newIndex = (activePlayPage + 1 + playPages.length) % playPages.length;
+            setActivePlayPage(newIndex);
         }
     };
 
@@ -70,6 +70,22 @@ const HowTo = () => {
     const handleNavigation = (path: string) => {
         navigate(path);
     };
+
+    useEffect(() => {
+        const newPreviousPage = (activePlayPage - 1 + playPages.length) % playPages.length;
+        const newNextPage = (activePlayPage + 1) % playPages.length;
+    
+        setPreviousPlayPage(newPreviousPage);
+        setNextPlayPage(newNextPage);
+      }, [activePlayPage, playPages.length]);
+
+      useEffect(() => {
+        const newPreviousRole = (activeRole - 1 + roles.length) % roles.length;
+        const newNextRole = (activeRole + 1) % roles.length;
+    
+        setPreviousRole(newPreviousRole);
+        setNextRole(newNextRole);
+      }, [activeRole, roles.length]);
 
     return (        
         <Container>
@@ -90,46 +106,53 @@ const HowTo = () => {
                             {activeTab === tabs[1] &&
                                 <div className="battle">
 
-                                    <p className="battle-role">{activeRole}</p>
-
-                                    {activeRole === roles[0] &&
+                                    {activeRole === 0 &&
                                         <HowToBattleTank />
                                     }
 
-                                    {activeRole === roles[1] &&
+                                    {activeRole === 1 &&
                                         <HowToBattleHealer />
                                     }
 
-                                    {activeRole === roles[2] &&
+                                    {activeRole === 2 &&
                                         <HowToBattleDPS />
                                     }   
 
-                                    {activeRole === roles[3] &&
+                                    {activeRole === 3 &&
                                         <HowToBattleCaster />
                                     }   
 
-                                    <p className="battle-howto">Press up or down to scroll through classes.</p>
+                                    <div className="play-howto-jawn">
+                                        <div className="play-howto">ᐃ</div>
+                                        <div className="play-howto">{roles[previousRole]}</div>
+                                        <div className="play-how-to-active-scroll">{roles[activeRole]}</div>
+                                        <div className="play-howto">{roles[nextRole]}</div>
+                                        <div className="play-howto">ᐁ</div>
+                                    </div>
                                 </div>
                             }
 
                             {activeTab === tabs[2] &&
                                 <div className="battle">
 
-                                    <p className="battle-role">{activePlayPage}</p>
 
-                                    {activePlayPage === playPages[0] &&
+                                    {activePlayPage === 0 &&
                                         <HowToArena />
                                     }
 
-                                    {activePlayPage === playPages[1] &&
+                                    {activePlayPage === 1 &&
                                         <HowToShop />
                                     }
-                                    {activePlayPage === playPages[2] &&
+                                    {activePlayPage === 2 &&
                                         <HowToBag />
                                     }
-
-                                    <p className="battle-howto">Press up or down to scroll through available content.</p>
-
+                                    <div className="play-howto-jawn">
+                                        <div className="play-howto">ᐃ</div>
+                                        <div className="play-howto">{playPages[previousPlayPage]}</div>
+                                        <div className="play-how-to-active-scroll">{playPages[activePlayPage]}</div>
+                                        <div className="play-howto">{playPages[nextPlayPage]}</div>
+                                        <div className="play-howto">ᐁ</div>
+                                    </div>
                                 </div>
                             }
 

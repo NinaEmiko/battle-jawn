@@ -3,7 +3,7 @@ import "../../styling/HowTo.css";
 const HowToShop = () => {
 
     return (
-        <div>
+        <div className="shop-howto-jawn">
             <p className="battle-move">Gold number beside item represents it's value.</p>
             <p className="battle-move">Water replenishes hero's Spirit/Magic/Power/Energy.</p>
             <p className="battle-move">Potion heals for 30 health.</p>
