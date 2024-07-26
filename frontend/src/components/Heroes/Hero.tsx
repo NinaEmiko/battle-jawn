@@ -6,12 +6,18 @@ const Hero = ({props}:{props:any}) => {
     return (
         <div>
             <div className="hero-name-level">
-                <div className="hero-name">
-                    {props.name}
-                </div>
                 <div className="hero-level">
+                ᐊ &nbsp;
+                </div>
+                <div className="hero-name">
+                {props.name}
+                </div>
+                <div className="hero-level-light">
                   Lvl {props.level} {props.role}
                 </div>
+                <div className="hero-level">
+                ᐅ
+            </div>
             </div>
             <table className="my-heroes-table">
                 <tbody>

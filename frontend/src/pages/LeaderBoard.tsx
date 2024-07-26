@@ -52,9 +52,6 @@ const LeaderBoard = () => {
                         {heroList.length > 0 &&
 
                             <div className="leader-board-header-jawn">
-                                <div className="number-symbol">
-                                    #{currentHeroIndex + 1}
-                                </div>
                                 <div className="leader-board-hero-name-level">
                                     <div className="leader-board-hero-name">
                                         {heroList[currentHeroIndex].name}
@@ -83,7 +80,11 @@ const LeaderBoard = () => {
                             </div>
                         }
                     </div>
-                    <p className="leaderboard-howto">Press up or down to scroll through the top 5 heroes.</p>
+                    <div className="play-howto-jawn">
+                                        <div className="play-howto">ᐃ</div>
+                                        <div className="play-how-to-active-scroll">#{currentHeroIndex + 1} ●</div>
+                                        <div className="play-howto">ᐁ</div>
+                                    </div>
                 </div>
             </Display>
             <Controls
