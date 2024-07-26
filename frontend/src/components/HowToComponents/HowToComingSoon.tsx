@@ -4,7 +4,6 @@ const HowToComingSoon = () => {
 
     return (
         <div className="shop-howto-jawn">
-            <p className="battle-role">Currently Unavailable</p>
             <p className="battle-move">Leaving Town</p>
             <p className="battle-move">Hospital</p>
             <p className="battle-move">NPCs</p>
