@@ -10,7 +10,7 @@
     height: 100%;
     background: transparent;
     border: 0;
-    color: var(--mid-dark-jawn);
+    color: var(--mid-light-jawn);
 }
 .talent-tree-jawn-active{
     width: 50%;
@@ -18,7 +18,7 @@
     height: 100%;
     background: transparent;
     border: 0;
-    color: gold;
+    color: var(--orange-jawn);
 }
 .hero-name{
   font-size: 30px;

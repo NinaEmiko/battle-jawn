@@ -137,7 +137,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                             {activeTab === "Delete Account" && (
                                 <div className="account-settings-container-jawn">
                                     <div className="delete-account-txt">
-                                        <p>Do you wish to delete your account?</p>
+                                        <p className="delete-account-txt">Do you wish to delete your account?</p>
                                     </div>
                                     <div className="delete-account-jawn">
                                         <p>{message}</p>
