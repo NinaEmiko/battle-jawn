@@ -123,11 +123,9 @@ const HowTo = () => {
                                     }   
 
                                     <div className="play-howto-jawn">
-                                        <div className="play-howto">ᐃ</div>
-                                        <div className="play-howto">{roles[previousRole]}</div>
-                                        <div className="play-how-to-active-scroll">{roles[activeRole]}</div>
-                                        <div className="play-howto">{roles[nextRole]}</div>
-                                        <div className="play-howto">ᐁ</div>
+                                        <div className="play-howto">{roles[previousRole]} ᐃ</div>
+                                        <div className="play-how-to-active-scroll">{roles[activeRole]} ●</div>
+                                        <div className="play-howto">{roles[nextRole]} ᐁ</div>
                                     </div>
                                 </div>
                             }
@@ -147,11 +145,9 @@ const HowTo = () => {
                                         <HowToBag />
                                     }
                                     <div className="play-howto-jawn">
-                                        <div className="play-howto">ᐃ</div>
-                                        <div className="play-howto">{playPages[previousPlayPage]}</div>
-                                        <div className="play-how-to-active-scroll">{playPages[activePlayPage]}</div>
-                                        <div className="play-howto">{playPages[nextPlayPage]}</div>
-                                        <div className="play-howto">ᐁ</div>
+                                        <div className="play-howto">{playPages[previousPlayPage]} ᐃ</div>
+                                        <div className="play-how-to-active-scroll">{playPages[activePlayPage]} ●</div>
+                                        <div className="play-howto">{playPages[nextPlayPage]} ᐁ</div>
                                     </div>
                                 </div>
                             }
