@@ -17,10 +17,10 @@ const TalentPopUp = ({props}:{props:any}) => {
         <Container>
             <PageName props={props.talent} />
             <Display>
-                <div className="icon-wrapper">
-                </div>
-                <div className="talent-description-wrapper">
-                    <p className="talent-description-text">{props.description}</p>
+                <div className="parent-jawn">
+                    <div className="child-jawn" >
+                        <p className="text-jawn">{props.description}</p>
+                    </div>
                 </div>
             </Display>
             {props.type === "available" ?

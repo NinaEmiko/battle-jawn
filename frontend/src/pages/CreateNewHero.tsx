@@ -9,6 +9,7 @@ import DPS from "../assets/DPS.png"
 import Caster from "../assets/Caster.png"
 import { CASTER_DESCRIPTION, DPS_DESCRIPTION, HEALER_DESCRIPTION, TANK_DESCRIPTION } from "../helpers/content_helper";
 import "../styling/CreateNewHero.css";
+import "../styling/Tabs.css";
 import { newHero } from "../api/api";
   
 function CreateNewHero({props}:{props:any}): React.ReactNode {
@@ -70,7 +71,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
             <PageName props={"New Hero"} />
             <Display>
                 <div className="parent-jawn">
-                    <div className="display-jawn-tabs-4">
+                    <div className="display-tabs-top-4">
                         <button className={activeButton === 'Tank' ? 'active' : ''} onClick={()=> handleTabClick("Tank")}>Tank</button>
                         <button className={activeButton === 'Healer' ? 'active' : ''} onClick={()=> handleTabClick("Healer")}>Healer</button>
                         <button className={activeButton === 'DPS' ? 'active' : ''} onClick={()=> handleTabClick("DPS")}>DPS</button>
@@ -85,13 +86,12 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                             value={heroName} onChange={(e) => setHeroName(e.target.value)} />
                         </div>
                     }
-                    <div className="message-container">
-                        {message !== "" &&
-                            <div className="message-jawn">
-                                {message}
-                            </div>
-                        }
-                    </div>
+
+                    {message !== "" &&
+                        <div className="warning-txt">
+                            {message}
+                        </div>
+                    }
 
 
                     <div className="image-description-jawn">
@@ -121,9 +121,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                         }
                     </div>
 
-                    <div className="hero-description-txt-container">
-                        <p className="hero-description-txt">{heroDescription}</p>
-                    </div>
+                    <p className="text-jawn">{heroDescription}</p>
 
                 </div>
             </Display>

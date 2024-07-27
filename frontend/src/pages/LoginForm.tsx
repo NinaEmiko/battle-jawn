@@ -4,6 +4,7 @@ import Controls from '../components/Controls';
 import Display from '../components/Display';
 import PageName from '../components/PageName';
 import '../styling/LoginForm.css';
+import '../styling/Tabs.css';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -152,7 +153,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
               )}
             </div>
           </div>
-          <div className="display-jawn-tabs">
+          <div className="display-tabs-top-2">
             <button
               className={activeButton === 'Login' ? 'active' : ''}
               onClick={() => handleTabClick('Login')}

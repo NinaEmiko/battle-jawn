@@ -146,9 +146,11 @@ const Inventory = ({props}:{props:any}) => {
                                 </div>
                             </>
                             :
-                            <div className="account-settings-container-jawn">
-                                <div className="other-txt">
-                                    {popUpContent}
+                            <div className="parent-jawn">
+                                <div className="child-jawn">
+                                    <div className="text-jawn">
+                                        {popUpContent}
+                                    </div>
                                 </div>
                             </div>
                         }

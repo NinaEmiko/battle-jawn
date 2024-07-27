@@ -4,6 +4,8 @@ import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
 import "../styling/HowTo.css";
+import "../styling/Tabs.css";
+import "../styling/Scroll.css";
 import { useEffect, useState } from "react";
 import HowToArena from "../components/HowToComponents/HowToArena";
 import HowToShop from "../components/HowToComponents/HowToShop";
@@ -92,7 +94,7 @@ const HowTo = () => {
             <PageName props={"How To"} />
             <Display>
                     <div className="parent-jawn">
-                        <div className="display-jawn-tabs-4">
+                        <div className="display-tabs-top-4">
                             <button className={activeTab === tabs[0] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[0])}>{tabs[0]}</button>
                             <button className={activeTab === tabs[1] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[1])}>{tabs[1]}</button>
                             <button className={activeTab === tabs[2] ? 'active' : ''} onClick={()=> handleClickSpecificTab(tabs[2])}>{tabs[2]}</button>
@@ -104,7 +106,7 @@ const HowTo = () => {
                             }
 
                             {activeTab === tabs[1] &&
-                                <div className="battle">
+                                <>
 
                                     {activeRole === 0 &&
                                         <HowToBattleTank />
@@ -122,18 +124,16 @@ const HowTo = () => {
                                         <HowToBattleCaster />
                                     }   
 
-                                    <div className="play-howto-jawn">
-                                        <div className="play-howto">{roles[previousRole]} ᐃ</div>
-                                        <div className="play-how-to-active-scroll">{roles[activeRole]} ●</div>
-                                        <div className="play-howto">{roles[nextRole]} ᐁ</div>
+                                    <div className="scroll-jawn">
+                                        <div className="previous-scroll">{roles[previousRole]} ᐃ</div>
+                                        <div className="active-scroll">{roles[activeRole]} ●</div>
+                                        <div className="next-scroll">{roles[nextRole]} ᐁ</div>
                                     </div>
-                                </div>
+                                </>
                             }
 
                             {activeTab === tabs[2] &&
-                                <div className="battle">
-
-
+                                <>
                                     {activePlayPage === 0 &&
                                         <HowToArena />
                                     }
@@ -144,12 +144,12 @@ const HowTo = () => {
                                     {activePlayPage === 2 &&
                                         <HowToBag />
                                     }
-                                    <div className="play-howto-jawn">
-                                        <div className="play-howto">{playPages[previousPlayPage]} ᐃ</div>
-                                        <div className="play-how-to-active-scroll">{playPages[activePlayPage]} ●</div>
-                                        <div className="play-howto">{playPages[nextPlayPage]} ᐁ</div>
+                                    <div className="scroll-jawn">
+                                        <div className="previous-scroll">{playPages[previousPlayPage]} ᐃ</div>
+                                        <div className="active-scroll">{playPages[activePlayPage]} ●</div>
+                                        <div className="next-scroll">{playPages[nextPlayPage]} ᐁ</div>
                                     </div>
-                                </div>
+                                </>
                             }
 
                             {activeTab === tabs[3] &&

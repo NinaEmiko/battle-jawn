@@ -1,3 +1,5 @@
+/* CONTAINER */
+
 .display-jawn {
     margin: 5px;
     height: 55%;
@@ -10,44 +12,39 @@
     position: relative;
 }
 
-.display-jawn-tabs{
+/* PARENT */
+
+.parent-jawn{
+    position: relative;
+    height: 100%;
     width: 100%;
-    position: absolute;
-    top: 0;
-    height: 10%;
+    overflow-y: hidden;
 }
-.display-jawn-tab{
-    width: 100%;
+
+/* CHILD */
+
+.child-jawn{
+    align-items: center;
     position: absolute;
-    top: 0;
-    height: 10%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+/* TEXT */
+
+.text-jawn{
+    align-items: center;
     text-align: center;
-}
-.display-jawn-tab button{
-    width: 100%;
-    align-items: center;
-    height: 100%;
-    background: transparent;
-    border: 0;
+    color: white;
 }
 
-.display-jawn-tabs button{
-    width: 50%;
-    align-items: center;
-    height: 100%;
-    background: transparent;
-    border: 0;
-}
+/* WARNING TEXT */
 
-.display-jawn-tabs-4 button{
-    padding-top: 15px;
-    width: 25%;
-    align-items: center;
-    height: 100%;
-    background: transparent;
-    border: 0;
-}
-
-button.active {
-    color: var(--orange-jawn);
+.warning-txt{
+    margin-top: 10px;
+    text-align: center;
+    color: red;
+    font-size: 20px;
   }

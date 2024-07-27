@@ -1,14 +1,12 @@
-import "../../styling/HowTo.css";
-
 const HowToComingSoon = () => {
 
     return (
-        <div className="shop-howto-jawn">
-            <p className="battle-move">Leaving Town</p>
-            <p className="battle-move">Hospital</p>
-            <p className="battle-move">NPCs</p>
-            <p className="battle-move">Talent Tree</p>      
-            <p className="battle-move">Quests</p>   
+        <div className="child-jawn">
+            <p className="text-jawn">Leaving Town</p>
+            <p className="text-jawn">Hospital</p>
+            <p className="text-jawn">NPCs</p>
+            <p className="text-jawn">Talent Tree</p>      
+            <p className="text-jawn">Quests</p>   
         </div>
     )
 }

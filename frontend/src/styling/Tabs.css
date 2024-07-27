@@ -1,0 +1,72 @@
+/* DISPLAY TABS TOP 4 */
+
+.display-tabs-top-4 button{
+    padding-top: 15px;
+    width: 25%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+
+/* DISPLAY TABS TOP 2 */
+
+.display-tabs-top-2{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 10%;
+    font-size: 4vw;
+}
+
+.display-tabs-top-2 button{
+    width: 50%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+
+/* DISPLAY TABS TOP 1 */
+
+.display-tabs-top-1{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 10%;
+    text-align: center;
+}
+
+.display-tabs-top-1 button{
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+
+/* DISPLAY TABS BOTTOM 2 */
+
+.display-tabs-bottom-2{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+}
+.display-tabs-bottom-2 button{
+    width: 50%;
+    align-items: center;
+    height: 100%;
+    background: transparent;
+    border: 0;
+    color: var(--mid-light-jawn);
+}
+
+/* UNIVERSAL */
+
+button.active {
+    color: var(--orange-jawn);
+    font-size: 5vw;
+  }
+
+  

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styling/LeaderBoard.css";
+import "../styling/Scroll.css";
 import { useNavigate } from "react-router-dom";
 import { fetchLeaderboard } from "../api/api";
 import Container from "../components/Container";
@@ -80,11 +81,11 @@ const LeaderBoard = () => {
                             </div>
                         }
                     </div>
-                    <div className="play-howto-jawn">
-                                        <div className="play-howto">ᐃ</div>
-                                        <div className="play-how-to-active-scroll">#{currentHeroIndex + 1} ●</div>
-                                        <div className="play-howto">ᐁ</div>
-                                    </div>
+                    <div className="scroll-jawn">
+                        <div className="previous-scroll">ᐃ</div>
+                        <div className="active-scroll">#{currentHeroIndex + 1} ●</div>
+                        <div className="next-scroll">ᐁ</div>
+                    </div>
                 </div>
             </Display>
             <Controls

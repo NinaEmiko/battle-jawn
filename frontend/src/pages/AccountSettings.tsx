@@ -5,6 +5,7 @@ import Display from "../components/Display";
 import PageName from "../components/PageName";
 import { request, setAuthHeader } from "../helpers/axios_helper";
 import '../styling/AccountSettings.css';
+import '../styling/Tabs.css';
 import { useNavigate } from "react-router-dom";
 
 const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
@@ -109,45 +110,34 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                 <>  
                     <div className="parent-jawn">
                         <div className="child-jawn">
-                            {activeTab === "Delete Confirmation" &&     
-                                <div className="account-settings-container-jawn">
-                                    <div className="delete-account-txt">
-                                        WARNING: You are about to delete your account. This action cannot be undone. Are you sure?                                    </div>
-                                    </div>
-                            }
-
                             {activeTab === "Update Password" && (
-                                <div className="account-settings-container-jawn">
-                                        <input type="password"
-                                        className="new-password-input"
-                                        placeholder="Old Password"
-                                        value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
-                                        <input type="password"
-                                        className="new-password-input"
-                                        placeholder="New Password"
-                                        value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-                                        <input type="password"
-                                        className="new-password-input"
-                                        placeholder="Confirm New Password"
-                                        value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
-                                        <p className="new-password-msg">{message}</p>
-                                </div>
+                                <>
+                                    <input type="password"
+                                    className="new-password-input"
+                                    placeholder="Old Password"
+                                    value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                                    <input type="password"
+                                    className="new-password-input"
+                                    placeholder="New Password"
+                                    value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                                    <input type="password"
+                                    className="new-password-input"
+                                    placeholder="Confirm New Password"
+                                    value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
+                                    <p className="new-password-msg">{message}</p>
+                                </>
                             )}
 
                             {activeTab === "Delete Account" && (
-                                <div className="account-settings-container-jawn">
-                                    <div className="delete-account-txt">
-                                        <p className="delete-account-txt">Do you wish to delete your account?</p>
-                                    </div>
-                                    <div className="delete-account-jawn">
-                                        <p>{message}</p>
-                                    </div>
-                                </div>
+                                <>
+                                    <p className="warning-txt">WARNING: You are about to delete your account. This action cannot be undone. Are you sure?</p>
+                                    <p>{message}</p>
+                                </>
                             )}
                         </div>
                     </div>
 
-                    <div className="display-jawn-tabs">
+                    <div className="display-tabs-top-2">
                         <button className={activeTab === 'Update Password' ? 'active' : ''} onClick={()=> handleTabClick("Update Password")}>Update Password</button>
                         <button className={activeTab === 'Delete Account' ? 'active' : ''} onClick={()=> handleTabClick("Delete Account")}>Delete Account</button>
                     </div>

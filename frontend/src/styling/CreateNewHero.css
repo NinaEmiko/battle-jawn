@@ -8,12 +8,7 @@
     width: 100vw;
     height: 100vh;
 }
-.parent-jawn{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-}
+
 .container-jawn-new-hero {
   background-color: var(--dark-jawn);
   opacity: 90%;
@@ -100,15 +95,7 @@
   background-color: var(--mid-light-jawn);
   color: black;
 }
-.hero-description-txt{
-  justify-content: center;
-  text-align: center;
-  color: var(--light-jawn);
-  /* position: absolute; */
-  /* bottom: 0; */
-  margin: 5px;
-  margin-top: 10px;
-}
+
 .image-description-jawn{
   justify-content: center;
   align-items: center;
@@ -144,12 +131,4 @@
   /* border: 0 5px var(--orange-jawn); */
   color: var(--orange-jawn);
 
-}
-.message-jawn{
-  color: red;
-  font-size: 15px;
-  text-align: center;
-}
-.hero-description-txt-container{
-  padding: 10px;
 }

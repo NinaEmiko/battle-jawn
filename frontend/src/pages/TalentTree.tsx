@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../styling/TalentTree.css";
 import "../styling/MyHeroes.css";
+import "../styling/Tabs.css";
 import { treeOneSetter, treeTwoSetter } from "../helpers/talent_tree_helper";
 import StealthTree from "../components/TalentTreeComponents/StealthTree";
 import DexterityTree from "../components/TalentTreeComponents/DexterityTree";
@@ -133,9 +134,9 @@ const TalentTree = ({props}:{props:any}) => {
                                         </div>
                                     }
                                 </div>
-                                    <div className="talent-trees-jawn">
-                                        <button className={activeTree === treeOne ? 'talent-tree-jawn-active' : 'talent-tree-jawn'} onClick={()=> handleTabClick(treeOne)}>{treeOne}</button>
-                                        <button className={activeTree === treeTwo ? 'talent-tree-jawn-active' : 'talent-tree-jawn'} onClick={()=> handleTabClick(treeTwo)}>{treeTwo}</button>
+                                    <div className="display-tabs-bottom-2">
+                                        <button className={activeTree === treeOne ? 'active' : ''} onClick={()=> handleTabClick(treeOne)}>{treeOne}</button>
+                                        <button className={activeTree === treeTwo ? 'active' : ''} onClick={()=> handleTabClick(treeTwo)}>{treeTwo}</button>
                                     </div>
                             </div>
                         </>

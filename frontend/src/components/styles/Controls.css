@@ -14,19 +14,19 @@
     background-color: var(--dark-jawn);
     opacity: 90%;
     text-align: center;
-    font-size: 25px;
+    /* font-size: 25px; */
     display: flex;
 }
 
 .controls-btn{
     background-color: var(--mid-light-jawn);
     border: 1px solid var(--mid-dark-jawn);
-    border-radius: 5px;
+    border-radius: 15px;
     color: black;
     outline: none;
-    font-size: 15px;
-    height: 40px;
-    width: 60px;
+    font-size: 4vw;
+    /* height: 40px;
+    width: 60px; */
 }
 
 /* LEFT STYLES */

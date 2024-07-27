@@ -1,12 +1,10 @@
-import "../../styling/HowTo.css";
-
 const HowToBattleHealer = () => {
 
     return (
-        <div className="shop-howto-jawn">
-            <p className="battle-move">Wand: Generates 1 Spirit.</p>
-            <p className="battle-move">Holy: Consumes 2 Spirit.</p>
-            <p className="battle-move">Heal: Consumes 1 Spirit.</p>
+        <div className="child-jawn">
+            <p className="text-jawn">Wand: Generates 1 Spirit.</p>
+            <p className="text-jawn">Holy: Consumes 2 Spirit.</p>
+            <p className="text-jawn">Heal: Consumes 1 Spirit.</p>
         </div>
     )
 }

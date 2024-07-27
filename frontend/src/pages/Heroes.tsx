@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "../styling/MyHeroes.css";
+import "../styling/Tabs.css";
 import { fetchHeroes, restHero, deleteHero } from "../api/api";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
@@ -122,9 +123,9 @@ function Heroes( {props}:{props:any} ) {
             <Display>
                 <>
                     {showDeleteConfirmation &&
-                    <div className="account-settings-container-jawn">
-                        <div className="delete-account-txt">
-                          WARNING: This action cannot be undone. Are you sure you wish to delete {heroList[currentHeroIndex].name}?
+                    <div className="parent-jawn">
+                        <div className="child-jawn">
+                          <p className="warning-txt">WARNING: This action cannot be undone. Are you sure you wish to delete {heroList[currentHeroIndex].name}?</p>
                         </div>
                       </div>
                     }
@@ -132,7 +133,7 @@ function Heroes( {props}:{props:any} ) {
                     {!showDeleteConfirmation &&
                         <div>
                             {heroList.length < 5 &&
-                                <div className="display-jawn-tab">
+                                <div className="display-tabs-top-1">
                                     <button onClick={() => handleClickNewHero(heroList[currentHeroIndex])}>Create New Hero</button>
                                 </div>
                             }
@@ -140,15 +141,7 @@ function Heroes( {props}:{props:any} ) {
                             {heroList.length > 0 &&
                               <div className="hero-header-jawn">
                                 <Hero props={heroList[currentHeroIndex]} />
-                                {/* <div className="hero-scroll-jawn">
-                                    <div className="hero-previous-scroll">ᐊ</div>
-                                    <div className="hero-previous-scroll">Previous</div>
-                                    <div className="hero-active-scroll">Current</div>
-                                    <div className="hero-next-scroll">Next</div>
-                                    <div className="hero-next-scroll">ᐅ</div>
-                                </div> */}
                               </div>
-                              
                             }
                         </div>
                     }

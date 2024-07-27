@@ -1,12 +1,10 @@
-import "../../styling/HowTo.css";
-
 const HowToBattleTank = () => {
 
     return (
-        <div className="shop-howto-jawn">
-            <p className="battle-move">Strike: Generates 1 Power.</p>
-            <p className="battle-move">Impale: Consumes 2 Power.</p>
-            <p className="battle-move">Block: Successful blocks generate Max Power.</p>
+        <div className="child-jawn">
+            <p className="text-jawn">Strike: Generates 1 Power.</p>
+            <p className="text-jawn">Impale: Consumes 2 Power.</p>
+            <p className="text-jawn">Block: Successful blocks generate Max Power.</p>
         </div>
     )
 }

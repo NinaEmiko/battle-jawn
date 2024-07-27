@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { buyItems, sellItems, fetchHero, fetchInventory } from "../api/api";
 import { determinePrice } from "../helpers/price_helper";
+import '../styling/Tabs.css';
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
@@ -197,15 +198,17 @@ const Shop = ({props}:{props:any}) => {
                                 </>
                             }
 
-                            <div className="display-jawn-tabs">
+                            <div className="display-tabs-top-2">
                                 <button className={activeButton === 'Buy' ? 'active' : ''} onClick={()=> handleTabClick("Buy")}>Buy</button>
                                 <button className={activeButton === 'Sell' ? 'active' : ''} onClick={()=> handleTabClick("Sell")}>Sell</button>
                             </div>
                         </>
                         :
-                            <div className="account-settings-container-jawn">
-                                <div className="other-txt">
-                                    {popUpContent}
+                            <div className="parent-jawn">
+                                <div className="child-jawn">
+                                    <div className="text-jawn">
+                                        {popUpContent}
+                                    </div>
                                 </div>
                             </div>
                     }
