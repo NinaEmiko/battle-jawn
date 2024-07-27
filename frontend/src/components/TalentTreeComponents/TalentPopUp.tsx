@@ -27,8 +27,8 @@ const TalentPopUp = ({props}:{props:any}) => {
                 <Controls 
                     handleClickLeftBtnBottom={props.onClickOk}
                     leftBtnBottomText="Back"
-                    handleClickRightBtnCenter={() => handleClickConfirm()}
-                    rightBtnCenterText="Charge"
+                    handleClickLeftBtnTop={() => handleClickConfirm()}
+                    leftBtnTopText="Activate"
                     rightBtnTopText="ᐃ"
                     rightBtnLeftText="ᐊ"
                     rightBtnRightText="ᐅ"

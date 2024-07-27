@@ -33,12 +33,13 @@ function Battle({props}:{props:any}) {
   const [leftButtonTopText, setLeftButtonTopText] = useState("Potion");
   const [leftButtonCenterText, setLeftButtonCenterText] = useState("Water");
   const [leftButtonBottomText, setLeftButtonBottomText] = useState("Run");
-  const [rightButtonLeftText, setRightButtonLeftText] = useState("");
-  const [rightButtonCenterText, setRightButtonCenterText] = useState("");
-  const [rightButtonRightText, setRightButtonRightText] = useState("");
-  const [moveOne, setMoveOne] = useState("");
-  const [moveTwo, setMoveTwo] = useState("");
-  const [moveThree, setMoveThree] = useState("");
+  const [rightButtonLeftText, setRightButtonLeftText] = useState("-");
+  const [rightButtonRightText, setRightButtonRightText] = useState("-");
+  const [rightButtonTopText, setRightButtonTopText] = useState("-");
+  const [rightButtonBottomText, setRightButtonBottomText] = useState("-");
+  const [moveOne, setMoveOne] = useState("-");
+  const [moveTwo, setMoveTwo] = useState("-");
+  const [moveThree, setMoveThree] = useState("-");
   const [loot, setLoot] = useState<string[]>([]);
   const [emptySlots, setEmptySlots] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
@@ -75,11 +76,11 @@ function Battle({props}:{props:any}) {
     }
   }
 
-  const handleClickCenterDirectionButton = () => {
-    if (rightButtonCenterText === "OK") {
+  const handleClickTopLeftButton = () => {
+    if (leftButtonTopText === "OK") {
       handleClickEndOfBattle()
     } else {
-      handleClickBattle(moveTwo);
+      handleClickBattle("Potion");
     }
   }
 
@@ -171,12 +172,12 @@ function Battle({props}:{props:any}) {
     setSessionInitialized(true);
   }
   const setPostBattleButtons = () => {
-    setLeftButtonTopText("")
-    setLeftButtonCenterText("")
-    setLeftButtonBottomText("")
-    setRightButtonLeftText("")
-    setRightButtonCenterText("OK")
-    setRightButtonRightText("")
+    setLeftButtonTopText("OK")
+    setLeftButtonCenterText("-")
+    setLeftButtonBottomText("-")
+    setRightButtonLeftText("-")
+    setRightButtonRightText("-")
+    setRightButtonTopText("-")
   }
 
   const processEndOfBattle = async (result: string) => {  
@@ -237,28 +238,28 @@ function Battle({props}:{props:any}) {
       setMoveOne("Strike")
       setRightButtonLeftText("Strike")
       setMoveTwo("Impale")
-      setRightButtonCenterText("Impale")
+      setRightButtonTopText("Impale")
       setMoveThree("Block")
       setRightButtonRightText("Block")
     } else if (role === "Healer") {
       setMoveOne("Wand")
       setRightButtonLeftText("Wand")
       setMoveTwo("Holy")
-      setRightButtonCenterText("Holy")
+      setRightButtonTopText("Holy")
       setMoveThree("Heal")
       setRightButtonRightText("Heal")
     } else if (role === "DPS") {
       setMoveOne("Stab")
       setRightButtonLeftText("Stab")
       setMoveTwo("BackStab")
-      setRightButtonCenterText("BackStab")
+      setRightButtonTopText("BackStab")
       setMoveThree("Steal")
       setRightButtonRightText("Steal")
     } else if (role === "Caster") {
       setMoveOne("Wand")
       setRightButtonLeftText("Wand")
       setMoveTwo("FireBlast")
-      setRightButtonCenterText("FireBlast")
+      setRightButtonTopText("FireBlast")
       setMoveThree("IceBlast")
       setRightButtonRightText("IceBlast")
     }
@@ -335,7 +336,7 @@ function Battle({props}:{props:any}) {
         }
       </Display>
       <Controls
-        handleClickLeftBtnTop={() => handleClickBattle("Potion")}
+        handleClickLeftBtnTop={() => handleClickTopLeftButton()}
         leftBtnTopText={leftButtonTopText}
         handleClickLeftBtnMiddle={() => handleClickBattle("Water")}
         leftBtnMiddleText={leftButtonCenterText}
@@ -343,10 +344,11 @@ function Battle({props}:{props:any}) {
         leftBtnBottomText={leftButtonBottomText}
         handleClickRightBtnLeft={() => handleClickBattle(moveOne)}
         rightBtnLeftText={rightButtonLeftText}
-        handleClickRightBtnCenter={() => handleClickCenterDirectionButton()}
-        rightBtnCenterText={rightButtonCenterText}
+        handleClickRightBtnTop={() => handleClickBattle(moveTwo)}
+        rightBtnTopText={rightButtonTopText}
         handleClickRightBtnRight={() => handleClickBattle(moveThree)}
         rightBtnRightText={rightButtonRightText}
+        rightBtnBottomText={rightButtonBottomText}
       />
     </Container>
   );

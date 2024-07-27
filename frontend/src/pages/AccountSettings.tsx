@@ -154,12 +154,12 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
                 </>
             </Display>
             <Controls
+                handleClickLeftBtnTop={() => handleExitButtonClick()}
+                leftBtnTopText={centerButtonText}
                 handleClickLeftBtnBottom={() => handleExitButtonClick()}
                 leftBtnBottomText={exitButtonText}
                 handleClickRightBtnLeft={() => handleClickDirectionButton()}
                 rightBtnLeftText={leftButtonText}
-                handleClickRightBtnCenter={() => handleClickSubmit()}
-                rightBtnCenterText={centerButtonText}
                 handleClickRightBtnRight={() => handleClickDirectionButton()}
                 rightBtnRightText={rightButtonText}
                 rightBtnTopText="ᐃ"

@@ -8,7 +8,6 @@ type ControlsProps = {
   handleClickLeftBtnBottom?: () => void;
   handleClickRightBtnTop?: () => void;
   handleClickRightBtnLeft?: () => void;
-  handleClickRightBtnCenter?: () => void;
   handleClickRightBtnRight?: () => void;
   handleClickRightBtnBottom?: () => void;
   leftBtnTopText?: string;
@@ -16,7 +15,6 @@ type ControlsProps = {
   leftBtnBottomText?: string;
   rightBtnTopText?: string;
   rightBtnLeftText?: string;
-  rightBtnCenterText?: string;
   rightBtnRightText?: string;
   rightBtnBottomText?: string;
   startMoving?: (direction: string) => void;
@@ -29,17 +27,15 @@ const Controls: React.FC<ControlsProps> = ({
   handleClickLeftBtnBottom,
   handleClickRightBtnTop,
   handleClickRightBtnLeft,
-  handleClickRightBtnCenter,
   handleClickRightBtnRight,
   handleClickRightBtnBottom,
-  leftBtnTopText = "",
-  leftBtnMiddleText = "",
-  leftBtnBottomText = "",
-  rightBtnTopText = "",
-  rightBtnLeftText = "",
-  rightBtnCenterText = "",
-  rightBtnRightText = "",
-  rightBtnBottomText = "",
+  leftBtnTopText = "-",
+  leftBtnMiddleText = "-",
+  leftBtnBottomText = "-",
+  rightBtnTopText = "-",
+  rightBtnLeftText = "-",
+  rightBtnRightText = "-",
+  rightBtnBottomText = "-",
   startMoving,
   stopMoving,
 }) => {
@@ -76,9 +72,6 @@ const Controls: React.FC<ControlsProps> = ({
         onTouchEnd={stopMoving}
         >
           {rightBtnLeftText}
-        </button>
-        <button className="controls-btn" onClick={handleClickRightBtnCenter}>
-          {rightBtnCenterText}
         </button>
         <button className="controls-btn"
         onClick={handleClickRightBtnRight}

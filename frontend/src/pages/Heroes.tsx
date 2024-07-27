@@ -17,8 +17,11 @@ function Heroes( {props}:{props:any} ) {
   const [leftCenterButtonText, setLeftCenterButtonText] = useState("Talents");
   const [leftBottomButtonText, setLeftBottomButtonText] = useState("Delete");
   const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("ᐊ");
-  const [rightDirectionButtonText, setRightDirectionButtonText] = useState("ᐅ")
-  const [centerDirectionButtonText, setCenterDirectionButtonText] = useState("")
+  const [rightDirectionButtonText, setRightDirectionButtonText] = useState("ᐅ");
+  const [topDirectionButtonText, setTopDirectionButtonText] = useState("ᐃ")
+  const [bottomDirectionButtonText, setBottomDirectionButtonText] = useState("ᐁ")
+
+
 
   //API CALLS
   const fetchHeroesCall = async () => {
@@ -49,17 +52,11 @@ function Heroes( {props}:{props:any} ) {
     setLeftTopButtonText("Play")
     setLeftCenterButtonText("Talents")
     setLeftBottomButtonText("Delete")
-    setLeftDirectionButtonText("ᐊ")
-    setRightDirectionButtonText("ᐅ")
-    setCenterDirectionButtonText("");
   }
   const setDeleteHeroConfirmationButtons = () => {
-    setLeftTopButtonText("")
-    setLeftCenterButtonText("")
+    setLeftTopButtonText("Confirm")
+    setLeftCenterButtonText("-")
     setLeftBottomButtonText("Decline")
-    setLeftDirectionButtonText("")
-    setRightDirectionButtonText("")
-    setCenterDirectionButtonText("Delete");
   }
   const handleClickNewHero = (id: number) => {
     props.setIsVisible("New Hero", id);
@@ -168,10 +165,8 @@ function Heroes( {props}:{props:any} ) {
               rightBtnLeftText={leftDirectionButtonText}
               handleClickRightBtnRight={() => nextHero()}
               rightBtnRightText={rightDirectionButtonText}
-              handleClickRightBtnCenter={() => handleConfirmButtonClick()}
-              rightBtnCenterText={centerDirectionButtonText}
-              rightBtnTopText="ᐃ"
-              rightBtnBottomText="ᐁ"
+              rightBtnTopText={topDirectionButtonText}
+              rightBtnBottomText={bottomDirectionButtonText}
             />
         </Container>
   );

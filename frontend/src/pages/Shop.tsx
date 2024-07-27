@@ -20,7 +20,7 @@ const Shop = ({props}:{props:any}) => {
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
     const [leftBottomButtonText, setLeftBottomButtonText] = useState("Leave");
-    const [rightCenterButtonText, setRightCenterButtonText] = useState("")
+    const [rightCenterButtonText, setRightCenterButtonText] = useState("-")
     const [leftDirectionButtonText, setLeftDirectionButtonText] = useState("ᐊ");
     const [rightDirectionButtonText, setRightDirectionButtonText] = useState("ᐅ")
 
@@ -46,9 +46,7 @@ const Shop = ({props}:{props:any}) => {
     const handleClickBuy = async (id: number, item: string) => {
         const data = await buyItems(id, item);
         setPopUpContent(data);
-        setLeftBottomButtonText("")
-        setLeftDirectionButtonText("")
-        setRightDirectionButtonText("")
+        setLeftBottomButtonText("-")
         setRightCenterButtonText("OK")
         setPurchases(prevPurchases => prevPurchases + 1);
         setShowPopUp(true);
@@ -57,9 +55,7 @@ const Shop = ({props}:{props:any}) => {
     const handleClickSell = async (id: number, item: string) => {
         const data = await sellItems(id, item);
         setPopUpContent(data);
-        setLeftBottomButtonText("")
-        setLeftDirectionButtonText("")
-        setRightDirectionButtonText("")
+        setLeftBottomButtonText("-")
         setRightCenterButtonText("OK")
         setPurchases(prevPurchases => prevPurchases + 1);
         setShowPopUp(true);
@@ -75,7 +71,7 @@ const Shop = ({props}:{props:any}) => {
         setLeftBottomButtonText("Leave")
         setLeftDirectionButtonText("ᐊ")
         setRightDirectionButtonText("ᐅ")
-        setRightCenterButtonText("")
+        setRightCenterButtonText("-")
         setShowPopUp(false);
     }
           
@@ -222,8 +218,8 @@ const Shop = ({props}:{props:any}) => {
                 rightBtnLeftText={leftDirectionButtonText}
                 handleClickRightBtnRight={() => handleTabClick("Sell")}
                 rightBtnRightText={rightDirectionButtonText}
-                handleClickRightBtnCenter={() => handleOkButtonClick()}
-                rightBtnCenterText={rightCenterButtonText}
+                handleClickLeftBtnTop={() => handleOkButtonClick()}
+                leftBtnTopText={rightCenterButtonText}
                 rightBtnTopText="ᐃ"
                 rightBtnBottomText="ᐁ"
             />

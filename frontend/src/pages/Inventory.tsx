@@ -14,7 +14,7 @@ const Inventory = ({props}:{props:any}) => {
     const [heroCoins, setHeroCoins] = useState(0);
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
-    const [rightCenterButtonText, setRightCenterButtonText] = useState("")
+    const [rightCenterButtonText, setRightCenterButtonText] = useState("-")
     const [leftBottomButtonText, setLeftBottomButtonText] = useState("Close")
 
     const fetchInventoryCall = async () => {
@@ -30,7 +30,7 @@ const Inventory = ({props}:{props:any}) => {
     const handleClickPotion = async (index: number) => {
         const data = await usePotion(props.heroId, index)
         setPopUpContent(data);
-        setLeftBottomButtonText("");
+        setLeftBottomButtonText("-");
         setRightCenterButtonText("OK")
         setShowPopUp(true);
     }
@@ -38,7 +38,7 @@ const Inventory = ({props}:{props:any}) => {
     const handleClickWater = async (index: number) => {
         const data = await useWater(props.heroId, index)
         setPopUpContent(data);
-        setLeftBottomButtonText("");
+        setLeftBottomButtonText("-");
         setRightCenterButtonText("OK")
         setShowPopUp(true);
     }
@@ -56,7 +56,7 @@ const Inventory = ({props}:{props:any}) => {
     const handleOkButtonClick = () => {
         if (showPopUp) {
             setLeftBottomButtonText("Close");
-            setRightCenterButtonText("")
+            setRightCenterButtonText("-")
             setShowPopUp(false);
         }
     }
@@ -157,8 +157,8 @@ const Inventory = ({props}:{props:any}) => {
                 <Controls
                     handleClickLeftBtnBottom={() => handleBackButtonClick()}
                     leftBtnBottomText={leftBottomButtonText}
-                    handleClickRightBtnCenter={() => handleOkButtonClick()}
-                    rightBtnCenterText={rightCenterButtonText}
+                    handleClickLeftBtnTop={() => handleOkButtonClick()}
+                    leftBtnTopText={rightCenterButtonText}
                     rightBtnTopText="ᐃ"
                     rightBtnLeftText="ᐊ"
                     rightBtnRightText="ᐅ"
