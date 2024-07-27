@@ -1,17 +1,4 @@
 /* Display Box */
-.container-jawn {
-    background-color: var(--dark-jawn);
-    opacity: 90%;
-    width: 800px;
-    /* Rounds edges of Display Box */
-    border-radius: 5px;
-    /* Shadow Effect */
-    box-shadow: 0 0 10px 2px;
-    padding-top: .50em;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 16px;
-  }
 
 .battle-container {
   background-color: var(--dark-jawn);
