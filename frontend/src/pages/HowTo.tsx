@@ -3,7 +3,6 @@ import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
-import "../styling/HowTo.css";
 import "../styling/Tabs.css";
 import "../styling/Scroll.css";
 import { useEffect, useState } from "react";

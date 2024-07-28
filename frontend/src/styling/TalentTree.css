@@ -31,21 +31,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 50%; */
 }
 .left-and-right-container-jawn{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  /* width: 100%; */
   border: white;
-  /* height: 75%; */
 }
 .left-container-jawn .right-container-jawn{ 
   width: calc(50% - 10px);
   box-sizing: border-box;
   border: white;
-  /* height: 75%; */
   justify-content: center;
   align-items: center;
   display: flex;
@@ -55,7 +51,6 @@
   text-align: center;
   box-sizing: border-box;
   border: white;
-  /* height: 25%; */
   justify-content: center;
   display: flex;
 }

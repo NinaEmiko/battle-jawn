@@ -1,5 +1,4 @@
-import "../../styling/Container.css";
-import "../../styling/BattleContainer.css";
+import "../../styling/Battle.css";
 
 const LogBox = ({battleHistoryProp}:{battleHistoryProp: string[]}) => {
 

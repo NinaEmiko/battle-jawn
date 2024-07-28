@@ -1,7 +1,5 @@
-import "../styling/Container.css";
 import { useEffect, useState } from "react";
-import "../styling/BattleContainer.css";
-import "../styling/PostBattle.css";
+import "../styling/Battle.css";
 import { fetchBattleSession, heroMove, enemyMove, createNewBattleSession, fetchHero, fetchEnemy, fetchBattleHistoryMessage, endBattleSession, fetchLoot, fetchEmptySlots, selectLootCall } from "../api/api";
 import EnemyIcon from "../components/Battle/EnemyIcon";
 import HeroIcon from "../components/Battle/HeroIcon";

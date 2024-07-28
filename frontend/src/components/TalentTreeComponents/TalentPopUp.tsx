@@ -1,5 +1,4 @@
 import { activateTalent } from "../../api/api";
-import "../../styling/TalentPopUp.css";
 import Container from "../Container";
 import Controls from "../Controls";
 import Display from "../Display";

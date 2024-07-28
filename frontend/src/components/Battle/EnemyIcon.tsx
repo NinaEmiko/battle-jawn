@@ -1,4 +1,3 @@
-import "../../styling/EnemyIcon.css";
 import wolf from "../../assets/wolf.png";
 import orc from "../../assets/orc.png";
 import ghost from "../../assets/ghost.png";

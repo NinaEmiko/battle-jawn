@@ -1,5 +1,3 @@
-import "../../styling/HeroIcon.css";
-import "../../styling/Container.css";
 import wizard from "../../assets/wizard.png";
 import ninja from "../../assets/ninja.png";
 import athena from "../../assets/athena.png";
