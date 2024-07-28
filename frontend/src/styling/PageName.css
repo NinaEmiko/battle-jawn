@@ -16,8 +16,9 @@
 }
 
 .page-name-txt {
-  font-size: 35px;
+  font-size: 250%;
   color: gold;
+  /* padding: 5px; */
 }
   
 .page-name-column-2 {

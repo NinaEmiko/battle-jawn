@@ -15,6 +15,8 @@ import HowToBattleTank from "../components/HowToComponents/HowToBattleTank";
 import HowToBattleHealer from "../components/HowToComponents/HowToBattleHealer";
 import HowToBattleDPS from "../components/HowToComponents/HowToBattleDPS";
 import HowToBattleCaster from "../components/HowToComponents/HowToBattleCaster";
+import HowToTalents from "../components/HowToComponents/HowToTalents";
+import HowToStats from "../components/HowToComponents/HowToStats";
 
 const HowTo = () => {
     const [activeTab, setActiveTab] = useState("Heroes");
@@ -24,9 +26,14 @@ const HowTo = () => {
     const [previousPlayPage, setPreviousPlayPage] = useState(-1);
     const [activePlayPage, setActivePlayPage] = useState(0);
     const [nextPlayPage, setNextPlayPage] = useState(1);
+    const [previousHeroesPage, setPreviousHeroesPage] = useState(-1);
+    const [activeHeroesPage, setActiveHeroesPage] = useState(0);
+    const [nextHeroesPage, setNextHeroesPage] = useState(1);
     const tabs = ["Heroes", "Battle", "Play", "Upcoming"];
     const roles = ["Tank", "Healer", "DPS", "Caster"];
     const playPages = ["Arena", "Store", "Bag"];
+    const heroesPages = ["Heroes", "Talents", "Stats"];
+    
 
     const handleTabLeftClick = () => {
         const currentIndex = tabs.indexOf(activeTab);
@@ -42,23 +49,25 @@ const HowTo = () => {
 
     const handleUpClick = () => {
         if (activeTab === tabs[1]){
-            const newIndex = (activeRole - 1 + roles.length) % roles.length;
-            setActiveRole(newIndex);
+            setActiveRole((activeRole - 1 + roles.length) % roles.length);
         }
         if (activeTab === tabs[2]){
-            const newIndex = (activePlayPage - 1 + playPages.length) % playPages.length;
-            setActivePlayPage(newIndex);
+            setActivePlayPage((activePlayPage - 1 + playPages.length) % playPages.length);
+        }
+        if (activeTab === tabs[0]){
+            setActiveHeroesPage((activeHeroesPage - 1 + heroesPages.length) % heroesPages.length);
         }
     };
 
     const handleDownClick = () => {
         if (activeTab === tabs[1]){
-            const newIndex = (activeRole + 1 + roles.length) % roles.length;
-            setActiveRole(newIndex);
+            setActiveRole((activeRole + 1 + roles.length) % roles.length);
         }
         if (activeTab === tabs[2]){
-            const newIndex = (activePlayPage + 1 + playPages.length) % playPages.length;
-            setActivePlayPage(newIndex);
+            setActivePlayPage((activePlayPage + 1 + playPages.length) % playPages.length);
+        }
+        if (activeTab === tabs[0]){
+            setActiveHeroesPage((activeHeroesPage + 1 + heroesPages.length) % heroesPages.length);
         }
     };
 
@@ -88,6 +97,14 @@ const HowTo = () => {
         setNextRole(newNextRole);
       }, [activeRole, roles.length]);
 
+      useEffect(() => {
+        const newPreviousHeroesPage = (activeHeroesPage - 1 + heroesPages.length) % heroesPages.length;
+        const newNextHeroesPage = (activeHeroesPage + 1) % heroesPages.length;
+    
+        setPreviousHeroesPage(newPreviousHeroesPage);
+        setNextHeroesPage(newNextHeroesPage);
+      }, [activeHeroesPage, heroesPages.length]);
+
     return (        
         <Container>
             <PageName props={"How To"} />
@@ -101,12 +118,29 @@ const HowTo = () => {
                         </div>
 
                             {activeTab === tabs[0] &&
-                                <HowToHeroes />
+                                <>
+                                    {activeHeroesPage === 0 &&
+                                        <HowToHeroes />
+                                    }
+
+                                    {activeHeroesPage === 1 &&
+                                        <HowToTalents />
+                                    }
+
+                                    {activeHeroesPage === 2 &&
+                                        <HowToStats />
+                                    }
+
+                                    <div className="scroll-jawn">
+                                        <div className="previous-scroll">{heroesPages[previousHeroesPage]} ᐃ</div>
+                                        <div className="active-scroll">{heroesPages[activeHeroesPage]} ●</div>
+                                        <div className="next-scroll">{heroesPages[nextHeroesPage]} ᐁ</div>
+                                    </div>
+                                </>
                             }
 
                             {activeTab === tabs[1] &&
                                 <>
-
                                     {activeRole === 0 &&
                                         <HowToBattleTank />
                                     }
@@ -140,9 +174,11 @@ const HowTo = () => {
                                     {activePlayPage === 1 &&
                                         <HowToShop />
                                     }
+
                                     {activePlayPage === 2 &&
                                         <HowToBag />
                                     }
+
                                     <div className="scroll-jawn">
                                         <div className="previous-scroll">{playPages[previousPlayPage]} ᐃ</div>
                                         <div className="active-scroll">{playPages[activePlayPage]} ●</div>

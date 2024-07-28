@@ -22,8 +22,6 @@ function Heroes( {props}:{props:any} ) {
   const [topDirectionButtonText, setTopDirectionButtonText] = useState("ᐃ")
   const [bottomDirectionButtonText, setBottomDirectionButtonText] = useState("ᐁ")
 
-
-
   //API CALLS
   const fetchHeroesCall = async () => {
     const data = await fetchHeroes(props.accountId);

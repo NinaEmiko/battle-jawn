@@ -25,26 +25,14 @@ public class TalentTreeService {
         }
 
         return switch (hero.getRole()) {
-            case "Tank" -> {
-                processTankTalent(hero, talent);
-                yield "Talent successfully activated: " + talent + " .";
-            }
-            case "Healer" -> {
-                processHealerTalent(hero, talent);
-                yield "Talent successfully activated: " + talent + " .";
-            }
-            case "DPS" -> {
-                processDPSTalent(hero, talent);
-                yield "Talent successfully activated: " + talent + " .";
-            }
-            case "Caster" -> {
-                processCasterTalent(hero, talent);
-                yield "Talent successfully activated: " + talent + " .";
-            }
+            case "Tank" -> processTankTalent(hero, talent);
+            case "Healer" -> processHealerTalent(hero, talent);
+            case "DPS" -> processDPSTalent(hero, talent);
+            case "Caster" -> processCasterTalent(hero, talent);
             default -> "Error occurred while activating talent";
         };
     }
-    private void processTankTalent(Hero hero, String talent) {
+    private String processTankTalent(Hero hero, String talent) {
         TankTree tankTree = (TankTree) hero.getTalentTree();
 
         switch (talent) {
@@ -60,144 +48,153 @@ public class TalentTreeService {
             case "Improved Strike 1":
                 tankTree.setImprovedStrike1(true);
                 break;
-            case "improvedStrike2":
+            case "Improved Strike 2":
                 tankTree.setImprovedStrike2(true);
                 break;
-            case "improvedStrike3":
+            case "Improved Strike 3":
                 tankTree.setImprovedStrike3(true);
                 break;
-            case "titan":
+            case "Titan":
                 tankTree.setTitan(true);
                 break;
-            case "desperation":
+            case "Desperation":
                 tankTree.setDesperation(true);
                 break;
-            case "finalStand":
+            case "Final Stand":
                 tankTree.setFinalStand(true);
                 break;
-            case "hydration":
+            case "Hydration":
                 tankTree.setHydration(true);
                 break;
-            case "improvedBlock1":
+            case "Improved Block 1":
                 tankTree.setImprovedBlock1(true);
                 break;
-            case "improvedBlock2":
+            case "Improved Block 2":
                 tankTree.setImprovedBlock2(true);
                 break;
-            case "improvedHealth1":
+            case "Improved Health 1":
                 tankTree.setImprovedHealth1(true);
                 break;
-            case "improvedHealth2":
+            case "Improved Health 2":
                 tankTree.setImprovedHealth2(true);
                 break;
+            default:
+                return "Error occurred while activating " + talent + ".";
         }
         talentTreeRepository.save(tankTree);
+        return "Successfully activated " + talent + ".";
     }
 
-    private void processHealerTalent(Hero hero, String talent) {
+    private String processHealerTalent(Hero hero, String talent) {
         HealerTree healerTree = (HealerTree) hero.getTalentTree();
 
             switch (talent) {
-                case "botany1":
+                case "Botany 1":
                     healerTree.setBotany1(true);
                     break;
-                case "botany2":
+                case "Botany 2":
                     healerTree.setBotany2(true);
                     break;
-                case "improvedHeal1":
+                case "Improved Heal 1":
                     healerTree.setImprovedHeal1(true);
                     break;
-                case "improvedHeal2":
+                case "Improved Heal 2":
                     healerTree.setImprovedHeal2(true);
                     break;
-                case "improvedHeal3":
+                case "Improved Heal 3":
                     healerTree.setImprovedHeal3(true);
                     break;
-                case "spirituallyAttuned":
+                case "Spiritually Attuned":
                     healerTree.setSpirituallyAttuned(true);
                     break;
-                case "survivalInstincts":
+                case "Survival Instincts":
                     healerTree.setSurvivalInstincts(true);
                     break;
-                case "bubble":
+                case "Bubble":
                     healerTree.setBubble(true);
                     break;
-                case "improvedHoly1":
+                case "Improved Holy 1":
                     healerTree.setImprovedHoly1(true);
                     break;
-                case "improvedHoly2":
+                case "Improved Holy 2":
                     healerTree.setImprovedHoly2(true);
                     break;
-                case "improvedHoly3":
+                case "Improved Holy 3":
                     healerTree.setImprovedHoly3(true);
                     break;
-                case "improvedWand1":
+                case "Improved Wand 1":
                     healerTree.setImprovedWand1(true);
                     break;
-                case "improvedWand2":
+                case "Improved Wand 2":
                     healerTree.setImprovedWand2(true);
                     break;
-                case "improvedWand3":
+                case "Improved Wand 3":
                     healerTree.setImprovedWand3(true);
                     break;
+                default:
+                    return "Error occurred while activating " + talent + ".";
             }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);
         talentTreeRepository.save(healerTree);
+        return "Successfully activated " + talent + ".";
     }
 
-    private void processDPSTalent(Hero hero, String talent) {
+    private String processDPSTalent(Hero hero, String talent) {
         DPSTree dpsTree = (DPSTree) hero.getTalentTree();
 
             switch (talent) {
-                case "energized":
+                case "Energized":
                     dpsTree.setEnergized(true);
                     break;
-                case "improvedBackStab1":
+                case "Improved BackStab 1":
                     dpsTree.setImprovedBackStab1(true);
                     break;
-                case "improvedBackStab2":
+                case "Improved BackStab 2":
                     dpsTree.setImprovedBackStab2(true);
                     break;
-                case "improvedStab1":
+                case "Improved Stab 1":
                     dpsTree.setImprovedStab1(true);
                     break;
-                case "improvedStab2":
+                case "Improved Stab 2":
                     dpsTree.setImprovedStab2(true);
                     break;
-                case "improvedStab3":
+                case "Improved Stab 3":
                     dpsTree.setImprovedStab3(true);
                     break;
-                case "peekaboo":
+                case "Peekaboo":
                     dpsTree.setPeekaboo(true);
                     break;
-                case "elation":
+                case "Elation":
                     dpsTree.setElation(true);
                     break;
-                case "firstStrike":
+                case "First Strike":
                     dpsTree.setFirstStrike(true);
                     break;
-                case "HonorAmongThieves":
+                case "Honor Among Thieves":
                     dpsTree.setHonorAmongThieves(true);
                     break;
-                case "improvedSteal1":
+                case "Improved Steal 1":
                     dpsTree.setImprovedSteal1(true);
                     break;
-                case "improvedSteal2":
+                case "mproved Steal 2":
                     dpsTree.setImprovedSteal2(true);
                     break;
-                case "organizedMess":
+                case "Organized Mess":
                     dpsTree.setOrganizedMess(true);
                     break;
-                case "stickyFingaz":
+                case "Sticky Fingaz":
                     dpsTree.setStickyFingaz(true);
                     break;
+                default:
+                    return "Error occurred while activating " + talent + ".";
             }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);
         talentTreeRepository.save(dpsTree);
+        return "Successfully activated " + talent + ".";
     }
-    private void processCasterTalent(Hero hero, String talent) {
+    private String processCasterTalent(Hero hero, String talent) {
         CasterTree casterTree = (CasterTree) hero.getTalentTree();
 
         switch (talent) {
@@ -243,9 +240,12 @@ public class TalentTreeService {
             case "Second Nature":
                 casterTree.setSecondNature(true);
                 break;
+            default:
+                return "Error occurred while activating " + talent + ".";
         }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);
         talentTreeRepository.save(casterTree);
+        return "Successfully activated " + talent + ".";
     }
 }

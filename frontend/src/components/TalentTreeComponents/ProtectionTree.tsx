@@ -14,29 +14,29 @@ const ProtectionTree = ({props}:{props:any}) => {
 
             <div className="left-container-jawn">
 
-                {props.improvedHeal1 ?
+                {props.talentTree.improvedHeal1 ?
                 <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Heal 1", talentDescriptions("Improved Heal 1"), "active")}>Improved Heal 1</button>
                 :
                 <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Heal 1", talentDescriptions("Improved Heal 1"), "available")}>Improved Heal 1</button>
                 }
 
-                {props.improvedHeal2 &&
+                {props.talentTree.improvedHeal2 &&
                     <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Heal 2", "Improved Heal 2", "active")}>Improved Heal 2</button>
                 }
-                {!props.improvedHeal2 && !props.improvedHeal1 &&
+                {!props.talentTree.improvedHeal2 && !props.talentTree.improvedHeal1 &&
                     <button className="talent-jawn-inactive">Improved Heal 2</button>
                 }
-                {!props.improvedHeal2 && props.improvedHeal1 &&
+                {!props.talentTree.improvedHeal2 && props.talentTree.improvedHeal1 &&
                     <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Heal 2", "Improved Heal 2", "available")}>Improved Heal 2</button>
                 }
 
-                {props.improvedHeal3 &&
+                {props.talentTree.improvedHeal3 &&
                     <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Heal 3", "Improved Heal 3", "active")}>Improved Heal 3</button>
                 }
-                {!props.improvedHeal3 && !props.improvedHeal2 &&
+                {!props.talentTree.improvedHeal3 && !props.talentTree.improvedHeal2 &&
                     <button className="talent-jawn-inactive">Improved Heal 3</button>
                 }
-                {!props.improvedHeal3 && props.improvedHeal2 &&
+                {!props.talentTree.improvedHeal3 && props.talentTree.improvedHeal2 &&
                     <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Heal 3", "Improved Heal 3", "available")}>Improved Heal 3</button>
                 }
 
@@ -45,29 +45,29 @@ const ProtectionTree = ({props}:{props:any}) => {
 
             <div className="right-container-jawn">
 
-                {props.botany1 ?
+                {props.talentTree.botany1 ?
                 <button className="talent-jawn-active" onClick={() => handleTalentClick("Botany 1", talentDescriptions("Botany 1 - Protection"), "active")}>Botany 1</button>
                 :
                 <button className="talent-jawn-available" onClick={() => handleTalentClick("Botany 1", talentDescriptions("Botany 1 - Protection"), "available")}>Botany 1</button>
                 }
 
-                {props.botany2 &&
+                {props.talentTree.botany2 &&
                     <button className="talent-jawn-active" onClick={() => handleTalentClick("Botany 2", "Botany 2 - Protection", "active")}>Botany 2</button>
                 }
-                {!props.botany2 && !props.botany1 &&
+                {!props.talentTree.botany2 && !props.talentTree.botany1 &&
                     <button className="talent-jawn-inactive">Botany 2</button>
                 }
-                {!props.botany2 && props.botany1 &&
+                {!props.talentTree.botany2 && props.talentTree.botany1 &&
                     <button className="talent-jawn-available" onClick={() => handleTalentClick("Botany 2", "Botany 2 - Protection", "available")}>Botany 2</button>
                 }
 
-                {props.bubble &&
+                {props.talentTree.bubble &&
                     <button className="talent-jawn-active" onClick={() => handleTalentClick("Bubble", "Bubble", "active")}>Bubble</button>
                 }
-                {!props.bubble && !props.botany2 &&
+                {!props.talentTree.bubble && !props.talentTree.botany2 &&
                     <button className="talent-jawn-inactive">Bubble</button>
                 }
-                {!props.bubble && props.botany2 &&
+                {!props.talentTree.bubble && props.talentTree.botany2 &&
                     <button className="talent-jawn-available" onClick={() => handleTalentClick("Bubble", "Bubble", "available")}>Bubble</button>
                 }
 

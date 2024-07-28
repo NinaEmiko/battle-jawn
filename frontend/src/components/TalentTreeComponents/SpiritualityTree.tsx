@@ -14,29 +14,29 @@ const SpiritualityTree = ({props}:{props:any}) => {
 
             <div className="left-container-jawn">
 
-                {props.improvedWand1 ?
+                {props.talentTree.improvedWand1 ?
                 <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 1", talentDescriptions("Improved Wand 1 - Spirituality"), "active")}>Improved Wand 1</button>
                 :
                 <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 1", talentDescriptions("Improved Wand 1 - Spirituality"), "available")}>Improved Wand 1</button>
                 }
 
-                {props.improvedWand2 &&
+                {props.talentTree.improvedWand2 &&
                     <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 2", "Improved Wand 2 - Spirituality", "active")}>Improved Wand 2</button>
                 }
-                {!props.improvedWand2 && !props.improvedWand1 &&
+                {!props.talentTree.improvedWand2 && !props.talentTree.improvedWand1 &&
                     <button className="talent-jawn-inactive">Improved Wand 2</button>
                 }
-                {!props.improvedWand2 && props.improvedWand1 &&
+                {!props.talentTree.improvedWand2 && props.talentTree.improvedWand1 &&
                     <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 2", "Improved Wand 2 - Spirituality", "available")}>Improved Wand 2</button>
                 }
 
-                {props.improvedWand3 &&
+                {props.talentTree.improvedWand3 &&
                     <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 3", "Improved Wand 3 - Spirituality", "active")}>Improved Wand 3</button>
                 }
-                {!props.improvedWand3 && !props.improvedWand2 &&
+                {!props.talentTree.improvedWand3 && !props.talentTree.improvedWand2 &&
                     <button className="talent-jawn-inactive">Improved Wand 3</button>
                 }
-                {!props.improvedWand3 && props.improvedWand2 &&
+                {!props.talentTree.improvedWand3 && props.talentTree.improvedWand2 &&
                     <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 3", "Improved Wand 3 - Spirituality", "available")}>Improved Wand 3</button>
                 }
 
@@ -45,30 +45,30 @@ const SpiritualityTree = ({props}:{props:any}) => {
 
             <div className="right-container-jawn">
 
-                {props.holy1 ?
-                <button className="talent-jawn-active" onClick={() => handleTalentClick("Holy 1", talentDescriptions("Holy 1"), "active")}>Holy 1</button>
+                {props.talentTree.improvedHoly1 ?
+                <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Holy 1", talentDescriptions("Improved Holy 1"), "active")}>Improved Holy 1</button>
                 :
-                <button className="talent-jawn-available" onClick={() => handleTalentClick("Holy 1", talentDescriptions("Holy 1"), "available")}>Holy 1</button>
+                <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Holy 1", talentDescriptions("Improved Holy 1"), "available")}>Improved Holy 1</button>
                 }
 
-                {props.holy2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Holy 2", "Holy 2", "active")}>Holy 2</button>
+                {props.talentTree.improvedHoly2 &&
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Holy 2", "Improved Holy 2", "active")}>Improved Holy 2</button>
                 }
-                {!props.holy2 && !props.holy1 &&
-                    <button className="talent-jawn-inactive">Holy 2</button>
+                {!props.talentTree.improvedHoly2 && !props.talentTree.improvedHoly1 &&
+                    <button className="talent-jawn-inactive">Improved Holy 2</button>
                 }
-                {!props.holy2 && props.holy1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Holy 2", "Holy 2", "available")}>Holy 2</button>
+                {!props.talentTree.improvedHoly2 && props.talentTree.improvedHoly1 &&
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Holy 2", "Improved Holy 2", "available")}>Improved Holy 2</button>
                 }
 
-                {props.holy3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Holy 3", "Holy 3", "active")}>Holy 3</button>
+                {props.talentTree.improvedHoly3 &&
+                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Holy 3", "Improved Holy 3", "active")}>Improved Holy 3</button>
                 }
-                {!props.holy3 && !props.holy2 &&
-                    <button className="talent-jawn-inactive">Holy 3</button>
+                {!props.talentTree.improvedHoly3 && !props.talentTree.improvedHoly2 &&
+                    <button className="talent-jawn-inactive">Improved Holy 3</button>
                 }
-                {!props.holy3 && props.holy2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Holy 3", "Holy 3", "available")}>Holy 3</button>
+                {!props.talentTree.improvedHoly3 && props.talentTree.improvedHoly2 &&
+                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Holy 3", "Improved Holy 3", "available")}>Improved Holy 3</button>
                 }
 
             </div>
@@ -76,11 +76,11 @@ const SpiritualityTree = ({props}:{props:any}) => {
 
             <div className="bottom-container-jawn">
 
-            {props.spirituallyAttuned &&
+            {props.talentTree.spirituallyAttuned &&
                 <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Spiritually Attuned", "Spiritually Attuned", "active")}>Spiritually Attuned</button>
             }
-            {!props.spirituallyAttuned && props.improvedWand3 && props.improvedHoly2 ||
-            !props.spirituallyAttuned && props.improvedWand2 && props.improvedHoly3 ?
+            {!props.talentTree.spirituallyAttuned && props.talentTree.improvedWand3 && props.talentTree.improvedHoly2 ||
+            !props.talentTree.spirituallyAttuned && props.talentTree.improvedWand2 && props.talentTree.improvedHoly3 ?
                 <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Spiritually Attuned", "Spiritually Attuned", "available")}>Spiritually Attuned</button>
             :
                 <button className="talent-jawn-inactive center-jawn">Spiritually Attuned</button>
