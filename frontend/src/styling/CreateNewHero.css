@@ -1,134 +1,38 @@
-.create-hero-background-jawn {
-    background-image: url('./assets/create-hero-background.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-}
-
-.container-jawn-new-hero {
-  background-color: var(--dark-jawn);
-  opacity: 90%;
-  border-radius: 5px;
-  box-shadow: 0 0 10px 2px;
-  padding-top: .50em;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  justify-content: center;
-  text-align: center;
-  max-height: 550px;
-  overflow-y: auto;
-  width: 420px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.userPrompt {
-  color: gold;
-  font-size: 30px;
-}
-.user-prompt-wrapper-create{
-  align-items: center;
-}
-.hero-name-input-create {
-  margin-bottom: 10px;
-}
-.create-new-hero-name-text {
-  margin-bottom: 10px;
-  color: black;
-  justify-content: center;
-  text-align: center;
-  width: 75%;
-}
-.btn-role{
-  background-color: var(--mid-light-jawn);
-  border: 1px solid var(--mid-dark-jawn);
-  border-radius: 0;
-  padding: 5px 10px;
-  color: black;
-  outline: none;
-  font-size: 20px;
-  width: 200px;
-  height: 50px;
-  margin-top: 5px;
-  align-items: center;
-
-}
-
-.btn-grid-roles {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 10px;
-}
-  
-.btn-role {
-  background-color: var(--mid-light-jawn);
-  border: 1px solid var(--mid-dark-jawn);
-  border-radius: 0;
-  padding: 5px 10px;
-  color: black;
-  outline: none;
-  font-size: 20px;
-  height: 50px;
-  width: 150px;
-  align-items: center;
-}
-
-.btn-role:hover {
-  border-color: black;
-}
-
-.btn-role:active {
-  box-shadow: 0 5px var(--dark-jawn);
-  transform: translateY(2px);
-}
-
-#button5 {
-  border-color: black;
-  font-size: 20px;
-  width: 180px;
-  height: 50px;
-  margin-top: 15px;
-  background-color: var(--mid-light-jawn);
-  color: black;
-}
-
 .image-description-jawn{
-  justify-content: center;
-  align-items: center;
   display: flex;
+  width: 100%;
+  padding: 10px;
+
 }
-.hero-img-jawn{
-  justify-content: center;
-  align-items: center;
+.image-jawn{
+  flex: 1;
+  width: 33.33%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
 }
+
+.description-jawn{
+  flex: 2;
+  width: 6.67%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5px;
+}
+
 .hero-img{
-  width: 150px;
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
 }
-.new-hero-name{
-  margin-top: 15px;
-  margin-left: 5px;
-  margin-right: 5px;
-  display: flex;
-}
+
 .new-hero-name-input{
-  margin-left: 5px;
   float: right;
   text-align: right;
-  width: 100%; 
-  padding-left: 5px;
-  margin-bottom: 15px;
+  width: 95%; 
+  margin: 10px;
   border-radius: 5px;
   height: 35px;
-  padding: 5px 10px;
-}
-.new-hero-name-input:focus{
-  box-shadow: 0 0 10px 5px;
-  /* border: 0 5px var(--orange-jawn); */
-  color: var(--orange-jawn);
-
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
@@ -21,20 +21,6 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
 
     const handleTabClick = (button: string) => {
         setActiveButton(button);
-        switch (button){
-            case "Tank":
-                setHeroDescription(TANK_DESCRIPTION);
-                break;
-            case "Healer":
-                setHeroDescription(HEALER_DESCRIPTION);
-                break;
-            case "DPS":
-                setHeroDescription(DPS_DESCRIPTION);
-                break;
-            case "Caster":
-                setHeroDescription(CASTER_DESCRIPTION);
-                break;
-        }
       };
 
     const handleReturnToHeroes = (id: number) => {
@@ -65,6 +51,23 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
         const newIndex = (currentIndex + 1 + roles.length) % roles.length;
         setActiveButton(roles[newIndex]);
     };
+    
+    useEffect(() => {
+        switch (activeButton){
+            case "Tank":
+                setHeroDescription(TANK_DESCRIPTION);
+                break;
+            case "Healer":
+                setHeroDescription(HEALER_DESCRIPTION);
+                break;
+            case "DPS":
+                setHeroDescription(DPS_DESCRIPTION);
+                break;
+            case "Caster":
+                setHeroDescription(CASTER_DESCRIPTION);
+                break;
+        }
+      }, [activeButton])
 
     return (
         <Container>
@@ -79,12 +82,10 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                     </div>
 
                     {activeButton != "" &&
-                        <div className="new-hero-name">
                             <input type="text"
                             className="new-hero-name-input"
                             placeholder="Hero Name"
                             value={heroName} onChange={(e) => setHeroName(e.target.value)} />
-                        </div>
                     }
 
                     {message !== "" &&
@@ -93,36 +94,28 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
                         </div>
                     }
 
-
                     <div className="image-description-jawn">
-
-                        {activeButton === "Tank" &&
-                            <div className="hero-img-jawn">
+                        <div className="image-jawn">
+                            {activeButton === "Tank" &&
                                 <img className="hero-img" src={Tank} />
-                            </div>
-                        }
+                            }
 
-                        {activeButton === "Healer" &&
-                            <div className="hero-img-jawn">
+                            {activeButton === "Healer" &&
                                 <img className="hero-img" src={Healer} />
-                            </div>
-                        }
+                            }
 
-                        {activeButton === "DPS" &&
-                            <div className="hero-img-jawn">
+                            {activeButton === "DPS" &&
                                 <img className="hero-img" src={DPS} />
-                            </div>
-                        }
+                            }
 
-                        {activeButton === "Caster" &&
-                            <div className="hero-img-jawn">
+                            {activeButton === "Caster" &&
                                 <img className="hero-img" src={Caster} />
-                            </div>
-                        }
+                            }
+                        </div>
+                        <div className="description-jawn">
+                            <p className="text-jawn">{heroDescription}</p>
+                        </div>
                     </div>
-
-                    <p className="text-jawn">{heroDescription}</p>
-
                 </div>
             </Display>
             <Controls
