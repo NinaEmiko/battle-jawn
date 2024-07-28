@@ -214,6 +214,8 @@
   }
   .enemy-level{
     margin-right: 10px;
+    padding-left: 10px;
+    color: var(--orange-jawn);
   }
   .healthBar{
     width: 90%;
@@ -226,3 +228,7 @@
   .enemy-display-right-top-half-name{
     color: gold;
   }
+  .loot-jawn{
+    align-items: center;
+    text-align: center;
+}

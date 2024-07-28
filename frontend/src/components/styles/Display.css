@@ -40,6 +40,12 @@
     color: white;
 }
 
+.text-jawn-secondary{
+    align-items: center;
+    text-align: center;
+    color: var(--light-jawn);
+}
+
 /* WARNING TEXT */
 
 .warning-txt{
@@ -47,4 +53,12 @@
     text-align: center;
     color: red;
     font-size: 20px;
+  }
+
+  /* HEADER TEXT */
+
+  .header-jawn{
+    align-items: center;
+    text-align: center;
+    color: var(--mid-jawn);
   }

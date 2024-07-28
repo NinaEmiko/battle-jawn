@@ -52,7 +52,7 @@ const LeaderBoard = () => {
 
                         {heroList.length > 0 &&
 
-                            <div className="leader-board-header-jawn">
+                            <div className="parent-jawn">
                                 <div className="leader-board-hero-name-level">
                                     <div className="leader-board-hero-name">
                                         {heroList[currentHeroIndex].name}

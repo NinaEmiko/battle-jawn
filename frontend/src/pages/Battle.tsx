@@ -308,30 +308,32 @@ function Battle({props}:{props:any}) {
         }
 
         {postBattleActive && 
-                <div>
+                <div className="parent-jawn">
+                  <div className="child-jawn">
 
                 {battleResult === "Hero runs" &&
-                    <h1 className="post-battle-text">You ran away.</h1>
+                    <h1 className="header-jawn">You ran away.</h1>
                 }
     
                 {battleResult === "Hero loses" &&
-                    <h1 className="post-battle-text">You have been defeated.</h1>
+                    <h1 className="header-jawn">You have been defeated.</h1>
                 }
     
                 {battleResult === "Hero wins" &&
                     <div>
-                        <h1 className="title-jawn">{postBattleMessage}</h1>
-                        <p className="select-text">Select loot you wish to pick up:</p>
+                        <h1 className="header-jawn">{postBattleMessage}</h1>
+                        <p className="text-jawn-secondary">Select loot you wish to pick up:</p>
                         {loot.map ((item, index) =>
                             <div className="loot-jawn" key={index}>
                                 <input 
                                     type="checkbox" 
                                     onChange={() => handleSelect(item)}/>
-                                <label className="label-jawn">{item}</label>
+                                <label className="text-jawn">{item}</label>
                             </div>
                         )}
                     </div>
                 }
+                </div>
               </div>
         }
       </Display>
