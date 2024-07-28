@@ -4,6 +4,7 @@
     bottom: 0;
     height: 10%;
 }
+
 .talent-tree-jawn{
     width: 50%;
     align-items: center;
@@ -12,6 +13,7 @@
     border: 0;
     color: var(--mid-light-jawn);
 }
+
 .talent-tree-jawn-active{
     width: 50%;
     align-items: center;
@@ -20,24 +22,28 @@
     border: 0;
     color: var(--orange-jawn);
 }
+
 .hero-name{
   font-size: 30px;
   color: gold;
   margin-top:11%;
   text-align: center;
 }
+
 .talent-group-jawn{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .left-and-right-container-jawn{
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   border: white;
 }
+
 .left-container-jawn .right-container-jawn{ 
   width: calc(50% - 10px);
   box-sizing: border-box;
@@ -46,6 +52,7 @@
   align-items: center;
   display: flex;
 }
+
 .bottom-container-jawn {
   width: calc(50% - 10px);
   text-align: center;
@@ -54,12 +61,14 @@
   justify-content: center;
   display: flex;
 }
+
 .center-jawn {
   grid-column: span 2;
   text-align: center;
   justify-content: center;
   margin-left: -10%;
 }
+
 .talent-jawn-active{
   margin-right: 5px;
   color: green;
@@ -70,6 +79,7 @@
   display: flex;
   width: 100%;
 }
+
 .talent-jawn-inactive{
   margin-right: 5px;
   color: grey;
@@ -80,6 +90,7 @@
   display: flex;
   width: 100%;
 }
+
 .talent-jawn-available{
   margin-right: 5px;
   color: #0FA4AF;

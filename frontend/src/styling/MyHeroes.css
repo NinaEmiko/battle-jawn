@@ -4,6 +4,7 @@
     color: var(--light-jawn);
     font-size:20px;
 }
+
 .data-jawn {
     float: right;
     color: var(--light-jawn);
@@ -58,6 +59,7 @@
   background-color: var(--orange-jawn); 
   border-radius: 20px;
 }
+
 .experience-bar::-webkit-progress-bar {
   background-color: var(--mid-dark-jawn); 
   border-radius: 20px;

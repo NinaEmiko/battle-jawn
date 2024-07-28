@@ -23,6 +23,7 @@ input {
     align-items: center;
     justify-content: center;
 }
+
 .form-control{
     display: block;
     width: 100%; 
@@ -32,6 +33,7 @@ input {
     height: 35px;
     padding: 5px 10px;
 }
+
 .form-control:focus{
     box-shadow: 0 0 10px 5px;
     color: var(--orange-jawn);

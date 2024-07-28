@@ -9,9 +9,9 @@
   font-size: 16px;
   text-align: right;
 }
+
 .new-password-input:focus{
   box-shadow: 0 0 10px 5px;
-  /* border: 0 5px var(--orange-jawn); */
   color: var(--orange-jawn);
 }
 

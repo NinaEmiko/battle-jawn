@@ -53,12 +53,12 @@
     text-align: center;
     color: red;
     font-size: 20px;
-  }
+}
 
-  /* HEADER TEXT */
+/* HEADER TEXT */
 
-  .header-jawn{
-    align-items: center;
-    text-align: center;
-    color: var(--mid-jawn);
-  }
+.header-jawn{
+align-items: center;
+text-align: center;
+color: var(--mid-jawn);
+}
