@@ -86,7 +86,7 @@ function App() {
       <Routes>
         {!currentUser.loggedIn && <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />}
         {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />}
-        {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard props={currentUser} />} />}
+        {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard />} />}
         {currentUser.loggedIn && <Route key="account-settings" path="/account-settings" element={<AccountSettings props={currentUser} logout={logout} />} />}
         {<Route key="about-us" path="/about-us" element={<AboutUs />} />}
         {<Route key="how-to" path="/how-to" element={<HowTo />} />}

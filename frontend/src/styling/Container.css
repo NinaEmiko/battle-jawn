@@ -21,16 +21,15 @@ body{
 
 @font-face {
   font-family: 'FantaisieArtistique';
-  src: local('FantaisieArtistique'), url(../../fonts/FantaisieArtistique.ttf) format('truetype');}
+  src: local('FantaisieArtistique'), url(../assets/fonts/FantaisieArtistique.ttf) format('truetype');}
 
 @font-face {
   font-family: 'Alice';
-  src: local('Alice'), url(../../fonts/Alice\ in\ Wonderland.ttf) format('truetype');}
+  src: local('Alice'), url(../assets/fonts/Alice\ in\ Wonderland.ttf) format('truetype');}
 
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: FantaisieArtistique;
-  /* color: hsl(181, 84%, 44%); */
   color: var(--mid-light-jawn);
 }
 

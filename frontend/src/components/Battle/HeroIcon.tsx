@@ -1,7 +1,7 @@
-import wizard from "../../assets/wizard.png";
-import ninja from "../../assets/ninja.png";
-import athena from "../../assets/athena.png";
-import antibiotics from "../../assets/antibiotics.png";
+import wizard from "../../assets/icons/wizard.png";
+import ninja from "../../assets/icons/ninja.png";
+import athena from "../../assets/icons/athena.png";
+import antibiotics from "../../assets/icons/antibiotics.png";
 
 const HeroIcon = ({heroNameProp}:{heroNameProp: string}) => {
 

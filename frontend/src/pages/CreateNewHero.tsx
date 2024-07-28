@@ -3,10 +3,10 @@ import Container from "../components/Container";
 import Controls from "../components/Controls";
 import Display from "../components/Display";
 import PageName from "../components/PageName";
-import Tank from "../assets/Tank.png"
-import Healer from "../assets/Healer.png"
-import DPS from "../assets/DPS.png"
-import Caster from "../assets/Caster.png"
+import Tank from "../assets/roles/Tank.png"
+import Healer from "../assets/roles/Healer.png"
+import DPS from "../assets/roles/DPS.png"
+import Caster from "../assets/roles/Caster.png"
 import { CASTER_DESCRIPTION, DPS_DESCRIPTION, HEALER_DESCRIPTION, TANK_DESCRIPTION } from "../helpers/content_helper";
 import "../styling/CreateNewHero.css";
 import "../styling/Tabs.css";

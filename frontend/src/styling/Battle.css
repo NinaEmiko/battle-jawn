@@ -1,74 +1,24 @@
-.background-jawn {
-    background-image: url('../assets/BattleJawnBackground.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .battle-container-jawn{
-    margin: 5px;
-  }
-
-  .container-jawn-hero-battle {
-    background-color: var(--dark-jawn);
-    opacity: 90%;
-    /* Rounds edges of Display Box */
-    border-radius: 5px;
-    /* Shadow Effect */
-    box-shadow: 0 0 10px 2px;
-    padding-top: .50em;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: center;
-    text-align: center;
-    overflow-y: auto;
-    margin-left: 5px;
-    margin-right: 5px;
-    width: 420px;
-  }
+.battle-container-jawn{
+  margin: 5px;
+}
 
 .role-icon {
-    /* display: none; */
-    float: left;
-    display: flex;
-    width: 45px;
-}
-.hero-name-role-resource{
-  display: flex;
-  align-items: center;
-  font-size: 25px;
-  color:  var(--mid-light-jawn);
-}
-.hero-name-role-resource > span{
-  margin-right: 10px;
-  margin-left: 5px;
   float: left;
-  justify-content: flex-end;
-  font-size: 25px;
-  color: gold;
-  padding-right: 5px;
-}
-
-.battle-btn-display {
-    width: 100%;
+  display: flex;
+  width: 45px;
 }
 
 .logBox {
-    margin-top: 10px;
-    height: 200px;
-    border: 3px solid #ccc;
-    display: flex;
-    flex-direction: column-reverse;
-    box-shadow: 0 0 10px 2px;
-    overflow: auto;
-    background-color: var(--dark-jawn);
-    color: gold;
-    text-align: right;
+  margin-top: 10px;
+  height: 200px;
+  border: 3px solid #ccc;
+  display: flex;
+  flex-direction: column-reverse;
+  box-shadow: 0 0 10px 2px;
+  overflow: auto;
+  background-color: var(--dark-jawn);
+  color: gold;
+  text-align: right;
 }
 
 .dialog{
@@ -76,159 +26,80 @@
   font-size: 20px;
 }
 
-.healthBar, .manaBar {
-    background-color:#00788c;
-    border-radius: 20px;
-    margin: 5px;
-    /* width: 90%; */
-    height: 12px;
+.healthBar {
+  background-color:#00788c;
+  border-radius: 20px;
+  margin: 5px;
+  width: 90%;
+  height: 12px;
 }
+
 .healthBar::-webkit-progress-bar {
-    accent-color: rgb(161, 2, 2);
-    border: 0;
-    border-radius: 20px;
- }
+  accent-color: rgb(161, 2, 2);
+  border: 0;
+  border-radius: 20px;
+}
+
 .healthBar::-webkit-progress-value {
-    background-color: rgb(161, 2, 2);
-    border: 0;
-    border-radius: 20px;
- }
- .healthBar::-moz-progress-bar {
-    background-color: rgb(161, 2, 2);
-    border: 0;
-    border-radius: 20px;
- }
+  background-color: rgb(161, 2, 2);
+  border: 0;
+  border-radius: 20px;
+}
  
- .btn-grid-roles{
-    justify-content: center;
- }
+.healthBar::-moz-progress-bar {
+  background-color: rgb(161, 2, 2);
+  border: 0;
+  border-radius: 20px;
+}
 
- .btn-grid {
-    /* Keeps Buttons in grid format */
-        display: grid;
-        /* Keeps grid in columns of 2 */
-        grid-template-columns: repeat(2, auto);
-        /* Adds spacing between buttons */
-        gap: 10px;
-    }
-  
-  .btn-role-battle {
-    background-color: var(--mid-light-jawn);
-    border: 1px solid var(--mid-dark-jawn);
-    border-radius: 0;
-    padding: 5px 10px;
-    color: black;
-    outline: none;
-    font-size: 20px;
-    height: 50px;
-    width: 150px;
-    align-items: center;
-  }
+.enemy-display{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
 
-  
-  .btn-role-battle:hover {
-    border-color: black;
-  }
-  
-  .btn-role-battle:active {
-    box-shadow: 0 5px var(--dark-jawn);
-    transform: translateY(2px);
-  }
+.enemy-display-left{
+  width: 10%;
+}
 
-  .user-prompt-wrapper-battle{
+.enemy-display-right{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
 
-  }
+.enemy-display-left-top-half{
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 20px;
+  margin-right: 5px;
+  color: gold;
+}
 
-  .userPrompt-battle{
-    margin-top: 10px;
-    color: gold;
-    font-size: 30px;
-  }
+.enemy-display-left-bottom-half{
+  height: 50%;
+  margin-left: 10px;
+}
 
-  @media (max-width: 576px) {
-    .container-jawn-hero-battle {
-      background-color: var(--dark-jawn);
-      opacity: 90%;
-      /* Rounds edges of Display Box */
-      border-radius: 5px;
-      /* Shadow Effect */
-      box-shadow: 0 0 10px 2px;
-      padding-top: .50em;
-      padding-bottom: 10px;
-      padding-left: 10px;
-      padding-right: 10px;
-      justify-content: center;
-      text-align: center;
-      overflow-y: auto;
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-  }
+.enemy-level{
+  margin-right: 10px;
+  padding-left: 10px;
+  color: var(--orange-jawn);
+}
 
-  @media (max-width: 576px) {
-    .container-jawn-hero-battle {
-      background-color: var(--dark-jawn);
-      opacity: 90%;
-      /* Rounds edges of Display Box */
-      border-radius: 5px;
-      /* Shadow Effect */
-      box-shadow: 0 0 10px 2px;
-      padding-top: .50em;
-      padding-bottom: 10px;
-      padding-left: 10px;
-      padding-right: 10px;
-      justify-content: center;
-      text-align: center;
-      overflow-y: auto;
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-  }
+.resource-icon{
+  height: 20px;
+  width: 30px;
+  margin-left: 5px;
+}
 
+.enemy-display-right-top-half-name{
+  color: gold;
+}
 
-  .enemy-display{
-    display: flex;
-    width: 100%;
-    height: 100%;
-  }
-  .enemy-display-left{
-    width: 10%;
-  }
-  .enemy-display-right{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-  }
-  .enemy-display-left-top-half{
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-left: 20px;
-    margin-right: 5px;
-    color: gold;
-  }
-  .enemy-display-left-bottom-half{
-    height: 50%;
-    margin-left: 10px;
-  }
-  .enemy-level{
-    margin-right: 10px;
-    padding-left: 10px;
-    color: var(--orange-jawn);
-  }
-  .healthBar{
-    width: 90%;
-  }
-  .resource-icon{
-    height: 20px;
-    width: 30px;
-    margin-left: 5px;
-  }
-  .enemy-display-right-top-half-name{
-    color: gold;
-  }
-  .loot-jawn{
-    align-items: center;
-    text-align: center;
+.loot-jawn{
+  align-items: center;
+  text-align: center;
 }

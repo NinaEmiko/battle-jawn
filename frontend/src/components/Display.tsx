@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import "./styles/Display.css";
+import "../styling/Display.css";
 
 const Display: React.FC<{children: ReactNode }> = ( {children}:{children:any} ) => {
 

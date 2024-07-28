@@ -1,7 +1,7 @@
-import wolf from "../../assets/wolf.png";
-import orc from "../../assets/orc.png";
-import ghost from "../../assets/ghost.png";
-import ninja from "../../assets/ninja.png";
+import wolf from "../../assets/icons/wolf.png";
+import orc from "../../assets/icons/orc.png";
+import ghost from "../../assets/icons/ghost.png";
+import ninja from "../../assets/icons/ninja.png";
 
 const EnemyIcon = ({enemyNameProp}:{enemyNameProp: string}) => {
 

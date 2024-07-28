@@ -1,4 +1,4 @@
-import "./styles/Controls.css";
+import "../styling/Controls.css";
 
 import React from 'react';
 
