@@ -1,28 +1,3 @@
-.talent-trees-jawn{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    height: 10%;
-}
-
-.talent-tree-jawn{
-    width: 50%;
-    align-items: center;
-    height: 100%;
-    background: transparent;
-    border: 0;
-    color: var(--mid-light-jawn);
-}
-
-.talent-tree-jawn-active{
-    width: 50%;
-    align-items: center;
-    height: 100%;
-    background: transparent;
-    border: 0;
-    color: var(--orange-jawn);
-}
-
 .hero-name{
   font-size: 30px;
   color: gold;
