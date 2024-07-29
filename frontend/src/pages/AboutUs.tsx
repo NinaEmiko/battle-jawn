@@ -41,6 +41,9 @@ const AboutUs = () => {
                             <div className="link-jawn">
                                 <a href="https://www.linkedin.com/in/nina-mcnair/">LinkedIn</a>
                             </div>
+                            <div className="link-jawn">
+                                <a href="mailto:TheBattleJawn@gmail.com">Email</a>
+                            </div>
                         </div>
                     </div>
                 }
