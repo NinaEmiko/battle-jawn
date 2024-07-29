@@ -57,6 +57,8 @@ const TalentTree = ({props}:{props:any}) => {
         handleSetTrees(data.role);
         setHeroTalentPoints(data.talentPoints);
         setHeroTalentTree(data.talentTree);
+        setPopUpType("reset");
+        setShowPopUp(true);
     }
 
     const handleConfirmButtonClick = async (talent: string) => {

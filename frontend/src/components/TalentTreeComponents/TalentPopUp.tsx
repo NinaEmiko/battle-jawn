@@ -15,11 +15,19 @@ const TalentPopUp = ({props}:{props:any}) => {
         <Container>
             <PageName props={props.talent} />
             <Display>
+            {props.type === "reset" ?
                 <div className="parent-jawn">
-                    <div className="child-jawn" >
+                    <div className="child-jawn">
+                        <p className="text-jawn">Talents reset successfully.</p>
+                    </div>
+                </div>
+                :
+                <div className="parent-jawn">
+                    <div className="child-jawn">
                         <p className="text-jawn">{props.description}</p>
                     </div>
                 </div>
+            }
             </Display>
             {props.type === "available" ?
                 <Controls 
