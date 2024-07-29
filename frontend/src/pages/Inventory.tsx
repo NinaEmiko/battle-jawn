@@ -44,7 +44,6 @@ const Inventory = ({props}:{props:any}) => {
     }
 
     const handleClickNotPotion = () => {
-        console.log("Not a potion")
     }
 
     const handleBackButtonClick = () => {

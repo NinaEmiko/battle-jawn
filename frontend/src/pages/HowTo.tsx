@@ -17,6 +17,7 @@ import HowToBattleDPS from "../components/HowToComponents/HowToBattleDPS";
 import HowToBattleCaster from "../components/HowToComponents/HowToBattleCaster";
 import HowToTalents from "../components/HowToComponents/HowToTalents";
 import HowToStats from "../components/HowToComponents/HowToStats";
+import Scroll from "../components/Scroll";
 
 const HowTo = () => {
     const [activeTab, setActiveTab] = useState("Heroes");
@@ -35,6 +36,14 @@ const HowTo = () => {
     const heroesPages = ["Heroes", "Talents", "Stats"];
     
 
+    //NAVIGATION
+    const navigate = useNavigate();
+
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    };
+
+    //HANDLER FUNCTIONS
     const handleTabLeftClick = () => {
         const currentIndex = tabs.indexOf(activeTab);
         const newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
@@ -75,35 +84,21 @@ const HowTo = () => {
         setActiveTab(tab);
     }
 
-    const navigate = useNavigate();
-
-    const handleNavigation = (path: string) => {
-        navigate(path);
-    };
-
+    //USE EFFECTS
     useEffect(() => {
-        const newPreviousPage = (activePlayPage - 1 + playPages.length) % playPages.length;
-        const newNextPage = (activePlayPage + 1) % playPages.length;
-    
-        setPreviousPlayPage(newPreviousPage);
-        setNextPlayPage(newNextPage);
-      }, [activePlayPage, playPages.length]);
+        setPreviousPlayPage((activePlayPage - 1 + playPages.length) % playPages.length);
+        setNextPlayPage((activePlayPage + 1) % playPages.length);
+    }, [activePlayPage, playPages.length]);
 
       useEffect(() => {
-        const newPreviousRole = (activeRole - 1 + roles.length) % roles.length;
-        const newNextRole = (activeRole + 1) % roles.length;
-    
-        setPreviousRole(newPreviousRole);
-        setNextRole(newNextRole);
-      }, [activeRole, roles.length]);
+        setPreviousRole((activeRole - 1 + roles.length) % roles.length);
+        setNextRole((activeRole + 1) % roles.length);
+    }, [activeRole, roles.length]);
 
-      useEffect(() => {
-        const newPreviousHeroesPage = (activeHeroesPage - 1 + heroesPages.length) % heroesPages.length;
-        const newNextHeroesPage = (activeHeroesPage + 1) % heroesPages.length;
-    
-        setPreviousHeroesPage(newPreviousHeroesPage);
-        setNextHeroesPage(newNextHeroesPage);
-      }, [activeHeroesPage, heroesPages.length]);
+      useEffect(() => {    
+        setPreviousHeroesPage((activeHeroesPage - 1 + heroesPages.length) % heroesPages.length);
+        setNextHeroesPage((activeHeroesPage + 1) % heroesPages.length);
+    }, [activeHeroesPage, heroesPages.length]);
 
     return (        
         <Container>
@@ -131,11 +126,11 @@ const HowTo = () => {
                                         <HowToStats />
                                     }
 
-                                    <div className="scroll-jawn">
-                                        <div className="previous-scroll">{heroesPages[previousHeroesPage]} ᐃ</div>
-                                        <div className="active-scroll">{heroesPages[activeHeroesPage]} ●</div>
-                                        <div className="next-scroll">{heroesPages[nextHeroesPage]} ᐁ</div>
-                                    </div>
+                                    <Scroll props={{
+                                        prev: heroesPages[previousHeroesPage],
+                                        active: heroesPages[activeHeroesPage],
+                                        next: heroesPages[nextHeroesPage]
+                                    }} />
                                 </>
                             }
 
@@ -157,11 +152,11 @@ const HowTo = () => {
                                         <HowToBattleCaster />
                                     }   
 
-                                    <div className="scroll-jawn">
-                                        <div className="previous-scroll">{roles[previousRole]} ᐃ</div>
-                                        <div className="active-scroll">{roles[activeRole]} ●</div>
-                                        <div className="next-scroll">{roles[nextRole]} ᐁ</div>
-                                    </div>
+                                    <Scroll props={{
+                                        prev: roles[previousRole],
+                                        active: roles[activeRole],
+                                        next: roles[nextRole]
+                                    }} />
                                 </>
                             }
 
@@ -179,11 +174,11 @@ const HowTo = () => {
                                         <HowToBag />
                                     }
 
-                                    <div className="scroll-jawn">
-                                        <div className="previous-scroll">{playPages[previousPlayPage]} ᐃ</div>
-                                        <div className="active-scroll">{playPages[activePlayPage]} ●</div>
-                                        <div className="next-scroll">{playPages[nextPlayPage]} ᐁ</div>
-                                    </div>
+                                    <Scroll props={{
+                                        prev: playPages[previousPlayPage],
+                                        active: playPages[activePlayPage],
+                                        next: playPages[nextPlayPage]
+                                    }} />
                                 </>
                             }
 

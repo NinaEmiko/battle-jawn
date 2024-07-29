@@ -8,7 +8,6 @@ const TalentPopUp = ({props}:{props:any}) => {
 
     const handleClickConfirm = async () => {
         const data = await activateTalent(props.heroId, props.talent)
-        console.log(data);
         props.onClickConfirm();
     }
 
