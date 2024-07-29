@@ -23,6 +23,7 @@ export const ENDPOINTS = {
   END_BATTLE_SESSION: `${BASE_URL}/api/battle-session/end`,
   FETCH_BATTLE_SESSION: `${BASE_URL}/api/battle-session/`,
   ACTIVATE_TALENT: `${BASE_URL}/api/talent/activate`,
+  RESET_TALENTS: `${BASE_URL}/api/talent/reset`,
   NEW_HERO: `${BASE_URL}/api/hero`,
 };
 

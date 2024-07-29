@@ -12,7 +12,7 @@ import DefenseTree from "../components/TalentTreeComponents/DefenseTree";
 import ArcaneTree from "../components/TalentTreeComponents/ArcaneTree";
 import MindfulnessTree from "../components/TalentTreeComponents/MindfulnessTree";
 import TalentPopUp from "../components/TalentTreeComponents/TalentPopUp";
-import { fetchHero } from "../api/api";
+import { fetchHero, resetTalents } from "../api/api";
 import Container from "../components/Container";
 import PageName from "../components/PageName";
 import Display from "../components/Display";
@@ -50,6 +50,13 @@ const TalentTree = ({props}:{props:any}) => {
     }
     const handleBackButtonClick = () => {
         props.setIsVisible("Heroes", props.id);
+    }
+
+    const handleResetButtonClick = async () => {
+        const data = await resetTalents(props.id)
+        handleSetTrees(data.role);
+        setHeroTalentPoints(data.talentPoints);
+        setHeroTalentTree(data.talentTree);
     }
 
     const handleConfirmButtonClick = async (talent: string) => {
@@ -142,6 +149,8 @@ const TalentTree = ({props}:{props:any}) => {
                         </>
                     </Display>
                     <Controls 
+                        handleClickLeftBtnTop={() => handleResetButtonClick()}
+                        leftBtnTopText="Reset"
                         handleClickLeftBtnBottom={() => handleBackButtonClick()}
                         leftBtnBottomText="Back"
                         handleClickRightBtnLeft={() => handleTabClick(treeOne)}

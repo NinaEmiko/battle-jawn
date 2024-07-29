@@ -43,7 +43,8 @@ public class SecurityConfig {
                                 "/api/inventory/add/{id}",
                                 "/api/inventory/potion/{id}",
                                 "/api/inventory/water/{id}",
-                                "/api/talent/activate"
+                                "/api/talent/activate",
+                                "/api/talent/reset"
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET,
                                 "/api/battle-history-message/{id}",

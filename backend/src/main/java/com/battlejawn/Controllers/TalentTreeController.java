@@ -1,6 +1,7 @@
 package com.battlejawn.Controllers;
 
 import com.battlejawn.Config.JsonParser;
+import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Service.TalentTreeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,19 @@ public class TalentTreeController {
         String parsedTalent = jsonParser.extractTalent(data);
         logger.info("Parsed Hero Id: " + parsedHeroId + ". Parsed talent: " + parsedTalent + ".");
         String response = talentTreeService.activateTalent(parsedHeroId, parsedTalent);
+        if (response != null) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/reset")
+    public ResponseEntity<Hero> resetTalents(@Valid @RequestBody String data){
+        logger.info("Inside activateTalent controller method. Object: " + data + ".");
+        Long parsedHeroId = jsonParser.extractHeroId(data);
+        logger.info("Parsed Hero Id: " + parsedHeroId + ".");
+        Hero response = talentTreeService.resetTalents(parsedHeroId);
         if (response != null) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {

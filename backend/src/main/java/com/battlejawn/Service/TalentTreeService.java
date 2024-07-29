@@ -17,6 +17,17 @@ public class TalentTreeService {
     private HeroService heroService;
     private final Logger logger = Logger.getLogger(TalentTreeService.class.getName());
 
+    public Hero resetTalents(Long heroId) {
+        Hero hero = heroService.getHeroById(heroId);
+        switch (hero.getRole()) {
+            case "Tank" -> resetTankTalents(hero);
+            case "Healer" -> resetHealerTalents(hero);
+            case "DPS" -> resetDPSTalents(hero);
+            case "Caster" -> resetCasterTalents(hero);
+        };
+        return hero;
+    }
+
     public String activateTalent(Long heroId, String talent) {
 
         Hero hero = heroService.getHeroById(heroId);
@@ -32,6 +43,111 @@ public class TalentTreeService {
             default -> "Error occurred while activating talent";
         };
     }
+
+    private String resetHealerTalents(Hero hero){
+        try {
+            HealerTree healerTree = (HealerTree) hero.getTalentTree();
+            healerTree.setImprovedHoly1(false);
+            healerTree.setImprovedHoly2(false);
+            healerTree.setImprovedHoly3(false);
+            healerTree.setImprovedHeal1(false);
+            healerTree.setImprovedHeal2(false);
+            healerTree.setImprovedHeal3(false);
+            healerTree.setImprovedWand1(false);
+            healerTree.setImprovedWand2(false);
+            healerTree.setImprovedWand3(false);
+            healerTree.setBubble(false);
+            healerTree.setBotany1(false);
+            healerTree.setBotany2(false);
+            healerTree.setSurvivalInstincts(false);
+            healerTree.setSpirituallyAttuned(false);
+            talentTreeRepository.save(healerTree);
+            hero.setTalentPoints(hero.getLevel() - 1);
+            heroService.updateHero(hero);
+            return hero.getName() + "'s talents successfully reset.";
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to reset talents for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
+    }
+
+    private String resetTankTalents(Hero hero){
+        try {
+            TankTree tankTree = (TankTree) hero.getTalentTree();
+            tankTree.setImprovedHealth1(false);
+            tankTree.setImprovedHealth2(false);
+            tankTree.setTitan(false);
+            tankTree.setHydration(false);
+            tankTree.setDesperation(false);
+            tankTree.setFinalStand(false);
+            tankTree.setImprovedImpale1(false);
+            tankTree.setImprovedImpale2(false);
+            tankTree.setImprovedImpale3(false);
+            tankTree.setImprovedStrike1(false);
+            tankTree.setImprovedStrike2(false);
+            tankTree.setImprovedStrike3(false);
+            tankTree.setImprovedBlock1(false);
+            tankTree.setImprovedBlock2(false);
+            talentTreeRepository.save(tankTree);
+            hero.setTalentPoints(hero.getLevel() - 1);
+            heroService.updateHero(hero);
+            return hero.getName() + "'s talents successfully reset.";
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to reset talents for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
+    }
+
+    private String resetDPSTalents(Hero hero){
+        try {
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            dpsTree.setStickyFingaz(false);
+            dpsTree.setElation(false);
+            dpsTree.setPeekaboo(false);
+            dpsTree.setEnergized(false);
+            dpsTree.setFirstStrike(false);
+            dpsTree.setOrganizedMess(false);
+            dpsTree.setHonorAmongThieves(false);
+            dpsTree.setImprovedSteal1(false);
+            dpsTree.setImprovedSteal2(false);
+            dpsTree.setImprovedStab1(false);
+            dpsTree.setImprovedStab2(false);
+            dpsTree.setImprovedStab3(false);
+            dpsTree.setImprovedBackStab1(false);
+            dpsTree.setImprovedBackStab2(false);
+            talentTreeRepository.save(dpsTree);
+            hero.setTalentPoints(hero.getLevel() - 1);
+            heroService.updateHero(hero);
+            return hero.getName() + "'s talents successfully reset.";
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to reset talents for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
+    }
+
+    private String resetCasterTalents(Hero hero){
+        try {
+            CasterTree casterTree = (CasterTree) hero.getTalentTree();
+            casterTree.setSecondNature(false);
+            casterTree.setPreparation(false);
+            casterTree.setFrostBite(false);
+            casterTree.setImprovedIceBlast(false);
+            casterTree.setBotany1(false);
+            casterTree.setBotany2(false);
+            casterTree.setBotany3(false);
+            casterTree.setImprovedWand1(false);
+            casterTree.setImprovedWand2(false);
+            casterTree.setImprovedWand3(false);
+            casterTree.setResourcefulness1(false);
+            casterTree.setResourcefulness2(false);
+            casterTree.setImprovedFireBlast1(false);
+            casterTree.setImprovedFireBlast2(false);
+            talentTreeRepository.save(casterTree);
+            hero.setTalentPoints(hero.getLevel() - 1);
+            heroService.updateHero(hero);
+            return hero.getName() + "'s talents successfully reset.";
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to reset talents for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
+    }
+
     private String processTankTalent(Hero hero, String talent) {
         TankTree tankTree = (TankTree) hero.getTalentTree();
 

@@ -229,6 +229,17 @@ export const activateTalent = async (id: number, talent: string) => {
     }
 }
 
+export const resetTalents = async (id: number) => {
+    try {
+        const response = await axios.post(`${ENDPOINTS.RESET_TALENTS}`, {
+            heroId: id
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error resetting talents:', error)
+    }
+}
+
 export const newHero = async (id: number, heroName: string, role: string) => {
     try {
         const response = await axios.post(`${ENDPOINTS.NEW_HERO}`, {
