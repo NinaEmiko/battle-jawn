@@ -13,7 +13,7 @@ const TalentPopUp = ({props}:{props:any}) => {
 
     return ( 
         <Container>
-            <PageName props={props.talent} />
+            <PageName props={{title: props.talent, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
             {props.type === "reset" ?
                 <div className="parent-jawn">

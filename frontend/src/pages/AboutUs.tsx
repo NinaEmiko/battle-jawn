@@ -7,7 +7,7 @@ import "../styling/AboutUs.css";
 import "../styling/Tabs.css";
 import { useState } from "react";
 
-const AboutUs = () => {
+const AboutUs = ({props}:{props:any}) => {
     const [activeButton, setActiveButton] = useState("About Us");
 
     const handleTabClick = (button: string) => {
@@ -22,7 +22,7 @@ const AboutUs = () => {
 
     return (        
         <Container>
-            <PageName props={"About Us"} />
+            <PageName props={{title: "About Us", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 {activeButton === "About Us" &&
                     <div className="parent-jawn">

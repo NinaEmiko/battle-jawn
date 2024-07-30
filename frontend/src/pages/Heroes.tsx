@@ -24,7 +24,7 @@ function Heroes( {props}:{props:any} ) {
 
   //API CALLS
   const fetchHeroesCall = async () => {
-    const data = await fetchHeroes(props.accountId);
+    const data = await fetchHeroes(props.currentUser.id);
     setHeroList(data);
   }
 
@@ -117,7 +117,7 @@ function Heroes( {props}:{props:any} ) {
 
   return (
       <Container>
-            <PageName props={"Heroes"} />
+            <PageName props={{title: "Heroes", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 <>
                     {showDeleteConfirmation &&

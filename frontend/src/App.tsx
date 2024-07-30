@@ -1,6 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import CustomNavBar from './components/CustomNavBar';
 import LoginForm from './pages/LoginForm';
 import AccountSettings from './pages/AccountSettings';
 import LeaderBoard from './pages/LeaderBoard';
@@ -9,15 +8,22 @@ import Home from './pages/Home';
 import HowTo from './pages/HowTo';
 import { request, setAuthHeader } from './helpers/axios_helper';
 import Cookies from 'js-cookie';
+import NavJawn from './components/NavJawn';
 
 function App() {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState({
     userName: '',
     id: 0,
     loggedIn: false,
   });
 
+  const toggleNav = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   const logout = () => {
+    toggleNav();
     setCurrentUser((prev) => ({
       ...prev,
       loggedIn: false,
@@ -82,14 +88,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CustomNavBar pageTitle="Battle Jawn" onLogout={logout} isLoggedIn={currentUser.loggedIn} />
+      <div className="dropdown-container">
+        {isExpanded && <NavJawn props={{logout:logout, toggleNav: toggleNav}}/>}
+      </div>
       <Routes>
-        {!currentUser.loggedIn && <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} />} />}
-        {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={currentUser} />} />}
-        {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard />} />}
-        {currentUser.loggedIn && <Route key="account-settings" path="/account-settings" element={<AccountSettings props={currentUser} logout={logout} />} />}
-        {<Route key="about-us" path="/about-us" element={<AboutUs />} />}
-        {<Route key="how-to" path="/how-to" element={<HowTo />} />}
+        {!currentUser.loggedIn && <Route key="login" path="/" element={<LoginForm onLogin={onLogin} onRegister={onRegister} currentUser={currentUser} logout={(logout)} />} />}
+        {currentUser.loggedIn && <Route key="my-heroes" path="/" element={<Home props={{currentUser: currentUser, toggleNav:toggleNav }} />} />}
+        {currentUser.loggedIn && <Route key="leader-board" path="/leader-board" element={<LeaderBoard props={{currentUser: currentUser, toggleNav:toggleNav }} />} />}
+        {currentUser.loggedIn && <Route key="account-settings" path="/account-settings" element={<AccountSettings props={{currentUser: currentUser, toggleNav:toggleNav }} />} />}
+        {<Route key="about-us" path="/about-us" element={<AboutUs props={{currentUser: currentUser, toggleNav:toggleNav }} />} />}
+        {<Route key="how-to" path="/how-to" element={<HowTo props={{currentUser: currentUser, toggleNav:toggleNav }} />} />}
       </Routes>
     </BrowserRouter>
   );

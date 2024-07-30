@@ -89,7 +89,7 @@ const TalentTree = ({props}:{props:any}) => {
         <>
             {!showPopUp ?      
                 <Container>
-                    <PageName props={"Talents"} />
+                    <PageName props={{title: "Talents", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
                     <Display>
                         <>
                             <div>
@@ -171,7 +171,9 @@ const TalentTree = ({props}:{props:any}) => {
                         description: popUpDescription,
                         heroId: props.id,
                         onClickOk: handleOkButtonClick,
-                        onClickConfirm: handleConfirmButtonClick
+                        onClickConfirm: handleConfirmButtonClick,
+                        currentUser: props.currentUser,
+                        logout: props.logout
                     }} 
                 />   
             }

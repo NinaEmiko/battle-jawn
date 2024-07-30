@@ -8,7 +8,7 @@ import PageName from "../components/PageName";
 import Display from "../components/Display";
 import Controls from "../components/Controls";
 
-const LeaderBoard = () => {
+const LeaderBoard = ({props}:{props:any}) => {
     const [heroList, setHeroList] = useState([]);
     const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
 
@@ -45,7 +45,7 @@ const LeaderBoard = () => {
     
     return (        
         <Container>
-            <PageName props={"Leader Board"} />
+            <PageName props={{title: "Leader Board", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 <div className="parent-jawn">
                     <div className="child-jawn">

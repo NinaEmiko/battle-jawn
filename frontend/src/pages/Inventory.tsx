@@ -123,7 +123,7 @@ const Inventory = ({props}:{props:any}) => {
     return (
         <>
             <Container>
-                <PageName props={"Inventory"} />
+                <PageName props={{title: "Inventory", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
                 <Display>
                     <>
                         {!showPopUp ? 

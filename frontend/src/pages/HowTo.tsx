@@ -19,7 +19,7 @@ import HowToTalents from "../components/HowToComponents/HowToTalents";
 import HowToStats from "../components/HowToComponents/HowToStats";
 import Scroll from "../components/Scroll";
 
-const HowTo = () => {
+const HowTo = ({props}:{props:any}) => {
     const [activeTab, setActiveTab] = useState("Heroes");
     const [previousRole, setPreviousRole] = useState(-1);
     const [activeRole, setActiveRole] = useState(0);
@@ -102,7 +102,7 @@ const HowTo = () => {
 
     return (        
         <Container>
-            <PageName props={"How To"} />
+            <PageName props={{title: "How To", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                     <div className="parent-jawn">
                         <div className="display-tabs-top-4">

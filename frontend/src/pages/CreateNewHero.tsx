@@ -28,7 +28,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
     }
 
     const newHeroCall = async () => {
-        const data = await newHero(props.accountId, heroName, activeButton);
+        const data = await newHero(props.currentUser.id, heroName, activeButton);
         handleReturnToHeroes(data.id);
     }
 
@@ -71,7 +71,7 @@ function CreateNewHero({props}:{props:any}): React.ReactNode {
 
     return (
         <Container>
-            <PageName props={"New Hero"} />
+            <PageName props={{title: "New Hero", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 <div className="parent-jawn">
                     <div className="display-tabs-top-4">

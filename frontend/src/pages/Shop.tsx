@@ -152,7 +152,7 @@ const Shop = ({props}:{props:any}) => {
 
     return (        
         <Container>
-            <PageName props={"Shop"} />
+            <PageName props={{title: "Shop", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 <>
                     {!showPopUp ?

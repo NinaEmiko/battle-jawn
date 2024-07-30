@@ -8,7 +8,7 @@ import '../styling/AccountSettings.css';
 import '../styling/Tabs.css';
 import { useNavigate } from "react-router-dom";
 
-const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
+const AccountSettings = ({props}:{props: any}) => {
     const apiUrl = import.meta.env.VITE_REACT_APP_URL;
     const [activeTab, setActiveTab] = useState("Update Password");
     const [newPassword, setNewPassword] = useState('');
@@ -80,7 +80,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
             handlePasswordChange()
         } else if (activeTab === "Delete Confirmation"){
             handleDeleteAccount();
-            logout();
+            props.logout();
         } else if (activeTab === "Delete Account"){
             setLeftButtonText("")
             setRightButtonText("")
@@ -104,7 +104,7 @@ const AccountSettings = ({props, logout}:{ props: any, logout: () => void}) => {
 
     return (        
         <Container>
-            <PageName props={"Account Settings"} />
+            <PageName props={{title: "Account Settings", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
 
             <Display>
                 <>  

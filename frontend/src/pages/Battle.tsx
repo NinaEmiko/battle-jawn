@@ -265,7 +265,7 @@ function Battle({props}:{props:any}) {
 
   return (
     <Container>
-      <PageName props={"Battle"} />
+      <PageName props={{title: "Battle", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
       <Display>
         {beginBattle && !postBattleActive &&
           <div className="battle-container-jawn">

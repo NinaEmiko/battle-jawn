@@ -19,31 +19,31 @@ function Home( {props}:{props:any} ) {
   return (
     <>
         {activeTab === "Battle" &&  
-          <Battle props={{heroId:heroId, setIsVisible: handleRedirect}} />
+          <Battle props={{heroId:heroId, setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
         }
 
         {activeTab === "Shop" &&
-          <Shop props={{heroId:heroId, setIsVisible: handleRedirect}} />
+          <Shop props={{heroId:heroId, setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
         }
 
         {activeTab === "Inventory" &&
-          <Inventory props={{heroId:heroId, setIsVisible: handleRedirect}} />
+          <Inventory props={{heroId:heroId, setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
         }
 
         {activeTab === "Map" &&
-          <Map props={{heroId:heroId, setIsVisible: handleRedirect}} />
+          <Map props={{heroId:heroId, setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
         }
 
         {activeTab === "Heroes" &&
-          <Heroes props={{accountId:props.id, setIsVisible: handleRedirect}} />
+          <Heroes props={{setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav }} />
         }
 
         {activeTab === "Talents" &&
-          <TalentTree props={{id:heroId, setIsVisible: handleRedirect}} />
+          <TalentTree props={{id:heroId, setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
         }
 
         {activeTab === "New Hero" &&
-          <CreateNewHero props={{accountId:props.id, setIsVisible: handleRedirect}} />
+          <CreateNewHero props={{setIsVisible: handleRedirect, currentUser: props.currentUser, toggleNav:props.toggleNav}} />
         }
     </>
   );

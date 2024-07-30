@@ -129,7 +129,7 @@ const Map = ({props}:{props:any}) => {
 
     return (
         <Container>
-            <PageName props={"Play"} />
+            <PageName props={{title: "Play", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 <div className="container-map-jawn"
                                     style={{

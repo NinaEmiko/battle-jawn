@@ -11,9 +11,11 @@ import { useNavigate } from 'react-router-dom';
 interface LoginFormProps {
   onLogin: (e: FormEvent, login: string, password: string) => void;
   onRegister: (login: string, password: string) => void;
+  currentUser: {userName: string, id: number, loggedIn: boolean};
+  logout: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister, currentUser, logout }) => {
   const [activeButton, setActiveButton] = useState('Login');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -81,7 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
 
   return (
     <Container>
-      <PageName props={"Welcome"} />
+      <PageName props={{title: "Welcome", currentUser: currentUser, logout: logout}} />
       <Display>
         <div className="parent-jawn">
           <div className="child-jawn">
