@@ -35,7 +35,7 @@ const PageName = ({props}:{props:any}) => {
             </div>
             {props.currentUser.loggedIn &&
                     <button className="dropdown-toggle" onClick={handleSelect}>
-                        ▼
+                        Menu
                     </button>                
                 }     
         </div>
