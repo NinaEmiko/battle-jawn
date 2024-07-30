@@ -7,6 +7,7 @@
     height: 100%;
     background: transparent;
     border: 0;
+    font-size: 4vw;
 }
 
 /* DISPLAY TABS TOP 2 */
@@ -16,7 +17,6 @@
     position: absolute;
     top: 0;
     height: 10%;
-    font-size: 4vw;
 }
 
 .display-tabs-top-2 button{
@@ -25,6 +25,7 @@
     height: 100%;
     background: transparent;
     border: 0;
+    font-size: 4vw;
 }
 
 /* DISPLAY TABS TOP 1 */
@@ -43,6 +44,7 @@
     height: 100%;
     background: transparent;
     border: 0;
+    font-size: 5vw;
 }
 
 /* DISPLAY TABS BOTTOM 2 */
@@ -60,6 +62,7 @@
     background: transparent;
     border: 0;
     color: var(--mid-light-jawn);
+    font-size: 4vw;
 }
 
 /* UNIVERSAL */

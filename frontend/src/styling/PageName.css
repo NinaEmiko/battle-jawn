@@ -1,6 +1,6 @@
 .page-name-jawn {
     display: flex;
-    justify-content: space-between;
+    justify-content: content;
     align-items: center;
     margin: 1%;
     height: 7.5%;
@@ -12,10 +12,20 @@
 }
 
 .page-name-txt {
-  font-size: 250%;
+  font-size: 10vw;
   color: gold;
+}
+.page-name-column-1 {
+  /* margin: 0 auto; */
+  width: 15%;
 }
 
 .page-name-column-2 {
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  width: 70%;
+  text-align: center;
+}
+.page-name-column-3 {
+  /* margin: 0 auto; */
+  width: 15%;
 }

@@ -104,7 +104,7 @@ const AccountSettings = ({props}:{props: any}) => {
 
     return (        
         <Container>
-            <PageName props={{title: "Account Settings", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
+            <PageName props={{title: "Settings", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
 
             <Display>
                 <>  

@@ -12,9 +12,9 @@
 
 .active-scroll{
     /* text-align: center; */
-    font-size: 20px;
+    font-size: 6vw;
     color: gold;    
 }
 .next-scroll, .previous-scroll{
-    font-size: 17px;
+    font-size: 4vw;
 }

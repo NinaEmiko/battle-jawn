@@ -45,7 +45,7 @@ const LeaderBoard = ({props}:{props:any}) => {
     
     return (        
         <Container>
-            <PageName props={{title: "Leader Board", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
+            <PageName props={{title: "Top 5", currentUser: props.currentUser, toggleNav:props.toggleNav}} />
             <Display>
                 <div className="parent-jawn">
                     <div className="child-jawn">

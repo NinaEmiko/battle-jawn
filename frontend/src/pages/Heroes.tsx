@@ -132,7 +132,7 @@ function Heroes( {props}:{props:any} ) {
                         <div>
                             {heroList.length < 5 &&
                                 <div className="display-tabs-top-1">
-                                    <button onClick={() => handleClickNewHero(heroList[currentHeroIndex])}>Create New Hero</button>
+                                    <button className="new-hero-btn" onClick={() => handleClickNewHero(heroList[currentHeroIndex])}>Create New Hero</button>
                                 </div>
                             }
 

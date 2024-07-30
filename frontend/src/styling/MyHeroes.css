@@ -2,7 +2,7 @@
     padding-left: 30px;
     text-align: left;
     color: var(--light-jawn);
-    font-size:20px;
+    font-size:6vw;
 }
 
 .data-jawn {
@@ -10,7 +10,7 @@
     color: var(--light-jawn);
     padding-right: 30px;
     text-align: right;
-    font-size:20px;
+    font-size:6vw;
 }
 
 .my-heroes-table {
@@ -18,9 +18,9 @@
 }
 
 .hero-name{
-  font-size: 30px;
+  font-size: 8vw;
   color: gold;
-  margin-top:11%;
+  padding-top: 3.5%;
 }
 
 .hero-name-level{
@@ -32,7 +32,7 @@
 
 .hero-level{
   color: var(--mid-light-jawn);
-  font-size: 17.5px;
+  font-size: 5vw;
   text-align: right;
   margin-left: 10px;
   margin-top: 15%;
@@ -40,10 +40,10 @@
 
 .hero-level-light{
   color: var(--light-jawn);
-  font-size: 17.5px;
+  font-size: 5vw;
   text-align: right;
   margin-left: 10px;
-  margin-top: 15%;
+  margin-top: 17%;
 }
 
 .experience-bar {
@@ -85,6 +85,7 @@
   transform: translate(-50%, -50%);
   color: var(--light-jawn);
   font-weight: bold;
+  font-size: 5vw;
 }
 
 .table-container{
@@ -106,4 +107,5 @@
   text-align: center;
   height: 100%;
   color: var(--light-jawn);
+  font-size: 5vw;
 }
