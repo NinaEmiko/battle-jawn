@@ -193,9 +193,11 @@ public class HeroServiceTest {
     }
     @Test
     void restAllHeroesTest() {
-        doNothing().when(heroRepository).restAllHeroes();
+        List<Hero> heroesList = new ArrayList<>();
+        when(heroRepository.findAll()).thenReturn(heroesList);
+        when(heroRepository.saveAll(any())).thenReturn(heroesList);
         heroService.restAllHeroes();
-        verify(heroRepository, times(1)).restAllHeroes();
+        verify(heroRepository, times(1)).findAll();
     }
     @Test
     void getHeroListByHighScoreTest(){

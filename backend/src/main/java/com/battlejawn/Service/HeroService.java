@@ -68,7 +68,12 @@ public class HeroService {
     @Transactional
     public void restAllHeroes() {
         logger.info("Inside restAllHeroes service method.");
-        heroRepository.restAllHeroes();
+        List<Hero> heroes = heroRepository.findAll();
+        for (Hero hero: heroes
+             ) {
+            hero.setHealth(hero.getMaxHealth());
+        }
+        heroRepository.saveAll(heroes);
     }
 
     public List<Hero> getHeroListByAccountId(Long id) {

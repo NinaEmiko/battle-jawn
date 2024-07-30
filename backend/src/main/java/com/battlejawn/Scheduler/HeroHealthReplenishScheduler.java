@@ -19,7 +19,7 @@ public class HeroHealthReplenishScheduler {
         logger.info("Inside replenishAllHeroesHealth service class. This job runs once a day at 1 am.");
         try {
             heroService.restAllHeroes();
-        }catch(Exception e) {
+        } catch(Exception e) {
             throw new RuntimeException("replenishAllHeroesHealth failed. Error: ", e);
         }
     }
