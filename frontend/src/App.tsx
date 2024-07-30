@@ -40,6 +40,7 @@ function App() {
       .then((response) => {
         Cookies.set('storedId', response.data.id);
         Cookies.set('storedUserName', response.data.userName);
+        Cookies.set('authHeader', response.data.token);
         setAuthHeader(response.data.token);
         setCurrentUser({
           id: response.data.id,
@@ -60,6 +61,7 @@ function App() {
       .then((response) => {
         Cookies.set('storedId', response.data.id);
         Cookies.set('storedUserName', response.data.userName);
+        Cookies.set('authHeader', response.data.token);
         setAuthHeader(response.data.token);
         setCurrentUser({
           id: response.data.id,
@@ -73,7 +75,7 @@ function App() {
   };
 
   useEffect(() => {
-    const auth = Cookies.get('AuthHeader');
+    const auth = Cookies.get('authHeader');
     const storedId = Cookies.get('storedId');
     const storedUserName = Cookies.get('storedUserName');
     if (storedId && storedUserName && auth) {
