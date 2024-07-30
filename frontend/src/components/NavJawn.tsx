@@ -18,9 +18,6 @@ const NavJawn = ({props}:{props:any}) => {
     return (
         <div
         className="dropdown-menu">
-            <div className="dropdown-item" onClick={() => handleNavigation('/')}>
-                Home
-            </div>
             <div className="dropdown-item" onClick={() => handleNavigation('/leader-board')}>
                 Leader Board
             </div>
