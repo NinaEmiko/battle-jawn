@@ -29,6 +29,9 @@ function App() {
       loggedIn: false,
     }));
     setAuthHeader(null);
+    Cookies.set('storedId', "");
+    Cookies.set('storedUserName', "");
+    Cookies.set('authHeader', "");
   };
 
   const onLogin = (e: FormEvent, username: string, password: string) => {
