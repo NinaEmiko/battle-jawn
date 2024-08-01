@@ -6,6 +6,7 @@ import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.*;
 import com.battlejawn.HeroMove.Attack.*;
 import com.battlejawn.HeroMove.Heal.*;
 import com.battlejawn.HeroMove.Run;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @Service
@@ -41,6 +43,10 @@ public class HeroMoveService {
         HeroMoveDTO heroMoveDTO;
         int damage;
         int healAmount;
+        TankTree tankTree;
+        CasterTree casterTree;
+        HealerTree healerTree;
+        DPSTree dpsTree;
 
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
@@ -49,17 +55,54 @@ public class HeroMoveService {
         switch (move) {
             case "Wand":
                 damage = wand.attack();
+                if (Objects.equals(hero.getRole(), "Caster")){
+                    casterTree = (CasterTree) hero.getTalentTree();
+                    if (casterTree.isImprovedWand1()){
+                        damage += 2;
+                    }
+                    if (casterTree.isImprovedWand2()){
+                        damage += 2;
+                    }
+                    //Add logic for improvedWand3
+                } else if (Objects.equals(hero.getRole(), "Healer")){
+                    healerTree = (HealerTree) hero.getTalentTree();
+                    if (healerTree.isImprovedWand1()){
+                        damage += 2;
+                    }
+                    if (healerTree.isImprovedWand2()){
+                        damage += 2;
+                    }
+                    //Add logic for improvedWand3
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Strike":
                 damage = strike.attack();
+                tankTree = (TankTree) hero.getTalentTree();
+                if (tankTree.isImprovedStrike1() && damage != 0){
+                    damage += 3;
+                }
+                if (tankTree.isImprovedStrike2()  && damage != 0){
+                    damage += 2;
+                }
+                //Add logic for improvedStrike3
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Stab":
+                dpsTree = (DPSTree) hero.getTalentTree();
                 damage = stab.attack();
                 if (damage == 0) {
-                    hero.setResource(0);
-                    heroService.updateHero(hero);
+                    if (!dpsTree.isImprovedStab3()) {
+                        hero.setResource(0);
+                        heroService.updateHero(hero);
+                    }
+                } else {
+                    if (dpsTree.isImprovedStab1()) {
+                        damage += 4;
+                    }
+                    if (dpsTree.isImprovedStab2()) {
+                        damage += 3;
+                    }
                 }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
@@ -79,11 +122,26 @@ public class HeroMoveService {
             case "Holy":
                 Holy holy = new Holy();
                 damage = holy.attack();
+                healerTree = (HealerTree) hero.getTalentTree();
+                if (healerTree.isImprovedHoly1() && damage != 0){
+                    damage += 5;
+                }
+                if (healerTree.isImprovedHoly2()  && damage != 0){
+                    damage += 2;
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Impale":
                 Impale impale = new Impale();
                 damage = impale.attack();
+                tankTree = (TankTree) hero.getTalentTree();
+                if (tankTree.isImprovedImpale1() && damage != 0){
+                    damage += 2;
+                }
+                if (tankTree.isImprovedImpale2()  && damage != 0){
+                    damage += 1;
+                }
+                //Add logic for improvedImpale 3
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "BackStab":
@@ -206,11 +264,26 @@ public String getDamageMessage(String move, int damage) {
                 default -> "Your energy is maxed out.";
             };
         } else if (waterCount > 0 && hero.getResource() != hero.getMaxResource()) {
-            newMessage = switch (hero.getRole()) {
-                case "Tank" -> "You feel empowered.";
-                case "Healer" -> "Your spirit has risen.";
-                case "Caster" -> "Your magic has risen.";
-                default -> "Your energy has increased.";
+            switch (hero.getRole()) {
+                case "Tank":
+                    TankTree tankTree = (TankTree) hero.getTalentTree();
+                    if (tankTree.isHydration()){
+                        if (hero.getMaxHealth() - hero.getHealth() < 5){
+                            hero.setHealth(hero.getMaxHealth());
+                        } else {
+                            hero.setHealth(hero.getHealth() + 5);
+                        }
+                    }
+                    newMessage = "You feel empowered.";
+                    break;
+                case "Healer":
+                    newMessage = "Your spirit has risen.";
+                    break;
+                case "Caster":
+                    newMessage = "Your magic has risen.";
+                    break;
+                default:
+                    newMessage = "Your energy has increased.";
             };
             hero.setResource(hero.getMaxResource());
             heroService.updateHero(hero);
@@ -336,14 +409,44 @@ public String getDamageMessage(String move, int damage) {
                     return true;
                 }
             case "Holy":
-                if (hero.getResource() < 2) {
-                    return false;
+                HealerTree healerTree = (HealerTree) hero.getTalentTree();
+                if (healerTree.isImprovedHoly3()){
+                    if (hero.getResource() < 1) {
+                        return false;
+                    } else {
+                        hero.setResource(hero.getResource() - 1);
+                        heroService.updateHero(hero);
+                        return true;
+                    }
                 } else {
-                    hero.setResource(hero.getResource() - 2);
-                    heroService.updateHero(hero);
-                    return true;
+                    if (hero.getResource() < 2) {
+                        return false;
+                    } else {
+                        hero.setResource(hero.getResource() - 2);
+                        heroService.updateHero(hero);
+                        return true;
+                    }
                 }
-            case "Impale", "BackStab":
+            case "Impale":
+                TankTree tankTree = (TankTree) hero.getTalentTree();
+                if (tankTree.isTitan()){
+                    if (hero.getResource() < 2) {
+                        return false;
+                    } else {
+                        hero.setResource(hero.getResource() - 2);
+                        heroService.updateHero(hero);
+                        return true;
+                    }
+                } else {
+                    if (hero.getResource() < 3) {
+                        return false;
+                    } else {
+                        hero.setResource(hero.getResource() - 3);
+                        heroService.updateHero(hero);
+                        return true;
+                    }
+                }
+            case "BackStab":
                 if (hero.getResource() < 3) {
                     return false;
                 } else {
@@ -365,5 +468,4 @@ public String getDamageMessage(String move, int damage) {
         heroMoveDTO.setGameOver(gameOver);
         return heroMoveDTO;
     }
-
 }

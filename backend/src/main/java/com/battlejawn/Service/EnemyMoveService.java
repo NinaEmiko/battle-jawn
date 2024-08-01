@@ -8,6 +8,7 @@ import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.Randomizer.Randomizer;
 import lombok.AllArgsConstructor;
@@ -105,7 +106,14 @@ public class EnemyMoveService {
         BattleStatus battleStatus = battleSession.getBattleStatus();
 
         if (battleStatus.isHeroBlocking()) {
+            TankTree tankTree = (TankTree) hero.getTalentTree();
             hero.setResource(hero.getMaxResource());
+            if (tankTree.isImprovedBlock1()){
+                hero.setHealth(hero.getHealth() + 5);
+            }
+            if (tankTree.isImprovedBlock2()){
+                hero.setHealth(hero.getHealth() + 5);
+            }
             heroService.updateHero(hero);
             battleStatus.setHeroBlocking(false);
             battleStatusService.saveBattleStatus(battleStatus);

@@ -73,6 +73,12 @@ public class TalentTreeService {
     private String resetTankTalents(Hero hero){
         try {
             TankTree tankTree = (TankTree) hero.getTalentTree();
+            if (tankTree.isImprovedHealth1()){
+                hero.setMaxHealth(hero.getMaxHealth() - 5);
+            }
+            if (tankTree.isImprovedHealth2()){
+                hero.setMaxHealth(hero.getMaxHealth() - 5);
+            }
             tankTree.setImprovedHealth1(false);
             tankTree.setImprovedHealth2(false);
             tankTree.setTitan(false);
@@ -189,9 +195,11 @@ public class TalentTreeService {
                 tankTree.setImprovedBlock2(true);
                 break;
             case "Improved Health 1":
+                hero.setMaxHealth(hero.getMaxHealth() + 5);
                 tankTree.setImprovedHealth1(true);
                 break;
             case "Improved Health 2":
+                hero.setMaxHealth(hero.getMaxHealth() + 5);
                 tankTree.setImprovedHealth2(true);
                 break;
             default:
