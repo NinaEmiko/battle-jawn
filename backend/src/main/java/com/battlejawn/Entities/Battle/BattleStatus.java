@@ -21,6 +21,10 @@ public class BattleStatus {
     @Column
     private boolean heroBlocking;
     @Column
+    private boolean heroBubbled;
+    @Column
+    private boolean heroPeekaboo;
+    @Column
     private boolean enemyFrozen;
     @Column
     private boolean enemyParalyzed;

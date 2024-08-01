@@ -161,7 +161,7 @@ public class EnemyMoveService {
 
             int updatedEnemyHealth;
             int updatedPotionCount = enemy.getPotions() - 1;
-            int healAmount = potion.usePotion();
+            int healAmount = 30;
             if (healAmount + enemy.getHealth() > enemy.getMaxHealth()) {
                 updatedEnemyHealth = enemy.getMaxHealth();
             } else {
