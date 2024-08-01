@@ -1,14 +1,8 @@
 package com.battlejawn.Entities.TalentTree;
 
-import com.battlejawn.Entities.Hero.Healer;
-import com.battlejawn.Entities.Hero.Hero;
-import com.battlejawn.Entities.Talent.Healer.Protection.*;
-import com.battlejawn.Entities.Talent.Healer.Spirituality.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

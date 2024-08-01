@@ -107,9 +107,20 @@ public class HeroMoveService {
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "FireBlast":
+                int resourceDamage;
+                casterTree = (CasterTree) hero.getTalentTree();
                 FireBlast fireBlast = new FireBlast();
                 damage = fireBlast.attack();
-                int resourceDamage = damage + (hero.getResource() * 5);
+                if (casterTree.isImprovedFireBlast1()){
+                    resourceDamage = damage + (hero.getResource() * 6);
+                } else {
+                    resourceDamage = damage + (hero.getResource() * 5);
+                }
+                if (casterTree.isImprovedFireBlast2()){
+                    if (hero.getResource() == hero.getMaxResource()){
+                        resourceDamage += 3;
+                    }
+                }
                 hero.setResource(0);
                 heroService.updateHero(hero);
                 heroMoveDTO = processHeroAttack(resourceDamage, enemy, battleSessionId, hero, move);
@@ -145,13 +156,24 @@ public class HeroMoveService {
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "BackStab":
+                dpsTree = (DPSTree) hero.getTalentTree();
                 BackStab backStab = new BackStab();
                 damage = backStab.attack();
+                if (dpsTree.isImprovedBackStab1() && damage != 0){
+                    damage += 3;
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Heal":
+                healerTree = (HealerTree) hero.getTalentTree();
                 Heal heal = new Heal();
                 healAmount = heal.useHeal();
+                if (healerTree.isImprovedHeal1()){
+                    healAmount += 5;
+                }
+                if (healerTree.isImprovedHeal2()){
+                    healAmount += 5;
+                }
                 heroMoveDTO = processHeroHeal(healAmount, enemy, battleSessionId, hero);
                 return heroMoveDTO;
             case "Steal":
@@ -348,6 +370,7 @@ public String getDamageMessage(String move, int damage) {
     }
 
     public HeroMoveDTO processSteal(Enemy enemy, Long battleSessionId, Hero hero) {
+        DPSTree dpsTree = (DPSTree) hero.getTalentTree();
         Inventory inventory = hero.getInventory();
         int emptySpaces = inventoryService.getEmptySlotSize(hero.getId());
 
@@ -356,10 +379,8 @@ public String getDamageMessage(String move, int damage) {
             if (stealSuccess) {
                 inventoryService.addToFirstEmptySlot(inventory, "Potion");
                 int updatedEnemyPotionCount = enemy.getPotions() - 1;
-                if (hero.getResource() > 0) {
+                if (dpsTree.isElation()){
                     hero.setResource(3);
-                } else {
-                    hero.setResource(2);
                 }
                 heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
@@ -400,7 +421,20 @@ public String getDamageMessage(String move, int damage) {
 
     public boolean processHeroResource(String move, Hero hero) {
         switch (move){
-            case "IceBlast", "Block":
+            case "IceBlast":
+                CasterTree casterTree = (CasterTree) hero.getTalentTree();
+                if (casterTree.isSecondNature()){
+                    return true;
+                } else {
+                    if (hero.getResource() < 1) {
+                        return false;
+                    } else {
+                        hero.setResource(hero.getResource() - 1);
+                        heroService.updateHero(hero);
+                        return true;
+                    }
+                }
+            case "Block":
                 if (hero.getResource() < 1) {
                     return false;
                 } else {

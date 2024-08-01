@@ -7,6 +7,7 @@ import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.*;
+import com.battlejawn.Entities.Hero.DPS;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Entities.Inventory;
@@ -226,6 +227,7 @@ class EnemyMoveServiceTest {
     }
     @Test
     void enemyMoveThiefStealTest() {
+        DPS dps = new DPS("DPS");
         enemy = new Thief(2, 95, 2, 4, 20);
         enemy.setName("Thief");
 
@@ -237,22 +239,23 @@ class EnemyMoveServiceTest {
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, dps);
         assertNotNull(enemyMoveDTO);
 
     }
 
     @Test
     void enemyMoveThiefStealFailTest() {
-        enemy = new Thief(2, 95, 2, 4, 20);
-        enemy.setName("Thief");
+        DPS dps = new DPS("DPS");
+        Enemy thief = new Thief(2, 95, 2, 4, 20);
+        thief.setName("Thief");
 
         when(inventoryService.findItemCount(inventory, "Potion")).thenReturn(1);
         when(enemySteal.useSteal()).thenReturn(false);
         when(battleHistoryMessageService.createNewMessage(anyLong(),anyString())).thenReturn(battleHistoryMessage);
         when(battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(anyLong())).thenReturn(battleHistoryMessageList);
 
-        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(enemy, 1L, hero);
+        EnemyMoveDTO enemyMoveDTO = enemyMoveService.processEnemySteal(thief, 1L, dps);
         assertNotNull(enemyMoveDTO);
 
     }

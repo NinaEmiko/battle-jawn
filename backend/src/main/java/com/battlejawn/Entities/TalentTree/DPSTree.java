@@ -1,15 +1,8 @@
 package com.battlejawn.Entities.TalentTree;
 
-import com.battlejawn.Entities.Hero.Caster;
-import com.battlejawn.Entities.Hero.DPS;
-import com.battlejawn.Entities.Hero.Hero;
-import com.battlejawn.Entities.Talent.DPS.Dexterity.*;
-import com.battlejawn.Entities.Talent.DPS.Stealth.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity

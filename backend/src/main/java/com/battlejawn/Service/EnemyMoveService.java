@@ -8,6 +8,7 @@ import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.DPSTree;
 import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.HeroMove.Heal.Potion;
 import com.battlejawn.Randomizer.Randomizer;
@@ -167,8 +168,12 @@ public class EnemyMoveService {
 
         logger.info("Inside processEnemySteal move method.");
         if (potionCount > 0 && enemy.getPotions() < enemy.getMaxPotions()) {
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
             logger.info("Inside first if statement. Hero potion count: " + potionCount + ". Enemy potion count: " + enemy.getPotions() + ". Enemy potion capacity: " + enemy.getMaxPotions());
             boolean stealSuccess = enemySteal.useSteal();
+            if (dpsTree.isHonorAmongThieves()){
+                stealSuccess = false;
+            }
             logger.info("stealSuccess: " + stealSuccess);
             if (stealSuccess) {
                 inventoryService.removeFirstFromInventory(hero.getId(), "potion");

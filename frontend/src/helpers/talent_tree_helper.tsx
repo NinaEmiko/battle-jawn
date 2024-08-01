@@ -39,12 +39,10 @@ export const talentDescriptions = (talent: string) => {
     switch (talent){
 
         //ARCANE
-        //TODO: UPDATE IN BACKEND
         case "Improved FireBlast 1":
-            return "Reduces the cost of Fire Blast by 1 magic.";
-        //TODO: UPDATE IN BACKEND
-        case "Improved FireBlast 2":
             return "Fire Blast does an additional 6 damage per magic.";
+        case "Improved FireBlast 2":
+            return "Fire Blast does an additional 3 damage if hero has full magic.";
         //TODO: UPDATE IN BACKEND
         case "Improved IceBlast":
             return "Ice Blast has the chance to freeze enemy.";
@@ -75,7 +73,6 @@ export const talentDescriptions = (talent: string) => {
         //TODO: UPDATE IN BACKEND
         case "Resourcefulness 2":
             return "Hero does not need Potion in inventory to use Potion.";
-        //TODO: UPDATE IN BACKEND
         case "Second Nature":
             return "Ice Blast costs 0 magic."
 
@@ -83,7 +80,6 @@ export const talentDescriptions = (talent: string) => {
         //TODO: UPDATE IN BACKEND
         case "Energized":
             return "Start battle at full energy."
-        //TODO: UPDATE IN BACKEND
         case "Improved BackStab 1":
             return "Increases the damage of BackStab by 3."
         //TODO: UPDATE IN BACKEND
@@ -100,13 +96,11 @@ export const talentDescriptions = (talent: string) => {
             return "Hero takes 0 damage after a successful BackStab.";
 
         //STEALTH    
-        //TODO: UPDATE IN BACKEND
         case "Elation":
             return "Successful steal grants 3 energy.";
         //TODO: UPDATE IN BACKEND
         case "First Strike":
             return "First BackStab costs 0 energy.";
-        //TODO: UPDATE IN BACKEND
         case "Honor Among Thieves":
             return "Items cannot be stolen from hero.";
         //TODO: UPDATE IN BACKEND
@@ -130,10 +124,8 @@ export const talentDescriptions = (talent: string) => {
         //TODO: UPDATE IN BACKEND
         case "Botany 2 - Protection":
             return "Potion grants 1 spirit."
-        //TODO: UPDATE IN BACKEND
         case "Improved Heal 1":
             return "Increases health granted by Heal by 5."
-        //TODO: UPDATE IN BACKEND
         case "Improved Heal 2":
             return "Increases health granted by Heal by 10."
         //TODO: UPDATE IN BACKEND
