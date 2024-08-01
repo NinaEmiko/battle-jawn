@@ -16,14 +16,16 @@ import com.battlejawn.Service.BattleHistoryMessageService;
 import com.battlejawn.Service.BattleSessionService;
 import com.battlejawn.Service.EnemyService;
 import com.battlejawn.Service.HeroService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
-@Data
-@Component
+@Service
+@AllArgsConstructor
 public class Strike {
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final BattleSessionService battleSessionService;

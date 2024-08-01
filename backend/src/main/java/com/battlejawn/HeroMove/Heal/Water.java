@@ -8,13 +8,15 @@ import com.battlejawn.Entities.Inventory;
 import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.Helpers.HeroMoveHelper;
 import com.battlejawn.Service.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
-@Data
+@Service
+@AllArgsConstructor
 public class Water {
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final BattleSessionService battleSessionService;

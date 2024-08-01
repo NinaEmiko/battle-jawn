@@ -13,11 +13,14 @@ import com.battlejawn.Entities.TalentTree.HealerTree;
 import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.Helpers.HeroMoveHelper;
 import com.battlejawn.Service.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Data
+@AllArgsConstructor
+@Service
 public class IceBlast {
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final BattleSessionService battleSessionService;

@@ -14,11 +14,14 @@ import com.battlejawn.Service.BattleHistoryMessageService;
 import com.battlejawn.Service.BattleSessionService;
 import com.battlejawn.Service.EnemyService;
 import com.battlejawn.Service.HeroService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Data
+@AllArgsConstructor
+@Service
 public class FireBlast {
     private final BattleHistoryMessageService battleHistoryMessageService;
     private final BattleSessionService battleSessionService;

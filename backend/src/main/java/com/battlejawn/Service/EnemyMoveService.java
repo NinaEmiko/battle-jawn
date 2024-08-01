@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 public class EnemyMoveService {
     private final HeroService heroService;
-    private final Potion potion;
     private final EnemySteal enemySteal;
     private final Randomizer randomizer;
     private final BattleHistoryMessageService battleHistoryMessageService;
