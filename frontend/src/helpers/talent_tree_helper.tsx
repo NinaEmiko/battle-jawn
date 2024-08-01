@@ -43,14 +43,12 @@ export const talentDescriptions = (talent: string) => {
             return "Fire Blast does an additional 6 damage per magic.";
         case "Improved FireBlast 2":
             return "Fire Blast does an additional 3 damage if hero has full magic.";
-        //TODO: UPDATE IN BACKEND
         case "Improved IceBlast":
             return "Ice Blast has the chance to freeze enemy.";
         case "Improved Wand 1 - Arcane":
             return "Increases the damage of Wand by 2.";
         case "Improved Wand 2 - Arcane":
             return "Increases the damage of Wand by 4.";
-        //TODO: UPDATE IN BACKEND
         case "Improved Wand 3 - Arcane":
             return "On crit, hero gains 2 magic.";
 
@@ -82,7 +80,6 @@ export const talentDescriptions = (talent: string) => {
             return "Start battle at full energy."
         case "Improved BackStab 1":
             return "Increases the damage of BackStab by 3."
-        //TODO: UPDATE IN BACKEND
         case "Improved BackStab 2":
             return "BackStab has the chance to paralyze an enemy.";
         case "Improved Stab 1":
@@ -128,7 +125,6 @@ export const talentDescriptions = (talent: string) => {
             return "Increases health granted by Heal by 5."
         case "Improved Heal 2":
             return "Increases health granted by Heal by 10."
-        //TODO: UPDATE IN BACKEND
         case "Improved Heal 3":
             return "Heal has the ability to crit.";
         case "Spiritually Attuned":
@@ -141,7 +137,6 @@ export const talentDescriptions = (talent: string) => {
             return "Increases damage of Wand by 2."
         case "Improved Wand 2 - Spirituality":
             return "Increases damage of Wand by 4."
-        //TODO: UPDATE IN BACKEND
         case "Improved Wand 3 - Spirituality":
             return "Wand grants 2 spirit on crit."
         case "Improved Holy 1":
@@ -179,17 +174,14 @@ export const talentDescriptions = (talent: string) => {
             return "Increases the damage of Strike by 3."
         case "Improved Strike 2":
             return "Increases the damage of Strike by 5."
-        //TODO: UPDATE IN BACKEND
         case "Improved Strike 3":
             return "Strike crit grants 2 power."
         case "Improved Impale 1":
             return "Increases the damage of Impale by 2."
         case "Improved Impale 2":
             return "Increases the damage of Impale by 3."
-        //TODO: UPDATE IN BACKEND
         case "Improved Impale 3":
             return "Impale has the chance to paralyze an enemy."
-
 
 
         //DEFAULT    

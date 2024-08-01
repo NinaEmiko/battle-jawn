@@ -22,4 +22,6 @@ public class BattleStatus {
     private boolean heroBlocking;
     @Column
     private boolean enemyFrozen;
+    @Column
+    private boolean enemyParalyzed;
 }

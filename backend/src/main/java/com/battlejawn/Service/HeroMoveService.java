@@ -47,13 +47,16 @@ public class HeroMoveService {
         CasterTree casterTree;
         HealerTree healerTree;
         DPSTree dpsTree;
+        boolean didCrit;
 
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
+        BattleStatus battleStatus = battleSession.getBattleStatus();
 
         switch (move) {
             case "Wand":
+                didCrit = critCheck(95);
                 damage = wand.attack();
                 if (Objects.equals(hero.getRole(), "Caster")){
                     casterTree = (CasterTree) hero.getTalentTree();
@@ -63,7 +66,12 @@ public class HeroMoveService {
                     if (casterTree.isImprovedWand2()){
                         damage += 2;
                     }
-                    //Add logic for improvedWand3
+                    if (casterTree.isImprovedWand3() && didCrit){
+                        if (hero.getResource() != hero.getMaxResource()) {
+                            hero.setResource(hero.getResource() + 1);
+                            heroService.updateHero(hero);
+                        }
+                    }
                 } else if (Objects.equals(hero.getRole(), "Healer")){
                     healerTree = (HealerTree) hero.getTalentTree();
                     if (healerTree.isImprovedWand1()){
@@ -72,11 +80,17 @@ public class HeroMoveService {
                     if (healerTree.isImprovedWand2()){
                         damage += 2;
                     }
-                    //Add logic for improvedWand3
+                    if (healerTree.isImprovedWand3() && didCrit){
+                        if (hero.getResource() != hero.getMaxResource()) {
+                            hero.setResource(hero.getResource() + 1);
+                            heroService.updateHero(hero);
+                        }
+                    }
                 }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Strike":
+                didCrit = critCheck(95);
                 damage = strike.attack();
                 tankTree = (TankTree) hero.getTalentTree();
                 if (tankTree.isImprovedStrike1() && damage != 0){
@@ -85,7 +99,15 @@ public class HeroMoveService {
                 if (tankTree.isImprovedStrike2()  && damage != 0){
                     damage += 2;
                 }
-                //Add logic for improvedStrike3
+                if (tankTree.isImprovedStrike3()  && damage != 0 && didCrit){
+                    if (hero.getResource() != hero.getMaxResource()) {
+                        hero.setResource(hero.getResource() + 1);
+                        heroService.updateHero(hero);
+                    }
+                }
+                if (didCrit && damage != 0){
+                    damage += (damage / 2);
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Stab":
@@ -126,8 +148,13 @@ public class HeroMoveService {
                 heroMoveDTO = processHeroAttack(resourceDamage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "IceBlast":
+                casterTree = (CasterTree) hero.getTalentTree();
                 IceBlast iceBlast = new IceBlast();
                 damage = iceBlast.attack();
+                if (casterTree.isImprovedIceBlast()  && damage != 0){
+                    battleStatus.setEnemyFrozen(true);
+                    battleStatusService.saveBattleStatus(battleStatus);
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Holy":
@@ -152,7 +179,10 @@ public class HeroMoveService {
                 if (tankTree.isImprovedImpale2()  && damage != 0){
                     damage += 1;
                 }
-                //Add logic for improvedImpale 3
+                if (tankTree.isImprovedImpale2()  && damage != 0){
+                    battleStatus.setEnemyParalyzed(true);
+                    battleStatusService.saveBattleStatus(battleStatus);
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "BackStab":
@@ -162,9 +192,14 @@ public class HeroMoveService {
                 if (dpsTree.isImprovedBackStab1() && damage != 0){
                     damage += 3;
                 }
+                if (dpsTree.isImprovedBackStab2()  && damage != 0){
+                    battleStatus.setEnemyParalyzed(true);
+                    battleStatusService.saveBattleStatus(battleStatus);
+                }
                 heroMoveDTO = processHeroAttack(damage, enemy, battleSessionId, hero, move);
                 return heroMoveDTO;
             case "Heal":
+                didCrit = critCheck(95);
                 healerTree = (HealerTree) hero.getTalentTree();
                 Heal heal = new Heal();
                 healAmount = heal.useHeal();
@@ -173,6 +208,9 @@ public class HeroMoveService {
                 }
                 if (healerTree.isImprovedHeal2()){
                     healAmount += 5;
+                }
+                if (healerTree.isImprovedHeal3() && didCrit){
+                    healAmount += (healAmount / 2);
                 }
                 heroMoveDTO = processHeroHeal(healAmount, enemy, battleSessionId, hero);
                 return heroMoveDTO;
@@ -512,5 +550,10 @@ public String getDamageMessage(String move, int damage) {
         heroMoveDTO.setBattleHistory(battleHistory);
         heroMoveDTO.setGameOver(gameOver);
         return heroMoveDTO;
+    }
+
+    private boolean critCheck(int percent){
+        int chance = (int) Math.floor(Math.random() * 100);
+        return chance > percent;
     }
 }

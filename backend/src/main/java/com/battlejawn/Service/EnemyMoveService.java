@@ -34,12 +34,25 @@ public class EnemyMoveService {
     public EnemyMoveDTO enemyMove(Long battleSessionId){
         logger.info("Inside enemyMove service class. Battle Session Id: " + battleSessionId + ".");
 
-        Enemy enemy = enemyService.getEnemyById(battleSessionService.getBattleSessionById(battleSessionId).getEnemyId());
+        BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
+        Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSessionService.getBattleSessionById(battleSessionId).getHeroId());
+        BattleStatus battleStatus = battleStatusService.findBattleStatusById(battleSession.getBattleStatus().getId());
 
         int moveIndex = randomizer.getRandomInt(9);
         EnemyMoveDTO enemyMoveDTO;
         int damage;
+
+        if (battleStatus.isEnemyParalyzed()){
+            battleStatus.setEnemyParalyzed(false);
+            battleStatusService.saveBattleStatus(battleStatus);
+            return processEnemyParalyzedMove(enemy, hero, battleSessionId);
+        }
+        if (battleStatus.isEnemyFrozen()){
+            battleStatus.setEnemyFrozen(false);
+            battleStatusService.saveBattleStatus(battleStatus);
+            return processEnemyFrozenMove(enemy, hero, battleSessionId);
+        }
 
         return switch (enemy.getName()) {
             case "Wolf" -> {
@@ -198,6 +211,22 @@ public class EnemyMoveService {
             List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
             return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
         }
+    }
+
+    private EnemyMoveDTO processEnemyParalyzedMove(Enemy enemy, Hero hero, Long battleSessionId){
+        String newMessage = "Enemy is paralyzed and cannot attack!";
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+
+        return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+    }
+
+    private EnemyMoveDTO processEnemyFrozenMove(Enemy enemy, Hero hero, Long battleSessionId){
+        String newMessage = "Enemy is frozen and cannot attack!";
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+
+        return getEnemyMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
     }
 
     public String getDamageMessage(String move, int damage) {

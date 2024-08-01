@@ -14,21 +14,6 @@ public class StrikeTest {
 
         Strike spyStrike = spy(strike);
         when(spyStrike.miss()).thenReturn(true);
-        when(spyStrike.criticalHit()).thenReturn(false);
-        when(spyStrike.stagger()).thenReturn(false);
-
-        int damage = spyStrike.attack();
-
-        assertEquals(spyStrike.getDamage(), damage);
-    }
-
-    @Test
-    void attackCriticalHitTest() {
-        Strike strike = new Strike();
-
-        Strike spyStrike = spy(strike);
-        when(spyStrike.miss()).thenReturn(false);
-        when(spyStrike.criticalHit()).thenReturn(true);
         when(spyStrike.stagger()).thenReturn(false);
 
         int damage = spyStrike.attack();
@@ -42,7 +27,6 @@ public class StrikeTest {
 
         Strike spyStrike = spy(strike);
         when(spyStrike.miss()).thenReturn(false);
-        when(spyStrike.criticalHit()).thenReturn(false);
         when(spyStrike.stagger()).thenReturn(false);
 
         int damage = spyStrike.attack();
@@ -55,7 +39,6 @@ public class StrikeTest {
 
         Strike spyStrike = spy(strike);
         when(spyStrike.miss()).thenReturn(false);
-        when(spyStrike.criticalHit()).thenReturn(false);
         when(spyStrike.stagger()).thenReturn(true);
 
         int damage = spyStrike.attack();
