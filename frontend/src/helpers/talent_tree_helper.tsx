@@ -131,10 +131,8 @@ export const talentDescriptions = (talent: string) => {
         //TODO: UPDATE IN BACKEND
         case "Improved Heal 3":
             return "Heal has the ability to crit.";
-        //TODO: UPDATE IN BACKEND
         case "Spiritually Attuned":
             return "Heal costs 0 spirit.";
-        //TODO: UPDATE IN BACKEND
         case "Survival Instincts":
             return "Successfully running grants full health."
 

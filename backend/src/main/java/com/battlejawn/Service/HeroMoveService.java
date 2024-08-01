@@ -253,17 +253,22 @@ public String getDamageMessage(String move, int damage) {
 }
 
     public HeroMoveDTO processHeroHeal(int healAmount, Enemy enemy, Long battleSessionId, Hero hero) {
+        HealerTree healerTree = (HealerTree) hero.getTalentTree();
         int updatedHeroHealth;
         String newMessage;
-        if (hero.getResource() == 0) {
+        if (hero.getResource() == 0 && ! healerTree.isSpirituallyAttuned()) {
             newMessage = "You do not have enough spirit.";
             updatedHeroHealth = hero.getHealth();
-        } else if (hero.getResource() > 0 && healAmount + hero.getHealth() > hero.getMaxHealth()) {
+        } else if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
             updatedHeroHealth = hero.getMaxHealth();
-            hero.setResource(hero.getResource() - 1);
+            if (!healerTree.isSpirituallyAttuned()){
+                hero.setResource(hero.getResource() - 1);
+            }
             newMessage = "You healed yourself for " + healAmount + ".";
         } else {
-            hero.setResource(hero.getResource() - 1);
+            if (!healerTree.isSpirituallyAttuned()){
+                hero.setResource(hero.getResource() - 1);
+            }
             updatedHeroHealth = hero.getHealth() + healAmount;
             newMessage = "You healed yourself for " + healAmount + ".";
         }
@@ -405,6 +410,12 @@ public String getDamageMessage(String move, int damage) {
     public HeroMoveDTO processRun(Enemy enemy, Long battleSessionId, Hero hero) {
         boolean gameOver = run.useRun();
         if (gameOver) {
+            if (Objects.equals(hero.getRole(), "Healer")){
+                HealerTree healerTree = (HealerTree) hero.getTalentTree();
+                if (healerTree.isSurvivalInstincts()){
+                    hero.setHealth(hero.getMaxHealth());
+                }
+            }
             hero.setRunCount(hero.getRunCount() + 1);
             heroService.updateHero(hero);
             String newMessage = "You successfully ran away!";
