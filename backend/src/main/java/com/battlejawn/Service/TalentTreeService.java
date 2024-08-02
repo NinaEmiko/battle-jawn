@@ -34,14 +34,21 @@ public class TalentTreeService {
         if (hero.getTalentPoints() < 1){
             return "You do not have enough talent points to activate this talent.";
         }
-
-        return switch (hero.getRole()) {
-            case "Tank" -> processTankTalent(hero, talent);
-            case "Healer" -> processHealerTalent(hero, talent);
-            case "DPS" -> processDPSTalent(hero, talent);
-            case "Caster" -> processCasterTalent(hero, talent);
-            default -> "Error occurred while activating talent";
-        };
+        try {
+            switch (hero.getRole()) {
+                case "Tank":
+                    return processTankTalent(hero, talent);
+                case "Healer":
+                    return processHealerTalent(hero, talent);
+                case "DPS":
+                    return processDPSTalent(hero, talent);
+                case "Caster":
+                    return processCasterTalent(hero, talent);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error occurred while activating talent for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
+        return null;
     }
 
     private String resetHealerTalents(Hero hero){
@@ -157,53 +164,55 @@ public class TalentTreeService {
     private String processTankTalent(Hero hero, String talent) {
         TankTree tankTree = (TankTree) hero.getTalentTree();
 
-        switch (talent) {
-            case "Improved Impale 1":
-                tankTree.setImprovedImpale1(true);
-                break;
-            case "Improved Impale 2":
-                tankTree.setImprovedImpale2(true);
-                break;
-            case "Improved Impale 3":
-                tankTree.setImprovedImpale3(true);
-                break;
-            case "Improved Strike 1":
-                tankTree.setImprovedStrike1(true);
-                break;
-            case "Improved Strike 2":
-                tankTree.setImprovedStrike2(true);
-                break;
-            case "Improved Strike 3":
-                tankTree.setImprovedStrike3(true);
-                break;
-            case "Titan":
-                tankTree.setTitan(true);
-                break;
-            case "Desperation":
-                tankTree.setDesperation(true);
-                break;
-            case "Final Stand":
-                tankTree.setFinalStand(true);
-                break;
-            case "Hydration":
-                tankTree.setHydration(true);
-                break;
-            case "Improved Block 1":
-                tankTree.setImprovedBlock1(true);
-                break;
-            case "Improved Block 2":
-                tankTree.setImprovedBlock2(true);
-                break;
-            case "Improved Health 1":
-                hero.setMaxHealth(hero.getMaxHealth() + 5);
-                tankTree.setImprovedHealth1(true);
-                break;
-            case "Improved Health 2":
-                hero.setMaxHealth(hero.getMaxHealth() + 5);
-                tankTree.setImprovedHealth2(true);
-                break;
-            default:
-                return "Error occurred while activating " + talent + ".";
+        try {
+            switch (talent) {
+                case "Improved Impale 1":
+                    tankTree.setImprovedImpale1(true);
+                    break;
+                case "Improved Impale 2":
+                    tankTree.setImprovedImpale2(true);
+                    break;
+                case "Improved Impale 3":
+                    tankTree.setImprovedImpale3(true);
+                    break;
+                case "Improved Strike 1":
+                    tankTree.setImprovedStrike1(true);
+                    break;
+                case "Improved Strike 2":
+                    tankTree.setImprovedStrike2(true);
+                    break;
+                case "Improved Strike 3":
+                    tankTree.setImprovedStrike3(true);
+                    break;
+                case "Titan":
+                    tankTree.setTitan(true);
+                    break;
+                case "Desperation":
+                    tankTree.setDesperation(true);
+                    break;
+                case "Final Stand":
+                    tankTree.setFinalStand(true);
+                    break;
+                case "Hydration":
+                    tankTree.setHydration(true);
+                    break;
+                case "Improved Block 1":
+                    tankTree.setImprovedBlock1(true);
+                    break;
+                case "Improved Block 2":
+                    tankTree.setImprovedBlock2(true);
+                    break;
+                case "Improved Health 1":
+                    hero.setMaxHealth(hero.getMaxHealth() + 5);
+                    tankTree.setImprovedHealth1(true);
+                    break;
+                case "Improved Health 2":
+                    hero.setMaxHealth(hero.getMaxHealth() + 5);
+                    tankTree.setImprovedHealth2(true);
+                    break;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to activate talent for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
         }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);
@@ -214,6 +223,7 @@ public class TalentTreeService {
     private String processHealerTalent(Hero hero, String talent) {
         HealerTree healerTree = (HealerTree) hero.getTalentTree();
 
+        try {
             switch (talent) {
                 case "Botany 1":
                     healerTree.setBotany1(true);
@@ -257,9 +267,10 @@ public class TalentTreeService {
                 case "Improved Wand 3":
                     healerTree.setImprovedWand3(true);
                     break;
-                default:
-                    return "Error occurred while activating " + talent + ".";
             }
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to activate talent for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);
         talentTreeRepository.save(healerTree);
@@ -269,6 +280,7 @@ public class TalentTreeService {
     private String processDPSTalent(Hero hero, String talent) {
         DPSTree dpsTree = (DPSTree) hero.getTalentTree();
 
+        try {
             switch (talent) {
                 case "Energized":
                     dpsTree.setEnergized(true);
@@ -312,9 +324,10 @@ public class TalentTreeService {
                 case "Sticky Fingaz":
                     dpsTree.setStickyFingaz(true);
                     break;
-                default:
-                    return "Error occurred while activating " + talent + ".";
             }
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to activate talent for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
+        }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);
         talentTreeRepository.save(dpsTree);
@@ -323,51 +336,53 @@ public class TalentTreeService {
     private String processCasterTalent(Hero hero, String talent) {
         CasterTree casterTree = (CasterTree) hero.getTalentTree();
 
-        switch (talent) {
-            case "FrostBite":
-                casterTree.setFrostBite(true);
-                break;
-            case "Improved FireBlast 1":
-                casterTree.setImprovedFireBlast1(true);
-                break;
-            case "Improved FireBlast 2":
-                casterTree.setImprovedFireBlast2(true);
-                break;
-            case "Improved IceBlast":
-                casterTree.setImprovedIceBlast(true);
-                break;
-            case "Improved Wand 1":
-                casterTree.setImprovedWand1(true);
-                break;
-            case "Improved Wand 2":
-                casterTree.setImprovedWand2(true);
-                break;
-            case "Improved Wand 3":
-                casterTree.setImprovedWand3(true);
-                break;
-            case "Botany 1":
-                casterTree.setBotany1(true);
-                break;
-            case "Botany 2":
-                casterTree.setBotany2(true);
-                break;
-            case "Botany 3":
-                casterTree.setBotany3(true);
-                break;
-            case "Preparation":
-                casterTree.setPreparation(true);
-                break;
-            case "Resourcefulness 1":
-                casterTree.setResourcefulness1(true);
-                break;
-            case "Resourcefulness 2":
-                casterTree.setResourcefulness2(true);
-                break;
-            case "Second Nature":
-                casterTree.setSecondNature(true);
-                break;
-            default:
-                return "Error occurred while activating " + talent + ".";
+        try {
+            switch (talent) {
+                case "FrostBite":
+                    casterTree.setFrostBite(true);
+                    break;
+                case "Improved FireBlast 1":
+                    casterTree.setImprovedFireBlast1(true);
+                    break;
+                case "Improved FireBlast 2":
+                    casterTree.setImprovedFireBlast2(true);
+                    break;
+                case "Improved IceBlast":
+                    casterTree.setImprovedIceBlast(true);
+                    break;
+                case "Improved Wand 1":
+                    casterTree.setImprovedWand1(true);
+                    break;
+                case "Improved Wand 2":
+                    casterTree.setImprovedWand2(true);
+                    break;
+                case "Improved Wand 3":
+                    casterTree.setImprovedWand3(true);
+                    break;
+                case "Botany 1":
+                    casterTree.setBotany1(true);
+                    break;
+                case "Botany 2":
+                    casterTree.setBotany2(true);
+                    break;
+                case "Botany 3":
+                    casterTree.setBotany3(true);
+                    break;
+                case "Preparation":
+                    casterTree.setPreparation(true);
+                    break;
+                case "Resourcefulness 1":
+                    casterTree.setResourcefulness1(true);
+                    break;
+                case "Resourcefulness 2":
+                    casterTree.setResourcefulness2(true);
+                    break;
+                case "Second Nature":
+                    casterTree.setSecondNature(true);
+                    break;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("TalentTreeService failed to activate talent for hero with ID: " + hero.getId() + ". Error: " + e.getMessage() + ".");
         }
         hero.setTalentPoints(hero.getTalentPoints() - 1);
         heroService.updateHero(hero);

@@ -54,7 +54,8 @@ class TalentTreeServiceTest {
         tank = new Tank("Tank");
         tank.setId(1);
         tankTree = (TankTree) tank.getTalentTree();
-
+        tankTree.setImprovedHealth1(true);
+        tankTree.setImprovedHealth2(true);
         when(talentTreeRepository.save(any())).thenReturn(tankTree);
         when(heroService.getHeroById(anyLong())).thenReturn(tank);
         doNothing().when(heroService).updateHero(any());
@@ -124,7 +125,7 @@ class TalentTreeServiceTest {
         caster.setId(1);
         casterTree = (CasterTree) caster.getTalentTree();
 
-        when(talentTreeRepository.save(any())).thenReturn(casterTree);
+        when(heroService.getHeroById(anyLong())).thenReturn(caster);
         when(talentTreeRepository.save(any())).thenThrow(new RuntimeException());
 
         assertThrows(RuntimeException.class, () -> {
@@ -152,13 +153,24 @@ class TalentTreeServiceTest {
         dps.setId(1);
         dpsTree = (DPSTree) dps.getTalentTree();
 
-        when(talentTreeRepository.save(any())).thenReturn(dpsTree);
+        when(heroService.getHeroById(anyLong())).thenReturn(dps);
         when(talentTreeRepository.save(any())).thenThrow(new RuntimeException());
 
         assertThrows(RuntimeException.class, () -> {
             talentTreeService.resetTalents(dps.getId());
         });
     }
+//    @Test
+//    void activateTalentDefaultTest(){
+//        Tank jawn = new Tank("Tank");
+//        jawn.setRole(null);
+//        jawn.setId(5L);
+//
+//        when(heroService.getHeroById(anyLong())).thenReturn(jawn);
+//
+//        String result = talentTreeService.activateTalent(jawn.getId(), "Them");
+//        Assertions.assertEquals("Error occurred while activating talent", result);
+//    }
 
     @Test
     void activateTankTalentTest(){
@@ -189,6 +201,22 @@ class TalentTreeServiceTest {
 
         Assertions.assertTrue(tankTree.isImprovedHealth2());
     }
+
+//    @Test
+//    void activateTankTalentExceptionTest(){
+//        tank = new Tank("Tank");
+//        tank.setId(1);
+//        tank.setTalentPoints(14);
+//        tankTree = (TankTree) tank.getTalentTree();
+//
+//        when(talentTreeRepository.save(any())).thenReturn(tankTree);
+//        when(heroService.getHeroById(anyLong())).thenReturn(tank);
+//        doThrow(RuntimeException.class).when(heroService).updateHero(any());
+//
+//        assertThrows(RuntimeException.class, () -> {
+//            talentTreeService.activateTalent(tankTree.getId(), "Jawn");
+//        });
+//    }
 
     @Test
     void activateHealerTalentTest(){

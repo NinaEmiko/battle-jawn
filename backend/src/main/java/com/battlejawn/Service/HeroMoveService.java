@@ -43,35 +43,40 @@ public class HeroMoveService {
     public HeroMoveDTO heroMove(String move, Long battleSessionId) {
         logger.info("Inside heroMove service method. Move: " + move + ". Battle Session ID: " + battleSessionId);
 
-        switch (move) {
-            case "Wand":
-                return wand.attack(battleSessionId);
-            case "Strike":
-                return strike.attack(battleSessionId);
-            case "Stab":
-                return stab.attack(battleSessionId);
-            case "FireBlast":
-                return fireBlast.attack(battleSessionId);
-            case "IceBlast":
-                return iceBlast.attack(battleSessionId);
-            case "Holy":
-                return holy.attack(battleSessionId);
-            case "Impale":
-                return impale.attack(battleSessionId);
-            case "BackStab":
-                return backStab.attack(battleSessionId);
-            case "Heal":
-                return heal.useHeal(battleSessionId);
-            case "Steal":
-                return steal.processSteal(battleSessionId);
-            case "Block":
-                return block.processBlock(battleSessionId);
-            case "Potion":
-                return potion.processPotion(battleSessionId);
-            case "Water":
-                return water.processWater(battleSessionId);
-            default:
-                return run.processRun(battleSessionId);
+        try {
+            switch (move) {
+                case "Wand":
+                    return wand.attack(battleSessionId);
+                case "Strike":
+                    return strike.attack(battleSessionId);
+                case "Stab":
+                    return stab.attack(battleSessionId);
+                case "FireBlast":
+                    return fireBlast.attack(battleSessionId);
+                case "IceBlast":
+                    return iceBlast.attack(battleSessionId);
+                case "Holy":
+                    return holy.attack(battleSessionId);
+                case "Impale":
+                    return impale.attack(battleSessionId);
+                case "BackStab":
+                    return backStab.attack(battleSessionId);
+                case "Heal":
+                    return heal.useHeal(battleSessionId);
+                case "Steal":
+                    return steal.processSteal(battleSessionId);
+                case "Block":
+                    return block.processBlock(battleSessionId);
+                case "Potion":
+                    return potion.processPotion(battleSessionId);
+                case "Water":
+                    return water.processWater(battleSessionId);
+                case "Run":
+                    return run.processRun(battleSessionId);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error occurred while routing to hero move: " + e.getMessage() + ".");
         }
+        return null;
     }
 }
