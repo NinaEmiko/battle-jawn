@@ -4,6 +4,7 @@ import com.battlejawn.Config.JsonParser;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Service.TalentTreeService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +18,13 @@ import java.util.logging.Logger;
 @RestController
 @Validated
 @RequestMapping("/api/talent")
+@AllArgsConstructor
 public class TalentTreeController {
 
     @Autowired
     private TalentTreeService talentTreeService;
     private final JsonParser jsonParser;
     private final Logger logger = Logger.getLogger(TalentTreeController.class.getName());
-    public TalentTreeController(TalentTreeService talentTreeService, JsonParser jsonParser){
-        this.talentTreeService = talentTreeService;
-        this.jsonParser = jsonParser;
-    }
 
     @PostMapping("/activate")
     public ResponseEntity<String> activateTalent(@Valid @RequestBody String data){
