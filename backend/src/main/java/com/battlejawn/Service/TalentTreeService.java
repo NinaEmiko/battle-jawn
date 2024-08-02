@@ -205,6 +205,8 @@ public class TalentTreeService {
             default:
                 return "Error occurred while activating " + talent + ".";
         }
+        hero.setTalentPoints(hero.getTalentPoints() - 1);
+        heroService.updateHero(hero);
         talentTreeRepository.save(tankTree);
         return "Successfully activated " + talent + ".";
     }
@@ -301,7 +303,7 @@ public class TalentTreeService {
                 case "Improved Steal 1":
                     dpsTree.setImprovedSteal1(true);
                     break;
-                case "mproved Steal 2":
+                case "Improved Steal 2":
                     dpsTree.setImprovedSteal2(true);
                     break;
                 case "Organized Mess":
