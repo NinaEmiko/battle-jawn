@@ -52,7 +52,7 @@ public class Stab {
         return processHeroAttack(damage, enemy, battleSessionId, hero);
     }
 
-    public HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero) {
+    private HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero) {
         int updatedEnemyHealth = enemy.getHealth() - damage;
         boolean gameOver = false;
         String newMessage = heroMoveHelper.getDamageMessage("Wand", damage);

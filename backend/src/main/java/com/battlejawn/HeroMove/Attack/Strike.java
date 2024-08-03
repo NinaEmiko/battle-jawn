@@ -53,7 +53,7 @@ public class Strike {
         return processHeroAttack(damage, enemy, battleSessionId, hero);
     }
 
-    public HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero) {
+    private HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero) {
         int updatedEnemyHealth = enemy.getHealth() - damage;
         String newMessage = heroMoveHelper.getDamageMessage("Strike", damage);
         boolean gameOver = false;
