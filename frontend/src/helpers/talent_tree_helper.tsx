@@ -87,9 +87,8 @@ export const talentDescriptions = (talent: string) => {
         //STEALTH    
         case "Elation":
             return "Successful steal grants 3 energy.";
-        //TODO: UPDATE IN BACKEND
         case "First Strike":
-            return "First BackStab costs 0 energy.";
+            return "Battles begin with a free stab.";
         case "Honor Among Thieves":
             return "Items cannot be stolen from hero.";
         case "Improved Steal 1":

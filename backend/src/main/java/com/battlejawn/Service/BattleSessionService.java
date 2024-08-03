@@ -6,6 +6,7 @@ import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.TalentTree.CasterTree;
 import com.battlejawn.Entities.TalentTree.DPSTree;
+import com.battlejawn.Helpers.HeroMoveHelper;
 import com.battlejawn.Repository.BattleSessionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class BattleSessionService {
     private final HeroService heroService;
     private final ExperienceProcessorService experienceProcessorService;
     private final BattleHistoryMessageService battleHistoryMessageService;
+    private final HeroMoveHelper heroMoveHelper;
     private final Logger logger = Logger.getLogger(BattleSessionService.class.getName());
 
     public BattleSession getBattleSessionById(Long id) {
@@ -41,6 +43,12 @@ public class BattleSessionService {
             Hero hero = heroService.getHeroById(heroId);
             int heroLevel = hero.getLevel();
 
+            Enemy enemy = enemyService.createNewEnemy(heroLevel);
+            BattleSession battleSession = new BattleSession();
+            battleSession.setEnemyId(enemy.getId());
+            battleSession.setHeroId(heroId);
+            battleSessionRepository.save(battleSession);
+
             if (Objects.equals(hero.getRole(), "Caster")){
                 CasterTree casterTree = (CasterTree) hero.getTalentTree();
                 if (casterTree.isPreparation()){
@@ -51,14 +59,15 @@ public class BattleSessionService {
                 if (dpsTree.isEnergized()){
                     hero.setResource(hero.getMaxResource());
                 }
+                if (dpsTree.isFirstStrike()){
+                    battleHistoryMessageService.createNewMessage(battleSession.getId(), "You struck the enemy!");
+                    int damage = heroMoveHelper.getDamage(5, 10, 100);
+                    String damageMessage = heroMoveHelper.getDamageMessage("Stab", damage);
+                    battleHistoryMessageService.createNewMessage(battleSession.getId(), damageMessage);
+                    enemy.setHealth(enemy.getHealth() - damage);
+                    enemyService.updateHealthById(enemy.getMaxHealth() - damage, enemy.getId());
+                }
             }
-
-            Enemy enemy = enemyService.createNewEnemy(heroLevel);
-
-            BattleSession battleSession = new BattleSession();
-            battleSession.setEnemyId(enemy.getId());
-            battleSession.setHeroId(heroId);
-            battleSessionRepository.save(battleSession);
 
             BattleHistoryMessage battleHistoryMessage = battleHistoryMessageService.createNewMessage(battleSession.getId(), "You encountered an enemy!");
             Long battleHistoryMessageId = battleHistoryMessage.getId();
