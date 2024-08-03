@@ -59,7 +59,6 @@ export const talentDescriptions = (talent: string) => {
             return "Water grants 5 health.";
         case "Botany 3 - Mindfulness":
             return "Potion grants 1 magic.";
-        //TODO: UPDATE IN BACKEND
         case "Preparation":
             return "Start battle at full magic.";
         case "Resourcefulness 1":
@@ -70,7 +69,6 @@ export const talentDescriptions = (talent: string) => {
             return "Ice Blast costs 0 magic."
 
         //DEXTERITY
-        //TODO: UPDATE IN BACKEND
         case "Energized":
             return "Start battle at full energy."
         case "Improved BackStab 1":

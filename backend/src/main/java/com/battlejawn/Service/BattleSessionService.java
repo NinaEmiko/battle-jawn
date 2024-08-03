@@ -4,11 +4,14 @@ import com.battlejawn.Entities.Battle.BattleHistoryMessage;
 import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
+import com.battlejawn.Entities.TalentTree.CasterTree;
+import com.battlejawn.Entities.TalentTree.DPSTree;
 import com.battlejawn.Repository.BattleSessionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
 @Service
@@ -37,6 +40,18 @@ public class BattleSessionService {
         try {
             Hero hero = heroService.getHeroById(heroId);
             int heroLevel = hero.getLevel();
+
+            if (Objects.equals(hero.getRole(), "Caster")){
+                CasterTree casterTree = (CasterTree) hero.getTalentTree();
+                if (casterTree.isPreparation()){
+                    hero.setResource(hero.getMaxResource());
+                }
+            } else if (Objects.equals(hero.getRole(), "DPS")){
+                DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+                if (dpsTree.isEnergized()){
+                    hero.setResource(hero.getMaxResource());
+                }
+            }
 
             Enemy enemy = enemyService.createNewEnemy(heroLevel);
 
