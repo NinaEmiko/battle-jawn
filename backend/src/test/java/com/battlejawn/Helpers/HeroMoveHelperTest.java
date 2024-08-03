@@ -28,4 +28,24 @@ public class HeroMoveHelperTest {
         Assertions.assertEquals(message, "Move did 1 damage.");
         Assertions.assertEquals(message2, "Move missed!");
     }
+    @Test
+    void criticalHitTest(){
+        heroMoveHelper.criticalHit(0);
+    }
+    @Test
+    void getDamageMissTest(){
+        heroMoveHelper.getDamage(0, 0, 100);
+    }
+    @Test
+    void getDamageHitTest(){
+        heroMoveHelper.getDamage(0, 0, 0);
+    }
+    @Test
+    void useRunTest(){
+        heroMoveHelper.useRun();
+    }
+    @Test
+    void useStealTest(){
+        heroMoveHelper.useSteal();
+    }
 }

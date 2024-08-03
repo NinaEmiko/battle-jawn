@@ -65,6 +65,7 @@ public class BlockTest {
     @Test
     void blockNoPowerTest() {
         list = new ArrayList<>();
+        tank.setResource(0);
         when(battleSessionService.getBattleSessionById(anyLong())).thenReturn(battleSession);
         when(enemyService.getEnemyById(any())).thenReturn(enemy);
         when(heroService.getHeroById(any())).thenReturn(tank);

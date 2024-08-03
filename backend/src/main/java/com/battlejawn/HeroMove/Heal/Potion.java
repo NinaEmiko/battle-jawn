@@ -22,7 +22,6 @@ public class Potion {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final HeroMoveHelper heroMoveHelper;
-    private final BattleStatusService battleStatusService;
     private final InventoryService inventoryService;
     public HeroMoveDTO processPotion(Long battleSessionId) {
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
@@ -30,6 +29,7 @@ public class Potion {
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
         Inventory inventory = hero.getInventory();
         int potionCount = inventoryService.findItemCount(inventory, "Potion");
+        String newMessage = "You are out of potions!";
 
         if (potionCount > 0 && hero.getHealth() != hero.getMaxHealth()) {
             int updatedHeroHealth;
@@ -42,22 +42,12 @@ public class Potion {
             }
             hero.setHealth(updatedHeroHealth);
             heroService.updateHero(hero);
-            String newMessage = "You feel better now.";
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), updatedHeroHealth, hero.getResource(), battleHistory, false);
+            newMessage = "You feel better now.";
         } else if (potionCount > 0 && hero.getHealth() == hero.getMaxHealth()) {
-            String newMessage = "You are at full health.";
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
-        } else {
-            String newMessage = "You are out of potions!";
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+            newMessage = "You are at full health.";
         }
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+        return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
     }
-
-
 }

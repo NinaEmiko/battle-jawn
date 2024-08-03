@@ -23,7 +23,6 @@ public class Water {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final HeroMoveHelper heroMoveHelper;
-    private final BattleStatusService battleStatusService;
     private final InventoryService inventoryService;
     public HeroMoveDTO processWater(Long battleSessionId) {
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
@@ -32,13 +31,17 @@ public class Water {
         Inventory inventory = hero.getInventory();
         int waterCount = inventoryService.findItemCount(inventory, "Water");
 
-        String newMessage;
+        String newMessage = "Your energy is maxed out.";
         if (waterCount > 0 && hero.getResource() == hero.getMaxResource()){
-            newMessage = switch(hero.getRole()){
-                case "Tank" -> "Your power is maxed out.";
-                case "Healer" -> "Your spirit is maxed out.";
-                case "Caster" -> "Your magic is maxed out.";
-                default -> "Your energy is maxed out.";
+            switch(hero.getRole()){
+                case "Tank":
+                    newMessage = "Your power is maxed out.";
+                    break;
+                case "Healer":
+                    newMessage = "Your spirit is maxed out.";
+                    break;
+                case "Caster":
+                    newMessage = "Your magic is maxed out.";
             };
         } else if (waterCount > 0 && hero.getResource() != hero.getMaxResource()) {
             switch (hero.getRole()) {
