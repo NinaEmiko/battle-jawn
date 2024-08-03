@@ -5,6 +5,8 @@ import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.CasterTree;
+import com.battlejawn.Entities.TalentTree.DPSTree;
 import com.battlejawn.Entities.TalentTree.HealerTree;
 import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.Helpers.HeroMoveHelper;
@@ -34,39 +36,62 @@ public class Potion {
         int potionCount = inventoryService.findItemCount(inventory, "Potion");
         String newMessage = "You are out of potions!";
 
-        if (potionCount > 0 && hero.getHealth() != hero.getMaxHealth()) {
-            int updatedHeroHealth;
-            inventoryService.removeFirstFromInventory(hero.getId(), "Potion");
-            int healAmount = 30;
-            if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
-                updatedHeroHealth = hero.getMaxHealth();
-            } else {
-                updatedHeroHealth = hero.getHealth() + healAmount;
-            }
-            if (Objects.equals(hero.getRole(), "Healer")){
-                HealerTree healerTree = (HealerTree) hero.getTalentTree();
-                if (healerTree.isBotany2() && hero.getResource() < hero.getMaxResource()){
-                    hero.setResource(hero.getResource() + 1);
-                }
-            }
-            if (Objects.equals(hero.getRole(), "Tank")){
-                TankTree tankTree = (TankTree) hero.getTalentTree();
-                if (tankTree.isFinalStand() && potionCount == 1){
-                    if (hero.getMaxHealth() - hero.getHealth() < 60){
-                        hero.setHealth(hero.getMaxHealth());
-                    } else {
-                        hero.setHealth(hero.getHealth() + 60);
+            if (Objects.equals(hero.getRole(), "Caster")) {
+                CasterTree casterTree = (CasterTree) hero.getTalentTree();
+                if (casterTree.isResourcefulness2()) {
+                    if (potionCount < 1) {
+                        inventoryService.addToFirstEmptySlot(inventory, "Potion");
+                        potionCount += 1;
                     }
                 }
             }
-            hero.setHealth(updatedHeroHealth);
-            heroService.updateHero(hero);
-            newMessage = "You feel better now.";
-        } else if (potionCount > 0 && hero.getHealth() == hero.getMaxHealth()) {
-            newMessage = "You are at full health.";
-        }
-        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-        return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+
+            if (potionCount > 0 && hero.getHealth() != hero.getMaxHealth()) {
+                int updatedHeroHealth;
+                int healAmount = 30;
+                if (healAmount + hero.getHealth() > hero.getMaxHealth()) {
+                    updatedHeroHealth = hero.getMaxHealth();
+                } else {
+                    updatedHeroHealth = hero.getHealth() + healAmount;
+                }
+                if (Objects.equals(hero.getRole(), "Healer")) {
+                    HealerTree healerTree = (HealerTree) hero.getTalentTree();
+                    if (healerTree.isBotany2() && hero.getResource() < hero.getMaxResource()) {
+                        hero.setResource(hero.getResource() + 1);
+                    }
+                }
+                if (Objects.equals(hero.getRole(), "Tank")) {
+                    TankTree tankTree = (TankTree) hero.getTalentTree();
+                    if (tankTree.isFinalStand() && potionCount == 1) {
+                        if (hero.getMaxHealth() - hero.getHealth() < 60) {
+                            hero.setHealth(hero.getMaxHealth());
+                        } else {
+                            hero.setHealth(hero.getHealth() + 60);
+                        }
+                    }
+                }
+                if (Objects.equals(hero.getRole(), "Caster")) {
+                    CasterTree casterTree = (CasterTree) hero.getTalentTree();
+                    if (casterTree.isBotany1()) {
+                        if (hero.getMaxHealth() - hero.getHealth() < 35) {
+                            hero.setHealth(hero.getMaxHealth());
+                        } else {
+                            hero.setHealth(hero.getHealth() + 35);
+                        }
+                    }
+                    if (casterTree.isBotany3() && hero.getResource() != hero.getMaxResource()) {
+                        hero.setResource(hero.getResource() + 1);
+                    }
+                }
+                inventoryService.removeFirstFromInventory(hero.getId(), "Potion");
+                hero.setHealth(updatedHeroHealth);
+                heroService.updateHero(hero);
+                newMessage = "You feel better now.";
+            } else if (potionCount > 0 && hero.getHealth() == hero.getMaxHealth()) {
+                newMessage = "You are at full health.";
+            }
+            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
     }
 }

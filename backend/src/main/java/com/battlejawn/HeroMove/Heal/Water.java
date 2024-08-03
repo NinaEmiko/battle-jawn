@@ -5,6 +5,7 @@ import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.CasterTree;
 import com.battlejawn.Entities.TalentTree.HealerTree;
 import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.Helpers.HeroMoveHelper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -31,6 +33,16 @@ public class Water {
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
         Inventory inventory = hero.getInventory();
         int waterCount = inventoryService.findItemCount(inventory, "Water");
+
+        if (Objects.equals(hero.getRole(), "Caster")) {
+            CasterTree casterTree = (CasterTree) hero.getTalentTree();
+            if (casterTree.isResourcefulness1()) {
+                if (waterCount < 1) {
+                    inventoryService.addToFirstEmptySlot(inventory, "Water");
+                    waterCount += 1;
+                }
+            }
+        }
 
         String newMessage = "Your energy is maxed out.";
         if (waterCount > 0 && hero.getResource() == hero.getMaxResource()){
@@ -69,11 +81,20 @@ public class Water {
                     newMessage = "Your spirit has risen.";
                     break;
                 case "Caster":
+                    CasterTree casterTree = (CasterTree) hero.getTalentTree();
+                    if (casterTree.isBotany2() && hero.getHealth() != hero.getMaxHealth()) {
+                        if (hero.getMaxHealth() - hero.getHealth() < 5){
+                            hero.setHealth(hero.getMaxHealth());
+                        } else {
+                            hero.setHealth(hero.getHealth() + 5);
+                        }
+                    }
                     newMessage = "Your magic has risen.";
                     break;
                 default:
                     newMessage = "Your energy has increased.";
             };
+            inventoryService.removeFirstFromInventory(hero.getId(), "Water");
             hero.setResource(hero.getMaxResource());
             heroService.updateHero(hero);
         } else {

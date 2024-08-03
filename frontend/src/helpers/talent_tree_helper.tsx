@@ -53,22 +53,17 @@ export const talentDescriptions = (talent: string) => {
             return "On crit, hero gains 2 magic.";
 
         //MINDFULNESS
-        //TODO: UPDATE IN BACKEND
         case "Botany 1 - Mindfulness":
             return "Potion grants an additional 5 health.";
-        //TODO: UPDATE IN BACKEND
         case "Botany 2 - Mindfulness":
             return "Water grants 5 health.";
-        //TODO: UPDATE IN BACKEND
         case "Botany 3 - Mindfulness":
             return "Potion grants 1 magic.";
         //TODO: UPDATE IN BACKEND
         case "Preparation":
             return "Start battle at full magic.";
-        //TODO: UPDATE IN BACKEND
         case "Resourcefulness 1":
             return "Hero does not need Water in inventory to use Water.";
-        //TODO: UPDATE IN BACKEND
         case "Resourcefulness 2":
             return "Hero does not need Potion in inventory to use Potion.";
         case "Second Nature":
