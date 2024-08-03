@@ -148,7 +148,8 @@ const StealthTree = ({props}:{props:any}) => {
                         props={{
                             text: "Sticky Fingaz",
                             description: "Sticky Fingaz",
-                            handleClickTalent: handleTalentClick
+                            handleClickTalent: handleTalentClick,
+                            bottom: true
                         }}/>
                 }
                 {!props.stickyFingaz &&
@@ -159,12 +160,14 @@ const StealthTree = ({props}:{props:any}) => {
                                 props={{
                                     text: "Sticky Fingaz",
                                     description: "Sticky Fingaz",
-                                    handleClickTalent: handleTalentClick
+                                    handleClickTalent: handleTalentClick,
+                                    bottom: true
                                 }}/>
                         :
                             <TalentButtonInactive 
                                 props={{
-                                    text: "Sticky Fingaz"
+                                    text: "Sticky Fingaz",
+                                    bottom: true
                                 }}/>
                         }
                     </>

@@ -1,5 +1,4 @@
 import "../../styling/TalentTree.css";
-import { talentDescriptions } from "../../helpers/talent_tree_helper";
 import TalentButtonActive from "../TalentComponents/TalentButtonActive";
 import TalentButtonAvailable from "../TalentComponents/TalentButtonAvailable";
 import TalentButtonInactive from "../TalentComponents/TalentButtonInactive";
@@ -144,7 +143,8 @@ const StrengthTree = ({props}:{props:any}) => {
                     props={{
                         text: "Titan",
                         description: "Titan",
-                        handleClickTalent: handleTalentClick
+                        handleClickTalent: handleTalentClick,
+                        bottom: true
                     }}/>
             }
             {!props.talentTree.titan &&
@@ -155,12 +155,14 @@ const StrengthTree = ({props}:{props:any}) => {
                             props={{
                                 text: "Titan",
                                 description: "Titan",
-                                handleClickTalent: handleTalentClick
+                                handleClickTalent: handleTalentClick,
+                                bottom: true
                             }}/>
                     :
                         <TalentButtonInactive 
                             props={{
-                                text: "Titan"
+                                text: "Titan",
+                                bottom: true
                             }}/>
                     }
                 </>

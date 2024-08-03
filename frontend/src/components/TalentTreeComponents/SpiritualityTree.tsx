@@ -144,7 +144,8 @@ const SpiritualityTree = ({props}:{props:any}) => {
                         props={{
                             text: "Spiritually Attuned",
                             description: "Spiritually Attuned",
-                            handleClickTalent: handleTalentClick
+                            handleClickTalent: handleTalentClick,
+                            bottom: true
                         }}/>               
                 }
                 {!props.talentTree.spirituallyAttuned &&
@@ -155,12 +156,14 @@ const SpiritualityTree = ({props}:{props:any}) => {
                                 props={{
                                     text: "Spiritually Attuned",
                                     description: "Spiritually Attuned",
-                                    handleClickTalent: handleTalentClick
+                                    handleClickTalent: handleTalentClick,
+                                    bottom: true
                                 }}/>              
                             :
                             <TalentButtonInactive
                                 props={{
-                                    text: "Spiritually Attuned"
+                                    text: "Spiritually Attuned",
+                                    bottom: true
                                 }}/>              
                         }
                     </>

@@ -144,7 +144,8 @@ const ArcaneTree = ({props}:{props:any}) => {
                         props={{
                             text: "Second Nature",
                             description: "Second Nature",
-                            handleClickTalent: handleTalentClick
+                            handleClickTalent: handleTalentClick,
+                            bottom: true
                         }}/>                     
                 }
                 {!props.talentTree.secondNature && 
@@ -155,12 +156,14 @@ const ArcaneTree = ({props}:{props:any}) => {
                                 props={{
                                     text: "Second Nature",
                                     description: "Second Nature",
-                                    handleClickTalent: handleTalentClick
+                                    handleClickTalent: handleTalentClick,
+                                    bottom: true
                                 }}/>                        
                             :
                             <TalentButtonInactive 
                                 props={{
-                                    text: "Second Nature"
+                                    text: "Second Nature",
+                                    bottom: true
                                 }}/>   
                         }            
                     </>  

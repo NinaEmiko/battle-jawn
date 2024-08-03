@@ -142,7 +142,8 @@ const MindfulnessTree = ({props}:{props:any}) => {
                         props={{
                             text: "Preparation",
                             description: "Preparation",
-                            handleClickTalent: handleTalentClick
+                            handleClickTalent: handleTalentClick,
+                            bottom: true
                         }}/>                 
                 }
                 {!props.talentTree.preparation && 
@@ -153,12 +154,14 @@ const MindfulnessTree = ({props}:{props:any}) => {
                                 props={{
                                     text: "Preparation",
                                     description: "Preparation",
-                                    handleClickTalent: handleTalentClick
+                                    handleClickTalent: handleTalentClick,
+                                    bottom: true
                                 }}/>                 
                         :
                             <TalentButtonInactive
                                 props={{
-                                    text: "Preparation"
+                                    text: "Preparation",
+                                    bottom: true
                                 }}/>                
                         }
                     </>

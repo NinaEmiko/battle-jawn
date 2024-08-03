@@ -143,7 +143,8 @@ const DefenseTree = ({props}:{props:any}) => {
                     props={{
                         text: "Desperation",
                         description: "Desperation",
-                        handleClickTalent: handleTalentClick
+                        handleClickTalent: handleTalentClick,
+                        bottom: true
                     }}/>            
             }
             {!props.talentTree.desperation &&
@@ -154,12 +155,14 @@ const DefenseTree = ({props}:{props:any}) => {
                             props={{
                                 text: "Desperation",
                                 description: "Desperation",
-                                handleClickTalent: handleTalentClick
+                                handleClickTalent: handleTalentClick,
+                                bottom: true
                             }}/>              
                     :
                         <TalentButtonInactive 
                             props={{
-                                text: "Desperation"
+                                text: "Desperation",
+                                bottom: true
                             }}/>            
                     }
                 </>

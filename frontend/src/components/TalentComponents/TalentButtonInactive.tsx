@@ -1,14 +1,18 @@
 import "../../styling/TalentTree.css";
-import { talentDescriptions } from "../../helpers/talent_tree_helper";
 
 const TalentButtonInactive = ({props}:{props:any}) => {
 
-
     return (
         <>
-            <button className="talent-jawn-inactive">
-                {props.text}
-            </button>
+            {props.bottom ?
+                <button className="talent-jawn-inactive center-jawn">
+                    {props.text}
+                </button>
+                :
+                <button className="talent-jawn-inactive">
+                    {props.text}
+                </button>
+            }
         </>
     )
 }

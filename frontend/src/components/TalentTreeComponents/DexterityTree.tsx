@@ -142,7 +142,8 @@ const DexterityTree = ({props}:{props:any}) => {
                         props={{
                             text: "Organized Mess",
                             description: "Organized Mess",
-                            handleClickTalent: handleTalentClick
+                            handleClickTalent: handleTalentClick,
+                            bottom: true
                         }}/>                
                 }
                 {!props.talentTree.organizedMess && 
@@ -153,12 +154,14 @@ const DexterityTree = ({props}:{props:any}) => {
                                 props={{
                                     text: "Organized Mess",
                                     description: "Organized Mess",
-                                    handleClickTalent: handleTalentClick
+                                    handleClickTalent: handleTalentClick,
+                                    bottom: true
                                 }}/>                
                         :
                             <TalentButtonActive
                                 props={{
-                                    text: "Organized Mess"
+                                    text: "Organized Mess",
+                                    bottom: true
                                 }}/>                
                         }
                     </>

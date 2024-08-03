@@ -142,7 +142,8 @@ const ProtectionTree = ({props}:{props:any}) => {
                         props={{
                             text: "Survival Instincts",
                             description: "Survival Instincts",
-                            handleClickTalent: handleTalentClick
+                            handleClickTalent: handleTalentClick,
+                            bottom: true
                         }}/>                
                 }
                 {!props.talentTree.survivalInstincts &&
@@ -153,12 +154,14 @@ const ProtectionTree = ({props}:{props:any}) => {
                                 props={{
                                     text: "Survival Instincts",
                                     description: "Survival Instincts",
-                                    handleClickTalent: handleTalentClick
+                                    handleClickTalent: handleTalentClick,
+                                    bottom: true
                                 }}/>                        
                         :
                             <TalentButtonInactive
                                 props={{
-                                    text: "Survival Instincts"
+                                    text: "Survival Instincts",
+                                    bottom: true
                                 }}/>                        
                         }
                     </>
