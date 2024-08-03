@@ -36,7 +36,7 @@ public class Steal {
         String newMessage;
 
         if (enemy.getPotions() > 0 && emptySpaces > 0) {
-            boolean stealSuccess = useSteal();
+            boolean stealSuccess = heroMoveHelper.useSteal();
             if (stealSuccess) {
                 inventoryService.addToFirstEmptySlot(inventory, "Potion");
                 int updatedEnemyPotionCount = enemy.getPotions() - 1;
@@ -55,9 +55,5 @@ public class Steal {
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
-    }
-    public boolean useSteal() {
-        int chance = (int) Math.floor(Math.random() * 100);
-        return chance > 40;
     }
 }

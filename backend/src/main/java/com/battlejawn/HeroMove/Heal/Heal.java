@@ -24,46 +24,29 @@ public class Heal {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final HeroMoveHelper heroMoveHelper;
-    private final BattleStatusService battleStatusService;
 
     public HeroMoveDTO useHeal(Long battleSessionId) {
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
-        BattleStatus battleStatus = battleSession.getBattleStatus();
 
-        boolean criticalHit = criticalHit(95);
-        int healAmount = getHealAmount();
-
+        boolean criticalHit = heroMoveHelper.criticalHit(95);
+        int healAmount = 30;
 
         HealerTree healerTree = (HealerTree) hero.getTalentTree();
 
-        if (healerTree.isImprovedHeal1()){
-            healAmount += 5;
-        }
-        if (healerTree.isImprovedHeal2()){
-            healAmount += 5;
-        }
-        if (healerTree.isImprovedHeal3() && criticalHit){
-            healAmount += (healAmount / 2);
-        }
+        healAmount += (healerTree.isImprovedHeal1()) ? 5 : 0;
+        healAmount += (healerTree.isImprovedHeal2()) ? 5 : 0;
+        healAmount += (healerTree.isImprovedHeal3() && criticalHit) ? healAmount / 2 : 0;
 
         return processHeroHeal(healAmount, enemy, battleSessionId, hero);
-    }
-
-    public boolean criticalHit(int percent) {
-        int chance = (int) Math.floor(Math.random() * 100);
-        return chance > percent;
-    }
-    private int getHealAmount(){
-        return 30;
     }
 
     public HeroMoveDTO processHeroHeal(int healAmount, Enemy enemy, Long battleSessionId, Hero hero) {
         HealerTree healerTree = (HealerTree) hero.getTalentTree();
         int updatedHeroHealth;
         String newMessage;
-        if (hero.getResource() == 0 && ! healerTree.isSpirituallyAttuned()) {
+        if (hero.getResource() == 0 && !healerTree.isSpirituallyAttuned()) {
             newMessage = "You do not have enough spirit.";
             updatedHeroHealth = hero.getHealth();
         } else if (healAmount + hero.getHealth() > hero.getMaxHealth()) {

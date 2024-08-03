@@ -40,4 +40,14 @@ public class HeroMoveHelper {
         int chance = (int) Math.floor(Math.random() * 100);
         return chance > missPercentage;
     }
+
+    public boolean useRun() {
+        int chance = (int) Math.floor(Math.random() * 100);
+        return chance > 45;
+    }
+
+    public boolean useSteal() {
+        int chance = (int) Math.floor(Math.random() * 100);
+        return chance > 40;
+    }
 }

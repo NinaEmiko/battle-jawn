@@ -30,7 +30,7 @@ public class Run {
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
         String newMessage;
-        boolean gameOver = useRun();
+        boolean gameOver = heroMoveHelper.useRun();
 
         if (gameOver) {
             if (Objects.equals(hero.getRole(), "Healer")){
@@ -48,9 +48,5 @@ public class Run {
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, gameOver);
-    }
-    public boolean useRun() {
-        int chance = (int) Math.floor(Math.random() * 100);
-        return chance > 45;
     }
 }

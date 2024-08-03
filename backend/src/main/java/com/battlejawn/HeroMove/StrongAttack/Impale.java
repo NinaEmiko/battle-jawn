@@ -42,7 +42,7 @@ public class Impale {
             damage += (tankTree.isImprovedImpale1()) ? 2 : 0;
             damage += (tankTree.isImprovedImpale2()) ? 1 : 0;
             damage += (criticalHit) ? damage / 2 : 0;
-            if (tankTree.isImprovedImpale2()) {
+            if (tankTree.isImprovedImpale3()) {
                 battleStatus.setEnemyParalyzed(true);
                 battleStatusService.saveBattleStatus(battleStatus);
             }
