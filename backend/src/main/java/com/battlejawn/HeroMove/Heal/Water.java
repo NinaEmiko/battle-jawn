@@ -5,6 +5,7 @@ import com.battlejawn.Entities.Battle.BattleSession;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.HealerTree;
 import com.battlejawn.Entities.TalentTree.TankTree;
 import com.battlejawn.Helpers.HeroMoveHelper;
 import com.battlejawn.Service.*;
@@ -57,6 +58,14 @@ public class Water {
                     newMessage = "You feel empowered.";
                     break;
                 case "Healer":
+                    HealerTree healerTree = (HealerTree) hero.getTalentTree();
+                    if(healerTree.isBotany1() && hero.getHealth() != hero.getMaxHealth()){
+                        if (hero.getMaxHealth() - hero.getHealth() < 5){
+                            hero.setHealth(hero.getMaxHealth());
+                        } else {
+                            hero.setHealth(hero.getHealth() + 5);
+                        }
+                    }
                     newMessage = "Your spirit has risen.";
                     break;
                 case "Caster":

@@ -44,12 +44,12 @@ public class BackStab {
             battleStatus.setEnemyParalyzed(true);
             battleStatusService.saveBattleStatus(battleStatus);
         }
-        return processHeroAttack(damage, enemy, battleSessionId, hero, "BackStab");
+        return processHeroAttack(damage, enemy, battleSessionId, hero, dpsTree, battleStatus);
     }
 
-    private HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move) {
+    private HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero, DPSTree dpsTree, BattleStatus battleStatus) {
         int updatedEnemyHealth = enemy.getHealth() - damage;
-        String newMessage = heroMoveHelper.getDamageMessage(move, damage);
+        String newMessage = heroMoveHelper.getDamageMessage("BackStab", damage);
         boolean gameOver = false;
 
         if (!processHeroResource(hero)) {
@@ -64,6 +64,10 @@ public class BackStab {
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, "You have defeated the enemy!");
         } else {
+            if (dpsTree.isPeekaboo()){
+                battleStatus.setHeroPeekaboo(true);
+                battleStatusService.saveBattleStatus(battleStatus);
+            }
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         }
         enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());

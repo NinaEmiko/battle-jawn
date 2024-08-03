@@ -88,7 +88,6 @@ export const talentDescriptions = (talent: string) => {
             return "Increases the damage of Stab by 7.";
         case "Improved Stab 3":
             return "Missed Stab consumes 0 energy.";
-        //TODO: UPDATE IN BACKEND
         case "Peekaboo":
             return "Hero takes 0 damage after a successful BackStab.";
 
@@ -115,10 +114,8 @@ export const talentDescriptions = (talent: string) => {
 
 
         //PROTECTION
-        //TODO: UPDATE IN BACKEND
         case "Botany 1 - Protection":
             return "Water grants an additional 10 health.";
-        //TODO: UPDATE IN BACKEND
         case "Botany 2 - Protection":
             return "Potion grants 1 spirit."
         case "Improved Heal 1":
@@ -145,15 +142,12 @@ export const talentDescriptions = (talent: string) => {
             return "Increases damage of Holy by 7."
         case "Improved Holy 3":
             return "Reduces the cost of Holy by 1 spirit.";
-        //TODO: UPDATE IN BACKEND
         case "Bubble":
             return "Holy has the chance to protect hero from next enemy attack.";
 
         //DEFENSE
-        //TODO: UPDATE IN BACKEND
         case "Desperation":
             return "Successful block, when below 20% health, grants free Strike."
-        //TODO: UPDATE IN BACKEND
         case "Final Stand":
             return "Heroes last potion heals for an additional 60 health."
         case "Hydration":
@@ -182,7 +176,6 @@ export const talentDescriptions = (talent: string) => {
             return "Increases the damage of Impale by 3."
         case "Improved Impale 3":
             return "Impale has the chance to paralyze an enemy."
-
 
         //DEFAULT    
         default:

@@ -26,9 +26,11 @@ public class Holy {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final HeroMoveHelper heroMoveHelper;
+    private final BattleStatusService battleStatusService;
 
     public HeroMoveDTO attack(Long battleSessionId) {
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
+        BattleStatus battleStatus = battleSession.getBattleStatus();
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
         boolean criticalHit = heroMoveHelper.criticalHit(95);
@@ -42,10 +44,10 @@ public class Holy {
             damage += (criticalHit) ? damage / 2 : 0;
         }
 
-        return processHeroAttack(damage, enemy, battleSessionId, hero, "Holy", healerTree);
+        return processHeroAttack(damage, enemy, battleSessionId, hero, "Holy", healerTree, battleStatus);
     }
 
-    public HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move, HealerTree healerTree) {
+    public HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move, HealerTree healerTree, BattleStatus battleStatus) {
         int updatedEnemyHealth = enemy.getHealth() - damage;
         String newMessage = heroMoveHelper.getDamageMessage(move, damage);
         boolean gameOver = false;
@@ -62,6 +64,11 @@ public class Holy {
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
             battleHistoryMessageService.createNewMessage(battleSessionId, "You have defeated the enemy!");
         } else {
+            if (healerTree.isBubble() && heroMoveHelper.useBubble()){
+                battleStatus.setHeroBubbled(true);
+                battleStatusService.saveBattleStatus(battleStatus);
+                battleHistoryMessageService.createNewMessage(battleSessionId, "Bubble activated.");
+            };
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
         }
         enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());

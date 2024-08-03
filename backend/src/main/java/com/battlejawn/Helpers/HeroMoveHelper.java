@@ -50,4 +50,9 @@ public class HeroMoveHelper {
         int chance = (int) Math.floor(Math.random() * 100);
         return chance > 40;
     }
+
+    public boolean useBubble() {
+        int chance = (int) Math.floor(Math.random() * 100);
+        return chance > 85;
+    }
 }
