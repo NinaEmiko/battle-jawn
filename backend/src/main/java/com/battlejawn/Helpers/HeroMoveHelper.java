@@ -24,4 +24,20 @@ public class HeroMoveHelper {
             return move + " missed!";
         }
     }
+
+    public boolean criticalHit(int percentage) {
+        int chance = (int) Math.floor(Math.random() * 100);
+        return chance > percentage;
+    }
+    public int getDamage(int extraDamage, int baseDamage, int missPercentage){
+        if (miss(missPercentage)) {
+            return 0;
+        } else {
+            return (int) (Math.floor(Math.random() * extraDamage) + baseDamage);
+        }
+    }
+    private boolean miss(int missPercentage) {
+        int chance = (int) Math.floor(Math.random() * 100);
+        return chance > missPercentage;
+    }
 }

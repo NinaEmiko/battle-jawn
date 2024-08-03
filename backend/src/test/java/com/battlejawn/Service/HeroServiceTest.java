@@ -194,6 +194,7 @@ public class HeroServiceTest {
     @Test
     void restAllHeroesTest() {
         List<Hero> heroesList = new ArrayList<>();
+        heroesList.add(new Tank("Tank"));
         when(heroRepository.findAll()).thenReturn(heroesList);
         when(heroRepository.saveAll(any())).thenReturn(heroesList);
         heroService.restAllHeroes();

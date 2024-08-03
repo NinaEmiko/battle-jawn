@@ -160,17 +160,6 @@ class TalentTreeServiceTest {
             talentTreeService.resetTalents(dps.getId());
         });
     }
-//    @Test
-//    void activateTalentDefaultTest(){
-//        Tank jawn = new Tank("Tank");
-//        jawn.setRole(null);
-//        jawn.setId(5L);
-//
-//        when(heroService.getHeroById(anyLong())).thenReturn(jawn);
-//
-//        String result = talentTreeService.activateTalent(jawn.getId(), "Them");
-//        Assertions.assertEquals("Error occurred while activating talent", result);
-//    }
 
     @Test
     void activateTankTalentTest(){
