@@ -1,13 +1,17 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.Entities.AdditionalInventory;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.DPSTree;
+import com.battlejawn.Repository.AdditionalInventoryRepository;
 import com.battlejawn.Repository.InventoryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
@@ -16,6 +20,7 @@ public class InventoryService {
     private LootService lootService;
     private InventoryRepository inventoryRepository;
     private HeroService heroService;
+    private AdditionalInventoryRepository additionalInventoryRepository;
     private final Logger logger = Logger.getLogger(InventoryService.class.getName());
 
     public String usePotion(Long id, int slot) {
@@ -74,6 +79,19 @@ public class InventoryService {
         inventoryList.add(inventory.getSlotEleven());
         inventoryList.add(inventory.getSlotTwelve());
 
+        if (Objects.equals(hero.getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            if (dpsTree.isOrganizedMess()){
+
+                AdditionalInventory additionalInventory = getAdditionalInventory(hero.getId());
+                inventoryList.add(additionalInventory.getSlotOne());
+                inventoryList.add(additionalInventory.getSlotTwo());
+                inventoryList.add(additionalInventory.getSlotThree());
+                inventoryList.add(additionalInventory.getSlotFour());
+
+            }
+        }
+
         return inventoryList;
     }
     public List<String> getLootOptions(Long enemyId){
@@ -122,7 +140,24 @@ public class InventoryService {
             inventory.setSlotEleven("");
         } else if(inventory.getSlotTwelve().equals(item)){
             inventory.setSlotTwelve("");
+        } else if (Objects.equals(hero.getRole(), "DPS")) {
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            if (dpsTree.isOrganizedMess()) {
+                AdditionalInventory additionalInventory = getAdditionalInventory(hero.getId());
+
+                if (additionalInventory.getSlotOne().equals(item)) {
+                    additionalInventory.setSlotOne("");
+                } else if (additionalInventory.getSlotTwo().equals(item)) {
+                    additionalInventory.setSlotTwo("");
+                } else if (additionalInventory.getSlotThree().equals(item)) {
+                    additionalInventory.setSlotThree("");
+                } else if (additionalInventory.getSlotFour().equals(item)) {
+                    additionalInventory.setSlotFour("");
+                }
+                additionalInventoryRepository.save(additionalInventory);
+            }
         }
+
         inventoryRepository.save(inventory);
     }
 
@@ -167,8 +202,39 @@ public class InventoryService {
             case 12:
                 inventory.setSlotTwelve("");
                 break;
+            case 13:
+                removeFromAdditionalInventory(13, hero.getId());
+                break;
+            case 14:
+                removeFromAdditionalInventory(14, hero.getId());
+                break;
+            case 15:
+                removeFromAdditionalInventory(15, hero.getId());
+                break;
+            case 16:
+                removeFromAdditionalInventory(16, hero.getId());
+                break;
         }
         inventoryRepository.save(inventory);
+    }
+
+    public void removeFromAdditionalInventory(int slot, Long heroId){
+        AdditionalInventory additionalInventory = getAdditionalInventory(heroId);
+        switch (slot) {
+            case 13:
+                additionalInventory.setSlotOne("");
+                break;
+            case 14:
+                additionalInventory.setSlotTwo("");
+                break;
+            case 15:
+                additionalInventory.setSlotThree("");
+                break;
+            case 16:
+                additionalInventory.setSlotFour("");
+                break;
+        }
+        additionalInventoryRepository.save(additionalInventory);
     }
     public void addToFirstEmptySlot(Inventory inventory, String item){
         logger.info("Inside addToFirstEmptySlot service method");
@@ -195,10 +261,31 @@ public class InventoryService {
             inventory.setSlotTen(item);
         } else if (inventory.getSlotEleven().isEmpty()){
             inventory.setSlotEleven(item);
-        } else {
+        } else if (inventory.getSlotTwelve().isEmpty()){
             inventory.setSlotTwelve(item);
+        } else if (Objects.equals(inventory.getHero().getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) inventory.getHero().getTalentTree();
+            if (dpsTree.isOrganizedMess()){
+                addToFirstEmptyAdditionalSlot(item, inventory.getHero().getId());
+            }
         }
         inventoryRepository.save(inventory);
+    }
+
+    public void addToFirstEmptyAdditionalSlot(String item, Long heroId) {
+        AdditionalInventory additionalInventory = getAdditionalInventory(heroId);
+
+        if (additionalInventory.getSlotOne().isEmpty()) {
+            additionalInventory.setSlotOne(item);
+        } else if (additionalInventory.getSlotTwo().isEmpty()){
+            additionalInventory.setSlotTwo(item);
+        } else if (additionalInventory.getSlotThree().isEmpty()){
+            additionalInventory.setSlotThree(item);
+        } else if (additionalInventory.getSlotFour().isEmpty()) {
+            additionalInventory.setSlotFour(item);
+        }
+
+        additionalInventoryRepository.save(additionalInventory);
     }
 
     public Integer getEmptySlotSize(Long id) {
@@ -210,6 +297,16 @@ public class InventoryService {
         for (Boolean value : emptySlots) {
             if (value){
                 inventorySize++;
+            }
+        }
+        if (Objects.equals(hero.getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            if (dpsTree.isOrganizedMess()){
+                AdditionalInventory additionalInventory = getAdditionalInventory(hero.getId());
+                inventorySize += (Objects.equals(additionalInventory.getSlotOne(), "")) ? 1 : 0;
+                inventorySize += (Objects.equals(additionalInventory.getSlotTwo(), "")) ? 1 : 0;
+                inventorySize += (Objects.equals(additionalInventory.getSlotThree(), "")) ? 1 : 0;
+                inventorySize += (Objects.equals(additionalInventory.getSlotFour(), "")) ? 1 : 0;
             }
         }
 
@@ -236,7 +333,21 @@ public class InventoryService {
     public Integer findPotionCountById(Long id) {
         Hero hero = heroService.getHeroById(id);
         Inventory inventory = hero.getInventory();
-        return findItemCount(inventory, "Potion");
+        int itemCount = 0;
+        itemCount += findItemCount(inventory, "Potion");
+
+        if (Objects.equals(hero.getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            if (dpsTree.isOrganizedMess()){
+                AdditionalInventory additionalInventory = getAdditionalInventory(hero.getId());
+                itemCount += (Objects.equals(additionalInventory.getSlotOne(), "Potion")) ? 1 : 0;
+                itemCount += (Objects.equals(additionalInventory.getSlotTwo(), "Potion")) ? 1 : 0;
+                itemCount += (Objects.equals(additionalInventory.getSlotThree(), "Potion")) ? 1 : 0;
+                itemCount += (Objects.equals(additionalInventory.getSlotFour(), "Potion")) ? 1 : 0;
+            }
+        }
+
+        return itemCount;
     }
 
     public int findItemCount(Inventory inventory, String item) {
@@ -277,6 +388,21 @@ public class InventoryService {
         if (Objects.equals(inventory.getSlotTwelve(), item)){
             count++;
         }
+        if (Objects.equals(inventory.getHero().getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) inventory.getHero().getTalentTree();
+            if (dpsTree.isOrganizedMess()){
+                AdditionalInventory additionalInventory = getAdditionalInventory(inventory.getHero().getId());
+                count += (Objects.equals(additionalInventory.getSlotOne(), item)) ? 1 : 0;
+                count += (Objects.equals(additionalInventory.getSlotTwo(), item)) ? 1 : 0;
+                count += (Objects.equals(additionalInventory.getSlotThree(), item)) ? 1 : 0;
+                count += (Objects.equals(additionalInventory.getSlotFour(), item)) ? 1 : 0;
+            }
+        }
         return count;
+    }
+
+    public AdditionalInventory getAdditionalInventory(Long heroId) {
+        Optional<AdditionalInventory> additionalInventoryOptional = Optional.ofNullable(additionalInventoryRepository.findAdditionalInventoryByHeroId(heroId));
+        return additionalInventoryOptional.orElse(null);
     }
 }

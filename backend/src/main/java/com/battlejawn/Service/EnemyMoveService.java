@@ -188,7 +188,7 @@ public class EnemyMoveService {
             }
             logger.info("stealSuccess: " + stealSuccess);
             if (stealSuccess) {
-                inventoryService.removeFirstFromInventory(hero.getId(), "potion");
+                inventoryService.removeFirstFromInventory(hero.getId(), "Potion");
                 int updatedEnemyPotionCount = enemy.getPotions() + 1;
                 heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());

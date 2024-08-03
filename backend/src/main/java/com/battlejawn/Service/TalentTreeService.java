@@ -1,10 +1,12 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.Entities.AdditionalInventory;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.TalentTree.CasterTree;
 import com.battlejawn.Entities.TalentTree.DPSTree;
 import com.battlejawn.Entities.TalentTree.HealerTree;
 import com.battlejawn.Entities.TalentTree.TankTree;
+import com.battlejawn.Repository.AdditionalInventoryRepository;
 import com.battlejawn.Repository.TalentTreeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.logging.Logger;
 public class TalentTreeService {
     private TalentTreeRepository talentTreeRepository;
     private HeroService heroService;
+    private AdditionalInventoryRepository additionalInventoryRepository;
     private final Logger logger = Logger.getLogger(TalentTreeService.class.getName());
 
     public Hero resetTalents(Long heroId) {
@@ -319,6 +322,8 @@ public class TalentTreeService {
                     dpsTree.setImprovedSteal2(true);
                     break;
                 case "Organized Mess":
+                    AdditionalInventory additionalInventory = new AdditionalInventory(hero.getId());
+                    additionalInventoryRepository.save(additionalInventory);
                     dpsTree.setOrganizedMess(true);
                     break;
                 case "Sticky Fingaz":

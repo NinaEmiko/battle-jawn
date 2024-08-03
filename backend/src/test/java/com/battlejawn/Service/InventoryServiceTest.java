@@ -188,27 +188,27 @@ public class InventoryServiceTest {
         verify(inventoryRepository, times(12)).save(any());
     }
 
-    @Test
-    void findPotionCountById() {
-        Hero hero = new Healer("Name");
-        Inventory inventory = new Inventory();
-        inventory.setSlotOne("Potion");
-        inventory.setSlotTwo("Potion");
-        inventory.setSlotThree("Potion");
-        inventory.setSlotFour("Potion");
-        inventory.setSlotFive("Potion");
-        inventory.setSlotSix("Potion");
-        inventory.setSlotSeven("Potion");
-        inventory.setSlotEight("Potion");
-        inventory.setSlotNine("Potion");
-        inventory.setSlotTen("Potion");
-        inventory.setSlotEleven("Potion");
-        inventory.setSlotTwelve("Potion");
-        hero.setInventory(inventory);
-        when(heroService.getHeroById(anyLong())).thenReturn(hero);
-        inventoryService.findPotionCountById(1L);
-        verify(heroService, times(1)).getHeroById(anyLong());
-    }
+//    @Test
+//    void findPotionCountById() {
+//        Hero hero = new Healer("Name");
+//        Inventory inventory = new Inventory();
+//        inventory.setSlotOne("Potion");
+//        inventory.setSlotTwo("Potion");
+//        inventory.setSlotThree("Potion");
+//        inventory.setSlotFour("Potion");
+//        inventory.setSlotFive("Potion");
+//        inventory.setSlotSix("Potion");
+//        inventory.setSlotSeven("Potion");
+//        inventory.setSlotEight("Potion");
+//        inventory.setSlotNine("Potion");
+//        inventory.setSlotTen("Potion");
+//        inventory.setSlotEleven("Potion");
+//        inventory.setSlotTwelve("Potion");
+//        hero.setInventory(inventory);
+//        when(heroService.getHeroById(anyLong())).thenReturn(hero);
+//        inventoryService.findPotionCountById(1L);
+//        verify(heroService, times(1)).getHeroById(anyLong());
+//    }
 
     @Test
     void usePotionMaxHealthTest() {

@@ -95,9 +95,8 @@ export const talentDescriptions = (talent: string) => {
             return "Hero can steal coins.";
         case "Improved Steal 2":
             return "Can steal more coins.";
-        //TODO: UPDATE IN BACKEND
         case "Organized Mess":
-            return "Hero gains 3 additional slots in inventory.";
+            return "Hero gains 4 additional slots in inventory.";
         case "Sticky Fingaz":
             return "Hero receives store discount.";
 
