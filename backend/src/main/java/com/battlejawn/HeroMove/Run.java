@@ -2,6 +2,7 @@ package com.battlejawn.HeroMove;
 
 import com.battlejawn.DTO.HeroMoveDTO;
 import com.battlejawn.Entities.Battle.BattleSession;
+import com.battlejawn.Entities.Battle.BattleStatus;
 import com.battlejawn.Entities.Enemy.Enemy;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.TalentTree.HealerTree;
@@ -23,15 +24,14 @@ public class Run {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final HeroMoveHelper heroMoveHelper;
-    private final BattleStatusService battleStatusService;
-    private final InventoryService inventoryService;
 
     public HeroMoveDTO processRun(Long battleSessionId) {
         BattleSession battleSession = battleSessionService.getBattleSessionById(battleSessionId);
         Enemy enemy = enemyService.getEnemyById(battleSession.getEnemyId());
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
-
+        String newMessage;
         boolean gameOver = useRun();
+
         if (gameOver) {
             if (Objects.equals(hero.getRole(), "Healer")){
                 HealerTree healerTree = (HealerTree) hero.getTalentTree();
@@ -41,16 +41,13 @@ public class Run {
             }
             hero.setRunCount(hero.getRunCount() + 1);
             heroService.updateHero(hero);
-            String newMessage = "You successfully ran away!";
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, true);
+            newMessage = "You successfully ran away!";
         } else {
-            String newMessage = "You could not get away!";
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+            newMessage = "You could not get away!";
         }
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+        return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, gameOver);
     }
     public boolean useRun() {
         int chance = (int) Math.floor(Math.random() * 100);

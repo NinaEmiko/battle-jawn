@@ -34,73 +34,46 @@ public class Impale {
         Hero hero = heroService.getHeroById(battleSession.getHeroId());
         BattleStatus battleStatus = battleSession.getBattleStatus();
 
-        boolean criticalHit = criticalHit(95);
-        int damage = getDamage();
+        boolean criticalHit = heroMoveHelper.criticalHit(95);
+        int damage = heroMoveHelper.getDamage(5, 20, 95);
         TankTree tankTree = (TankTree) hero.getTalentTree();
 
-        if (tankTree.isImprovedImpale1() && damage != 0){
-            damage += 2;
+        if (damage != 0) {
+            damage += (tankTree.isImprovedImpale1()) ? 2 : 0;
+            damage += (tankTree.isImprovedImpale2()) ? 1 : 0;
+            damage += (criticalHit) ? damage / 2 : 0;
+            if (tankTree.isImprovedImpale2()) {
+                battleStatus.setEnemyParalyzed(true);
+                battleStatusService.saveBattleStatus(battleStatus);
+            }
         }
-        if (tankTree.isImprovedImpale2()  && damage != 0){
-            damage += 1;
-        }
-        if (tankTree.isImprovedImpale2()  && damage != 0){
-            battleStatus.setEnemyParalyzed(true);
-            battleStatusService.saveBattleStatus(battleStatus);
-        }
-        if (criticalHit && damage != 0){
-            damage += (damage / 2);
-        }
-        return processHeroAttack(damage, enemy, battleSessionId, hero, "Impale", tankTree);
-    }
-    public boolean miss() {
-        int chance = (int) Math.floor(Math.random() * 100);
-        return chance > 95;
-    }
 
-    public boolean criticalHit(int percent) {
-        int chance = (int) Math.floor(Math.random() * 100);
-        return chance > percent;
-    }
-    private int getDamage(){
-        if (miss()) {
-            return 0;
-        } else {
-            return (int) (Math.floor(Math.random() * 5) + 20);
-        }
+        return processHeroAttack(damage, enemy, battleSessionId, hero, "Impale", tankTree);
     }
 
     public HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero, String move, TankTree tankTree) {
-        int updatedEnemyHealth;
-        String newMessage;
+        int updatedEnemyHealth = enemy.getHealth() - damage;
+        String newMessage = heroMoveHelper.getDamageMessage(move, damage);
+        boolean gameOver = false;
 
-        boolean enoughResource = processHeroResource(tankTree, hero);
 
-        if (!enoughResource) {
+        if (!processHeroResource(tankTree, hero)) {
             updatedEnemyHealth = enemy.getHealth();
             newMessage = "You do not have enough power.";
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, false);
-        } else if (damage > enemy.getHealth()) {
+            } else if (damage > enemy.getHealth()) {
             updatedEnemyHealth = 0;
-            newMessage = heroMoveHelper.getDamageMessage(move, damage);
-            enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
-            String enemyDefeatedMessage = "You have defeated the enemy!";
+            gameOver = true;
             hero.setWinCount(hero.getWinCount() + 1);
             heroService.updateHero(hero);
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            battleHistoryMessageService.createNewMessage(battleSessionId, enemyDefeatedMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, true);
-        } else {
-            updatedEnemyHealth = enemy.getHealth() - damage;
-            newMessage = heroMoveHelper.getDamageMessage(move, damage);
-            enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
+            battleHistoryMessageService.createNewMessage(battleSessionId, "You have defeated the enemy!");
+            } else {
             battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, false);
         }
+        enemyService.updateHealthById(updatedEnemyHealth, enemy.getId());
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+        return heroMoveHelper.getHeroMoveReturnObject(updatedEnemyHealth, hero.getHealth(), hero.getResource(), battleHistory, gameOver);
     }
     public boolean processHeroResource(TankTree tankTree, Hero hero) {
 

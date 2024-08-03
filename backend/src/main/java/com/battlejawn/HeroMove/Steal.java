@@ -23,7 +23,6 @@ public class Steal {
     private final HeroService heroService;
     private final EnemyService enemyService;
     private final HeroMoveHelper heroMoveHelper;
-    private final BattleStatusService battleStatusService;
     private final InventoryService inventoryService;
 
     public HeroMoveDTO processSteal(Long battleSessionId) {
@@ -34,6 +33,7 @@ public class Steal {
 
         DPSTree dpsTree = (DPSTree) hero.getTalentTree();
         int emptySpaces = inventoryService.getEmptySlotSize(hero.getId());
+        String newMessage;
 
         if (enemy.getPotions() > 0 && emptySpaces > 0) {
             boolean stealSuccess = useSteal();
@@ -45,22 +45,16 @@ public class Steal {
                 }
                 heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
-                String newMessage = "You stole a potion!";
-                battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-                List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-                return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+                newMessage = "You stole a potion!";
             } else {
-                String newMessage = "You didn't find anything.";
-                battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-                List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-                return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+                newMessage = "You didn't find anything.";
             }
         } else {
-            String newMessage = "You didn't find anything.";
-            battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
-            List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
-            return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
+            newMessage = "You didn't find anything.";
         }
+        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+        List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
+        return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
     }
     public boolean useSteal() {
         int chance = (int) Math.floor(Math.random() * 100);
