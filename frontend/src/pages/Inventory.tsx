@@ -14,6 +14,7 @@ const Inventory = ({props}:{props:any}) => {
     const [heroCoins, setHeroCoins] = useState(0);
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
+    const [heroOrganizedMess, setHeroOrganizedMess] = useState(false);
     const [rightCenterButtonText, setRightCenterButtonText] = useState("-")
     const [leftBottomButtonText, setLeftBottomButtonText] = useState("Close")
 
@@ -25,6 +26,9 @@ const Inventory = ({props}:{props:any}) => {
     const handleFetchHero = async () => {
         const data = await fetchHero(props.heroId)
         setHeroCoins(data.coins);
+        if (data.role === "DPS"){
+            setHeroOrganizedMess(true);
+        }
     }
 
     const handleClickPotion = async (index: number) => {
@@ -130,14 +134,26 @@ const Inventory = ({props}:{props:any}) => {
                             <>
                                 <div className="parent-jawn">
                                     <div className="child-jawn">
-                                        <div className="inventory-grid-container">
+                                        {heroOrganizedMess &&
+                                            <div className="inventory-grid-container">
                                                 
-                                            {[...Array(12).keys()].map(index => (
-                                                <div key={index} className="inventory-grid-item">
-                                                    <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
-                                                </div>
-                                            ))}
-                                        </div>
+                                                {[...Array(16).keys()].map(index => (
+                                                    <div key={index} className="inventory-grid-item">
+                                                        <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        }
+                                        {!heroOrganizedMess &&
+                                            <div className="inventory-grid-container">
+                                                
+                                                    {[...Array(12).keys()].map(index => (
+                                                        <div key={index} className="inventory-grid-item">
+                                                            <div className="inventory-icon">{determineIcon(inventoryList[index], index + 1)}</div>
+                                                        </div>
+                                                    ))}
+                                            </div>
+                                        }
                                         <div className="coins-container-jawn">
                                             <p className="coins-jawn">{heroCoins} coins</p>
                                         </div>
