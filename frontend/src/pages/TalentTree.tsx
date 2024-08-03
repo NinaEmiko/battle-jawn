@@ -11,7 +11,7 @@ import StrengthTree from "../components/TalentTreeComponents/StrengthTree";
 import DefenseTree from "../components/TalentTreeComponents/DefenseTree";
 import ArcaneTree from "../components/TalentTreeComponents/ArcaneTree";
 import MindfulnessTree from "../components/TalentTreeComponents/MindfulnessTree";
-import TalentPopUp from "../components/TalentTreeComponents/TalentPopUp";
+import TalentPopUp from "../components/TalentComponents/TalentPopUp";
 import { fetchHero, resetTalents } from "../api/api";
 import Container from "../components/Container";
 import PageName from "../components/PageName";

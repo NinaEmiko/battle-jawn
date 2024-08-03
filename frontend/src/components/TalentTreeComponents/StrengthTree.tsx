@@ -1,5 +1,8 @@
 import "../../styling/TalentTree.css";
 import { talentDescriptions } from "../../helpers/talent_tree_helper";
+import TalentButtonActive from "../TalentComponents/TalentButtonActive";
+import TalentButtonAvailable from "../TalentComponents/TalentButtonAvailable";
+import TalentButtonInactive from "../TalentComponents/TalentButtonInactive";
 
 const StrengthTree = ({props}:{props:any}) => {
 
@@ -9,87 +12,161 @@ const StrengthTree = ({props}:{props:any}) => {
 
     return (
         <div className="talent-group-jawn">
-
             <div className="left-and-right-container-jawn">
+                <div className="left-container-jawn">
+                    {props.talentTree.improvedStrike1 ?
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Strike 1",
+                                description: "Improved Strike 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    :
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Strike 1",
+                                description: "Improved Strike 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
 
-            <div className="left-container-jawn">
-
-                {props.talentTree.improvedStrike1 ?
-                <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 1", talentDescriptions("Improved Strike 1"), "active")}>Improved Strike 1</button>
-                :
-                <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 1", talentDescriptions("Improved Strike 1"), "available")}>Improved Strike 1</button>
-                }
-
-                {props.talentTree.improvedStrike2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 2", "Improved Strike 2", "active")}>Improved Strike 2</button>
-                }
-                {!props.talentTree.improvedStrike2 && !props.talentTree.improvedStrike1 &&
-                    <button className="talent-jawn-inactive">Improved Strike 2</button>
-                }
-                {!props.talentTree.improvedStrike2 && props.talentTree.improvedStrike1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 2", "Improved Strike 2", "available")}>Improved Strike 2</button>
-                }
-
-                {props.talentTree.improvedStrike3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Strike 3", "Improved Strike 3", "active")}>Improved Strike 3</button>
-                }
-                {!props.talentTree.improvedStrike3 && !props.talentTree.improvedStrike2 &&
-                    <button className="talent-jawn-inactive">Improved Strike 3</button>
-                }
-                {!props.talentTree.improvedStrike3 && props.talentTree.improvedStrike2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Strike 3", "Improved Strike 3", "available")}>Improved Strike 3</button>
-                }
-
-
+                    {props.talentTree.improvedStrike2 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Strike 2",
+                                description: "Improved Strike 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {!props.talentTree.improvedStrike2 && !props.talentTree.improvedStrike1 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved Strike 2"
+                            }}/>
+                    }
+                    {!props.talentTree.improvedStrike2 && props.talentTree.improvedStrike1 &&
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Strike 2",
+                                description: "Improved Strike 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {props.talentTree.improvedStrike3 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Strike 3",
+                                description: "Improved Strike 3",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {!props.talentTree.improvedStrike3 && !props.talentTree.improvedStrike2 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved Strike 3"
+                            }}/>
+                    }
+                    {!props.talentTree.improvedStrike3 && props.talentTree.improvedStrike2 &&
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Strike 3",
+                                description: "Improved Strike 3",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                </div>
+                <div className="right-container-jawn">
+                    {props.talentTree.improvedImpale1 ?
+                    <TalentButtonActive 
+                        props={{
+                            text: "Improved Impale 1",
+                            description: "Improved Impale 1",
+                            handleClickTalent: handleTalentClick
+                        }}/>
+                    :
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Impale 1",
+                                description: "Improved Impale 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {props.talentTree.improvedImpale2 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Impale 2",
+                                description: "Improved Impale 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {!props.talentTree.improvedImpale2 && !props.talentTree.improvedImpale1 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved Impale 2"
+                            }}/>
+                    }
+                    {!props.talentTree.improvedImpale2 && props.talentTree.improvedImpale1 &&
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Impale 2",
+                                description: "Improved Impale 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {props.talentTree.improvedImpale3 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Impale 3",
+                                description: "Improved Impale 3",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                    {!props.talentTree.improvedImpale3 && !props.talentTree.improvedImpale2 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved Impale 3"
+                            }}/>
+                    }
+                    {!props.talentTree.improvedImpale3 && props.talentTree.improvedImpale2 &&
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Impale 3",
+                                description: "Improved Impale 3",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    }
+                </div>
             </div>
-
-            <div className="right-container-jawn">
-
-                {props.talentTree.improvedImpale1 ?
-                <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 1", talentDescriptions("Improved Impale 1"), "active")}>Improved Impale 1</button>
-                :
-                <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 1", talentDescriptions("Improved Impale 1"), "available")}>Improved Impale 1</button>
-                }
-
-                {props.talentTree.improvedImpale2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 2", "Improved Impale 2", "active")}>Improved Impale 2</button>
-                }
-                {!props.talentTree.improvedImpale2 && !props.talentTree.improvedImpale1 &&
-                    <button className="talent-jawn-inactive">Improved Impale 2</button>
-                }
-                {!props.talentTree.improvedImpale2 && props.talentTree.improvedImpale1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 2", "Improved Impale 2", "available")}>Improved Impale 2</button>
-                }
-
-                {props.talentTree.improvedImpale3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Impale 3", "Improved Impale 3", "active")}>Improved Impale 3</button>
-                }
-                {!props.talentTree.improvedImpale3 && !props.talentTree.improvedImpale2 &&
-                    <button className="talent-jawn-inactive">Improved Impale 3</button>
-                }
-                {!props.talentTree.improvedImpale3 && props.talentTree.improvedImpale2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Impale 3", "Improved Impale 3", "available")}>Improved Impale 3</button>
-                }
-
-            </div>
-            </div>
-
             <div className="bottom-container-jawn">
 
             {props.talentTree.titan &&
-                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Titan", "Titan", "active")}>Titan</button>
+                <TalentButtonActive 
+                    props={{
+                        text: "Titan",
+                        description: "Titan",
+                        handleClickTalent: handleTalentClick
+                    }}/>
             }
-            {!props.talentTree.titan && props.talentTree.improvedStrike3 && props.talentTree.improvedImpale2 ||
-            !props.talentTree.titan && props.talentTree.improvedStrike2 && props.talentTree.improvedImpale3 ?
-                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Titan", "Titan", "available")}>Titan</button>
-            :
-                <button className="talent-jawn-inactive center-jawn">Titan</button>
+            {!props.talentTree.titan &&
+                <>
+                    {props.talentTree.improvedStrike3 && props.talentTree.improvedImpale2 ||
+                    props.talentTree.improvedStrike2 && props.talentTree.improvedImpale3 ?
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Titan",
+                                description: "Titan",
+                                handleClickTalent: handleTalentClick
+                            }}/>
+                    :
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Titan"
+                            }}/>
+                    }
+                </>
             }
-
             </div>
-
         </div>
-
     )
 }
 export default StrengthTree;

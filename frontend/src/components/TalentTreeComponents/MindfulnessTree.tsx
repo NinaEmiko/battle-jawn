@@ -1,5 +1,8 @@
 import "../../styling/TalentTree.css";
 import { talentDescriptions } from "../../helpers/talent_tree_helper";
+import TalentButtonActive from "../TalentComponents/TalentButtonActive";
+import TalentButtonAvailable from "../TalentComponents/TalentButtonAvailable";
+import TalentButtonInactive from "../TalentComponents/TalentButtonInactive";
 
 const MindfulnessTree = ({props}:{props:any}) => {
 
@@ -9,83 +12,157 @@ const MindfulnessTree = ({props}:{props:any}) => {
 
     return (
         <div className="talent-group-jawn">
-
-        <div className="left-and-right-container-jawn">
-
-            <div className="left-container-jawn">
-
-                {props.talentTree.resourcefulness1 ?
-                <button className="talent-jawn-active" onClick={() => handleTalentClick("Resourcefulness 1", talentDescriptions("Resourcefulness 1"), "active")}>Resourcefulness 1</button>
-                :
-                <button className="talent-jawn-available" onClick={() => handleTalentClick("Resourcefulness 1", talentDescriptions("Resourcefulness 1"), "available")}>Resourcefulness 1</button>
+            <div className="left-and-right-container-jawn">
+                <div className="left-container-jawn">
+                    {props.talentTree.resourcefulness1 ?
+                        <TalentButtonActive 
+                            props={{
+                                text: "Resourcefulness 1",
+                                description: "Resourcefulness 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    :
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Resourcefulness 1",
+                                description: "Resourcefulness 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    }
+                    {props.talentTree.resourcefulness2 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Resourcefulness 2",
+                                description: "Resourcefulness 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    }
+                    {!props.talentTree.resourcefulness2 && !props.talentTree.resourcefulness1 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Resourcefulness 2"
+                            }}/>                
+                    }
+                    {!props.talentTree.resourcefulness2 && props.talentTree.resourcefulness1 &&
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Resourcefulness 2",
+                                description: "Resourcefulness 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    }
+                    {props.talentTree.frostBite &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "FrostBite",
+                                description: "FrostBite",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    }
+                    {!props.talentTree.frostBite && !props.talentTree.resourcefulness2 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "FrostBite"
+                            }}/>                
+                    }
+                    {!props.talentTree.frostBite && props.talentTree.resourcefulness2 &&
+                        <TalentButtonAvailable
+                            props={{
+                                text: "FrostBite",
+                                description: "FrostBite",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    }
+                </div>
+                <div className="right-container-jawn">
+                    {props.talentTree.botany1 ?
+                        <TalentButtonActive 
+                            props={{
+                                text: "Botany 1",
+                                description: "Botany 1 - Mindfulness",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    :
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Botany 1",
+                                description: "Botany 1 - Mindfulness",
+                                handleClickTalent: handleTalentClick
+                            }}/>                
+                    }
+                    {props.talentTree.botany2 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Botany 2",
+                                description: "Botany 2 - Mindfulness",
+                                handleClickTalent: handleTalentClick
+                            }}/>                 
+                    }
+                    {!props.talentTree.botany2 && !props.talentTree.botany1 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Botany 2"
+                            }}/>                 
+                    }
+                    {!props.talentTree.botany2 && props.talentTree.botany1 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Botany 2",
+                                description: "Botany 2 - Mindfulness",
+                                handleClickTalent: handleTalentClick
+                            }}/>                 
+                    }
+                    {props.talentTree.botany3 &&
+                        <TalentButtonActive 
+                            props={{
+                                text: "Botany 3",
+                                description: "Botany 3 - Mindfulness",
+                                handleClickTalent: handleTalentClick
+                            }}/>                 
+                    }
+                    {!props.talentTree.botany3 && !props.talentTree.botany2 &&
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Botany 3"
+                            }}/>                 
+                    }
+                    {!props.talentTree.botany3 && props.talentTree.botany2 &&
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Botany 3",
+                                description: "Botany 3 - Mindfulness",
+                                handleClickTalent: handleTalentClick
+                            }}/>                 
+                    }
+                </div>
+                </div>
+                <div className="bottom-container-jawn">
+                {props.talentTree.preparation &&
+                    <TalentButtonActive 
+                        props={{
+                            text: "Preparation",
+                            description: "Preparation",
+                            handleClickTalent: handleTalentClick
+                        }}/>                 
                 }
-
-                {props.talentTree.resourcefulness2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Resourcefulness 2", "Resourcefulness 2", "active")}>Resourcefulness 2</button>
+                {!props.talentTree.preparation && 
+                    <>
+                        {props.talentTree.improvedWand2 && props.talentTree.botany3 ||
+                        props.talentTree.improvedWand3 && props.talentTree.botany2 ?
+                            <TalentButtonAvailable
+                                props={{
+                                    text: "Preparation",
+                                    description: "Preparation",
+                                    handleClickTalent: handleTalentClick
+                                }}/>                 
+                        :
+                            <TalentButtonInactive
+                                props={{
+                                    text: "Preparation"
+                                }}/>                
+                        }
+                    </>
                 }
-                {!props.talentTree.resourcefulness2 && !props.talentTree.resourcefulness1 &&
-                    <button className="talent-jawn-inactive">Resourcefulness 2</button>
-                }
-                {!props.talentTree.resourcefulness2 && props.talentTree.resourcefulness1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Resourcefulness 2", "Resourcefulness 2", "available")}>Resourcefulness 2</button>
-                }
-
-                {props.talentTree.frostBite &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("FrostBite", "FrostBite", "active")}>FrostBite</button>
-                }
-                {!props.talentTree.frostBite && !props.talentTree.resourcefulness2 &&
-                    <button className="talent-jawn-inactive">FrostBite</button>
-                }
-                {!props.talentTree.frostBite && props.talentTree.resourcefulness2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("FrostBite", "FrostBite", "available")}>FrostBite</button>
-                }
-
-
-            </div>
-
-            <div className="right-container-jawn">
-
-                {props.talentTree.botany1 ?
-                <button className="talent-jawn-active" onClick={() => handleTalentClick("Botany 1", talentDescriptions("Botany 1 - Mindfulness"), "active")}>Botany 1</button>
-                :
-                <button className="talent-jawn-available" onClick={() => handleTalentClick("Botany 1", talentDescriptions("Botany 1 - Mindfulness"), "available")}>Botany 1</button>
-                }
-
-                {props.talentTree.botany2 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Botany 2", "Botany 2 - Mindfulness", "active")}>Botany 2</button>
-                }
-                {!props.talentTree.botany2 && !props.talentTree.botany1 &&
-                    <button className="talent-jawn-inactive">Botany 2</button>
-                }
-                {!props.talentTree.botany2 && props.talentTree.botany1 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Botany 2", "Botany 2 - Mindfulness", "available")}>Botany 2</button>
-                }
-
-                {props.talentTree.botany3 &&
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Botany 3", "Botany 2 - Mindfulness", "active")}>Botany 3</button>
-                }
-                {!props.talentTree.botany3 && !props.talentTree.botany2 &&
-                    <button className="talent-jawn-inactive">Botany 3</button>
-                }
-                {!props.talentTree.botany3 && props.talentTree.botany2 &&
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Botany 3", "Botany 3 - Mindfulness", "available")}>Botany 3</button>
-                }
-
-            </div>
-            </div>
-
-            <div className="bottom-container-jawn">
-
-            {props.talentTree.preparation &&
-                <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Preparation", "Botany 3 - Mindfulness", "active")}>Preparation</button>
-            }
-            {!props.talentTree.preparation && props.talentTree.improvedWand2 && props.talentTree.botany3 ||
-            !props.talentTree.preparation && props.talentTree.improvedWand3 && props.talentTree.botany2 ?
-                <button className="talent-jawn-available center-jawn" onClick={() => handleTalentClick("Preparation", "Botany 3 - Mindfulness", "available")}>Preparation</button>
-            :
-                <button className="talent-jawn-inactive center-jawn">Preparation</button>
-            }
-
             </div>
         </div>
     )

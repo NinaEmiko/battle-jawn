@@ -1,5 +1,8 @@
 import "../../styling/TalentTree.css";
 import { talentDescriptions } from "../../helpers/talent_tree_helper";
+import TalentButtonActive from "../TalentComponents/TalentButtonActive";
+import TalentButtonAvailable from "../TalentComponents/TalentButtonAvailable";
+import TalentButtonInactive from "../TalentComponents/TalentButtonInactive";
 
 const ArcaneTree = ({props}:{props:any}) => {
 
@@ -9,85 +12,160 @@ const ArcaneTree = ({props}:{props:any}) => {
 
     return (
         <div className="talent-group-jawn">
-
             <div className="left-and-right-container-jawn">
-
                 <div className="left-container-jawn">
-
                     {props.talentTree.improvedFireBlast1 ?
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved FireBlast 1", talentDescriptions("Improved FireBlast 1"), "active")}>Improved FireBlast 1</button>
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved FireBlast 1",
+                                description: "Improved FireBlast 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>                    
                     :
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved FireBlast 1", talentDescriptions("Improved FireBlast 1"), "available")}>Improved FireBlast 1</button>
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved FireBlast 1",
+                                description: "Improved FireBlast 1",
+                                handleClickTalent: handleTalentClick
+                            }}/>                           
                     }
-
                     {props.talentTree.improvedFireBlast2 &&
-                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved FireBlast 2", talentDescriptions("Improved FireBlast 2"), "active")}>Improved FireBlast 2</button>
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved FireBlast 2",
+                                description: "Improved FireBlast 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>                      
                     }
                     {!props.talentTree.improvedFireBlast2 && !props.talentTree.improvedFireBlast1 &&
-                        <button className="talent-jawn-inactive">Improved FireBlast 2</button>
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved FireBlast 2"
+                            }}/>                      
                     }
                     {!props.talentTree.improvedFireBlast2 && props.talentTree.improvedBlast1 &&
-                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved FireBlast 2", talentDescriptions("Improved FireBlast 2"), "available")}>Improved FireBlast 2</button>
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved FireBlast 2",
+                                description: "Improved FireBlast 2",
+                                handleClickTalent: handleTalentClick
+                            }}/>                     
                     }
-
                     {props.talentTree.improvedIceBlast &&
-                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved IceBlast", talentDescriptions("Improved IceBlast"), "active")}>Improved IceBlast</button>
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved IceBlast",
+                                description: "Improved IceBlast",
+                                handleClickTalent: handleTalentClick
+                            }}/>                       
                     }
                     {!props.talentTree.improvedIceBlast && !props.talentTree.improvedFireBlast2 &&
-                        <button className="talent-jawn-inactive">Improved IceBlast</button>
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved IceBlast"
+                            }}/>                       
                     }
                     {!props.talentTree.improvedIceBlast && props.talentTree.improvedFireBlast2 &&
-                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved IceBlast", talentDescriptions("Improved IceBlast"), "available")}>Improved IceBlast</button>
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved IceBlast",
+                                description: "Improved IceBlast",
+                                handleClickTalent: handleTalentClick
+                            }}/>                       
                     }
-
-
                 </div>
-
                 <div className="right-container-jawn">
-
                     {props.talentTree.improvedWand1 ?
-                    <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 1", talentDescriptions("Improved Wand 1 - Arcane"), "active")}>Improved Wand 1</button>
+                         <TalentButtonActive 
+                            props={{
+                                text: "Improved Wand 1",
+                                description: "Improved Wand 1 - Arcane",
+                                handleClickTalent: handleTalentClick
+                            }}/>   
                     :
-                    <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 1", talentDescriptions("Improved Wand 1 - Arcane"), "available")}>Improved Wand 1</button>
+                    <TalentButtonAvailable 
+                        props={{
+                            text: "Improved Wand 1",
+                            description: "Improved Wand 1 - Arcane",
+                            handleClickTalent: handleTalentClick
+                        }}/>                       
                     }
-
                     {props.talentTree.improvedWand2 &&
-                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 2", talentDescriptions("Improved Wand 2 - Arcane"), "active")}>Improved Wand 2</button>
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Wand 2",
+                                description: "Improved Wand 2 - Arcane",
+                                handleClickTalent: handleTalentClick
+                            }}/>                       
                     }
                     {!props.talentTree.improvedWand2 && !props.talentTree.improvedWand1 &&
-                        <button className="talent-jawn-inactive">Improved Wand 2</button>
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved Wand 2"
+                            }}/>                       
                     }
                     {!props.talentTree.improvedWand2 && props.talentTree.improvedWand1 &&
-                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 2", talentDescriptions("Improved Wand 2 - Arcane"), "available")}>Improved Wand 1</button>
-                    }
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Wand 2",
+                                description: "Improved Wand 2 - Arcane",
+                                handleClickTalent: handleTalentClick
+                            }}/>                           }
 
                     {props.talentTree.improvedWand3 &&
-                        <button className="talent-jawn-active" onClick={() => handleTalentClick("Improved Wand 3", talentDescriptions("Improved Wand 3 - Arcane"), "active")}>Improved Wand 3</button>
+                        <TalentButtonActive 
+                            props={{
+                                text: "Improved Wand 3",
+                                description: "Improved Wand 3 - Arcane",
+                                handleClickTalent: handleTalentClick
+                            }}/>                     
                     }
                     {!props.talentTree.improvedWand3 && !props.talentTree.improvedWand2 &&
-                        <button className="talent-jawn-inactive">FrostBite</button>
+                        <TalentButtonInactive 
+                            props={{
+                                text: "Improved Wand 3"
+                            }}/>                     
                     }
                     {!props.talentTree.improvedWand3 && props.talentTree.improvedWand2 &&
-                        <button className="talent-jawn-available" onClick={() => handleTalentClick("Improved Wand 3", talentDescriptions("Improved Wand 3 - Arcane"), "available")}>Improved Wand 3</button>
+                        <TalentButtonAvailable 
+                            props={{
+                                text: "Improved Wand 3",
+                                description: "Improved Wand 3 - Arcane",
+                                handleClickTalent: handleTalentClick
+                            }}/>                        
                     }
-
                 </div>
             </div>
 
             <div className="bottom-container-jawn">
 
                 {props.talentTree.secondNature &&
-                    <button className="talent-jawn-active center-jawn" onClick={() => handleTalentClick("Second Nature", talentDescriptions("Second Nature"), "active")}>Second Nature</button>
+                    <TalentButtonActive 
+                        props={{
+                            text: "Second Nature",
+                            description: "Second Nature",
+                            handleClickTalent: handleTalentClick
+                        }}/>                     
                 }
-                {!props.talentTree.secondNature && props.talentTree.improvedIceBlast && props.talentTree.resourcefulness2 ||
-                !props.talentTree.secondNature && props.talentTree.improvedFireBlast2 && props.talentTree.frostBite ?
-                    <button className="talent-jawn-available center-jawn"onClick={() => handleTalentClick("Second Nature", talentDescriptions("Second Nature"), "available")} >Second Nature</button>
-                :
-                    <button className="talent-jawn-inactive center-jawn">Second Nature</button>
+                {!props.talentTree.secondNature && 
+                    <>
+                        {props.talentTree.improvedIceBlast && props.talentTree.resourcefulness2 ||
+                        props.talentTree.improvedFireBlast2 && props.talentTree.frostBite ?
+                            <TalentButtonAvailable 
+                                props={{
+                                    text: "Second Nature",
+                                    description: "Second Nature",
+                                    handleClickTalent: handleTalentClick
+                                }}/>                        
+                            :
+                            <TalentButtonInactive 
+                                props={{
+                                    text: "Second Nature"
+                                }}/>   
+                        }            
+                    </>  
                 }
-
             </div>
-
         </div>
     )
 }
