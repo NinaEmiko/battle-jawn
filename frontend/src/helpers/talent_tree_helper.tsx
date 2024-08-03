@@ -92,16 +92,13 @@ export const talentDescriptions = (talent: string) => {
             return "First BackStab costs 0 energy.";
         case "Honor Among Thieves":
             return "Items cannot be stolen from hero.";
-        //TODO: UPDATE IN BACKEND
         case "Improved Steal 1":
             return "Hero can steal coins.";
-        //TODO: UPDATE IN BACKEND
         case "Improved Steal 2":
             return "Can steal more coins.";
         //TODO: UPDATE IN BACKEND
         case "Organized Mess":
             return "Hero gains 3 additional slots in inventory.";
-        //TODO: UPDATE IN BACKEND
         case "Sticky Fingaz":
             return "Hero receives store discount.";
 

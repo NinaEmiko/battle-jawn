@@ -33,7 +33,6 @@ public class Steal {
 
         DPSTree dpsTree = (DPSTree) hero.getTalentTree();
         int emptySpaces = inventoryService.getEmptySlotSize(hero.getId());
-        String newMessage;
 
         if (enemy.getPotions() > 0 && emptySpaces > 0) {
             boolean stealSuccess = heroMoveHelper.useSteal();
@@ -43,16 +42,26 @@ public class Steal {
                 if (dpsTree.isElation()){
                     hero.setResource(3);
                 }
+                if (dpsTree.isImprovedSteal1()){
+                    Long coins = heroMoveHelper.stealCoins();
+                    hero.setCoins(coins);
+                    battleHistoryMessageService.createNewMessage(battleSessionId, "You stole " + coins + " coins!");
+                }
+                if (dpsTree.isImprovedSteal2()){
+                    Long coins = heroMoveHelper.stealCoins();
+                    hero.setCoins(coins);
+                    battleHistoryMessageService.createNewMessage(battleSessionId, "You stole " + coins + " coins!");
+                }
                 heroService.updateHero(hero);
                 enemyService.updatePotionCountById(updatedEnemyPotionCount, enemy.getId());
-                newMessage = "You stole a potion!";
+                battleHistoryMessageService.createNewMessage(battleSessionId, "You stole a potion!");
             } else {
-                newMessage = "You didn't find anything.";
+                battleHistoryMessageService.createNewMessage(battleSessionId, "You didn't find anything.");
             }
         } else {
-            newMessage = "You didn't find anything.";
+            battleHistoryMessageService.createNewMessage(battleSessionId, "You didn't find anything.");
         }
-        battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
+
         List<String> battleHistory = battleHistoryMessageService.getBattleHistoryMessagesByBattleSessionId(battleSessionId);
         return heroMoveHelper.getHeroMoveReturnObject(enemy.getHealth(), hero.getHealth(), hero.getResource(), battleHistory, false);
     }

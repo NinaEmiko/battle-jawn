@@ -17,6 +17,7 @@ const Shop = ({props}:{props:any}) => {
     const [activeButton, setActiveButton] = useState("Buy");
     const [heroName, setHeroName] = useState("");
     const [heroCoins, setHeroCoins] = useState(0);
+    const [heroStickyFingaz, setHeroStickyFingaz] = useState(false);
     const [filteredInventoryList, setFilteredInventoryList] = useState([]);
     const [popUpContent, setPopUpContent] = useState("");
     const [showPopUp, setShowPopUp] = useState(false);
@@ -37,6 +38,11 @@ const Shop = ({props}:{props:any}) => {
         const data = await fetchHero(props.heroId)
         setHeroName(data.name);
         setHeroCoins(data.coins);
+        if (data.role === "DPS"){
+            if (data.talentTree.isStickyFingaz){
+                setHeroStickyFingaz(true);
+            }
+        }
     }
 
     const handleFetchInventory = async () => {
@@ -164,7 +170,12 @@ const Shop = ({props}:{props:any}) => {
                                     <div className="inventory-grid-container">
                                         {[...Array(12).keys()].map(index => (
                                             <div key={index} className="inventory-grid-item">
-                                                <div className="inventory-icon-price">{determinePrice(purchaseList[index])}</div>
+                                                {heroStickyFingaz &&
+                                                    <div className="inventory-icon-price">0</div>
+                                                }
+                                                {!heroStickyFingaz &&
+                                                    <div className="inventory-icon-price">{determinePrice(purchaseList[index])}</div>
+                                                }
                                                 <div className="inventory-icon">{determineIcon(purchaseList[index], index + 1)}</div>
                                             </div>
                                         ))}

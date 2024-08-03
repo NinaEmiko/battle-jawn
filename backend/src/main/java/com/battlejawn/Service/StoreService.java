@@ -2,8 +2,11 @@ package com.battlejawn.Service;
 
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.DPSTree;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @Service
@@ -53,6 +56,13 @@ public class StoreService {
         logger.info("Inside buyPotion service method");
 
         String msg;
+
+        if (Objects.equals(hero.getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            if (dpsTree.isStickyFingaz()){
+                hero.setCoins(hero.getCoins() + quantity);
+            }
+        }
         if (hero.getCoins() - (quantity) < 0) {
             msg = "Insufficient coins.";
         } else {
@@ -67,6 +77,13 @@ public class StoreService {
         logger.info("Inside buyWater service method");
 
         String msg;
+
+        if (Objects.equals(hero.getRole(), "DPS")){
+            DPSTree dpsTree = (DPSTree) hero.getTalentTree();
+            if (dpsTree.isStickyFingaz()){
+                hero.setCoins(hero.getCoins() + quantity * 3L);
+            }
+        }
         if (hero.getCoins() - (quantity * 3L) < 0) {
             msg = "Insufficient coins.";
         } else {

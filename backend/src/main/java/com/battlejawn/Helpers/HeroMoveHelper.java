@@ -55,4 +55,8 @@ public class HeroMoveHelper {
         int chance = (int) Math.floor(Math.random() * 100);
         return chance > 85;
     }
+    public Long stealCoins() {
+        int coins = (int) Math.floor(Math.random() * 5);
+        return (long) coins;
+    }
 }
