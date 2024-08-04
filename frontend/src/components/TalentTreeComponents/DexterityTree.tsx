@@ -10,6 +10,8 @@ const DexterityTree = ({props}:{props:any}) => {
         props.setTalentPopUp(talent, description, type);
     }
 
+    console.log(props.talentTree.organizedMess);
+
     return (
         <div className="talent-group-jawn">
             <div className="left-and-right-container-jawn">
@@ -136,6 +138,7 @@ const DexterityTree = ({props}:{props:any}) => {
                     }
                 </div>
             </div>
+            
             <div className="bottom-container-jawn">
                 {props.talentTree.organizedMess &&
                     <TalentButtonActive
@@ -158,7 +161,7 @@ const DexterityTree = ({props}:{props:any}) => {
                                     bottom: true
                                 }}/>                
                         :
-                            <TalentButtonActive
+                            <TalentButtonInactive
                                 props={{
                                     text: "Organized Mess",
                                     bottom: true
