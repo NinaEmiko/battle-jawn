@@ -1,8 +1,10 @@
 package com.battlejawn.Service;
 
+import com.battlejawn.Entities.Hero.DPS;
 import com.battlejawn.Entities.Hero.Hero;
 import com.battlejawn.Entities.Hero.Tank;
 import com.battlejawn.Entities.Inventory;
+import com.battlejawn.Entities.TalentTree.DPSTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +50,23 @@ public class StoreServiceTest {
         Assertions.assertEquals(jawn, "You purchased 1 potion.");
     }
     @Test
+    void buyPotionStickyFingazTest() {
+        DPS dps = new DPS("DPS");
+        dps.setCoins(10L);
+        dps.setInventory(inventory);
+        inventory.setId(2L);
+        DPSTree dpsTree = new DPSTree();
+        dpsTree.setStickyFingaz(true);
+        dps.setTalentTree(dpsTree);
+        when(heroService.getHeroById(anyLong())).thenReturn(dps);
+        when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
+        doNothing().when(heroService).updateHero(any());
+        doNothing().when(inventoryService).addToFirstEmptySlot(any(), anyString());
+        String jawn = storeService.buy(1L, "Potion", 1);
+        verify(heroService, times(1)).updateHero(any());
+        Assertions.assertEquals(jawn, "You purchased 1 potion.");
+    }
+    @Test
     void buyPotionFailTest() {
         hero.setCoins(100L);
         inventory.setId(2L);
@@ -83,6 +102,23 @@ public class StoreServiceTest {
         hero.setCoins(10L);
         inventory.setId(2L);
         when(heroService.getHeroById(anyLong())).thenReturn(hero);
+        when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
+        doNothing().when(heroService).updateHero(any());
+        doNothing().when(inventoryService).addToFirstEmptySlot(any(), anyString());
+        String jawn = storeService.buy(1L, "Water", 1);
+        verify(heroService, times(1)).updateHero(any());
+        Assertions.assertEquals(jawn, "You purchased 1 water.");
+    }
+    @Test
+    void buyWaterStickyFingazTest() {
+        DPS dps = new DPS("DPS");
+        dps.setCoins(10L);
+        dps.setInventory(inventory);
+        inventory.setId(2L);
+        DPSTree dpsTree = new DPSTree();
+        dpsTree.setStickyFingaz(true);
+        dps.setTalentTree(dpsTree);
+        when(heroService.getHeroById(anyLong())).thenReturn(dps);
         when(inventoryService.getEmptySlotSize(anyLong())).thenReturn(2);
         doNothing().when(heroService).updateHero(any());
         doNothing().when(inventoryService).addToFirstEmptySlot(any(), anyString());
