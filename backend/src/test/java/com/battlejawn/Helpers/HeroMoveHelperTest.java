@@ -48,4 +48,12 @@ public class HeroMoveHelperTest {
     void useStealTest(){
         heroMoveHelper.useSteal();
     }
+    @Test
+    void useBubbleTest(){
+        heroMoveHelper.useBubble();
+    }
+    @Test
+    void stealCoinsTest(){
+        heroMoveHelper.stealCoins();
+    }
 }
