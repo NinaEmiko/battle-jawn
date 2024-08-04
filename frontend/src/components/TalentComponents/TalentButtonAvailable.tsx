@@ -7,7 +7,7 @@ const TalentButtonAvailable = ({props}:{props:any}) => {
         props.handleClickTalent(
             props.text,
             talentDescriptions(props.description),
-            "talent-jawn-available")
+            "available")
     }
 
     return (

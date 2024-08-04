@@ -10,8 +10,6 @@ const DexterityTree = ({props}:{props:any}) => {
         props.setTalentPopUp(talent, description, type);
     }
 
-    console.log(props.talentTree.organizedMess);
-
     return (
         <div className="talent-group-jawn">
             <div className="left-and-right-container-jawn">

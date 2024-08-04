@@ -7,7 +7,7 @@ const TalentButtonActive = ({props}:{props:any}) => {
         props.handleClickTalent(
             props.text,
             talentDescriptions(props.description),
-            "talent-jawn-active")
+            "active")
     }
 
     return (

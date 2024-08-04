@@ -29,7 +29,7 @@ const TalentPopUp = ({props}:{props:any}) => {
                 </div>
             }
             </Display>
-            {props.type === "talent-jawn-active" ?
+            {props.type === "available" ?
                 <Controls 
                     handleClickLeftBtnBottom={props.onClickOk}
                     leftBtnBottomText="Back"
