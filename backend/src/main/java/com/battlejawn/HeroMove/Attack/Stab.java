@@ -55,7 +55,7 @@ public class Stab {
     private HeroMoveDTO processHeroAttack(int damage, Enemy enemy, Long battleSessionId, Hero hero) {
         int updatedEnemyHealth = enemy.getHealth() - damage;
         boolean gameOver = false;
-        String newMessage = heroMoveHelper.getDamageMessage("Wand", damage);
+        String newMessage = heroMoveHelper.getDamageMessage("Stab", damage);
         battleHistoryMessageService.createNewMessage(battleSessionId, newMessage);
 
         if (damage > 0 && hero.getResource() != hero.getMaxResource()) {
